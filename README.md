@@ -18,7 +18,7 @@ $ pod install
 
 ### 쿠링SDK와 워크스페이스 생성
 
-반드시 [KuringSDK]() 도 같이 다운로드 후 아래의 구성으로 workspace를 생성하여 작업해주세요
+반드시 [KuringSDK](https://github.com/KU-Stacks/kuring-sdk-ios) 도 같이 다운로드 후 아래의 구성으로 workspace를 생성하여 작업해주세요
 - Kuring.proj
 - Kuring의 Pod.proj
 - KuringSDK.proj
