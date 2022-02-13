@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>685711045622-mbj6o07dmvquoi0h1c88k5oqk1m7plvi.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.685711045622-mbj6o07dmvquoi0h1c88k5oqk1m7plvi</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>685711045622-9ave07g6v6pn7vcl6hm0ho5ilbrquvj8.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCdtAxpTIXn1ypCytBkpxpiww3KAJXUKrs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>685711045622</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.kuring.service</string>
+	<key>PROJECT_ID</key>
+	<string>ku-stack</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ku-stack.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:685711045622:ios:21a95b4932c3c165a64dd7</string>
+</dict>
+</plist>
