@@ -14,7 +14,7 @@
         <!--💬 피드백-->
         <scene sceneID="Zts-ME-lmh">
             <objects>
-                <viewController id="NSb-E6-kAG" customClass="KUFeedbackViewController" customModule="kuring_uikit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="NSb-E6-kAG" customClass="KUFeedbackViewController" customModule="Kuring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DrK-tx-ukR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -118,7 +118,7 @@
         <!--🏛오픈소스-->
         <scene sceneID="p7x-ka-ASh">
             <objects>
-                <tableViewController id="gAH-dn-dfO" customClass="OpensourceListViewController" customModule="kuring_uikit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="gAH-dn-dfO" customClass="OpensourceListViewController" customModule="Kuring" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="LC5-En-Ulj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -148,7 +148,7 @@
         <!--🔍 검색-->
         <scene sceneID="JNH-Yl-pmB">
             <objects>
-                <viewController id="7ZN-GQ-3pw" customClass="KUSearchViewController" customModule="kuring_uikit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7ZN-GQ-3pw" customClass="KUSearchViewController" customModule="Kuring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UMW-KQ-KvV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -167,7 +167,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="searchTypeCell" id="Wrz-aP-jWs" customClass="KUSearchTypeCollectionViewCell" customModule="kuring_uikit_ios" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="searchTypeCell" id="Wrz-aP-jWs" customClass="KUSearchTypeCollectionViewCell" customModule="Kuring" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EhX-lV-ftN">
@@ -235,7 +235,7 @@
                                 <rect key="frame" x="0.0" y="224" width="414" height="672"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="noticeCell" rowHeight="48" id="dd0-d9-qZa" customClass="KUSearchedNoticeCell" customModule="kuring_uikit_ios" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="noticeCell" rowHeight="48" id="dd0-d9-qZa" customClass="KUSearchedNoticeCell" customModule="Kuring" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dd0-d9-qZa" id="XkF-HA-xE0">
@@ -273,7 +273,7 @@
                                             <outlet property="titleLabel" destination="gkT-4A-n7l" id="EC0-Bf-BiS"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="staffCell" rowHeight="48" id="4Y4-bE-keP" customClass="KUSearchedStaffCell" customModule="kuring_uikit_ios" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="staffCell" rowHeight="48" id="4Y4-bE-keP" customClass="KUSearchedStaffCell" customModule="Kuring" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92.5" width="414" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Y4-bE-keP" id="PGM-zQ-g0C">
@@ -343,7 +343,7 @@
         <!--Staff View Controller-->
         <scene sceneID="lp2-3T-8rO">
             <objects>
-                <tableViewController storyboardIdentifier="KUStaffViewController" id="9dP-B1-6cR" customClass="KUStaffViewController" customModule="kuring_uikit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="KUStaffViewController" id="9dP-B1-6cR" customClass="KUStaffViewController" customModule="Kuring" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="KJN-di-9pf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -358,14 +358,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="교수 이름" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fdA-AP-fub">
-                                                    <rect key="frame" x="20" y="8" width="63" height="20.5"/>
+                                                    <rect key="frame" x="20" y="7.5" width="52.5" height="17"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" name="ColorSet.Label.primary"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="학과 또는 학부 · 단과대학" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iKz-P3-JNW">
-                                                    <rect key="frame" x="20" y="28.5" width="111.5" height="13.5"/>
+                                                    <rect key="frame" x="20" y="27" width="111.5" height="13.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" name="ColorSet.Label.primary"/>
@@ -474,7 +474,7 @@
         <!--Notice List View Controller-->
         <scene sceneID="ad8-3f-W1p">
             <objects>
-                <viewController id="14F-oY-WCU" customClass="KUNoticeListViewController" customModule="kuring_uikit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="14F-oY-WCU" customClass="KUNoticeListViewController" customModule="Kuring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WQm-Hp-WNI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -492,7 +492,7 @@
                                     <inset key="sectionInset" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="noticeTypeCell" id="W9C-cD-qUl" customClass="KUNoticeListCollectionViewCell" customModule="kuring_uikit_ios" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="noticeTypeCell" id="W9C-cD-qUl" customClass="KUNoticeListCollectionViewCell" customModule="Kuring" customModuleProvider="target">
                                         <rect key="frame" x="16" y="0.0" width="60" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="68x-iB-yu8">
@@ -613,7 +613,7 @@
         <!--쿠링-->
         <scene sceneID="jzH-fD-ifd">
             <objects>
-                <viewController storyboardIdentifier="NoticeWebViewController" id="a1q-QO-A9d" customClass="NoticeWebViewController" customModule="kuring_uikit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NoticeWebViewController" id="a1q-QO-A9d" customClass="NoticeWebViewController" customModule="Kuring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hta-BK-dun">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -654,13 +654,13 @@
         <!--내 알림-->
         <scene sceneID="xeY-an-EbP">
             <objects>
-                <tableViewController id="vtV-ei-QVP" customClass="KUAlarmViewController" customModule="kuring_uikit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="vtV-ei-QVP" customClass="KUAlarmViewController" customModule="Kuring" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="YEt-lT-laY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="notificationCell" rowHeight="48" id="WLB-qo-KKy" customClass="NotificationTableViewCell" customModule="kuring_uikit_ios" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="notificationCell" rowHeight="48" id="WLB-qo-KKy" customClass="NotificationTableViewCell" customModule="Kuring" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WLB-qo-KKy" id="kk9-gU-et4">
@@ -791,7 +791,7 @@
         <!--설정-->
         <scene sceneID="Hcg-UQ-DfZ">
             <objects>
-                <tableViewController id="sdJ-L9-SXK" customClass="SettingsViewController" customModule="kuring_uikit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="sdJ-L9-SXK" customClass="SettingsViewController" customModule="Kuring" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="TFv-j5-pbJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -978,22 +978,22 @@
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="rectangle.grid.1x2" catalog="system" width="128" height="101"/>
         <namedColor name="ColorSet.Label.green">
-            <color red="0.011764705882352941" green="0.41960784313725491" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.012000000104308128" green="0.41999998688697815" blue="0.24699999392032623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ColorSet.Label.primary">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ColorSet.Label.secondary">
-            <color red="0.32549019607843138" green="0.35686274509803922" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.32499998807907104" green="0.35699999332427979" blue="0.36500000953674316" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ColorSet.green">
-            <color red="0.23921568627450981" green="0.74117647058823533" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23899999260902405" green="0.74099999666213989" blue="0.50199997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ColorSet.pink">
-            <color red="0.89411764705882357" green="0.35686274509803922" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89399999380111694" green="0.35699999332427979" blue="0.47099998593330383" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ColorSet.secondaryGreen">
-            <color red="0.77647058823529413" green="0.92549019607843142" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.77600002288818359" green="0.92500001192092896" blue="0.85500001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

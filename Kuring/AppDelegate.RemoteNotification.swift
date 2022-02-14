@@ -29,6 +29,10 @@ extension AppDelegate {
     ) {
         Messaging.messaging().apnsToken = deviceToken
     }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("[com.kuring.service] Failed to register for remote notification with error: \(error.localizedDescription)")
+    }
 }
 
 // MARK: - FirebaseMessaging
@@ -121,7 +125,7 @@ extension AppDelegate: KuringDelegate {
         content.title = "🔔 쿠링! 새 공지가 왔어요!"
         content.body = notification.subject
         content.sound = UNNotificationSound.default
-        content.badge = 1
+        content.badge = nil
         
         let identifier = notification.articleID
         let request = UNNotificationRequest(

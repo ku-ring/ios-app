@@ -197,7 +197,7 @@ extension AlarmTagViewController {
     
     private func setBinding() {
         onboardingBtn.rx.tap
-            .bind { [weak self] _ in
+            .bind { _ in
                 Storage.setFirstTime()
                 
 //                let vc = UINavigationController(rootViewController: KuringViewController())

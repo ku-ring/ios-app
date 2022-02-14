@@ -5,9 +5,8 @@
 //  Created by Hamlit Jason on 2021/12/06.
 //
 
-import Foundation
+import UIKit
 import WebKit
-import Then
 import SnapKit
 
 class NoticeWebViewController: UIViewController {
@@ -31,9 +30,9 @@ class NoticeWebViewController: UIViewController {
         let appIconImage = UIImage(named: "appIconLabel")?.withRenderingMode(.alwaysOriginal)
         navigationItem.titleView = UIImageView(image: appIconImage)
         
+        loadWebView()
         webView.uiDelegate = self
         webView.navigationDelegate = self
-        loadWebView()
     }
     
     private func loadWebView() {
@@ -71,5 +70,14 @@ extension NoticeWebViewController: WKUIDelegate, WKNavigationDelegate {
         // 로딩 실패시
         indicator.stopAnimating()
         indicator.isHidden = true
+    }
+    
+    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        print("[com.kuring.service] need auth for wkwebview")
+        completionHandler(URLSession.AuthChallengeDisposition.performDefaultHandling, nil)
+    }
+    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        print("[com.kuring.service] Failed provisional navigation: \(error.localizedDescription)")
     }
 }
