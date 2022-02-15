@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eLb-kH-8ev">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--우리 대학 공지 쿠링이 알려줄게!-->
+        <scene sceneID="1Sp-aV-TWk">
+            <objects>
+                <tableViewController id="C3S-GU-D4z" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="j8f-rS-NkC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="Obx-G5-6Eh">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Enu-n8-kvs">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="76"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Enu-n8-kvs" id="p32-hf-4dL">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🔔 알림 받기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdh-SV-wE5">
+                                                    <rect key="frame" x="20" y="16" width="374" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="Bcg-xr-OH1"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="중요한 알림을 놓치지 말고 알림으로 받아보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hwg-bn-LDj">
+                                                    <rect key="frame" x="20" y="45" width="374" height="15"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Hwg-bn-LDj" secondAttribute="bottom" constant="16" id="4by-zl-4ny"/>
+                                                <constraint firstAttribute="trailing" secondItem="Hwg-bn-LDj" secondAttribute="trailing" constant="20" id="DCh-wc-UgL"/>
+                                                <constraint firstItem="Hwg-bn-LDj" firstAttribute="top" secondItem="Rdh-SV-wE5" secondAttribute="bottom" constant="8" id="HmT-dx-whW"/>
+                                                <constraint firstItem="Rdh-SV-wE5" firstAttribute="top" secondItem="p32-hf-4dL" secondAttribute="top" constant="16" id="Q4j-Ko-izf"/>
+                                                <constraint firstAttribute="trailing" secondItem="Rdh-SV-wE5" secondAttribute="trailing" constant="20" id="exb-SN-mtS"/>
+                                                <constraint firstItem="Rdh-SV-wE5" firstAttribute="leading" secondItem="p32-hf-4dL" secondAttribute="leading" constant="20" id="pwz-fY-Y7c"/>
+                                                <constraint firstItem="Hwg-bn-LDj" firstAttribute="leading" secondItem="Rdh-SV-wE5" secondAttribute="leading" id="rU7-fU-GPE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Xcc-8y-g7y">
+                                        <rect key="frame" x="0.0" y="120.5" width="414" height="68"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xcc-8y-g7y" id="lfH-ZR-8i2">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="68"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="📣 터치 한번으로" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcg-zE-wcJ">
+                                                    <rect key="frame" x="20" y="8" width="374" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="Tyk-NU-Foy"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="학교 홈페이지에 들어갈 필요 없이 첫 화면에서 공지사항을 확인해보세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGU-f9-cEu">
+                                                    <rect key="frame" x="20" y="37" width="374" height="15"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="zGU-f9-cEu" secondAttribute="trailing" constant="20" id="0I6-TJ-6N1"/>
+                                                <constraint firstItem="pcg-zE-wcJ" firstAttribute="leading" secondItem="lfH-ZR-8i2" secondAttribute="leading" constant="20" id="DNo-jb-UFw"/>
+                                                <constraint firstAttribute="bottom" secondItem="zGU-f9-cEu" secondAttribute="bottom" constant="16" id="R9S-ol-uvQ"/>
+                                                <constraint firstItem="zGU-f9-cEu" firstAttribute="top" secondItem="pcg-zE-wcJ" secondAttribute="bottom" constant="8" id="V2M-Rd-voA"/>
+                                                <constraint firstAttribute="trailing" secondItem="pcg-zE-wcJ" secondAttribute="trailing" constant="20" id="WdM-83-AE8"/>
+                                                <constraint firstItem="zGU-f9-cEu" firstAttribute="leading" secondItem="pcg-zE-wcJ" secondAttribute="leading" id="aUd-Mr-pPh"/>
+                                                <constraint firstItem="pcg-zE-wcJ" firstAttribute="top" secondItem="lfH-ZR-8i2" secondAttribute="top" constant="8" id="g3I-mn-11m"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Keh-Vn-g3t">
+                                        <rect key="frame" x="0.0" y="188.5" width="414" height="76.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Keh-Vn-g3t" id="cQE-Tn-LPB">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="76.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🔍 빠른 검색" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="07d-Up-RHp">
+                                                    <rect key="frame" x="20" y="16" width="374" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="hww-f7-PXJ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공지사항과 교직원 정보를 가장 빠르게 검색해볼 수 있습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NYC-uW-DyR">
+                                                    <rect key="frame" x="20" y="45" width="374" height="15.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="07d-Up-RHp" firstAttribute="leading" secondItem="cQE-Tn-LPB" secondAttribute="leading" constant="20" id="YST-CK-DP1"/>
+                                                <constraint firstAttribute="trailing" secondItem="07d-Up-RHp" secondAttribute="trailing" constant="20" id="dYo-rT-0dt"/>
+                                                <constraint firstItem="NYC-uW-DyR" firstAttribute="top" secondItem="07d-Up-RHp" secondAttribute="bottom" constant="8" id="iMV-aM-ZFN"/>
+                                                <constraint firstItem="NYC-uW-DyR" firstAttribute="leading" secondItem="07d-Up-RHp" secondAttribute="leading" id="ip1-9O-P17"/>
+                                                <constraint firstAttribute="bottom" secondItem="NYC-uW-DyR" secondAttribute="bottom" constant="16" id="lLs-QW-RRN"/>
+                                                <constraint firstItem="07d-Up-RHp" firstAttribute="top" secondItem="cQE-Tn-LPB" secondAttribute="top" constant="16" id="nvJ-1o-6no"/>
+                                                <constraint firstAttribute="trailing" secondItem="NYC-uW-DyR" secondAttribute="trailing" constant="20" id="otQ-9C-Yfn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="C3S-GU-D4z" id="o6J-UP-wBs"/>
+                            <outlet property="delegate" destination="C3S-GU-D4z" id="C8E-gq-1kH"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="우리 대학 공지 쿠링이 알려줄게!" largeTitleDisplayMode="always" id="3V1-zV-b4o"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yx2-02-HK8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2487" y="-52"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="fQu-Xo-I8u">
+            <objects>
+                <viewController id="YM3-Zk-Lxl" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Q15-0p-Hnl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HXk-nO-SVL">
+                                <rect key="frame" x="145" y="735" width="125" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="나중에 설정할게요"/>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VjW-af-ycY">
+                                <rect key="frame" x="24" y="60" width="366" height="95.5"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aei-Xz-RQS">
+                                <rect key="frame" x="32" y="76" width="350" height="63.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bell.badge" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="6k8-Sz-KkK">
+                                        <rect key="frame" x="0.0" y="0.0" width="24" height="63"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="dEX-fd-JO5"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="elf-xP-zKp">
+                                        <rect key="frame" x="32" y="0.0" width="298" height="63.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공지 구독하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UDT-2V-Ie0">
+                                                <rect key="frame" x="0.0" y="0.0" width="76.5" height="17"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="17" id="RP3-4M-Rhr"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <color key="textColor" name="ColorSet.Label.primary"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="장학? 학사? 원하는 카테고리를 구독하고 공지사항을 알림으로 받아보세요! 더이상 학교 홈페이지에 매번 접속하실 필요가 없습니다!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7PQ-3L-6Wh">
+                                                <rect key="frame" x="0.0" y="17" width="295.5" height="46.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <color key="textColor" name="ColorSet.Label.primary"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="CTd-Ne-dBg">
+                                        <rect key="frame" x="338" y="2" width="12" height="60"/>
+                                        <color key="tintColor" name="ColorSet.gray"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="12" id="cu8-19-cGA"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Amo-WY-AqE">
+                                <rect key="frame" x="24" y="60" width="366" height="95.5"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title=" "/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Nhf-Mq-bKB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="VjW-af-ycY" firstAttribute="top" secondItem="aei-Xz-RQS" secondAttribute="top" constant="-16" id="53o-Zh-s4R"/>
+                            <constraint firstItem="Amo-WY-AqE" firstAttribute="trailing" secondItem="VjW-af-ycY" secondAttribute="trailing" id="92l-eB-Upk"/>
+                            <constraint firstItem="aei-Xz-RQS" firstAttribute="top" secondItem="Nhf-Mq-bKB" secondAttribute="top" constant="32" id="9Mn-wd-4Pb"/>
+                            <constraint firstItem="Amo-WY-AqE" firstAttribute="leading" secondItem="VjW-af-ycY" secondAttribute="leading" id="DtW-Q1-kvW"/>
+                            <constraint firstItem="Amo-WY-AqE" firstAttribute="bottom" secondItem="VjW-af-ycY" secondAttribute="bottom" id="UqR-nm-5Ob"/>
+                            <constraint firstItem="VjW-af-ycY" firstAttribute="trailing" secondItem="aei-Xz-RQS" secondAttribute="trailing" constant="8" id="VfY-cg-Qrw"/>
+                            <constraint firstItem="VjW-af-ycY" firstAttribute="leading" secondItem="aei-Xz-RQS" secondAttribute="leading" constant="-8" id="Zhx-GV-Z2K"/>
+                            <constraint firstItem="Amo-WY-AqE" firstAttribute="top" secondItem="VjW-af-ycY" secondAttribute="top" id="iIx-om-PcS"/>
+                            <constraint firstItem="VjW-af-ycY" firstAttribute="bottom" secondItem="aei-Xz-RQS" secondAttribute="bottom" constant="16" id="tx3-S3-t8T"/>
+                            <constraint firstItem="aei-Xz-RQS" firstAttribute="leading" secondItem="Nhf-Mq-bKB" secondAttribute="leading" constant="32" id="vIZ-Ll-vnx"/>
+                            <constraint firstAttribute="trailing" secondItem="aei-Xz-RQS" secondAttribute="trailing" constant="32" id="y6k-9L-9WU"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z3I-SM-Tiy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3198.5507246376815" y="-35.491071428571423"/>
+        </scene>
+        <!--우리 대학 공지 쿠링이 알려줄게!-->
+        <scene sceneID="7DE-kI-hIa">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="kFr-Qf-qo1" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="우리 대학 공지 쿠링이 알려줄게!" largeTitleDisplayMode="always" id="nVT-xz-GsV"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5ik-AS-5Jk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1642.0289855072465" y="-51.5625"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="uP3-95-nsc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eLb-kH-8ev" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="cN6-kk-4sY">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="standardAppearance"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kFr-Qf-qo1" kind="relationship" relationship="rootViewController" id="iSc-E4-UGZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DGS-7b-Bkb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="731.8840579710145" y="-51.5625"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="bell.badge" catalog="system" width="128" height="124"/>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
+        <namedColor name="ColorSet.Label.primary">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ColorSet.gray">
+            <color red="0.32549019607843138" green="0.35686274509803922" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

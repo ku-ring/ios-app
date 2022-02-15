@@ -1,0 +1,774 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A9DA6C6627B97EE300F3B786 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */; };
+		A9DA6C6D27B97EE300F3B786 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6B27B97EE300F3B786 /* Main.storyboard */; };
+		A9DA6C6F27B97EE500F3B786 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6E27B97EE500F3B786 /* Assets.xcassets */; };
+		A9DA6C7B27B9800F00F3B786 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C7A27B9800F00F3B786 /* GoogleService-Info.plist */; };
+		A9DA6C7E27B9809900F3B786 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A9DA6C7D27B9809900F3B786 /* FirebaseAnalytics */; };
+		A9DA6C8027B9809900F3B786 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = A9DA6C7F27B9809900F3B786 /* FirebaseMessaging */; };
+		A9DA6C8327B9813D00F3B786 /* KuringSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9DA6C8227B9813D00F3B786 /* KuringSDK.framework */; };
+		A9DA6C8427B9813D00F3B786 /* KuringSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9DA6C8227B9813D00F3B786 /* KuringSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9DA6C8727B981A100F3B786 /* AppDelegate.RemoteNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */; };
+		A9DA6CBE27B98D2300F3B786 /* KUFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8927B98D2200F3B786 /* KUFeedbackViewController.swift */; };
+		A9DA6CBF27B98D2300F3B786 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C8B27B98D2200F3B786 /* Onboarding.storyboard */; };
+		A9DA6CC027B98D2300F3B786 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8C27B98D2200F3B786 /* OnboardingModel.swift */; };
+		A9DA6CC127B98D2300F3B786 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8D27B98D2200F3B786 /* OnBoardingViewController.swift */; };
+		A9DA6CC227B98D2300F3B786 /* Date.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */; };
+		A9DA6CC327B98D2300F3B786 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9027B98D2200F3B786 /* Global.swift */; };
+		A9DA6CC427B98D2300F3B786 /* Notice.KuringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9127B98D2200F3B786 /* Notice.KuringApp.swift */; };
+		A9DA6CC527B98D2300F3B786 /* UIView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9227B98D2200F3B786 /* UIView+Rx.swift */; };
+		A9DA6CC627B98D2300F3B786 /* CustomExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9327B98D2200F3B786 /* CustomExtension.swift */; };
+		A9DA6CC727B98D2300F3B786 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9427B98D2200F3B786 /* UIViewController+Rx.swift */; };
+		A9DA6CC827B98D2300F3B786 /* UITableView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9527B98D2200F3B786 /* UITableView+Rx.swift */; };
+		A9DA6CC927B98D2300F3B786 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9627B98D2200F3B786 /* Colors.swift */; };
+		A9DA6CCA27B98D2300F3B786 /* DeviceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9727B98D2200F3B786 /* DeviceConfiguration.swift */; };
+		A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */; };
+		A9DA6CCC27B98D2300F3B786 /* CategoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9A27B98D2200F3B786 /* CategoryCollectionViewController.swift */; };
+		A9DA6CCD27B98D2300F3B786 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9C27B98D2200F3B786 /* Storage.swift */; };
+		A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9E27B98D2200F3B786 /* KUStaffViewController.swift */; };
+		A9DA6CCF27B98D2300F3B786 /* KUSearchViewController.Searcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CA027B98D2200F3B786 /* KUSearchViewController.Searcher.swift */; };
+		A9DA6CD027B98D2300F3B786 /* KUSearchViewController.UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CA127B98D2200F3B786 /* KUSearchViewController.UICollectionView.swift */; };
+		A9DA6CD127B98D2300F3B786 /* KUSearchViewController.UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CA227B98D2200F3B786 /* KUSearchViewController.UITextField.swift */; };
+		A9DA6CD227B98D2300F3B786 /* KUSearchViewController.UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CA327B98D2200F3B786 /* KUSearchViewController.UITableView.swift */; };
+		A9DA6CD327B98D2300F3B786 /* KUSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CA427B98D2200F3B786 /* KUSearchViewController.swift */; };
+		A9DA6CD427B98D2300F3B786 /* KUSearchTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CA627B98D2200F3B786 /* KUSearchTypeCollectionViewCell.swift */; };
+		A9DA6CD527B98D2300F3B786 /* KUSearchedNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CA727B98D2200F3B786 /* KUSearchedNoticeCell.swift */; };
+		A9DA6CD627B98D2300F3B786 /* KUSearchedStaffCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CA827B98D2200F3B786 /* KUSearchedStaffCell.swift */; };
+		A9DA6CD727B98D2300F3B786 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CAA27B98D2200F3B786 /* SettingsViewController.swift */; };
+		A9DA6CD827B98D2300F3B786 /* KUNoticeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CAC27B98D2200F3B786 /* KUNoticeListViewController.swift */; };
+		A9DA6CD927B98D2300F3B786 /* NoticeWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CAD27B98D2200F3B786 /* NoticeWebViewController.swift */; };
+		A9DA6CDA27B98D2300F3B786 /* KUNoticeTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CAF27B98D2200F3B786 /* KUNoticeTagView.swift */; };
+		A9DA6CDB27B98D2300F3B786 /* KUNoticeListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB027B98D2200F3B786 /* KUNoticeListViewCell.swift */; };
+		A9DA6CDC27B98D2300F3B786 /* KUNoticeListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB127B98D2200F3B786 /* KUNoticeListCollectionViewCell.swift */; };
+		A9DA6CDD27B98D2300F3B786 /* KUNoticeListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6CB227B98D2200F3B786 /* KUNoticeListViewCell.xib */; };
+		A9DA6CDE27B98D2300F3B786 /* AlarmTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB427B98D2200F3B786 /* AlarmTagViewController.swift */; };
+		A9DA6CDF27B98D2300F3B786 /* KUAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB527B98D2200F3B786 /* KUAlarmViewController.swift */; };
+		A9DA6CE027B98D2300F3B786 /* KUAlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB727B98D2200F3B786 /* KUAlarmTableViewCell.swift */; };
+		A9DA6CE127B98D2300F3B786 /* KUAlarmTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6CB827B98D2200F3B786 /* KUAlarmTableViewCell.xib */; };
+		A9DA6CE227B98D2300F3B786 /* KUAlarmHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB927B98D2200F3B786 /* KUAlarmHeaderView.swift */; };
+		A9DA6CE327B98D2300F3B786 /* Opensource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CBB27B98D2300F3B786 /* Opensource.swift */; };
+		A9DA6CE427B98D2300F3B786 /* OpenSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CBC27B98D2300F3B786 /* OpenSourceController.swift */; };
+		A9DA6CE527B98D2300F3B786 /* OpensourceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CBD27B98D2300F3B786 /* OpensourceListViewController.swift */; };
+		A9DA6D0927B98FEC00F3B786 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6D0727B98FEC00F3B786 /* LaunchScreen.storyboard */; };
+		D430312BD0477A68D7728C94 /* Pods_Kuring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A9DA6C8527B9813D00F3B786 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A9DA6C8427B9813D00F3B786 /* KuringSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		098133CE147F3EC919795C6B /* Pods-Kuring.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuring.debug.xcconfig"; path = "Target Support Files/Pods-Kuring/Pods-Kuring.debug.xcconfig"; sourceTree = "<group>"; };
+		6AA68EE0A1CA6D5FD2FB9A4F /* Pods-Kuring.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuring.release.xcconfig"; path = "Target Support Files/Pods-Kuring/Pods-Kuring.release.xcconfig"; sourceTree = "<group>"; };
+		A9DA6C6227B97EE300F3B786 /* Kuring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuring.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A9DA6C6C27B97EE300F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A9DA6C6E27B97EE500F3B786 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A9DA6C7327B97EE500F3B786 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9DA6C7927B97F8300F3B786 /* Kuring.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kuring.entitlements; sourceTree = "<group>"; };
+		A9DA6C7A27B9800F00F3B786 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A9DA6C8227B9813D00F3B786 /* KuringSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KuringSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.RemoteNotification.swift; sourceTree = "<group>"; };
+		A9DA6C8927B98D2200F3B786 /* KUFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUFeedbackViewController.swift; sourceTree = "<group>"; };
+		A9DA6C8B27B98D2200F3B786 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		A9DA6C8C27B98D2200F3B786 /* OnboardingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
+		A9DA6C8D27B98D2200F3B786 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.Kuring.swift; sourceTree = "<group>"; };
+		A9DA6C9027B98D2200F3B786 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		A9DA6C9127B98D2200F3B786 /* Notice.KuringApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notice.KuringApp.swift; sourceTree = "<group>"; };
+		A9DA6C9227B98D2200F3B786 /* UIView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Rx.swift"; sourceTree = "<group>"; };
+		A9DA6C9327B98D2200F3B786 /* CustomExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomExtension.swift; sourceTree = "<group>"; };
+		A9DA6C9427B98D2200F3B786 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
+		A9DA6C9527B98D2200F3B786 /* UITableView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Rx.swift"; sourceTree = "<group>"; };
+		A9DA6C9627B98D2200F3B786 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		A9DA6C9727B98D2200F3B786 /* DeviceConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceConfiguration.swift; sourceTree = "<group>"; };
+		A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.Kuring.swift; sourceTree = "<group>"; };
+		A9DA6C9A27B98D2200F3B786 /* CategoryCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewController.swift; sourceTree = "<group>"; };
+		A9DA6C9C27B98D2200F3B786 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		A9DA6C9E27B98D2200F3B786 /* KUStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUStaffViewController.swift; sourceTree = "<group>"; };
+		A9DA6CA027B98D2200F3B786 /* KUSearchViewController.Searcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUSearchViewController.Searcher.swift; sourceTree = "<group>"; };
+		A9DA6CA127B98D2200F3B786 /* KUSearchViewController.UICollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUSearchViewController.UICollectionView.swift; sourceTree = "<group>"; };
+		A9DA6CA227B98D2200F3B786 /* KUSearchViewController.UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUSearchViewController.UITextField.swift; sourceTree = "<group>"; };
+		A9DA6CA327B98D2200F3B786 /* KUSearchViewController.UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUSearchViewController.UITableView.swift; sourceTree = "<group>"; };
+		A9DA6CA427B98D2200F3B786 /* KUSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUSearchViewController.swift; sourceTree = "<group>"; };
+		A9DA6CA627B98D2200F3B786 /* KUSearchTypeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUSearchTypeCollectionViewCell.swift; sourceTree = "<group>"; };
+		A9DA6CA727B98D2200F3B786 /* KUSearchedNoticeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUSearchedNoticeCell.swift; sourceTree = "<group>"; };
+		A9DA6CA827B98D2200F3B786 /* KUSearchedStaffCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUSearchedStaffCell.swift; sourceTree = "<group>"; };
+		A9DA6CAA27B98D2200F3B786 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A9DA6CAC27B98D2200F3B786 /* KUNoticeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUNoticeListViewController.swift; sourceTree = "<group>"; };
+		A9DA6CAD27B98D2200F3B786 /* NoticeWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeWebViewController.swift; sourceTree = "<group>"; };
+		A9DA6CAF27B98D2200F3B786 /* KUNoticeTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUNoticeTagView.swift; sourceTree = "<group>"; };
+		A9DA6CB027B98D2200F3B786 /* KUNoticeListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUNoticeListViewCell.swift; sourceTree = "<group>"; };
+		A9DA6CB127B98D2200F3B786 /* KUNoticeListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUNoticeListCollectionViewCell.swift; sourceTree = "<group>"; };
+		A9DA6CB227B98D2200F3B786 /* KUNoticeListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KUNoticeListViewCell.xib; sourceTree = "<group>"; };
+		A9DA6CB427B98D2200F3B786 /* AlarmTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmTagViewController.swift; sourceTree = "<group>"; };
+		A9DA6CB527B98D2200F3B786 /* KUAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUAlarmViewController.swift; sourceTree = "<group>"; };
+		A9DA6CB727B98D2200F3B786 /* KUAlarmTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUAlarmTableViewCell.swift; sourceTree = "<group>"; };
+		A9DA6CB827B98D2200F3B786 /* KUAlarmTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KUAlarmTableViewCell.xib; sourceTree = "<group>"; };
+		A9DA6CB927B98D2200F3B786 /* KUAlarmHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUAlarmHeaderView.swift; sourceTree = "<group>"; };
+		A9DA6CBB27B98D2300F3B786 /* Opensource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opensource.swift; sourceTree = "<group>"; };
+		A9DA6CBC27B98D2300F3B786 /* OpenSourceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSourceController.swift; sourceTree = "<group>"; };
+		A9DA6CBD27B98D2300F3B786 /* OpensourceListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpensourceListViewController.swift; sourceTree = "<group>"; };
+		A9DA6D0827B98FEC00F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kuring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A9DA6C5F27B97EE300F3B786 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9DA6C8027B9809900F3B786 /* FirebaseMessaging in Frameworks */,
+				A9DA6C7E27B9809900F3B786 /* FirebaseAnalytics in Frameworks */,
+				A9DA6C8327B9813D00F3B786 /* KuringSDK.framework in Frameworks */,
+				D430312BD0477A68D7728C94 /* Pods_Kuring.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0303846B4E48B6E66F2BF2DA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				098133CE147F3EC919795C6B /* Pods-Kuring.debug.xcconfig */,
+				6AA68EE0A1CA6D5FD2FB9A4F /* Pods-Kuring.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A9DA6C5927B97EE300F3B786 = {
+			isa = PBXGroup;
+			children = (
+				A9DA6C6427B97EE300F3B786 /* Kuring */,
+				A9DA6C6327B97EE300F3B786 /* Products */,
+				A9DA6C8127B9813D00F3B786 /* Frameworks */,
+				0303846B4E48B6E66F2BF2DA /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		A9DA6C6327B97EE300F3B786 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6C6227B97EE300F3B786 /* Kuring.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A9DA6C6427B97EE300F3B786 /* Kuring */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6C7927B97F8300F3B786 /* Kuring.entitlements */,
+				A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */,
+				A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */,
+				A9DA6CB327B98D2200F3B786 /* Alarm */,
+				A9DA6C9927B98D2200F3B786 /* Category */,
+				A9DA6C9B27B98D2200F3B786 /* DB */,
+				A9DA6C8827B98D2200F3B786 /* Feedback */,
+				A9DA6CAB27B98D2200F3B786 /* Notice */,
+				A9DA6C8A27B98D2200F3B786 /* OnBoarding */,
+				A9DA6CBA27B98D2300F3B786 /* OpenSource */,
+				A9DA6C9D27B98D2200F3B786 /* Search */,
+				A9DA6CA927B98D2200F3B786 /* Settings */,
+				A9DA6C8E27B98D2200F3B786 /* Utils */,
+				A9DA6C6B27B97EE300F3B786 /* Main.storyboard */,
+				A9DA6D0727B98FEC00F3B786 /* LaunchScreen.storyboard */,
+				A9DA6C6E27B97EE500F3B786 /* Assets.xcassets */,
+				A9DA6C7327B97EE500F3B786 /* Info.plist */,
+				A9DA6C7A27B9800F00F3B786 /* GoogleService-Info.plist */,
+			);
+			path = Kuring;
+			sourceTree = "<group>";
+		};
+		A9DA6C8127B9813D00F3B786 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6C8227B9813D00F3B786 /* KuringSDK.framework */,
+				CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A9DA6C8827B98D2200F3B786 /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6C8927B98D2200F3B786 /* KUFeedbackViewController.swift */,
+			);
+			path = Feedback;
+			sourceTree = "<group>";
+		};
+		A9DA6C8A27B98D2200F3B786 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6C8B27B98D2200F3B786 /* Onboarding.storyboard */,
+				A9DA6C8C27B98D2200F3B786 /* OnboardingModel.swift */,
+				A9DA6C8D27B98D2200F3B786 /* OnBoardingViewController.swift */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		A9DA6C8E27B98D2200F3B786 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */,
+				A9DA6C9027B98D2200F3B786 /* Global.swift */,
+				A9DA6C9127B98D2200F3B786 /* Notice.KuringApp.swift */,
+				A9DA6C9227B98D2200F3B786 /* UIView+Rx.swift */,
+				A9DA6C9327B98D2200F3B786 /* CustomExtension.swift */,
+				A9DA6C9427B98D2200F3B786 /* UIViewController+Rx.swift */,
+				A9DA6C9527B98D2200F3B786 /* UITableView+Rx.swift */,
+				A9DA6C9627B98D2200F3B786 /* Colors.swift */,
+				A9DA6C9727B98D2200F3B786 /* DeviceConfiguration.swift */,
+				A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		A9DA6C9927B98D2200F3B786 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6C9A27B98D2200F3B786 /* CategoryCollectionViewController.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		A9DA6C9B27B98D2200F3B786 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6C9C27B98D2200F3B786 /* Storage.swift */,
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		A9DA6C9D27B98D2200F3B786 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6C9E27B98D2200F3B786 /* KUStaffViewController.swift */,
+				A9DA6C9F27B98D2200F3B786 /* Controller */,
+				A9DA6CA527B98D2200F3B786 /* View */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		A9DA6C9F27B98D2200F3B786 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6CA027B98D2200F3B786 /* KUSearchViewController.Searcher.swift */,
+				A9DA6CA127B98D2200F3B786 /* KUSearchViewController.UICollectionView.swift */,
+				A9DA6CA227B98D2200F3B786 /* KUSearchViewController.UITextField.swift */,
+				A9DA6CA327B98D2200F3B786 /* KUSearchViewController.UITableView.swift */,
+				A9DA6CA427B98D2200F3B786 /* KUSearchViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A9DA6CA527B98D2200F3B786 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6CA627B98D2200F3B786 /* KUSearchTypeCollectionViewCell.swift */,
+				A9DA6CA727B98D2200F3B786 /* KUSearchedNoticeCell.swift */,
+				A9DA6CA827B98D2200F3B786 /* KUSearchedStaffCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A9DA6CA927B98D2200F3B786 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6CAA27B98D2200F3B786 /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		A9DA6CAB27B98D2200F3B786 /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6CAC27B98D2200F3B786 /* KUNoticeListViewController.swift */,
+				A9DA6CAD27B98D2200F3B786 /* NoticeWebViewController.swift */,
+				A9DA6CAE27B98D2200F3B786 /* View */,
+			);
+			path = Notice;
+			sourceTree = "<group>";
+		};
+		A9DA6CAE27B98D2200F3B786 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6CAF27B98D2200F3B786 /* KUNoticeTagView.swift */,
+				A9DA6CB027B98D2200F3B786 /* KUNoticeListViewCell.swift */,
+				A9DA6CB127B98D2200F3B786 /* KUNoticeListCollectionViewCell.swift */,
+				A9DA6CB227B98D2200F3B786 /* KUNoticeListViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A9DA6CB327B98D2200F3B786 /* Alarm */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6CB427B98D2200F3B786 /* AlarmTagViewController.swift */,
+				A9DA6CB527B98D2200F3B786 /* KUAlarmViewController.swift */,
+				A9DA6CB627B98D2200F3B786 /* View */,
+			);
+			path = Alarm;
+			sourceTree = "<group>";
+		};
+		A9DA6CB627B98D2200F3B786 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6CB727B98D2200F3B786 /* KUAlarmTableViewCell.swift */,
+				A9DA6CB827B98D2200F3B786 /* KUAlarmTableViewCell.xib */,
+				A9DA6CB927B98D2200F3B786 /* KUAlarmHeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A9DA6CBA27B98D2300F3B786 /* OpenSource */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6CBB27B98D2300F3B786 /* Opensource.swift */,
+				A9DA6CBC27B98D2300F3B786 /* OpenSourceController.swift */,
+				A9DA6CBD27B98D2300F3B786 /* OpensourceListViewController.swift */,
+			);
+			path = OpenSource;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A9DA6C6127B97EE300F3B786 /* Kuring */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9DA6C7627B97EE500F3B786 /* Build configuration list for PBXNativeTarget "Kuring" */;
+			buildPhases = (
+				ABD156C4EFD6E12A1C2CC3D8 /* [CP] Check Pods Manifest.lock */,
+				A9DA6C5E27B97EE300F3B786 /* Sources */,
+				A9DA6C5F27B97EE300F3B786 /* Frameworks */,
+				A9DA6C6027B97EE300F3B786 /* Resources */,
+				A9DA6C8527B9813D00F3B786 /* Embed Frameworks */,
+				5B7797E2CD28B995C21DBA58 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Kuring;
+			packageProductDependencies = (
+				A9DA6C7D27B9809900F3B786 /* FirebaseAnalytics */,
+				A9DA6C7F27B9809900F3B786 /* FirebaseMessaging */,
+			);
+			productName = Kuring;
+			productReference = A9DA6C6227B97EE300F3B786 /* Kuring.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A9DA6C5A27B97EE300F3B786 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					A9DA6C6127B97EE300F3B786 = {
+						CreatedOnToolsVersion = 13.2;
+					};
+				};
+			};
+			buildConfigurationList = A9DA6C5D27B97EE300F3B786 /* Build configuration list for PBXProject "Kuring" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A9DA6C5927B97EE300F3B786;
+			packageReferences = (
+				A9DA6C7C27B9809900F3B786 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			productRefGroup = A9DA6C6327B97EE300F3B786 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A9DA6C6127B97EE300F3B786 /* Kuring */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A9DA6C6027B97EE300F3B786 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9DA6CDD27B98D2300F3B786 /* KUNoticeListViewCell.xib in Resources */,
+				A9DA6CBF27B98D2300F3B786 /* Onboarding.storyboard in Resources */,
+				A9DA6CE127B98D2300F3B786 /* KUAlarmTableViewCell.xib in Resources */,
+				A9DA6C7B27B9800F00F3B786 /* GoogleService-Info.plist in Resources */,
+				A9DA6D0927B98FEC00F3B786 /* LaunchScreen.storyboard in Resources */,
+				A9DA6C6F27B97EE500F3B786 /* Assets.xcassets in Resources */,
+				A9DA6C6D27B97EE300F3B786 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5B7797E2CD28B995C21DBA58 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kuring/Pods-Kuring-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kuring/Pods-Kuring-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kuring/Pods-Kuring-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ABD156C4EFD6E12A1C2CC3D8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Kuring-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A9DA6C5E27B97EE300F3B786 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9DA6CD527B98D2300F3B786 /* KUSearchedNoticeCell.swift in Sources */,
+				A9DA6CCF27B98D2300F3B786 /* KUSearchViewController.Searcher.swift in Sources */,
+				A9DA6CD127B98D2300F3B786 /* KUSearchViewController.UITextField.swift in Sources */,
+				A9DA6CC827B98D2300F3B786 /* UITableView+Rx.swift in Sources */,
+				A9DA6CE327B98D2300F3B786 /* Opensource.swift in Sources */,
+				A9DA6CC327B98D2300F3B786 /* Global.swift in Sources */,
+				A9DA6CDC27B98D2300F3B786 /* KUNoticeListCollectionViewCell.swift in Sources */,
+				A9DA6CE527B98D2300F3B786 /* OpensourceListViewController.swift in Sources */,
+				A9DA6CD327B98D2300F3B786 /* KUSearchViewController.swift in Sources */,
+				A9DA6CC227B98D2300F3B786 /* Date.Kuring.swift in Sources */,
+				A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */,
+				A9DA6CC927B98D2300F3B786 /* Colors.swift in Sources */,
+				A9DA6CCD27B98D2300F3B786 /* Storage.swift in Sources */,
+				A9DA6CC527B98D2300F3B786 /* UIView+Rx.swift in Sources */,
+				A9DA6CDA27B98D2300F3B786 /* KUNoticeTagView.swift in Sources */,
+				A9DA6CD827B98D2300F3B786 /* KUNoticeListViewController.swift in Sources */,
+				A9DA6CCC27B98D2300F3B786 /* CategoryCollectionViewController.swift in Sources */,
+				A9DA6CDE27B98D2300F3B786 /* AlarmTagViewController.swift in Sources */,
+				A9DA6CDB27B98D2300F3B786 /* KUNoticeListViewCell.swift in Sources */,
+				A9DA6CC027B98D2300F3B786 /* OnboardingModel.swift in Sources */,
+				A9DA6CE427B98D2300F3B786 /* OpenSourceController.swift in Sources */,
+				A9DA6CBE27B98D2300F3B786 /* KUFeedbackViewController.swift in Sources */,
+				A9DA6CE227B98D2300F3B786 /* KUAlarmHeaderView.swift in Sources */,
+				A9DA6CD227B98D2300F3B786 /* KUSearchViewController.UITableView.swift in Sources */,
+				A9DA6CD027B98D2300F3B786 /* KUSearchViewController.UICollectionView.swift in Sources */,
+				A9DA6CC127B98D2300F3B786 /* OnBoardingViewController.swift in Sources */,
+				A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */,
+				A9DA6CDF27B98D2300F3B786 /* KUAlarmViewController.swift in Sources */,
+				A9DA6CC427B98D2300F3B786 /* Notice.KuringApp.swift in Sources */,
+				A9DA6C8727B981A100F3B786 /* AppDelegate.RemoteNotification.swift in Sources */,
+				A9DA6CCA27B98D2300F3B786 /* DeviceConfiguration.swift in Sources */,
+				A9DA6C6627B97EE300F3B786 /* AppDelegate.swift in Sources */,
+				A9DA6CE027B98D2300F3B786 /* KUAlarmTableViewCell.swift in Sources */,
+				A9DA6CD727B98D2300F3B786 /* SettingsViewController.swift in Sources */,
+				A9DA6CD627B98D2300F3B786 /* KUSearchedStaffCell.swift in Sources */,
+				A9DA6CD427B98D2300F3B786 /* KUSearchTypeCollectionViewCell.swift in Sources */,
+				A9DA6CD927B98D2300F3B786 /* NoticeWebViewController.swift in Sources */,
+				A9DA6CC727B98D2300F3B786 /* UIViewController+Rx.swift in Sources */,
+				A9DA6CC627B98D2300F3B786 /* CustomExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A9DA6C6B27B97EE300F3B786 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9DA6C6C27B97EE300F3B786 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A9DA6D0727B98FEC00F3B786 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9DA6D0827B98FEC00F3B786 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A9DA6C7427B97EE500F3B786 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A9DA6C7527B97EE500F3B786 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A9DA6C7727B97EE500F3B786 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 098133CE147F3EC919795C6B /* Pods-Kuring.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Kuring/Kuring.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = 77CD4KLN3Y;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Kuring/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "쿠링";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		A9DA6C7827B97EE500F3B786 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6AA68EE0A1CA6D5FD2FB9A4F /* Pods-Kuring.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Kuring/Kuring.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = 77CD4KLN3Y;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Kuring/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "쿠링";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A9DA6C5D27B97EE300F3B786 /* Build configuration list for PBXProject "Kuring" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9DA6C7427B97EE500F3B786 /* Debug */,
+				A9DA6C7527B97EE500F3B786 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9DA6C7627B97EE500F3B786 /* Build configuration list for PBXNativeTarget "Kuring" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9DA6C7727B97EE500F3B786 /* Debug */,
+				A9DA6C7827B97EE500F3B786 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A9DA6C7C27B9809900F3B786 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 8.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A9DA6C7D27B9809900F3B786 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A9DA6C7C27B9809900F3B786 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		A9DA6C7F27B9809900F3B786 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A9DA6C7C27B9809900F3B786 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = A9DA6C5A27B97EE300F3B786 /* Project object */;
+}
