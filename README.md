@@ -1,3 +1,8 @@
+![kuring.banner](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F871bea0c-d000-462c-8a69-da7f718b6b29%2Fnotion.banner.nanumsquare.png?table=block&id=a69fdf7f-f068-48c2-aede-f1fdcf13ca57&spaceId=547f4e5f-dce5-42a1-acc9-a4759b4d81a8&width=2000&userId=3b783d7c-6fef-43ef-819f-9ca8c90755a4&cache=v2)
+
+**🔔 걱정마, 쿠링이 알려줄게!** [👉🏽앱스토어 다운로드](https://apps.apple.com/kr/app/%EC%BF%A0%EB%A7%81/id1609873520)
+
+
 # kuring-ios-app
 This is a private repository for 쿠링 application service
 
@@ -30,4 +35,9 @@ $ pod install
 ### 프로비저닝 프로파일 (Provisioning Profile) 요청
 
 재성에게 필요하신 프로파일을 요청하시면 됩니다.
+
+- - -
+
+![kuring](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F0723407c-43fd-416d-990f-944c361fadb7%2Fnotion.logo.png?table=block&id=a69fdf7f-f068-48c2-aede-f1fdcf13ca57&spaceId=547f4e5f-dce5-42a1-acc9-a4759b4d81a8&width=250&userId=3b783d7c-6fef-43ef-819f-9ca8c90755a4&cache=v2)
+
 
