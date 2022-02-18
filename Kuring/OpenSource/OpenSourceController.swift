@@ -19,9 +19,10 @@ class OpenSourceController: UIViewController {
         $0.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
-    private let podList: [String] = [
-        Opensource.currentList.compactMap { $0.link.split(separator: "/").last }.map { String($0) }
-    ]
+    private let podList: [String] = Opensource.currentList
+        .compactMap { $0.link.split(separator: "/").last }
+        .compactMap { String($0) }
+    
     
     // current list에 md 여부 추가하기.....?
     private let addressList: [String] = [

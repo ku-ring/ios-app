@@ -42,8 +42,8 @@ class KUStaffViewController: UITableViewController {
     
     /// `staff.phoneNumber`를 실제 전화가능한 문자열로 가공한 뒤 전화를 겁니다.
     private func makeCall() {
-        let validPhoneNumber = staff.phoneNumber.replacingOccurrences(of: CharacterSet.decimalDigits.inverted, with: "")
-//        let validPhoneNumber = staff.phoneNumber.replacingOccurrences(of: "-", with: "") // - 가 아닌 char도 삭제
+//        let validPhoneNumber = staff.phoneNumber.replacingOccurrences(of: CharacterSet.decimalDigits.inverted, with: "")
+        let validPhoneNumber = staff.phoneNumber.replacingOccurrences(of: "-", with: "") // - 가 아닌 char도 삭제
         guard let phoneURL = URL(string: "tel://" + validPhoneNumber) else { return }
         UIApplication.shared.open(phoneURL)
     }
