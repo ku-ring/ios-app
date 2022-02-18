@@ -28,7 +28,6 @@ class OnBoardingViewController: UIViewController {
         $0.dataSource = self
         $0.estimatedRowHeight = 74
         $0.rowHeight = view.frame.width * 74 / 360
-        
     }
     
     var bag = DisposeBag()

@@ -113,9 +113,7 @@ extension AppDelegate: KuringDelegate {
         createNotificationBanner(from: notification)
     }
     
-    func didUpdateSubscription(_ subscription: Subscription) {
-        
-    }
+    func didUpdateSubscription(_ subscription: Subscription) { }
     
     /**
      알림이 오면 배너를 생성하여 띄운다

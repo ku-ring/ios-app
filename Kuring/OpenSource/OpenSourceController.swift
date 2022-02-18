@@ -20,17 +20,10 @@ class OpenSourceController: UIViewController {
     }
     
     private let podList: [String] = [
-        "Alamofire",
-        "Firebase",
-        "RxAlamofire",
-        "RxCocoa",
-        "RxGesture",
-        "RxSwift",
-        "SkeletonView",
-        "SnapKit",
-        "Then"
+        Opensource.currentList.compactMap { $0.link.split(separator: "/").last }.map { String($0) }
     ]
     
+    // current list에 md 여부 추가하기.....?
     private let addressList: [String] = [
         "https://github.com/Alamofire/Alamofire/blob/master/LICENSE",
         "https://github.com/firebase/firebase-ios-sdk/blob/master/LICENSE",

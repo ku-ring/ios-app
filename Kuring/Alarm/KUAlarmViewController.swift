@@ -19,9 +19,9 @@ class KUAlarmViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nibName = UINib(nibName: "KUAlarmTableViewCell", bundle: nil)
+        let nibName = UINib(nibName: String(describing: KUAlarmTableViewCell.self), bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: KUAlarmTableViewCell.identifier)
-        Kuring.addDelegate(self, forKey: "KUAlarmViewController")
+        Kuring.addDelegate(self, forKey: String(describing: Self.self))
         
         if notifications.isEmpty {
             showEmptyData()
@@ -30,10 +30,8 @@ class KUAlarmViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        notifications.values.forEach {
-            $0.forEach { notifications in
-                notifications.isNew = false
-            }
+        notifications.values.flatMap { $0 }.forEach { notifications in
+            notifications.isNew = false
         }
     }
 
@@ -76,7 +74,6 @@ extension KUAlarmViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         let headerView = KUAlarmHeaderView(
             frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 36),
             date: dates[section]

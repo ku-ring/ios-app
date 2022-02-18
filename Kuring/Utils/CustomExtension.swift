@@ -82,6 +82,7 @@ extension DateFormatter {
 
 
 extension Date {
+    // kuring sdk 에도 같은거 있음
     func isSameDay(as otherDate: Date) -> Bool {
         let baseDate = self
         let otherDate = otherDate

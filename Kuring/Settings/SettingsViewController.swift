@@ -66,5 +66,4 @@ extension UIViewController {
         let nav = UINavigationController(rootViewController: subscriptionVC)
         present(nav, animated: true, completion: nil)
     }
-    
 }

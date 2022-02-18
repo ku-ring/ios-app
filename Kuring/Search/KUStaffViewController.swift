@@ -42,7 +42,8 @@ class KUStaffViewController: UITableViewController {
     
     /// `staff.phoneNumber`를 실제 전화가능한 문자열로 가공한 뒤 전화를 겁니다.
     private func makeCall() {
-        let validPhoneNumber = staff.phoneNumber.replacingOccurrences(of: "-", with: "")
+        let validPhoneNumber = staff.phoneNumber.replacingOccurrences(of: CharacterSet.decimalDigits.inverted, with: "")
+//        let validPhoneNumber = staff.phoneNumber.replacingOccurrences(of: "-", with: "") // - 가 아닌 char도 삭제
         guard let phoneURL = URL(string: "tel://" + validPhoneNumber) else { return }
         UIApplication.shared.open(phoneURL)
     }
@@ -74,7 +75,7 @@ class KUStaffViewController: UITableViewController {
             guard let self = self else { return }
             self.makeCall()
         }
-        let cancelAction = UIAlertAction(title: "아이KU! 잘못 눌렀어요.", style: .cancel)
+        let cancelAction = UIAlertAction(title: "아이KU! 잘못 눌렀어요.", style: .cancel) // 개드립 금지!
         actionSheet.addAction(callAction)
         actionSheet.addAction(cancelAction)
         self.present(actionSheet, animated: true, completion: nil)

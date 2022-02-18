@@ -75,4 +75,3 @@ class KUAlarmHeaderView: UIView {
         dateLabel.textColor = color
     }
 }
-

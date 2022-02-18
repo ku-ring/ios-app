@@ -20,4 +20,3 @@ class OnboardingViewModel {
         onBoarding(image: "mag", title: "빠른 검색", subtitle: "공지사항과 교직원 정보를 가장 빠르게 검색해볼 수 있습니다.")
     ]
 }
-
