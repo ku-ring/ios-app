@@ -11,6 +11,9 @@ enum URLLink: String {
     case whatsNew = "https://kuring.notion.site/iOS-eef51c986b7f4320b97424df3f4a5e3c"
     case privacy = "https://kuring.notion.site/65ba27f2367044e0be7061e885e7415c"
     case terms = "https://kuring.notion.site/e88095d4d67d4c4c92983fd85cb693b9"
+    case team = "https://kuring.notion.site/a69fdf7ff06848c2aedef1fdcf13ca57"
+    case instagram = "https://www.instagram.com/kuring.konkuk"
+    case kakaotalk = "https://pf.kakao.com/_xorGxab"
     
     func openURL() {
         if let url = URL(string: self.rawValue) {
@@ -31,19 +34,26 @@ class SettingsViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath.section {
-            case 0: // 공지구독
-                showSubscription()
-            case 1: // 정보
-                switch indexPath.row {
-                    case 1: URLLink.whatsNew.openURL()
-                    case 2: URLLink.privacy.openURL()
-                    case 3: URLLink.terms.openURL()
-                    case 4: showOpensource()
-                    default: return
-                }
-            case 2: // 피드백
-                showFeedback()
+        case 0: // 공지구독
+            showSubscription()
+        case 1: // 정보
+            switch indexPath.row {
+            case 1: URLLink.whatsNew.openURL()
+            case 2: URLLink.team.openURL()
+            case 3: URLLink.privacy.openURL()
+            case 4: URLLink.terms.openURL()
+            case 5: showOpensource()
             default: return
+            }
+        case 2: // 소셜
+            switch indexPath.row {
+            case 0: URLLink.instagram.openURL()
+            case 1: URLLink.kakaotalk.openURL()
+            default: return
+            }
+        case 3: // 피드백
+            showFeedback()
+        default: return
         }
     }
     
