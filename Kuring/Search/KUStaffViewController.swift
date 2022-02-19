@@ -75,7 +75,7 @@ class KUStaffViewController: UITableViewController {
             guard let self = self else { return }
             self.makeCall()
         }
-        let cancelAction = UIAlertAction(title: "아이KU! 잘못 눌렀어요.", style: .cancel) // 개드립 금지!
+        let cancelAction = UIAlertAction(title: "아이KU! 잘못 눌렀어요.", style: .cancel)
         actionSheet.addAction(callAction)
         actionSheet.addAction(cancelAction)
         self.present(actionSheet, animated: true, completion: nil)

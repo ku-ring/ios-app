@@ -308,7 +308,7 @@ extension KUNoticeListViewController: SkeletonTableViewDataSource {
 }
 
 extension UIColor {
-    // use fucking enum
+    // TODO: use fucking enum
     static func named(_ name: String) -> UIColor {
         return self.init(named: name) ?? .gray
     }
