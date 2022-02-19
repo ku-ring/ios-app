@@ -43,7 +43,7 @@ extension AppDelegate: MessagingDelegate {
             return
         }
 
-        Kuring.register(fcmToken: fcmToken) { _ in }
+        Kuring.register(fcmToken: fcmToken)
         print("[com.kuring.service] FCM token: \(fcmToken)")
     }
 }
@@ -62,9 +62,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // MARK: Kuring
         Kuring.userNotificationCenter(
             center,
-            willPresent: notification,
-            withCompletionHandler: completionHandler
+            willPresent: notification
         )
+        
+        completionHandler([.banner, .list, .badge, .sound])
     }
     
     func userNotificationCenter(
@@ -79,9 +80,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // MARK: Kuring
         Kuring.userNotificationCenter(
             center,
-            didReceive: response,
-            withCompletionHandler: completionHandler
+            didReceive: response
         )
+        
+        completionHandler()
     }
 }
 
@@ -101,9 +103,10 @@ extension AppDelegate {
         // MARK: Kuring
         Kuring.application(
             application,
-            didReceiveRemoteNotification: userInfo,
-            fetchCompletionHandler: completionHandler
+            didReceiveRemoteNotification: userInfo
         )
+        
+        completionHandler(.newData)
     }
 }
 
@@ -113,9 +116,7 @@ extension AppDelegate: KuringDelegate {
         createNotificationBanner(from: notification)
     }
     
-    func didUpdateSubscription(_ subscription: Subscription) {
-        
-    }
+    func didUpdateSubscription(_ subscription: Subscription) { }
     
     /**
      알림이 오면 배너를 생성하여 띄운다

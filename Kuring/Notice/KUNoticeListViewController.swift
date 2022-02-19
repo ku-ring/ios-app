@@ -113,13 +113,9 @@ class KUNoticeListViewController: UIViewController {
     }
     
     func updateData() {
-        if let hasNext = hasNextList[currentType] {
-            if hasNext == false {
-                // 더이상 불러올 수 있는 공지가 없습니다.
-                return
-            }
+        if let hasNext = hasNextList[currentType], hasNext {
+            load()
         }
-        load()
     }
     
     @objc
@@ -134,34 +130,26 @@ class KUNoticeListViewController: UIViewController {
         query = Kuring.createNoticeListQuery(with: params)
         query?.load { [weak self] result in
             guard let self = self else { return }
+            
             self.isLoading = false
             self.refreshControl.endRefreshing()
+            
             switch result {
-                case .success(let notices):
-                    var newNotices: [Notice] = []
-                    for notice in notices {
-                        if notice.id == self.noticeList[self.currentType]?.first?.id { return }
-                        newNotices.append(notice)
-                    }
-                    // 가져온 데이터 수 기록
-                    let count = newNotices.count
-                    
-                    // 가져온 데이터 수 만큼 오프셋 값 추가
-                    let prevOffset = self.offsetList[self.currentType] ?? 0
-                    let currentOffset = prevOffset + count
-                    self.offsetList.updateValue(currentOffset, forKey: self.currentType)
-                    
-                    // 가져온 데이터 array 가장 앞에 삽입
-                    // Update notices
-                    var currentNotices = self.noticeList[self.currentType] ?? []
-                    currentNotices.insert(contentsOf: newNotices, at: 0)
-                    self.noticeList.updateValue(currentNotices, forKey: self.currentType)
-                    
-                    // 뷰 업데이트
-                    self.tableView.reloadData()
-                    
-                case .failure(let error):
-                    print(error.localizedDescription)
+            case .success(let notices):
+                let newNotices = notices.filter { self.noticeList[self.currentType]?.first?.id == $0.id }
+                
+                // 가져온 데이터 수 만큼 오프셋 값 추가
+                self.offsetList[self.currentType, default: 0] += newNotices.count
+                
+                // 가져온 데이터 array 가장 앞에 삽입
+                // Update notices
+                self.noticeList[self.currentType, default: []].insert(contentsOf: newNotices, at: 0)
+                
+                // 뷰 업데이트
+                self.tableView.reloadData()
+                
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
@@ -182,6 +170,7 @@ class KUNoticeListViewController: UIViewController {
             self.isLoading = false
             self.tableView.hideSkeleton()
             switch result {
+                // FIXME: - see above
                 case .success(let notices):
                     // Update hasNext
                     let hasNext = notices.count >= self.loadLimit
@@ -231,7 +220,7 @@ extension KUNoticeListViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        guard let cell = collectionView.cellForItem(at: indexPath) as? KUNoticeListCollectionViewCell else { return }
+        let cell = collectionView.cellForItem(at: indexPath) as! KUNoticeListCollectionViewCell
         self.currentType = cell.noticeType
     }
 }
@@ -268,7 +257,7 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
             if !articleArray.contains(id) {
                 articleArray.append(id)
                 UserDefaults.standard.set(articleArray, forKey: articleKey)
-                readArticle = UserDefaults.standard.array(forKey: articleKey)!
+                readArticle = articleArray
             }
         }
         
@@ -315,5 +304,12 @@ extension KUNoticeListViewController: SkeletonTableViewDataSource {
     
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
         return KUNoticeListViewCell.identifier
+    }
+}
+
+extension UIColor {
+    // TODO: use fucking enum
+    static func named(_ name: String) -> UIColor {
+        return self.init(named: name) ?? .gray
     }
 }

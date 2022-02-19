@@ -55,9 +55,9 @@ class KUFeedbackViewController: UIViewController {
             self.textView.text = ""
             self.textView.isEditable = false
             
+            self.dismiss(animated: true, completion: nil)
             switch result {
-                case .success:
-                    self.dismiss(animated: true, completion: nil)
+                case .success: break
                 case .failure(let error):
                     print(error.localizedDescription)
             }

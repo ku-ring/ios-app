@@ -15,6 +15,7 @@ class KUSearchViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     
+    // TODO: make non-null or move to kuring main
     var searcher: Searcher?
     
     var currentType: Searcher.SearchType = .notice {

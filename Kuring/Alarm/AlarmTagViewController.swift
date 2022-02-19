@@ -22,9 +22,7 @@ class AlarmTagViewController : UIViewController {
     /// 구독되지 않은 카테고리 딕셔너리
     var unSelectedCategories: [NoticeType] = []
     
-    var SortedSelectedCategories:[Int: String] = [:]
-    
-    
+    var SortedSelectedCategories: [Int: String] = [:]
     
     // MARK: Properties
     lazy var saveButton: UIBarButtonItem = {
@@ -52,7 +50,7 @@ class AlarmTagViewController : UIViewController {
     }()
     
     private var bellImageView = UIImageView().then {
-        $0.image = UIImage(named: "Bell_Image")
+        $0.image = UIImage(named: "Bell_Image") // image name convention please~
         $0.tintColor = .white
     }
     
@@ -77,7 +75,6 @@ class AlarmTagViewController : UIViewController {
         
         return cv
     }()
-    
     
     private var lineView = UIView().then {
         $0.backgroundColor = .white
@@ -182,8 +179,8 @@ extension AlarmTagViewController {
             unSelectedCollectionView,
             onboardingBtn
         ])
+
         setDelegate()
-        
     }
     
     private func setDelegate() {
@@ -280,13 +277,10 @@ extension AlarmTagViewController {
             $0.width.equalTo(232 * DeviceWidthRatio)
             $0.centerX.equalToSuperview()
         }
-        
     }
-    
 }
 
 extension AlarmTagViewController: UICollectionViewDelegate { }
-
 
 extension AlarmTagViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -320,8 +314,6 @@ extension AlarmTagViewController: UICollectionViewDataSource{
         return cell
     }
 }
-
-
 
 extension AlarmTagViewController: UICollectionViewDelegateFlowLayout {
     
@@ -384,5 +376,3 @@ class AlarmTagCell : UICollectionViewCell {
         }
     }
 }
-
-

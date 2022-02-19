@@ -54,7 +54,6 @@
 		A9DA6CE127B98D2300F3B786 /* KUAlarmTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6CB827B98D2200F3B786 /* KUAlarmTableViewCell.xib */; };
 		A9DA6CE227B98D2300F3B786 /* KUAlarmHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB927B98D2200F3B786 /* KUAlarmHeaderView.swift */; };
 		A9DA6CE327B98D2300F3B786 /* Opensource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CBB27B98D2300F3B786 /* Opensource.swift */; };
-		A9DA6CE427B98D2300F3B786 /* OpenSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CBC27B98D2300F3B786 /* OpenSourceController.swift */; };
 		A9DA6CE527B98D2300F3B786 /* OpensourceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CBD27B98D2300F3B786 /* OpensourceListViewController.swift */; };
 		A9DA6D0927B98FEC00F3B786 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6D0727B98FEC00F3B786 /* LaunchScreen.storyboard */; };
 		D430312BD0477A68D7728C94 /* Pods_Kuring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */; };
@@ -124,7 +123,6 @@
 		A9DA6CB827B98D2200F3B786 /* KUAlarmTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KUAlarmTableViewCell.xib; sourceTree = "<group>"; };
 		A9DA6CB927B98D2200F3B786 /* KUAlarmHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUAlarmHeaderView.swift; sourceTree = "<group>"; };
 		A9DA6CBB27B98D2300F3B786 /* Opensource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opensource.swift; sourceTree = "<group>"; };
-		A9DA6CBC27B98D2300F3B786 /* OpenSourceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSourceController.swift; sourceTree = "<group>"; };
 		A9DA6CBD27B98D2300F3B786 /* OpensourceListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpensourceListViewController.swift; sourceTree = "<group>"; };
 		A9DA6D0827B98FEC00F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kuring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,7 +340,6 @@
 			isa = PBXGroup;
 			children = (
 				A9DA6CBB27B98D2300F3B786 /* Opensource.swift */,
-				A9DA6CBC27B98D2300F3B786 /* OpenSourceController.swift */,
 				A9DA6CBD27B98D2300F3B786 /* OpensourceListViewController.swift */,
 			);
 			path = OpenSource;
@@ -495,7 +492,6 @@
 				A9DA6CDE27B98D2300F3B786 /* AlarmTagViewController.swift in Sources */,
 				A9DA6CDB27B98D2300F3B786 /* KUNoticeListViewCell.swift in Sources */,
 				A9DA6CC027B98D2300F3B786 /* OnboardingModel.swift in Sources */,
-				A9DA6CE427B98D2300F3B786 /* OpenSourceController.swift in Sources */,
 				A9DA6CBE27B98D2300F3B786 /* KUFeedbackViewController.swift in Sources */,
 				A9DA6CE227B98D2300F3B786 /* KUAlarmHeaderView.swift in Sources */,
 				A9DA6CD227B98D2300F3B786 /* KUSearchViewController.UITableView.swift in Sources */,
