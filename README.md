@@ -32,9 +32,9 @@ $ pod install
 > testflight로 올리는 경우 및 prod 테스트가 필요한 경우를 제외하고 반드시 scheme은 debug로 설정해주세요.
 > entitlement도 scheme에 따라 development | production 수정해주세요.
 
-### 프로비저닝 프로파일 (Provisioning Profile) 요청
+### developed by...
 
-재성에게 필요하신 프로파일을 요청하시면 됩니다.
+[🐷](https://github.com/jaesung-0o0) | [🐻](https://rldd.tistory.com/)
 
 - - -
 
