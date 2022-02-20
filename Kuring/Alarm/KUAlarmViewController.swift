@@ -51,7 +51,7 @@ class KUAlarmViewController: UITableViewController {
         ? "구독중인 카테고리가 없습니다."
         : "받은 알림이 없습니다."
         emptyDataLabel.textAlignment = .center
-        emptyDataLabel.textColor = UIColor(named: "ColorSet.green")
+        emptyDataLabel.textColor = ColorSet.green
         emptyDataLabel.sizeToFit()
         emptyDataLabel.center.x = tableView.center.x
         emptyDataLabel.center.y = tableView.frame.height - emptyDataLabel.frame.height

@@ -170,7 +170,7 @@ extension AlarmTagViewController {
     }
     
     private func setUpView() {
-        view.backgroundColor = UIColor(named: "ColorSet.green")
+        view.backgroundColor = ColorSet.green
         view.addSubViews([
             bellImageView,
             alarmTagLabel,
@@ -300,10 +300,10 @@ extension AlarmTagViewController: UICollectionViewDataSource{
         if collectionView == selectedCollectionView {
             cell.alarmTitleLabel.text = selectedCategories[indexPath.row].koreanValue
             cell.alarmTitleLabel.backgroundColor = .white
-            cell.alarmTitleLabel.textColor = UIColor(named: "ColorSet.green")
+            cell.alarmTitleLabel.textColor = ColorSet.green
         } else {
             cell.alarmTitleLabel.text = unSelectedCategories[indexPath.row].koreanValue
-            cell.alarmTitleLabel.backgroundColor = UIColor(named: "ColorSet.green")
+            cell.alarmTitleLabel.backgroundColor = ColorSet.green
             cell.alarmTitleLabel.textColor = .white
             
         }

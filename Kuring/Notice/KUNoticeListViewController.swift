@@ -101,8 +101,8 @@ class KUNoticeListViewController: UIViewController {
     func updateNotifcationButton() {
         let config = UIImage.SymbolConfiguration(
             paletteColors: Kuring.hasNewNotification
-            ? [UIColor(named: "ColorSet.pink")!, UIColor(named: "ColorSet.Label.primary")!]
-            : [UIColor(named: "ColorSet.Label.primary")!]
+            ? [ColorSet.pink, ColorSet.Label.primary]
+            : [ColorSet.Label.primary]
         )
         
         notificationButton.image = UIImage(

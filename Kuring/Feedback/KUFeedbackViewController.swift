@@ -22,13 +22,13 @@ class KUFeedbackViewController: UIViewController {
         super.viewDidLoad()
         
         textView.text = placeholder
-        textView.textColor = UIColor(named: "ColorSet.Label.tertiary")
+        textView.textColor = ColorSet.Label.tertiary
         textView.delegate = self
         
         textViewBackgroundView.backgroundColor = .clear
         textViewBackgroundView.layer.cornerRadius = 12
         textViewBackgroundView.layer.borderWidth = 1
-        textViewBackgroundView.layer.borderColor = UIColor(named: "ColorSet.green")?.cgColor
+        textViewBackgroundView.layer.borderColor = ColorSet.green.cgColor
         
         textLimitLabel.text = "\(textLimit.min)글자 이상 입력해주세요"
         
@@ -78,14 +78,14 @@ extension KUFeedbackViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if isTextViewEmpty {
             textView.text = ""
-            textView.textColor = UIColor(named: "ColorSet.Label.primary")
+            textView.textColor = ColorSet.Label.primary
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = placeholder
-            textView.textColor = UIColor(named: "ColorSet.Label.tertiary")
+            textView.textColor = ColorSet.Label.tertiary
         }
     }
     
@@ -99,9 +99,9 @@ extension KUFeedbackViewController: UITextViewDelegate {
         }
         if textView.text.count > textLimit.max {
             updateButtonState(enabled: false)
-            textLimitLabel.textColor = UIColor(named: "ColorSet.pink")
+            textLimitLabel.textColor = ColorSet.pink
         } else {
-            textLimitLabel.textColor = UIColor(named: "ColorSet.Label.secondary")
+            textLimitLabel.textColor = ColorSet.Label.secondary
         }
     }
 }

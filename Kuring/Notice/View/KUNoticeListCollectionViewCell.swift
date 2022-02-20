@@ -21,11 +21,11 @@ class KUNoticeListCollectionViewCell: UICollectionViewCell {
         
         selectionBackgroundView.layer.cornerRadius = selectionBackgroundView.frame.height / 2
         selectionBackgroundView.layer.masksToBounds = true
-        selectionBackgroundView.backgroundColor = UIColor(named: "ColorSet.secondaryGreen")
+        selectionBackgroundView.backgroundColor = ColorSet.secondaryGreen
         
         selectionBackgroundView?.isHidden = !selected
         nameLabel.textColor = selected
-        ? UIColor(named: "ColorSet.Label.green")
-        : UIColor(named: "ColorSet.Label.primary")
+        ? ColorSet.Label.green
+        : ColorSet.Label.primary
     }
 }
