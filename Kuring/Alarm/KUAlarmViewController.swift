@@ -101,6 +101,19 @@ extension KUAlarmViewController {
         showNoticeWebViewController(with: urlString)
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        tableView.beginUpdates()
+        let date = dates[indexPath.section]
+        Kuring.removeNotification(at: indexPath.row, forDate: date)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        tableView.endUpdates()
+    }
+    
     /// 선택된 `Notice` 값으로 부터 유효한 웹주소 가져오기
     func articleURL(from notification: KuringSDK.Notification) -> String {
         if var articleArray = readArticle as? [String] {
