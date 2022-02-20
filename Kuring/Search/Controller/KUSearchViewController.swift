@@ -22,6 +22,7 @@ class KUSearchViewController: UIViewController {
         didSet {
             collectionView.reloadData()
             resetResult()
+            search()
         }
     }
     var staffResult: [Staff] = [] {

@@ -23,7 +23,7 @@ class KUStaffViewController: UITableViewController {
         nameLabel.text = staff.name
         deptLabel.text = "\(staff.deptName) · \(staff.collegeName)"
         emailLabel.text = "✉️ " + staff.email
-        phoneLabel.text = "📞 " + staff.phoneNumber
+        phoneLabel.text = "📞 " + staff.phone
         labLabel.text = "📍 " + staff.lab
         majorLabel.text = "📖 " + staff.major
     }
@@ -43,7 +43,7 @@ class KUStaffViewController: UITableViewController {
     /// `staff.phoneNumber`를 실제 전화가능한 문자열로 가공한 뒤 전화를 겁니다.
     private func makeCall() {
 //        let validPhoneNumber = staff.phoneNumber.replacingOccurrences(of: CharacterSet.decimalDigits.inverted, with: "")
-        let validPhoneNumber = staff.phoneNumber.replacingOccurrences(of: "-", with: "") // - 가 아닌 char도 삭제
+        let validPhoneNumber = staff.phone.replacingOccurrences(of: "-", with: "") // - 가 아닌 char도 삭제
         guard let phoneURL = URL(string: "tel://" + validPhoneNumber) else { return }
         UIApplication.shared.open(phoneURL)
     }
@@ -71,7 +71,7 @@ class KUStaffViewController: UITableViewController {
     /// 전화번호를 눌렀을 때, 실수로 눌렀을 경우를 대비하여 **action sheet**를 보여줍니다.
     private func showAskingCallActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let callAction = UIAlertAction(title: "\(staff.phoneNumber)로 전화걸기", style: .default) { [weak self] _ in
+        let callAction = UIAlertAction(title: "\(staff.phone)로 전화걸기", style: .default) { [weak self] _ in
             guard let self = self else { return }
             self.makeCall()
         }
