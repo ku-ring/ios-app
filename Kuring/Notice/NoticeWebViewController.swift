@@ -30,6 +30,15 @@ class NoticeWebViewController: UIViewController {
         let appIconImage = UIImage(named: "appIconLabel")?.withRenderingMode(.alwaysOriginal)
         navigationItem.titleView = UIImageView(image: appIconImage)
         
+        let rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "square.and.arrow.up"),
+            style: .plain,
+            target: self,
+            action: #selector(didTapRightBarButton)
+        )
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+        
+        
         loadWebView()
         webView.uiDelegate = self
         webView.navigationDelegate = self
@@ -44,6 +53,13 @@ class NoticeWebViewController: UIViewController {
         webView.load(request)
         indicator.startAnimating()
         indicator.isHidden = false
+    }
+    
+    @objc fileprivate func didTapRightBarButton() {
+        UIPasteboard.general.string = articleURL // 클립보드에도 복사.
+        let activityVC = UIActivityViewController(activityItems: [articleURL!], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = self.view
+        self.present(activityVC, animated: true, completion: nil)
     }
 }
 
