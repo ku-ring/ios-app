@@ -5,31 +5,32 @@
 //  Created by Hamlit Jason on 2022/01/21.
 //
 
-import Foundation
 import UIKit
-//
-//public func colorFromDecimalRGB(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat, alpha: CGFloat = 1.0) -> UIColor {
-//    return UIColor(
-//        red: red / 255.0,
-//        green: green / 255.0,
-//        blue: blue / 255.0,
-//        alpha: alpha
-//    )
-//}
-//
-//extension UIColor {
-//    
-//    // MARK: Custom Defined Colors
-//    
-//    /// textGrey
-//    class var textGrey: UIColor {
-//        return colorFromDecimalRGB(146, 146, 146)
-//    }
-//    
-//    /// 전화번호나 이메일 처럼 링크를 표시해주는 경우
-//    class var linkColor: UIColor {
-//        return colorFromDecimalRGB(61, 158, 189)
-//    }
-//    
-//    
-//}
+
+struct ColorSet {
+    static var green: UIColor { General.green }
+    static var secondaryGreen: UIColor { General.secondaryGreen }
+    static var pink: UIColor { General.pink }
+    static var gray: UIColor { General.gray }
+    static var secondaryGray: UIColor { General.secondaryGray }
+    
+    struct General {
+        static let green = UIColor(named: "ColorSet.green") ?? UIColor.green
+        static let secondaryGreen = UIColor(named: "ColorSet.secondaryGreen") ?? UIColor.green.withAlphaComponent(0.5)
+        static let pink = UIColor(named: "ColorSet.pink") ?? UIColor.systemPink
+        static let gray = UIColor(named: "ColorSet.gray") ?? UIColor.gray
+        static let secondaryGray = UIColor(named: "ColorSet.secondaryGray") ?? UIColor.lightGray
+    }
+    
+    struct Label {
+        static let primary = UIColor(named: "ColorSet.Label.primary") ?? UIColor.label
+        static let secondary = UIColor(named: "ColorSet.Label.secondary") ?? UIColor.secondaryLabel
+        static let tertiary = UIColor(named: "ColorSet.Label.tertiary") ?? UIColor.tertiaryLabel
+        static let green = UIColor(named: "ColorSet.Label.green") ?? UIColor.green
+    }
+    
+    struct Background {
+        static let primary = UIColor(named: "ColorSet.Background.primary") ?? UIColor.secondarySystemGroupedBackground
+    }
+}
+

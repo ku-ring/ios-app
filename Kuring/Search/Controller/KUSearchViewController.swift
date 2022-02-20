@@ -49,7 +49,7 @@ class KUSearchViewController: UIViewController {
         textFieldBackgroundView.backgroundColor = .clear
         textFieldBackgroundView.layer.cornerRadius = textFieldBackgroundView.frame.height / 2
         textFieldBackgroundView.layer.borderWidth = 1
-        textFieldBackgroundView.layer.borderColor = UIColor(named: "ColorSet.green")?.cgColor
+        textFieldBackgroundView.layer.borderColor = ColorSet.green.cgColor
     }
     
     deinit {

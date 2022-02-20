@@ -86,8 +86,8 @@ class KUNoticeListViewCell: UITableViewCell {
         [titleLabel, dateLabel]
             .forEach {
                 $0?.textColor = readNotice()
-                ? UIColor(named: "ColorSet.Label.tertiary")
-                : UIColor(named: "ColorSet.Label.primary")
+                ? ColorSet.Label.tertiary
+                : ColorSet.Label.primary
             }
     }
     
