@@ -171,14 +171,15 @@ extension AlarmTagViewController {
     
     private func setUpView() {
         view.backgroundColor = ColorSet.green
-        view.addSubViews([
+        [
             bellImageView,
             alarmTagLabel,
             selectedCollectionView,
             lineView,
             unSelectedCollectionView,
             onboardingBtn
-        ])
+        ].forEach { view.addSubview($0) }
+        
 
         setDelegate()
     }
@@ -247,7 +248,7 @@ extension AlarmTagViewController {
         alarmTagLabel.snp.makeConstraints {
             $0.top.equalTo(bellImageView.snp.bottom).offset(23 * DeviceHeightRatio)
             $0.centerX.equalToSuperview()
-            $0.left.equalTo(view.safeArea.left).offset(18 * DeviceWidthRatio)
+            $0.left.equalTo(view.safeAreaLayoutGuide).offset(18 * DeviceWidthRatio)
             $0.right.equalTo(view.safeArea.right).offset(-18 * DeviceWidthRatio)
         }
         

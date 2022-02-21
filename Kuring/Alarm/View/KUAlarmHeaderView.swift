@@ -69,7 +69,7 @@ class KUAlarmHeaderView: UIView {
         backgroundView.backgroundColor = .secondarySystemGroupedBackground
         backgroundView.layer.cornerRadius = backgroundView.frame.height / 2
         backgroundView.layer.borderWidth = 1
-        backgroundView.layer.borderColor = color.cgColor // 여기 에러 뜨네요
+        backgroundView.layer.borderColor = color.cgColor
         dateLabel.font = .preferredFont(forTextStyle: .subheadline)
         dateLabel.textAlignment = .center
         dateLabel.textColor = color

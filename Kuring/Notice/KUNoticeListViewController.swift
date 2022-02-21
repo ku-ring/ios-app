@@ -171,26 +171,26 @@ class KUNoticeListViewController: UIViewController {
             self.tableView.hideSkeleton()
             switch result {
                 // FIXME: - see above
-                case .success(let notices):
-                    // Update hasNext
-                    let hasNext = notices.count >= self.loadLimit
-                    self.hasNextList.updateValue(hasNext, forKey: self.currentType)
-                    
-                    // Update offset
-                    let prevOffset = self.offsetList[self.currentType] ?? 0
-                    let currentOffset = prevOffset + notices.count
-                    self.offsetList.updateValue(currentOffset, forKey: self.currentType)
-                    
-                    // Update notices
-                    var currentNotices = self.noticeList[self.currentType] ?? []
-                    notices.forEach { currentNotices.append($0) }
-                    self.noticeList.updateValue(currentNotices, forKey: self.currentType)
-                    
-                    // 뷰 업데이트
-                    self.tableView.reloadData()
-                    
-                case .failure(let error):
-                    print(error.localizedDescription)
+            case .success(let notices):
+                // Update hasNext
+                let hasNext = notices.count >= self.loadLimit
+                self.hasNextList.updateValue(hasNext, forKey: self.currentType)
+                
+                // Update offset
+                let prevOffset = self.offsetList[self.currentType] ?? 0
+                let currentOffset = prevOffset + notices.count
+                self.offsetList.updateValue(currentOffset, forKey: self.currentType)
+                
+                // Update notices
+                var currentNotices = self.noticeList[self.currentType] ?? []
+                notices.forEach { currentNotices.append($0) }
+                self.noticeList.updateValue(currentNotices, forKey: self.currentType)
+                
+                // 뷰 업데이트
+                self.tableView.reloadData()
+                
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
@@ -264,7 +264,7 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
         let articleURL = currentType == .도서관
         ? "\(libraryBaseUrl)\(notice.articleID)"
         : "\(originalBaseUrl)?id=\(notice.articleID)"
-    
+        
         return articleURL.isEmpty
         ? "https://konkuk.ac.kr"
         : articleURL

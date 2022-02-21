@@ -83,6 +83,23 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             didReceive: response
         )
         
+        // TODO: 알림 받으면 웹뷰로 바로 이동
+        print("✅ userInfo \(userInfo)")
+        
+        guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? AppDelegate)?.window?.rootViewController else { return }
+        let vc = NoticeWebViewController()
+        
+        let id = userInfo["articleId"]
+        
+        if userInfo["category"] as! String == "library" {
+            vc.articleURL = "https://www.konkuk.ac.kr/do/MessageBoard/ArticleRead.do?id=\(String(describing: id))"
+        } else {
+            vc.articleURL = "https://library.konkuk.ac.kr/#/bbs/notice/\(String(describing: id))"
+        }
+        
+        let navController = rootViewController as? UINavigationController
+        navController!.pushViewController(vc, animated: true)
+        
         completionHandler()
     }
 }
@@ -108,6 +125,8 @@ extension AppDelegate {
         
         completionHandler(.newData)
     }
+    
+    
 }
 
 // MARK: - KuringDelegate

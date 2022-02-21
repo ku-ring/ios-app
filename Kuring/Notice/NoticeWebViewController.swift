@@ -20,6 +20,21 @@ class NoticeWebViewController: UIViewController {
             indicator.isHidden = true
         }
     }
+    @IBAction func didTapShare() {
+        
+        guard let articleURL = self.articleURL else {
+//            showError("공유 도중 문제가 발생했습니다")   // 에러 문구를 alert 로 보여주기
+            return
+        }
+        let activityVC = UIActivityViewController(
+            activityItems: [articleURL],   // force unwrapping 필요 x
+            applicationActivities: nil
+        )
+        
+        activityVC.popoverPresentationController?.sourceView = self.view
+        self.present(activityVC, animated: true, completion: nil)
+        
+    }
     
     // MARK: Properties
     var articleURL: String!
@@ -29,15 +44,6 @@ class NoticeWebViewController: UIViewController {
         
         let appIconImage = UIImage(named: "appIconLabel")?.withRenderingMode(.alwaysOriginal)
         navigationItem.titleView = UIImageView(image: appIconImage)
-        
-        let rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "square.and.arrow.up"),
-            style: .plain,
-            target: self,
-            action: #selector(didTapRightBarButton)
-        )
-        navigationItem.rightBarButtonItem = rightBarButtonItem
-        
         
         loadWebView()
         webView.uiDelegate = self
@@ -49,17 +55,11 @@ class NoticeWebViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
             return
         }
+        print("✅ url \(url)")
         let request = URLRequest(url: url)
         webView.load(request)
         indicator.startAnimating()
         indicator.isHidden = false
-    }
-    
-    @objc fileprivate func didTapRightBarButton() {
-        UIPasteboard.general.string = articleURL // 클립보드에도 복사.
-        let activityVC = UIActivityViewController(activityItems: [articleURL!], applicationActivities: nil)
-        activityVC.popoverPresentationController?.sourceView = self.view
-        self.present(activityVC, animated: true, completion: nil)
     }
 }
 
@@ -89,7 +89,6 @@ extension NoticeWebViewController: WKUIDelegate, WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        print("[com.kuring.service] need auth for wkwebview")
         completionHandler(URLSession.AuthChallengeDisposition.performDefaultHandling, nil)
     }
     

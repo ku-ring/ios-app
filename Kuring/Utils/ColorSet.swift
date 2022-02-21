@@ -1,5 +1,5 @@
 //
-//  Colors.swift
+//  ColorSet.swift
 //  kuring-uikit-ios
 //
 //  Created by Hamlit Jason on 2022/01/21.
