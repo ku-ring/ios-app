@@ -82,9 +82,13 @@ class KUNoticeListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
         
         updateNotifcationButton()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tableView.hideSkeleton()
     }
     
     override func viewDidLayoutSubviews() {
@@ -149,7 +153,7 @@ class KUNoticeListViewController: UIViewController {
                 self.tableView.reloadData()
                 
             case .failure(let error):
-                print(error.localizedDescription)
+                Logger.debug(error.localizedDescription)
             }
         }
     }
@@ -171,26 +175,26 @@ class KUNoticeListViewController: UIViewController {
             self.tableView.hideSkeleton()
             switch result {
                 // FIXME: - see above
-                case .success(let notices):
-                    // Update hasNext
-                    let hasNext = notices.count >= self.loadLimit
-                    self.hasNextList.updateValue(hasNext, forKey: self.currentType)
-                    
-                    // Update offset
-                    let prevOffset = self.offsetList[self.currentType] ?? 0
-                    let currentOffset = prevOffset + notices.count
-                    self.offsetList.updateValue(currentOffset, forKey: self.currentType)
-                    
-                    // Update notices
-                    var currentNotices = self.noticeList[self.currentType] ?? []
-                    notices.forEach { currentNotices.append($0) }
-                    self.noticeList.updateValue(currentNotices, forKey: self.currentType)
-                    
-                    // 뷰 업데이트
-                    self.tableView.reloadData()
-                    
-                case .failure(let error):
-                    print(error.localizedDescription)
+            case .success(let notices):
+                // Update hasNext
+                let hasNext = notices.count >= self.loadLimit
+                self.hasNextList.updateValue(hasNext, forKey: self.currentType)
+                
+                // Update offset
+                let prevOffset = self.offsetList[self.currentType] ?? 0
+                let currentOffset = prevOffset + notices.count
+                self.offsetList.updateValue(currentOffset, forKey: self.currentType)
+                
+                // Update notices
+                var currentNotices = self.noticeList[self.currentType] ?? []
+                notices.forEach { currentNotices.append($0) }
+                self.noticeList.updateValue(currentNotices, forKey: self.currentType)
+                
+                // 뷰 업데이트
+                self.tableView.reloadData()
+                
+            case .failure(let error):
+                Logger.debug(error.localizedDescription)
             }
         }
     }
@@ -246,6 +250,7 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: true)
         let notice = currentNotices[indexPath.row]
         notice.read()
+        tableView.reloadData()
         let urlString = articleURL(from: notice)
         showNoticeWebViewController(with: urlString)
     }
@@ -264,7 +269,7 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
         let articleURL = currentType == .도서관
         ? "\(libraryBaseUrl)\(notice.articleID)"
         : "\(originalBaseUrl)?id=\(notice.articleID)"
-    
+        
         return articleURL.isEmpty
         ? "https://konkuk.ac.kr"
         : articleURL

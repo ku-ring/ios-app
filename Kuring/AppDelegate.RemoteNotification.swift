@@ -31,7 +31,7 @@ extension AppDelegate {
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("[com.kuring.service] Failed to register for remote notification with error: \(error.localizedDescription)")
+        Logger.debug("[com.kuring.service] Failed to register for remote notification with error: \(error.localizedDescription)")
     }
 }
 
@@ -39,12 +39,12 @@ extension AppDelegate {
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         guard let fcmToken = fcmToken else {
-            print("[com.kuring.service] No FCM token")
+            Logger.debug("[com.kuring.service] No FCM token")
             return
         }
 
         Kuring.register(fcmToken: fcmToken)
-        print("[com.kuring.service] FCM token: \(fcmToken)")
+        Logger.debug("[com.kuring.service] FCM token: \(fcmToken)")
     }
 }
 
@@ -76,14 +76,29 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // MARK: Analytics
         let userInfo = response.notification.request.content.userInfo
         Messaging.messaging().appDidReceiveMessage(userInfo)
-        
-        // MARK: Kuring
-        Kuring.userNotificationCenter(
-            center,
-            didReceive: response
-        )
+        Logger.debug("✅ userInfo \(userInfo)")
+
+        // TODO: 알림 받으면 웹뷰로 바로 이동
+        openBanner(with: userInfo)
         
         completionHandler()
+    }
+    
+    /// 배너를 눌렀을 때, 웹뷰를 보여줍니다.
+    func openBanner(with userInfo: [AnyHashable: Any]) {
+        guard let articleID = userInfo["articleId"] else { return }
+        guard let categoryString = userInfo["category"] as? String else { return }
+        guard let navigationController = self.window?.rootViewController as? UINavigationController else { return }
+        let articleURL = NoticeType.from(categoryString) == .도서관
+        ? "\(libraryBaseUrl)\(articleID)"
+        : "\(originalBaseUrl)?id=\(articleID)"
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let noticeWebVC = storyboard.instantiateViewController(
+            withIdentifier: "NoticeWebViewController"
+        ) as? NoticeWebViewController else { return }
+        noticeWebVC.articleURL = articleURL
+        navigationController.pushViewController(noticeWebVC, animated: true)
     }
 }
 
@@ -137,7 +152,7 @@ extension AppDelegate: KuringDelegate {
         
         UNUserNotificationCenter.current().add(request) { (error) in
             if let error = error {
-                print("[com.kuring.service] Failed to show notification: \(error.localizedDescription)")
+                Logger.debug("[com.kuring.service] Failed to show notification: \(error.localizedDescription)")
             }
         }
     }
