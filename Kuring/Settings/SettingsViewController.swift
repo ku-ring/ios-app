@@ -11,9 +11,9 @@ enum URLLink: String {
     case whatsNew = "https://kuring.notion.site/iOS-eef51c986b7f4320b97424df3f4a5e3c"
     case privacy = "https://kuring.notion.site/65ba27f2367044e0be7061e885e7415c"
     case terms = "https://kuring.notion.site/e88095d4d67d4c4c92983fd85cb693b9"
-    case team = "https://kuring.notion.site/a69fdf7ff06848c2aedef1fdcf13ca57"
-    case instagram = "https://www.instagram.com/kuring.konkuk"
-    case kakaotalk = "https://pf.kakao.com/_xorGxab"
+    case team = "https://bit.ly/3v2c5eg"
+    case instagram = "https://bit.ly/3I30uiG"
+    case kakaotalk = "https://bit.ly/3p5LZTI"
     
     func openURL() {
         if let url = URL(string: self.rawValue) {
