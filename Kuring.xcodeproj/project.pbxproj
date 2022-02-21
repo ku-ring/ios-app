@@ -22,7 +22,6 @@
 		A9DA6CC127B98D2300F3B786 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8D27B98D2200F3B786 /* OnBoardingViewController.swift */; };
 		A9DA6CC227B98D2300F3B786 /* Date.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */; };
 		A9DA6CC327B98D2300F3B786 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9027B98D2200F3B786 /* Global.swift */; };
-		A9DA6CC627B98D2300F3B786 /* UIView.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9327B98D2200F3B786 /* UIView.Kuring.swift */; };
 		A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9627B98D2200F3B786 /* ColorSet.swift */; };
 		A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */; };
 		A9DA6CCC27B98D2300F3B786 /* CategoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9A27B98D2200F3B786 /* CategoryCollectionViewController.swift */; };
@@ -87,7 +86,6 @@
 		A9DA6C8D27B98D2200F3B786 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.Kuring.swift; sourceTree = "<group>"; };
 		A9DA6C9027B98D2200F3B786 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
-		A9DA6C9327B98D2200F3B786 /* UIView.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.Kuring.swift; sourceTree = "<group>"; };
 		A9DA6C9627B98D2200F3B786 /* ColorSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
 		A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.Kuring.swift; sourceTree = "<group>"; };
 		A9DA6C9A27B98D2200F3B786 /* CategoryCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewController.swift; sourceTree = "<group>"; };
@@ -336,7 +334,6 @@
 			children = (
 				A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */,
 				A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */,
-				A9DA6C9327B98D2200F3B786 /* UIView.Kuring.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -501,7 +498,6 @@
 				A9DA6CD627B98D2300F3B786 /* KUSearchedStaffCell.swift in Sources */,
 				A9DA6CD427B98D2300F3B786 /* KUSearchTypeCollectionViewCell.swift in Sources */,
 				A9DA6CD927B98D2300F3B786 /* NoticeWebViewController.swift in Sources */,
-				A9DA6CC627B98D2300F3B786 /* UIView.Kuring.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

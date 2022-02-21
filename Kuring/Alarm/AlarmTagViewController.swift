@@ -92,7 +92,7 @@ class AlarmTagViewController : UIViewController {
         return cv
     }()
     
-    private lazy var onboardingBtn = UIButton().then {
+    private lazy var onBoardingButton = UIButton().then {
         $0.setTitle("시작하기", for: .normal)
         $0.backgroundColor = .white
         let color = UIColor.clear
@@ -153,8 +153,8 @@ class AlarmTagViewController : UIViewController {
     func updateBarButtonStatus() {
         let isUpdated = Kuring.subscribedCategories != selectedCategories
         resetButton.isEnabled = isUpdated
-        onboardingBtn.isEnabled = isUpdated
-        onboardingBtn.alpha = isUpdated ? 1.0 : 0.5
+        onBoardingButton.isEnabled = isUpdated
+        onBoardingButton.alpha = isUpdated ? 1.0 : 0.5
     }
 }
 
@@ -177,7 +177,7 @@ extension AlarmTagViewController {
             selectedCollectionView,
             lineView,
             unSelectedCollectionView,
-            onboardingBtn
+            onBoardingButton
         ].forEach { view.addSubview($0) }
         
 
@@ -194,7 +194,7 @@ extension AlarmTagViewController {
     }
     
     private func setBinding() {
-        onboardingBtn.rx.tap
+        onBoardingButton.rx.tap
             .bind { _ in
                 Storage.setFirstTime()
                 
@@ -248,8 +248,8 @@ extension AlarmTagViewController {
         alarmTagLabel.snp.makeConstraints {
             $0.top.equalTo(bellImageView.snp.bottom).offset(23 * DeviceHeightRatio)
             $0.centerX.equalToSuperview()
-            $0.left.equalTo(view.safeAreaLayoutGuide).offset(18 * DeviceWidthRatio)
-            $0.right.equalTo(view.safeArea.right).offset(-18 * DeviceWidthRatio)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(18 * DeviceWidthRatio)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-18 * DeviceWidthRatio)
         }
         
         selectedCollectionView.snp.makeConstraints {
@@ -261,20 +261,20 @@ extension AlarmTagViewController {
         
         lineView.snp.makeConstraints {
             $0.top.equalTo(selectedCollectionView.snp.bottom)
-            $0.left.equalToSuperview().offset(100 * DeviceWidthRatio)
-            $0.right.equalToSuperview().offset(-100 * DeviceWidthRatio)
+            $0.leading.equalToSuperview().offset(100 * DeviceWidthRatio)
+            $0.trailing.equalToSuperview().offset(-100 * DeviceWidthRatio)
             $0.height.equalTo(1)
         }
         
         unSelectedCollectionView.snp.makeConstraints {
             $0.top.equalTo(lineView.snp.bottom).offset(30 * DeviceHeightRatio)
-            $0.bottom.equalTo(view.safeArea.bottom)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.width.equalTo(alarmTagLabel.snp.width).offset(-40 * DeviceWidthRatio)
             $0.centerX.equalToSuperview()
         }
         
-        onboardingBtn.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeArea.bottom).offset(-10)
+        onBoardingButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
             $0.width.equalTo(232 * DeviceWidthRatio)
             $0.centerX.equalToSuperview()
         }
