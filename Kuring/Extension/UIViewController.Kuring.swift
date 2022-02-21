@@ -16,4 +16,13 @@ extension UIViewController {
         noticeWebVC.articleURL = urlString
         self.navigationController?.pushViewController(noticeWebVC, animated: true)
     }
+    
+    func showError(_ message: String) {
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
+    }
 }

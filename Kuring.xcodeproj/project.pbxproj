@@ -22,7 +22,6 @@
 		A9DA6CC127B98D2300F3B786 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8D27B98D2200F3B786 /* OnBoardingViewController.swift */; };
 		A9DA6CC227B98D2300F3B786 /* Date.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */; };
 		A9DA6CC327B98D2300F3B786 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9027B98D2200F3B786 /* Global.swift */; };
-		A9DA6CC527B98D2300F3B786 /* UIView+Rx.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9227B98D2200F3B786 /* UIView+Rx.Kuring.swift */; };
 		A9DA6CC627B98D2300F3B786 /* UIView.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9327B98D2200F3B786 /* UIView.Kuring.swift */; };
 		A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9627B98D2200F3B786 /* ColorSet.swift */; };
 		A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */; };
@@ -88,7 +87,6 @@
 		A9DA6C8D27B98D2200F3B786 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.Kuring.swift; sourceTree = "<group>"; };
 		A9DA6C9027B98D2200F3B786 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
-		A9DA6C9227B98D2200F3B786 /* UIView+Rx.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Rx.Kuring.swift"; sourceTree = "<group>"; };
 		A9DA6C9327B98D2200F3B786 /* UIView.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.Kuring.swift; sourceTree = "<group>"; };
 		A9DA6C9627B98D2200F3B786 /* ColorSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
 		A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.Kuring.swift; sourceTree = "<group>"; };
@@ -338,7 +336,6 @@
 			children = (
 				A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */,
 				A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */,
-				A9DA6C9227B98D2200F3B786 /* UIView+Rx.Kuring.swift */,
 				A9DA6C9327B98D2200F3B786 /* UIView.Kuring.swift */,
 			);
 			path = Extension;
@@ -483,7 +480,6 @@
 				A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */,
 				A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */,
 				A9DA6CCD27B98D2300F3B786 /* Storage.swift in Sources */,
-				A9DA6CC527B98D2300F3B786 /* UIView+Rx.Kuring.swift in Sources */,
 				A9DA6CDA27B98D2300F3B786 /* KUNoticeTagView.swift in Sources */,
 				A9DA6CD827B98D2300F3B786 /* KUNoticeListViewController.swift in Sources */,
 				A9DA6CCC27B98D2300F3B786 /* CategoryCollectionViewController.swift in Sources */,
@@ -654,6 +650,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Kuring/Kuring.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 38PD5AHVVF;
@@ -675,6 +672,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -688,6 +686,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Kuring/Kuring.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 38PD5AHVVF;
@@ -709,6 +708,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

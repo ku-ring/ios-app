@@ -21,9 +21,8 @@ class NoticeWebViewController: UIViewController {
         }
     }
     @IBAction func didTapShare() {
-        
         guard let articleURL = self.articleURL else {
-//            showError("공유 도중 문제가 발생했습니다")   // 에러 문구를 alert 로 보여주기
+            showError("공유 도중 에러가 발생했습니다.")
             return
         }
         let activityVC = UIActivityViewController(
