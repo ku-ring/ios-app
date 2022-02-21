@@ -20,6 +20,20 @@ class NoticeWebViewController: UIViewController {
             indicator.isHidden = true
         }
     }
+    @IBAction func didTapShare() {
+        guard let articleURL = self.articleURL else {
+            showError("공유 도중 에러가 발생했습니다.")
+            return
+        }
+        let activityVC = UIActivityViewController(
+            activityItems: [articleURL],
+            applicationActivities: nil
+        )
+        
+        activityVC.popoverPresentationController?.sourceView = self.view
+        self.present(activityVC, animated: true, completion: nil)
+        
+    }
     
     // MARK: Properties
     var articleURL: String!
@@ -40,6 +54,7 @@ class NoticeWebViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
             return
         }
+        Logger.debug("✅ url \(url)")
         let request = URLRequest(url: url)
         webView.load(request)
         indicator.startAnimating()
@@ -73,11 +88,10 @@ extension NoticeWebViewController: WKUIDelegate, WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        print("[com.kuring.service] need auth for wkwebview")
         completionHandler(URLSession.AuthChallengeDisposition.performDefaultHandling, nil)
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        print("[com.kuring.service] Failed provisional navigation: \(error.localizedDescription)")
+        Logger.debug("[com.kuring.service] Failed provisional navigation: \(error.localizedDescription)")
     }
 }
