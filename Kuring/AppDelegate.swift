@@ -26,15 +26,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-    
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        let userInfo: [String: Any] = [
-            "category": "bachelor",
-            "articleId": "5b49f62",
-            "subject": "[인공지능] 2022학년도 1학기 인공지능(AI) 온라인 모듈형 교육과정 신청 안내",
-            "baseUrl": "",
-            "postedDate": "20220128"
-        ]
-        openBanner(with: userInfo)
-    }
 }
