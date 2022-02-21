@@ -92,7 +92,7 @@ class AlarmTagViewController : UIViewController {
         return cv
     }()
     
-    private lazy var onBoardingButton = UIButton().then {
+    private lazy var onboardingButton = UIButton().then {
         $0.setTitle("시작하기", for: .normal)
         $0.backgroundColor = .white
         let color = UIColor.clear
@@ -153,8 +153,8 @@ class AlarmTagViewController : UIViewController {
     func updateBarButtonStatus() {
         let isUpdated = Kuring.subscribedCategories != selectedCategories
         resetButton.isEnabled = isUpdated
-        onBoardingButton.isEnabled = isUpdated
-        onBoardingButton.alpha = isUpdated ? 1.0 : 0.5
+        onboardingButton.isEnabled = isUpdated
+        onboardingButton.alpha = isUpdated ? 1.0 : 0.5
     }
 }
 
@@ -177,7 +177,7 @@ extension AlarmTagViewController {
             selectedCollectionView,
             lineView,
             unSelectedCollectionView,
-            onBoardingButton
+            onboardingButton
         ].forEach { view.addSubview($0) }
         
 
@@ -194,7 +194,7 @@ extension AlarmTagViewController {
     }
     
     private func setBinding() {
-        onBoardingButton.rx.tap
+        onboardingButton.rx.tap
             .bind { _ in
                 Storage.setFirstTime()
                 
@@ -273,7 +273,7 @@ extension AlarmTagViewController {
             $0.centerX.equalToSuperview()
         }
         
-        onBoardingButton.snp.makeConstraints {
+        onboardingButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
             $0.width.equalTo(232 * DeviceWidthRatio)
             $0.centerX.equalToSuperview()

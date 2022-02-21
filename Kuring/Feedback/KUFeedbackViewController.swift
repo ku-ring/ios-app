@@ -57,9 +57,8 @@ class KUFeedbackViewController: UIViewController {
             
             self.dismiss(animated: true, completion: nil)
             switch result {
-                case .success: break
-                case .failure(let error):
-                    print(error.localizedDescription)
+            case .success: break
+            case .failure(let error): Logger.debug(error.localizedDescription)
             }
         }
         // 피드백 전송 시 `textView` 와 `sendButton` 을 비활성화 시킵니다.

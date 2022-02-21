@@ -26,7 +26,7 @@ class NoticeWebViewController: UIViewController {
             return
         }
         let activityVC = UIActivityViewController(
-            activityItems: [articleURL],   // force unwrapping 필요 x
+            activityItems: [articleURL],
             applicationActivities: nil
         )
         
@@ -54,7 +54,7 @@ class NoticeWebViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
             return
         }
-        print("✅ url \(url)")
+        Logger.debug("✅ url \(url)")
         let request = URLRequest(url: url)
         webView.load(request)
         indicator.startAnimating()
@@ -92,6 +92,6 @@ extension NoticeWebViewController: WKUIDelegate, WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        print("[com.kuring.service] Failed provisional navigation: \(error.localizedDescription)")
+        Logger.debug("[com.kuring.service] Failed provisional navigation: \(error.localizedDescription)")
     }
 }

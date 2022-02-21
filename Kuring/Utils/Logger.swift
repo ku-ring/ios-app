@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import FirebaseAnalytics
 
 class Logger {
     static func debug(_ log: Any?) {
-    #if DEBUG
-        print("✅ \(String(describing: log))")
-    #endif
+#if DEBUG
+        print("[com.kuring.service] ✅ \(String(describing: log))")
+#else
+        Analytics.logEvent("com.kuring.service.logger.debug", parameters: ["log": log])
+#endif
     }
 }
