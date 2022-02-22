@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import KuringSDK
+import AppsFlyerLib
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // MARK: Remote notification registration
         registerForRemoteNotification(of: application)
         
+        // MARK: AppsFlyerLib
+        AppsFlyerLib.shared().appsFlyerDevKey = KuringSDK.Kuring.appsflyerKey
+        AppsFlyerLib.shared().appleAppID = KuringSDK.Kuring.appleID
+        AppsFlyerLib.shared().isDebug = true
+        AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
+        AppsFlyerLib.shared().delegate = self
+
         return true
     }
 }

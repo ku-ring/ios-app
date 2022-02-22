@@ -50,6 +50,7 @@
 		A9DA6CE327B98D2300F3B786 /* Opensource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CBB27B98D2300F3B786 /* Opensource.swift */; };
 		A9DA6CE527B98D2300F3B786 /* OpensourceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CBD27B98D2300F3B786 /* OpensourceListViewController.swift */; };
 		A9DA6D0927B98FEC00F3B786 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6D0727B98FEC00F3B786 /* LaunchScreen.storyboard */; };
+		B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */; };
 		B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A0382427C3ECD70074EC95 /* Logger.swift */; };
 		D430312BD0477A68D7728C94 /* Pods_Kuring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */; };
 /* End PBXBuildFile section */
@@ -114,6 +115,7 @@
 		A9DA6CBB27B98D2300F3B786 /* Opensource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opensource.swift; sourceTree = "<group>"; };
 		A9DA6CBD27B98D2300F3B786 /* OpensourceListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpensourceListViewController.swift; sourceTree = "<group>"; };
 		A9DA6D0827B98FEC00F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.AppsFlyerLib.swift; sourceTree = "<group>"; };
 		B1A0382427C3ECD70074EC95 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kuring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -166,6 +168,7 @@
 				A9DA6C7927B97F8300F3B786 /* Kuring.entitlements */,
 				A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */,
 				A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */,
+				B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */,
 				A9DA6CB327B98D2200F3B786 /* Alarm */,
 				A9DA6C9927B98D2200F3B786 /* Category */,
 				A9DA6C9B27B98D2200F3B786 /* DB */,
@@ -491,6 +494,7 @@
 				A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */,
 				B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */,
 				A9DA6CDF27B98D2300F3B786 /* KUAlarmViewController.swift in Sources */,
+				B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */,
 				A9DA6C8727B981A100F3B786 /* AppDelegate.RemoteNotification.swift in Sources */,
 				A9DA6C6627B97EE300F3B786 /* AppDelegate.swift in Sources */,
 				A9DA6CE027B98D2300F3B786 /* KUAlarmTableViewCell.swift in Sources */,
