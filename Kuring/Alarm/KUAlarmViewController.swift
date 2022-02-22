@@ -30,6 +30,9 @@ class KUAlarmViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
         notifications.values.flatMap { $0 }.forEach { notifications in
             notifications.isNew = false
         }
