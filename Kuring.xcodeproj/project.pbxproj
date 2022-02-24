@@ -12,6 +12,7 @@
 		A9C447E327C788A50094D9A9 /* OnboardingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447E227C788A50094D9A9 /* OnboardingRow.swift */; };
 		A9C447E727C7A2560094D9A9 /* OnboardingIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447E627C7A2560094D9A9 /* OnboardingIntroView.swift */; };
 		A9C447E927C7A61B0094D9A9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447E827C7A61B0094D9A9 /* OnboardingViewController.swift */; };
+		A9C447EB27C7EA3B0094D9A9 /* Bundle.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447EA27C7EA3B0094D9A9 /* Bundle.Kuring.swift */; };
 		A9DA6C6627B97EE300F3B786 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */; };
 		A9DA6C6D27B97EE300F3B786 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6B27B97EE300F3B786 /* Main.storyboard */; };
 		A9DA6C6F27B97EE500F3B786 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6E27B97EE500F3B786 /* Assets.xcassets */; };
@@ -78,6 +79,7 @@
 		A9C447E227C788A50094D9A9 /* OnboardingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRow.swift; sourceTree = "<group>"; };
 		A9C447E627C7A2560094D9A9 /* OnboardingIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingIntroView.swift; sourceTree = "<group>"; };
 		A9C447E827C7A61B0094D9A9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		A9C447EA27C7EA3B0094D9A9 /* Bundle.Kuring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.Kuring.swift; sourceTree = "<group>"; };
 		A9DA6C6227B97EE300F3B786 /* Kuring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9DA6C6C27B97EE300F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */,
+				A9C447EA27C7EA3B0094D9A9 /* Bundle.Kuring.swift */,
 				A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */,
 			);
 			path = Extension;
@@ -493,6 +496,7 @@
 				A9DA6CDB27B98D2300F3B786 /* KUNoticeListViewCell.swift in Sources */,
 				A9DA6CBE27B98D2300F3B786 /* KUFeedbackViewController.swift in Sources */,
 				A9DA6CE227B98D2300F3B786 /* KUAlarmHeaderView.swift in Sources */,
+				A9C447EB27C7EA3B0094D9A9 /* Bundle.Kuring.swift in Sources */,
 				A9DA6CD227B98D2300F3B786 /* KUSearchViewController.UITableView.swift in Sources */,
 				A9DA6CD027B98D2300F3B786 /* KUSearchViewController.UICollectionView.swift in Sources */,
 				A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */,

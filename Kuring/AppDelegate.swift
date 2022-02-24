@@ -28,8 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        if Kuring.isFirstRun {
-            self.window?.rootViewController?.showOnboardingViewController()            
-        }
+        self.window?.rootViewController?.showOnboardingViewController()
     }
 }
