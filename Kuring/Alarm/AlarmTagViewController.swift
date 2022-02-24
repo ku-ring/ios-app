@@ -10,7 +10,10 @@ import SnapKit
 import RxSwift
 import RxCocoa
 import KuringSDK
-import SwiftUI
+
+protocol AlarmTagViewControllerDelegate: AnyObject {
+    func didSelectCategory(_ selectedCategories: [NoticeType])
+}
 
 class AlarmTagViewController : UIViewController {
     
@@ -22,7 +25,7 @@ class AlarmTagViewController : UIViewController {
     /// 구독되지 않은 카테고리 딕셔너리
     var unSelectedCategories: [NoticeType] = []
     
-    var SortedSelectedCategories: [Int: String] = [:]
+    weak var delegate: AlarmTagViewControllerDelegate?
     
     // MARK: Properties
     lazy var saveButton: UIBarButtonItem = {
@@ -311,6 +314,8 @@ extension AlarmTagViewController: UICollectionViewDataSource{
         
         let isUpdated = Kuring.subscribedCategories != selectedCategories
         saveButton.isEnabled = isUpdated
+        
+        delegate?.didSelectCategory(selectedCategories)
         
         return cell
     }

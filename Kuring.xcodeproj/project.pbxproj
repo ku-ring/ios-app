@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A9C445BC27C552FB0094D9A9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C445BB27C552FB0094D9A9 /* OnboardingView.swift */; };
+		A9C447DF27C7877E0094D9A9 /* CategorySelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447DE27C7877E0094D9A9 /* CategorySelectView.swift */; };
+		A9C447E327C788A50094D9A9 /* OnboardingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447E227C788A50094D9A9 /* OnboardingRow.swift */; };
+		A9C447E727C7A2560094D9A9 /* OnboardingIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447E627C7A2560094D9A9 /* OnboardingIntroView.swift */; };
+		A9C447E927C7A61B0094D9A9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447E827C7A61B0094D9A9 /* OnboardingViewController.swift */; };
 		A9DA6C6627B97EE300F3B786 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */; };
 		A9DA6C6D27B97EE300F3B786 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6B27B97EE300F3B786 /* Main.storyboard */; };
 		A9DA6C6F27B97EE500F3B786 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6E27B97EE500F3B786 /* Assets.xcassets */; };
@@ -17,9 +22,6 @@
 		A9DA6C8427B9813D00F3B786 /* KuringSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9DA6C8227B9813D00F3B786 /* KuringSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9DA6C8727B981A100F3B786 /* AppDelegate.RemoteNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */; };
 		A9DA6CBE27B98D2300F3B786 /* KUFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8927B98D2200F3B786 /* KUFeedbackViewController.swift */; };
-		A9DA6CBF27B98D2300F3B786 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C8B27B98D2200F3B786 /* Onboarding.storyboard */; };
-		A9DA6CC027B98D2300F3B786 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8C27B98D2200F3B786 /* OnboardingModel.swift */; };
-		A9DA6CC127B98D2300F3B786 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8D27B98D2200F3B786 /* OnBoardingViewController.swift */; };
 		A9DA6CC227B98D2300F3B786 /* Date.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */; };
 		A9DA6CC327B98D2300F3B786 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9027B98D2200F3B786 /* Global.swift */; };
 		A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9627B98D2200F3B786 /* ColorSet.swift */; };
@@ -71,6 +73,11 @@
 /* Begin PBXFileReference section */
 		098133CE147F3EC919795C6B /* Pods-Kuring.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuring.debug.xcconfig"; path = "Target Support Files/Pods-Kuring/Pods-Kuring.debug.xcconfig"; sourceTree = "<group>"; };
 		6AA68EE0A1CA6D5FD2FB9A4F /* Pods-Kuring.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuring.release.xcconfig"; path = "Target Support Files/Pods-Kuring/Pods-Kuring.release.xcconfig"; sourceTree = "<group>"; };
+		A9C445BB27C552FB0094D9A9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		A9C447DE27C7877E0094D9A9 /* CategorySelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectView.swift; sourceTree = "<group>"; };
+		A9C447E227C788A50094D9A9 /* OnboardingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRow.swift; sourceTree = "<group>"; };
+		A9C447E627C7A2560094D9A9 /* OnboardingIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingIntroView.swift; sourceTree = "<group>"; };
+		A9C447E827C7A61B0094D9A9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A9DA6C6227B97EE300F3B786 /* Kuring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9DA6C6C27B97EE300F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -81,9 +88,6 @@
 		A9DA6C8227B9813D00F3B786 /* KuringSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KuringSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.RemoteNotification.swift; sourceTree = "<group>"; };
 		A9DA6C8927B98D2200F3B786 /* KUFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUFeedbackViewController.swift; sourceTree = "<group>"; };
-		A9DA6C8B27B98D2200F3B786 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
-		A9DA6C8C27B98D2200F3B786 /* OnboardingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
-		A9DA6C8D27B98D2200F3B786 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.Kuring.swift; sourceTree = "<group>"; };
 		A9DA6C9027B98D2200F3B786 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		A9DA6C9627B98D2200F3B786 /* ColorSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
@@ -171,7 +175,7 @@
 				A9DA6C9B27B98D2200F3B786 /* DB */,
 				A9DA6C8827B98D2200F3B786 /* Feedback */,
 				A9DA6CAB27B98D2200F3B786 /* Notice */,
-				A9DA6C8A27B98D2200F3B786 /* OnBoarding */,
+				A9DA6C8A27B98D2200F3B786 /* Onboarding */,
 				A9DA6CBA27B98D2300F3B786 /* OpenSource */,
 				A9DA6C9D27B98D2200F3B786 /* Search */,
 				A9DA6CA927B98D2200F3B786 /* Settings */,
@@ -203,14 +207,16 @@
 			path = Feedback;
 			sourceTree = "<group>";
 		};
-		A9DA6C8A27B98D2200F3B786 /* OnBoarding */ = {
+		A9DA6C8A27B98D2200F3B786 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				A9DA6C8B27B98D2200F3B786 /* Onboarding.storyboard */,
-				A9DA6C8C27B98D2200F3B786 /* OnboardingModel.swift */,
-				A9DA6C8D27B98D2200F3B786 /* OnBoardingViewController.swift */,
+				A9C447E827C7A61B0094D9A9 /* OnboardingViewController.swift */,
+				A9C445BB27C552FB0094D9A9 /* OnboardingView.swift */,
+				A9C447E627C7A2560094D9A9 /* OnboardingIntroView.swift */,
+				A9C447E227C788A50094D9A9 /* OnboardingRow.swift */,
+				A9C447DE27C7877E0094D9A9 /* CategorySelectView.swift */,
 			);
-			path = OnBoarding;
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		A9DA6C8E27B98D2200F3B786 /* Utils */ = {
@@ -407,7 +413,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9DA6CDD27B98D2300F3B786 /* KUNoticeListViewCell.xib in Resources */,
-				A9DA6CBF27B98D2300F3B786 /* Onboarding.storyboard in Resources */,
 				A9DA6CE127B98D2300F3B786 /* KUAlarmTableViewCell.xib in Resources */,
 				A9DA6C7B27B9800F00F3B786 /* GoogleService-Info.plist in Resources */,
 				A9DA6D0927B98FEC00F3B786 /* LaunchScreen.storyboard in Resources */,
@@ -469,25 +474,27 @@
 				A9DA6CCF27B98D2300F3B786 /* KUSearchViewController.Searcher.swift in Sources */,
 				A9DA6CD127B98D2300F3B786 /* KUSearchViewController.UITextField.swift in Sources */,
 				A9DA6CE327B98D2300F3B786 /* Opensource.swift in Sources */,
+				A9C447E727C7A2560094D9A9 /* OnboardingIntroView.swift in Sources */,
 				A9DA6CC327B98D2300F3B786 /* Global.swift in Sources */,
 				A9DA6CDC27B98D2300F3B786 /* KUNoticeListCollectionViewCell.swift in Sources */,
+				A9C447E927C7A61B0094D9A9 /* OnboardingViewController.swift in Sources */,
 				A9DA6CE527B98D2300F3B786 /* OpensourceListViewController.swift in Sources */,
 				A9DA6CD327B98D2300F3B786 /* KUSearchViewController.swift in Sources */,
 				A9DA6CC227B98D2300F3B786 /* Date.Kuring.swift in Sources */,
 				A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */,
+				A9C447E327C788A50094D9A9 /* OnboardingRow.swift in Sources */,
 				A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */,
 				A9DA6CCD27B98D2300F3B786 /* Storage.swift in Sources */,
 				A9DA6CDA27B98D2300F3B786 /* KUNoticeTagView.swift in Sources */,
+				A9C445BC27C552FB0094D9A9 /* OnboardingView.swift in Sources */,
 				A9DA6CD827B98D2300F3B786 /* KUNoticeListViewController.swift in Sources */,
 				A9DA6CCC27B98D2300F3B786 /* CategoryCollectionViewController.swift in Sources */,
 				A9DA6CDE27B98D2300F3B786 /* AlarmTagViewController.swift in Sources */,
 				A9DA6CDB27B98D2300F3B786 /* KUNoticeListViewCell.swift in Sources */,
-				A9DA6CC027B98D2300F3B786 /* OnboardingModel.swift in Sources */,
 				A9DA6CBE27B98D2300F3B786 /* KUFeedbackViewController.swift in Sources */,
 				A9DA6CE227B98D2300F3B786 /* KUAlarmHeaderView.swift in Sources */,
 				A9DA6CD227B98D2300F3B786 /* KUSearchViewController.UITableView.swift in Sources */,
 				A9DA6CD027B98D2300F3B786 /* KUSearchViewController.UICollectionView.swift in Sources */,
-				A9DA6CC127B98D2300F3B786 /* OnBoardingViewController.swift in Sources */,
 				A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */,
 				B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */,
 				A9DA6CDF27B98D2300F3B786 /* KUAlarmViewController.swift in Sources */,
@@ -495,6 +502,7 @@
 				A9DA6C6627B97EE300F3B786 /* AppDelegate.swift in Sources */,
 				A9DA6CE027B98D2300F3B786 /* KUAlarmTableViewCell.swift in Sources */,
 				A9DA6CD727B98D2300F3B786 /* SettingsViewController.swift in Sources */,
+				A9C447DF27C7877E0094D9A9 /* CategorySelectView.swift in Sources */,
 				A9DA6CD627B98D2300F3B786 /* KUSearchedStaffCell.swift in Sources */,
 				A9DA6CD427B98D2300F3B786 /* KUSearchTypeCollectionViewCell.swift in Sources */,
 				A9DA6CD927B98D2300F3B786 /* NoticeWebViewController.swift in Sources */,

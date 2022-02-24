@@ -11,6 +11,7 @@ struct ColorSet {
     static var green: UIColor { General.green }
     static var secondaryGreen: UIColor { General.secondaryGreen }
     static var pink: UIColor { General.pink }
+    static var blue: UIColor { General.blue }
     static var gray: UIColor { General.gray }
     static var secondaryGray: UIColor { General.secondaryGray }
     
@@ -18,6 +19,7 @@ struct ColorSet {
         static let green = UIColor(named: "ColorSet.green") ?? UIColor.green
         static let secondaryGreen = UIColor(named: "ColorSet.secondaryGreen") ?? UIColor.green.withAlphaComponent(0.5)
         static let pink = UIColor(named: "ColorSet.pink") ?? UIColor.systemPink
+        static let blue = UIColor(named: "ColorSet.blue") ?? UIColor.systemBlue
         static let gray = UIColor(named: "ColorSet.gray") ?? UIColor.gray
         static let secondaryGray = UIColor(named: "ColorSet.secondaryGray") ?? UIColor.lightGray
     }
@@ -34,3 +36,10 @@ struct ColorSet {
     }
 }
 
+import SwiftUI
+
+extension UIColor {
+    var color: Color {
+        Color(uiColor: self)
+    }
+}

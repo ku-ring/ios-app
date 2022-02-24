@@ -8,6 +8,13 @@
 import UIKit
 
 extension UIViewController {
+    func showOnboardingViewController() {
+        let onboardingVC = OnboardingViewController()
+        onboardingVC.modalPresentationStyle = .fullScreen
+        onboardingVC.isModalInPresentation = true
+        self.present(onboardingVC, animated: true)
+    }
+    
     func showNoticeWebViewController(with urlString: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let noticeWebVC = storyboard.instantiateViewController(
