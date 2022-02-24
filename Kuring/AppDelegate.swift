@@ -26,4 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        if Kuring.isFirstRun {
+            self.window?.rootViewController?.showOnboardingViewController()            
+        }
+    }
 }
