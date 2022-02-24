@@ -13,6 +13,7 @@
 		A9C447E727C7A2560094D9A9 /* OnboardingIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447E627C7A2560094D9A9 /* OnboardingIntroView.swift */; };
 		A9C447E927C7A61B0094D9A9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447E827C7A61B0094D9A9 /* OnboardingViewController.swift */; };
 		A9C447EB27C7EA3B0094D9A9 /* Bundle.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447EA27C7EA3B0094D9A9 /* Bundle.Kuring.swift */; };
+		A9C447EE27C81E640094D9A9 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447ED27C81E640094D9A9 /* OnboardingViewModel.swift */; };
 		A9DA6C6627B97EE300F3B786 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */; };
 		A9DA6C6D27B97EE300F3B786 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6B27B97EE300F3B786 /* Main.storyboard */; };
 		A9DA6C6F27B97EE500F3B786 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6E27B97EE500F3B786 /* Assets.xcassets */; };
@@ -80,6 +81,7 @@
 		A9C447E627C7A2560094D9A9 /* OnboardingIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingIntroView.swift; sourceTree = "<group>"; };
 		A9C447E827C7A61B0094D9A9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A9C447EA27C7EA3B0094D9A9 /* Bundle.Kuring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.Kuring.swift; sourceTree = "<group>"; };
+		A9C447ED27C81E640094D9A9 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		A9DA6C6227B97EE300F3B786 /* Kuring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9DA6C6C27B97EE300F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -148,6 +150,25 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A9C447EC27C81E550094D9A9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A9C445BB27C552FB0094D9A9 /* OnboardingView.swift */,
+				A9C447E627C7A2560094D9A9 /* OnboardingIntroView.swift */,
+				A9C447E227C788A50094D9A9 /* OnboardingRow.swift */,
+				A9C447DE27C7877E0094D9A9 /* CategorySelectView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A9C447EF27C81E810094D9A9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A9C447ED27C81E640094D9A9 /* OnboardingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		A9DA6C5927B97EE300F3B786 = {
 			isa = PBXGroup;
 			children = (
@@ -213,10 +234,8 @@
 			isa = PBXGroup;
 			children = (
 				A9C447E827C7A61B0094D9A9 /* OnboardingViewController.swift */,
-				A9C445BB27C552FB0094D9A9 /* OnboardingView.swift */,
-				A9C447E627C7A2560094D9A9 /* OnboardingIntroView.swift */,
-				A9C447E227C788A50094D9A9 /* OnboardingRow.swift */,
-				A9C447DE27C7877E0094D9A9 /* CategorySelectView.swift */,
+				A9C447EF27C81E810094D9A9 /* ViewModel */,
+				A9C447EC27C81E550094D9A9 /* View */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -504,6 +523,7 @@
 				A9DA6CDF27B98D2300F3B786 /* KUAlarmViewController.swift in Sources */,
 				A9DA6C8727B981A100F3B786 /* AppDelegate.RemoteNotification.swift in Sources */,
 				A9DA6C6627B97EE300F3B786 /* AppDelegate.swift in Sources */,
+				A9C447EE27C81E640094D9A9 /* OnboardingViewModel.swift in Sources */,
 				A9DA6CE027B98D2300F3B786 /* KUAlarmTableViewCell.swift in Sources */,
 				A9DA6CD727B98D2300F3B786 /* SettingsViewController.swift in Sources */,
 				A9C447DF27C7877E0094D9A9 /* CategorySelectView.swift in Sources */,

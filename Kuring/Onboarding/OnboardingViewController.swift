@@ -15,8 +15,8 @@ class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let delegate = OnboardingViewDelegate()
-        let controller = UIHostingController(rootView: OnboardingView(delegate: delegate))
+        let viewModel = OnboardingViewModel()
+        let controller = UIHostingController(rootView: OnboardingView(viewModel: viewModel))
         controller.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(controller)
         view.addSubview(controller.view)
@@ -27,7 +27,7 @@ class OnboardingViewController: UIViewController {
             controller.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
         
-        cancellable = delegate.$onDismiss.sink { [weak self] _ in
+        cancellable = viewModel.$onDismiss.sink { [weak self] _ in
             guard let self = self else { return }
             self.dismiss(animated: true, completion: nil)
         }
