@@ -140,14 +140,15 @@ class KUNoticeListViewController: UIViewController {
             
             switch result {
             case .success(let notices):
-                let newNotices = notices.filter { self.noticeList[self.currentType]?.first?.id == $0.id }
+                let noticeType = notices.first?.category ?? self.currentType
+                let newNotices = notices.filter { self.noticeList[noticeType]?.first?.id == $0.id }
                 
                 // 가져온 데이터 수 만큼 오프셋 값 추가
-                self.offsetList[self.currentType, default: 0] += newNotices.count
+                self.offsetList[noticeType, default: 0] += newNotices.count
                 
                 // 가져온 데이터 array 가장 앞에 삽입
                 // Update notices
-                self.noticeList[self.currentType, default: []].insert(contentsOf: newNotices, at: 0)
+                self.noticeList[noticeType, default: []].insert(contentsOf: newNotices, at: 0)
                 
                 // 뷰 업데이트
                 self.tableView.reloadData()
@@ -177,18 +178,19 @@ class KUNoticeListViewController: UIViewController {
                 // FIXME: - see above
             case .success(let notices):
                 // Update hasNext
+                let noticeType = notices.first?.category ?? self.currentType
                 let hasNext = notices.count >= self.loadLimit
-                self.hasNextList.updateValue(hasNext, forKey: self.currentType)
+                self.hasNextList.updateValue(hasNext, forKey: noticeType)
                 
                 // Update offset
-                let prevOffset = self.offsetList[self.currentType] ?? 0
+                let prevOffset = self.offsetList[noticeType] ?? 0
                 let currentOffset = prevOffset + notices.count
-                self.offsetList.updateValue(currentOffset, forKey: self.currentType)
+                self.offsetList.updateValue(currentOffset, forKey: noticeType)
                 
                 // Update notices
-                var currentNotices = self.noticeList[self.currentType] ?? []
+                var currentNotices = self.noticeList[noticeType] ?? []
                 notices.forEach { currentNotices.append($0) }
-                self.noticeList.updateValue(currentNotices, forKey: self.currentType)
+                self.noticeList.updateValue(currentNotices, forKey: noticeType)
                 
                 // 뷰 업데이트
                 self.tableView.reloadData()
