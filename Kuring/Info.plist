@@ -5,7 +5,7 @@
 	<key>NSAdvertisingAttributionReportEndpoint</key>
 	<string>https://appsflyer-skadnetwork.com/</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string></string>
+	<string>허용 시에만 쿠링은 서비스의 안정성 개선을 위해 다음의 데이터를 수집 합니다: 설치기록, 앱 로그</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
