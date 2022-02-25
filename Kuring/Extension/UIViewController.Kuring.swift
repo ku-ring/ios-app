@@ -6,8 +6,21 @@
 //
 
 import UIKit
+import KuringSDK
 
 extension UIViewController {
+    func showOnboardingViewController() {
+        guard Kuring.categoryStrings.isEmpty else { return }
+        guard Kuring.isFirstRun || Kuring.appVersion == nil else { return }
+        
+        let onboardingVC = OnboardingViewController()
+        onboardingVC.modalPresentationStyle = .fullScreen
+        onboardingVC.isModalInPresentation = true
+        self.present(onboardingVC, animated: true)
+        
+        Kuring.updateAppVersion(to: Bundle.appVersion)
+    }
+    
     func showNoticeWebViewController(with urlString: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let noticeWebVC = storyboard.instantiateViewController(
