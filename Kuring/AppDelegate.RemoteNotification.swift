@@ -138,22 +138,17 @@ extension AppDelegate {
 // MARK: - KuringDelegate
 extension AppDelegate: KuringDelegate {
     func didReceiveNotification(_ notification: KuringSDK.Notification) {
-        createNotificationBanner(from: notification)
+        Logger.debug("Received \(notification.subject)")
     }
-    
-    func didUpdateSubscription(_ subscription: Subscription) { }
-    
-    /**
-     알림이 오면 배너를 생성하여 띄운다
-     */
-    func createNotificationBanner(from notification: KuringSDK.Notification) {
+
+    func didReadyToCreateNotificationBanner(title: String, body: String, identifier: String) {
         let content = UNMutableNotificationContent()
-        content.title = "🔔 쿠링! 새 공지가 왔어요!"
-        content.body = notification.subject
+        content.title = title
+        content.body = body
         content.sound = UNNotificationSound.default
         content.badge = nil
         
-        let identifier = notification.articleID
+        let identifier = identifier
         let request = UNNotificationRequest(
             identifier: identifier,
             content: content,
@@ -162,8 +157,12 @@ extension AppDelegate: KuringDelegate {
         
         UNUserNotificationCenter.current().add(request) { (error) in
             if let error = error {
-                Logger.debug("[com.kuring.service] Failed to show notification: \(error.localizedDescription)")
+                Logger.debug("Failed to show banner: \(error.localizedDescription)")
             }
         }
+    }
+    
+    func didUpdateSubscription(_ subscription: Subscription) {
+        Logger.debug("\(subscription.categories)")
     }
 }

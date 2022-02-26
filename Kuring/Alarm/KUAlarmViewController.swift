@@ -143,6 +143,8 @@ extension KUAlarmViewController: KuringDelegate {
     func didReceiveNotification(_ notification: KuringSDK.Notification) {
         tableView.reloadData()
     }
+
+    func didReadyToCreateNotificationBanner(title: String, body: String, identifier: String) { }
     
     func didUpdateSubscription(_ subscription: Subscription) {
         if notifications.isEmpty {
