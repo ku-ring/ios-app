@@ -17,7 +17,7 @@ public class Storage {
     static func setFirstTime() {
         let defaults = UserDefaults.standard
         defaults.setValue(
-            "YES", // OMG 이건 objc인가요... 절레절레
+            true,
             forKey: KeyFistTime)
     }
 }
