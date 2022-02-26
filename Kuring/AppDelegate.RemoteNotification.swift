@@ -142,6 +142,7 @@ extension AppDelegate: KuringDelegate {
     }
 
     func didReadyToCreateNotificationBanner(title: String, body: String, identifier: String) {
+        Logger.debug("did ready to create notification banner - \(title) - \(body) - \(identifier)")
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body
