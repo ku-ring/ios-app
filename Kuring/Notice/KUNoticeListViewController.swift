@@ -46,7 +46,6 @@ class KUNoticeListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.isSkeletonable = true
-            tableView.rowHeight = 68
             tableView.estimatedRowHeight = 68
         }
     }
