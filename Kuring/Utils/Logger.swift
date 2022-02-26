@@ -23,4 +23,19 @@ class Logger {
         )
 #endif
     }
+    
+    static func error(_ log: String) {
+        let time = Date().formatted(date: .complete, time: .complete)
+#if DEBUG
+        print("[com.kuring.service] [\(time)]\n🚨 \(log))")
+#else
+        Analytics.logEvent(
+            "com.kuring.service.logger.error",
+            parameters: [
+                "log": log,
+                "time": time
+            ]
+        )
+#endif
+    }
 }

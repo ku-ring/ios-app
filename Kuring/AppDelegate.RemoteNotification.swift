@@ -157,7 +157,7 @@ extension AppDelegate: KuringDelegate {
         
         UNUserNotificationCenter.current().add(request) { (error) in
             if let error = error {
-                Logger.debug("Failed to show banner: \(error.localizedDescription)")
+                Logger.error("Failed to show banner: \(error.localizedDescription)")
             }
         }
     }
