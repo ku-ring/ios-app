@@ -140,7 +140,12 @@ class KUNoticeListViewController: UIViewController {
             switch result {
             case .success(let notices):
                 let noticeType = notices.first?.category ?? self.currentType
-                let newNotices = notices.filter { self.noticeList[noticeType]?.first?.id == $0.id }
+                var newNotices: [Notice] = []
+                for notice in notices {
+                    if notice.id == self.noticeList[noticeType]?.first?.id { return }
+                    newNotices.append(notice)
+                }
+                guard !newNotices.isEmpty else { return }
                 
                 // 가져온 데이터 수 만큼 오프셋 값 추가
                 self.offsetList[noticeType, default: 0] += newNotices.count
