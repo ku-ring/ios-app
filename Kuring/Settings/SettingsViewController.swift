@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KuringSDK
 
 enum URLLink: String {
     case whatsNew = "https://kuring.notion.site/iOS-eef51c986b7f4320b97424df3f4a5e3c"
@@ -30,12 +31,21 @@ class SettingsViewController: UITableViewController {
         }
     }
     
+    @IBOutlet weak var customNotificationSwitch: UISwitch! {
+        didSet {
+            customNotificationSwitch.isOn = Kuring.isCustomNotificationEnabled
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath.section {
         case 0: // 공지구독
-            showSubscription()
+            switch indexPath.row {
+            case 0: showSubscription()
+            default: return
+            }
         case 1: // 정보
             switch indexPath.row {
             case 1: URLLink.whatsNew.openURL()
@@ -55,6 +65,12 @@ class SettingsViewController: UITableViewController {
             showFeedback()
         default: return
         }
+    }
+    
+    @IBAction func didTapCustomNotficationSwitch(_ uiSwitch: UISwitch) {
+        Kuring.isCustomNotificationEnabled = uiSwitch.isOn
+        
+        Logger.debug("didSwitchCustomNotification: \(Kuring.isCustomNotificationEnabled)")
     }
     
     func showOpensource() {

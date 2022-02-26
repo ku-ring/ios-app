@@ -46,7 +46,6 @@ class KUNoticeListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.isSkeletonable = true
-            tableView.rowHeight = 68
             tableView.estimatedRowHeight = 68
         }
     }
@@ -296,10 +295,10 @@ extension KUNoticeListViewController: KuringDelegate {
     func didReceiveNotification(_ notification: KuringSDK.Notification) {
         updateNotifcationButton()
     }
+
+    func didReadyToCreateNotificationBanner(title: String, body: String, identifier: String) { }
     
-    func didUpdateSubscription(_ subscription: Subscription) {
-        
-    }
+    func didUpdateSubscription(_ subscription: Subscription) { }
 }
 
 extension KUNoticeListViewController: SkeletonTableViewDelegate { }

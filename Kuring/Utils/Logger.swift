@@ -10,10 +10,32 @@ import FirebaseAnalytics
 
 class Logger {
     static func debug(_ log: Any?) {
+        let time = Date().formatted(date: .complete, time: .complete)
 #if DEBUG
-        print("[com.kuring.service] ✅ \(String(describing: log))")
+        print("[com.kuring.service] [\(time)]\n✅ \(String(describing: log))")
 #else
-        Analytics.logEvent("com.kuring.service.logger.debug", parameters: ["log": log])
+        Analytics.logEvent(
+            "com.kuring.service.logger.debug",
+            parameters: [
+                "log": log,
+                "time": time
+            ]
+        )
+#endif
+    }
+    
+    static func error(_ log: String) {
+        let time = Date().formatted(date: .complete, time: .complete)
+#if DEBUG
+        print("[com.kuring.service] [\(time)]\n🚨 \(log))")
+#else
+        Analytics.logEvent(
+            "com.kuring.service.logger.error",
+            parameters: [
+                "log": log,
+                "time": time
+            ]
+        )
 #endif
     }
 }
