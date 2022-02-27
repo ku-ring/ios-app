@@ -29,7 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // MARK: AppsFlyerLib
         AppsFlyerLib.shared().appsFlyerDevKey = KuringSDK.Kuring.appsflyerKey
         AppsFlyerLib.shared().appleAppID = KuringSDK.Kuring.appleID
+        #if DEBUG
         AppsFlyerLib.shared().isDebug = true
+        #endif
         AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
         AppsFlyerLib.shared().delegate = self
 

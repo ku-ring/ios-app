@@ -14,10 +14,12 @@ class Logger {
 #if DEBUG
         print("[com.kuring.service] [\(time)]\n✅ \(String(describing: log))")
 #else
+        let logString = String(describing: log)
         Analytics.logEvent(
-            "com.kuring.service.logger.debug",
+            "com_kuring_service_logger_debug",
             parameters: [
-                "log": log,
+                "version": Bundle.appVersion,
+                "log": logString,
                 "time": time
             ]
         )
@@ -30,8 +32,9 @@ class Logger {
         print("[com.kuring.service] [\(time)]\n🚨 \(log))")
 #else
         Analytics.logEvent(
-            "com.kuring.service.logger.error",
+            "com_kuring_service_logger_error",
             parameters: [
+                "version": Bundle.appVersion,
                 "log": log,
                 "time": time
             ]

@@ -31,7 +31,7 @@ extension AppDelegate {
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        Logger.debug("[com.kuring.service] Failed to register for remote notification with error: \(error.localizedDescription)")
+        Logger.debug("Failed to register for remote notification with error: \(error.localizedDescription)")
     }
 }
 
@@ -39,12 +39,12 @@ extension AppDelegate {
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         guard let fcmToken = fcmToken else {
-            Logger.debug("[com.kuring.service] No FCM token")
+            Logger.error("No FCM token")
             return
         }
 
         Kuring.register(fcmToken: fcmToken)
-        Logger.debug("[com.kuring.service] FCM token: \(fcmToken)")
+        Logger.debug("FCM token: \(fcmToken)")
     }
 }
 
@@ -142,6 +142,7 @@ extension AppDelegate: KuringDelegate {
     }
 
     func didReadyToCreateNotificationBanner(title: String, body: String, identifier: String) {
+        Logger.debug("did ready to create notification banner - \(title) - \(body) - \(identifier)")
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body
