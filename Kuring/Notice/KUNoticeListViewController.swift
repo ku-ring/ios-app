@@ -46,7 +46,6 @@ class KUNoticeListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.isSkeletonable = true
-            tableView.rowHeight = 68
             tableView.estimatedRowHeight = 68
         }
     }
@@ -82,9 +81,13 @@ class KUNoticeListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
         
         updateNotifcationButton()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tableView.hideSkeleton()
     }
     
     override func viewDidLayoutSubviews() {
@@ -101,8 +104,8 @@ class KUNoticeListViewController: UIViewController {
     func updateNotifcationButton() {
         let config = UIImage.SymbolConfiguration(
             paletteColors: Kuring.hasNewNotification
-            ? [UIColor(named: "ColorSet.pink")!, UIColor(named: "ColorSet.Label.primary")!]
-            : [UIColor(named: "ColorSet.Label.primary")!]
+            ? [ColorSet.pink, ColorSet.Label.primary]
+            : [ColorSet.Label.primary]
         )
         
         notificationButton.image = UIImage(
@@ -113,13 +116,9 @@ class KUNoticeListViewController: UIViewController {
     }
     
     func updateData() {
-        if let hasNext = hasNextList[currentType] {
-            if hasNext == false {
-                // 더이상 불러올 수 있는 공지가 없습니다.
-                return
-            }
+        if let hasNext = hasNextList[currentType], hasNext {
+            load()
         }
-        load()
     }
     
     @objc
@@ -134,34 +133,32 @@ class KUNoticeListViewController: UIViewController {
         query = Kuring.createNoticeListQuery(with: params)
         query?.load { [weak self] result in
             guard let self = self else { return }
+            
             self.isLoading = false
             self.refreshControl.endRefreshing()
+            
             switch result {
-                case .success(let notices):
-                    var newNotices: [Notice] = []
-                    for notice in notices {
-                        if notice.id == self.noticeList[self.currentType]?.first?.id { return }
-                        newNotices.append(notice)
-                    }
-                    // 가져온 데이터 수 기록
-                    let count = newNotices.count
-                    
-                    // 가져온 데이터 수 만큼 오프셋 값 추가
-                    let prevOffset = self.offsetList[self.currentType] ?? 0
-                    let currentOffset = prevOffset + count
-                    self.offsetList.updateValue(currentOffset, forKey: self.currentType)
-                    
-                    // 가져온 데이터 array 가장 앞에 삽입
-                    // Update notices
-                    var currentNotices = self.noticeList[self.currentType] ?? []
-                    currentNotices.insert(contentsOf: newNotices, at: 0)
-                    self.noticeList.updateValue(currentNotices, forKey: self.currentType)
-                    
-                    // 뷰 업데이트
-                    self.tableView.reloadData()
-                    
-                case .failure(let error):
-                    print(error.localizedDescription)
+            case .success(let notices):
+                let noticeType = notices.first?.category ?? self.currentType
+                var newNotices: [Notice] = []
+                for notice in notices {
+                    if notice.id == self.noticeList[noticeType]?.first?.id { return }
+                    newNotices.append(notice)
+                }
+                guard !newNotices.isEmpty else { return }
+                
+                // 가져온 데이터 수 만큼 오프셋 값 추가
+                self.offsetList[noticeType, default: 0] += newNotices.count
+                
+                // 가져온 데이터 array 가장 앞에 삽입
+                // Update notices
+                self.noticeList[noticeType, default: []].insert(contentsOf: newNotices, at: 0)
+                
+                // 뷰 업데이트
+                self.tableView.reloadData()
+                
+            case .failure(let error):
+                Logger.debug(error.localizedDescription)
             }
         }
     }
@@ -182,26 +179,28 @@ class KUNoticeListViewController: UIViewController {
             self.isLoading = false
             self.tableView.hideSkeleton()
             switch result {
-                case .success(let notices):
-                    // Update hasNext
-                    let hasNext = notices.count >= self.loadLimit
-                    self.hasNextList.updateValue(hasNext, forKey: self.currentType)
-                    
-                    // Update offset
-                    let prevOffset = self.offsetList[self.currentType] ?? 0
-                    let currentOffset = prevOffset + notices.count
-                    self.offsetList.updateValue(currentOffset, forKey: self.currentType)
-                    
-                    // Update notices
-                    var currentNotices = self.noticeList[self.currentType] ?? []
-                    notices.forEach { currentNotices.append($0) }
-                    self.noticeList.updateValue(currentNotices, forKey: self.currentType)
-                    
-                    // 뷰 업데이트
-                    self.tableView.reloadData()
-                    
-                case .failure(let error):
-                    print(error.localizedDescription)
+                // FIXME: - see above
+            case .success(let notices):
+                // Update hasNext
+                let noticeType = notices.first?.category ?? self.currentType
+                let hasNext = notices.count >= self.loadLimit
+                self.hasNextList.updateValue(hasNext, forKey: noticeType)
+                
+                // Update offset
+                let prevOffset = self.offsetList[noticeType] ?? 0
+                let currentOffset = prevOffset + notices.count
+                self.offsetList.updateValue(currentOffset, forKey: noticeType)
+                
+                // Update notices
+                var currentNotices = self.noticeList[noticeType] ?? []
+                notices.forEach { currentNotices.append($0) }
+                self.noticeList.updateValue(currentNotices, forKey: noticeType)
+                
+                // 뷰 업데이트
+                self.tableView.reloadData()
+                
+            case .failure(let error):
+                Logger.debug(error.localizedDescription)
             }
         }
     }
@@ -231,7 +230,7 @@ extension KUNoticeListViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        guard let cell = collectionView.cellForItem(at: indexPath) as? KUNoticeListCollectionViewCell else { return }
+        let cell = collectionView.cellForItem(at: indexPath) as! KUNoticeListCollectionViewCell
         self.currentType = cell.noticeType
     }
 }
@@ -257,6 +256,7 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: true)
         let notice = currentNotices[indexPath.row]
         notice.read()
+        tableView.reloadData()
         let urlString = articleURL(from: notice)
         showNoticeWebViewController(with: urlString)
     }
@@ -268,14 +268,14 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
             if !articleArray.contains(id) {
                 articleArray.append(id)
                 UserDefaults.standard.set(articleArray, forKey: articleKey)
-                readArticle = UserDefaults.standard.array(forKey: articleKey)!
+                readArticle = articleArray
             }
         }
         
         let articleURL = currentType == .도서관
         ? "\(libraryBaseUrl)\(notice.articleID)"
         : "\(originalBaseUrl)?id=\(notice.articleID)"
-    
+        
         return articleURL.isEmpty
         ? "https://konkuk.ac.kr"
         : articleURL
@@ -300,10 +300,10 @@ extension KUNoticeListViewController: KuringDelegate {
     func didReceiveNotification(_ notification: KuringSDK.Notification) {
         updateNotifcationButton()
     }
+
+    func didReadyToCreateNotificationBanner(title: String, body: String, identifier: String) { }
     
-    func didUpdateSubscription(_ subscription: Subscription) {
-        
-    }
+    func didUpdateSubscription(_ subscription: Subscription) { }
 }
 
 extension KUNoticeListViewController: SkeletonTableViewDelegate { }
@@ -315,5 +315,12 @@ extension KUNoticeListViewController: SkeletonTableViewDataSource {
     
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
         return KUNoticeListViewCell.identifier
+    }
+}
+
+extension UIColor {
+    // TODO: use fucking enum
+    static func named(_ name: String) -> UIColor {
+        return self.init(named: name) ?? .gray
     }
 }

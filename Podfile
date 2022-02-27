@@ -14,4 +14,5 @@ target 'Kuring' do
   pod 'SkeletonView'
   pod 'SnapKit', '~> 5.0.0'
   pod 'Then'
+  pod 'AppsFlyerFramework'
 end

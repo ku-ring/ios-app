@@ -19,9 +19,9 @@ class KUAlarmViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nibName = UINib(nibName: "KUAlarmTableViewCell", bundle: nil)
+        let nibName = UINib(nibName: String(describing: KUAlarmTableViewCell.self), bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: KUAlarmTableViewCell.identifier)
-        Kuring.addDelegate(self, forKey: "KUAlarmViewController")
+        Kuring.addDelegate(self, forKey: String(describing: Self.self))
         
         if notifications.isEmpty {
             showEmptyData()
@@ -30,10 +30,11 @@ class KUAlarmViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        notifications.values.forEach {
-            $0.forEach { notifications in
-                notifications.isNew = false
-            }
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
+        notifications.values.flatMap { $0 }.forEach { notifications in
+            notifications.isNew = false
         }
     }
 
@@ -53,7 +54,7 @@ class KUAlarmViewController: UITableViewController {
         ? "구독중인 카테고리가 없습니다."
         : "받은 알림이 없습니다."
         emptyDataLabel.textAlignment = .center
-        emptyDataLabel.textColor = UIColor(named: "ColorSet.green")
+        emptyDataLabel.textColor = ColorSet.green
         emptyDataLabel.sizeToFit()
         emptyDataLabel.center.x = tableView.center.x
         emptyDataLabel.center.y = tableView.frame.height - emptyDataLabel.frame.height
@@ -76,7 +77,6 @@ extension KUAlarmViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         let headerView = KUAlarmHeaderView(
             frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 36),
             date: dates[section]
@@ -102,6 +102,19 @@ extension KUAlarmViewController {
         notification.isNew = false
         let urlString = articleURL(from: notification)
         showNoticeWebViewController(with: urlString)
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        tableView.beginUpdates()
+        let date = dates[indexPath.section]
+        Kuring.removeNotification(at: indexPath.row, forDate: date)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        tableView.endUpdates()
     }
     
     /// 선택된 `Notice` 값으로 부터 유효한 웹주소 가져오기
@@ -130,6 +143,8 @@ extension KUAlarmViewController: KuringDelegate {
     func didReceiveNotification(_ notification: KuringSDK.Notification) {
         tableView.reloadData()
     }
+
+    func didReadyToCreateNotificationBanner(title: String, body: String, identifier: String) { }
     
     func didUpdateSubscription(_ subscription: Subscription) {
         if notifications.isEmpty {

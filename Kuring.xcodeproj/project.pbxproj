@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A9C445BC27C552FB0094D9A9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C445BB27C552FB0094D9A9 /* OnboardingView.swift */; };
+		A9C447DF27C7877E0094D9A9 /* CategorySelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447DE27C7877E0094D9A9 /* CategorySelectView.swift */; };
+		A9C447E327C788A50094D9A9 /* OnboardingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447E227C788A50094D9A9 /* OnboardingRow.swift */; };
+		A9C447E727C7A2560094D9A9 /* OnboardingIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447E627C7A2560094D9A9 /* OnboardingIntroView.swift */; };
+		A9C447E927C7A61B0094D9A9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447E827C7A61B0094D9A9 /* OnboardingViewController.swift */; };
+		A9C447EB27C7EA3B0094D9A9 /* Bundle.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447EA27C7EA3B0094D9A9 /* Bundle.Kuring.swift */; };
+		A9C447EE27C81E640094D9A9 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447ED27C81E640094D9A9 /* OnboardingViewModel.swift */; };
 		A9DA6C6627B97EE300F3B786 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */; };
 		A9DA6C6D27B97EE300F3B786 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6B27B97EE300F3B786 /* Main.storyboard */; };
 		A9DA6C6F27B97EE500F3B786 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6E27B97EE500F3B786 /* Assets.xcassets */; };
@@ -17,18 +24,9 @@
 		A9DA6C8427B9813D00F3B786 /* KuringSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9DA6C8227B9813D00F3B786 /* KuringSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9DA6C8727B981A100F3B786 /* AppDelegate.RemoteNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */; };
 		A9DA6CBE27B98D2300F3B786 /* KUFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8927B98D2200F3B786 /* KUFeedbackViewController.swift */; };
-		A9DA6CBF27B98D2300F3B786 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C8B27B98D2200F3B786 /* Onboarding.storyboard */; };
-		A9DA6CC027B98D2300F3B786 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8C27B98D2200F3B786 /* OnboardingModel.swift */; };
-		A9DA6CC127B98D2300F3B786 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8D27B98D2200F3B786 /* OnBoardingViewController.swift */; };
 		A9DA6CC227B98D2300F3B786 /* Date.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */; };
 		A9DA6CC327B98D2300F3B786 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9027B98D2200F3B786 /* Global.swift */; };
-		A9DA6CC427B98D2300F3B786 /* Notice.KuringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9127B98D2200F3B786 /* Notice.KuringApp.swift */; };
-		A9DA6CC527B98D2300F3B786 /* UIView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9227B98D2200F3B786 /* UIView+Rx.swift */; };
-		A9DA6CC627B98D2300F3B786 /* CustomExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9327B98D2200F3B786 /* CustomExtension.swift */; };
-		A9DA6CC727B98D2300F3B786 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9427B98D2200F3B786 /* UIViewController+Rx.swift */; };
-		A9DA6CC827B98D2300F3B786 /* UITableView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9527B98D2200F3B786 /* UITableView+Rx.swift */; };
-		A9DA6CC927B98D2300F3B786 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9627B98D2200F3B786 /* Colors.swift */; };
-		A9DA6CCA27B98D2300F3B786 /* DeviceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9727B98D2200F3B786 /* DeviceConfiguration.swift */; };
+		A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9627B98D2200F3B786 /* ColorSet.swift */; };
 		A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */; };
 		A9DA6CCC27B98D2300F3B786 /* CategoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9A27B98D2200F3B786 /* CategoryCollectionViewController.swift */; };
 		A9DA6CCD27B98D2300F3B786 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9C27B98D2200F3B786 /* Storage.swift */; };
@@ -54,9 +52,10 @@
 		A9DA6CE127B98D2300F3B786 /* KUAlarmTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6CB827B98D2200F3B786 /* KUAlarmTableViewCell.xib */; };
 		A9DA6CE227B98D2300F3B786 /* KUAlarmHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB927B98D2200F3B786 /* KUAlarmHeaderView.swift */; };
 		A9DA6CE327B98D2300F3B786 /* Opensource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CBB27B98D2300F3B786 /* Opensource.swift */; };
-		A9DA6CE427B98D2300F3B786 /* OpenSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CBC27B98D2300F3B786 /* OpenSourceController.swift */; };
 		A9DA6CE527B98D2300F3B786 /* OpensourceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CBD27B98D2300F3B786 /* OpensourceListViewController.swift */; };
 		A9DA6D0927B98FEC00F3B786 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6D0727B98FEC00F3B786 /* LaunchScreen.storyboard */; };
+		B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */; };
+		B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A0382427C3ECD70074EC95 /* Logger.swift */; };
 		D430312BD0477A68D7728C94 /* Pods_Kuring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +76,13 @@
 /* Begin PBXFileReference section */
 		098133CE147F3EC919795C6B /* Pods-Kuring.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuring.debug.xcconfig"; path = "Target Support Files/Pods-Kuring/Pods-Kuring.debug.xcconfig"; sourceTree = "<group>"; };
 		6AA68EE0A1CA6D5FD2FB9A4F /* Pods-Kuring.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuring.release.xcconfig"; path = "Target Support Files/Pods-Kuring/Pods-Kuring.release.xcconfig"; sourceTree = "<group>"; };
+		A9C445BB27C552FB0094D9A9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		A9C447DE27C7877E0094D9A9 /* CategorySelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectView.swift; sourceTree = "<group>"; };
+		A9C447E227C788A50094D9A9 /* OnboardingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRow.swift; sourceTree = "<group>"; };
+		A9C447E627C7A2560094D9A9 /* OnboardingIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingIntroView.swift; sourceTree = "<group>"; };
+		A9C447E827C7A61B0094D9A9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		A9C447EA27C7EA3B0094D9A9 /* Bundle.Kuring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.Kuring.swift; sourceTree = "<group>"; };
+		A9C447ED27C81E640094D9A9 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		A9DA6C6227B97EE300F3B786 /* Kuring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9DA6C6C27B97EE300F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,18 +93,9 @@
 		A9DA6C8227B9813D00F3B786 /* KuringSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KuringSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.RemoteNotification.swift; sourceTree = "<group>"; };
 		A9DA6C8927B98D2200F3B786 /* KUFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUFeedbackViewController.swift; sourceTree = "<group>"; };
-		A9DA6C8B27B98D2200F3B786 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
-		A9DA6C8C27B98D2200F3B786 /* OnboardingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
-		A9DA6C8D27B98D2200F3B786 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.Kuring.swift; sourceTree = "<group>"; };
 		A9DA6C9027B98D2200F3B786 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
-		A9DA6C9127B98D2200F3B786 /* Notice.KuringApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notice.KuringApp.swift; sourceTree = "<group>"; };
-		A9DA6C9227B98D2200F3B786 /* UIView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Rx.swift"; sourceTree = "<group>"; };
-		A9DA6C9327B98D2200F3B786 /* CustomExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomExtension.swift; sourceTree = "<group>"; };
-		A9DA6C9427B98D2200F3B786 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
-		A9DA6C9527B98D2200F3B786 /* UITableView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Rx.swift"; sourceTree = "<group>"; };
-		A9DA6C9627B98D2200F3B786 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		A9DA6C9727B98D2200F3B786 /* DeviceConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceConfiguration.swift; sourceTree = "<group>"; };
+		A9DA6C9627B98D2200F3B786 /* ColorSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
 		A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.Kuring.swift; sourceTree = "<group>"; };
 		A9DA6C9A27B98D2200F3B786 /* CategoryCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewController.swift; sourceTree = "<group>"; };
 		A9DA6C9C27B98D2200F3B786 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -124,9 +121,10 @@
 		A9DA6CB827B98D2200F3B786 /* KUAlarmTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KUAlarmTableViewCell.xib; sourceTree = "<group>"; };
 		A9DA6CB927B98D2200F3B786 /* KUAlarmHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUAlarmHeaderView.swift; sourceTree = "<group>"; };
 		A9DA6CBB27B98D2300F3B786 /* Opensource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opensource.swift; sourceTree = "<group>"; };
-		A9DA6CBC27B98D2300F3B786 /* OpenSourceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSourceController.swift; sourceTree = "<group>"; };
 		A9DA6CBD27B98D2300F3B786 /* OpensourceListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpensourceListViewController.swift; sourceTree = "<group>"; };
 		A9DA6D0827B98FEC00F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.AppsFlyerLib.swift; sourceTree = "<group>"; };
+		B1A0382427C3ECD70074EC95 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kuring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -154,6 +152,25 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A9C447EC27C81E550094D9A9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A9C445BB27C552FB0094D9A9 /* OnboardingView.swift */,
+				A9C447E627C7A2560094D9A9 /* OnboardingIntroView.swift */,
+				A9C447E227C788A50094D9A9 /* OnboardingRow.swift */,
+				A9C447DE27C7877E0094D9A9 /* CategorySelectView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A9C447EF27C81E810094D9A9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A9C447ED27C81E640094D9A9 /* OnboardingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		A9DA6C5927B97EE300F3B786 = {
 			isa = PBXGroup;
 			children = (
@@ -178,15 +195,17 @@
 				A9DA6C7927B97F8300F3B786 /* Kuring.entitlements */,
 				A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */,
 				A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */,
+				B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */,
 				A9DA6CB327B98D2200F3B786 /* Alarm */,
 				A9DA6C9927B98D2200F3B786 /* Category */,
 				A9DA6C9B27B98D2200F3B786 /* DB */,
 				A9DA6C8827B98D2200F3B786 /* Feedback */,
 				A9DA6CAB27B98D2200F3B786 /* Notice */,
-				A9DA6C8A27B98D2200F3B786 /* OnBoarding */,
+				A9DA6C8A27B98D2200F3B786 /* Onboarding */,
 				A9DA6CBA27B98D2300F3B786 /* OpenSource */,
 				A9DA6C9D27B98D2200F3B786 /* Search */,
 				A9DA6CA927B98D2200F3B786 /* Settings */,
+				B1A0382127C3E9F90074EC95 /* Extension */,
 				A9DA6C8E27B98D2200F3B786 /* Utils */,
 				A9DA6C6B27B97EE300F3B786 /* Main.storyboard */,
 				A9DA6D0727B98FEC00F3B786 /* LaunchScreen.storyboard */,
@@ -214,29 +233,22 @@
 			path = Feedback;
 			sourceTree = "<group>";
 		};
-		A9DA6C8A27B98D2200F3B786 /* OnBoarding */ = {
+		A9DA6C8A27B98D2200F3B786 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				A9DA6C8B27B98D2200F3B786 /* Onboarding.storyboard */,
-				A9DA6C8C27B98D2200F3B786 /* OnboardingModel.swift */,
-				A9DA6C8D27B98D2200F3B786 /* OnBoardingViewController.swift */,
+				A9C447E827C7A61B0094D9A9 /* OnboardingViewController.swift */,
+				A9C447EF27C81E810094D9A9 /* ViewModel */,
+				A9C447EC27C81E550094D9A9 /* View */,
 			);
-			path = OnBoarding;
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		A9DA6C8E27B98D2200F3B786 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */,
 				A9DA6C9027B98D2200F3B786 /* Global.swift */,
-				A9DA6C9127B98D2200F3B786 /* Notice.KuringApp.swift */,
-				A9DA6C9227B98D2200F3B786 /* UIView+Rx.swift */,
-				A9DA6C9327B98D2200F3B786 /* CustomExtension.swift */,
-				A9DA6C9427B98D2200F3B786 /* UIViewController+Rx.swift */,
-				A9DA6C9527B98D2200F3B786 /* UITableView+Rx.swift */,
-				A9DA6C9627B98D2200F3B786 /* Colors.swift */,
-				A9DA6C9727B98D2200F3B786 /* DeviceConfiguration.swift */,
-				A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */,
+				A9DA6C9627B98D2200F3B786 /* ColorSet.swift */,
+				B1A0382427C3ECD70074EC95 /* Logger.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -342,10 +354,19 @@
 			isa = PBXGroup;
 			children = (
 				A9DA6CBB27B98D2300F3B786 /* Opensource.swift */,
-				A9DA6CBC27B98D2300F3B786 /* OpenSourceController.swift */,
 				A9DA6CBD27B98D2300F3B786 /* OpensourceListViewController.swift */,
 			);
 			path = OpenSource;
+			sourceTree = "<group>";
+		};
+		B1A0382127C3E9F90074EC95 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */,
+				A9C447EA27C7EA3B0094D9A9 /* Bundle.Kuring.swift */,
+				A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -417,7 +438,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9DA6CDD27B98D2300F3B786 /* KUNoticeListViewCell.xib in Resources */,
-				A9DA6CBF27B98D2300F3B786 /* Onboarding.storyboard in Resources */,
 				A9DA6CE127B98D2300F3B786 /* KUAlarmTableViewCell.xib in Resources */,
 				A9DA6C7B27B9800F00F3B786 /* GoogleService-Info.plist in Resources */,
 				A9DA6D0927B98FEC00F3B786 /* LaunchScreen.storyboard in Resources */,
@@ -478,42 +498,42 @@
 				A9DA6CD527B98D2300F3B786 /* KUSearchedNoticeCell.swift in Sources */,
 				A9DA6CCF27B98D2300F3B786 /* KUSearchViewController.Searcher.swift in Sources */,
 				A9DA6CD127B98D2300F3B786 /* KUSearchViewController.UITextField.swift in Sources */,
-				A9DA6CC827B98D2300F3B786 /* UITableView+Rx.swift in Sources */,
 				A9DA6CE327B98D2300F3B786 /* Opensource.swift in Sources */,
+				A9C447E727C7A2560094D9A9 /* OnboardingIntroView.swift in Sources */,
 				A9DA6CC327B98D2300F3B786 /* Global.swift in Sources */,
 				A9DA6CDC27B98D2300F3B786 /* KUNoticeListCollectionViewCell.swift in Sources */,
+				A9C447E927C7A61B0094D9A9 /* OnboardingViewController.swift in Sources */,
 				A9DA6CE527B98D2300F3B786 /* OpensourceListViewController.swift in Sources */,
 				A9DA6CD327B98D2300F3B786 /* KUSearchViewController.swift in Sources */,
 				A9DA6CC227B98D2300F3B786 /* Date.Kuring.swift in Sources */,
 				A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */,
-				A9DA6CC927B98D2300F3B786 /* Colors.swift in Sources */,
+				A9C447E327C788A50094D9A9 /* OnboardingRow.swift in Sources */,
+				A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */,
 				A9DA6CCD27B98D2300F3B786 /* Storage.swift in Sources */,
-				A9DA6CC527B98D2300F3B786 /* UIView+Rx.swift in Sources */,
 				A9DA6CDA27B98D2300F3B786 /* KUNoticeTagView.swift in Sources */,
+				A9C445BC27C552FB0094D9A9 /* OnboardingView.swift in Sources */,
 				A9DA6CD827B98D2300F3B786 /* KUNoticeListViewController.swift in Sources */,
 				A9DA6CCC27B98D2300F3B786 /* CategoryCollectionViewController.swift in Sources */,
 				A9DA6CDE27B98D2300F3B786 /* AlarmTagViewController.swift in Sources */,
 				A9DA6CDB27B98D2300F3B786 /* KUNoticeListViewCell.swift in Sources */,
-				A9DA6CC027B98D2300F3B786 /* OnboardingModel.swift in Sources */,
-				A9DA6CE427B98D2300F3B786 /* OpenSourceController.swift in Sources */,
 				A9DA6CBE27B98D2300F3B786 /* KUFeedbackViewController.swift in Sources */,
 				A9DA6CE227B98D2300F3B786 /* KUAlarmHeaderView.swift in Sources */,
+				A9C447EB27C7EA3B0094D9A9 /* Bundle.Kuring.swift in Sources */,
 				A9DA6CD227B98D2300F3B786 /* KUSearchViewController.UITableView.swift in Sources */,
 				A9DA6CD027B98D2300F3B786 /* KUSearchViewController.UICollectionView.swift in Sources */,
-				A9DA6CC127B98D2300F3B786 /* OnBoardingViewController.swift in Sources */,
 				A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */,
+				B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */,
 				A9DA6CDF27B98D2300F3B786 /* KUAlarmViewController.swift in Sources */,
-				A9DA6CC427B98D2300F3B786 /* Notice.KuringApp.swift in Sources */,
+				B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */,
 				A9DA6C8727B981A100F3B786 /* AppDelegate.RemoteNotification.swift in Sources */,
-				A9DA6CCA27B98D2300F3B786 /* DeviceConfiguration.swift in Sources */,
 				A9DA6C6627B97EE300F3B786 /* AppDelegate.swift in Sources */,
+				A9C447EE27C81E640094D9A9 /* OnboardingViewModel.swift in Sources */,
 				A9DA6CE027B98D2300F3B786 /* KUAlarmTableViewCell.swift in Sources */,
 				A9DA6CD727B98D2300F3B786 /* SettingsViewController.swift in Sources */,
+				A9C447DF27C7877E0094D9A9 /* CategorySelectView.swift in Sources */,
 				A9DA6CD627B98D2300F3B786 /* KUSearchedStaffCell.swift in Sources */,
 				A9DA6CD427B98D2300F3B786 /* KUSearchTypeCollectionViewCell.swift in Sources */,
 				A9DA6CD927B98D2300F3B786 /* NoticeWebViewController.swift in Sources */,
-				A9DA6CC727B98D2300F3B786 /* UIViewController+Rx.swift in Sources */,
-				A9DA6CC627B98D2300F3B786 /* CustomExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,24 +683,24 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Kuring/Kuring.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 77CD4KLN3Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kuring/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "쿠링";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "허용 시에만 쿠링은 서비스의 안정성 개선을 위해 다음의 데이터를 수집 합니다: 설치기록, 앱 로그";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -697,24 +717,24 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Kuring/Kuring.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 77CD4KLN3Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kuring/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "쿠링";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "허용 시에만 쿠링은 서비스의 안정성 개선을 위해 다음의 데이터를 수집 합니다: 설치기록, 앱 로그";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

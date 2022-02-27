@@ -31,7 +31,7 @@ extension AppDelegate {
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("[com.kuring.service] Failed to register for remote notification with error: \(error.localizedDescription)")
+        Logger.debug("Failed to register for remote notification with error: \(error.localizedDescription)")
     }
 }
 
@@ -39,12 +39,12 @@ extension AppDelegate {
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         guard let fcmToken = fcmToken else {
-            print("[com.kuring.service] No FCM token")
+            Logger.error("No FCM token")
             return
         }
 
-        Kuring.register(fcmToken: fcmToken) { _ in }
-        print("[com.kuring.service] FCM token: \(fcmToken)")
+        Kuring.register(fcmToken: fcmToken)
+        Logger.debug("FCM token: \(fcmToken)")
     }
 }
 
@@ -62,9 +62,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // MARK: Kuring
         Kuring.userNotificationCenter(
             center,
-            willPresent: notification,
-            withCompletionHandler: completionHandler
+            willPresent: notification
         )
+        
+        completionHandler([.banner, .list, .badge, .sound])
     }
     
     func userNotificationCenter(
@@ -75,13 +76,39 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // MARK: Analytics
         let userInfo = response.notification.request.content.userInfo
         Messaging.messaging().appDidReceiveMessage(userInfo)
+        Logger.debug("✅ userInfo \(userInfo)")
+
+        // TODO: 알림 받으면 웹뷰로 바로 이동
+        openBanner(with: userInfo)
         
-        // MARK: Kuring
-        Kuring.userNotificationCenter(
-            center,
-            didReceive: response,
-            withCompletionHandler: completionHandler
-        )
+        completionHandler()
+    }
+    
+    /// 배너를 눌렀을 때, 웹뷰를 보여줍니다.
+    func openBanner(with userInfo: [AnyHashable: Any]) {
+        guard let articleID = userInfo["articleId"] else { return }
+        guard let categoryString = userInfo["category"] as? String else { return }
+        guard let navigationController = self.window?.rootViewController as? UINavigationController else { return }
+        let articleURL = NoticeType.from(categoryString) == .도서관
+        ? "\(libraryBaseUrl)\(articleID)"
+        : "\(originalBaseUrl)?id=\(articleID)"
+        
+        // TODO: UserDefault로 저장 + 프로퍼티래퍼 공부중
+        if var articleArray = readArticle as? [String] {
+            let id = articleURL
+            if !articleArray.contains(id) {
+                articleArray.append(id)
+                UserDefaults.standard.set(articleArray, forKey: articleKey)
+                readArticle = articleArray
+            }
+        }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let noticeWebVC = storyboard.instantiateViewController(
+            withIdentifier: "NoticeWebViewController"
+        ) as? NoticeWebViewController else { return }
+        noticeWebVC.articleURL = articleURL
+        navigationController.pushViewController(noticeWebVC, animated: true)
     }
 }
 
@@ -101,33 +128,28 @@ extension AppDelegate {
         // MARK: Kuring
         Kuring.application(
             application,
-            didReceiveRemoteNotification: userInfo,
-            fetchCompletionHandler: completionHandler
+            didReceiveRemoteNotification: userInfo
         )
+        
+        completionHandler(.newData)
     }
 }
 
 // MARK: - KuringDelegate
 extension AppDelegate: KuringDelegate {
     func didReceiveNotification(_ notification: KuringSDK.Notification) {
-        createNotificationBanner(from: notification)
+        Logger.debug("Received \(notification.subject)")
     }
-    
-    func didUpdateSubscription(_ subscription: Subscription) {
-        
-    }
-    
-    /**
-     알림이 오면 배너를 생성하여 띄운다
-     */
-    func createNotificationBanner(from notification: KuringSDK.Notification) {
+
+    func didReadyToCreateNotificationBanner(title: String, body: String, identifier: String) {
+        Logger.debug("did ready to create notification banner - \(title) - \(body) - \(identifier)")
         let content = UNMutableNotificationContent()
-        content.title = "🔔 쿠링! 새 공지가 왔어요!"
-        content.body = notification.subject
+        content.title = title
+        content.body = body
         content.sound = UNNotificationSound.default
         content.badge = nil
         
-        let identifier = notification.articleID
+        let identifier = identifier
         let request = UNNotificationRequest(
             identifier: identifier,
             content: content,
@@ -136,8 +158,12 @@ extension AppDelegate: KuringDelegate {
         
         UNUserNotificationCenter.current().add(request) { (error) in
             if let error = error {
-                print("[com.kuring.service] Failed to show notification: \(error.localizedDescription)")
+                Logger.error("Failed to show banner: \(error.localizedDescription)")
             }
         }
+    }
+    
+    func didUpdateSubscription(_ subscription: Subscription) {
+        Logger.debug("\(subscription.categories)")
     }
 }

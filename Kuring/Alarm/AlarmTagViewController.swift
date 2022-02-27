@@ -10,7 +10,10 @@ import SnapKit
 import RxSwift
 import RxCocoa
 import KuringSDK
-import SwiftUI
+
+protocol AlarmTagViewControllerDelegate: AnyObject {
+    func didSelectCategory(_ selectedCategories: [NoticeType])
+}
 
 class AlarmTagViewController : UIViewController {
     
@@ -22,9 +25,7 @@ class AlarmTagViewController : UIViewController {
     /// 구독되지 않은 카테고리 딕셔너리
     var unSelectedCategories: [NoticeType] = []
     
-    var SortedSelectedCategories:[Int: String] = [:]
-    
-    
+    weak var delegate: AlarmTagViewControllerDelegate?
     
     // MARK: Properties
     lazy var saveButton: UIBarButtonItem = {
@@ -52,7 +53,7 @@ class AlarmTagViewController : UIViewController {
     }()
     
     private var bellImageView = UIImageView().then {
-        $0.image = UIImage(named: "Bell_Image")
+        $0.image = UIImage(named: "Bell_Image") // image name convention please~
         $0.tintColor = .white
     }
     
@@ -78,7 +79,6 @@ class AlarmTagViewController : UIViewController {
         return cv
     }()
     
-    
     private var lineView = UIView().then {
         $0.backgroundColor = .white
     }
@@ -95,7 +95,7 @@ class AlarmTagViewController : UIViewController {
         return cv
     }()
     
-    private lazy var onboardingBtn = UIButton().then {
+    private lazy var onboardingButton = UIButton().then {
         $0.setTitle("시작하기", for: .normal)
         $0.backgroundColor = .white
         let color = UIColor.clear
@@ -156,8 +156,8 @@ class AlarmTagViewController : UIViewController {
     func updateBarButtonStatus() {
         let isUpdated = Kuring.subscribedCategories != selectedCategories
         resetButton.isEnabled = isUpdated
-        onboardingBtn.isEnabled = isUpdated
-        onboardingBtn.alpha = isUpdated ? 1.0 : 0.5
+        onboardingButton.isEnabled = isUpdated
+        onboardingButton.alpha = isUpdated ? 1.0 : 0.5
     }
 }
 
@@ -173,17 +173,18 @@ extension AlarmTagViewController {
     }
     
     private func setUpView() {
-        view.backgroundColor = UIColor(named: "ColorSet.green")
-        view.addSubViews([
+        view.backgroundColor = ColorSet.green
+        [
             bellImageView,
             alarmTagLabel,
             selectedCollectionView,
             lineView,
             unSelectedCollectionView,
-            onboardingBtn
-        ])
-        setDelegate()
+            onboardingButton
+        ].forEach { view.addSubview($0) }
         
+
+        setDelegate()
     }
     
     private func setDelegate() {
@@ -196,7 +197,7 @@ extension AlarmTagViewController {
     }
     
     private func setBinding() {
-        onboardingBtn.rx.tap
+        onboardingButton.rx.tap
             .bind { _ in
                 Storage.setFirstTime()
                 
@@ -250,8 +251,8 @@ extension AlarmTagViewController {
         alarmTagLabel.snp.makeConstraints {
             $0.top.equalTo(bellImageView.snp.bottom).offset(23 * DeviceHeightRatio)
             $0.centerX.equalToSuperview()
-            $0.left.equalTo(view.safeArea.left).offset(18 * DeviceWidthRatio)
-            $0.right.equalTo(view.safeArea.right).offset(-18 * DeviceWidthRatio)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(18 * DeviceWidthRatio)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-18 * DeviceWidthRatio)
         }
         
         selectedCollectionView.snp.makeConstraints {
@@ -263,30 +264,27 @@ extension AlarmTagViewController {
         
         lineView.snp.makeConstraints {
             $0.top.equalTo(selectedCollectionView.snp.bottom)
-            $0.left.equalToSuperview().offset(100 * DeviceWidthRatio)
-            $0.right.equalToSuperview().offset(-100 * DeviceWidthRatio)
+            $0.leading.equalToSuperview().offset(100 * DeviceWidthRatio)
+            $0.trailing.equalToSuperview().offset(-100 * DeviceWidthRatio)
             $0.height.equalTo(1)
         }
         
         unSelectedCollectionView.snp.makeConstraints {
             $0.top.equalTo(lineView.snp.bottom).offset(30 * DeviceHeightRatio)
-            $0.bottom.equalTo(view.safeArea.bottom)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.width.equalTo(alarmTagLabel.snp.width).offset(-40 * DeviceWidthRatio)
             $0.centerX.equalToSuperview()
         }
         
-        onboardingBtn.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeArea.bottom).offset(-10)
+        onboardingButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
             $0.width.equalTo(232 * DeviceWidthRatio)
             $0.centerX.equalToSuperview()
         }
-        
     }
-    
 }
 
 extension AlarmTagViewController: UICollectionViewDelegate { }
-
 
 extension AlarmTagViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -306,10 +304,10 @@ extension AlarmTagViewController: UICollectionViewDataSource{
         if collectionView == selectedCollectionView {
             cell.alarmTitleLabel.text = selectedCategories[indexPath.row].koreanValue
             cell.alarmTitleLabel.backgroundColor = .white
-            cell.alarmTitleLabel.textColor = UIColor(named: "ColorSet.green")
+            cell.alarmTitleLabel.textColor = ColorSet.green
         } else {
             cell.alarmTitleLabel.text = unSelectedCategories[indexPath.row].koreanValue
-            cell.alarmTitleLabel.backgroundColor = UIColor(named: "ColorSet.green")
+            cell.alarmTitleLabel.backgroundColor = ColorSet.green
             cell.alarmTitleLabel.textColor = .white
             
         }
@@ -317,11 +315,11 @@ extension AlarmTagViewController: UICollectionViewDataSource{
         let isUpdated = Kuring.subscribedCategories != selectedCategories
         saveButton.isEnabled = isUpdated
         
+        delegate?.didSelectCategory(selectedCategories)
+        
         return cell
     }
 }
-
-
 
 extension AlarmTagViewController: UICollectionViewDelegateFlowLayout {
     
@@ -384,5 +382,3 @@ class AlarmTagCell : UICollectionViewCell {
         }
     }
 }
-
-

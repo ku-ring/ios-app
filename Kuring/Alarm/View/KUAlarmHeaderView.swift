@@ -65,14 +65,13 @@ class KUAlarmHeaderView: UIView {
     }
     
     func setupStyles() {
-        let color = UIColor(named: "ColorSet.gray")
+        let color = ColorSet.gray
         backgroundView.backgroundColor = .secondarySystemGroupedBackground
         backgroundView.layer.cornerRadius = backgroundView.frame.height / 2
         backgroundView.layer.borderWidth = 1
-        backgroundView.layer.borderColor = color?.cgColor
+        backgroundView.layer.borderColor = color.cgColor
         dateLabel.font = .preferredFont(forTextStyle: .subheadline)
         dateLabel.textAlignment = .center
         dateLabel.textColor = color
     }
 }
-

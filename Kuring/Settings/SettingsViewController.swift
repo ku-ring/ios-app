@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import KuringSDK
 
 enum URLLink: String {
     case whatsNew = "https://kuring.notion.site/iOS-eef51c986b7f4320b97424df3f4a5e3c"
     case privacy = "https://kuring.notion.site/65ba27f2367044e0be7061e885e7415c"
     case terms = "https://kuring.notion.site/e88095d4d67d4c4c92983fd85cb693b9"
+    case team = "https://bit.ly/3v2c5eg"
+    case instagram = "https://bit.ly/3I30uiG"
+    case kakaotalk = "https://bit.ly/3p5LZTI"
     
     func openURL() {
         if let url = URL(string: self.rawValue) {
@@ -27,24 +31,46 @@ class SettingsViewController: UITableViewController {
         }
     }
     
+    @IBOutlet weak var customNotificationSwitch: UISwitch! {
+        didSet {
+            customNotificationSwitch.isOn = Kuring.isCustomNotificationEnabled
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath.section {
-            case 0: // 공지구독
-                showSubscription()
-            case 1: // 정보
-                switch indexPath.row {
-                    case 1: URLLink.whatsNew.openURL()
-                    case 2: URLLink.privacy.openURL()
-                    case 3: URLLink.terms.openURL()
-                    case 4: showOpensource()
-                    default: return
-                }
-            case 2: // 피드백
-                showFeedback()
+        case 0: // 공지구독
+            switch indexPath.row {
+            case 0: showSubscription()
             default: return
+            }
+        case 1: // 정보
+            switch indexPath.row {
+            case 1: URLLink.whatsNew.openURL()
+            case 2: URLLink.team.openURL()
+            case 3: URLLink.privacy.openURL()
+            case 4: URLLink.terms.openURL()
+            case 5: showOpensource()
+            default: return
+            }
+        case 2: // 소셜
+            switch indexPath.row {
+            case 0: URLLink.instagram.openURL()
+            case 1: URLLink.kakaotalk.openURL()
+            default: return
+            }
+        case 3: // 피드백
+            showFeedback()
+        default: return
         }
+    }
+    
+    @IBAction func didTapCustomNotficationSwitch(_ uiSwitch: UISwitch) {
+        Kuring.isCustomNotificationEnabled = uiSwitch.isOn
+        
+        Logger.debug("didSwitchCustomNotification: \(Kuring.isCustomNotificationEnabled)")
     }
     
     func showOpensource() {
@@ -66,5 +92,4 @@ extension UIViewController {
         let nav = UINavigationController(rootViewController: subscriptionVC)
         present(nav, animated: true, completion: nil)
     }
-    
 }
