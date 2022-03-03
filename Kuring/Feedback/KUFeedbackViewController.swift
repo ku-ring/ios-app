@@ -16,7 +16,7 @@ class KUFeedbackViewController: UIViewController {
     
     let placeholder = "피드백을 남겨주세요."
     var isTextViewEmpty: Bool { textView.text == placeholder }
-    let textLimit: (min: Int, max: Int) = (min: 4, max: 256)
+    let textLimit: (min: Int, max: Int) = (min: 5, max: 256)
     
     override func viewDidLoad() {
         super.viewDidLoad()
