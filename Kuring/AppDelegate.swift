@@ -45,7 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // MARK: appVersion
         if Kuring.appVersion != Bundle.appVersion {
-            UserDefaultManager.inAppReviewCount = 0 // reset action count
             Kuring.updateAppVersion(to: Bundle.appVersion)
         }
         
