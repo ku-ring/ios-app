@@ -700,7 +700,7 @@
 				CODE_SIGN_ENTITLEMENTS = Kuring/Kuring.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 38PD5AHVVF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kuring/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "쿠링";
@@ -734,7 +734,7 @@
 				CODE_SIGN_ENTITLEMENTS = Kuring/Kuring.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 38PD5AHVVF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kuring/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "쿠링";

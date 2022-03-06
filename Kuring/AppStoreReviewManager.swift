@@ -19,7 +19,7 @@ class AppStoreReviewManager {
         UserDefaultManager.inAppReviewCount += 1
         guard isReviewable else { return }
         
-        let lastVersion =         UserDefaultManager.appVersion
+        let lastVersion = UserDefaultManager.appVersion
         
         if lastVersion != Bundle.appVersion {
             SKStoreReviewController.requestReview()

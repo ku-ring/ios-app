@@ -17,8 +17,8 @@ class UserDefaultManager {
     @UserDefault(key: .inAppReviewCount, defaultValue: 0)
     static var inAppReviewCount: Int
     
-    @UserDefault(key: .appVersion, defaultValue: nil)
-    static var appVersion: String?
+    @UserDefault(key: .appVersion, defaultValue: "")
+    static var appVersion: String
 }
 
 @propertyWrapper
