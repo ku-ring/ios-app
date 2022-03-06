@@ -261,6 +261,7 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
         showNoticeWebViewController(with: urlString)
     }
     
+    
     /// 선택된 `Notice` 값으로 부터 유효한 웹주소 가져오기
     func articleURL(from notice: Notice) -> String {
         if var articleArray = readArticle as? [String] {
@@ -300,7 +301,7 @@ extension KUNoticeListViewController: KuringDelegate {
     func didReceiveNotification(_ notification: KuringSDK.Notification) {
         updateNotifcationButton()
     }
-
+    
     func didReadyToCreateNotificationBanner(title: String, body: String, identifier: String) { }
     
     func didUpdateSubscription(_ subscription: Subscription) { }

@@ -32,7 +32,6 @@ class NoticeWebViewController: UIViewController {
         
         activityVC.popoverPresentationController?.sourceView = self.view
         self.present(activityVC, animated: true, completion: nil)
-        
     }
     
     // MARK: Properties
@@ -47,6 +46,11 @@ class NoticeWebViewController: UIViewController {
         loadWebView()
         webView.uiDelegate = self
         webView.navigationDelegate = self
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        AppStroeReviewManager.requestReviewIfAppropriate()
     }
     
     private func loadWebView() {
