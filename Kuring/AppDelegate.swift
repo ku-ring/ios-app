@@ -35,6 +35,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
         AppsFlyerLib.shared().delegate = self
 
+        // MARK: appVersion
+        if Kuring.appVersion != Bundle.appVersion {
+            UserDefaultManager.inAppReviewCount = 0 // reset action count
+        }
+
+        
         return true
     }
     

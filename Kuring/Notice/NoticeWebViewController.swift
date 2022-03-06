@@ -50,7 +50,7 @@ class NoticeWebViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        AppStroeReviewManager.requestReviewIfAppropriate()
+        AppStoreReviewManager.requestReviewIfAppropriate()
     }
     
     private func loadWebView() {
