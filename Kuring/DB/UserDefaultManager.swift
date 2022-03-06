@@ -11,14 +11,10 @@ class UserDefaultManager {
     enum Key: String {
         /// 인앱 리뷰를 위한 키
         case inAppReviewCount
-        case appVersion
     }
     
     @UserDefault(key: .inAppReviewCount, defaultValue: 0)
     static var inAppReviewCount: Int
-    
-    @UserDefault(key: .appVersion, defaultValue: "")
-    static var appVersion: String
 }
 
 @propertyWrapper

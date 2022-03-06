@@ -35,12 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
         AppsFlyerLib.shared().delegate = self
 
-        // MARK: appVersion
-        if Kuring.appVersion != Bundle.appVersion {
-            UserDefaultManager.inAppReviewCount = 0 // reset action count
-        }
-
-        
         return true
     }
     
@@ -48,6 +42,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // MARK: 온보딩
         self.window?.rootViewController?.showOnboardingViewController()
+        
+        // MARK: appVersion
+        if Kuring.appVersion != Bundle.appVersion {
+            UserDefaultManager.inAppReviewCount = 0 // reset action count
+            Kuring.updateAppVersion(to: Bundle.appVersion)
+        }
         
         // MARK: AppsFlyerLib
         AppsFlyerLib.shared().start()
