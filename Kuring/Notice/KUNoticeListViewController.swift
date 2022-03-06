@@ -300,7 +300,7 @@ extension KUNoticeListViewController: KuringDelegate {
     func didReceiveNotification(_ notification: KuringSDK.Notification) {
         updateNotifcationButton()
     }
-
+    
     func didReadyToCreateNotificationBanner(title: String, body: String, identifier: String) { }
     
     func didUpdateSubscription(_ subscription: Subscription) { }

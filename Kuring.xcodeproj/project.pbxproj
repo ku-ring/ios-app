@@ -56,6 +56,8 @@
 		A9DA6D0927B98FEC00F3B786 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6D0727B98FEC00F3B786 /* LaunchScreen.storyboard */; };
 		B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */; };
 		B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A0382427C3ECD70074EC95 /* Logger.swift */; };
+		B1FBAD1127D213C90044B90A /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */; };
+		B1FBAD1327D21C5D0044B90A /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FBAD1227D21C5D0044B90A /* UserDefaultManager.swift */; };
 		D430312BD0477A68D7728C94 /* Pods_Kuring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */; };
 /* End PBXBuildFile section */
 
@@ -125,6 +127,8 @@
 		A9DA6D0827B98FEC00F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.AppsFlyerLib.swift; sourceTree = "<group>"; };
 		B1A0382427C3ECD70074EC95 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
+		B1FBAD1227D21C5D0044B90A /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kuring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -207,6 +211,7 @@
 				A9DA6CA927B98D2200F3B786 /* Settings */,
 				B1A0382127C3E9F90074EC95 /* Extension */,
 				A9DA6C8E27B98D2200F3B786 /* Utils */,
+				B1FBAD0F27D213B50044B90A /* StoreKit */,
 				A9DA6C6B27B97EE300F3B786 /* Main.storyboard */,
 				A9DA6D0727B98FEC00F3B786 /* LaunchScreen.storyboard */,
 				A9DA6C6E27B97EE500F3B786 /* Assets.xcassets */,
@@ -265,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				A9DA6C9C27B98D2200F3B786 /* Storage.swift */,
+				B1FBAD1227D21C5D0044B90A /* UserDefaultManager.swift */,
 			);
 			path = DB;
 			sourceTree = "<group>";
@@ -367,6 +373,14 @@
 				A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		B1FBAD0F27D213B50044B90A /* StoreKit */ = {
+			isa = PBXGroup;
+			children = (
+				B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */,
+			);
+			name = StoreKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -510,6 +524,7 @@
 				A9C447E327C788A50094D9A9 /* OnboardingRow.swift in Sources */,
 				A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */,
 				A9DA6CCD27B98D2300F3B786 /* Storage.swift in Sources */,
+				B1FBAD1327D21C5D0044B90A /* UserDefaultManager.swift in Sources */,
 				A9DA6CDA27B98D2300F3B786 /* KUNoticeTagView.swift in Sources */,
 				A9C445BC27C552FB0094D9A9 /* OnboardingView.swift in Sources */,
 				A9DA6CD827B98D2300F3B786 /* KUNoticeListViewController.swift in Sources */,
@@ -533,6 +548,7 @@
 				A9C447DF27C7877E0094D9A9 /* CategorySelectView.swift in Sources */,
 				A9DA6CD627B98D2300F3B786 /* KUSearchedStaffCell.swift in Sources */,
 				A9DA6CD427B98D2300F3B786 /* KUSearchTypeCollectionViewCell.swift in Sources */,
+				B1FBAD1127D213C90044B90A /* AppStoreReviewManager.swift in Sources */,
 				A9DA6CD927B98D2300F3B786 /* NoticeWebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -610,7 +626,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -665,7 +681,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

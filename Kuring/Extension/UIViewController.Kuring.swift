@@ -17,8 +17,6 @@ extension UIViewController {
         onboardingVC.modalPresentationStyle = .fullScreen
         onboardingVC.isModalInPresentation = true
         self.present(onboardingVC, animated: true)
-        
-        Kuring.updateAppVersion(to: Bundle.appVersion)
     }
     
     func showNoticeWebViewController(with urlString: String) {

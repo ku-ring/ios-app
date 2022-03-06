@@ -43,6 +43,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // MARK: 온보딩
         self.window?.rootViewController?.showOnboardingViewController()
         
+        // MARK: appVersion
+        if Kuring.appVersion != Bundle.appVersion {
+            Kuring.updateAppVersion(to: Bundle.appVersion)
+        }
+        
         // MARK: AppsFlyerLib
         AppsFlyerLib.shared().start()
         
