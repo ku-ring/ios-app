@@ -12,7 +12,7 @@ import StoreKit
 
 class AppStroeReviewManager {
     
-    static let minimumReviewWorthyActionCount = 36
+    static let minimumReviewWorthyActionCount = 3
     
     static func requestReviewIfAppropriate() {
         
