@@ -58,6 +58,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // MARK: Analytics
         let userInfo = notification.request.content.userInfo
         Messaging.messaging().appDidReceiveMessage(userInfo)
+        Logger.debug("포어그라운드에서 알림을 받았습니다: \(userInfo)")
         
         // MARK: Kuring
         Kuring.userNotificationCenter(
@@ -76,7 +77,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // MARK: Analytics
         let userInfo = response.notification.request.content.userInfo
         Messaging.messaging().appDidReceiveMessage(userInfo)
-        Logger.debug("✅ userInfo \(userInfo)")
+        Logger.debug("푸시 알림을 받았습니다: \(userInfo)")
 
         // TODO: 알림 받으면 웹뷰로 바로 이동
         openBanner(with: userInfo)
@@ -124,6 +125,7 @@ extension AppDelegate {
         
         // MARK: Analytics
         Messaging.messaging().appDidReceiveMessage(userInfo)
+        Logger.debug("대기중인 푸시 알림이 실행되었습니다: \(userInfo)")
         
         // MARK: Kuring
         Kuring.application(
