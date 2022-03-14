@@ -58,7 +58,7 @@ class NoticeWebViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
             return
         }
-        Logger.debug("✅ url \(url)")
+        Logger.debug("✅ 공지화면을 열었습니다: \(url)")
         let request = URLRequest(url: url)
         webView.load(request)
         indicator.startAnimating()

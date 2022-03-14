@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseAnalytics
+import AppsFlyerLib
 
 class Logger {
     static func debug(_ log: Any?) {
@@ -18,6 +19,14 @@ class Logger {
         Analytics.logEvent(
             "com_kuring_service_logger_debug",
             parameters: [
+                "version": Bundle.appVersion,
+                "log": logString,
+                "time": time
+            ]
+        )
+        AppsFlyerLib.shared().logEvent(
+            "com_kuring_service_logger_debug",
+            withValues: [
                 "version": Bundle.appVersion,
                 "log": logString,
                 "time": time
@@ -36,6 +45,14 @@ class Logger {
             parameters: [
                 "version": Bundle.appVersion,
                 "log": log,
+                "time": time
+            ]
+        )
+        AppsFlyerLib.shared().logEvent(
+            "com_kuring_service_logger_debug",
+            withValues: [
+                "version": Bundle.appVersion,
+                "log": logString,
                 "time": time
             ]
         )
