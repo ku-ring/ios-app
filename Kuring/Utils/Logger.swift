@@ -52,7 +52,7 @@ class Logger {
             "com_kuring_service_logger_debug",
             withValues: [
                 "version": Bundle.appVersion,
-                "log": logString,
+                "log": log,
                 "time": time
             ]
         )
