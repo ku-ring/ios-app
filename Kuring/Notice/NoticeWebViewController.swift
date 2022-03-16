@@ -32,7 +32,6 @@ class NoticeWebViewController: UIViewController {
         
         activityVC.popoverPresentationController?.sourceView = self.view
         self.present(activityVC, animated: true, completion: nil)
-        
     }
     
     // MARK: Properties
@@ -49,12 +48,17 @@ class NoticeWebViewController: UIViewController {
         webView.navigationDelegate = self
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        AppStoreReviewManager.requestReviewIfAppropriate()
+    }
+    
     private func loadWebView() {
         guard let url = URL(string: articleURL) else {
             self.navigationController?.popViewController(animated: true)
             return
         }
-        Logger.debug("✅ url \(url)")
+        Logger.debug("✅ 공지화면을 열었습니다: \(url)")
         let request = URLRequest(url: url)
         webView.load(request)
         indicator.startAnimating()

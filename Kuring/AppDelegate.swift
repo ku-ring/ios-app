@@ -43,6 +43,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // MARK: 온보딩
         self.window?.rootViewController?.showOnboardingViewController()
         
+        // MARK: appVersion
+        if Kuring.appVersion != Bundle.appVersion {
+            Kuring.updateAppVersion(to: Bundle.appVersion)
+        }
+        
         // MARK: AppsFlyerLib
         AppsFlyerLib.shared().start()
         
@@ -51,15 +56,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ATTrackingManager.requestTrackingAuthorization { status in
                 switch status {
                 case .denied:
-                    Logger.debug("AuthorizationSatus is denied")
+                    Logger.debug("앱트래킹이 거절되었습니다.")
                 case .notDetermined:
-                    Logger.debug("AuthorizationSatus is notDetermined")
+                    Logger.debug("앱트래킹에 대한 요청이 보류 되었습니다.")
                 case .restricted:
-                    Logger.debug("AuthorizationSatus is restricted")
+                    Logger.debug("앱트래킹에 제약이 걸렸습니다.")
                 case .authorized:
-                    Logger.debug("AuthorizationSatus is authorized")
+                    Logger.debug("앱트래킹이 허용되었습니다.")
                 @unknown default:
-                    Logger.error("Invalid authorization status")
+                    Logger.error("알 수 없는 앱트래킹 상태가 감지되었습니다.")
                     fatalError("Invalid authorization status")
                 }
             }
