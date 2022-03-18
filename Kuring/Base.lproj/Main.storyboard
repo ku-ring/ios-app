@@ -619,7 +619,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" allowsBackForwardNavigationGestures="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32d-ld-B1l">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -629,16 +629,32 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Qjl-as-f6L">
                                 <rect key="frame" x="197" y="465" width="20" height="20"/>
                             </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S9e-qF-Uus">
+                                <rect key="frame" x="32" y="802" width="350" height="52"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="cK1-ou-Nfv"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="26"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Iz-nG-4y8"/>
                         <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Iz-nG-4y8" firstAttribute="trailing" secondItem="S9e-qF-Uus" secondAttribute="trailing" constant="32" id="3UC-P2-RSQ"/>
+                            <constraint firstItem="S9e-qF-Uus" firstAttribute="leading" secondItem="6Iz-nG-4y8" secondAttribute="leading" constant="32" id="48O-Tc-qL6"/>
                             <constraint firstItem="6Iz-nG-4y8" firstAttribute="trailing" secondItem="32d-ld-B1l" secondAttribute="trailing" id="5FF-fa-3e3"/>
                             <constraint firstItem="Qjl-as-f6L" firstAttribute="centerY" secondItem="6Iz-nG-4y8" secondAttribute="centerY" id="6pQ-yy-ri8"/>
-                            <constraint firstItem="6Iz-nG-4y8" firstAttribute="bottom" secondItem="32d-ld-B1l" secondAttribute="bottom" id="G1U-yA-FGr"/>
                             <constraint firstItem="32d-ld-B1l" firstAttribute="top" secondItem="6Iz-nG-4y8" secondAttribute="top" id="JG4-5r-QWU"/>
                             <constraint firstItem="Qjl-as-f6L" firstAttribute="centerX" secondItem="6Iz-nG-4y8" secondAttribute="centerX" id="R2H-ai-VoU"/>
                             <constraint firstItem="32d-ld-B1l" firstAttribute="leading" secondItem="6Iz-nG-4y8" secondAttribute="leading" id="TSC-0i-9Dx"/>
+                            <constraint firstItem="6Iz-nG-4y8" firstAttribute="bottom" secondItem="S9e-qF-Uus" secondAttribute="bottom" constant="8" id="XsF-YW-4pM"/>
+                            <constraint firstAttribute="bottom" secondItem="32d-ld-B1l" secondAttribute="bottom" id="zoh-ag-KVz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="쿠링" largeTitleDisplayMode="never" id="PM5-bf-C5P">
@@ -650,13 +666,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="adsBannerContainerView" destination="S9e-qF-Uus" id="Uqf-eV-vNE"/>
                         <outlet property="indicator" destination="Qjl-as-f6L" id="fQP-pJ-qIc"/>
                         <outlet property="webView" destination="32d-ld-B1l" id="ZjJ-w9-84X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lY9-4J-wYK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1655" y="2922"/>
+            <point key="canvasLocation" x="-1655.072463768116" y="2921.6517857142858"/>
         </scene>
         <!--내 알림-->
         <scene sceneID="xeY-an-EbP">

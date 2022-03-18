@@ -24,14 +24,6 @@ class Logger {
                 "time": time
             ]
         )
-        AppsFlyerLib.shared().logEvent(
-            "com_kuring_service_logger_debug",
-            withValues: [
-                "version": Bundle.appVersion,
-                "log": logString,
-                "time": time
-            ]
-        )
 #endif
     }
     
@@ -43,14 +35,6 @@ class Logger {
         Analytics.logEvent(
             "com_kuring_service_logger_error",
             parameters: [
-                "version": Bundle.appVersion,
-                "log": log,
-                "time": time
-            ]
-        )
-        AppsFlyerLib.shared().logEvent(
-            "com_kuring_service_logger_debug",
-            withValues: [
                 "version": Bundle.appVersion,
                 "log": log,
                 "time": time
