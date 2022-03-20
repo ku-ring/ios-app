@@ -9,12 +9,17 @@ import UIKit
 
 class UserDefaultManager {
     enum Key: String {
-        /// 인앱 리뷰를 위한 키
+        /// 인앱 리뷰 사용을 위한 키
         case inAppReviewCount
+        /// 읽은 공지 아이디를 저장하기 위한 키
+        case notice_list
     }
     
     @UserDefault(key: .inAppReviewCount, defaultValue: 0)
     static var inAppReviewCount: Int
+    
+    @UserDefault(key: .notice_list, defaultValue: [])
+    static var notice_list: [String]
 }
 
 @propertyWrapper

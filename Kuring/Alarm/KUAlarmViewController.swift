@@ -101,7 +101,11 @@ extension KUAlarmViewController {
         guard let notification = notifications[date]?[indexPath.row] else { return }
         notification.isNew = false
         let urlString = articleURL(from: notification)
-        showNoticeWebViewController(with: urlString)
+        print("🍏 notification \(notification)")
+        showNoticeWebViewController(
+            url: urlString,
+            articleID: notification.articleID
+        )
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -119,14 +123,6 @@ extension KUAlarmViewController {
     
     /// 선택된 `Notice` 값으로 부터 유효한 웹주소 가져오기
     func articleURL(from notification: KuringSDK.Notification) -> String {
-        if var articleArray = readArticle as? [String] {
-            let id = notification.articleID
-            if !articleArray.contains(id) {
-                articleArray.append(id)
-                UserDefaults.standard.set(articleArray, forKey: articleKey)
-                readArticle = UserDefaults.standard.array(forKey: articleKey)!
-            }
-        }
         
         // TODO: notification의 category 값 확인 필요
         let articleURL = notification.category == NoticeType.도서관

@@ -38,7 +38,10 @@ extension KUSearchViewController: UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.cellForRow(at: indexPath) as! KUSearchedNoticeCell
                 let notice = cell.notice!
                 let urlString = articleURL(from: notice)
-                showNoticeWebViewController(with: urlString)
+                showNoticeWebViewController(
+                    url: urlString,
+                    articleID: notice.articleID
+                )
                 
                 return
             case .staff:
@@ -66,15 +69,6 @@ extension KUSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     /// 선택된 `Notice` 값으로 부터 유효한 웹주소 가져오기
     func articleURL(from notice: Notice) -> String {
-        if var articleArray = readArticle as? [String] {
-            let id = notice.articleID
-            if !articleArray.contains(id) {
-                articleArray.append(id)
-                UserDefaults.standard.set(articleArray, forKey: articleKey)
-                readArticle = UserDefaults.standard.array(forKey: articleKey)!
-            }
-        }
-        
         let articleURL = notice.category == .도서관
         ? "\(libraryBaseUrl)\(notice.articleID)"
         : "\(originalBaseUrl)?id=\(notice.articleID)"

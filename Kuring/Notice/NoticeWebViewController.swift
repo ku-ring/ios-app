@@ -57,6 +57,7 @@ class NoticeWebViewController: UIViewController {
     
     // MARK: Properties
     var articleURL: String!
+    var articleID: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,6 +126,8 @@ extension NoticeWebViewController: WKUIDelegate, WKNavigationDelegate {
         // 로딩이 완료되었을 때 동작
         indicator.stopAnimating()
         indicator.isHidden = true
+        
+        NoticeManager.update(id: articleID)
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {

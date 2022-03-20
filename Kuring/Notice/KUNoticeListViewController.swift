@@ -83,6 +83,7 @@ class KUNoticeListViewController: UIViewController {
         super.viewWillAppear(animated)
         
         updateNotifcationButton()
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -258,19 +259,14 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
         notice.read()
         tableView.reloadData()
         let urlString = articleURL(from: notice)
-        showNoticeWebViewController(with: urlString)
+        showNoticeWebViewController(
+            url: urlString,
+            articleID: notice.articleID
+        )
     }
     
     /// 선택된 `Notice` 값으로 부터 유효한 웹주소 가져오기
     func articleURL(from notice: Notice) -> String {
-        if var articleArray = readArticle as? [String] {
-            let id = notice.articleID
-            if !articleArray.contains(id) {
-                articleArray.append(id)
-                UserDefaults.standard.set(articleArray, forKey: articleKey)
-                readArticle = articleArray
-            }
-        }
         
         let articleURL = currentType == .도서관
         ? "\(libraryBaseUrl)\(notice.articleID)"

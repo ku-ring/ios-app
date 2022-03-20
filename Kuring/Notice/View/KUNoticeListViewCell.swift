@@ -92,9 +92,11 @@ class KUNoticeListViewCell: UITableViewCell {
     }
     
     private func readNotice() -> Bool {
-        if let articleArray = readArticle as? [String] {
-            let id = notice.articleID
-            return articleArray.contains(id)
+        let notice_list = NoticeManager.read()
+        let id = notice.articleID
+        
+        if notice_list.contains(id) {
+            return true
         } else {
             return false
         }

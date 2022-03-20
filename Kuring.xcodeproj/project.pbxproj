@@ -55,6 +55,7 @@
 		A9DA6CE527B98D2300F3B786 /* OpensourceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CBD27B98D2300F3B786 /* OpensourceListViewController.swift */; };
 		A9DA6D0927B98FEC00F3B786 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6D0727B98FEC00F3B786 /* LaunchScreen.storyboard */; };
 		B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */; };
+		B1648D0F27E766C700BCB423 /* NoticeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1648D0E27E766C700BCB423 /* NoticeManger.swift */; };
 		B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A0382427C3ECD70074EC95 /* Logger.swift */; };
 		B1FBAD1127D213C90044B90A /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */; };
 		B1FBAD1327D21C5D0044B90A /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FBAD1227D21C5D0044B90A /* UserDefaultManager.swift */; };
@@ -126,6 +127,7 @@
 		A9DA6CBD27B98D2300F3B786 /* OpensourceListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpensourceListViewController.swift; sourceTree = "<group>"; };
 		A9DA6D0827B98FEC00F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.AppsFlyerLib.swift; sourceTree = "<group>"; };
+		B1648D0E27E766C700BCB423 /* NoticeManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeManger.swift; sourceTree = "<group>"; };
 		B1A0382427C3ECD70074EC95 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		B1FBAD1227D21C5D0044B90A /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
@@ -202,7 +204,7 @@
 				B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */,
 				A9DA6CB327B98D2200F3B786 /* Alarm */,
 				A9DA6C9927B98D2200F3B786 /* Category */,
-				A9DA6C9B27B98D2200F3B786 /* DB */,
+				A9DA6C9B27B98D2200F3B786 /* Manger */,
 				A9DA6C8827B98D2200F3B786 /* Feedback */,
 				A9DA6CAB27B98D2200F3B786 /* Notice */,
 				A9DA6C8A27B98D2200F3B786 /* Onboarding */,
@@ -266,13 +268,14 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
-		A9DA6C9B27B98D2200F3B786 /* DB */ = {
+		A9DA6C9B27B98D2200F3B786 /* Manger */ = {
 			isa = PBXGroup;
 			children = (
 				A9DA6C9C27B98D2200F3B786 /* Storage.swift */,
 				B1FBAD1227D21C5D0044B90A /* UserDefaultManager.swift */,
+				B1648D0E27E766C700BCB423 /* NoticeManger.swift */,
 			);
-			path = DB;
+			path = Manger;
 			sourceTree = "<group>";
 		};
 		A9DA6C9D27B98D2200F3B786 /* Search */ = {
@@ -538,6 +541,7 @@
 				A9DA6CD027B98D2300F3B786 /* KUSearchViewController.UICollectionView.swift in Sources */,
 				A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */,
 				B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */,
+				B1648D0F27E766C700BCB423 /* NoticeManger.swift in Sources */,
 				A9DA6CDF27B98D2300F3B786 /* KUAlarmViewController.swift in Sources */,
 				B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */,
 				A9DA6C8727B981A100F3B786 /* AppDelegate.RemoteNotification.swift in Sources */,
