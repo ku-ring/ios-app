@@ -10,6 +10,7 @@ import Firebase
 import KuringSDK
 import AppsFlyerLib
 import AppTrackingTransparency
+import GoogleMobileAds
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -34,6 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
         AppsFlyerLib.shared().delegate = self
+        
+        // MARK: 인앱광고
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+
 
         return true
     }
