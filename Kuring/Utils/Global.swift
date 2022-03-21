@@ -16,7 +16,7 @@ var libraryBaseUrl = "https://library.konkuk.ac.kr/#/bbs/notice/"
 //var articleKey = "readArticleId" /// userDefault 키(읽은 아티클 아이디)
 //var readArticle = UserDefaults.standard.array(forKey: articleKey) ?? [String]() /// userDefault 읽은 아티클 id저장
 
-var timeKey = "EntryTime" /// userDefault 키(마지막으로 접속한 시간) 
-var userConnectedTime = UserDefaults.standard.string(forKey: timeKey) ?? "20211201" /// userDefault 읽은 시간 값 - default값 00000000
+//var timeKey = "EntryTime" /// userDefault 키(마지막으로 접속한 시간)
+//var userConnectedTime = UserDefaults.standard.string(forKey: timeKey) ?? "20211201" /// userDefault 읽은 시간 값 - default값 00000000
 
 
