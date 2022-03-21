@@ -25,7 +25,7 @@ struct CategorySelectView: UIViewControllerRepresentable {
         Coordinator(self)
     }
     
-    class Coordinator: NSObject, AlarmTagViewControllerDelegate {
+    class Coordinator: NSObject, CategorySelectViewControllerDelegate {
         var parent: CategorySelectView
         
         init(_ categorySelctor: CategorySelectView) {

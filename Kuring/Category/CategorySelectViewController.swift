@@ -12,7 +12,7 @@ import SnapKit
 import Then
 import KuringSDK
 
-protocol AlarmTagViewControllerDelegate: AnyObject {
+protocol CategorySelectViewControllerDelegate: AnyObject {
     func didSelectCategory(_ selectedCategories: [NoticeType])
 }
 
@@ -25,39 +25,34 @@ class CategorySelectViewController : UIViewController {
     /// 구독되지 않은 카테고리 딕셔너리
     var unSelectedCategories: [NoticeType] = []
     
-    weak var delegate: AlarmTagViewControllerDelegate?
+    weak var delegate: CategorySelectViewControllerDelegate?
     
     // MARK: Properties
-    lazy var saveButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(
-            image: UIImage(systemName: "checkmark"),
-            style: .plain,
-            target: self,
-            action: #selector(didTapSave)
-        )
-        button.tintColor = .white
-        button.isEnabled = false
-        return button
-    }()
+    private lazy var saveButton = UIBarButtonItem().then {
+        $0.image = UIImage(systemName: "checkmark")
+        $0.style = .plain
+        $0.target = self
+        $0.action = #selector(didTapSave)
+        $0.tintColor = .white
+        $0.isEnabled = false
+    }
     
-    lazy var resetButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(
-            image: UIImage(systemName: "arrowshape.turn.up.left"),
-            style: .plain,
-            target: self,
-            action: #selector(didTapReset)
-        )
-        button.tintColor = .white
-        button.isEnabled = false
-        return button
-    }()
+    private lazy var resetButton = UIBarButtonItem().then {
+        $0.image = UIImage(systemName: "arrowshape.turn.up.left")
+        $0.style = .plain
+        $0.target = self
+        $0.action = #selector(didTapReset)
+        $0.tintColor = .white
+        $0.isEnabled = false
+    }
+    
     
     private var bellImageView = UIImageView().then {
-        $0.image = UIImage(named: "Bell_Image") // image name convention please~
+        $0.image = UIImage(named: "ic_bell")
         $0.tintColor = .white
     }
     
-    private var alarmTagLabel = UILabel().then {
+    private var descriptionLabel = UILabel().then {
         $0.text = "알림 받고 싶은 카테고리를 선택해 주세요."
         $0.font = .preferredFont(forTextStyle: .body)
         $0.adjustsFontSizeToFitWidth = true
@@ -67,7 +62,6 @@ class CategorySelectViewController : UIViewController {
     }
     
     private var selectedCollectionView : UICollectionView = {
-        // 선택된 카테고리
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         layout.sectionInset = .zero
@@ -84,7 +78,6 @@ class CategorySelectViewController : UIViewController {
     }
     
     private var unSelectedCollectionView : UICollectionView = {
-        // 선택되지 않은 카테고리
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         layout.sectionInset = .zero
@@ -98,16 +91,8 @@ class CategorySelectViewController : UIViewController {
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("🟠 alarm tag button")
-        self.navigationItem.title = "푸쉬 알림 설정"
-        let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.titleTextAttributes = textAttributes
-        
-        self.navigationItem.rightBarButtonItems = [
-            saveButton,
-            resetButton,
-        ]
-        
+
+        setupNavigationBar()
         setUpProperties()
         setUpView()
         setConstraints()
@@ -160,17 +145,28 @@ extension CategorySelectViewController {
         }
     }
     
+    
+    private func setupNavigationBar() {
+        self.navigationItem.title = "푸쉬 알림 설정"
+        let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
+        self.navigationItem.rightBarButtonItems = [
+            saveButton,
+            resetButton,
+        ]
+    }
+    
     private func setUpView() {
         view.backgroundColor = ColorSet.green
         [
             bellImageView,
-            alarmTagLabel,
+            descriptionLabel,
             selectedCollectionView,
             lineView,
             unSelectedCollectionView,
         ].forEach { view.addSubview($0) }
         
-
         setDelegate()
     }
     
@@ -226,7 +222,7 @@ extension CategorySelectViewController {
             $0.height.width.equalTo(41.4 * DeviceHeightRatio)
         }
         
-        alarmTagLabel.snp.makeConstraints {
+        descriptionLabel.snp.makeConstraints {
             $0.top.equalTo(bellImageView.snp.bottom).offset(23 * DeviceHeightRatio)
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(18 * DeviceWidthRatio)
@@ -234,9 +230,9 @@ extension CategorySelectViewController {
         }
         
         selectedCollectionView.snp.makeConstraints {
-            $0.top.equalTo(alarmTagLabel.snp.bottom).offset(22 * DeviceHeightRatio)
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(22 * DeviceHeightRatio)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(alarmTagLabel.snp.width).offset(-40 * DeviceWidthRatio)
+            $0.width.equalTo(descriptionLabel.snp.width).offset(-40 * DeviceWidthRatio)
             $0.height.lessThanOrEqualTo(165)
         }
         
@@ -250,7 +246,7 @@ extension CategorySelectViewController {
         unSelectedCollectionView.snp.makeConstraints {
             $0.top.equalTo(lineView.snp.bottom).offset(30 * DeviceHeightRatio)
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.width.equalTo(alarmTagLabel.snp.width).offset(-40 * DeviceWidthRatio)
+            $0.width.equalTo(descriptionLabel.snp.width).offset(-40 * DeviceWidthRatio)
             $0.centerX.equalToSuperview()
         }
     }
