@@ -269,13 +269,13 @@ extension CategorySelectViewController: UICollectionViewDataSource{
         }
         
         if collectionView == selectedCollectionView {
-            cell.alarmTitleLabel.text = selectedCategories[indexPath.row].koreanValue
-            cell.alarmTitleLabel.backgroundColor = .white
-            cell.alarmTitleLabel.textColor = ColorSet.green
+            cell.categoryTitleLabel.text = selectedCategories[indexPath.row].koreanValue
+            cell.categoryTitleLabel.backgroundColor = .white
+            cell.categoryTitleLabel.textColor = ColorSet.green
         } else {
-            cell.alarmTitleLabel.text = unSelectedCategories[indexPath.row].koreanValue
-            cell.alarmTitleLabel.backgroundColor = ColorSet.green
-            cell.alarmTitleLabel.textColor = .white
+            cell.categoryTitleLabel.text = unSelectedCategories[indexPath.row].koreanValue
+            cell.categoryTitleLabel.backgroundColor = ColorSet.green
+            cell.categoryTitleLabel.textColor = .white
             
         }
         

@@ -13,10 +13,10 @@ import Then
 
 class CategorySelectCell : UICollectionViewCell {
     
-    static let identifier = "alarmTagCell"
+    static let identifier = "CategorySelectCell"
     
     //MARK: Properties
-    var alarmTitleLabel = UILabel().then {
+    var categoryTitleLabel = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 6
@@ -29,9 +29,9 @@ class CategorySelectCell : UICollectionViewCell {
     //MARK: Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.addSubview(alarmTitleLabel)
+        [categoryTitleLabel].forEach { addSubview($0) }
         
-        self.categorySetConstraints()
+        self.setLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -39,13 +39,11 @@ class CategorySelectCell : UICollectionViewCell {
     }
     
     //MARK: Function
-    private func categorySetConstraints() {
+    private func setLayout() {
         self.layer.cornerRadius = 6
         
-        alarmTitleLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.equalToSuperview()
-            $0.height.equalToSuperview()
+        categoryTitleLabel.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
 }
