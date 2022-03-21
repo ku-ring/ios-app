@@ -7,5 +7,5 @@
 
 import UIKit
 
-var originalBaseUrl = "https://www.konkuk.ac.kr/do/MessageBoard/ArticleRead.do" /// 베이스 URL (재성님 sdk에서 url을 받아올 방법을 모르겠어요
+var originalBaseUrl = "https://www.konkuk.ac.kr/do/MessageBoard/ArticleRead.do"
 var libraryBaseUrl = "https://library.konkuk.ac.kr/#/bbs/notice/"
