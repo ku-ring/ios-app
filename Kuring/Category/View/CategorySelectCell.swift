@@ -11,7 +11,7 @@ import RxSwift
 import SnapKit
 import Then
 
-class AlarmTagCell : UICollectionViewCell {
+class CategorySelectCell : UICollectionViewCell {
     
     static let identifier = "alarmTagCell"
     

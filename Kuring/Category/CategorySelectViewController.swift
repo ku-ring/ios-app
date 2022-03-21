@@ -170,8 +170,8 @@ extension CategorySelectViewController {
     }
     
     private func setDelegate() {
-        selectedCollectionView.register(AlarmTagCell.self, forCellWithReuseIdentifier: AlarmTagCell.identifier)
-        unSelectedCollectionView.register(AlarmTagCell.self, forCellWithReuseIdentifier: AlarmTagCell.identifier)
+        selectedCollectionView.register(CategorySelectCell.self, forCellWithReuseIdentifier: CategorySelectCell.identifier)
+        unSelectedCollectionView.register(CategorySelectCell.self, forCellWithReuseIdentifier: CategorySelectCell.identifier)
         selectedCollectionView.delegate = self
         selectedCollectionView.dataSource = self
         unSelectedCollectionView.delegate = self
@@ -264,7 +264,7 @@ extension CategorySelectViewController: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmTagCell.identifier, for: indexPath) as? AlarmTagCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategorySelectCell.identifier, for: indexPath) as? CategorySelectCell else {
             return UICollectionViewCell()
         }
         
