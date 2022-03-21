@@ -4,6 +4,9 @@
 
 
 # kuring-ios-app
+
+<img src="https://user-images.githubusercontent.com/53814741/159313205-e764d8e6-03b1-4c4c-8202-5992422a8f3b.gif" align="right" width="30%"/>
+
 This is a private repository for 쿠링 application service
 
 ## 요구사항
