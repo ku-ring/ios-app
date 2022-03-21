@@ -28,7 +28,6 @@
 		A9DA6CC327B98D2300F3B786 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9027B98D2200F3B786 /* Global.swift */; };
 		A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9627B98D2200F3B786 /* ColorSet.swift */; };
 		A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */; };
-		A9DA6CCC27B98D2300F3B786 /* CategoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9A27B98D2200F3B786 /* CategoryCollectionViewController.swift */; };
 		A9DA6CCD27B98D2300F3B786 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9C27B98D2200F3B786 /* Storage.swift */; };
 		A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9E27B98D2200F3B786 /* KUStaffViewController.swift */; };
 		A9DA6CCF27B98D2300F3B786 /* KUSearchViewController.Searcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CA027B98D2200F3B786 /* KUSearchViewController.Searcher.swift */; };
@@ -46,7 +45,7 @@
 		A9DA6CDB27B98D2300F3B786 /* KUNoticeListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB027B98D2200F3B786 /* KUNoticeListViewCell.swift */; };
 		A9DA6CDC27B98D2300F3B786 /* KUNoticeListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB127B98D2200F3B786 /* KUNoticeListCollectionViewCell.swift */; };
 		A9DA6CDD27B98D2300F3B786 /* KUNoticeListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6CB227B98D2200F3B786 /* KUNoticeListViewCell.xib */; };
-		A9DA6CDE27B98D2300F3B786 /* AlarmTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB427B98D2200F3B786 /* AlarmTagViewController.swift */; };
+		A9DA6CDE27B98D2300F3B786 /* CategorySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB427B98D2200F3B786 /* CategorySelectViewController.swift */; };
 		A9DA6CDF27B98D2300F3B786 /* KUAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB527B98D2200F3B786 /* KUAlarmViewController.swift */; };
 		A9DA6CE027B98D2300F3B786 /* KUAlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB727B98D2200F3B786 /* KUAlarmTableViewCell.swift */; };
 		A9DA6CE127B98D2300F3B786 /* KUAlarmTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6CB827B98D2200F3B786 /* KUAlarmTableViewCell.xib */; };
@@ -100,7 +99,6 @@
 		A9DA6C9027B98D2200F3B786 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		A9DA6C9627B98D2200F3B786 /* ColorSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
 		A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.Kuring.swift; sourceTree = "<group>"; };
-		A9DA6C9A27B98D2200F3B786 /* CategoryCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewController.swift; sourceTree = "<group>"; };
 		A9DA6C9C27B98D2200F3B786 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		A9DA6C9E27B98D2200F3B786 /* KUStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUStaffViewController.swift; sourceTree = "<group>"; };
 		A9DA6CA027B98D2200F3B786 /* KUSearchViewController.Searcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUSearchViewController.Searcher.swift; sourceTree = "<group>"; };
@@ -118,7 +116,7 @@
 		A9DA6CB027B98D2200F3B786 /* KUNoticeListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUNoticeListViewCell.swift; sourceTree = "<group>"; };
 		A9DA6CB127B98D2200F3B786 /* KUNoticeListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUNoticeListCollectionViewCell.swift; sourceTree = "<group>"; };
 		A9DA6CB227B98D2200F3B786 /* KUNoticeListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KUNoticeListViewCell.xib; sourceTree = "<group>"; };
-		A9DA6CB427B98D2200F3B786 /* AlarmTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmTagViewController.swift; sourceTree = "<group>"; };
+		A9DA6CB427B98D2200F3B786 /* CategorySelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.swift; sourceTree = "<group>"; };
 		A9DA6CB527B98D2200F3B786 /* KUAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUAlarmViewController.swift; sourceTree = "<group>"; };
 		A9DA6CB727B98D2200F3B786 /* KUAlarmTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUAlarmTableViewCell.swift; sourceTree = "<group>"; };
 		A9DA6CB827B98D2200F3B786 /* KUAlarmTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KUAlarmTableViewCell.xib; sourceTree = "<group>"; };
@@ -263,7 +261,7 @@
 		A9DA6C9927B98D2200F3B786 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				A9DA6C9A27B98D2200F3B786 /* CategoryCollectionViewController.swift */,
+				A9DA6CB427B98D2200F3B786 /* CategorySelectViewController.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -342,7 +340,6 @@
 		A9DA6CB327B98D2200F3B786 /* Alarm */ = {
 			isa = PBXGroup;
 			children = (
-				A9DA6CB427B98D2200F3B786 /* AlarmTagViewController.swift */,
 				A9DA6CB527B98D2200F3B786 /* KUAlarmViewController.swift */,
 				A9DA6CB627B98D2200F3B786 /* View */,
 			);
@@ -531,8 +528,7 @@
 				A9DA6CDA27B98D2300F3B786 /* KUNoticeTagView.swift in Sources */,
 				A9C445BC27C552FB0094D9A9 /* OnboardingView.swift in Sources */,
 				A9DA6CD827B98D2300F3B786 /* KUNoticeListViewController.swift in Sources */,
-				A9DA6CCC27B98D2300F3B786 /* CategoryCollectionViewController.swift in Sources */,
-				A9DA6CDE27B98D2300F3B786 /* AlarmTagViewController.swift in Sources */,
+				A9DA6CDE27B98D2300F3B786 /* CategorySelectViewController.swift in Sources */,
 				A9DA6CDB27B98D2300F3B786 /* KUNoticeListViewCell.swift in Sources */,
 				A9DA6CBE27B98D2300F3B786 /* KUFeedbackViewController.swift in Sources */,
 				A9DA6CE227B98D2300F3B786 /* KUAlarmHeaderView.swift in Sources */,

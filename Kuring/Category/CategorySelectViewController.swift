@@ -6,16 +6,17 @@
 //
 
 import UIKit
-import SnapKit
-import RxSwift
 import RxCocoa
+import RxSwift
+import SnapKit
+import Then
 import KuringSDK
 
 protocol AlarmTagViewControllerDelegate: AnyObject {
     func didSelectCategory(_ selectedCategories: [NoticeType])
 }
 
-class AlarmTagViewController : UIViewController {
+class CategorySelectViewController : UIViewController {
     
     var bag = DisposeBag()
     /// 온보딩에서 왔을 시 사용되는 값!
@@ -150,7 +151,7 @@ class AlarmTagViewController : UIViewController {
     }
 }
 
-extension AlarmTagViewController {
+extension CategorySelectViewController {
     private func setUpProperties() {
         NoticeType.allCases.forEach { noticeType in
             if Kuring.subscribedCategories.contains(noticeType) {
@@ -257,9 +258,9 @@ extension AlarmTagViewController {
     }
 }
 
-extension AlarmTagViewController: UICollectionViewDelegate { }
+extension CategorySelectViewController: UICollectionViewDelegate { }
 
-extension AlarmTagViewController: UICollectionViewDataSource{
+extension CategorySelectViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == selectedCollectionView {
@@ -294,7 +295,7 @@ extension AlarmTagViewController: UICollectionViewDataSource{
     }
 }
 
-extension AlarmTagViewController: UICollectionViewDelegateFlowLayout {
+extension CategorySelectViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemSpacing : CGFloat = 10
