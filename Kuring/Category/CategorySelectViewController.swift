@@ -18,9 +18,7 @@ protocol AlarmTagViewControllerDelegate: AnyObject {
 
 class CategorySelectViewController : UIViewController {
     
-    var bag = DisposeBag()
-    /// 온보딩에서 왔을 시 사용되는 값!
-    var onboardflag = true
+    var disposeBag = DisposeBag()
     
     /// 구독된 카테고리 배열
     var selectedCategories: [NoticeType] = []
@@ -201,7 +199,7 @@ extension CategorySelectViewController {
                 
                 updateBarButtonStatus()
             }
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
         
         unSelectedCollectionView.rx.itemSelected
             .bind{ [self] indexPath in
@@ -218,7 +216,7 @@ extension CategorySelectViewController {
                 
                 updateBarButtonStatus()
             }
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
     }
     
     private func setConstraints() {
