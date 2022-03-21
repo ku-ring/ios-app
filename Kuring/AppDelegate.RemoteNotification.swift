@@ -79,7 +79,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         Messaging.messaging().appDidReceiveMessage(userInfo)
         Logger.debug("푸시 알림을 받았습니다: \(userInfo)")
 
-        // TODO: 알림 받으면 웹뷰로 바로 이동
         openBanner(with: userInfo)
         
         completionHandler()
@@ -91,8 +90,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         guard let categoryString = userInfo["category"] as? String else { return }
         guard let navigationController = self.window?.rootViewController as? UINavigationController else { return }
         let articleURL = NoticeType.from(categoryString) == .도서관
-        ? "\(libraryBaseUrl)\(articleID)"
-        : "\(originalBaseUrl)?id=\(articleID)"
+        ? "\(BaseURL.library.rawValue)\(articleID)"
+        : "\(BaseURL.original.rawValue)?id=\(articleID)"
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let noticeWebVC = storyboard.instantiateViewController(

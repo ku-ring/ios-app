@@ -25,7 +25,7 @@
 		A9DA6C8727B981A100F3B786 /* AppDelegate.RemoteNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */; };
 		A9DA6CBE27B98D2300F3B786 /* KUFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8927B98D2200F3B786 /* KUFeedbackViewController.swift */; };
 		A9DA6CC227B98D2300F3B786 /* Date.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */; };
-		A9DA6CC327B98D2300F3B786 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9027B98D2200F3B786 /* Global.swift */; };
+		A9DA6CC327B98D2300F3B786 /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9027B98D2200F3B786 /* BaseURL.swift */; };
 		A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9627B98D2200F3B786 /* ColorSet.swift */; };
 		A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */; };
 		A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9E27B98D2200F3B786 /* KUStaffViewController.swift */; };
@@ -96,7 +96,7 @@
 		A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.RemoteNotification.swift; sourceTree = "<group>"; };
 		A9DA6C8927B98D2200F3B786 /* KUFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUFeedbackViewController.swift; sourceTree = "<group>"; };
 		A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.Kuring.swift; sourceTree = "<group>"; };
-		A9DA6C9027B98D2200F3B786 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		A9DA6C9027B98D2200F3B786 /* BaseURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
 		A9DA6C9627B98D2200F3B786 /* ColorSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
 		A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.Kuring.swift; sourceTree = "<group>"; };
 		A9DA6C9E27B98D2200F3B786 /* KUStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUStaffViewController.swift; sourceTree = "<group>"; };
@@ -251,7 +251,7 @@
 		A9DA6C8E27B98D2200F3B786 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A9DA6C9027B98D2200F3B786 /* Global.swift */,
+				A9DA6C9027B98D2200F3B786 /* BaseURL.swift */,
 				A9DA6C9627B98D2200F3B786 /* ColorSet.swift */,
 				B1A0382427C3ECD70074EC95 /* Logger.swift */,
 			);
@@ -522,7 +522,7 @@
 				A9DA6CD127B98D2300F3B786 /* KUSearchViewController.UITextField.swift in Sources */,
 				A9DA6CE327B98D2300F3B786 /* Opensource.swift in Sources */,
 				A9C447E727C7A2560094D9A9 /* OnboardingIntroView.swift in Sources */,
-				A9DA6CC327B98D2300F3B786 /* Global.swift in Sources */,
+				A9DA6CC327B98D2300F3B786 /* BaseURL.swift in Sources */,
 				A9DA6CDC27B98D2300F3B786 /* KUNoticeListCollectionViewCell.swift in Sources */,
 				A9C447E927C7A61B0094D9A9 /* OnboardingViewController.swift in Sources */,
 				A9DA6CE527B98D2300F3B786 /* OpensourceListViewController.swift in Sources */,

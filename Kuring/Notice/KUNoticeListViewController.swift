@@ -269,9 +269,10 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
     func articleURL(from notice: Notice) -> String {
         
         let articleURL = currentType == .도서관
-        ? "\(libraryBaseUrl)\(notice.articleID)"
-        : "\(originalBaseUrl)?id=\(notice.articleID)"
+        ? "\(BaseURL.library.rawValue)\(notice.articleID)"
+        : "\(BaseURL.original.rawValue)?id=\(notice.articleID)"
         
+        print("🤖 \(BaseURL.original.rawValue)")
         return articleURL.isEmpty
         ? "https://konkuk.ac.kr"
         : articleURL

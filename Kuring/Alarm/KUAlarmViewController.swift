@@ -126,8 +126,8 @@ extension KUAlarmViewController {
         
         // TODO: notification의 category 값 확인 필요
         let articleURL = notification.category == NoticeType.도서관
-        ? "\(libraryBaseUrl)\(notification.articleID)"
-        : "\(originalBaseUrl)?id=\(notification.articleID)"
+        ? "\(BaseURL.library.rawValue)\(notification.articleID)"
+        : "\(BaseURL.original.rawValue)?id=\(notification.articleID)"
         
         return articleURL.isEmpty
         ? "https://konkuk.ac.kr"
