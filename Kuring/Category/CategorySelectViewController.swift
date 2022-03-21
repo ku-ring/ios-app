@@ -215,6 +215,9 @@ extension CategorySelectViewController {
     }
     
     private func setLayout() {
+        let DeviceWidthRatio = UIScreen.main.bounds.size.width / 360
+        let DeviceHeightRatio = UIScreen.main.bounds.size.height / 608
+
         bellImageView.snp.makeConstraints {
             $0.top.equalTo(view.snp.top).offset(30 * DeviceHeightRatio)
             $0.centerX.equalToSuperview()
