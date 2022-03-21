@@ -93,22 +93,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let articleURL = NoticeType.from(categoryString) == .도서관
         ? "\(libraryBaseUrl)\(articleID)"
         : "\(originalBaseUrl)?id=\(articleID)"
-        
-        // TODO: UserDefault로 저장 + 프로퍼티래퍼 공부중
-        if var articleArray = readArticle as? [String] {
-            let id = articleURL
-            if !articleArray.contains(id) {
-                articleArray.append(id)
-                UserDefaults.standard.set(articleArray, forKey: articleKey)
-                readArticle = articleArray
-            }
-        }
-        
+
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let noticeWebVC = storyboard.instantiateViewController(
             withIdentifier: "NoticeWebViewController"
         ) as? NoticeWebViewController else { return }
         noticeWebVC.articleURL = articleURL
+        noticeWebVC.articleID = "\(articleID)"
         navigationController.pushViewController(noticeWebVC, animated: true)
     }
 }
