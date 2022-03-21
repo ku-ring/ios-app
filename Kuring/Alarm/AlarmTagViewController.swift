@@ -18,7 +18,8 @@ protocol AlarmTagViewControllerDelegate: AnyObject {
 class AlarmTagViewController : UIViewController {
     
     var bag = DisposeBag()
-    var onboardflag = true /// 온보딩에서 왔을 시 사용되는 값!
+    /// 온보딩에서 왔을 시 사용되는 값!
+    var onboardflag = true
     
     /// 구독된 카테고리 배열
     var selectedCategories: [NoticeType] = []
@@ -95,20 +96,10 @@ class AlarmTagViewController : UIViewController {
         return cv
     }()
     
-    private lazy var onboardingButton = UIButton().then {
-        $0.setTitle("시작하기", for: .normal)
-        $0.backgroundColor = .white
-        let color = UIColor.clear
-        $0.setTitleColor(color, for: .normal)
-        $0.layer.cornerRadius = 18
-        $0.isHidden = onboardflag
-        $0.alpha = 0.5
-    }
-    
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("🟠 alarm tag button")
         self.navigationItem.title = "푸쉬 알림 설정"
         let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
@@ -156,8 +147,6 @@ class AlarmTagViewController : UIViewController {
     func updateBarButtonStatus() {
         let isUpdated = Kuring.subscribedCategories != selectedCategories
         resetButton.isEnabled = isUpdated
-        onboardingButton.isEnabled = isUpdated
-        onboardingButton.alpha = isUpdated ? 1.0 : 0.5
     }
 }
 
@@ -180,7 +169,6 @@ extension AlarmTagViewController {
             selectedCollectionView,
             lineView,
             unSelectedCollectionView,
-            onboardingButton
         ].forEach { view.addSubview($0) }
         
 
@@ -197,18 +185,7 @@ extension AlarmTagViewController {
     }
     
     private func setBinding() {
-        onboardingButton.rx.tap
-            .bind { _ in
-                Storage.setFirstTime()
-                
-//                let vc = UINavigationController(rootViewController: KuringViewController())
-//                vc.modalPresentationStyle = .fullScreen
-//
-//                self?.present(vc, animated: false)
-            }
-            .disposed(by: bag)
-        
-        _ = selectedCollectionView.rx.itemSelected
+        selectedCollectionView.rx.itemSelected
             .bind { [self] indexPath in
                 let selectItem = self.selectedCategories[indexPath.row]
                 
@@ -223,8 +200,9 @@ extension AlarmTagViewController {
                 
                 updateBarButtonStatus()
             }
+            .disposed(by: bag)
         
-        _ = unSelectedCollectionView.rx.itemSelected
+        unSelectedCollectionView.rx.itemSelected
             .bind{ [self] indexPath in
                 let selectItem = unSelectedCategories[indexPath.row]
                 
@@ -239,6 +217,7 @@ extension AlarmTagViewController {
                 
                 updateBarButtonStatus()
             }
+            .disposed(by: bag)
     }
     
     private func setConstraints() {
@@ -273,12 +252,6 @@ extension AlarmTagViewController {
             $0.top.equalTo(lineView.snp.bottom).offset(30 * DeviceHeightRatio)
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.width.equalTo(alarmTagLabel.snp.width).offset(-40 * DeviceWidthRatio)
-            $0.centerX.equalToSuperview()
-        }
-        
-        onboardingButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
-            $0.width.equalTo(232 * DeviceWidthRatio)
             $0.centerX.equalToSuperview()
         }
     }

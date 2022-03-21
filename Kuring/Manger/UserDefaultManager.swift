@@ -13,6 +13,7 @@ class UserDefaultManager {
         case inAppReviewCount
         /// 읽은 공지 아이디를 저장하기 위한 키
         case notice_list
+        
     }
     
     @UserDefault(key: .inAppReviewCount, defaultValue: 0)
