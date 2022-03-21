@@ -93,9 +93,9 @@ class CategorySelectViewController : UIViewController {
         super.viewDidLoad()
 
         setupNavigationBar()
-        setUpProperties()
-        setUpView()
-        setConstraints()
+        setupProperties()
+        setupViews()
+        setLayout()
         setBinding()
     }
     
@@ -135,7 +135,7 @@ class CategorySelectViewController : UIViewController {
 }
 
 extension CategorySelectViewController {
-    private func setUpProperties() {
+    private func setupProperties() {
         NoticeType.allCases.forEach { noticeType in
             if Kuring.subscribedCategories.contains(noticeType) {
                 self.selectedCategories.append(noticeType)
@@ -144,7 +144,6 @@ extension CategorySelectViewController {
             }
         }
     }
-    
     
     private func setupNavigationBar() {
         self.navigationItem.title = "푸쉬 알림 설정"
@@ -157,7 +156,7 @@ extension CategorySelectViewController {
         ]
     }
     
-    private func setUpView() {
+    private func setupViews() {
         view.backgroundColor = ColorSet.green
         [
             bellImageView,
@@ -215,7 +214,7 @@ extension CategorySelectViewController {
             .disposed(by: disposeBag)
     }
     
-    private func setConstraints() {
+    private func setLayout() {
         bellImageView.snp.makeConstraints {
             $0.top.equalTo(view.snp.top).offset(30 * DeviceHeightRatio)
             $0.centerX.equalToSuperview()
@@ -309,44 +308,5 @@ extension CategorySelectViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         return sectionInsets.left
-    }
-}
-
-class AlarmTagCell : UICollectionViewCell {
-    
-    static let identifier = "alarmTagCell"
-    
-    //MARK: Properties
-    var alarmTitleLabel = UILabel().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 6
-        $0.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
-        $0.layer.borderWidth = 1
-        $0.textAlignment = .center
-        $0.font = .boldSystemFont(ofSize: 16)
-    }
-    
-    //MARK: Life Cycle
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        contentView.addSubview(alarmTitleLabel)
-        
-        self.categorySetConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    //MARK: Function
-    private func categorySetConstraints() {
-        self.layer.cornerRadius = 6
-        
-        alarmTitleLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.equalToSuperview()
-            $0.height.equalToSuperview()
-        }
     }
 }
