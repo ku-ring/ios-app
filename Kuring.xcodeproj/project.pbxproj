@@ -28,7 +28,6 @@
 		A9DA6CC327B98D2300F3B786 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9027B98D2200F3B786 /* Global.swift */; };
 		A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9627B98D2200F3B786 /* ColorSet.swift */; };
 		A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */; };
-		A9DA6CCD27B98D2300F3B786 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9C27B98D2200F3B786 /* Storage.swift */; };
 		A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9E27B98D2200F3B786 /* KUStaffViewController.swift */; };
 		A9DA6CCF27B98D2300F3B786 /* KUSearchViewController.Searcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CA027B98D2200F3B786 /* KUSearchViewController.Searcher.swift */; };
 		A9DA6CD027B98D2300F3B786 /* KUSearchViewController.UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CA127B98D2200F3B786 /* KUSearchViewController.UICollectionView.swift */; };
@@ -100,7 +99,6 @@
 		A9DA6C9027B98D2200F3B786 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		A9DA6C9627B98D2200F3B786 /* ColorSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
 		A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.Kuring.swift; sourceTree = "<group>"; };
-		A9DA6C9C27B98D2200F3B786 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		A9DA6C9E27B98D2200F3B786 /* KUStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUStaffViewController.swift; sourceTree = "<group>"; };
 		A9DA6CA027B98D2200F3B786 /* KUSearchViewController.Searcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUSearchViewController.Searcher.swift; sourceTree = "<group>"; };
 		A9DA6CA127B98D2200F3B786 /* KUSearchViewController.UICollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUSearchViewController.UICollectionView.swift; sourceTree = "<group>"; };
@@ -272,7 +270,6 @@
 		A9DA6C9B27B98D2200F3B786 /* Manger */ = {
 			isa = PBXGroup;
 			children = (
-				A9DA6C9C27B98D2200F3B786 /* Storage.swift */,
 				B1FBAD1227D21C5D0044B90A /* UserDefaultManager.swift */,
 				B1648D0E27E766C700BCB423 /* NoticeManger.swift */,
 			);
@@ -534,7 +531,6 @@
 				A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */,
 				A9C447E327C788A50094D9A9 /* OnboardingRow.swift in Sources */,
 				A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */,
-				A9DA6CCD27B98D2300F3B786 /* Storage.swift in Sources */,
 				B1FBAD1327D21C5D0044B90A /* UserDefaultManager.swift in Sources */,
 				A9DA6CDA27B98D2300F3B786 /* KUNoticeTagView.swift in Sources */,
 				A9C445BC27C552FB0094D9A9 /* OnboardingView.swift in Sources */,
