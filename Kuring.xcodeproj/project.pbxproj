@@ -26,7 +26,6 @@
 		A9DA6C8327B9813D00F3B786 /* KuringSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9DA6C8227B9813D00F3B786 /* KuringSDK.framework */; };
 		A9DA6C8427B9813D00F3B786 /* KuringSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9DA6C8227B9813D00F3B786 /* KuringSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9DA6C8727B981A100F3B786 /* AppDelegate.RemoteNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */; };
-		A9DA6CBE27B98D2300F3B786 /* KUFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8927B98D2200F3B786 /* KUFeedbackViewController.swift */; };
 		A9DA6CC227B98D2300F3B786 /* Date.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */; };
 		A9DA6CC327B98D2300F3B786 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9027B98D2200F3B786 /* Global.swift */; };
 		A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9627B98D2200F3B786 /* ColorSet.swift */; };
@@ -100,7 +99,6 @@
 		A9DA6C7A27B9800F00F3B786 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A9DA6C8227B9813D00F3B786 /* KuringSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KuringSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.RemoteNotification.swift; sourceTree = "<group>"; };
-		A9DA6C8927B98D2200F3B786 /* KUFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUFeedbackViewController.swift; sourceTree = "<group>"; };
 		A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.Kuring.swift; sourceTree = "<group>"; };
 		A9DA6C9027B98D2200F3B786 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		A9DA6C9627B98D2200F3B786 /* ColorSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
@@ -239,7 +237,6 @@
 		A9DA6C8827B98D2200F3B786 /* Feedback */ = {
 			isa = PBXGroup;
 			children = (
-				A9DA6C8927B98D2200F3B786 /* KUFeedbackViewController.swift */,
 				A9CD87C527E3A0A5007831C8 /* FeedbackView.swift */,
 				A9CD87C727E3AC77007831C8 /* FeedbackViewModel.swift */,
 			);
@@ -541,7 +538,6 @@
 				A9DA6CCC27B98D2300F3B786 /* CategoryCollectionViewController.swift in Sources */,
 				A9DA6CDE27B98D2300F3B786 /* AlarmTagViewController.swift in Sources */,
 				A9DA6CDB27B98D2300F3B786 /* KUNoticeListViewCell.swift in Sources */,
-				A9DA6CBE27B98D2300F3B786 /* KUFeedbackViewController.swift in Sources */,
 				A9DA6CE227B98D2300F3B786 /* KUAlarmHeaderView.swift in Sources */,
 				A9C447EB27C7EA3B0094D9A9 /* Bundle.Kuring.swift in Sources */,
 				A9DA6CD227B98D2300F3B786 /* KUSearchViewController.UITableView.swift in Sources */,
