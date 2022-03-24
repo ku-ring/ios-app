@@ -28,7 +28,7 @@ class CategorySelectViewController : UIViewController {
     weak var delegate: CategorySelectViewControllerDelegate?
     
     // MARK: Properties
-    private lazy var saveButton = UIBarButtonItem().then {
+    lazy var saveButton = UIBarButtonItem().then {
         $0.image = UIImage(systemName: "checkmark")
         $0.style = .plain
         $0.target = self
@@ -61,7 +61,7 @@ class CategorySelectViewController : UIViewController {
         $0.textColor = .white
     }
     
-    private var selectedCollectionView : UICollectionView = {
+    var selectedCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         layout.sectionInset = .zero
@@ -77,7 +77,7 @@ class CategorySelectViewController : UIViewController {
         $0.backgroundColor = .white
     }
     
-    private var unSelectedCollectionView : UICollectionView = {
+    var unSelectedCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         layout.sectionInset = .zero
@@ -95,7 +95,7 @@ class CategorySelectViewController : UIViewController {
         setupNavigationBar()
         setupProperties()
         setupViews()
-        setLayout()
+        setupLayout()
         setBinding()
     }
     
@@ -166,10 +166,10 @@ extension CategorySelectViewController {
             unSelectedCollectionView,
         ].forEach { view.addSubview($0) }
         
-        setDelegate()
+        setupDelegate()
     }
     
-    private func setDelegate() {
+    private func setupDelegate() {
         selectedCollectionView.register(CategorySelectCell.self, forCellWithReuseIdentifier: CategorySelectCell.identifier)
         unSelectedCollectionView.register(CategorySelectCell.self, forCellWithReuseIdentifier: CategorySelectCell.identifier)
         selectedCollectionView.delegate = self
@@ -214,7 +214,7 @@ extension CategorySelectViewController {
             .disposed(by: disposeBag)
     }
     
-    private func setLayout() {
+    private func setupLayout() {
         let DeviceWidthRatio = UIScreen.main.bounds.size.width / 360
         let DeviceHeightRatio = UIScreen.main.bounds.size.height / 608
 
@@ -251,65 +251,5 @@ extension CategorySelectViewController {
             $0.width.equalTo(descriptionLabel.snp.width).offset(-40 * DeviceWidthRatio)
             $0.centerX.equalToSuperview()
         }
-    }
-}
-
-extension CategorySelectViewController: UICollectionViewDelegate { }
-
-extension CategorySelectViewController: UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        if collectionView == selectedCollectionView {
-            return selectedCategories.count
-        } else {
-            return unSelectedCategories.count
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategorySelectCell.identifier, for: indexPath) as? CategorySelectCell else {
-            return UICollectionViewCell()
-        }
-        
-        if collectionView == selectedCollectionView {
-            cell.categoryTitleLabel.text = selectedCategories[indexPath.row].koreanValue
-            cell.categoryTitleLabel.backgroundColor = .white
-            cell.categoryTitleLabel.textColor = ColorSet.green
-        } else {
-            cell.categoryTitleLabel.text = unSelectedCategories[indexPath.row].koreanValue
-            cell.categoryTitleLabel.backgroundColor = ColorSet.green
-            cell.categoryTitleLabel.textColor = .white
-            
-        }
-        
-        let isUpdated = Kuring.subscribedCategories != selectedCategories
-        saveButton.isEnabled = isUpdated
-        
-        delegate?.didSelectCategory(selectedCategories)
-        
-        return cell
-    }
-}
-
-extension CategorySelectViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemSpacing : CGFloat = 10
-        
-        /// width 식 : 컬렉션 뷰 width - 좌우 inset - 아이템 사이의 간격 / 원하는 아이템의 갯수
-        let width : CGFloat = (collectionView.bounds.width - 20 - itemSpacing * 2) / 3
-        let height = width * 32 / 88
-        
-        return CGSize(width: width, height: height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        return sectionInsets
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        return sectionInsets.left
     }
 }
