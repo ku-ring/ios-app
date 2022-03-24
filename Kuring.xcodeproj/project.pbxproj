@@ -215,7 +215,6 @@
 				A9DA6CA927B98D2200F3B786 /* Settings */,
 				B1A0382127C3E9F90074EC95 /* Extension */,
 				A9DA6C8E27B98D2200F3B786 /* Utils */,
-				B1FBAD0F27D213B50044B90A /* StoreKit */,
 				A9DA6C6B27B97EE300F3B786 /* Main.storyboard */,
 				A9DA6D0727B98FEC00F3B786 /* LaunchScreen.storyboard */,
 				A9DA6C6E27B97EE500F3B786 /* Assets.xcassets */,
@@ -277,6 +276,7 @@
 				B1FBAD1227D21C5D0044B90A /* UserDefaultManager.swift */,
 				B1648D0E27E766C700BCB423 /* NoticeManger.swift */,
 				B1E4760F27E85B2C002CEBD6 /* HapticsManager.swift */,
+				B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */,
 			);
 			path = Manger;
 			sourceTree = "<group>";
@@ -395,14 +395,6 @@
 				B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		B1FBAD0F27D213B50044B90A /* StoreKit */ = {
-			isa = PBXGroup;
-			children = (
-				B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */,
-			);
-			name = StoreKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

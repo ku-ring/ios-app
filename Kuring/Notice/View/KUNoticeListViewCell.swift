@@ -10,7 +10,7 @@ import KuringSDK
 import SkeletonView
 
 class KUNoticeListViewCell: UITableViewCell {
-    static let identifier = "noticeListCell"
+    static let identifier = String(describing: self)
     
     @IBOutlet weak var dotView: UIView! {
         didSet {
@@ -92,13 +92,8 @@ class KUNoticeListViewCell: UITableViewCell {
     }
     
     private func readNotice() -> Bool {
-        let notice_list = NoticeManager.read()
-        let id = notice.articleID
+        let noticeList = NoticeManager.read()
         
-        if notice_list.contains(id) {
-            return true
-        } else {
-            return false
-        }
+        return noticeList.contains(notice.articleID)
     }
 }
