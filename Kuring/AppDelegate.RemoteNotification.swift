@@ -89,9 +89,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         guard let articleID = userInfo["articleId"] else { return }
         guard let categoryString = userInfo["category"] as? String else { return }
         guard let navigationController = self.window?.rootViewController as? UINavigationController else { return }
+        
+        let lib = Notice.NoticeURL.library("\(articleID)").urlString
+        let origin = Notice.NoticeURL.library("\(articleID)").urlString
+        
         let articleURL = NoticeType.from(categoryString) == .도서관
-        ? "\(BaseURL.library.rawValue)\(articleID)"
-        : "\(BaseURL.original.rawValue)?id=\(articleID)"
+        ? "\(lib)\(articleID)"
+        : "\(origin)?id=\(articleID)"
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let noticeWebVC = storyboard.instantiateViewController(

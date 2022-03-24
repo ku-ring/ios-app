@@ -13,7 +13,7 @@ import Then
 
 class CategorySelectCell : UICollectionViewCell {
     
-    static let identifier = "CategorySelectCell"
+    static let identifier = String(describing: self)
     
     //MARK: Properties
     var categoryTitleLabel = UILabel().then {

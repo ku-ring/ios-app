@@ -101,7 +101,6 @@ extension KUAlarmViewController {
         guard let notification = notifications[date]?[indexPath.row] else { return }
         notification.isNew = false
         let urlString = articleURL(from: notification)
-        print("🍏 notification \(notification)")
         showNoticeWebViewController(
             url: urlString,
             articleID: notification.articleID
@@ -126,8 +125,8 @@ extension KUAlarmViewController {
         
         // TODO: notification의 category 값 확인 필요
         let articleURL = notification.category == NoticeType.도서관
-        ? "\(BaseURL.library.rawValue)\(notification.articleID)"
-        : "\(BaseURL.original.rawValue)?id=\(notification.articleID)"
+        ? "\(notification.baseURLString)\(notification.articleID)"
+        : "\(notification.baseURLString)?id=\(notification.articleID)"
         
         return articleURL.isEmpty
         ? "https://konkuk.ac.kr"

@@ -70,8 +70,8 @@ extension KUSearchViewController: UITableViewDelegate, UITableViewDataSource {
     /// 선택된 `Notice` 값으로 부터 유효한 웹주소 가져오기
     func articleURL(from notice: Notice) -> String {
         let articleURL = notice.category == .도서관
-        ? "\(BaseURL.library.rawValue)\(notice.articleID)"
-        : "\(BaseURL.original.rawValue)?id=\(notice.articleID)"
+        ? "\(notice.urlString)\(notice.articleID)"
+        : "\(notice.urlString)?id=\(notice.articleID)"
         
         return articleURL.isEmpty
         ? "https://konkuk.ac.kr"

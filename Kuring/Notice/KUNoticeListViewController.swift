@@ -262,24 +262,15 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
         let notice = currentNotices[indexPath.row]
         notice.read()
         tableView.reloadData()
-        let urlString = articleURL(from: notice)
+        
+        let urlString = notice.urlString == ""
+        ? "https://kunkuk.ac.kr"
+        : notice.urlString
+        
         showNoticeWebViewController(
             url: urlString,
             articleID: notice.articleID
         )
-    }
-    
-    /// 선택된 `Notice` 값으로 부터 유효한 웹주소 가져오기
-    func articleURL(from notice: Notice) -> String {
-        
-        let articleURL = currentType == .도서관
-        ? "\(BaseURL.library.rawValue)\(notice.articleID)"
-        : "\(BaseURL.original.rawValue)?id=\(notice.articleID)"
-        
-        print("🤖 \(BaseURL.original.rawValue)")
-        return articleURL.isEmpty
-        ? "https://konkuk.ac.kr"
-        : articleURL
     }
     
     /// 스크롤 시 호출되는 메소드
