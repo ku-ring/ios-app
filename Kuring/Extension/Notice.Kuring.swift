@@ -8,11 +8,6 @@
 import KuringSDK
 import UIKit
 
-//enum BaseURL: String {
-//    case original = "https://www.konkuk.ac.kr/do/MessageBoard/ArticleRead.do"
-//    case library = "https://library.konkuk.ac.kr/#/bbs/notice/"
-//}
-
 extension Notice {
     enum NoticeURL {
         case original(_ articleID: String)
@@ -23,7 +18,7 @@ extension Notice {
             switch self {
             case .original(let articleID): return "https://www.konkuk.ac.kr/do/MessageBoard/ArticleRead.do?id=\(articleID)"
             case .library(let articleID): return "https://library.konkuk.ac.kr/#/bbs/notice/\(articleID)"
-            case .major(let articleID): return ""
+            case .major(let _): return ""
             }
         }
     }
