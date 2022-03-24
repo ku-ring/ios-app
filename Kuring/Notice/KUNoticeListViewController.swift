@@ -82,12 +82,16 @@ class KUNoticeListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        HapticManager.shared.setupGenerator()
+        
         updateNotifcationButton()
         tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        HapticManager.shared.release()
         tableView.hideSkeleton()
     }
     
@@ -235,8 +239,7 @@ extension KUNoticeListViewController: UICollectionViewDelegate, UICollectionView
         guard self.currentType != cell.noticeType else { return }
         
         self.currentType = cell.noticeType
-        Logger.debug("did Tap collectionViewCell \(cell.noticeType)")
-        HapticsManager.impactHeavy()
+        HapticManager.shared.createImpact()
     }
 }
 
@@ -310,9 +313,9 @@ extension KUNoticeListViewController: SkeletonTableViewDataSource {
     }
 }
 
-extension UIColor {
-    // TODO: use fucking enum
-    static func named(_ name: String) -> UIColor {
-        return self.init(named: name) ?? .gray
-    }
-}
+//extension UIColor {
+//    // TODO: use fucking enum
+//    static func named(_ name: String) -> UIColor {
+//        return self.init(named: name) ?? .gray
+//    }
+//}

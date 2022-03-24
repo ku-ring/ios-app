@@ -57,7 +57,7 @@
 		B1648D0F27E766C700BCB423 /* NoticeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1648D0E27E766C700BCB423 /* NoticeManger.swift */; };
 		B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A0382427C3ECD70074EC95 /* Logger.swift */; };
 		B1E475EC27E824A1002CEBD6 /* CategorySelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */; };
-		B1E4761027E85B2C002CEBD6 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E4760F27E85B2C002CEBD6 /* HapticsManager.swift */; };
+		B1E4761027E85B2C002CEBD6 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */; };
 		B1FBAD1127D213C90044B90A /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */; };
 		B1FBAD1327D21C5D0044B90A /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FBAD1227D21C5D0044B90A /* UserDefaultManager.swift */; };
 		D430312BD0477A68D7728C94 /* Pods_Kuring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */; };
@@ -130,7 +130,7 @@
 		B1648D0E27E766C700BCB423 /* NoticeManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeManger.swift; sourceTree = "<group>"; };
 		B1A0382427C3ECD70074EC95 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectCell.swift; sourceTree = "<group>"; };
-		B1E4760F27E85B2C002CEBD6 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
+		B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		B1FBAD1227D21C5D0044B90A /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kuring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -275,7 +275,7 @@
 			children = (
 				B1FBAD1227D21C5D0044B90A /* UserDefaultManager.swift */,
 				B1648D0E27E766C700BCB423 /* NoticeManger.swift */,
-				B1E4760F27E85B2C002CEBD6 /* HapticsManager.swift */,
+				B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */,
 				B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */,
 			);
 			path = Manger;
@@ -547,7 +547,7 @@
 				A9DA6CE227B98D2300F3B786 /* KUAlarmHeaderView.swift in Sources */,
 				A9C447EB27C7EA3B0094D9A9 /* Bundle.Kuring.swift in Sources */,
 				A9DA6CD227B98D2300F3B786 /* KUSearchViewController.UITableView.swift in Sources */,
-				B1E4761027E85B2C002CEBD6 /* HapticsManager.swift in Sources */,
+				B1E4761027E85B2C002CEBD6 /* HapticManager.swift in Sources */,
 				A9DA6CD027B98D2300F3B786 /* KUSearchViewController.UICollectionView.swift in Sources */,
 				B1E475EC27E824A1002CEBD6 /* CategorySelectCell.swift in Sources */,
 				A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */,
