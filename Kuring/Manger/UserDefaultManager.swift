@@ -12,15 +12,15 @@ class UserDefaultManager {
         /// 인앱 리뷰 사용을 위한 키
         case inAppReviewCount
         /// 읽은 공지 아이디를 저장하기 위한 키
-        case notice_list
+        case noticeList
         
     }
     
     @UserDefault(key: .inAppReviewCount, defaultValue: 0)
     static var inAppReviewCount: Int
     
-    @UserDefault(key: .notice_list, defaultValue: [])
-    static var notice_list: [String]
+    @UserDefault(key: .noticeList, defaultValue: [])
+    static var noticeList: [String]
 }
 
 @propertyWrapper
