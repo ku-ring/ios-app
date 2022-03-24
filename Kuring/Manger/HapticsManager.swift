@@ -13,7 +13,7 @@ class HapticsManager {
     static private var impactFeedbackGenerator: UIImpactFeedbackGenerator?
     
     static func impactHeavy() {
-        HapticsManager.impactFeedbackGenerator = UIImpactFeedbackGenerator()
+        HapticsManager.impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
         HapticsManager.impactFeedbackGenerator?.impactOccurred()
     }
 }

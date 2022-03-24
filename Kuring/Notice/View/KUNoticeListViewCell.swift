@@ -10,7 +10,7 @@ import KuringSDK
 import SkeletonView
 
 class KUNoticeListViewCell: UITableViewCell {
-    static let identifier = String(describing: self)
+    static let identifier = "noticeListCell"
     
     @IBOutlet weak var dotView: UIView! {
         didSet {

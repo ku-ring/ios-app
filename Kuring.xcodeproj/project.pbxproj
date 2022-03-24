@@ -716,7 +716,7 @@
 				CODE_SIGN_ENTITLEMENTS = Kuring/Kuring.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 38PD5AHVVF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kuring/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "쿠링";
@@ -733,7 +733,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.servicedd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -750,7 +750,7 @@
 				CODE_SIGN_ENTITLEMENTS = Kuring/Kuring.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 38PD5AHVVF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kuring/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "쿠링";
@@ -767,7 +767,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.servicedd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
