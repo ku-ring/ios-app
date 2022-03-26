@@ -7,6 +7,7 @@
 
 import UIKit
 
+// TODO: Move to SDK
 class UserDefaultManager {
     enum Key: String {
         /// 인앱 리뷰 사용을 위한 키

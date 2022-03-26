@@ -86,17 +86,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     /// 배너를 눌렀을 때, 웹뷰를 보여줍니다.
     func openBanner(with userInfo: [AnyHashable: Any]) {
-        guard let articleID = userInfo["articleId"] else { return }
+        guard let articleID = userInfo["articleId"] as? String else { return }
         guard let categoryString = userInfo["category"] as? String else { return }
         guard let navigationController = self.window?.rootViewController as? UINavigationController else { return }
         
-        let lib = Notice.NoticeURL.library("\(articleID)").urlString
-        let origin = Notice.NoticeURL.library("\(articleID)").urlString
-        
         let articleURL = NoticeType.from(categoryString) == .도서관
-        ? "\(lib)\(articleID)"
-        : "\(origin)?id=\(articleID)"
-
+        ? Notice.NoticeURL.library(articleID).urlString
+        : Notice.NoticeURL.original(articleID).urlString
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let noticeWebVC = storyboard.instantiateViewController(
             withIdentifier: "NoticeWebViewController"

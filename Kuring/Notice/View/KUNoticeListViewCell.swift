@@ -85,15 +85,14 @@ class KUNoticeListViewCell: UITableViewCell {
         // 읽음 여부에 따라 label의 색상을 업데이트 합니다
         [titleLabel, dateLabel]
             .forEach {
-                $0?.textColor = readNotice()
+                $0?.textColor = isRead
                 ? ColorSet.Label.tertiary
                 : ColorSet.Label.primary
             }
     }
     
-    private func readNotice() -> Bool {
-        let noticeList = NoticeManager.readNoticeIDs
-        
-        return noticeList.contains(notice.articleID)
+    /// 읽었던 공지 인지
+    private var isRead: Bool {
+        Kuring.readNoticeIDs.contains(notice.articleID)
     }
 }

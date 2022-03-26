@@ -127,7 +127,7 @@ extension NoticeWebViewController: WKUIDelegate, WKNavigationDelegate {
         indicator.stopAnimating()
         indicator.isHidden = true
         
-        NoticeManager.update(id: articleID)
+        Kuring.readNotice(id: articleID)
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
