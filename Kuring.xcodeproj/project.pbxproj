@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A994014727E9E5AC00FE9989 /* View.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A994014627E9E5AC00FE9989 /* View.Kuring.swift */; };
+		A9580E5C27ED849100253A58 /* NSObject.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9580E5B27ED849100253A58 /* NSObject.Kuring.swift */; };
+		A9580E5E27ED85AC00253A58 /* StringSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9580E5D27ED85AC00253A58 /* StringSet.swift */; };
 		A9C445BC27C552FB0094D9A9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C445BB27C552FB0094D9A9 /* OnboardingView.swift */; };
 		A9C447DF27C7877E0094D9A9 /* CategorySelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447DE27C7877E0094D9A9 /* CategorySelectView.swift */; };
 		A9C447E327C788A50094D9A9 /* OnboardingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447E227C788A50094D9A9 /* OnboardingRow.swift */; };
@@ -56,7 +58,6 @@
 		A9DA6D0927B98FEC00F3B786 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6D0727B98FEC00F3B786 /* LaunchScreen.storyboard */; };
 		B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */; };
 		B143E91727EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143E91627EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift */; };
-		B1648D0F27E766C700BCB423 /* NoticeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1648D0E27E766C700BCB423 /* NoticeManger.swift */; };
 		B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A0382427C3ECD70074EC95 /* Logger.swift */; };
 		B1E475EC27E824A1002CEBD6 /* CategorySelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */; };
 		B1E4761027E85B2C002CEBD6 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */; };
@@ -83,6 +84,8 @@
 		098133CE147F3EC919795C6B /* Pods-Kuring.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuring.debug.xcconfig"; path = "Target Support Files/Pods-Kuring/Pods-Kuring.debug.xcconfig"; sourceTree = "<group>"; };
 		6AA68EE0A1CA6D5FD2FB9A4F /* Pods-Kuring.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuring.release.xcconfig"; path = "Target Support Files/Pods-Kuring/Pods-Kuring.release.xcconfig"; sourceTree = "<group>"; };
 		A994014627E9E5AC00FE9989 /* View.Kuring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.Kuring.swift; sourceTree = "<group>"; };
+		A9580E5B27ED849100253A58 /* NSObject.Kuring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObject.Kuring.swift; sourceTree = "<group>"; };
+		A9580E5D27ED85AC00253A58 /* StringSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSet.swift; sourceTree = "<group>"; };
 		A9C445BB27C552FB0094D9A9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		A9C447DE27C7877E0094D9A9 /* CategorySelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectView.swift; sourceTree = "<group>"; };
 		A9C447E227C788A50094D9A9 /* OnboardingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRow.swift; sourceTree = "<group>"; };
@@ -131,7 +134,6 @@
 		A9DA6D0827B98FEC00F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.AppsFlyerLib.swift; sourceTree = "<group>"; };
 		B143E91627EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.UICollectionView.swift; sourceTree = "<group>"; };
-		B1648D0E27E766C700BCB423 /* NoticeManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeManger.swift; sourceTree = "<group>"; };
 		B1A0382427C3ECD70074EC95 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectCell.swift; sourceTree = "<group>"; };
 		B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				A9DA6C9627B98D2200F3B786 /* ColorSet.swift */,
+				A9580E5D27ED85AC00253A58 /* StringSet.swift */,
 				B1A0382427C3ECD70074EC95 /* Logger.swift */,
 			);
 			path = Utils;
@@ -279,7 +282,6 @@
 			isa = PBXGroup;
 			children = (
 				B1FBAD1227D21C5D0044B90A /* UserDefaultManager.swift */,
-				B1648D0E27E766C700BCB423 /* NoticeManger.swift */,
 				B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */,
 				B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */,
 			);
@@ -391,6 +393,7 @@
 				A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */,
 				A9DA6C9027B98D2200F3B786 /* Notice.Kuring.swift */,
 				A994014627E9E5AC00FE9989 /* View.Kuring.swift */,
+				A9580E5B27ED849100253A58 /* NSObject.Kuring.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				A9DA6CE327B98D2300F3B786 /* Opensource.swift in Sources */,
 				A9C447E727C7A2560094D9A9 /* OnboardingIntroView.swift in Sources */,
 				A9DA6CC327B98D2300F3B786 /* Notice.Kuring.swift in Sources */,
+				A9580E5C27ED849100253A58 /* NSObject.Kuring.swift in Sources */,
 				A9DA6CDC27B98D2300F3B786 /* KUNoticeListCollectionViewCell.swift in Sources */,
 				A9C447E927C7A61B0094D9A9 /* OnboardingViewController.swift in Sources */,
 				A9DA6CE527B98D2300F3B786 /* OpensourceListViewController.swift in Sources */,
@@ -559,7 +563,6 @@
 				B1E475EC27E824A1002CEBD6 /* CategorySelectCell.swift in Sources */,
 				A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */,
 				B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */,
-				B1648D0F27E766C700BCB423 /* NoticeManger.swift in Sources */,
 				A9DA6CDF27B98D2300F3B786 /* KUAlarmViewController.swift in Sources */,
 				B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */,
 				A9DA6C8727B981A100F3B786 /* AppDelegate.RemoteNotification.swift in Sources */,
@@ -569,6 +572,7 @@
 				A9CD87C627E3A0A5007831C8 /* FeedbackView.swift in Sources */,
 				A9DA6CD727B98D2300F3B786 /* SettingsViewController.swift in Sources */,
 				B143E91727EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift in Sources */,
+				A9580E5E27ED85AC00253A58 /* StringSet.swift in Sources */,
 				A9C447DF27C7877E0094D9A9 /* CategorySelectView.swift in Sources */,
 				A9DA6CD627B98D2300F3B786 /* KUSearchedStaffCell.swift in Sources */,
 				A9DA6CD427B98D2300F3B786 /* KUSearchTypeCollectionViewCell.swift in Sources */,
@@ -724,7 +728,7 @@
 				CODE_SIGN_ENTITLEMENTS = Kuring/Kuring.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 38PD5AHVVF;
+				DEVELOPMENT_TEAM = 77CD4KLN3Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kuring/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "쿠링";
@@ -741,7 +745,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.servicedd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -758,7 +762,7 @@
 				CODE_SIGN_ENTITLEMENTS = Kuring/Kuring.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 38PD5AHVVF;
+				DEVELOPMENT_TEAM = 77CD4KLN3Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kuring/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "쿠링";
@@ -775,7 +779,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.servicedd;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -96,7 +96,7 @@ class CategorySelectViewController : UIViewController {
         setupProperties()
         setupViews()
         setupLayout()
-        setBinding()
+        setupBinding()
     }
     
     @objc
@@ -178,7 +178,7 @@ extension CategorySelectViewController {
         unSelectedCollectionView.dataSource = self
     }
     
-    private func setBinding() {
+    private func setupBinding() {
         selectedCollectionView.rx.itemSelected
             .bind { [self] indexPath in
                 let selectItem = self.selectedCategories[indexPath.row]

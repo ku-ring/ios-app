@@ -27,6 +27,8 @@ extension KUSearchViewController: UITableViewDelegate, UITableViewDataSource {
             let staff = staffResult[indexPath.row]
             cell.staff = staff
             return cell
+        default:
+            fatalError("없는 검색 타입 입니다.")
         }
     }
     
@@ -46,8 +48,6 @@ extension KUSearchViewController: UITableViewDelegate, UITableViewDataSource {
                 url: urlString,
                 articleID: notice.articleID
             )
-            
-            return
         case .staff:
             // 선택된 셀에서 Staff 정보 가져오기
             let cell = tableView.cellForRow(at: indexPath) as! KUSearchedStaffCell
@@ -68,6 +68,8 @@ extension KUSearchViewController: UITableViewDelegate, UITableViewDataSource {
                 sheet.detents = [.medium(), .large()]
             }
             present(nav, animated: true, completion: nil)
+        default:
+            fatalError("없는 검색 타입 입니다.")
         }
     }
 }

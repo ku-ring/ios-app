@@ -51,8 +51,8 @@ class KUAlarmViewController: UITableViewController {
         let emptyDataLabel = UILabel()
         emptyDataLabel.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         emptyDataLabel.text = Kuring.categoryStrings.isEmpty
-        ? "구독중인 카테고리가 없습니다."
-        : "받은 알림이 없습니다."
+        ? StringSet.MyNotification.noSubscription
+        : StringSet.MyNotification.empty
         emptyDataLabel.textAlignment = .center
         emptyDataLabel.textColor = ColorSet.green
         emptyDataLabel.sizeToFit()
@@ -101,8 +101,8 @@ extension KUAlarmViewController {
         guard let notification = notifications[date]?[indexPath.row] else { return }
         notification.isNew = false
         
-        let urlString = notification.baseURLString == ""
-        ? "https://kunkuk.ac.kr"
+        let urlString = notification.baseURLString.isEmpty
+        ? StringSet.URL.konkuk
         : notification.baseURLString
         
         showNoticeWebViewController(

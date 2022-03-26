@@ -1,0 +1,21 @@
+//
+//  StringSet.swift
+//  Kuring
+//
+//  Created by Jaesung Lee on 2022/03/25.
+//
+
+import Foundation
+
+
+struct StringSet {
+    struct URL {
+        static let konkuk = "https://www.konkuk.ac.kr"
+        static let konkukLibrary = "https://library.konkuk.ac.kr"
+    }
+    
+    struct MyNotification {
+        static let noSubscription = "구독중인 카테고리가 없습니다."
+        static let empty = "받은 알림이 없습니다."
+    }
+}

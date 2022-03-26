@@ -16,9 +16,9 @@ extension Notice {
         
         var urlString: String {
             switch self {
-            case .original(let articleID): return "https://www.konkuk.ac.kr/do/MessageBoard/ArticleRead.do?id=\(articleID)"
-            case .library(let articleID): return "https://library.konkuk.ac.kr/#/bbs/notice/\(articleID)"
-            case .major(let _): return ""
+            case .original(let articleID): return "\(StringSet.URL.konkuk)/do/MessageBoard/ArticleRead.do?id=\(articleID)"
+            case .library(let articleID): return "\(StringSet.URL.konkukLibrary)/#/bbs/notice/\(articleID)"
+            default: return ""
             }
         }
     }
