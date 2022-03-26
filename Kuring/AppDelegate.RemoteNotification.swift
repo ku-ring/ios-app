@@ -79,7 +79,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         Messaging.messaging().appDidReceiveMessage(userInfo)
         Logger.debug("푸시 알림을 받았습니다: \(userInfo)")
 
-        // TODO: 알림 받으면 웹뷰로 바로 이동
         openBanner(with: userInfo)
         
         completionHandler()
@@ -90,25 +89,20 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         guard let articleID = userInfo["articleId"] else { return }
         guard let categoryString = userInfo["category"] as? String else { return }
         guard let navigationController = self.window?.rootViewController as? UINavigationController else { return }
+        
+        let lib = Notice.NoticeURL.library("\(articleID)").urlString
+        let origin = Notice.NoticeURL.library("\(articleID)").urlString
+        
         let articleURL = NoticeType.from(categoryString) == .도서관
-        ? "\(libraryBaseUrl)\(articleID)"
-        : "\(originalBaseUrl)?id=\(articleID)"
-        
-        // TODO: UserDefault로 저장 + 프로퍼티래퍼 공부중
-        if var articleArray = readArticle as? [String] {
-            let id = articleURL
-            if !articleArray.contains(id) {
-                articleArray.append(id)
-                UserDefaults.standard.set(articleArray, forKey: articleKey)
-                readArticle = articleArray
-            }
-        }
-        
+        ? "\(lib)\(articleID)"
+        : "\(origin)?id=\(articleID)"
+
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let noticeWebVC = storyboard.instantiateViewController(
             withIdentifier: "NoticeWebViewController"
         ) as? NoticeWebViewController else { return }
         noticeWebVC.articleURL = articleURL
+        noticeWebVC.articleID = "\(articleID)"
         navigationController.pushViewController(noticeWebVC, animated: true)
     }
 }

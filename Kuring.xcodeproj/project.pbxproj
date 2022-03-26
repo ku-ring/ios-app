@@ -27,11 +27,9 @@
 		A9DA6C8427B9813D00F3B786 /* KuringSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9DA6C8227B9813D00F3B786 /* KuringSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9DA6C8727B981A100F3B786 /* AppDelegate.RemoteNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */; };
 		A9DA6CC227B98D2300F3B786 /* Date.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */; };
-		A9DA6CC327B98D2300F3B786 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9027B98D2200F3B786 /* Global.swift */; };
+		A9DA6CC327B98D2300F3B786 /* Notice.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9027B98D2200F3B786 /* Notice.Kuring.swift */; };
 		A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9627B98D2200F3B786 /* ColorSet.swift */; };
 		A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */; };
-		A9DA6CCC27B98D2300F3B786 /* CategoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9A27B98D2200F3B786 /* CategoryCollectionViewController.swift */; };
-		A9DA6CCD27B98D2300F3B786 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9C27B98D2200F3B786 /* Storage.swift */; };
 		A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9E27B98D2200F3B786 /* KUStaffViewController.swift */; };
 		A9DA6CCF27B98D2300F3B786 /* KUSearchViewController.Searcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CA027B98D2200F3B786 /* KUSearchViewController.Searcher.swift */; };
 		A9DA6CD027B98D2300F3B786 /* KUSearchViewController.UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CA127B98D2200F3B786 /* KUSearchViewController.UICollectionView.swift */; };
@@ -48,7 +46,7 @@
 		A9DA6CDB27B98D2300F3B786 /* KUNoticeListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB027B98D2200F3B786 /* KUNoticeListViewCell.swift */; };
 		A9DA6CDC27B98D2300F3B786 /* KUNoticeListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB127B98D2200F3B786 /* KUNoticeListCollectionViewCell.swift */; };
 		A9DA6CDD27B98D2300F3B786 /* KUNoticeListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6CB227B98D2200F3B786 /* KUNoticeListViewCell.xib */; };
-		A9DA6CDE27B98D2300F3B786 /* AlarmTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB427B98D2200F3B786 /* AlarmTagViewController.swift */; };
+		A9DA6CDE27B98D2300F3B786 /* CategorySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB427B98D2200F3B786 /* CategorySelectViewController.swift */; };
 		A9DA6CDF27B98D2300F3B786 /* KUAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB527B98D2200F3B786 /* KUAlarmViewController.swift */; };
 		A9DA6CE027B98D2300F3B786 /* KUAlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CB727B98D2200F3B786 /* KUAlarmTableViewCell.swift */; };
 		A9DA6CE127B98D2300F3B786 /* KUAlarmTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6CB827B98D2200F3B786 /* KUAlarmTableViewCell.xib */; };
@@ -57,7 +55,11 @@
 		A9DA6CE527B98D2300F3B786 /* OpensourceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CBD27B98D2300F3B786 /* OpensourceListViewController.swift */; };
 		A9DA6D0927B98FEC00F3B786 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6D0727B98FEC00F3B786 /* LaunchScreen.storyboard */; };
 		B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */; };
+		B143E91727EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143E91627EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift */; };
+		B1648D0F27E766C700BCB423 /* NoticeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1648D0E27E766C700BCB423 /* NoticeManger.swift */; };
 		B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A0382427C3ECD70074EC95 /* Logger.swift */; };
+		B1E475EC27E824A1002CEBD6 /* CategorySelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */; };
+		B1E4761027E85B2C002CEBD6 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */; };
 		B1FBAD1127D213C90044B90A /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */; };
 		B1FBAD1327D21C5D0044B90A /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FBAD1227D21C5D0044B90A /* UserDefaultManager.swift */; };
 		D430312BD0477A68D7728C94 /* Pods_Kuring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */; };
@@ -100,11 +102,9 @@
 		A9DA6C8227B9813D00F3B786 /* KuringSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KuringSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.RemoteNotification.swift; sourceTree = "<group>"; };
 		A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.Kuring.swift; sourceTree = "<group>"; };
-		A9DA6C9027B98D2200F3B786 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		A9DA6C9027B98D2200F3B786 /* Notice.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notice.Kuring.swift; sourceTree = "<group>"; };
 		A9DA6C9627B98D2200F3B786 /* ColorSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
 		A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.Kuring.swift; sourceTree = "<group>"; };
-		A9DA6C9A27B98D2200F3B786 /* CategoryCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewController.swift; sourceTree = "<group>"; };
-		A9DA6C9C27B98D2200F3B786 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		A9DA6C9E27B98D2200F3B786 /* KUStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUStaffViewController.swift; sourceTree = "<group>"; };
 		A9DA6CA027B98D2200F3B786 /* KUSearchViewController.Searcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUSearchViewController.Searcher.swift; sourceTree = "<group>"; };
 		A9DA6CA127B98D2200F3B786 /* KUSearchViewController.UICollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUSearchViewController.UICollectionView.swift; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 		A9DA6CB027B98D2200F3B786 /* KUNoticeListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUNoticeListViewCell.swift; sourceTree = "<group>"; };
 		A9DA6CB127B98D2200F3B786 /* KUNoticeListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUNoticeListCollectionViewCell.swift; sourceTree = "<group>"; };
 		A9DA6CB227B98D2200F3B786 /* KUNoticeListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KUNoticeListViewCell.xib; sourceTree = "<group>"; };
-		A9DA6CB427B98D2200F3B786 /* AlarmTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmTagViewController.swift; sourceTree = "<group>"; };
+		A9DA6CB427B98D2200F3B786 /* CategorySelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.swift; sourceTree = "<group>"; };
 		A9DA6CB527B98D2200F3B786 /* KUAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUAlarmViewController.swift; sourceTree = "<group>"; };
 		A9DA6CB727B98D2200F3B786 /* KUAlarmTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUAlarmTableViewCell.swift; sourceTree = "<group>"; };
 		A9DA6CB827B98D2200F3B786 /* KUAlarmTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KUAlarmTableViewCell.xib; sourceTree = "<group>"; };
@@ -130,7 +130,11 @@
 		A9DA6CBD27B98D2300F3B786 /* OpensourceListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpensourceListViewController.swift; sourceTree = "<group>"; };
 		A9DA6D0827B98FEC00F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.AppsFlyerLib.swift; sourceTree = "<group>"; };
+		B143E91627EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.UICollectionView.swift; sourceTree = "<group>"; };
+		B1648D0E27E766C700BCB423 /* NoticeManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeManger.swift; sourceTree = "<group>"; };
 		B1A0382427C3ECD70074EC95 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectCell.swift; sourceTree = "<group>"; };
+		B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		B1FBAD1227D21C5D0044B90A /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kuring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,7 +210,7 @@
 				B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */,
 				A9DA6CB327B98D2200F3B786 /* Alarm */,
 				A9DA6C9927B98D2200F3B786 /* Category */,
-				A9DA6C9B27B98D2200F3B786 /* DB */,
+				A9DA6C9B27B98D2200F3B786 /* Manger */,
 				A9DA6C8827B98D2200F3B786 /* Feedback */,
 				A9DA6CAB27B98D2200F3B786 /* Notice */,
 				A9DA6C8A27B98D2200F3B786 /* Onboarding */,
@@ -215,7 +219,6 @@
 				A9DA6CA927B98D2200F3B786 /* Settings */,
 				B1A0382127C3E9F90074EC95 /* Extension */,
 				A9DA6C8E27B98D2200F3B786 /* Utils */,
-				B1FBAD0F27D213B50044B90A /* StoreKit */,
 				A9DA6C6B27B97EE300F3B786 /* Main.storyboard */,
 				A9DA6D0727B98FEC00F3B786 /* LaunchScreen.storyboard */,
 				A9DA6C6E27B97EE500F3B786 /* Assets.xcassets */,
@@ -256,7 +259,6 @@
 		A9DA6C8E27B98D2200F3B786 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A9DA6C9027B98D2200F3B786 /* Global.swift */,
 				A9DA6C9627B98D2200F3B786 /* ColorSet.swift */,
 				B1A0382427C3ECD70074EC95 /* Logger.swift */,
 			);
@@ -266,18 +268,22 @@
 		A9DA6C9927B98D2200F3B786 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				A9DA6C9A27B98D2200F3B786 /* CategoryCollectionViewController.swift */,
+				A9DA6CB427B98D2200F3B786 /* CategorySelectViewController.swift */,
+				B143E91527EC4B830075E1A4 /* ViewController */,
+				B1E475EA27E82486002CEBD6 /* View */,
 			);
 			path = Category;
 			sourceTree = "<group>";
 		};
-		A9DA6C9B27B98D2200F3B786 /* DB */ = {
+		A9DA6C9B27B98D2200F3B786 /* Manger */ = {
 			isa = PBXGroup;
 			children = (
-				A9DA6C9C27B98D2200F3B786 /* Storage.swift */,
 				B1FBAD1227D21C5D0044B90A /* UserDefaultManager.swift */,
+				B1648D0E27E766C700BCB423 /* NoticeManger.swift */,
+				B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */,
+				B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */,
 			);
-			path = DB;
+			path = Manger;
 			sourceTree = "<group>";
 		};
 		A9DA6C9D27B98D2200F3B786 /* Search */ = {
@@ -344,7 +350,6 @@
 		A9DA6CB327B98D2200F3B786 /* Alarm */ = {
 			isa = PBXGroup;
 			children = (
-				A9DA6CB427B98D2200F3B786 /* AlarmTagViewController.swift */,
 				A9DA6CB527B98D2200F3B786 /* KUAlarmViewController.swift */,
 				A9DA6CB627B98D2200F3B786 /* View */,
 			);
@@ -370,23 +375,32 @@
 			path = OpenSource;
 			sourceTree = "<group>";
 		};
+		B143E91527EC4B830075E1A4 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B143E91627EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		B1A0382127C3E9F90074EC95 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */,
 				A9C447EA27C7EA3B0094D9A9 /* Bundle.Kuring.swift */,
 				A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */,
+				A9DA6C9027B98D2200F3B786 /* Notice.Kuring.swift */,
 				A994014627E9E5AC00FE9989 /* View.Kuring.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		B1FBAD0F27D213B50044B90A /* StoreKit */ = {
+		B1E475EA27E82486002CEBD6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */,
+				B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */,
 			);
-			name = StoreKit;
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -521,7 +535,7 @@
 				A9DA6CD127B98D2300F3B786 /* KUSearchViewController.UITextField.swift in Sources */,
 				A9DA6CE327B98D2300F3B786 /* Opensource.swift in Sources */,
 				A9C447E727C7A2560094D9A9 /* OnboardingIntroView.swift in Sources */,
-				A9DA6CC327B98D2300F3B786 /* Global.swift in Sources */,
+				A9DA6CC327B98D2300F3B786 /* Notice.Kuring.swift in Sources */,
 				A9DA6CDC27B98D2300F3B786 /* KUNoticeListCollectionViewCell.swift in Sources */,
 				A9C447E927C7A61B0094D9A9 /* OnboardingViewController.swift in Sources */,
 				A9DA6CE527B98D2300F3B786 /* OpensourceListViewController.swift in Sources */,
@@ -530,21 +544,22 @@
 				A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */,
 				A9C447E327C788A50094D9A9 /* OnboardingRow.swift in Sources */,
 				A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */,
-				A9DA6CCD27B98D2300F3B786 /* Storage.swift in Sources */,
 				B1FBAD1327D21C5D0044B90A /* UserDefaultManager.swift in Sources */,
 				A9DA6CDA27B98D2300F3B786 /* KUNoticeTagView.swift in Sources */,
 				A9C445BC27C552FB0094D9A9 /* OnboardingView.swift in Sources */,
 				A9DA6CD827B98D2300F3B786 /* KUNoticeListViewController.swift in Sources */,
-				A9DA6CCC27B98D2300F3B786 /* CategoryCollectionViewController.swift in Sources */,
-				A9DA6CDE27B98D2300F3B786 /* AlarmTagViewController.swift in Sources */,
+				A9DA6CDE27B98D2300F3B786 /* CategorySelectViewController.swift in Sources */,
 				A9DA6CDB27B98D2300F3B786 /* KUNoticeListViewCell.swift in Sources */,
 				A9DA6CE227B98D2300F3B786 /* KUAlarmHeaderView.swift in Sources */,
 				A9C447EB27C7EA3B0094D9A9 /* Bundle.Kuring.swift in Sources */,
 				A9DA6CD227B98D2300F3B786 /* KUSearchViewController.UITableView.swift in Sources */,
+				B1E4761027E85B2C002CEBD6 /* HapticManager.swift in Sources */,
 				A9CD87C827E3AC77007831C8 /* FeedbackViewModel.swift in Sources */,
 				A9DA6CD027B98D2300F3B786 /* KUSearchViewController.UICollectionView.swift in Sources */,
+				B1E475EC27E824A1002CEBD6 /* CategorySelectCell.swift in Sources */,
 				A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */,
 				B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */,
+				B1648D0F27E766C700BCB423 /* NoticeManger.swift in Sources */,
 				A9DA6CDF27B98D2300F3B786 /* KUAlarmViewController.swift in Sources */,
 				B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */,
 				A9DA6C8727B981A100F3B786 /* AppDelegate.RemoteNotification.swift in Sources */,
@@ -553,6 +568,7 @@
 				A9DA6CE027B98D2300F3B786 /* KUAlarmTableViewCell.swift in Sources */,
 				A9CD87C627E3A0A5007831C8 /* FeedbackView.swift in Sources */,
 				A9DA6CD727B98D2300F3B786 /* SettingsViewController.swift in Sources */,
+				B143E91727EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift in Sources */,
 				A9C447DF27C7877E0094D9A9 /* CategorySelectView.swift in Sources */,
 				A9DA6CD627B98D2300F3B786 /* KUSearchedStaffCell.swift in Sources */,
 				A9DA6CD427B98D2300F3B786 /* KUSearchTypeCollectionViewCell.swift in Sources */,
@@ -708,7 +724,7 @@
 				CODE_SIGN_ENTITLEMENTS = Kuring/Kuring.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 77CD4KLN3Y;
+				DEVELOPMENT_TEAM = 38PD5AHVVF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kuring/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "쿠링";
@@ -725,7 +741,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.servicedd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -742,7 +758,7 @@
 				CODE_SIGN_ENTITLEMENTS = Kuring/Kuring.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 77CD4KLN3Y;
+				DEVELOPMENT_TEAM = 38PD5AHVVF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kuring/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "쿠링";
@@ -759,7 +775,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.servicedd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

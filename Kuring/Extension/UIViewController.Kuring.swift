@@ -19,12 +19,13 @@ extension UIViewController {
         self.present(onboardingVC, animated: true)
     }
     
-    func showNoticeWebViewController(with urlString: String) {
+    func showNoticeWebViewController(url urlString: String, articleID: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let noticeWebVC = storyboard.instantiateViewController(
             withIdentifier: "NoticeWebViewController"
         ) as? NoticeWebViewController else { return }
         noticeWebVC.articleURL = urlString
+        noticeWebVC.articleID = articleID
         self.navigationController?.pushViewController(noticeWebVC, animated: true)
     }
     

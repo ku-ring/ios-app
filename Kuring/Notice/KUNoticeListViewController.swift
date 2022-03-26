@@ -82,11 +82,16 @@ class KUNoticeListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        HapticManager.shared.setupGenerator()
+        
         updateNotifcationButton()
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        HapticManager.shared.release()
         tableView.hideSkeleton()
     }
     
@@ -231,7 +236,10 @@ extension KUNoticeListViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         let cell = collectionView.cellForItem(at: indexPath) as! KUNoticeListCollectionViewCell
+        guard self.currentType != cell.noticeType else { return }
+        
         self.currentType = cell.noticeType
+        HapticManager.shared.createImpact()
     }
 }
 
@@ -257,28 +265,15 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
         let notice = currentNotices[indexPath.row]
         notice.read()
         tableView.reloadData()
-        let urlString = articleURL(from: notice)
-        showNoticeWebViewController(with: urlString)
-    }
-    
-    /// 선택된 `Notice` 값으로 부터 유효한 웹주소 가져오기
-    func articleURL(from notice: Notice) -> String {
-        if var articleArray = readArticle as? [String] {
-            let id = notice.articleID
-            if !articleArray.contains(id) {
-                articleArray.append(id)
-                UserDefaults.standard.set(articleArray, forKey: articleKey)
-                readArticle = articleArray
-            }
-        }
         
-        let articleURL = currentType == .도서관
-        ? "\(libraryBaseUrl)\(notice.articleID)"
-        : "\(originalBaseUrl)?id=\(notice.articleID)"
+        let urlString = notice.urlString == ""
+        ? "https://kunkuk.ac.kr"
+        : notice.urlString
         
-        return articleURL.isEmpty
-        ? "https://konkuk.ac.kr"
-        : articleURL
+        showNoticeWebViewController(
+            url: urlString,
+            articleID: notice.articleID
+        )
     }
     
     /// 스크롤 시 호출되는 메소드
@@ -315,12 +310,5 @@ extension KUNoticeListViewController: SkeletonTableViewDataSource {
     
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
         return KUNoticeListViewCell.identifier
-    }
-}
-
-extension UIColor {
-    // TODO: use fucking enum
-    static func named(_ name: String) -> UIColor {
-        return self.init(named: name) ?? .gray
     }
 }
