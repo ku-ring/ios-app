@@ -7,6 +7,7 @@
 
 import UIKit
 import KuringSDK
+import SwiftUI
 
 enum URLLink: String {
     case whatsNew = "https://kuring.notion.site/iOS-eef51c986b7f4320b97424df3f4a5e3c"
@@ -78,7 +79,8 @@ class SettingsViewController: UITableViewController {
     }
     
     func showFeedback() {
-        performSegue(withIdentifier: "showFeedback", sender: nil)
+        let feedbackVC = UIHostingController(rootView: FeedbackView())
+        self.present(feedbackVC, animated: true, completion: nil)
     }
 }
 
