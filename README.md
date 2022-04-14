@@ -1,4 +1,9 @@
-![kuring.banner](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F871bea0c-d000-462c-8a69-da7f718b6b29%2Fnotion.banner.nanumsquare.png?table=block&id=a69fdf7f-f068-48c2-aede-f1fdcf13ca57&spaceId=547f4e5f-dce5-42a1-acc9-a4759b4d81a8&width=2000&userId=3b783d7c-6fef-43ef-819f-9ca8c90755a4&cache=v2)
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/53814741/163469327-98af5c02-efc7-4c3e-8fec-9195ca6805ad.JPG" width="30%"/>
+ <img src="https://user-images.githubusercontent.com/53814741/163469357-aed6a78a-4b65-4a9a-bead-d541e7eee702.JPG" width="30%"/>
+ <img src="https://user-images.githubusercontent.com/53814741/163469345-503b6b50-b240-4c8d-9656-c719a5f3d9f2.JPG" width="30%"/>
+</p>
+
 
 **🔔 걱정마, 쿠링이 알려줄게!** [👉🏽앱스토어 다운로드](https://apps.apple.com/kr/app/%EC%BF%A0%EB%A7%81/id1609873520)
 
