@@ -15,7 +15,8 @@ target 'Kuring' do
   pod 'SnapKit', '~> 5.0.0'
   pod 'Then'
   pod 'AppsFlyerFramework'
-
+  pod 'lottie-ios'
+  
   # Ads
   pod 'Google-Mobile-Ads-SDK'
 end

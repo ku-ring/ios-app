@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A994014727E9E5AC00FE9989 /* View.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A994014627E9E5AC00FE9989 /* View.Kuring.swift */; };
 		A9580E5C27ED849100253A58 /* NSObject.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9580E5B27ED849100253A58 /* NSObject.Kuring.swift */; };
 		A9580E5E27ED85AC00253A58 /* StringSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9580E5D27ED85AC00253A58 /* StringSet.swift */; };
+		A994014727E9E5AC00FE9989 /* View.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A994014627E9E5AC00FE9989 /* View.Kuring.swift */; };
 		A9C445BC27C552FB0094D9A9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C445BB27C552FB0094D9A9 /* OnboardingView.swift */; };
 		A9C447DF27C7877E0094D9A9 /* CategorySelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447DE27C7877E0094D9A9 /* CategorySelectView.swift */; };
 		A9C447E327C788A50094D9A9 /* OnboardingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447E227C788A50094D9A9 /* OnboardingRow.swift */; };
@@ -59,6 +59,7 @@
 		B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */; };
 		B143E91727EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143E91627EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift */; };
 		B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A0382427C3ECD70074EC95 /* Logger.swift */; };
+		B1D83714281BBE3C00A2AF01 /* lottieLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = B1D83713281BBE3C00A2AF01 /* lottieLoading.json */; };
 		B1E475EC27E824A1002CEBD6 /* CategorySelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */; };
 		B1E4761027E85B2C002CEBD6 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */; };
 		B1FBAD1127D213C90044B90A /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */; };
@@ -83,9 +84,9 @@
 /* Begin PBXFileReference section */
 		098133CE147F3EC919795C6B /* Pods-Kuring.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuring.debug.xcconfig"; path = "Target Support Files/Pods-Kuring/Pods-Kuring.debug.xcconfig"; sourceTree = "<group>"; };
 		6AA68EE0A1CA6D5FD2FB9A4F /* Pods-Kuring.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuring.release.xcconfig"; path = "Target Support Files/Pods-Kuring/Pods-Kuring.release.xcconfig"; sourceTree = "<group>"; };
-		A994014627E9E5AC00FE9989 /* View.Kuring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.Kuring.swift; sourceTree = "<group>"; };
 		A9580E5B27ED849100253A58 /* NSObject.Kuring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObject.Kuring.swift; sourceTree = "<group>"; };
 		A9580E5D27ED85AC00253A58 /* StringSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSet.swift; sourceTree = "<group>"; };
+		A994014627E9E5AC00FE9989 /* View.Kuring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.Kuring.swift; sourceTree = "<group>"; };
 		A9C445BB27C552FB0094D9A9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		A9C447DE27C7877E0094D9A9 /* CategorySelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectView.swift; sourceTree = "<group>"; };
 		A9C447E227C788A50094D9A9 /* OnboardingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRow.swift; sourceTree = "<group>"; };
@@ -135,6 +136,7 @@
 		B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.AppsFlyerLib.swift; sourceTree = "<group>"; };
 		B143E91627EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.UICollectionView.swift; sourceTree = "<group>"; };
 		B1A0382427C3ECD70074EC95 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		B1D83713281BBE3C00A2AF01 /* lottieLoading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottieLoading.json; sourceTree = "<group>"; };
 		B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectCell.swift; sourceTree = "<group>"; };
 		B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				A9DA6CA927B98D2200F3B786 /* Settings */,
 				B1A0382127C3E9F90074EC95 /* Extension */,
 				A9DA6C8E27B98D2200F3B786 /* Utils */,
+				B1D83712281BBD2900A2AF01 /* Resources */,
 				A9DA6C6B27B97EE300F3B786 /* Main.storyboard */,
 				A9DA6D0727B98FEC00F3B786 /* LaunchScreen.storyboard */,
 				A9DA6C6E27B97EE500F3B786 /* Assets.xcassets */,
@@ -398,6 +401,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		B1D83712281BBD2900A2AF01 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B1D83713281BBE3C00A2AF01 /* lottieLoading.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		B1E475EA27E82486002CEBD6 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -478,6 +489,7 @@
 				A9DA6CE127B98D2300F3B786 /* KUAlarmTableViewCell.xib in Resources */,
 				A9DA6C7B27B9800F00F3B786 /* GoogleService-Info.plist in Resources */,
 				A9DA6D0927B98FEC00F3B786 /* LaunchScreen.storyboard in Resources */,
+				B1D83714281BBE3C00A2AF01 /* lottieLoading.json in Resources */,
 				A9DA6C6F27B97EE500F3B786 /* Assets.xcassets in Resources */,
 				A9DA6C6D27B97EE300F3B786 /* Main.storyboard in Resources */,
 			);

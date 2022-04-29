@@ -7,7 +7,7 @@
 
 import UIKit
 import KuringSDK
-import SkeletonView
+import Lottie
 
 class KUNoticeListViewController: UIViewController {
     /// 현재 공지 타입. 기본값: `.학사`
@@ -36,8 +36,21 @@ class KUNoticeListViewController: UIViewController {
     var query: NoticeListQuery?
     /// 한번 요청 시 가져올 수 있는 공지 사항 개수 최댓값
     let loadLimit = 20
+    /// 데이터가 로딩되는 동안에 나타는 애니메이션 뷰(lottie)
+    let animationView: AnimationView = .init(name: StringSet.Lottie.loading)
     /// 현재 공지사항 리스트를 가져오는 중인지 여부
-    var isLoading = false
+    var isLoading = false {
+        didSet {
+            if isLoading {
+                animationView.isHidden = false
+                animationView.loopMode = .loop
+                animationView.play()
+            } else {
+                animationView.isHidden = true
+                animationView.stop()
+            }
+        }
+    }
     
     @IBOutlet weak var notificationButton: UIBarButtonItem!
     
@@ -45,12 +58,17 @@ class KUNoticeListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {
-            tableView.isSkeletonable = true
             tableView.estimatedRowHeight = 68
         }
     }
     
     let refreshControl = UIRefreshControl()
+    
+    override func loadView() {
+        super.loadView()
+        
+        self.setupAnimationView()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +81,6 @@ class KUNoticeListViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.isSkeletonable = true
         
         let nibName = UINib(nibName: "KUNoticeListViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: KUNoticeListViewCell.identifier)
@@ -81,7 +98,6 @@ class KUNoticeListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         HapticManager.shared.setupGenerator()
         
         updateNotifcationButton()
@@ -92,7 +108,6 @@ class KUNoticeListViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         HapticManager.shared.release()
-        tableView.hideSkeleton()
     }
     
     override func viewDidLayoutSubviews() {
@@ -171,7 +186,6 @@ class KUNoticeListViewController: UIViewController {
     func load() {
         if hasNextList[currentType] == false { return }
         isLoading = true
-        tableView.showSkeleton()
         let currentOffset = offsetList[currentType] ?? 0
         let params = NoticeListQuery.Params(
             type: currentType,
@@ -182,7 +196,7 @@ class KUNoticeListViewController: UIViewController {
         query?.load { [weak self] result in
             guard let self = self else { return }
             self.isLoading = false
-            self.tableView.hideSkeleton()
+            
             switch result {
                 // FIXME: - see above
             case .success(let notices):
@@ -208,6 +222,17 @@ class KUNoticeListViewController: UIViewController {
                 Logger.debug(error.localizedDescription)
             }
         }
+    }
+    
+    private func setupAnimationView() {
+        view.addSubview(animationView)
+        
+        animationView.snp.makeConstraints {
+            $0.width.height.equalTo(100)
+            $0.center.equalToSuperview()
+        }
+        
+        self.isLoading = true
     }
 }
 
@@ -299,16 +324,4 @@ extension KUNoticeListViewController: KuringDelegate {
     func didReadyToCreateNotificationBanner(title: String, body: String, identifier: String) { }
     
     func didUpdateSubscription(_ subscription: Subscription) { }
-}
-
-extension KUNoticeListViewController: SkeletonTableViewDelegate { }
-
-extension KUNoticeListViewController: SkeletonTableViewDataSource {
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return KUNoticeListViewCell.identifier
-    }
 }
