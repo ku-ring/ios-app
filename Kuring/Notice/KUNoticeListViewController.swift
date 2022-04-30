@@ -37,17 +37,28 @@ class KUNoticeListViewController: UIViewController {
     /// 한번 요청 시 가져올 수 있는 공지 사항 개수 최댓값
     let loadLimit = 20
     /// 데이터가 로딩되는 동안에 나타는 애니메이션 뷰(lottie)
-    let animationView: AnimationView = .init(name: StringSet.Lottie.loading)
+    let loadingView: AnimationView = .init(name: StringSet.Lottie.loading)
+    /// 데이터가 refresh를 통해 로딩되는 동안에 나타나는 동안에 보여질 애니메이션 뷰(lottie)
+    let indicatorView: AnimationView = .init(name: StringSet.Lottie.loading)
     /// 현재 공지사항 리스트를 가져오는 중인지 여부
     var isLoading = false {
         didSet {
             if isLoading {
-                animationView.isHidden = false
-                animationView.loopMode = .loop
-                animationView.play()
+                if refreshControl.isRefreshing {
+                    indicatorView.isHidden = false
+                    indicatorView.loopMode = .loop
+                    indicatorView.play()
+                } else {
+                    loadingView.isHidden = false
+                    loadingView.loopMode = .loop
+                    loadingView.play()
+                }
             } else {
-                animationView.isHidden = true
-                animationView.stop()
+                loadingView.isHidden = true
+                indicatorView.isHidden = true
+                
+                loadingView.stop()
+                indicatorView.stop()
             }
         }
     }
@@ -63,7 +74,7 @@ class KUNoticeListViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        self.setupAnimationView()
+        self.setupAnimationViews()
     }
     
     override func viewDidLoad() {
@@ -220,22 +231,23 @@ class KUNoticeListViewController: UIViewController {
         }
     }
     
-    private func setupAnimationView() {
-        view.addSubview(animationView)
-        
-        animationView.snp.makeConstraints {
+    private func setupAnimationViews() {
+        // main loading
+        view.addSubview(loadingView)
+        loadingView.snp.makeConstraints {
             $0.width.height.equalTo(100)
             $0.center.equalToSuperview()
         }
-        
         isLoading = true
+        
+        // refresh indicator
+        refreshControl.addSubview(indicatorView)
+        indicatorView.snp.makeConstraints {
+            $0.width.height.equalTo(100)
+            $0.center.equalToSuperview()
+        }
+        refreshControl.tintColor = .clear
     }
-//
-//    private func setupRefreshControl() {
-//        refreshControl.addSubview(animationView)
-//        refreshControl.clipsToBounds = true
-//        refreshControl.tintColor = .clear
-//    }
 }
 
 extension KUNoticeListViewController: UICollectionViewDelegate, UICollectionViewDataSource {

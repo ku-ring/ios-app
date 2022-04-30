@@ -10,6 +10,7 @@ import WebKit
 import KuringSDK
 import SnapKit
 import GoogleMobileAds
+import Lottie
 
 class NoticeWebViewController: UIViewController {
     @IBOutlet weak var webView: WKWebView! {
@@ -17,11 +18,7 @@ class NoticeWebViewController: UIViewController {
             webView.backgroundColor = .clear
         }
     }
-    @IBOutlet weak var indicator: UIActivityIndicatorView! {
-        didSet {
-            indicator.isHidden = true
-        }
-    }
+    
     @IBOutlet weak var adsBannerContainerView: UIView! {
         didSet {
             adsBannerContainerView.backgroundColor = .clear
@@ -47,6 +44,9 @@ class NoticeWebViewController: UIViewController {
         self.present(activityVC, animated: true, completion: nil)
     }
     
+    // MARK: Lottie Indicator
+    fileprivate let indicatorView: AnimationView = .init(name: StringSet.Lottie.loading)
+    
     // MARK: 인앱광고
     lazy var bannerView: GADBannerView = {
         let adSize = GADAdSizeFromCGSize(
@@ -58,6 +58,12 @@ class NoticeWebViewController: UIViewController {
     // MARK: Properties
     var articleURL: String!
     var articleID: String!
+    
+    override func loadView() {
+        super.loadView()
+        
+        setupAnimationView()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,8 +92,8 @@ class NoticeWebViewController: UIViewController {
         Logger.debug("✅ 공지화면을 열었습니다: \(url)")
         let request = URLRequest(url: url)
         webView.load(request)
-        indicator.startAnimating()
-        indicator.isHidden = false
+        indicatorView.play()
+        indicatorView.isHidden = false
     }
     
     private func setupAdsBanner() {
@@ -107,6 +113,15 @@ class NoticeWebViewController: UIViewController {
         
         bannerView.load(.init())
     }
+    
+    private func setupAnimationView() {
+        view.addSubview(indicatorView)
+        
+        indicatorView.snp.makeConstraints {
+            $0.width.height.equalTo(100)
+            $0.center.equalToSuperview()
+        }
+    }
 }
 
 
@@ -117,23 +132,23 @@ extension NoticeWebViewController: WKUIDelegate, WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         // 로딩중인지 확인
-        guard !indicator.isAnimating else { return }
-        indicator.startAnimating()
-        indicator.isHidden = false
+        guard !indicatorView.isAnimationPlaying else { return }
+        indicatorView.play()
+        indicatorView.isHidden = false
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // 로딩이 완료되었을 때 동작
-        indicator.stopAnimating()
-        indicator.isHidden = true
+        indicatorView.stop()
+        indicatorView.isHidden = true
         
         Kuring.readNotice(id: articleID)
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         // 로딩 실패시
-        indicator.stopAnimating()
-        indicator.isHidden = true
+        indicatorView.stop()
+        indicatorView.isHidden = true
     }
     
     func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
