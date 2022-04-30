@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // MARK: Kuring
+        Kuring.apiKey = "4BEC2A05-2F67-4083-83E2-866AEAF6CFDC"
         Kuring.addDelegate(self, forKey: "AppDelegate")
         
         // MARK: Firebase
