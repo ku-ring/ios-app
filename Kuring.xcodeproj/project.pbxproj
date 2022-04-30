@@ -60,6 +60,7 @@
 		B143E91727EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143E91627EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift */; };
 		B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A0382427C3ECD70074EC95 /* Logger.swift */; };
 		B1D83714281BBE3C00A2AF01 /* lottieLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = B1D83713281BBE3C00A2AF01 /* lottieLoading.json */; };
+		B1DE72E8281CFFAB002AF498 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = B1DE72E7281CFFAB002AF498 /* Lottie */; };
 		B1E475EC27E824A1002CEBD6 /* CategorySelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */; };
 		B1E4761027E85B2C002CEBD6 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */; };
 		B1FBAD1127D213C90044B90A /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */; };
@@ -149,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1DE72E8281CFFAB002AF498 /* Lottie in Frameworks */,
 				A9DA6C8027B9809900F3B786 /* FirebaseMessaging in Frameworks */,
 				A9DA6C7E27B9809900F3B786 /* FirebaseAnalytics in Frameworks */,
 				A9DA6C8327B9813D00F3B786 /* KuringSDK.framework in Frameworks */,
@@ -439,6 +441,7 @@
 			packageProductDependencies = (
 				A9DA6C7D27B9809900F3B786 /* FirebaseAnalytics */,
 				A9DA6C7F27B9809900F3B786 /* FirebaseMessaging */,
+				B1DE72E7281CFFAB002AF498 /* Lottie */,
 			);
 			productName = Kuring;
 			productReference = A9DA6C6227B97EE300F3B786 /* Kuring.app */;
@@ -470,6 +473,7 @@
 			mainGroup = A9DA6C5927B97EE300F3B786;
 			packageReferences = (
 				A9DA6C7C27B9809900F3B786 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				B1DE72E6281CFFAB002AF498 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = A9DA6C6327B97EE300F3B786 /* Products */;
 			projectDirPath = "";
@@ -831,6 +835,14 @@
 				minimumVersion = 8.9.0;
 			};
 		};
+		B1DE72E6281CFFAB002AF498 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 3.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -843,6 +855,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A9DA6C7C27B9809900F3B786 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		B1DE72E7281CFFAB002AF498 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1DE72E6281CFFAB002AF498 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

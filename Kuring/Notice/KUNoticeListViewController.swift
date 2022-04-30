@@ -56,11 +56,7 @@ class KUNoticeListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var tableView: UITableView! {
-        didSet {
-            tableView.estimatedRowHeight = 68
-        }
-    }
+    @IBOutlet weak var tableView: UITableView!
     
     let refreshControl = UIRefreshControl()
     
@@ -232,8 +228,14 @@ class KUNoticeListViewController: UIViewController {
             $0.center.equalToSuperview()
         }
         
-        self.isLoading = true
+        isLoading = true
     }
+//
+//    private func setupRefreshControl() {
+//        refreshControl.addSubview(animationView)
+//        refreshControl.clipsToBounds = true
+//        refreshControl.tintColor = .clear
+//    }
 }
 
 extension KUNoticeListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
