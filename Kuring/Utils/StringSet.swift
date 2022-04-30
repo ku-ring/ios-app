@@ -18,4 +18,9 @@ struct StringSet {
         static let noSubscription = "구독중인 카테고리가 없습니다."
         static let empty = "받은 알림이 없습니다."
     }
+    
+    /// lottie-ios JSON 파일 name
+    struct Lottie {
+        static let loading = "lottieLoading"
+    }
 }
