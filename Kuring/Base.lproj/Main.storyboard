@@ -254,14 +254,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="교수 이름" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fdA-AP-fub">
-                                                    <rect key="frame" x="20" y="7.5" width="52.5" height="17"/>
+                                                    <rect key="frame" x="20" y="8" width="63" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" name="ColorSet.Label.primary"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="학과 또는 학부 · 단과대학" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iKz-P3-JNW">
-                                                    <rect key="frame" x="20" y="27" width="111.5" height="13.5"/>
+                                                    <rect key="frame" x="20" y="28.5" width="111.5" height="13.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" name="ColorSet.Label.primary"/>
@@ -522,9 +522,6 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Qjl-as-f6L">
-                                <rect key="frame" x="197" y="465" width="20" height="20"/>
-                            </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S9e-qF-Uus">
                                 <rect key="frame" x="32" y="802" width="350" height="52"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -545,9 +542,7 @@
                             <constraint firstItem="6Iz-nG-4y8" firstAttribute="trailing" secondItem="S9e-qF-Uus" secondAttribute="trailing" constant="32" id="3UC-P2-RSQ"/>
                             <constraint firstItem="S9e-qF-Uus" firstAttribute="leading" secondItem="6Iz-nG-4y8" secondAttribute="leading" constant="32" id="48O-Tc-qL6"/>
                             <constraint firstItem="6Iz-nG-4y8" firstAttribute="trailing" secondItem="32d-ld-B1l" secondAttribute="trailing" id="5FF-fa-3e3"/>
-                            <constraint firstItem="Qjl-as-f6L" firstAttribute="centerY" secondItem="6Iz-nG-4y8" secondAttribute="centerY" id="6pQ-yy-ri8"/>
                             <constraint firstItem="32d-ld-B1l" firstAttribute="top" secondItem="6Iz-nG-4y8" secondAttribute="top" id="JG4-5r-QWU"/>
-                            <constraint firstItem="Qjl-as-f6L" firstAttribute="centerX" secondItem="6Iz-nG-4y8" secondAttribute="centerX" id="R2H-ai-VoU"/>
                             <constraint firstItem="32d-ld-B1l" firstAttribute="leading" secondItem="6Iz-nG-4y8" secondAttribute="leading" id="TSC-0i-9Dx"/>
                             <constraint firstItem="6Iz-nG-4y8" firstAttribute="bottom" secondItem="S9e-qF-Uus" secondAttribute="bottom" constant="8" id="XsF-YW-4pM"/>
                             <constraint firstAttribute="bottom" secondItem="32d-ld-B1l" secondAttribute="bottom" id="zoh-ag-KVz"/>
@@ -563,7 +558,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="adsBannerContainerView" destination="S9e-qF-Uus" id="Uqf-eV-vNE"/>
-                        <outlet property="indicator" destination="Qjl-as-f6L" id="fQP-pJ-qIc"/>
                         <outlet property="webView" destination="32d-ld-B1l" id="ZjJ-w9-84X"/>
                     </connections>
                 </viewController>
