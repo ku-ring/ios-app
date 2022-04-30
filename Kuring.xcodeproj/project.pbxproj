@@ -59,8 +59,8 @@
 		B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */; };
 		B143E91727EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143E91627EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift */; };
 		B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A0382427C3ECD70074EC95 /* Logger.swift */; };
-		B1D83714281BBE3C00A2AF01 /* lottieLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = B1D83713281BBE3C00A2AF01 /* lottieLoading.json */; };
 		B1DE72E8281CFFAB002AF498 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = B1DE72E7281CFFAB002AF498 /* Lottie */; };
+		B1DE72EC281D1EE7002AF498 /* lottieLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = B1DE72EB281D1EE7002AF498 /* lottieLoading.json */; };
 		B1E475EC27E824A1002CEBD6 /* CategorySelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */; };
 		B1E4761027E85B2C002CEBD6 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */; };
 		B1FBAD1127D213C90044B90A /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */; };
@@ -137,7 +137,7 @@
 		B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.AppsFlyerLib.swift; sourceTree = "<group>"; };
 		B143E91627EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.UICollectionView.swift; sourceTree = "<group>"; };
 		B1A0382427C3ECD70074EC95 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		B1D83713281BBE3C00A2AF01 /* lottieLoading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottieLoading.json; sourceTree = "<group>"; };
+		B1DE72EB281D1EE7002AF498 /* lottieLoading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottieLoading.json; sourceTree = "<group>"; };
 		B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectCell.swift; sourceTree = "<group>"; };
 		B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
@@ -406,7 +406,7 @@
 		B1D83712281BBD2900A2AF01 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B1D83713281BBE3C00A2AF01 /* lottieLoading.json */,
+				B1DE72EB281D1EE7002AF498 /* lottieLoading.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -489,11 +489,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1DE72EC281D1EE7002AF498 /* lottieLoading.json in Resources */,
 				A9DA6CDD27B98D2300F3B786 /* KUNoticeListViewCell.xib in Resources */,
 				A9DA6CE127B98D2300F3B786 /* KUAlarmTableViewCell.xib in Resources */,
 				A9DA6C7B27B9800F00F3B786 /* GoogleService-Info.plist in Resources */,
 				A9DA6D0927B98FEC00F3B786 /* LaunchScreen.storyboard in Resources */,
-				B1D83714281BBE3C00A2AF01 /* lottieLoading.json in Resources */,
 				A9DA6C6F27B97EE500F3B786 /* Assets.xcassets in Resources */,
 				A9DA6C6D27B97EE300F3B786 /* Main.storyboard in Resources */,
 			);
