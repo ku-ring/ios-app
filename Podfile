@@ -11,7 +11,6 @@ target 'Kuring' do
   pod 'RxSwift', '6.2.0'
   pod 'RxCocoa', '6.2.0'
   pod 'RxGesture'
-  pod 'SkeletonView'
   pod 'SnapKit', '~> 5.0.0'
   pod 'Then'
   pod 'AppsFlyerFramework'
