@@ -7,7 +7,6 @@
 
 import UIKit
 import KuringSDK
-import SkeletonView
 
 class KUNoticeListViewCell: UITableViewCell {
     static let identifier = "noticeListCell"
@@ -15,28 +14,16 @@ class KUNoticeListViewCell: UITableViewCell {
     @IBOutlet weak var dotView: UIView! {
         didSet {
             dotView.isHidden = true
-            dotView.isSkeletonable = false
             dotView.layer.cornerRadius = 4
             dotView.layer.masksToBounds = true
         }
     }
-    @IBOutlet weak var titleLabel: UILabel! {
-        didSet {
-            titleLabel.isSkeletonable = true
-            titleLabel.linesCornerRadius = 4
-        }
-    }
-    @IBOutlet weak var dateLabel: UILabel! {
-        didSet {
-            dateLabel.isSkeletonable = true
-            dateLabel.linesCornerRadius = 4
-        }
-    }
-    @IBOutlet weak var hstackView: UIStackView! {
-        didSet {
-            hstackView.isSkeletonable = true
-        }
-    }
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    @IBOutlet weak var hstackView: UIStackView!
+    
     var notice: Notice! {
         didSet {
             updateUI()
@@ -47,7 +34,6 @@ class KUNoticeListViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        self.isSkeletonable = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
