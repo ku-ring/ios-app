@@ -17,7 +17,7 @@ struct MessageList: View {
         VStack {
             ScrollView(showsIndicators: false) {
                 ScrollViewReader { reader in
-                    VStack(spacing: 8) {
+                    VStack(spacing: 4) {
                         ForEach(viewModel.sentMessages, id: \.requestID) { message in
                             if let userMessage = message as? UserMessage {
                                 MessageBubble(viewModel: viewModel, userMessage: userMessage)

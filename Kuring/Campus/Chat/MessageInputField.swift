@@ -11,6 +11,10 @@ import KuringCommons
 struct MessageInputField: View {
     @ObservedObject var viewModel: KuringChatViewModel
     
+    var isSendable: Bool {
+        !viewModel.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+    
     var body: some View {
         HStack(spacing: 0) {
             TextField("메세지를 입력하세요", text: $viewModel.text)
@@ -30,6 +34,8 @@ struct MessageInputField: View {
                     .foregroundColor(ColorSet.green.color)
                     .padding()
             }
+            .disabled(!isSendable)
+            .opacity(isSendable ? 1.0 : 0.5)
         }
         .padding(.leading, 16)
         .padding(.trailing, 8)

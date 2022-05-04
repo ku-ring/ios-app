@@ -72,7 +72,7 @@ struct MessageBubble: View {
         HStack(alignment: .bottom, spacing: 8) {
             if isSentByMe {
                 Spacer()
-                    .frame(minWidth: 130)
+                    .frame(minWidth: 80)
                 
                 if sendingState != .sent {
                     sendingState.icon
@@ -90,7 +90,8 @@ struct MessageBubble: View {
                     .multilineTextAlignment(.leading)
                     .lineLimit(10)
             }
-            .padding()
+            .padding(.vertical, 8)
+            .padding(.horizontal, 16)
             .background {
                 RoundedRectangle(cornerRadius: 16)
                     .fill(
@@ -121,7 +122,7 @@ struct MessageBubble: View {
                 }
                 
                 Spacer()
-                    .frame(minWidth: 130)
+                    .frame(minWidth: 80)
             }
         }
         .padding(.horizontal)
