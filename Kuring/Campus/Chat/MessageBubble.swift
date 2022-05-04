@@ -55,7 +55,7 @@ struct MessageBubble: View {
             text.foregroundColor = isSentByMe
             ? ColorSet.Background.primary.color
             : ColorSet.Label.primary.color
-            if let range = text.range(of: "j_sung_0o0") {
+            if let myUsername = SendbirdChat.getCurrentUser()?.nickname, let range = text.range(of: myUsername) {
                 text[range].foregroundColor = isSentByMe
                 ? ColorSet.Background.primary.color
                 : ColorSet.green.color
