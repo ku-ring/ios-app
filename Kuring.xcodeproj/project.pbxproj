@@ -19,6 +19,8 @@
 		A9C447EE27C81E640094D9A9 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447ED27C81E640094D9A9 /* OnboardingViewModel.swift */; };
 		A9CD87C627E3A0A5007831C8 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CD87C527E3A0A5007831C8 /* FeedbackView.swift */; };
 		A9CD87C827E3AC77007831C8 /* FeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CD87C727E3AC77007831C8 /* FeedbackViewModel.swift */; };
+		A9D248032822BB1800F6FC51 /* SendbirdChatSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A9D248022822BB1800F6FC51 /* SendbirdChatSDK */; };
+		A9D248062822DAD900F6FC51 /* KuringCommons in Frameworks */ = {isa = PBXBuildFile; productRef = A9D248052822DAD900F6FC51 /* KuringCommons */; };
 		A9DA6C6627B97EE300F3B786 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */; };
 		A9DA6C6D27B97EE300F3B786 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6B27B97EE300F3B786 /* Main.storyboard */; };
 		A9DA6C6F27B97EE500F3B786 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6E27B97EE500F3B786 /* Assets.xcassets */; };
@@ -30,7 +32,6 @@
 		A9DA6C8727B981A100F3B786 /* AppDelegate.RemoteNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */; };
 		A9DA6CC227B98D2300F3B786 /* Date.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */; };
 		A9DA6CC327B98D2300F3B786 /* Notice.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9027B98D2200F3B786 /* Notice.Kuring.swift */; };
-		A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9627B98D2200F3B786 /* ColorSet.swift */; };
 		A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */; };
 		A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C9E27B98D2200F3B786 /* KUStaffViewController.swift */; };
 		A9DA6CCF27B98D2300F3B786 /* KUSearchViewController.Searcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6CA027B98D2200F3B786 /* KUSearchViewController.Searcher.swift */; };
@@ -108,7 +109,6 @@
 		A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.RemoteNotification.swift; sourceTree = "<group>"; };
 		A9DA6C8F27B98D2200F3B786 /* Date.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.Kuring.swift; sourceTree = "<group>"; };
 		A9DA6C9027B98D2200F3B786 /* Notice.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notice.Kuring.swift; sourceTree = "<group>"; };
-		A9DA6C9627B98D2200F3B786 /* ColorSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
 		A9DA6C9827B98D2200F3B786 /* UIViewController.Kuring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.Kuring.swift; sourceTree = "<group>"; };
 		A9DA6C9E27B98D2200F3B786 /* KUStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUStaffViewController.swift; sourceTree = "<group>"; };
 		A9DA6CA027B98D2200F3B786 /* KUSearchViewController.Searcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUSearchViewController.Searcher.swift; sourceTree = "<group>"; };
@@ -152,8 +152,10 @@
 			files = (
 				B1DE72E8281CFFAB002AF498 /* Lottie in Frameworks */,
 				A9DA6C8027B9809900F3B786 /* FirebaseMessaging in Frameworks */,
+				A9D248032822BB1800F6FC51 /* SendbirdChatSDK in Frameworks */,
 				A9DA6C7E27B9809900F3B786 /* FirebaseAnalytics in Frameworks */,
 				A9DA6C8327B9813D00F3B786 /* KuringSDK.framework in Frameworks */,
+				A9D248062822DAD900F6FC51 /* KuringCommons in Frameworks */,
 				D430312BD0477A68D7728C94 /* Pods_Kuring.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,7 +268,6 @@
 		A9DA6C8E27B98D2200F3B786 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A9DA6C9627B98D2200F3B786 /* ColorSet.swift */,
 				A9580E5D27ED85AC00253A58 /* StringSet.swift */,
 				B1A0382427C3ECD70074EC95 /* Logger.swift */,
 			);
@@ -442,6 +443,8 @@
 				A9DA6C7D27B9809900F3B786 /* FirebaseAnalytics */,
 				A9DA6C7F27B9809900F3B786 /* FirebaseMessaging */,
 				B1DE72E7281CFFAB002AF498 /* Lottie */,
+				A9D248022822BB1800F6FC51 /* SendbirdChatSDK */,
+				A9D248052822DAD900F6FC51 /* KuringCommons */,
 			);
 			productName = Kuring;
 			productReference = A9DA6C6227B97EE300F3B786 /* Kuring.app */;
@@ -474,6 +477,8 @@
 			packageReferences = (
 				A9DA6C7C27B9809900F3B786 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				B1DE72E6281CFFAB002AF498 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				A9D248012822BB1800F6FC51 /* XCRemoteSwiftPackageReference "sendbird-chat-sdk-ios" */,
+				A9D248042822DAD900F6FC51 /* XCRemoteSwiftPackageReference "kuring-ios-commons" */,
 			);
 			productRefGroup = A9DA6C6327B97EE300F3B786 /* Products */;
 			projectDirPath = "";
@@ -563,7 +568,6 @@
 				A9DA6CC227B98D2300F3B786 /* Date.Kuring.swift in Sources */,
 				A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */,
 				A9C447E327C788A50094D9A9 /* OnboardingRow.swift in Sources */,
-				A9DA6CC927B98D2300F3B786 /* ColorSet.swift in Sources */,
 				B1FBAD1327D21C5D0044B90A /* UserDefaultManager.swift in Sources */,
 				A9DA6CDA27B98D2300F3B786 /* KUNoticeTagView.swift in Sources */,
 				A9C445BC27C552FB0094D9A9 /* OnboardingView.swift in Sources */,
@@ -827,6 +831,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A9D248012822BB1800F6FC51 /* XCRemoteSwiftPackageReference "sendbird-chat-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sendbird/sendbird-chat-sdk-ios";
+			requirement = {
+				kind = exactVersion;
+				version = "4.0.0-beta.3";
+			};
+		};
+		A9D248042822DAD900F6FC51 /* XCRemoteSwiftPackageReference "kuring-ios-commons" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/KU-Stacks/kuring-ios-commons";
+			requirement = {
+				kind = exactVersion;
+				version = 1.0.0;
+			};
+		};
 		A9DA6C7C27B9809900F3B786 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -846,6 +866,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A9D248022822BB1800F6FC51 /* SendbirdChatSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A9D248012822BB1800F6FC51 /* XCRemoteSwiftPackageReference "sendbird-chat-sdk-ios" */;
+			productName = SendbirdChatSDK;
+		};
+		A9D248052822DAD900F6FC51 /* KuringCommons */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A9D248042822DAD900F6FC51 /* XCRemoteSwiftPackageReference "kuring-ios-commons" */;
+			productName = KuringCommons;
+		};
 		A9DA6C7D27B9809900F3B786 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A9DA6C7C27B9809900F3B786 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

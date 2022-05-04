@@ -6,8 +6,9 @@
 //
 
 import UIKit
-import KuringSDK
 import Lottie
+import KuringSDK
+import KuringCommons
 
 class KUNoticeListViewController: UIViewController {
     /// 현재 공지 타입. 기본값: `.학사`

@@ -11,6 +11,7 @@ import RxSwift
 import SnapKit
 import Then
 import KuringSDK
+import KuringCommons
 
 protocol CategorySelectViewControllerDelegate: AnyObject {
     func didSelectCategory(_ selectedCategories: [NoticeType])

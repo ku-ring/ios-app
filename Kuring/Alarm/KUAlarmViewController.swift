@@ -7,6 +7,7 @@
 
 import UIKit
 import KuringSDK
+import KuringCommons
 
 class KUAlarmViewController: UITableViewController {
     var notifications: [String : [KuringSDK.Notification]] {
