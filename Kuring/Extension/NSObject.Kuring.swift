@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KuringCommons
 
 public extension NSObject {
     /// This gets the class name of object.

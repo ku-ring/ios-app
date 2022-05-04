@@ -7,6 +7,7 @@
 
 import UIKit
 import KuringSDK
+import KuringCommons
 import FirebaseMessaging
 
 extension AppDelegate {
@@ -31,7 +32,7 @@ extension AppDelegate {
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        Logger.debug("Failed to register for remote notification with error: \(error.localizedDescription)")
+        Logger.error("Failed to register for remote notification with error: \(error.localizedDescription)")
     }
 }
 

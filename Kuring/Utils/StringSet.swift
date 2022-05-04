@@ -23,4 +23,19 @@ struct StringSet {
     struct Lottie {
         static let loading = "lottieLoading"
     }
+    
+    struct Campus {
+        static let baseString = "com.kuring.campus"
+        static let channelID = "kuring_main_anonymous"
+        
+        struct UserDefaults {
+            static let baseString = "\(StringSet.Campus.baseString).userdefaults"
+            static let usernameKey = "\(baseString).username"
+        }
+        
+        // MARK: Chat
+        static let chatString = "\(baseString).chat"
+        static let channelDelegateID = "\(chatString).delegate.channel"
+        static let connectionDelegateID = "\(chatString).delegate.connection"
+    }
 }

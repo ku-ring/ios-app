@@ -7,6 +7,7 @@
 
 import UIKit
 import KuringSDK
+import KuringCommons
 
 extension KUSearchViewController: SearcherDelegate {
     

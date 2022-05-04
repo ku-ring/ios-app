@@ -8,6 +8,7 @@
 import UIKit
 import WebKit
 import KuringSDK
+import KuringCommons
 import SnapKit
 import GoogleMobileAds
 import Lottie
@@ -156,7 +157,7 @@ extension NoticeWebViewController: WKUIDelegate, WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        Logger.debug("[com.kuring.service] Failed provisional navigation: \(error.localizedDescription)")
+        Logger.error(error)
     }
 }
 
@@ -187,18 +188,18 @@ extension NoticeWebViewController: GADBannerViewDelegate {
     }
     
     func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
-        print("bannerViewDidRecordImpression")
+        Logger.debug("bannerViewDidRecordImpression")
     }
     
     func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
-        print("bannerViewWillPresentScreen")
+        Logger.debug("bannerViewWillPresentScreen")
     }
     
     func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {
-        print("bannerViewWillDIsmissScreen")
+        Logger.debug("bannerViewWillDIsmissScreen")
     }
     
     func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
-        print("bannerViewDidDismissScreen")
+        Logger.debug("bannerViewDidDismissScreen")
     }
 }

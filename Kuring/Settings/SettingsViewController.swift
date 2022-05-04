@@ -7,6 +7,7 @@
 
 import UIKit
 import KuringSDK
+import KuringCommons
 import SwiftUI
 
 enum URLLink: String {
@@ -79,8 +80,11 @@ class SettingsViewController: UITableViewController {
     }
     
     func showFeedback() {
-        let feedbackVC = UIHostingController(rootView: FeedbackView())
-        self.present(feedbackVC, animated: true, completion: nil)
+        let chatVC = UIHostingController(rootView: KuringChatView())
+        chatVC.modalPresentationStyle = .fullScreen
+        self.present(chatVC, animated: true, completion: nil)
+//        let feedbackVC = UIHostingController(rootView: FeedbackView())
+//        self.present(feedbackVC, animated: true, completion: nil)
     }
 }
 

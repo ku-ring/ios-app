@@ -21,6 +21,21 @@
 		A9CD87C827E3AC77007831C8 /* FeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CD87C727E3AC77007831C8 /* FeedbackViewModel.swift */; };
 		A9D248032822BB1800F6FC51 /* SendbirdChatSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A9D248022822BB1800F6FC51 /* SendbirdChatSDK */; };
 		A9D248062822DAD900F6FC51 /* KuringCommons in Frameworks */ = {isa = PBXBuildFile; productRef = A9D248052822DAD900F6FC51 /* KuringCommons */; };
+		A9D248082822DDDA00F6FC51 /* CampusOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D248072822DDDA00F6FC51 /* CampusOnboarding.swift */; };
+		A9D2480C2822DE3B00F6FC51 /* CampusStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2480B2822DE3B00F6FC51 /* CampusStartView.swift */; };
+		A9D2480E2822DE5400F6FC51 /* CampusUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2480D2822DE5400F6FC51 /* CampusUsernameView.swift */; };
+		A9D248102822DE7D00F6FC51 /* CampusOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2480F2822DE7D00F6FC51 /* CampusOnboardingViewModel.swift */; };
+		A9D248122822DEE900F6FC51 /* KuringCampus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D248112822DEE900F6FC51 /* KuringCampus.swift */; };
+		A9D248142822DFB700F6FC51 /* String.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D248132822DFB700F6FC51 /* String.Kuring.swift */; };
+		A9D248162822E03D00F6FC51 /* MessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D248152822E03D00F6FC51 /* MessageBubble.swift */; };
+		A9D248182822E05400F6FC51 /* MessageInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D248172822E05400F6FC51 /* MessageInputField.swift */; };
+		A9D2481A2822E06A00F6FC51 /* MessageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D248192822E06A00F6FC51 /* MessageList.swift */; };
+		A9D2481C2822E08F00F6FC51 /* TopRoundedShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2481B2822E08F00F6FC51 /* TopRoundedShape.swift */; };
+		A9D2481E2822E0D700F6FC51 /* KuringChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2481D2822E0D700F6FC51 /* KuringChatView.swift */; };
+		A9D248212822E13800F6FC51 /* KuringChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D248202822E13800F6FC51 /* KuringChatViewModel.swift */; };
+		A9D248232822E15100F6FC51 /* KuringChatViewModel.OpenChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D248222822E15100F6FC51 /* KuringChatViewModel.OpenChannel.swift */; };
+		A9D248252822E16400F6FC51 /* KuringChatViewModel.Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D248242822E16400F6FC51 /* KuringChatViewModel.Connection.swift */; };
+		A9D248282822E60000F6FC51 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D248272822E60000F6FC51 /* Chat.swift */; };
 		A9DA6C6627B97EE300F3B786 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */; };
 		A9DA6C6D27B97EE300F3B786 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6B27B97EE300F3B786 /* Main.storyboard */; };
 		A9DA6C6F27B97EE500F3B786 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6E27B97EE500F3B786 /* Assets.xcassets */; };
@@ -59,7 +74,6 @@
 		A9DA6D0927B98FEC00F3B786 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6D0727B98FEC00F3B786 /* LaunchScreen.storyboard */; };
 		B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */; };
 		B143E91727EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143E91627EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift */; };
-		B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A0382427C3ECD70074EC95 /* Logger.swift */; };
 		B1DE72E8281CFFAB002AF498 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = B1DE72E7281CFFAB002AF498 /* Lottie */; };
 		B1DE72EC281D1EE7002AF498 /* lottieLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = B1DE72EB281D1EE7002AF498 /* lottieLoading.json */; };
 		B1E475EC27E824A1002CEBD6 /* CategorySelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */; };
@@ -98,6 +112,21 @@
 		A9C447ED27C81E640094D9A9 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		A9CD87C527E3A0A5007831C8 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		A9CD87C727E3AC77007831C8 /* FeedbackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewModel.swift; sourceTree = "<group>"; };
+		A9D248072822DDDA00F6FC51 /* CampusOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusOnboarding.swift; sourceTree = "<group>"; };
+		A9D2480B2822DE3B00F6FC51 /* CampusStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusStartView.swift; sourceTree = "<group>"; };
+		A9D2480D2822DE5400F6FC51 /* CampusUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusUsernameView.swift; sourceTree = "<group>"; };
+		A9D2480F2822DE7D00F6FC51 /* CampusOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusOnboardingViewModel.swift; sourceTree = "<group>"; };
+		A9D248112822DEE900F6FC51 /* KuringCampus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringCampus.swift; sourceTree = "<group>"; };
+		A9D248132822DFB700F6FC51 /* String.Kuring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.Kuring.swift; sourceTree = "<group>"; };
+		A9D248152822E03D00F6FC51 /* MessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubble.swift; sourceTree = "<group>"; };
+		A9D248172822E05400F6FC51 /* MessageInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputField.swift; sourceTree = "<group>"; };
+		A9D248192822E06A00F6FC51 /* MessageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageList.swift; sourceTree = "<group>"; };
+		A9D2481B2822E08F00F6FC51 /* TopRoundedShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRoundedShape.swift; sourceTree = "<group>"; };
+		A9D2481D2822E0D700F6FC51 /* KuringChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringChatView.swift; sourceTree = "<group>"; };
+		A9D248202822E13800F6FC51 /* KuringChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringChatViewModel.swift; sourceTree = "<group>"; };
+		A9D248222822E15100F6FC51 /* KuringChatViewModel.OpenChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringChatViewModel.OpenChannel.swift; sourceTree = "<group>"; };
+		A9D248242822E16400F6FC51 /* KuringChatViewModel.Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringChatViewModel.Connection.swift; sourceTree = "<group>"; };
+		A9D248272822E60000F6FC51 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		A9DA6C6227B97EE300F3B786 /* Kuring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9DA6C6C27B97EE300F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -136,7 +165,6 @@
 		A9DA6D0827B98FEC00F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.AppsFlyerLib.swift; sourceTree = "<group>"; };
 		B143E91627EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.UICollectionView.swift; sourceTree = "<group>"; };
-		B1A0382427C3ECD70074EC95 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B1DE72EB281D1EE7002AF498 /* lottieLoading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottieLoading.json; sourceTree = "<group>"; };
 		B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectCell.swift; sourceTree = "<group>"; };
 		B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
@@ -191,6 +219,51 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		A9D248092822DDE000F6FC51 /* CampusOnboarding */ = {
+			isa = PBXGroup;
+			children = (
+				A9D248072822DDDA00F6FC51 /* CampusOnboarding.swift */,
+				A9D2480B2822DE3B00F6FC51 /* CampusStartView.swift */,
+				A9D2480D2822DE5400F6FC51 /* CampusUsernameView.swift */,
+				A9D2480F2822DE7D00F6FC51 /* CampusOnboardingViewModel.swift */,
+			);
+			path = CampusOnboarding;
+			sourceTree = "<group>";
+		};
+		A9D2480A2822DDF800F6FC51 /* Campus */ = {
+			isa = PBXGroup;
+			children = (
+				A9D248092822DDE000F6FC51 /* CampusOnboarding */,
+				A9D248112822DEE900F6FC51 /* KuringCampus.swift */,
+				A9D2481F2822E11D00F6FC51 /* Chat */,
+			);
+			path = Campus;
+			sourceTree = "<group>";
+		};
+		A9D2481F2822E11D00F6FC51 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				A9D248152822E03D00F6FC51 /* MessageBubble.swift */,
+				A9D248192822E06A00F6FC51 /* MessageList.swift */,
+				A9D248172822E05400F6FC51 /* MessageInputField.swift */,
+				A9D2481B2822E08F00F6FC51 /* TopRoundedShape.swift */,
+				A9D2481D2822E0D700F6FC51 /* KuringChatView.swift */,
+				A9D248262822E54600F6FC51 /* ViewModel */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		A9D248262822E54600F6FC51 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A9D248202822E13800F6FC51 /* KuringChatViewModel.swift */,
+				A9D248222822E15100F6FC51 /* KuringChatViewModel.OpenChannel.swift */,
+				A9D248242822E16400F6FC51 /* KuringChatViewModel.Connection.swift */,
+				A9D248272822E60000F6FC51 /* Chat.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		A9DA6C5927B97EE300F3B786 = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +289,7 @@
 				A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */,
 				A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */,
 				B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */,
+				A9D2480A2822DDF800F6FC51 /* Campus */,
 				A9DA6CB327B98D2200F3B786 /* Alarm */,
 				A9DA6C9927B98D2200F3B786 /* Category */,
 				A9DA6C9B27B98D2200F3B786 /* Manger */,
@@ -269,7 +343,6 @@
 			isa = PBXGroup;
 			children = (
 				A9580E5D27ED85AC00253A58 /* StringSet.swift */,
-				B1A0382427C3ECD70074EC95 /* Logger.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -400,6 +473,7 @@
 				A9DA6C9027B98D2200F3B786 /* Notice.Kuring.swift */,
 				A994014627E9E5AC00FE9989 /* View.Kuring.swift */,
 				A9580E5B27ED849100253A58 /* NSObject.Kuring.swift */,
+				A9D248132822DFB700F6FC51 /* String.Kuring.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -555,15 +629,23 @@
 			files = (
 				A994014727E9E5AC00FE9989 /* View.Kuring.swift in Sources */,
 				A9DA6CD527B98D2300F3B786 /* KUSearchedNoticeCell.swift in Sources */,
+				A9D2481E2822E0D700F6FC51 /* KuringChatView.swift in Sources */,
+				A9D2481C2822E08F00F6FC51 /* TopRoundedShape.swift in Sources */,
 				A9DA6CCF27B98D2300F3B786 /* KUSearchViewController.Searcher.swift in Sources */,
+				A9D2480C2822DE3B00F6FC51 /* CampusStartView.swift in Sources */,
 				A9DA6CD127B98D2300F3B786 /* KUSearchViewController.UITextField.swift in Sources */,
 				A9DA6CE327B98D2300F3B786 /* Opensource.swift in Sources */,
 				A9C447E727C7A2560094D9A9 /* OnboardingIntroView.swift in Sources */,
+				A9D248252822E16400F6FC51 /* KuringChatViewModel.Connection.swift in Sources */,
+				A9D248232822E15100F6FC51 /* KuringChatViewModel.OpenChannel.swift in Sources */,
 				A9DA6CC327B98D2300F3B786 /* Notice.Kuring.swift in Sources */,
 				A9580E5C27ED849100253A58 /* NSObject.Kuring.swift in Sources */,
+				A9D248282822E60000F6FC51 /* Chat.swift in Sources */,
 				A9DA6CDC27B98D2300F3B786 /* KUNoticeListCollectionViewCell.swift in Sources */,
 				A9C447E927C7A61B0094D9A9 /* OnboardingViewController.swift in Sources */,
 				A9DA6CE527B98D2300F3B786 /* OpensourceListViewController.swift in Sources */,
+				A9D248082822DDDA00F6FC51 /* CampusOnboarding.swift in Sources */,
+				A9D248182822E05400F6FC51 /* MessageInputField.swift in Sources */,
 				A9DA6CD327B98D2300F3B786 /* KUSearchViewController.swift in Sources */,
 				A9DA6CC227B98D2300F3B786 /* Date.Kuring.swift in Sources */,
 				A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */,
@@ -579,17 +661,23 @@
 				A9DA6CD227B98D2300F3B786 /* KUSearchViewController.UITableView.swift in Sources */,
 				B1E4761027E85B2C002CEBD6 /* HapticManager.swift in Sources */,
 				A9CD87C827E3AC77007831C8 /* FeedbackViewModel.swift in Sources */,
+				A9D248212822E13800F6FC51 /* KuringChatViewModel.swift in Sources */,
 				A9DA6CD027B98D2300F3B786 /* KUSearchViewController.UICollectionView.swift in Sources */,
+				A9D248102822DE7D00F6FC51 /* CampusOnboardingViewModel.swift in Sources */,
 				B1E475EC27E824A1002CEBD6 /* CategorySelectCell.swift in Sources */,
+				A9D248162822E03D00F6FC51 /* MessageBubble.swift in Sources */,
 				A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */,
-				B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */,
 				A9DA6CDF27B98D2300F3B786 /* KUAlarmViewController.swift in Sources */,
 				B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */,
 				A9DA6C8727B981A100F3B786 /* AppDelegate.RemoteNotification.swift in Sources */,
+				A9D248142822DFB700F6FC51 /* String.Kuring.swift in Sources */,
 				A9DA6C6627B97EE300F3B786 /* AppDelegate.swift in Sources */,
 				A9C447EE27C81E640094D9A9 /* OnboardingViewModel.swift in Sources */,
+				A9D2481A2822E06A00F6FC51 /* MessageList.swift in Sources */,
+				A9D248122822DEE900F6FC51 /* KuringCampus.swift in Sources */,
 				A9DA6CE027B98D2300F3B786 /* KUAlarmTableViewCell.swift in Sources */,
 				A9CD87C627E3A0A5007831C8 /* FeedbackView.swift in Sources */,
+				A9D2480E2822DE5400F6FC51 /* CampusUsernameView.swift in Sources */,
 				A9DA6CD727B98D2300F3B786 /* SettingsViewController.swift in Sources */,
 				B143E91727EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift in Sources */,
 				A9580E5E27ED85AC00253A58 /* StringSet.swift in Sources */,
