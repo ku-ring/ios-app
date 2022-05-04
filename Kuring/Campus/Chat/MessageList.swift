@@ -44,7 +44,14 @@ struct MessageList: View {
             
             MessageInputField(viewModel: viewModel)
         }
-        .padding(.bottom, UIApplication.shared.windows.first?.safeAreaInsets.bottom)
+        .padding(
+            .bottom,
+            UIApplication.shared
+                .connectedScenes
+                .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+                .first { $0.isKeyWindow }?
+                .safeAreaInsets.bottom
+        )
         .background(ColorSet.Background.primary.color)
         .clipShape(TopRoundedShape())
     }
