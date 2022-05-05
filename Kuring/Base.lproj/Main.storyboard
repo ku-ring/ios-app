@@ -494,6 +494,12 @@
                                     <segue destination="vtV-ei-QVP" kind="show" identifier="showNotification" id="smu-ZT-6js"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem image="message" catalog="system" id="4OP-pa-Ikm">
+                                <color key="tintColor" name="ColorSet.Label.primary"/>
+                                <connections>
+                                    <action selector="didTapCampus" destination="14F-oY-WCU" id="wQO-FW-4rB"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -1002,6 +1008,7 @@
         <image name="checklist" catalog="system" width="128" height="105"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="message" catalog="system" width="128" height="113"/>
         <image name="rectangle.grid.1x2" catalog="system" width="128" height="101"/>
         <namedColor name="ColorSet.Label.green">
             <color red="0.012000000104308128" green="0.41999998688697815" blue="0.24699999392032623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

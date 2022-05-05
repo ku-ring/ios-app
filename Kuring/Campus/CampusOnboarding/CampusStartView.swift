@@ -14,12 +14,23 @@ struct CampusStartView: View {
     var body: some View {
         VStack(spacing: 64) {
             Spacer()
-  
+            
             Image("campus.man.sitdown")
                 .padding(.horizontal, 64)
                 .clipped()
             
             Text("친구에게 메세지를 보내세요")
+            
+            NavigationLink(destination: KuringChatView()) {
+                RoundedRectangle(cornerRadius: 26)
+                    .frame(width: 232, height: 52)
+                    .foregroundColor(ColorSet.green.color)
+                    .overlay {
+                        Text("시작하기")
+                            .foregroundColor(ColorSet.Background.primary.color)
+                    }
+                    .padding(.bottom, 64)
+            }
             
             Button(action: viewModel.start) {
                 RoundedRectangle(cornerRadius: 26)

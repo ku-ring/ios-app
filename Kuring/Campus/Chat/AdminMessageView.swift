@@ -10,8 +10,16 @@ import KuringCommons
 import SendbirdChatSDK
 
 struct AdminMessageView: View {
+    @State private var showsMore: Bool = false
     let requestID: String
     let adminName: String = StringSet.Campus.adminName
+    var prevMessage: String {
+        if message.count > 255 {
+            return String(message[message.index(message.startIndex, offsetBy: 0)...message.index(message.startIndex, offsetBy: 255)])
+        } else {
+            return message
+        }
+    }
     let message: String
     
     var body: some View {
@@ -24,11 +32,24 @@ struct AdminMessageView: View {
                     .font(.subheadline.bold())
                     .foregroundColor(ColorSet.Label.green.color)
                 
-                Text(message)
-                    .font(.subheadline)
-                    .foregroundColor(ColorSet.Label.green.color)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(10)
+                Group {
+                    if showsMore {
+                        Text(message)
+                    } else {
+                        Text("\(prevMessage)...")
+                    }
+                }
+                .font(.subheadline)
+                .foregroundColor(ColorSet.Label.green.color)
+                .multilineTextAlignment(.leading)
+                
+                if message.count > 255 {
+                    Button(action: showMore) {
+                        Text(showsMore ? "생략하기" : "더보기")
+                            .font(.subheadline)
+                            .foregroundColor(ColorSet.Label.secondary.color)
+                    }
+                }
             }
             .padding(.vertical, 8)
             .padding(.horizontal, 16)
@@ -48,5 +69,9 @@ struct AdminMessageView: View {
     
     func share() {
         UIPasteboard.general.string = message
+    }
+    
+    func showMore() {
+        showsMore.toggle()
     }
 }

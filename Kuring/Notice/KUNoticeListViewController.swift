@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 import Lottie
 import KuringSDK
 import KuringCommons
@@ -248,6 +249,19 @@ class KUNoticeListViewController: UIViewController {
             $0.center.equalToSuperview()
         }
         refreshControl.tintColor = .clear
+    }
+    
+    // TODO: 쿠링캠퍼스
+    @IBAction func didTapCampus() {
+        // Sendbird connect
+        // Sendbird nickname nil?
+        // - Shows onboarding
+        
+//        let viewModel = KuringChatViewModel()
+//        let chatView = UIHostingController(rootView: KuringChatView(viewModel: viewModel))
+        let chatView = CampusViewController()
+        chatView.modalPresentationStyle = .fullScreen
+        self.present(chatView, animated: true, completion: nil)
     }
 }
 

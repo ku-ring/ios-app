@@ -29,16 +29,25 @@ import KuringCommons
 // connect(userID)
 // openChannel.enter
 
-public struct KuringChatView: View {
+struct KuringChatView: View {
     @StateObject private var viewModel = KuringChatViewModel()
     
-    public var body: some View {
-        VStack {
+    var body: some View {
+        ZStack {
             MessageList(viewModel: viewModel)
-                .padding(.top, 4)
+            
+            if viewModel.isLoading {
+                LottieView(filename: "lottieLoading")                
+            }
         }
         .edgesIgnoringSafeArea(.bottom)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("💬 쿠링청심대")
+                    .font(.title3.bold())
+                    .foregroundColor(ColorSet.Label.primary.color)
+            }
+        }
     }
-    
-    public init() { }
 }

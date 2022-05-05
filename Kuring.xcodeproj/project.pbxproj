@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		A9580E5C27ED849100253A58 /* NSObject.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9580E5B27ED849100253A58 /* NSObject.Kuring.swift */; };
 		A9580E5E27ED85AC00253A58 /* StringSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9580E5D27ED85AC00253A58 /* StringSet.swift */; };
+		A966E1B02824364200F6AF3D /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A966E1AF2824364200F6AF3D /* LottieView.swift */; };
+		A966E1B2282436C900F6AF3D /* CampusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A966E1B1282436C900F6AF3D /* CampusViewController.swift */; };
+		A966E1B42824476C00F6AF3D /* UserMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A966E1B32824476C00F6AF3D /* UserMessageView.swift */; };
 		A994014727E9E5AC00FE9989 /* View.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A994014627E9E5AC00FE9989 /* View.Kuring.swift */; };
 		A9C445BC27C552FB0094D9A9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C445BB27C552FB0094D9A9 /* OnboardingView.swift */; };
 		A9C447DF27C7877E0094D9A9 /* CategorySelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447DE27C7877E0094D9A9 /* CategorySelectView.swift */; };
@@ -103,6 +106,9 @@
 		6AA68EE0A1CA6D5FD2FB9A4F /* Pods-Kuring.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuring.release.xcconfig"; path = "Target Support Files/Pods-Kuring/Pods-Kuring.release.xcconfig"; sourceTree = "<group>"; };
 		A9580E5B27ED849100253A58 /* NSObject.Kuring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObject.Kuring.swift; sourceTree = "<group>"; };
 		A9580E5D27ED85AC00253A58 /* StringSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSet.swift; sourceTree = "<group>"; };
+		A966E1AF2824364200F6AF3D /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		A966E1B1282436C900F6AF3D /* CampusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusViewController.swift; sourceTree = "<group>"; };
+		A966E1B32824476C00F6AF3D /* UserMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMessageView.swift; sourceTree = "<group>"; };
 		A994014627E9E5AC00FE9989 /* View.Kuring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.Kuring.swift; sourceTree = "<group>"; };
 		A9C445BB27C552FB0094D9A9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		A9C447DE27C7877E0094D9A9 /* CategorySelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectView.swift; sourceTree = "<group>"; };
@@ -237,6 +243,7 @@
 			children = (
 				A9D248092822DDE000F6FC51 /* CampusOnboarding */,
 				A9D248112822DEE900F6FC51 /* KuringCampus.swift */,
+				A966E1B1282436C900F6AF3D /* CampusViewController.swift */,
 				A9D2481F2822E11D00F6FC51 /* Chat */,
 			);
 			path = Campus;
@@ -246,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				A9D248152822E03D00F6FC51 /* MessageBubble.swift */,
+				A966E1B32824476C00F6AF3D /* UserMessageView.swift */,
 				A9D2482D282396DB00F6FC51 /* AdminMessageView.swift */,
 				A9D248192822E06A00F6FC51 /* MessageList.swift */,
 				A9D248172822E05400F6FC51 /* MessageInputField.swift */,
@@ -292,6 +300,7 @@
 				A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */,
 				A9DA6C8627B981A100F3B786 /* AppDelegate.RemoteNotification.swift */,
 				B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */,
+				A966E1AF2824364200F6AF3D /* LottieView.swift */,
 				A9D2480A2822DDF800F6FC51 /* Campus */,
 				A9DA6CB327B98D2200F3B786 /* Alarm */,
 				A9DA6C9927B98D2200F3B786 /* Category */,
@@ -647,6 +656,7 @@
 				A9DA6CDC27B98D2300F3B786 /* KUNoticeListCollectionViewCell.swift in Sources */,
 				A9C447E927C7A61B0094D9A9 /* OnboardingViewController.swift in Sources */,
 				A9DA6CE527B98D2300F3B786 /* OpensourceListViewController.swift in Sources */,
+				A966E1B02824364200F6AF3D /* LottieView.swift in Sources */,
 				A9D248082822DDDA00F6FC51 /* CampusOnboarding.swift in Sources */,
 				A9D248182822E05400F6FC51 /* MessageInputField.swift in Sources */,
 				A9DA6CD327B98D2300F3B786 /* KUSearchViewController.swift in Sources */,
@@ -660,6 +670,7 @@
 				A9DA6CD827B98D2300F3B786 /* KUNoticeListViewController.swift in Sources */,
 				A9DA6CDE27B98D2300F3B786 /* CategorySelectViewController.swift in Sources */,
 				A9DA6CDB27B98D2300F3B786 /* KUNoticeListViewCell.swift in Sources */,
+				A966E1B42824476C00F6AF3D /* UserMessageView.swift in Sources */,
 				A9DA6CE227B98D2300F3B786 /* KUAlarmHeaderView.swift in Sources */,
 				A9C447EB27C7EA3B0094D9A9 /* Bundle.Kuring.swift in Sources */,
 				A9DA6CD227B98D2300F3B786 /* KUSearchViewController.UITableView.swift in Sources */,
@@ -690,6 +701,7 @@
 				A9DA6CD427B98D2300F3B786 /* KUSearchTypeCollectionViewCell.swift in Sources */,
 				B1FBAD1127D213C90044B90A /* AppStoreReviewManager.swift in Sources */,
 				A9DA6CD927B98D2300F3B786 /* NoticeWebViewController.swift in Sources */,
+				A966E1B2282436C900F6AF3D /* CampusViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
