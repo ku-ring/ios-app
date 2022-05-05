@@ -21,7 +21,6 @@ class NoticeLockerViewController: UIViewController {
     private var lockerNotices: [Notice] = Kuring.noticeLocker {
         didSet {
             Kuring.noticeLocker = lockerNotices
-            tableView.reloadData()
         }
     }
     
@@ -29,6 +28,12 @@ class NoticeLockerViewController: UIViewController {
         super.viewDidLoad()
         
         setupViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
     }
     
     private func setupViews() {
