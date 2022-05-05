@@ -140,6 +140,9 @@ class KuringChatViewModel: ObservableObject {
                 self.sentMessages.append(message)
             }
             self.lastMessageIndex = fetchedMessages.last?.requestID ?? ""
+            if let adminMessage = fetchedMessages.last as? AdminMessage {
+                self.lastMessageIndex = "\(adminMessage.messageID)"
+            }
         }
     }
     

@@ -8,8 +8,10 @@
 import SwiftUI
 import KuringCommons
 
+// 앱실행
+// Sendbird init with appID
+
 // 온보딩
-// Sendbird .init with appID
 // userID: fcm token
 // connect(userID:)
 
@@ -31,29 +33,11 @@ public struct KuringChatView: View {
     @StateObject private var viewModel = KuringChatViewModel()
     
     public var body: some View {
-        NavigationView {
-            VStack {
-                MessageList(viewModel: viewModel)
-                    .padding(.top, 4)
-            }
-            .edgesIgnoringSafeArea(.bottom)
-            .background { ColorSet.green.color.edgesIgnoringSafeArea(.top) }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {}) {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(ColorSet.Background.primary.color)
-                    }
-                }
-                
-                ToolbarItem(placement: .principal) {
-                    Text("쿠링청심대")
-                        .font(.title3.bold())
-                        .foregroundColor(ColorSet.Background.primary.color)
-                }
-            }
+        VStack {
+            MessageList(viewModel: viewModel)
+                .padding(.top, 4)
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
     
     public init() { }

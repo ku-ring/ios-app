@@ -21,6 +21,8 @@ struct MessageList: View {
                         ForEach(viewModel.sentMessages, id: \.requestID) { message in
                             if let userMessage = message as? UserMessage {
                                 MessageBubble(viewModel: viewModel, userMessage: userMessage)
+                            } else if let adminMessage = message as? AdminMessage {
+                                AdminMessageView(adminMessage: adminMessage)
                             }
                         }
                         
@@ -53,6 +55,5 @@ struct MessageList: View {
                 .safeAreaInsets.bottom
         )
         .background(ColorSet.Background.primary.color)
-        .clipShape(TopRoundedShape())
     }
 }

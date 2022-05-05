@@ -81,8 +81,10 @@ class SettingsViewController: UITableViewController {
     
     func showFeedback() {
         let chatVC = UIHostingController(rootView: KuringChatView())
-        chatVC.modalPresentationStyle = .fullScreen
-        self.present(chatVC, animated: true, completion: nil)
+        let nav = UINavigationController(rootViewController: chatVC)
+        nav.title = "쿠링청심대"
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true, completion: nil)
 //        let feedbackVC = UIHostingController(rootView: FeedbackView())
 //        self.present(feedbackVC, animated: true, completion: nil)
     }

@@ -27,6 +27,7 @@ struct StringSet {
     struct Campus {
         static let baseString = "com.kuring.campus"
         static let channelID = "kuring_main_anonymous"
+        static let adminName = "🍿 쿠링이 알려드려요!"
         
         struct UserDefaults {
             static let baseString = "\(StringSet.Campus.baseString).userdefaults"

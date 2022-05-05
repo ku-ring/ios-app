@@ -36,6 +36,7 @@
 		A9D248232822E15100F6FC51 /* KuringChatViewModel.OpenChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D248222822E15100F6FC51 /* KuringChatViewModel.OpenChannel.swift */; };
 		A9D248252822E16400F6FC51 /* KuringChatViewModel.Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D248242822E16400F6FC51 /* KuringChatViewModel.Connection.swift */; };
 		A9D248282822E60000F6FC51 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D248272822E60000F6FC51 /* Chat.swift */; };
+		A9D2482E282396DB00F6FC51 /* AdminMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2482D282396DB00F6FC51 /* AdminMessageView.swift */; };
 		A9DA6C6627B97EE300F3B786 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */; };
 		A9DA6C6D27B97EE300F3B786 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6B27B97EE300F3B786 /* Main.storyboard */; };
 		A9DA6C6F27B97EE500F3B786 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6E27B97EE500F3B786 /* Assets.xcassets */; };
@@ -127,6 +128,7 @@
 		A9D248222822E15100F6FC51 /* KuringChatViewModel.OpenChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringChatViewModel.OpenChannel.swift; sourceTree = "<group>"; };
 		A9D248242822E16400F6FC51 /* KuringChatViewModel.Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringChatViewModel.Connection.swift; sourceTree = "<group>"; };
 		A9D248272822E60000F6FC51 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		A9D2482D282396DB00F6FC51 /* AdminMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMessageView.swift; sourceTree = "<group>"; };
 		A9DA6C6227B97EE300F3B786 /* Kuring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9DA6C6C27B97EE300F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				A9D248152822E03D00F6FC51 /* MessageBubble.swift */,
+				A9D2482D282396DB00F6FC51 /* AdminMessageView.swift */,
 				A9D248192822E06A00F6FC51 /* MessageList.swift */,
 				A9D248172822E05400F6FC51 /* MessageInputField.swift */,
 				A9D2481B2822E08F00F6FC51 /* TopRoundedShape.swift */,
@@ -649,6 +652,7 @@
 				A9DA6CD327B98D2300F3B786 /* KUSearchViewController.swift in Sources */,
 				A9DA6CC227B98D2300F3B786 /* Date.Kuring.swift in Sources */,
 				A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */,
+				A9D2482E282396DB00F6FC51 /* AdminMessageView.swift in Sources */,
 				A9C447E327C788A50094D9A9 /* OnboardingRow.swift in Sources */,
 				B1FBAD1327D21C5D0044B90A /* UserDefaultManager.swift in Sources */,
 				A9DA6CDA27B98D2300F3B786 /* KUNoticeTagView.swift in Sources */,
