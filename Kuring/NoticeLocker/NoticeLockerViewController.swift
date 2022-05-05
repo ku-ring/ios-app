@@ -11,6 +11,7 @@ import KuringSDK
 class NoticeLockerViewController: UIViewController {
     
     let tableView = UITableView()
+    private var lockerNotices: [Notice] = Kuring.noticeLocker
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +40,7 @@ class NoticeLockerViewController: UIViewController {
 
 extension NoticeLockerViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        Kuring.noticeLocker.count
+        lockerNotices.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,9 +49,26 @@ extension NoticeLockerViewController: UITableViewDelegate, UITableViewDataSource
             for: indexPath
         ) as! KUNoticeListViewCell
         
-        let notice = Kuring.noticeLocker[indexPath.row]
+        let notice = lockerNotices[indexPath.row]
         cell.notice = notice
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let notice = lockerNotices[indexPath.row]
+        notice.read()
+        tableView.reloadData()
+        
+        let urlString = notice.urlString == ""
+        ? "https://kunkuk.ac.kr"
+        : notice.urlString
+        
+        showNoticeWebViewController(
+            url: urlString,
+            articleID: notice.articleID
+        )
     }
 }

@@ -714,7 +714,7 @@
             </objects>
             <point key="canvasLocation" x="-2494" y="3627"/>
         </scene>
-        <!--Notice Locker View Controller-->
+        <!--🗃공지 보관함-->
         <scene sceneID="g3N-dY-gyy">
             <objects>
                 <viewController id="8k3-mS-1kt" customClass="NoticeLockerViewController" customModule="Kuring" customModuleProvider="target" sceneMemberID="viewController">
@@ -724,7 +724,7 @@
                         <viewLayoutGuide key="safeArea" id="73P-7h-Y4v"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Gr6-S3-EFy"/>
+                    <navigationItem key="navigationItem" title="🗃공지 보관함" id="Gr6-S3-EFy"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9nM-2T-sYy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
