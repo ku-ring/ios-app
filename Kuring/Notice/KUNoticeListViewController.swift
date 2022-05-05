@@ -324,9 +324,32 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // TODO: 추후에 공지 보관함 기능 추가
-        return nil
+        let subscribeAction = UIContextualAction(
+            style: .normal,
+            title: nil
+        ) { [weak self] action, view, completionHandler in
+            // TODO: 공지 보관함 로직
+            let notice = self?.currentNotices[indexPath.row]
+            
+            // FIXME: 앱을 종료했다 다시 시작하면 값이 초기화 되는 이슈.
+            Logger.debug("previous \(Kuring.noticeLocker)")
+            var previous = Kuring.noticeLocker
+            previous.append(notice!)
+            let next: [Notice] = previous
+            Kuring.noticeLocker = next
+            
+            Kuring.noticeLocker.forEach {
+                Logger.debug("👉 forEach \($0.subject)")
+            }
+            
+            completionHandler(true)
+        }
+        subscribeAction.backgroundColor = .systemYellow
+        subscribeAction.image = UIImage(systemName: "archivebox.fill")
+        
+        return UISwipeActionsConfiguration(actions: [subscribeAction])
     }
 }
 

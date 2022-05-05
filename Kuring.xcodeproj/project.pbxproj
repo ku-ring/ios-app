@@ -64,7 +64,6 @@
 		B1DE72EC281D1EE7002AF498 /* lottieLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = B1DE72EB281D1EE7002AF498 /* lottieLoading.json */; };
 		B1E475EC27E824A1002CEBD6 /* CategorySelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */; };
 		B1E4761027E85B2C002CEBD6 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */; };
-		B1F11C272823A490004A7BFB /* NoticeLockerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F11C262823A490004A7BFB /* NoticeLockerView.swift */; };
 		B1FBAD1127D213C90044B90A /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */; };
 		D430312BD0477A68D7728C94 /* Pods_Kuring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */; };
 /* End PBXBuildFile section */
@@ -142,7 +141,6 @@
 		B1DE72EB281D1EE7002AF498 /* lottieLoading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottieLoading.json; sourceTree = "<group>"; };
 		B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectCell.swift; sourceTree = "<group>"; };
 		B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
-		B1F11C262823A490004A7BFB /* NoticeLockerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeLockerView.swift; sourceTree = "<group>"; };
 		B1FBAD1027D213C90044B90A /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		CDBAF75F4B2433346602A42E /* Pods_Kuring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kuring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -409,7 +407,6 @@
 			isa = PBXGroup;
 			children = (
 				B1CF41302822918F00D4E1CC /* NoticeLockerViewController.swift */,
-				B1F11C282823A495004A7BFB /* View */,
 			);
 			path = NoticeLocker;
 			sourceTree = "<group>";
@@ -426,14 +423,6 @@
 			isa = PBXGroup;
 			children = (
 				B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		B1F11C282823A495004A7BFB /* View */ = {
-			isa = PBXGroup;
-			children = (
-				B1F11C262823A490004A7BFB /* NoticeLockerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -612,7 +601,6 @@
 				A9DA6CD627B98D2300F3B786 /* KUSearchedStaffCell.swift in Sources */,
 				A9DA6CD427B98D2300F3B786 /* KUSearchTypeCollectionViewCell.swift in Sources */,
 				B1FBAD1127D213C90044B90A /* AppStoreReviewManager.swift in Sources */,
-				B1F11C272823A490004A7BFB /* NoticeLockerView.swift in Sources */,
 				A9DA6CD927B98D2300F3B786 /* NoticeWebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
