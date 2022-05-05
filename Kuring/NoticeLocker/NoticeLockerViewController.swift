@@ -10,8 +10,20 @@ import KuringSDK
 
 class NoticeLockerViewController: UIViewController {
     
-    let tableView = UITableView()
-    private var lockerNotices: [Notice] = Kuring.noticeLocker
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.separatorStyle = .none
+        
+        return tableView
+    }()
+    
+    /// 로컬에 저장된 사용자가 공지 보관함에 담은 공지 리스트
+    private var lockerNotices: [Notice] = Kuring.noticeLocker {
+        didSet {
+            Kuring.noticeLocker = lockerNotices
+            tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,5 +82,21 @@ extension NoticeLockerViewController: UITableViewDelegate, UITableViewDataSource
             url: urlString,
             articleID: notice.articleID
         )
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            tableView.beginUpdates()
+            lockerNotices.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.endUpdates()
+        default:
+            break
+        }
     }
 }
