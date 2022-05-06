@@ -331,24 +331,18 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
             title: nil
         ) { [weak self] action, view, completionHandler in
             // TODO: 공지 보관함 로직
-            guard let notice = self?.currentNotices[indexPath.row] else { return }
+            guard let self = self else { return }
+
+            let notice = self.currentNotices[indexPath.row]
             
-            
-            // FIXME: 앱을 종료했다 다시 시작하면 값이 초기화 되는 이슈.
-            Logger.debug("previous \(Kuring.noticeLocker)")
-            var lockerNotices: [Notice] = Kuring.noticeLocker
-            lockerNotices.append(notice)
-            
-            Kuring.noticeLocker = lockerNotices
-            
-            Kuring.noticeLocker.forEach {
-                Logger.debug("👉 forEach \($0.subject)")
+            if !Kuring.noticeLocker.contains(notice) {
+                Kuring.noticeLocker.append(notice)
             }
             
             completionHandler(true)
         }
         subscribeAction.backgroundColor = .systemYellow
-        subscribeAction.image = UIImage(systemName: "archivebox.fill")
+        subscribeAction.image = UIImage(systemName: "bookmark.fill")
         
         return UISwipeActionsConfiguration(actions: [subscribeAction])
     }

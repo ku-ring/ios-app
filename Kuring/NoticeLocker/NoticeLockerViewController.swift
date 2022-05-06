@@ -17,13 +17,6 @@ class NoticeLockerViewController: UIViewController {
         return tableView
     }()
     
-    /// 로컬에 저장된 사용자가 공지 보관함에 담은 공지 리스트
-    private var lockerNotices: [Notice] = Kuring.noticeLocker {
-        didSet {
-            Kuring.noticeLocker = lockerNotices
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,7 +50,7 @@ class NoticeLockerViewController: UIViewController {
 
 extension NoticeLockerViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        lockerNotices.count
+        Kuring.noticeLocker.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,7 +59,7 @@ extension NoticeLockerViewController: UITableViewDelegate, UITableViewDataSource
             for: indexPath
         ) as! KUNoticeListViewCell
         
-        let notice = lockerNotices[indexPath.row]
+        let notice = Kuring.noticeLocker[indexPath.row]
         cell.notice = notice
         
         return cell
@@ -75,7 +68,7 @@ extension NoticeLockerViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let notice = lockerNotices[indexPath.row]
+        let notice = Kuring.noticeLocker[indexPath.row]
         notice.read()
         tableView.reloadData()
         
@@ -90,14 +83,14 @@ extension NoticeLockerViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .delete
+        .delete
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
             tableView.beginUpdates()
-            lockerNotices.remove(at: indexPath.row)
+            Kuring.noticeLocker.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
         default:

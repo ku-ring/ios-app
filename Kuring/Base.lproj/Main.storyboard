@@ -254,14 +254,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="교수 이름" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fdA-AP-fub">
-                                                    <rect key="frame" x="20" y="7.5" width="52.5" height="17"/>
+                                                    <rect key="frame" x="20" y="8" width="63" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" name="ColorSet.Label.primary"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="학과 또는 학부 · 단과대학" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iKz-P3-JNW">
-                                                    <rect key="frame" x="20" y="27" width="111.5" height="13.5"/>
+                                                    <rect key="frame" x="20" y="28.5" width="111.5" height="13.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" name="ColorSet.Label.primary"/>
@@ -695,9 +695,8 @@
         <!--공지사항-->
         <scene sceneID="wHk-7O-kXE">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Wf-hK-7Mq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Fv-pX-dcU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="공지사항" image="tabBarItem:jmK-F7-Zce:image" catalog="system" id="jmK-F7-Zce"/>
+                    <tabBarItem key="tabBarItem" title="공지사항" image="tabBarItem:jmK-F7-Zce:image" id="jmK-F7-Zce"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xY1-J4-5VB">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -711,6 +710,7 @@
                         <segue destination="14F-oY-WCU" kind="relationship" relationship="rootViewController" id="sBY-Ih-Gvh"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Wf-hK-7Mq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2494" y="3627"/>
         </scene>
@@ -1031,7 +1031,7 @@
         <image name="checklist" catalog="system" width="128" height="105"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="tabBarItem:jmK-F7-Zce:image" catalog="system" width="128" height="101">
+        <image name="tabBarItem:jmK-F7-Zce:image" width="128" height="101">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
 S2V5ZWRBcmNoaXZlctEICVRyb290gAGvEBELDBscIRkmKywzNjlDS0xQU1UkbnVsbNcNDg8QERITFBUW
