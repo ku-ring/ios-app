@@ -6,47 +6,65 @@
 //
 
 import SwiftUI
+import KuringCommons
 import AuthenticationServices
-
 
 struct CampusSignInView: View {
     @ObservedObject var viewModel: CampusViewModel
     
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
-        switch viewModel.currentState {
-        case is InitialState, is ConnectingState, is ChannelRetrievalState:
-            LottieView(filename: StringSet.Lottie.loading)
-            
-        case is LoginState, is KakaoLoginState, is AppleLoginState:
-            SignInWithAppleButton(.signIn) { request in
-                viewModel.signInWithApple()
-                viewModel.configure(request)
-            } onCompletion: { result in
-                viewModel.handleResult(result)
-            }
-            .signInWithAppleButtonStyle(
-                colorScheme == .light ? .black : .white
-            )
-            .frame(height: 45)
-            .padding()
-            
-        case is UsernameRequestState:
+        NavigationView {
             VStack {
-                TextField("보여질 이름을 입력하세요", text: $viewModel.pendingUsername)
-                
-                Button(action: viewModel.setupUsername) {
-                    Text("Complete Sign up")
+                switch viewModel.currentState {
+                case is InitialState, is ConnectingState, is ChannelRetrievalState:
+                    LottieView(filename: StringSet.Lottie.loading)
+                    
+                case is LoginState, is KakaoLoginState, is AppleLoginState:
+                    SignInWithAppleButton(.signIn) { request in
+                        viewModel.signInWithApple()
+                        viewModel.configure(request)
+                    } onCompletion: { result in
+                        viewModel.handleResult(result)
+                    }
+                    .signInWithAppleButtonStyle(
+                        colorScheme == .light ? .black : .white
+                    )
+                    .frame(height: 45)
+                    .padding()
+                    
+                case is UsernameRequestState:
+                    VStack {
+                        TextField("보여질 이름을 입력하세요", text: $viewModel.pendingUsername)
+                        
+                        Button(action: viewModel.setupUsername) {
+                            Text("Complete Sign up")
+                        }
+                    }
+                    
+                case is ConnectedState:
+                    Button(action: viewModel.startChat) {
+                        Text("Start Chat")
+                    }
+                    
+                default:
+                    Text("de")
                 }
             }
-            
-        case is ConnectedState:
-            Button(action: viewModel.startChat) {
-                Text("Start Chat")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: viewModel.dismiss) {
+                        Image(systemName: "xmark")
+                            .foregroundColor(ColorSet.green.color)
+                    }
+                }
+                ToolbarItem(placement: .principal) {
+                    Text("쿠링캠퍼스")
+                        .font(.title3.bold())
+                        .foregroundColor(ColorSet.Label.primary.color)
+                }
             }
-            
-        default:
-            Text("de")
+            .tint(ColorSet.green.color)
         }
     }
 }

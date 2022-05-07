@@ -11,6 +11,7 @@ import SendbirdChatSDK
 import AuthenticationServices
 
 class CampusViewModel: ObservableObject {
+    @Published private(set) var onDismiss: Bool = false
     @Published var pendingUsername: String = ""
     
     var currentState: CampusState = InitialState() {
@@ -18,8 +19,16 @@ class CampusViewModel: ObservableObject {
         didSet { currentState.start(context: self) }
     }
     
+    init() {    
+        self.currentState.start(context: self)
+    }
+    
     func changeState(to newState: CampusState) {
         self.currentState = newState
+    }
+    
+    func dismiss() {
+        onDismiss = true
     }
     
     // MARK: - actions

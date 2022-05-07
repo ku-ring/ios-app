@@ -17,10 +17,10 @@ protocol CampusState {
 
 extension CampusState {
     func start(context: CampusViewModel) {
-        Logger.debug(#function)
+        Logger.debug("\(self) \(#function)")
     }
     
     func finish(context: CampusViewModel) {
-        Logger.debug(#function)
+        Logger.debug("\(self) \(#function)")
     }
 }
