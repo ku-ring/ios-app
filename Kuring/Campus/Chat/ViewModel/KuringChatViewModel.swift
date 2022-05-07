@@ -33,6 +33,7 @@ class KuringChatViewModel: ObservableObject {
         }
     }
     
+    // TODO: 글자수 제한 300자
     @Published var text: String = ""
     @Published var isLoading: Bool = false
     

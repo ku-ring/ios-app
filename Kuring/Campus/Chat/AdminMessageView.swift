@@ -52,7 +52,7 @@ struct AdminMessageView: View {
                 }
             }
             .padding(.vertical, 8)
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 20)
         }
         .contextMenu {
             Button(action: share) {
