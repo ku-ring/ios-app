@@ -47,8 +47,10 @@ struct CampusSignInView: View {
                         Text("Start Chat")
                     }
                     
+                case is ChatStartedState:
+                    KuringChatView()
                 default:
-                    Text("de")
+                    EmptyView()
                 }
             }
             .toolbar {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KuringSDK
 import KuringCommons
 import SendbirdChatSDK
 import AuthenticationServices
@@ -14,13 +15,14 @@ class CampusViewModel: ObservableObject {
     @Published private(set) var onDismiss: Bool = false
     @Published var pendingUsername: String = ""
     
-    var currentState: CampusState = InitialState() {
+    @Published var currentState: CampusState = InitialState() {
         willSet { currentState.finish(context: self) }
         didSet { currentState.start(context: self) }
     }
     
     init() {    
         self.currentState.start(context: self)
+        Kuring.userID = KuringCampus.userID
     }
     
     func changeState(to newState: CampusState) {
