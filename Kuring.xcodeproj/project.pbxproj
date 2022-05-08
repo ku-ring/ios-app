@@ -59,7 +59,7 @@
 		B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */; };
 		B143E91727EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B143E91627EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift */; };
 		B1A0382527C3ECD70074EC95 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A0382427C3ECD70074EC95 /* Logger.swift */; };
-		B1CF41312822918F00D4E1CC /* NoticeLockerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CF41302822918F00D4E1CC /* NoticeLockerViewController.swift */; };
+		B1CF41312822918F00D4E1CC /* NoticeBookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CF41302822918F00D4E1CC /* NoticeBookmarkViewController.swift */; };
 		B1DE72E8281CFFAB002AF498 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = B1DE72E7281CFFAB002AF498 /* Lottie */; };
 		B1DE72EC281D1EE7002AF498 /* lottieLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = B1DE72EB281D1EE7002AF498 /* lottieLoading.json */; };
 		B1E475EC27E824A1002CEBD6 /* CategorySelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */; };
@@ -137,7 +137,7 @@
 		B11B4C3427C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.AppsFlyerLib.swift; sourceTree = "<group>"; };
 		B143E91627EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.UICollectionView.swift; sourceTree = "<group>"; };
 		B1A0382427C3ECD70074EC95 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		B1CF41302822918F00D4E1CC /* NoticeLockerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeLockerViewController.swift; sourceTree = "<group>"; };
+		B1CF41302822918F00D4E1CC /* NoticeBookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBookmarkViewController.swift; sourceTree = "<group>"; };
 		B1DE72EB281D1EE7002AF498 /* lottieLoading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottieLoading.json; sourceTree = "<group>"; };
 		B1E475EB27E824A1002CEBD6 /* CategorySelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectCell.swift; sourceTree = "<group>"; };
 		B1E4760F27E85B2C002CEBD6 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
@@ -219,7 +219,7 @@
 				A9DA6C9B27B98D2200F3B786 /* Manger */,
 				A9DA6C8827B98D2200F3B786 /* Feedback */,
 				A9DA6CAB27B98D2200F3B786 /* Notice */,
-				B1CF412F2822916800D4E1CC /* NoticeLocker */,
+				B1CF412F2822916800D4E1CC /* NoticeBookmark */,
 				A9DA6C8A27B98D2200F3B786 /* Onboarding */,
 				A9DA6CBA27B98D2300F3B786 /* OpenSource */,
 				A9DA6C9D27B98D2200F3B786 /* Search */,
@@ -403,12 +403,12 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		B1CF412F2822916800D4E1CC /* NoticeLocker */ = {
+		B1CF412F2822916800D4E1CC /* NoticeBookmark */ = {
 			isa = PBXGroup;
 			children = (
-				B1CF41302822918F00D4E1CC /* NoticeLockerViewController.swift */,
+				B1CF41302822918F00D4E1CC /* NoticeBookmarkViewController.swift */,
 			);
-			path = NoticeLocker;
+			path = NoticeBookmark;
 			sourceTree = "<group>";
 		};
 		B1D83712281BBD2900A2AF01 /* Resources */ = {
@@ -580,7 +580,7 @@
 				A9DA6CE227B98D2300F3B786 /* KUAlarmHeaderView.swift in Sources */,
 				A9C447EB27C7EA3B0094D9A9 /* Bundle.Kuring.swift in Sources */,
 				A9DA6CD227B98D2300F3B786 /* KUSearchViewController.UITableView.swift in Sources */,
-				B1CF41312822918F00D4E1CC /* NoticeLockerViewController.swift in Sources */,
+				B1CF41312822918F00D4E1CC /* NoticeBookmarkViewController.swift in Sources */,
 				B1E4761027E85B2C002CEBD6 /* HapticManager.swift in Sources */,
 				A9CD87C827E3AC77007831C8 /* FeedbackViewModel.swift in Sources */,
 				A9DA6CD027B98D2300F3B786 /* KUSearchViewController.UICollectionView.swift in Sources */,

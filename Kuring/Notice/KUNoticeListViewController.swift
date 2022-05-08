@@ -333,8 +333,8 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
 
             let notice = self.currentNotices[indexPath.row]
             
-            if !Kuring.noticeLocker.contains(notice) {
-                Kuring.noticeLocker.append(notice)
+            if !Kuring.noticeBookmark.contains(notice) {
+                Kuring.noticeBookmark.append(notice)
             }
             
             completionHandler(true)

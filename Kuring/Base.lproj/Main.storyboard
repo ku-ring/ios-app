@@ -717,7 +717,7 @@
         <!--🗃공지 보관함-->
         <scene sceneID="g3N-dY-gyy">
             <objects>
-                <viewController id="8k3-mS-1kt" customClass="NoticeLockerViewController" customModule="Kuring" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8k3-mS-1kt" customClass="NoticeBookmarkViewController" customModule="Kuring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oZH-RM-p4L">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

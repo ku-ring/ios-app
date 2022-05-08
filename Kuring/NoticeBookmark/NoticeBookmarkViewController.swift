@@ -8,7 +8,7 @@
 import UIKit
 import KuringSDK
 
-class NoticeLockerViewController: UIViewController {
+class NoticeBookmarkViewController: UIViewController {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -48,9 +48,9 @@ class NoticeLockerViewController: UIViewController {
     }
 }
 
-extension NoticeLockerViewController: UITableViewDelegate, UITableViewDataSource {
+extension NoticeBookmarkViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        Kuring.noticeLocker.count
+        Kuring.noticeBookmark.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -59,7 +59,7 @@ extension NoticeLockerViewController: UITableViewDelegate, UITableViewDataSource
             for: indexPath
         ) as! KUNoticeListViewCell
         
-        let notice = Kuring.noticeLocker[indexPath.row]
+        let notice = Kuring.noticeBookmark[indexPath.row]
         cell.notice = notice
         
         return cell
@@ -68,7 +68,7 @@ extension NoticeLockerViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let notice = Kuring.noticeLocker[indexPath.row]
+        let notice = Kuring.noticeBookmark[indexPath.row]
         notice.read()
         tableView.reloadData()
         
@@ -90,7 +90,7 @@ extension NoticeLockerViewController: UITableViewDelegate, UITableViewDataSource
         switch editingStyle {
         case .delete:
             tableView.beginUpdates()
-            Kuring.noticeLocker.remove(at: indexPath.row)
+            Kuring.noticeBookmark.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
         default:
