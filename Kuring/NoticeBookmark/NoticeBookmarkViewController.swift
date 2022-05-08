@@ -30,7 +30,7 @@ class NoticeBookmarkViewController: UIViewController {
     }
     
     private func setupViews() {
-        view.addSubview(tableView) 
+        view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -72,7 +72,7 @@ extension NoticeBookmarkViewController: UITableViewDelegate, UITableViewDataSour
         notice.read()
         tableView.reloadData()
         
-        let urlString = notice.urlString == ""
+        let urlString = notice.urlString.isEmpty
         ? "https://kunkuk.ac.kr"
         : notice.urlString
         

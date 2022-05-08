@@ -305,7 +305,7 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
         notice.read()
         tableView.reloadData()
         
-        let urlString = notice.urlString == ""
+        let urlString = notice.urlString.isEmpty
         ? "https://kunkuk.ac.kr"
         : notice.urlString
         
