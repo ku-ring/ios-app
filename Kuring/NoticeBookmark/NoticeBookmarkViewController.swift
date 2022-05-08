@@ -30,7 +30,7 @@ class NoticeBookmarkViewController: UIViewController {
     }
     
     private func setupViews() {
-        [tableView].forEach { view.addSubview($0) }
+        view.addSubview(tableView) 
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
