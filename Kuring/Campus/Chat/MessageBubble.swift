@@ -91,7 +91,7 @@ struct MessageBubble: View {
                     .lineLimit(10)
             }
             .padding(.vertical, 8)
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 20)
             .background {
                 RoundedRectangle(cornerRadius: 16)
                     .fill(

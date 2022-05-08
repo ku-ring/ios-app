@@ -12,10 +12,10 @@ struct UsernameProtocol {
     /// (?=.{8,20}$) // username is 5-15 characters long
     /// (?![_.]) // no _ or . at the beginning
     /// (?!.*[_.]{2}) // no __ or _. or ._ or .. inside
-    /// [a-zA-Z0-9._] // allowed characters
+    /// [a-zA-Z가-힣0-9._] // allowed characters
     /// (?<![_.]) // no _ or . at the end
     /// ```
-    static let regex: NSRegularExpression = try! NSRegularExpression(pattern: "^(?=.{5,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$")
+    static let regex: NSRegularExpression = try! NSRegularExpression(pattern: "^(?=.{5,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z가-힣0-9._]+(?<![_.])$")
 }
 
 extension String {

@@ -40,6 +40,18 @@
 		A9D248252822E16400F6FC51 /* KuringChatViewModel.Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D248242822E16400F6FC51 /* KuringChatViewModel.Connection.swift */; };
 		A9D248282822E60000F6FC51 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D248272822E60000F6FC51 /* Chat.swift */; };
 		A9D2482E282396DB00F6FC51 /* AdminMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D2482D282396DB00F6FC51 /* AdminMessageView.swift */; };
+		A9D8609C28266F1200B611D6 /* CampusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D8609B28266F1200B611D6 /* CampusViewModel.swift */; };
+		A9D860B32826DFCD00B611D6 /* CampusSignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D860B22826DFCD00B611D6 /* CampusSignInView.swift */; };
+		A9D860E82827005B00B611D6 /* CampusState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D860E72827005B00B611D6 /* CampusState.swift */; };
+		A9D860EA282700A300B611D6 /* InitialState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D860E9282700A300B611D6 /* InitialState.swift */; };
+		A9D860EC282700EB00B611D6 /* ConnectingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D860EB282700EB00B611D6 /* ConnectingState.swift */; };
+		A9D860EE2827010400B611D6 /* LoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D860ED2827010400B611D6 /* LoginState.swift */; };
+		A9D860F02827011100B611D6 /* KakaoLoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D860EF2827011100B611D6 /* KakaoLoginState.swift */; };
+		A9D860F22827011A00B611D6 /* AppleLoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D860F12827011A00B611D6 /* AppleLoginState.swift */; };
+		A9D860F42827024C00B611D6 /* UsernameRequestState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D860F32827024C00B611D6 /* UsernameRequestState.swift */; };
+		A9D860F62827025300B611D6 /* ConnectedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D860F52827025300B611D6 /* ConnectedState.swift */; };
+		A9D860F82827025F00B611D6 /* ChannelRetrievalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D860F72827025F00B611D6 /* ChannelRetrievalState.swift */; };
+		A9D860FA2827026600B611D6 /* ChatStartedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D860F92827026600B611D6 /* ChatStartedState.swift */; };
 		A9DA6C6627B97EE300F3B786 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */; };
 		A9DA6C6D27B97EE300F3B786 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6B27B97EE300F3B786 /* Main.storyboard */; };
 		A9DA6C6F27B97EE500F3B786 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DA6C6E27B97EE500F3B786 /* Assets.xcassets */; };
@@ -135,6 +147,18 @@
 		A9D248242822E16400F6FC51 /* KuringChatViewModel.Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringChatViewModel.Connection.swift; sourceTree = "<group>"; };
 		A9D248272822E60000F6FC51 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		A9D2482D282396DB00F6FC51 /* AdminMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMessageView.swift; sourceTree = "<group>"; };
+		A9D8609B28266F1200B611D6 /* CampusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusViewModel.swift; sourceTree = "<group>"; };
+		A9D860B22826DFCD00B611D6 /* CampusSignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusSignInView.swift; sourceTree = "<group>"; };
+		A9D860E72827005B00B611D6 /* CampusState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusState.swift; sourceTree = "<group>"; };
+		A9D860E9282700A300B611D6 /* InitialState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialState.swift; sourceTree = "<group>"; };
+		A9D860EB282700EB00B611D6 /* ConnectingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectingState.swift; sourceTree = "<group>"; };
+		A9D860ED2827010400B611D6 /* LoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginState.swift; sourceTree = "<group>"; };
+		A9D860EF2827011100B611D6 /* KakaoLoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginState.swift; sourceTree = "<group>"; };
+		A9D860F12827011A00B611D6 /* AppleLoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginState.swift; sourceTree = "<group>"; };
+		A9D860F32827024C00B611D6 /* UsernameRequestState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameRequestState.swift; sourceTree = "<group>"; };
+		A9D860F52827025300B611D6 /* ConnectedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedState.swift; sourceTree = "<group>"; };
+		A9D860F72827025F00B611D6 /* ChannelRetrievalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelRetrievalState.swift; sourceTree = "<group>"; };
+		A9D860F92827026600B611D6 /* ChatStartedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStartedState.swift; sourceTree = "<group>"; };
 		A9DA6C6227B97EE300F3B786 /* Kuring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DA6C6527B97EE300F3B786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9DA6C6C27B97EE300F3B786 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -232,8 +256,10 @@
 			children = (
 				A9D248072822DDDA00F6FC51 /* CampusOnboarding.swift */,
 				A9D2480B2822DE3B00F6FC51 /* CampusStartView.swift */,
+				A9D860B22826DFCD00B611D6 /* CampusSignInView.swift */,
 				A9D2480D2822DE5400F6FC51 /* CampusUsernameView.swift */,
 				A9D2480F2822DE7D00F6FC51 /* CampusOnboardingViewModel.swift */,
+				A9D8609B28266F1200B611D6 /* CampusViewModel.swift */,
 			);
 			path = CampusOnboarding;
 			sourceTree = "<group>";
@@ -243,6 +269,7 @@
 			children = (
 				A9D248092822DDE000F6FC51 /* CampusOnboarding */,
 				A9D248112822DEE900F6FC51 /* KuringCampus.swift */,
+				A9D860E62827005000B611D6 /* CampusState */,
 				A966E1B1282436C900F6AF3D /* CampusViewController.swift */,
 				A9D2481F2822E11D00F6FC51 /* Chat */,
 			);
@@ -273,6 +300,23 @@
 				A9D248272822E60000F6FC51 /* Chat.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A9D860E62827005000B611D6 /* CampusState */ = {
+			isa = PBXGroup;
+			children = (
+				A9D860E72827005B00B611D6 /* CampusState.swift */,
+				A9D860E9282700A300B611D6 /* InitialState.swift */,
+				A9D860ED2827010400B611D6 /* LoginState.swift */,
+				A9D860EF2827011100B611D6 /* KakaoLoginState.swift */,
+				A9D860F12827011A00B611D6 /* AppleLoginState.swift */,
+				A9D860EB282700EB00B611D6 /* ConnectingState.swift */,
+				A9D860F32827024C00B611D6 /* UsernameRequestState.swift */,
+				A9D860F52827025300B611D6 /* ConnectedState.swift */,
+				A9D860F72827025F00B611D6 /* ChannelRetrievalState.swift */,
+				A9D860F92827026600B611D6 /* ChatStartedState.swift */,
+			);
+			path = CampusState;
 			sourceTree = "<group>";
 		};
 		A9DA6C5927B97EE300F3B786 = {
@@ -642,10 +686,13 @@
 				A994014727E9E5AC00FE9989 /* View.Kuring.swift in Sources */,
 				A9DA6CD527B98D2300F3B786 /* KUSearchedNoticeCell.swift in Sources */,
 				A9D2481E2822E0D700F6FC51 /* KuringChatView.swift in Sources */,
+				A9D860F02827011100B611D6 /* KakaoLoginState.swift in Sources */,
 				A9D2481C2822E08F00F6FC51 /* TopRoundedShape.swift in Sources */,
 				A9DA6CCF27B98D2300F3B786 /* KUSearchViewController.Searcher.swift in Sources */,
 				A9D2480C2822DE3B00F6FC51 /* CampusStartView.swift in Sources */,
+				A9D860F42827024C00B611D6 /* UsernameRequestState.swift in Sources */,
 				A9DA6CD127B98D2300F3B786 /* KUSearchViewController.UITextField.swift in Sources */,
+				A9D860FA2827026600B611D6 /* ChatStartedState.swift in Sources */,
 				A9DA6CE327B98D2300F3B786 /* Opensource.swift in Sources */,
 				A9C447E727C7A2560094D9A9 /* OnboardingIntroView.swift in Sources */,
 				A9D248252822E16400F6FC51 /* KuringChatViewModel.Connection.swift in Sources */,
@@ -656,9 +703,12 @@
 				A9DA6CDC27B98D2300F3B786 /* KUNoticeListCollectionViewCell.swift in Sources */,
 				A9C447E927C7A61B0094D9A9 /* OnboardingViewController.swift in Sources */,
 				A9DA6CE527B98D2300F3B786 /* OpensourceListViewController.swift in Sources */,
+				A9D860EC282700EB00B611D6 /* ConnectingState.swift in Sources */,
 				A966E1B02824364200F6AF3D /* LottieView.swift in Sources */,
+				A9D860B32826DFCD00B611D6 /* CampusSignInView.swift in Sources */,
 				A9D248082822DDDA00F6FC51 /* CampusOnboarding.swift in Sources */,
 				A9D248182822E05400F6FC51 /* MessageInputField.swift in Sources */,
+				A9D860EE2827010400B611D6 /* LoginState.swift in Sources */,
 				A9DA6CD327B98D2300F3B786 /* KUSearchViewController.swift in Sources */,
 				A9DA6CC227B98D2300F3B786 /* Date.Kuring.swift in Sources */,
 				A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */,
@@ -670,18 +720,22 @@
 				A9DA6CD827B98D2300F3B786 /* KUNoticeListViewController.swift in Sources */,
 				A9DA6CDE27B98D2300F3B786 /* CategorySelectViewController.swift in Sources */,
 				A9DA6CDB27B98D2300F3B786 /* KUNoticeListViewCell.swift in Sources */,
+				A9D860F82827025F00B611D6 /* ChannelRetrievalState.swift in Sources */,
 				A966E1B42824476C00F6AF3D /* UserMessageView.swift in Sources */,
 				A9DA6CE227B98D2300F3B786 /* KUAlarmHeaderView.swift in Sources */,
 				A9C447EB27C7EA3B0094D9A9 /* Bundle.Kuring.swift in Sources */,
 				A9DA6CD227B98D2300F3B786 /* KUSearchViewController.UITableView.swift in Sources */,
 				B1E4761027E85B2C002CEBD6 /* HapticManager.swift in Sources */,
 				A9CD87C827E3AC77007831C8 /* FeedbackViewModel.swift in Sources */,
+				A9D8609C28266F1200B611D6 /* CampusViewModel.swift in Sources */,
+				A9D860F62827025300B611D6 /* ConnectedState.swift in Sources */,
 				A9D248212822E13800F6FC51 /* KuringChatViewModel.swift in Sources */,
 				A9DA6CD027B98D2300F3B786 /* KUSearchViewController.UICollectionView.swift in Sources */,
 				A9D248102822DE7D00F6FC51 /* CampusOnboardingViewModel.swift in Sources */,
 				B1E475EC27E824A1002CEBD6 /* CategorySelectCell.swift in Sources */,
 				A9D248162822E03D00F6FC51 /* MessageBubble.swift in Sources */,
 				A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */,
+				A9D860EA282700A300B611D6 /* InitialState.swift in Sources */,
 				A9DA6CDF27B98D2300F3B786 /* KUAlarmViewController.swift in Sources */,
 				B11B4C3527C53B5A00F63D17 /* AppDelegate.AppsFlyerLib.swift in Sources */,
 				A9DA6C8727B981A100F3B786 /* AppDelegate.RemoteNotification.swift in Sources */,
@@ -695,10 +749,12 @@
 				A9D2480E2822DE5400F6FC51 /* CampusUsernameView.swift in Sources */,
 				A9DA6CD727B98D2300F3B786 /* SettingsViewController.swift in Sources */,
 				B143E91727EC4BA00075E1A4 /* CategorySelectViewController.UICollectionView.swift in Sources */,
+				A9D860F22827011A00B611D6 /* AppleLoginState.swift in Sources */,
 				A9580E5E27ED85AC00253A58 /* StringSet.swift in Sources */,
 				A9C447DF27C7877E0094D9A9 /* CategorySelectView.swift in Sources */,
 				A9DA6CD627B98D2300F3B786 /* KUSearchedStaffCell.swift in Sources */,
 				A9DA6CD427B98D2300F3B786 /* KUSearchTypeCollectionViewCell.swift in Sources */,
+				A9D860E82827005B00B611D6 /* CampusState.swift in Sources */,
 				B1FBAD1127D213C90044B90A /* AppStoreReviewManager.swift in Sources */,
 				A9DA6CD927B98D2300F3B786 /* NoticeWebViewController.swift in Sources */,
 				A966E1B2282436C900F6AF3D /* CampusViewController.swift in Sources */,

@@ -17,10 +17,10 @@ struct MessageList: View {
         VStack {
             ScrollView(showsIndicators: false) {
                 ScrollViewReader { reader in
-                    VStack(spacing: 4) {
+                    VStack(spacing: 5) {
                         ForEach(viewModel.sentMessages, id: \.requestID) { message in
                             if let userMessage = message as? UserMessage {
-                                UserMessageView(viewModel: viewModel, userMessage: userMessage)
+                                MessageBubble(viewModel: viewModel, userMessage: userMessage)
                             } else if let adminMessage = message as? AdminMessage {
                                 AdminMessageView(adminMessage: adminMessage)
                             }
