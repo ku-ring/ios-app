@@ -325,12 +325,10 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        // TODO: 추후에 공지 보관함 기능 추가
         let subscribeAction = UIContextualAction(
             style: .normal,
             title: nil
         ) { [weak self] action, view, completionHandler in
-            // TODO: 공지 보관함 로직
             guard let self = self else { return }
 
             let notice = self.currentNotices[indexPath.row]
