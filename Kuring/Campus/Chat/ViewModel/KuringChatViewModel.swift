@@ -61,6 +61,15 @@ class KuringChatViewModel: ObservableObject {
                 return
             }
             
+            KuringCampus.getUser(named: "쿠링") { result in
+                switch result {
+                case .success(let user):
+                    Logger.debug(user)
+                case .failure(let error):
+                    Logger.error(error)
+                }
+            }
+            
             OpenChannel.getChannel(url: "kuring_main_anonymous") { [self] channel, error in
                 self.isLoading = false
                 defer { Logger.error(error) }
