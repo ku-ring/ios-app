@@ -37,57 +37,20 @@ class KuringChatViewModel: ObservableObject {
     @Published var text: String = ""
     @Published var isLoading: Bool = false
     
-    var openChannel: OpenChannel?
+    var openChannel: OpenChannel
     var query: PreviousMessageListQuery?
     
-    init() {
+    init(channel: OpenChannel) {
+        self.openChannel = channel
         SendbirdChat.add(self as ConnectionDelegate, identifier: StringSet.Campus.connectionDelegateID)
         SendbirdChat.add(self as OpenChannelDelegate, identifier: StringSet.Campus.channelDelegateID)
-        connect()
-    }
-    
-    func connect() {
-        guard SendbirdChat.getCurrentUser() == nil else {
-            self.fetchPreviousMessageList()
-            return
-        }
-        self.isLoading = true
-        SendbirdChat.connect(userID: KuringCampus.userID) { [weak self] user, error in
-            guard let self = self else { return }
-            defer { Logger.error(error) }
-            
-            if let error = error {
-                self.isLoading = false
-                print(error.localizedDescription)
-                return
-            }
-            
-            KuringCampus.getUser(named: "쿠링") { result in
-                switch result {
-                case .success(let user):
-                    Logger.debug(user)
-                case .failure(let error):
-                    Logger.error(error)
-                }
-            }
-            
-            OpenChannel.getChannel(url: "kuring_main_anonymous") { [self] channel, error in
-                self.isLoading = false
-                defer { Logger.error(error) }
-                guard error == nil else { return }
-                channel?.enter { error in
-                    defer { Logger.error(error) }
-                    self.openChannel = channel
-                    self.fetchPreviousMessageList()
-                }
-            }
-        }
+        self.fetchPreviousMessageList()
     }
     
     func sendUserMessage() {
-        guard let openChannel = openChannel else { return }
         Logger.debug(#function)
         let pendingMessage = openChannel.sendUserMessage(text) { message, error in
+            self.updateLastMessageIndex()
             defer { Logger.error(error) }
             guard let message = message else { return }
             switch message.sendingStatus {
@@ -106,12 +69,11 @@ class KuringChatViewModel: ObservableObject {
         }
         text = ""
         pendingMessages.append(pendingMessage)
-        lastMessageIndex = pendingMessage.requestID
+        updateLastMessageIndex()
     }
     
     func resendUserMessage(requestID: String) {
-        guard let openChannel = openChannel else { return }
-        guard let failedMessage = self.failedMessages.first(where: { $0.requestID == requestID }) else { return }
+         guard let failedMessage = self.failedMessages.first(where: { $0.requestID == requestID }) else { return }
         Logger.debug(#function)
         failedMessages.removeAll { $0.requestID == requestID }
         let pendingMessage = openChannel.resendUserMessage(failedMessage) { [requestID] message, error in
@@ -135,14 +97,19 @@ class KuringChatViewModel: ObservableObject {
         Logger.debug(#function)
         failedMessages.removeAll { $0.requestID == requestID }
         pendingMessages.removeAll { $0.requestID == requestID }
+        updateLastMessageIndex()
+    }
+    
+    func updateLastMessageIndex() {
         lastMessageIndex = self.pendingMessages.last?.requestID
         ?? self.failedMessages.last?.requestID
-        ?? self.sentMessages.last?.requestID
         ?? ""
+        if lastMessageIndex.isEmpty, let lastSentMessage = self.sentMessages.last {
+            lastMessageIndex = "\(lastSentMessage.messageID)"
+        }
     }
     
     func fetchPreviousMessageList() {
-        guard let openChannel = openChannel else { return }
         Logger.debug(#function)
         self.isLoading = true
         
@@ -156,18 +123,21 @@ class KuringChatViewModel: ObservableObject {
             Logger.debug("\(fetchedMessages.count) 개의 메세지를 가져왔습니다.")
             if fetchedMessages.isEmpty { return }
             for message in fetchedMessages {
-                if message.requestID == self.sentMessages.last?.requestID { return }
-                self.sentMessages.append(message)
+                switch message {
+                case let userMessage as UserMessage:
+                    if userMessage.messageID == self.sentMessages.last?.messageID { return }
+                    self.sentMessages.append(message)
+                case let adminMessage as AdminMessage:
+                    if adminMessage.messageID == self.sentMessages.last?.messageID { return }
+                    self.sentMessages.append(message)
+                default: return
+                }
             }
-            self.lastMessageIndex = fetchedMessages.last?.requestID ?? ""
-            if let adminMessage = fetchedMessages.last as? AdminMessage {
-                self.lastMessageIndex = "\(adminMessage.messageID)"
-            }
+            self.updateLastMessageIndex()
         }
     }
     
     func fetchRecentMessageList() {
-        guard let openChannel = openChannel else { return }
         Logger.debug(#function)
         let params = MessageListParams()
         params.nextResultSize = 20
@@ -176,7 +146,7 @@ class KuringChatViewModel: ObservableObject {
             let fetchedMessages = messages ?? []
             if fetchedMessages.isEmpty { return }
             for message in fetchedMessages {
-                if message.requestID == self.sentMessages.last?.requestID { return }
+                if message.messageID == self.sentMessages.last?.messageID { return }
                 self.sentMessages.append(message)
             }
             self.fetchPreviousMessageList()

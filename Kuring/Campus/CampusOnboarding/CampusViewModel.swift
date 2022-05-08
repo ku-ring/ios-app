@@ -13,7 +13,10 @@ import AuthenticationServices
 
 class CampusViewModel: ObservableObject {
     @Published private(set) var onDismiss: Bool = false
-    @Published var pendingUsername: String = ""
+    @Published var pendingUsername: String = "" {
+        didSet { errorMessage = "" }
+    }
+    @Published var errorMessage: String = ""
     
     @Published var currentState: CampusState = InitialState() {
         willSet { currentState.finish(context: self) }
@@ -22,7 +25,6 @@ class CampusViewModel: ObservableObject {
     
     init() {    
         self.currentState.start(context: self)
-        Kuring.userID = KuringCampus.userID
     }
     
     func changeState(to newState: CampusState) {
@@ -55,6 +57,16 @@ class CampusViewModel: ObservableObject {
     }
     
     func setupUsername() {
+        guard let currentState = self.currentState as? UsernameRequestState else { return }
+        currentState.checkAvailablity(username: pendingUsername, context: self)
+    }
+    
+    func didFailToSetupUsername(with message: String) {
+        errorMessage = message
+        Logger.error(message)
+    }
+    
+    func updateUsername() {
         guard let currentState = self.currentState as? UsernameRequestState else { return }
         currentState.updateUsername(to: pendingUsername, context: self)
     }

@@ -13,7 +13,7 @@ extension KuringChatViewModel: ConnectionDelegate {
     func didSucceedReconnection() {
         Logger.debug(#function)
         self.sentMessages = []
-        connect()
+        fetchPreviousMessageList()
     }
     
     func didFailReconnection() {

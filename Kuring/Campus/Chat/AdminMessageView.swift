@@ -11,11 +11,11 @@ import SendbirdChatSDK
 
 struct AdminMessageView: View {
     @State private var showsMore: Bool = false
-    let requestID: String
+    let messageID: String
     let adminName: String = StringSet.Campus.adminName
     var prevMessage: String {
         if message.count > 255 {
-            return String(message[message.index(message.startIndex, offsetBy: 0)...message.index(message.startIndex, offsetBy: 255)])
+            return String(message[message.index(message.startIndex, offsetBy: 0)...message.index(message.startIndex, offsetBy: 255)]) + "..."
         } else {
             return message
         }
@@ -36,7 +36,7 @@ struct AdminMessageView: View {
                     if showsMore {
                         Text(message)
                     } else {
-                        Text("\(prevMessage)...")
+                        Text(prevMessage)
                     }
                 }
                 .font(.subheadline)
@@ -59,11 +59,11 @@ struct AdminMessageView: View {
                 Label("공유하기", systemImage: "doc.on.doc")
             }
         }
-        .id(requestID)
+        .id(messageID)
     }
     
     init(adminMessage:AdminMessage) {
-        self.requestID = "\(adminMessage.messageID)"
+        self.messageID = "\(adminMessage.messageID)"
         self.message = adminMessage.message
     }
     

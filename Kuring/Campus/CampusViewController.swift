@@ -15,7 +15,7 @@ class CampusViewController: UIViewController {
         super.viewDidLoad()
         
         let viewModel = CampusViewModel()
-        let controller = UIHostingController(rootView: CampusSignInView(viewModel: viewModel))
+        let controller = UIHostingController(rootView: CampusHomeView(viewModel: viewModel))
         controller.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(controller)
         view.addSubview(controller.view)

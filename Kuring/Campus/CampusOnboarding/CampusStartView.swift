@@ -7,9 +7,12 @@
 
 import SwiftUI
 import KuringCommons
+import AuthenticationServices
 
 struct CampusStartView: View {
-    @ObservedObject var viewModel: CampusOnboardingViewModel
+    @ObservedObject var viewModel: CampusViewModel
+    
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         VStack(spacing: 64) {
@@ -19,28 +22,34 @@ struct CampusStartView: View {
                 .padding(.horizontal, 64)
                 .clipped()
             
-            Text("친구에게 메세지를 보내세요")
+            Text("쿠링 청심대에서 다같이 모여 메세지를 보내세요")
             
-            NavigationLink(destination: KuringChatView()) {
-                RoundedRectangle(cornerRadius: 26)
-                    .frame(width: 232, height: 52)
-                    .foregroundColor(ColorSet.green.color)
-                    .overlay {
-                        Text("시작하기")
-                            .foregroundColor(ColorSet.Background.primary.color)
-                    }
-                    .padding(.bottom, 64)
-            }
-            
-            Button(action: viewModel.start) {
-                RoundedRectangle(cornerRadius: 26)
-                    .frame(width: 232, height: 52)
-                    .foregroundColor(ColorSet.green.color)
-                    .overlay {
-                        Text("시작하기")
-                            .foregroundColor(ColorSet.Background.primary.color)
-                    }
-                    .padding(.bottom, 64)
+            switch viewModel.currentState{
+            case is InitialState, is ConnectingState, is ChannelRetrievalState:
+                LottieView(filename: StringSet.Lottie.loading)
+            case is ConnectedState:
+                Button(action: viewModel.startChat) {
+                    RoundedRectangle(cornerRadius: 26)
+                        .frame(width: 232, height: 52)
+                        .foregroundColor(ColorSet.green.color)
+                        .overlay {
+                            Text("시작하기")
+                                .foregroundColor(ColorSet.Background.primary.color)
+                        }
+                        .padding(.bottom, 64)
+                }
+            default:
+                SignInWithAppleButton(.signIn) { request in
+                    viewModel.signInWithApple()
+                    viewModel.configure(request)
+                } onCompletion: { result in
+                    viewModel.handleResult(result)
+                }
+                .signInWithAppleButtonStyle(
+                    colorScheme == .light ? .black : .white
+                )
+                .frame(height: 45)
+                .padding()
             }
         }
     }

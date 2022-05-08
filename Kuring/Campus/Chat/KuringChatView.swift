@@ -7,6 +7,7 @@
 
 import SwiftUI
 import KuringCommons
+import SendbirdChatSDK
 
 // 앱실행
 // Sendbird init with appID
@@ -30,7 +31,7 @@ import KuringCommons
 // openChannel.enter
 
 struct KuringChatView: View {
-    @StateObject private var viewModel = KuringChatViewModel()
+    @ObservedObject var viewModel: KuringChatViewModel
     
     var body: some View {
         ZStack {
@@ -49,5 +50,9 @@ struct KuringChatView: View {
                     .foregroundColor(ColorSet.Label.primary.color)
             }
         }
+    }
+    
+    init(channel: OpenChannel) {
+        self.viewModel = KuringChatViewModel(channel: channel)
     }
 }
