@@ -339,7 +339,7 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
             
             completionHandler(true)
         }
-        subscribeAction.backgroundColor = .systemYellow
+        subscribeAction.backgroundColor = ColorSet.green
         subscribeAction.image = UIImage(systemName: "bookmark.fill")
         
         return UISwipeActionsConfiguration(actions: [subscribeAction])
