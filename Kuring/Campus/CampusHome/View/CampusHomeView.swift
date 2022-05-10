@@ -21,7 +21,7 @@ struct CampusHomeView: View {
                     CampusUsernameView(viewModel: viewModel)
                     
                 case let chatStartedState as ChatStartedState:
-                    KuringChatView(channel: chatStartedState.channel)
+                    ChatView(channel: chatStartedState.channel)
                 default:
                     CampusStartView(viewModel: viewModel)
                 }

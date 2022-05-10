@@ -11,7 +11,7 @@ import KuringCommons
 import SendbirdChatSDK
 
 struct UserMessageView: View {
-    @ObservedObject var viewModel: KuringChatViewModel
+    @ObservedObject var viewModel: ChatViewModel
     
     let messageID: String
     let requestID: String
@@ -95,7 +95,7 @@ struct UserMessageView: View {
             .padding(.vertical, 8)
             .padding(.horizontal, 20)
             .background {
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: 12)
                     .fill(
                         isSentByMe
                         ? ColorSet.green.color
@@ -131,7 +131,7 @@ struct UserMessageView: View {
         .id(messageID == "0" ? requestID : messageID)
     }
     
-    init(viewModel: KuringChatViewModel, userMessage: UserMessage) {
+    init(viewModel: ChatViewModel, userMessage: UserMessage) {
         self.viewModel = viewModel
         self.requestID = userMessage.requestID
         self.messageID = "\(userMessage.messageID)"

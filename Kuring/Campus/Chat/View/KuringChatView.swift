@@ -9,29 +9,8 @@ import SwiftUI
 import KuringCommons
 import SendbirdChatSDK
 
-// 앱실행
-// Sendbird init with appID
-
-// 온보딩
-// userID: fcm token
-// connect(userID:)
-
-
-// 닉네임 입력창 띄우고
-// 닉네임 입력 후 확인누르면
-// open channel
-// nicknames
-// comparison
-// 에러 -> 중복된 닉네임입니다.
-
-// 채팅뷰
-// SendbirdChat.currentUser == nil
-// Sendbird init
-// connect(userID)
-// openChannel.enter
-
-struct KuringChatView: View {
-    @ObservedObject var viewModel: KuringChatViewModel
+struct ChatView: View {
+    @ObservedObject var viewModel: ChatViewModel
     
     var body: some View {
         ZStack {
@@ -39,6 +18,15 @@ struct KuringChatView: View {
             
             if viewModel.isLoading {
                 LottieView(filename: "lottieLoading")                
+            }
+            
+            switch viewModel.currentState {
+            case is ChatDisconnectedState:
+                Text("연결이 끊겼습니다.")
+                    .foregroundColor(ColorSet.pink.color)
+            case is ChatConnectingState:
+                LottieView(filename: "lottieLoading")
+            default: EmptyView()
             }
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -53,6 +41,6 @@ struct KuringChatView: View {
     }
     
     init(channel: OpenChannel) {
-        self.viewModel = KuringChatViewModel(channel: channel)
+        self.viewModel = ChatViewModel(channel: channel)
     }
 }

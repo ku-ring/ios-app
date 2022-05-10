@@ -11,7 +11,7 @@ import KuringCommons
 import SendbirdChatSDK
 
 struct MessageList: View {
-    @ObservedObject var viewModel: KuringChatViewModel
+    @ObservedObject var viewModel: ChatViewModel
     
     var body: some View {
         VStack {
