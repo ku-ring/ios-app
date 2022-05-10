@@ -19,7 +19,7 @@ class NoticeWebViewController: UIViewController {
             webView.backgroundColor = .clear
         }
     }
-    
+   
     @IBOutlet weak var adsBannerContainerView: UIView! {
         didSet {
             adsBannerContainerView.backgroundColor = .clear
