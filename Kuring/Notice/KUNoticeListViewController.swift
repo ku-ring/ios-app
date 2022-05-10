@@ -305,7 +305,7 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
         notice.read()
         tableView.reloadData()
         
-        let urlString = notice.urlString == ""
+        let urlString = notice.urlString.isEmpty
         ? "https://kunkuk.ac.kr"
         : notice.urlString
         
@@ -324,9 +324,25 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        // TODO: 추후에 공지 보관함 기능 추가
-        return nil
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let subscribeAction = UIContextualAction(
+            style: .normal,
+            title: nil
+        ) { [weak self] action, view, completionHandler in
+            guard let self = self else { return }
+
+            let notice = self.currentNotices[indexPath.row]
+            
+            if !Kuring.noticeBookmark.contains(notice) {
+                Kuring.noticeBookmark.append(notice)
+            }
+            
+            completionHandler(true)
+        }
+        subscribeAction.backgroundColor = ColorSet.green
+        subscribeAction.image = UIImage(systemName: "bookmark.fill")
+        
+        return UISwipeActionsConfiguration(actions: [subscribeAction])
     }
 }
 

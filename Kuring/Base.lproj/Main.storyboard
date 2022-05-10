@@ -39,7 +39,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5D6-oB-PeD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1203" y="3627"/>
+            <point key="canvasLocation" x="2113.0434782608695" y="3626.7857142857142"/>
         </scene>
         <!--🔍 검색-->
         <scene sceneID="JNH-Yl-pmB">
@@ -494,6 +494,18 @@
                                     <segue destination="vtV-ei-QVP" kind="show" identifier="showNotification" id="smu-ZT-6js"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem id="Tlp-OZ-Fp2">
+                                <imageReference key="image" image="archivebox" catalog="system" renderingMode="hierarchical">
+                                    <hierarchicalColors>
+                                        <color systemColor="labelColor"/>
+                                        <color systemColor="secondaryLabelColor"/>
+                                        <color systemColor="tertiaryLabelColor"/>
+                                    </hierarchicalColors>
+                                </imageReference>
+                                <connections>
+                                    <segue destination="8k3-mS-1kt" kind="show" id="rPZ-h1-s9b"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -504,7 +516,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9EE-iE-1dM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1654" y="3627"/>
+            <point key="canvasLocation" x="-1655" y="3627"/>
         </scene>
         <!--쿠링-->
         <scene sceneID="jzH-fD-ifd">
@@ -684,7 +696,7 @@
         <scene sceneID="wHk-7O-kXE">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Fv-pX-dcU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="공지사항" image="rectangle.grid.1x2" catalog="system" id="jmK-F7-Zce"/>
+                    <tabBarItem key="tabBarItem" title="공지사항" id="jmK-F7-Zce"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xY1-J4-5VB">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -700,7 +712,23 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Wf-hK-7Mq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2493" y="3627"/>
+            <point key="canvasLocation" x="-2494" y="3627"/>
+        </scene>
+        <!--🗃공지 보관함-->
+        <scene sceneID="g3N-dY-gyy">
+            <objects>
+                <viewController id="8k3-mS-1kt" customClass="NoticeBookmarkViewController" customModule="Kuring" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oZH-RM-p4L">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="73P-7h-Y4v"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="🗃공지 보관함" id="Gr6-S3-EFy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9nM-2T-sYy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-313" y="4367"/>
         </scene>
         <!--설정-->
         <scene sceneID="Hcg-UQ-DfZ">
@@ -957,7 +985,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GOv-Hc-ndQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-313" y="3627"/>
+            <point key="canvasLocation" x="597.10144927536237" y="3626.7857142857142"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yxG-2u-UdV">
@@ -975,7 +1003,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vO5-RA-1bt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="467" y="3627"/>
+            <point key="canvasLocation" x="1376.8115942028987" y="3626.7857142857142"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YNA-8c-UMG">
@@ -998,11 +1026,11 @@
     </scenes>
     <resources>
         <image name="appIconLabel" width="32.5" height="24"/>
+        <image name="archivebox" catalog="system" width="128" height="106"/>
         <image name="bell" catalog="system" width="128" height="124"/>
         <image name="checklist" catalog="system" width="128" height="105"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="rectangle.grid.1x2" catalog="system" width="128" height="101"/>
         <namedColor name="ColorSet.Label.green">
             <color red="0.012000000104308128" green="0.41999998688697815" blue="0.24699999392032623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
