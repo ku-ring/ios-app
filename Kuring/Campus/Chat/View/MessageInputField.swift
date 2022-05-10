@@ -9,7 +9,7 @@ import SwiftUI
 import KuringCommons
 
 struct MessageInputField: View {
-    @ObservedObject var viewModel: KuringChatViewModel
+    @ObservedObject var viewModel: ChatViewModel
     
     var isSendable: Bool {
         !viewModel.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -41,11 +41,3 @@ struct MessageInputField: View {
         .padding(.trailing, 8)
     }
 }
-
-struct MessageInputField_Previews: PreviewProvider {
-    static var previews: some View {
-        MessageInputField(viewModel: .init())
-    }
-}
-
-

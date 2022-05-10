@@ -51,7 +51,10 @@ struct KuringCampus {
                 resultHandler(.failure(NSError(domain: StringSet.Campus.baseString, code: 400)))
                 return
             }
-            let user = try? JSONDecoder().decode(User.self, from: data)
+            var user = try? JSONDecoder().decode(User.self, from: data)
+            if user?.userID.isEmpty == true {
+                user = nil
+            }
             resultHandler(.success(user))
         }
         .resume()

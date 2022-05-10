@@ -1,17 +1,19 @@
 //
-//  MessageBubble.swift
+//  UserMessageView.swift
 //  Kuring
 //
 //  Created by Jaesung Lee on 2022/05/05.
 //
 
 import SwiftUI
+import KuringSDK
 import KuringCommons
 import SendbirdChatSDK
 
-struct MessageBubble: View {
-    @ObservedObject var viewModel: KuringChatViewModel
+struct UserMessageView: View {
+    @ObservedObject var viewModel: ChatViewModel
     
+    let messageID: String
     let requestID: String
     let username: String
     let message: String
@@ -93,7 +95,7 @@ struct MessageBubble: View {
             .padding(.vertical, 8)
             .padding(.horizontal, 20)
             .background {
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: 12)
                     .fill(
                         isSentByMe
                         ? ColorSet.green.color
@@ -126,24 +128,16 @@ struct MessageBubble: View {
             }
         }
         .padding(.horizontal)
-        .id(requestID)
+        .id(messageID == "0" ? requestID : messageID)
     }
     
-    init(viewModel: KuringChatViewModel = .init(), username: String, message: String, isSentByMe: Bool, sendingState: SendingState) {
-        self.viewModel = viewModel
-        self.requestID = ""
-        self.username = username
-        self.message = message
-        self.isSentByMe = isSentByMe
-        self.sendingState = sendingState
-    }
-    
-    init(viewModel: KuringChatViewModel, userMessage: UserMessage) {
+    init(viewModel: ChatViewModel, userMessage: UserMessage) {
         self.viewModel = viewModel
         self.requestID = userMessage.requestID
+        self.messageID = "\(userMessage.messageID)"
         self.username = userMessage.sender?.nickname ?? "(알 수 없음)"
         self.message = userMessage.message
-        self.isSentByMe = userMessage.sender?.userID == KuringCampus.userID
+        self.isSentByMe = userMessage.sender?.userID == Kuring.userID
         switch userMessage.sendingStatus {
         case .succeeded:
             self.sendingState = .sent
@@ -158,55 +152,5 @@ struct MessageBubble: View {
     
     func copy() {
         UIPasteboard.general.string = message
-    }
-}
-
-struct MessageBubble_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            MessageBubble(
-                username: "j_sung_0o0",
-                message: "테스트 메세지 입니다. 사용자와 동일한 닉네임이 있는 경우 이렇게 굵게 표시됩니다. j_sung_0o0. 그럼 계속 메세지를 전송해보세요.",
-                isSentByMe: false,
-                sendingState: .sent
-            )
-            
-            MessageBubble(
-                username: "j_sung_0o0",
-                message: "테스트 메세지 입니다. 사용자와 동일한 닉네임이 있는 경우 이렇게 굵게 표시됩니다. j_sung_0o0. 그럼 계속 메세지를 전송해보세요.",
-                isSentByMe: true,
-                sendingState: .pending
-            )
-            
-            MessageBubble(
-                username: "j_sung_0o0",
-                message: "테스트 메세지 입니다. 사용자와 동일한 닉네임이 있는 경우 이렇게 굵게 표시됩니다. j_sung_0o0. 그럼 계속 메세지를 전송해보세요.",
-                isSentByMe: true,
-                sendingState: .failed
-            )
-            
-            MessageBubble(
-                username: "j_sung_0o0",
-                message: "테스트 메세지 입니다. 사용자와 동일한 닉네임이 있는 경우 이렇게 굵게 표시됩니다. j_sung_0o0. 그럼 계속 메세지를 전송해보세요.",
-                isSentByMe: false,
-                sendingState: .failed
-            )
-            
-            MessageBubble(
-                username: "j_sung_0o0",
-                message: "테스트 메세지 입니다. 사용자와 동일한 닉네임이 있는 경우 이렇게 굵게 표시됩니다. j_sung_0o0. 그럼 계속 메세지를 전송해보세요.",
-                isSentByMe: false,
-                sendingState: .pending
-            )
-            
-            MessageBubble(
-                username: "j_sung_0o0",
-                message: "테스트 메세지 입니다. 사용자와 동일한 닉네임이 있는 경우 이렇게 굵게 표시됩니다. j_sung_0o0. 그럼 계속 메세지를 전송해보세요.",
-                isSentByMe: true,
-                sendingState: .sent
-            )
-                .preferredColorScheme(.dark)
-        }
-        .previewLayout(.sizeThatFits)
     }
 }

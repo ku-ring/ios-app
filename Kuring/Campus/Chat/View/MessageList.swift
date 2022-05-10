@@ -11,27 +11,27 @@ import KuringCommons
 import SendbirdChatSDK
 
 struct MessageList: View {
-    @ObservedObject var viewModel: KuringChatViewModel
+    @ObservedObject var viewModel: ChatViewModel
     
     var body: some View {
         VStack {
             ScrollView(showsIndicators: false) {
                 ScrollViewReader { reader in
                     VStack(spacing: 5) {
-                        ForEach(viewModel.sentMessages, id: \.requestID) { message in
+                        ForEach(viewModel.sentMessages, id: \.messageID) { message in
                             if let userMessage = message as? UserMessage {
-                                MessageBubble(viewModel: viewModel, userMessage: userMessage)
+                                UserMessageView(viewModel: viewModel, userMessage: userMessage)
                             } else if let adminMessage = message as? AdminMessage {
                                 AdminMessageView(adminMessage: adminMessage)
                             }
                         }
                         
                         ForEach(viewModel.failedMessages, id: \.self) { failedMessage in
-                            MessageBubble(viewModel: viewModel, userMessage: failedMessage)
+                            UserMessageView(viewModel: viewModel, userMessage: failedMessage)
                         }
                         
                         ForEach(viewModel.pendingMessages, id: \.self) { pendingMessage in
-                            MessageBubble(viewModel: viewModel, userMessage: pendingMessage)
+                            UserMessageView(viewModel: viewModel, userMessage: pendingMessage)
                         }
                     }
                     .onChange(of: viewModel.lastMessageIndex) { newValue in

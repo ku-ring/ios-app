@@ -9,7 +9,7 @@ import SwiftUI
 import KuringCommons
 
 struct CampusUsernameView: View {
-    @ObservedObject var viewModel: CampusOnboardingViewModel
+    @ObservedObject var viewModel: CampusViewModel
     
     var body: some View {
         VStack(spacing: 64) {
@@ -23,9 +23,9 @@ struct CampusUsernameView: View {
                     Text("@")
                         .foregroundColor(ColorSet.green.color)
                     
-                    TextField("이름을 입력해주세요", text: $viewModel.unsavedUsername)
+                    TextField("이름을 입력해주세요", text: $viewModel.pendingUsername)
                         .foregroundColor(
-                            viewModel.unsavedUsername.conformsToUsernameProtocol
+                            viewModel.pendingUsername.conformsToUsernameProtocol
                             ? ColorSet.Label.primary.color
                             : ColorSet.pink.color
                         )
@@ -38,12 +38,19 @@ struct CampusUsernameView: View {
                 }
                 .padding(.vertical, 4)
                 
-                Text("이름에는 \"알파벳 대소문자, 숫자, ., _\"가 가능합니다.")
+                if !viewModel.errorMessage.isEmpty {
+                    Text(viewModel.errorMessage)
+                        .font(.caption)
+                        .foregroundColor(ColorSet.pink.color)
+                        .padding(.horizontal)
+                }
+                
+                Text("이름에는 \"한글, 알파벳 대소문자, 숫자, ., _\"가 가능합니다.")
                     .font(.caption)
                     .foregroundColor(ColorSet.pink.color)
                     .opacity(
-                        viewModel.unsavedUsername.conformsToUsernameProtocol
-                        || viewModel.unsavedUsername.count < 5
+                        viewModel.pendingUsername.conformsToUsernameProtocol
+                        || viewModel.pendingUsername.count < 5
                         ? 0 : 1
                     )
                     .padding(.horizontal)
@@ -53,7 +60,7 @@ struct CampusUsernameView: View {
             
             Spacer()
             
-            Button(action: viewModel.done) {
+            Button(action: viewModel.setupUsername) {
                 RoundedRectangle(cornerRadius: 26)
                     .frame(width: 232, height: 52)
                     .foregroundColor(ColorSet.green.color)
@@ -63,7 +70,7 @@ struct CampusUsernameView: View {
                     }
                     .padding(.bottom, 64)
             }
-            .opacity(viewModel.unsavedUsername.isEmpty ? 0 : 1)
+            .opacity(viewModel.pendingUsername.isEmpty ? 0 : 1)
         }
     }
 }

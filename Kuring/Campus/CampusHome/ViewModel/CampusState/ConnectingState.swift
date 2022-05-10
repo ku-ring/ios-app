@@ -12,7 +12,7 @@ import SendbirdChatSDK
 
 class ConnectingState: CampusState {
     func start(context: CampusViewModel) {
-        guard let userID = Kuring.userID else {
+        guard let userID = Kuring.userID, !userID.isEmpty else {
             context.changeState(to: LoginState())
             return
         }
@@ -22,7 +22,7 @@ class ConnectingState: CampusState {
                 Logger.error(error)
                 return
             }
-            if user.nickname == nil {
+            if user.nickname == nil || user.nickname?.isEmpty == true {
                 context.changeState(to: UsernameRequestState())
             } else {
                 context.changeState(to: ConnectedState())

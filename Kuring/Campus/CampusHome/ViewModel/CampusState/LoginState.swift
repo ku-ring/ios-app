@@ -9,7 +9,7 @@ import Foundation
 
 class LoginState: CampusState {
     func loginWithKakao(context: CampusViewModel) {
-        context.changeState(to: KakaoLoginState())
+        context.changeState(to: GoogleLoginState())
     }
     
     func loginWithApple(context: CampusViewModel) {
