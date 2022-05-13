@@ -105,20 +105,9 @@ class KUNoticeListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        HapticManager.shared.setupGenerator()
         
         updateNotifcationButton()
         tableView.reloadData()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        HapticManager.shared.release()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

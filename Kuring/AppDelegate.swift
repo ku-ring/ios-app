@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Kuring.apiKey = "4BEC2A05-2F67-4083-83E2-866AEAF6CFDC"
         Kuring.addDelegate(self, forKey: "AppDelegate")
         
+        HapticManager.shared.setupGenerator()
+        
         // MARK: Firebase
         FirebaseApp.configure()
         
@@ -70,10 +72,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 case .authorized:
                     Logger.debug("앱트래킹이 허용되었습니다.")
                 @unknown default:
-                    Logger.error("알 수 없는 앱트래킹 상태가 감지되었습니다.")
-                    fatalError("Invalid authorization status")
+                    Logger.debug("알 수 없는 앱트래킹 상태가 감지되었습니다.")
                 }
             }
         }
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        HapticManager.shared.release()
     }
 }
