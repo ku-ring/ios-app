@@ -19,24 +19,45 @@ struct MessageList: View {
                 ScrollViewReader { reader in
                     VStack(spacing: 5) {
                         ForEach(viewModel.sentMessages, id: \.messageID) { message in
-                            if let userMessage = message as? UserMessage {
-                                UserMessageView(viewModel: viewModel, userMessage: userMessage)
-                            } else if let adminMessage = message as? AdminMessage {
-                                AdminMessageView(adminMessage: adminMessage)
+                            VStack {
+                                if !viewModel.isSameDay(currentMessage: message, status: .sent) {
+                                    MessageDateView(message: message)
+                                }
+                                
+                                if let userMessage = message as? UserMessage {
+                                    UserMessageView(viewModel: viewModel, userMessage: userMessage)
+                                } else if let adminMessage = message as? AdminMessage {
+                                    AdminMessageView(adminMessage: adminMessage)
+                                }
                             }
                         }
                         
                         ForEach(viewModel.failedMessages, id: \.self) { failedMessage in
-                            UserMessageView(viewModel: viewModel, userMessage: failedMessage)
+                            VStack {
+                                if !viewModel.isSameDay(currentMessage: failedMessage, status: .failed) {
+                                    MessageDateView(message: failedMessage)
+                                }
+                                
+                                UserMessageView(viewModel: viewModel, userMessage: failedMessage)
+                            }
                         }
                         
                         ForEach(viewModel.pendingMessages, id: \.self) { pendingMessage in
-                            UserMessageView(viewModel: viewModel, userMessage: pendingMessage)
+                            VStack {
+                                if !viewModel.isSameDay(currentMessage: pendingMessage, status: .pending) {
+                                    MessageDateView(message: pendingMessage)
+                                }
+                                
+                                UserMessageView(viewModel: viewModel, userMessage: pendingMessage)
+                            }
                         }
                     }
                     .onChange(of: viewModel.lastMessageIndex) { newValue in
                         guard !newValue.isEmpty else { return }
-                        reader.scrollTo(newValue)
+                        guard viewModel.isScrollable else { return }
+                        withAnimation {
+                            reader.scrollTo(newValue, anchor: .bottom)
+                        }
                     }
                     .padding(.bottom)
                     .padding(.top, 25)

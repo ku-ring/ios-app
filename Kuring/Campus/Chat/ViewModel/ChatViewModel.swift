@@ -27,6 +27,7 @@ class ChatViewModel: ObservableObject {
             Logger.debug("viewModel.failedMessages 에 \(String(describing: failedMessages.last))를 추가하였습니다.")
         }
     }
+    @Published var isScrollable: Bool = true
     @Published var lastMessageIndex: String = "" {
         didSet {
             Logger.debug("viewModel.lastMessageIndex = \(lastMessageIndex)")
@@ -44,6 +45,12 @@ class ChatViewModel: ObservableObject {
     
     var openChannel: OpenChannel
     var query: PreviousMessageListQuery?
+    
+    enum MessageStatus {
+        case sent
+        case pending
+        case failed
+    }
     
     init(channel: OpenChannel) {
         self.openChannel = channel
@@ -94,5 +101,77 @@ class ChatViewModel: ObservableObject {
         guard let connectingState = self.currentState as? ChatConnectingState else { return }
         connectingState.onCompleteMessageListRetrieval(with: result, context: self)
     }
+    
+    func isSameDay(currentMessage: BaseMessage, status: MessageStatus) -> Bool {
+        var index: Int?
+        switch status {
+        case .sent:
+            index = sentMessages.firstIndex(of: currentMessage)
+        case .pending:
+            guard let userMessage = currentMessage as? UserMessage else { return false }
+            index = pendingMessages.firstIndex(of: userMessage)
+        case .failed:
+            guard let userMessage = currentMessage as? UserMessage else { return false }
+            index = failedMessages.firstIndex(of: userMessage)
+        }
+        guard let index = index else { return false }
+        var prevMessage: BaseMessage?
+        switch status {
+        case .sent:
+            guard index > 0 else { return false }
+            prevMessage = sentMessages[index - 1]
+        case .pending:
+            if index == 0 {
+                prevMessage = sentMessages.last
+            } else {
+                prevMessage = pendingMessages[index - 1]
+            }
+        case .failed:
+            if index == 0 {
+                prevMessage = sentMessages.last
+            } else {
+                prevMessage = failedMessages[index - 1]
+            }
+        }
+        guard let prevMessage = prevMessage else { return false }
+
+        
+        let curCreatedAt = currentMessage.createdAt
+        let prevCreatedAt = prevMessage.createdAt
+        
+        return Date.from(prevCreatedAt).isSameDay(as: Date.from(curCreatedAt))
+    }
 }
 
+extension Date {
+    static public func from(_ baseTimestamp: Int64) -> Date {
+        let timestampString = String(format: "%lld", baseTimestamp)
+        let timeInterval = timestampString.count == 10
+            ? TimeInterval(baseTimestamp)
+            : TimeInterval(Double(baseTimestamp) / 1000.0)
+        return Date(timeIntervalSince1970: timeInterval)
+    }
+    
+    func isSameDay(as otherDate: Date) -> Bool {
+        let baseDate = self
+        let otherDate = otherDate
+ 
+        let baseDateComponents = Calendar.current.dateComponents(
+            [.day, .month, .year],
+            from: baseDate
+        )
+        let otherDateComponents = Calendar.current.dateComponents(
+            [.day, .month, .year],
+            from: otherDate
+        )
+
+        if baseDateComponents.year == otherDateComponents.year,
+            baseDateComponents.month == otherDateComponents.month,
+            baseDateComponents.day == otherDateComponents.day {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+}

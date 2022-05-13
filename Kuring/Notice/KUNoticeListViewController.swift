@@ -317,6 +317,7 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let notice = currentNotices[indexPath.row]
+        Kuring.cachedNotices.updateValue(notice, forKey: notice.articleID)
         notice.read()
         tableView.reloadData()
         

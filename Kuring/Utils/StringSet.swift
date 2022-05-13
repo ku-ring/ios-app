@@ -38,5 +38,10 @@ struct StringSet {
         static let chatString = "\(baseString).chat"
         static let channelDelegateID = "\(chatString).delegate.channel"
         static let connectionDelegateID = "\(chatString).delegate.connection"
+        
+        struct MessagePayloadKey {
+            static let noticeSubject = "notice.subject"
+            static let noticeURL = "notice.url"
+        }
     }
 }

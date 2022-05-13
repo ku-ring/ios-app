@@ -12,6 +12,7 @@ import KuringCommons
 import SnapKit
 import GoogleMobileAds
 import Lottie
+import SendbirdChatSDK
 
 class NoticeWebViewController: UIViewController {
     @IBOutlet weak var webView: WKWebView! {
@@ -45,6 +46,47 @@ class NoticeWebViewController: UIViewController {
         self.present(activityVC, animated: true, completion: nil)
     }
     
+    @IBAction func didTapChat() {
+        guard let articleURL = self.articleURL else {
+            showError("공유 도중 에러가 발생했습니다.")
+            return
+        }
+        guard let userID = Kuring.userID else {
+            showError("쿠링 캠퍼스에 로그인 해주세요.")
+            return
+        }
+        guard let notice = Kuring.cachedNotices[self.articleID] else {
+            showError("공유 도중 에러가 발생했습니다.")
+            return
+        }
+        if !indicatorView.isAnimationPlaying {
+            indicatorView.play()
+            indicatorView.isHidden = false
+        }
+        if let channel = channel {
+            sendToChannel(notice: notice, url: articleURL)
+            return
+        }
+        SendbirdChat.connect(userID: userID) { [weak self, notice, articleURL] user, error in
+            guard let self = self else { return }
+            if let error = error {
+                DispatchQueue.main.async { [self] in
+                    self.indicatorView.stop()
+                    self.indicatorView.isHidden = true
+                    self.showError("공유 도중 에러가 발생했습니다.")
+                }
+                Logger.error(error)
+                return
+            }
+            OpenChannel.getChannel(url: StringSet.Campus.channelID) { [notice, articleURL] channel, error in
+                self.channel = channel
+                channel?.enter(completionHandler: { error in
+                    self.sendToChannel(notice: notice, url: articleURL)
+                })
+            }
+        }
+    }
+    
     // MARK: Lottie Indicator
     fileprivate let indicatorView: AnimationView = .init(name: StringSet.Lottie.loading)
     
@@ -59,6 +101,7 @@ class NoticeWebViewController: UIViewController {
     // MARK: Properties
     var articleURL: String!
     var articleID: String!
+    var channel: OpenChannel?
     
     override func loadView() {
         super.loadView()
@@ -122,6 +165,25 @@ class NoticeWebViewController: UIViewController {
             $0.width.height.equalTo(100)
             $0.center.equalToSuperview()
         }
+    }
+    
+    func sendToChannel(notice: Notice, url: String) {
+        let params = UserMessageCreateParams(message: "")
+        let noticeInfo = [
+            StringSet.Campus.MessagePayloadKey.noticeSubject: notice.subject,
+            StringSet.Campus.MessagePayloadKey.noticeURL: url
+        ]
+        let encoder = JSONEncoder()
+        if let jsonData = try? encoder.encode(noticeInfo) {
+            params.data = String(data: jsonData, encoding: .utf8)
+        }
+        self.channel?.sendUserMessage(params: params, completionHandler: { message, error in
+            DispatchQueue.main.async {
+                self.indicatorView.stop()
+                self.indicatorView.isHidden = true
+                self.showError("성공적으로 전달했습니다.")
+            }
+        })
     }
 }
 

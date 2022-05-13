@@ -11,6 +11,7 @@
 		A94A4FD42829391300CDA575 /* ChatState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A4FD32829391300CDA575 /* ChatState.swift */; };
 		A94A4FD62829392100CDA575 /* ChatDisconnectedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A4FD52829392100CDA575 /* ChatDisconnectedState.swift */; };
 		A94A4FD82829393C00CDA575 /* ChatConnectingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A4FD72829393C00CDA575 /* ChatConnectingState.swift */; };
+		A94A4FDE282ED9E400CDA575 /* MessageDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A4FDD282ED9E400CDA575 /* MessageDateView.swift */; };
 		A9580E5C27ED849100253A58 /* NSObject.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9580E5B27ED849100253A58 /* NSObject.Kuring.swift */; };
 		A9580E5E27ED85AC00253A58 /* StringSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9580E5D27ED85AC00253A58 /* StringSet.swift */; };
 		A966E1B02824364200F6AF3D /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A966E1AF2824364200F6AF3D /* LottieView.swift */; };
@@ -119,6 +120,7 @@
 		A94A4FD32829391300CDA575 /* ChatState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatState.swift; sourceTree = "<group>"; };
 		A94A4FD52829392100CDA575 /* ChatDisconnectedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDisconnectedState.swift; sourceTree = "<group>"; };
 		A94A4FD72829393C00CDA575 /* ChatConnectingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConnectingState.swift; sourceTree = "<group>"; };
+		A94A4FDD282ED9E400CDA575 /* MessageDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDateView.swift; sourceTree = "<group>"; };
 		A9580E5B27ED849100253A58 /* NSObject.Kuring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObject.Kuring.swift; sourceTree = "<group>"; };
 		A9580E5D27ED85AC00253A58 /* StringSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSet.swift; sourceTree = "<group>"; };
 		A966E1AF2824364200F6AF3D /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 			children = (
 				A9D248152822E03D00F6FC51 /* UserMessageView.swift */,
 				A9D2482D282396DB00F6FC51 /* AdminMessageView.swift */,
+				A94A4FDD282ED9E400CDA575 /* MessageDateView.swift */,
 				A9D248192822E06A00F6FC51 /* MessageList.swift */,
 				A9D248172822E05400F6FC51 /* MessageInputField.swift */,
 				A9D2481D2822E0D700F6FC51 /* KuringChatView.swift */,
@@ -749,7 +752,7 @@
 				A9DA6CCB27B98D2300F3B786 /* UIViewController.Kuring.swift in Sources */,
 				A9D2482E282396DB00F6FC51 /* AdminMessageView.swift in Sources */,
 				A9C447E327C788A50094D9A9 /* OnboardingRow.swift in Sources */,
-        A9DA6CDA27B98D2300F3B786 /* KUNoticeTagView.swift in Sources */,
+				A9DA6CDA27B98D2300F3B786 /* KUNoticeTagView.swift in Sources */,
 				A9C445BC27C552FB0094D9A9 /* OnboardingView.swift in Sources */,
 				A9DA6CD827B98D2300F3B786 /* KUNoticeListViewController.swift in Sources */,
 				A9DA6CDE27B98D2300F3B786 /* CategorySelectViewController.swift in Sources */,
@@ -767,6 +770,7 @@
 				A9DA6CD027B98D2300F3B786 /* KUSearchViewController.UICollectionView.swift in Sources */,
 				B1E475EC27E824A1002CEBD6 /* CategorySelectCell.swift in Sources */,
 				A9D248162822E03D00F6FC51 /* UserMessageView.swift in Sources */,
+				A94A4FDE282ED9E400CDA575 /* MessageDateView.swift in Sources */,
 				A9DA6CCE27B98D2300F3B786 /* KUStaffViewController.swift in Sources */,
 				A94A4FD62829392100CDA575 /* ChatDisconnectedState.swift in Sources */,
 				A9D860EA282700A300B611D6 /* InitialState.swift in Sources */,

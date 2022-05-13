@@ -10,6 +10,7 @@ import KuringCommons
 
 struct CampusUsernameView: View {
     @ObservedObject var viewModel: CampusViewModel
+    @FocusState private var firstResponder: Bool
     
     var body: some View {
         VStack(spacing: 64) {
@@ -24,6 +25,7 @@ struct CampusUsernameView: View {
                         .foregroundColor(ColorSet.green.color)
                     
                     TextField("이름을 입력해주세요", text: $viewModel.pendingUsername)
+                        .focused($firstResponder)
                         .foregroundColor(
                             viewModel.pendingUsername.conformsToUsernameProtocol
                             ? ColorSet.Label.primary.color

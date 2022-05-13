@@ -11,14 +11,22 @@ import KuringCommons
 import SendbirdChatSDK
 
 struct UserMessageView: View {
+    @Environment(\.openURL) var openURL
     @ObservedObject var viewModel: ChatViewModel
     
     let messageID: String
     let requestID: String
     let username: String
     let message: String
+    let sentAt: Date
     let isSentByMe: Bool
     let sendingState: SendingState
+    
+    struct NoticeInfo {
+        let subject: String
+        let url: String
+    }
+    var noticeInfo: NoticeInfo?
     
     enum SendingState {
         case sent
@@ -74,18 +82,36 @@ struct UserMessageView: View {
         HStack(alignment: .bottom, spacing: 8) {
             if isSentByMe {
                 Spacer()
-                    .frame(minWidth: 80)
                 
                 if sendingState != .sent {
                     sendingState.icon
+                        .padding(.leading, 64)
+                } else {
+                    Text(sentAt, style: .time)
+                        .font(.caption)
+                        .foregroundColor(ColorSet.Label.tertiary.color)
+                        .padding(.leading, 64)
                 }
             }
             
-            VStack(alignment: isSentByMe ? .trailing : .leading, spacing: 8.0) {
+            VStack(alignment: .leading) {
                 if !isSentByMe {
                     Text(username)
                         .font(.subheadline.bold())
                         .foregroundColor(ColorSet.green.color)
+                }
+                
+                if let noticeInfo = noticeInfo {
+                    Label(noticeInfo.subject, systemImage: "megaphone.fill")
+                        .font(.footnote.bold())
+                        .foregroundColor(
+                            isSentByMe
+                            ? ColorSet.Background.primary.color
+                            : ColorSet.Label.primary.color
+                        )
+                        .onTapGesture {
+                            openURL(URL(string: noticeInfo.url)!)
+                        }
                 }
                 
                 Text(attributedString)
@@ -121,10 +147,15 @@ struct UserMessageView: View {
             if !isSentByMe {
                 if sendingState != .sent {
                     sendingState.icon
+                        .padding(.trailing, 64)
+                } else {
+                    Text(sentAt, style: .time)
+                        .font(.caption)
+                        .foregroundColor(ColorSet.Label.tertiary.color)
+                        .padding(.trailing, 64)
                 }
                 
                 Spacer()
-                    .frame(minWidth: 80)
             }
         }
         .padding(.horizontal)
@@ -137,7 +168,24 @@ struct UserMessageView: View {
         self.messageID = "\(userMessage.messageID)"
         self.username = userMessage.sender?.nickname ?? "(알 수 없음)"
         self.message = userMessage.message
+        self.sentAt = Date(
+            timeIntervalSince1970: userMessage.updatedAt != 0
+            ? Double(userMessage.updatedAt) / 1000
+            : Double(userMessage.createdAt) / 1000
+        )
         self.isSentByMe = userMessage.sender?.userID == Kuring.userID
+        
+        if let data = userMessage.data.data(using: .utf8) {
+            let decoder = JSONDecoder()
+            if let noticeInfo = try? decoder.decode([String: String].self, from: data) {
+                self.noticeInfo = NoticeInfo(
+                    subject: noticeInfo[StringSet.Campus.MessagePayloadKey.noticeSubject] ?? "",
+                    url: noticeInfo[StringSet.Campus.MessagePayloadKey.noticeURL] ?? ""
+                )
+            }
+        }
+        
+        
         switch userMessage.sendingStatus {
         case .succeeded:
             self.sendingState = .sent
