@@ -65,6 +65,7 @@ class ChatViewModel: ObservableObject {
     
     func sendUserMessage() {
         guard let connectedState = self.currentState as? ChatConnectedState else { return }
+        HapticManager.shared.createImpact(style: .soft)
         connectedState.sendUserMessage(context: self)
     }
     
