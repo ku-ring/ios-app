@@ -12,6 +12,7 @@
 		A94A4FD62829392100CDA575 /* ChatDisconnectedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A4FD52829392100CDA575 /* ChatDisconnectedState.swift */; };
 		A94A4FD82829393C00CDA575 /* ChatConnectingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A4FD72829393C00CDA575 /* ChatConnectingState.swift */; };
 		A94A4FDE282ED9E400CDA575 /* MessageDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A4FDD282ED9E400CDA575 /* MessageDateView.swift */; };
+		A94A4FE2282FDDA900CDA575 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94A4FE1282FDDA900CDA575 /* WebView.swift */; };
 		A9580E5C27ED849100253A58 /* NSObject.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9580E5B27ED849100253A58 /* NSObject.Kuring.swift */; };
 		A9580E5E27ED85AC00253A58 /* StringSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9580E5D27ED85AC00253A58 /* StringSet.swift */; };
 		A966E1B02824364200F6AF3D /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A966E1AF2824364200F6AF3D /* LottieView.swift */; };
@@ -121,6 +122,7 @@
 		A94A4FD52829392100CDA575 /* ChatDisconnectedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDisconnectedState.swift; sourceTree = "<group>"; };
 		A94A4FD72829393C00CDA575 /* ChatConnectingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatConnectingState.swift; sourceTree = "<group>"; };
 		A94A4FDD282ED9E400CDA575 /* MessageDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDateView.swift; sourceTree = "<group>"; };
+		A94A4FE1282FDDA900CDA575 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		A9580E5B27ED849100253A58 /* NSObject.Kuring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObject.Kuring.swift; sourceTree = "<group>"; };
 		A9580E5D27ED85AC00253A58 /* StringSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSet.swift; sourceTree = "<group>"; };
 		A966E1AF2824364200F6AF3D /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 			children = (
 				A9DA6CAC27B98D2200F3B786 /* KUNoticeListViewController.swift */,
 				A9DA6CAD27B98D2200F3B786 /* NoticeWebViewController.swift */,
+				A94A4FE1282FDDA900CDA575 /* WebView.swift */,
 				A9DA6CAE27B98D2200F3B786 /* View */,
 			);
 			path = Notice;
@@ -736,6 +739,7 @@
 				A9C447E727C7A2560094D9A9 /* OnboardingIntroView.swift in Sources */,
 				A9D248252822E16400F6FC51 /* ChatViewModel.Connection.swift in Sources */,
 				A94A4FD22829390D00CDA575 /* ChatConnectedState.swift in Sources */,
+				A94A4FE2282FDDA900CDA575 /* WebView.swift in Sources */,
 				A9D248232822E15100F6FC51 /* ChatViewModel.OpenChannel.swift in Sources */,
 				A9DA6CC327B98D2300F3B786 /* Notice.Kuring.swift in Sources */,
 				A9580E5C27ED849100253A58 /* NSObject.Kuring.swift in Sources */,

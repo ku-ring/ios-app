@@ -11,8 +11,9 @@ import KuringCommons
 import SendbirdChatSDK
 
 struct UserMessageView: View {
-    @Environment(\.openURL) var openURL
     @ObservedObject var viewModel: ChatViewModel
+    @StateObject private var webViewModel = WebViewModel()
+    @State private var showsNoticeWebView: Bool = false
     
     let messageID: String
     let requestID: String
@@ -110,7 +111,7 @@ struct UserMessageView: View {
                             : ColorSet.Label.primary.color
                         )
                         .onTapGesture {
-                            openURL(URL(string: noticeInfo.url)!)
+                            showsNoticeWebView = true
                         }
                 }
                 
@@ -160,6 +161,33 @@ struct UserMessageView: View {
         }
         .padding(.horizontal)
         .id(messageID == "0" ? requestID : messageID)
+        .sheet(isPresented: $showsNoticeWebView) {
+            NavigationView {
+                ZStack {
+                    WebView(viewModel: webViewModel, urlString: noticeInfo!.url)
+                    
+                    if webViewModel.isLoading {
+                        LottieView(filename: StringSet.Lottie.loading)
+                    }
+                }
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Image("appIconLabel")
+                    }
+                    
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            showsNoticeWebView = false
+                        } label: {
+                            Image(systemName: "xmark")
+                                .foregroundColor(ColorSet.primary.color)
+                        }
+                        
+                    }
+                }
+            }
+        }
     }
     
     init(viewModel: ChatViewModel, userMessage: UserMessage) {
