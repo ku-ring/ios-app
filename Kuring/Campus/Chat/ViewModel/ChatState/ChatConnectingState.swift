@@ -40,18 +40,20 @@ class ChatConnectingState: ChatState {
         case .success(let messages):
             let fetchedMessages = messages
             Logger.debug("\(fetchedMessages.count) 개의 메세지를 가져왔습니다.")
-            if fetchedMessages.isEmpty { return }
-            for message in fetchedMessages {
-                switch message {
-                case let userMessage as UserMessage:
-                    if userMessage.messageID == context.sentMessages.last?.messageID { return }
-                    context.sentMessages.append(message)
-                case let adminMessage as AdminMessage:
-                    if adminMessage.messageID == context.sentMessages.last?.messageID { return }
-                    context.sentMessages.append(message)
-                default: return
-                }
+            if !fetchedMessages.isEmpty {
+                for message in fetchedMessages {
+                    switch message {
+                    case let userMessage as UserMessage:
+                        if userMessage.messageID == context.sentMessages.last?.messageID { return }
+                        context.sentMessages.append(message)
+                    case let adminMessage as AdminMessage:
+                        if adminMessage.messageID == context.sentMessages.last?.messageID { return }
+                        context.sentMessages.append(message)
+                    default: return
+                    }
+                }                
             }
+            context.hasMorePreviousMessages = fetchedMessages.count >= 100
             context.updateLastMessageIndex()
             context.changeState(ChatConnectedState(channel: channel))
         case .failure(let error):

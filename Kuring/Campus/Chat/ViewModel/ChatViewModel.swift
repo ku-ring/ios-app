@@ -37,6 +37,7 @@ class ChatViewModel: ObservableObject {
     // TODO: 글자수 제한 300자
     @Published var text: String = ""
     @Published var isLoading: Bool = false
+    @Published var hasMorePreviousMessages: Bool = false
     
     @Published var currentState: ChatState {
         willSet { currentState.finish(context: self) }
@@ -45,6 +46,7 @@ class ChatViewModel: ObservableObject {
     
     var openChannel: OpenChannel
     var query: PreviousMessageListQuery?
+    
     
     enum MessageStatus {
         case sent

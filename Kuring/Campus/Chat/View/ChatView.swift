@@ -70,39 +70,55 @@ struct ChatView: View, KeyboardReadable {
     private var messageList: some View {
         ScrollView(showsIndicators: false) {
             ScrollViewReader { reader in
-                VStack(spacing: 5) {
-                    ForEach(viewModel.sentMessages, id: \.messageID) { message in
-                        VStack {
-                            if !viewModel.isSameDay(currentMessage: message, status: .sent) {
-                                MessageDateView(message: message)
+                ZStack {
+                    VStack(spacing: 5) {
+                        if viewModel.hasMorePreviousMessages {
+                            Button(action: viewModel.fetchPreviousMessageList) {
+                                Text("이전 메세지 가져오기")
+                                    .font(.subheadline.bold())
                             }
-                            
-                            if let userMessage = message as? UserMessage {
-                                UserMessageView(viewModel: viewModel, userMessage: userMessage)
-                            } else if let adminMessage = message as? AdminMessage {
-                                AdminMessageView(adminMessage: adminMessage)
+                            .foregroundColor(ColorSet.primary.color)
+                        }
+                        
+                        ForEach(viewModel.sentMessages, id: \.messageID) { message in
+                            VStack {
+                                if !viewModel.isSameDay(currentMessage: message, status: .sent) {
+                                    MessageDateView(message: message)
+                                }
+                                
+                                if let userMessage = message as? UserMessage {
+                                    UserMessageView(viewModel: viewModel, userMessage: userMessage)
+                                } else if let adminMessage = message as? AdminMessage {
+                                    AdminMessageView(adminMessage: adminMessage)
+                                }
+                            }
+                        }
+                        
+                        ForEach(viewModel.failedMessages, id: \.self) { failedMessage in
+                            VStack {
+                                if !viewModel.isSameDay(currentMessage: failedMessage, status: .failed) {
+                                    MessageDateView(message: failedMessage)
+                                }
+                                
+                                UserMessageView(viewModel: viewModel, userMessage: failedMessage)
+                            }
+                        }
+                        
+                        ForEach(viewModel.pendingMessages, id: \.self) { pendingMessage in
+                            VStack {
+                                if !viewModel.isSameDay(currentMessage: pendingMessage, status: .pending) {
+                                    MessageDateView(message: pendingMessage)
+                                }
+                                
+                                UserMessageView(viewModel: viewModel, userMessage: pendingMessage)
                             }
                         }
                     }
                     
-                    ForEach(viewModel.failedMessages, id: \.self) { failedMessage in
-                        VStack {
-                            if !viewModel.isSameDay(currentMessage: failedMessage, status: .failed) {
-                                MessageDateView(message: failedMessage)
-                            }
-                            
-                            UserMessageView(viewModel: viewModel, userMessage: failedMessage)
-                        }
-                    }
-                    
-                    ForEach(viewModel.pendingMessages, id: \.self) { pendingMessage in
-                        VStack {
-                            if !viewModel.isSameDay(currentMessage: pendingMessage, status: .pending) {
-                                MessageDateView(message: pendingMessage)
-                            }
-                            
-                            UserMessageView(viewModel: viewModel, userMessage: pendingMessage)
-                        }
+                    GeometryReader { proxy in
+                        let offset = proxy.frame(in: .named("scroll")).minY
+                        Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
+                        
                     }
                 }
                 .onChange(of: viewModel.lastMessageIndex) { newValue in
@@ -121,8 +137,9 @@ struct ChatView: View, KeyboardReadable {
                 .padding(.top, 25)
             }
         }
-        .refreshable {
-            viewModel.fetchPreviousMessageList()
+        .coordinateSpace(name: "scroll")
+        .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
+            //
         }
         .safeAreaInset(edge: .bottom) {
             messageInputField
@@ -167,5 +184,13 @@ struct ChatView: View, KeyboardReadable {
     
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+struct ScrollViewOffsetPreferenceKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue = CGFloat.zero
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
     }
 }
