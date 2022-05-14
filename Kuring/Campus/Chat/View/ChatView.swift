@@ -1,0 +1,171 @@
+//
+//  ChatView.swift
+//  Kuring
+//
+//  Created by Jaesung Lee on 2022/05/05.
+//
+
+import SwiftUI
+import KuringSDK
+import KuringCommons
+import SendbirdChatSDK
+
+struct ChatView: View, KeyboardReadable {
+    @Environment(\.presentationMode) private var presentationMode
+    @ObservedObject var viewModel: ChatViewModel
+    @State private var inputHeight: CGFloat = 44
+    
+    var isSendable: Bool {
+        !viewModel.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+    
+    var body: some View {
+        NavigationView {
+            ZStack {
+                ZStack {
+                    messageList
+                        .onTapGesture {
+                            hideKeyboard()
+                        }
+                }
+                .background(ColorSet.Background.primary.color)
+                
+                if viewModel.isLoading {
+                    LottieView(filename: "lottieLoading")
+                }
+                
+                switch viewModel.currentState {
+                case is ChatDisconnectedState:
+                    Text("연결이 끊겼습니다.")
+                        .foregroundColor(ColorSet.pink.color)
+                case is ChatConnectingState:
+                    LottieView(filename: "lottieLoading")
+                default: EmptyView()
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                            .foregroundColor(ColorSet.primary.color)
+                    }
+                }
+                ToolbarItem(placement: .principal) {
+                    Text("💬 쿠링청심대")
+                        .font(.title3.bold())
+                        .foregroundColor(ColorSet.Label.primary.color)
+                }
+            }
+        }
+    }
+    
+    init(channel: OpenChannel) {
+        self.viewModel = ChatViewModel(channel: channel)
+        UITextView.appearance().backgroundColor = .clear
+    }
+    
+    private var messageList: some View {
+        ScrollView(showsIndicators: false) {
+            ScrollViewReader { reader in
+                VStack(spacing: 5) {
+                    ForEach(viewModel.sentMessages, id: \.messageID) { message in
+                        VStack {
+                            if !viewModel.isSameDay(currentMessage: message, status: .sent) {
+                                MessageDateView(message: message)
+                            }
+                            
+                            if let userMessage = message as? UserMessage {
+                                UserMessageView(viewModel: viewModel, userMessage: userMessage)
+                            } else if let adminMessage = message as? AdminMessage {
+                                AdminMessageView(adminMessage: adminMessage)
+                            }
+                        }
+                    }
+                    
+                    ForEach(viewModel.failedMessages, id: \.self) { failedMessage in
+                        VStack {
+                            if !viewModel.isSameDay(currentMessage: failedMessage, status: .failed) {
+                                MessageDateView(message: failedMessage)
+                            }
+                            
+                            UserMessageView(viewModel: viewModel, userMessage: failedMessage)
+                        }
+                    }
+                    
+                    ForEach(viewModel.pendingMessages, id: \.self) { pendingMessage in
+                        VStack {
+                            if !viewModel.isSameDay(currentMessage: pendingMessage, status: .pending) {
+                                MessageDateView(message: pendingMessage)
+                            }
+                            
+                            UserMessageView(viewModel: viewModel, userMessage: pendingMessage)
+                        }
+                    }
+                }
+                .onChange(of: viewModel.lastMessageIndex) { newValue in
+                    guard !newValue.isEmpty else { return }
+                    guard viewModel.isScrollable else { return }
+                    withAnimation {
+                        reader.scrollTo(newValue, anchor: .bottom)
+                    }
+                }
+                .onReceive(keyboardPublisher) { _ in
+                    withAnimation {
+                        reader.scrollTo(viewModel.lastMessageIndex, anchor: .bottom)
+                    }
+                }
+                .padding(.bottom)
+                .padding(.top, 25)
+            }
+        }
+        .refreshable {
+            viewModel.fetchPreviousMessageList()
+        }
+        .safeAreaInset(edge: .bottom) {
+            messageInputField
+                .background {
+                    ColorSet.Background.primary.color
+                        .ignoresSafeArea()
+                }
+        }
+    }
+    
+    private var messageInputField: some View {
+        HStack(spacing: 0) {
+            MessageInput(
+                text: $viewModel.text,
+                height: $inputHeight
+            )
+            .frame(height: inputHeight < 90 ? inputHeight : 90)
+                .multilineTextAlignment(.leading)
+                .opacity(viewModel.text.isEmpty ? 0.5 : 1)
+                .padding(.vertical, 2)
+                .padding(.horizontal, 12)
+                .background {
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(ColorSet.green.color, lineWidth: 1)
+                }
+                .padding(.vertical, 4)
+            
+            Button(action: viewModel.sendUserMessage) {
+                Image(systemName: "paperplane.fill")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .rotationEffect(.degrees(45))
+                    .foregroundColor(ColorSet.green.color)
+                    .padding()
+            }
+            .disabled(!isSendable)
+            .opacity(isSendable ? 1.0 : 0.5)
+        }
+        .padding(.leading, 16)
+        .padding(.trailing, 8)
+    }
+    
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}

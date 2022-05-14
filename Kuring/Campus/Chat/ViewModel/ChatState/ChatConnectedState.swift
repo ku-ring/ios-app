@@ -52,7 +52,7 @@ class ChatConnectedState: ChatState {
     
     func sendUserMessage(context: ChatViewModel) {
         Logger.debug(#function)
-        let pendingMessage = channel.sendUserMessage(context.text) { [self, context] message, error in
+        let pendingMessage = channel.sendUserMessage(context.text) { [context] message, error in
             defer { Logger.error(error) }
             guard let message = message else { return }
             switch message.sendingStatus {
