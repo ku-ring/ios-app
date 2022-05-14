@@ -20,13 +20,20 @@ class ChannelRetrievalState: CampusState {
         channel.enter { [weak channel, context] error in
             guard let channel = channel else {
                 Logger.error("채널에 대한 메모리 참조를 잃었습니다.")
+                context.onError = true
                 return
             }
             if let error = error {
                 Logger.error(error)
+                context.onError = true
                 return
             }
+            context.onChat = true
             context.changeState(to: ChatStartedState(channel: channel))
         }
+    }
+    
+    func restart(context: CampusViewModel) {
+        self.start(context: context)
     }
 }

@@ -12,7 +12,6 @@ import SendbirdChatSDK
 
 struct UserMessageView: View {
     @ObservedObject var viewModel: ChatViewModel
-    @StateObject private var webViewModel = WebViewModel()
     @State private var showsNoticeWebView: Bool = false
     
     let messageID: String
@@ -22,12 +21,6 @@ struct UserMessageView: View {
     let sentAt: Date
     let isSentByMe: Bool
     let sendingState: SendingState
-    
-    struct NoticeInfo {
-        let subject: String
-        let url: String
-    }
-    var noticeInfo: NoticeInfo?
     
     enum SendingState {
         case sent
@@ -69,7 +62,7 @@ struct UserMessageView: View {
             if let myUsername = SendbirdChat.getCurrentUser()?.nickname, let range = text.range(of: myUsername) {
                 text[range].foregroundColor = isSentByMe
                 ? ColorSet.Background.primary.color
-                : ColorSet.green.color
+                : ColorSet.Label.primary.color
                 text[range].font = .footnote.bold()
             }
      
@@ -100,19 +93,6 @@ struct UserMessageView: View {
                     Text(username)
                         .font(.subheadline.bold())
                         .foregroundColor(ColorSet.green.color)
-                }
-                
-                if let noticeInfo = noticeInfo {
-                    Label(noticeInfo.subject, systemImage: "megaphone.fill")
-                        .font(.footnote.bold())
-                        .foregroundColor(
-                            isSentByMe
-                            ? ColorSet.Background.primary.color
-                            : ColorSet.Label.primary.color
-                        )
-                        .onTapGesture {
-                            showsNoticeWebView = true
-                        }
                 }
                 
                 Text(attributedString)
@@ -161,33 +141,6 @@ struct UserMessageView: View {
         }
         .padding(.horizontal)
         .id(messageID == "0" ? requestID : messageID)
-        .sheet(isPresented: $showsNoticeWebView) {
-            NavigationView {
-                ZStack {
-                    WebView(viewModel: webViewModel, urlString: noticeInfo!.url)
-                    
-                    if webViewModel.isLoading {
-                        LottieView(filename: StringSet.Lottie.loading)
-                    }
-                }
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Image("appIconLabel")
-                    }
-                    
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            showsNoticeWebView = false
-                        } label: {
-                            Image(systemName: "xmark")
-                                .foregroundColor(ColorSet.primary.color)
-                        }
-                        
-                    }
-                }
-            }
-        }
     }
     
     init(viewModel: ChatViewModel, userMessage: UserMessage) {
@@ -202,17 +155,6 @@ struct UserMessageView: View {
             : Double(userMessage.createdAt) / 1000
         )
         self.isSentByMe = userMessage.sender?.userID == Kuring.userID
-        
-        if let data = userMessage.data.data(using: .utf8) {
-            let decoder = JSONDecoder()
-            if let noticeInfo = try? decoder.decode([String: String].self, from: data) {
-                self.noticeInfo = NoticeInfo(
-                    subject: noticeInfo[StringSet.Campus.MessagePayloadKey.noticeSubject] ?? "",
-                    url: noticeInfo[StringSet.Campus.MessagePayloadKey.noticeURL] ?? ""
-                )
-            }
-        }
-        
         
         switch userMessage.sendingStatus {
         case .succeeded:

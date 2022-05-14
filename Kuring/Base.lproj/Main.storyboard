@@ -567,20 +567,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="쿠링" largeTitleDisplayMode="never" id="PM5-bf-C5P">
-                        <rightBarButtonItems>
-                            <barButtonItem style="plain" systemItem="action" id="4wm-0j-iNA">
-                                <color key="tintColor" name="ColorSet.Label.primary"/>
-                                <connections>
-                                    <action selector="didTapShare" destination="a1q-QO-A9d" id="8X7-qi-zpR"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="paperplane" catalog="system" id="9BX-c1-214">
-                                <color key="tintColor" name="ColorSet.Label.primary"/>
-                                <connections>
-                                    <action selector="didTapChat" destination="a1q-QO-A9d" id="ndQ-mm-jqR"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="4wm-0j-iNA">
+                            <color key="tintColor" name="ColorSet.Label.primary"/>
+                            <connections>
+                                <action selector="didTapShare" destination="a1q-QO-A9d" id="8X7-qi-zpR"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="adsBannerContainerView" destination="S9e-qF-Uus" id="Uqf-eV-vNE"/>
@@ -726,7 +718,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Wf-hK-7Mq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2494" y="3627"/>
+            <point key="canvasLocation" x="-2526" y="3627"/>
         </scene>
         <!--🗃공지 보관함-->
         <scene sceneID="g3N-dY-gyy">
@@ -1046,7 +1038,6 @@
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="message" catalog="system" width="128" height="113"/>
-        <image name="paperplane" catalog="system" width="128" height="118"/>
         <namedColor name="ColorSet.Label.green">
             <color red="0.012000000104308128" green="0.41999998688697815" blue="0.24699999392032623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -46,47 +46,6 @@ class NoticeWebViewController: UIViewController {
         self.present(activityVC, animated: true, completion: nil)
     }
     
-    @IBAction func didTapChat() {
-        guard let articleURL = self.articleURL else {
-            showError("공유 도중 에러가 발생했습니다.")
-            return
-        }
-        guard let userID = Kuring.userID else {
-            showError("쿠링 캠퍼스에 로그인 해주세요.")
-            return
-        }
-        guard let notice = Kuring.cachedNotices[self.articleID] else {
-            showError("공유 도중 에러가 발생했습니다.")
-            return
-        }
-        if !indicatorView.isAnimationPlaying {
-            indicatorView.play()
-            indicatorView.isHidden = false
-        }
-        if let channel = channel {
-            sendToChannel(notice: notice, url: articleURL)
-            return
-        }
-        SendbirdChat.connect(userID: userID) { [weak self, notice, articleURL] user, error in
-            guard let self = self else { return }
-            if let error = error {
-                DispatchQueue.main.async { [self] in
-                    self.indicatorView.stop()
-                    self.indicatorView.isHidden = true
-                    self.showError("공유 도중 에러가 발생했습니다.")
-                }
-                Logger.error(error)
-                return
-            }
-            OpenChannel.getChannel(url: StringSet.Campus.channelID) { [notice, articleURL] channel, error in
-                self.channel = channel
-                channel?.enter(completionHandler: { error in
-                    self.sendToChannel(notice: notice, url: articleURL)
-                })
-            }
-        }
-    }
-    
     // MARK: Lottie Indicator
     fileprivate let indicatorView: AnimationView = .init(name: StringSet.Lottie.loading)
     

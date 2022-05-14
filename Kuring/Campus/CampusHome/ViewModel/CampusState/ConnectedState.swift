@@ -14,9 +14,14 @@ class ConnectedState: CampusState {
         OpenChannel.getChannel(url: StringSet.Campus.channelID) { [context] channel, error in
             guard let channel = channel else {
                 Logger.error(error)
+                context.onError = true
                 return
             }
             context.changeState(to: ChannelRetrievalState(channel: channel))
         }
+    }
+    
+    func restart(context: CampusViewModel) {
+        self.startChat(context: context)
     }
 }

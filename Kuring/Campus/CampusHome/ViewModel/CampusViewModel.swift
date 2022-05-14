@@ -22,6 +22,12 @@ class CampusViewModel: ObservableObject {
         willSet { currentState.finish(context: self) }
         didSet { currentState.start(context: self) }
     }
+    @Published var onError: Bool = false
+    @Published var onChat: Bool = false {
+        didSet {
+            if !onChat { endChat() }
+        }
+    }
     
     init() {    
         self.currentState.start(context: self)
@@ -36,9 +42,9 @@ class CampusViewModel: ObservableObject {
     }
     
     // MARK: - actions
-    func signInWithKakao() {
+    func signInWithGoogle() {
         guard let currentState = self.currentState as? LoginState else { return }
-        currentState.loginWithKakao(context: self)
+        currentState.loginWithGoogle(context: self)
     }
     
     func signInWithApple() {
@@ -74,5 +80,15 @@ class CampusViewModel: ObservableObject {
     func startChat() {
         guard let currentState = self.currentState as? ConnectedState else { return }
         currentState.startChat(context: self)
+    }
+    
+    func endChat() {
+        guard let currentState = self.currentState as? ChatStartedState else { return }
+        currentState.endChat(context: self)
+    }
+    
+    func restart() {
+        onError = false
+        currentState.restart(context: self)
     }
 }

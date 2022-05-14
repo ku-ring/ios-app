@@ -14,4 +14,8 @@ class ChatStartedState: CampusState {
     init(channel: OpenChannel) {
         self.channel = channel
     }
+    
+    func endChat(context: CampusViewModel) {
+        context.changeState(to: ConnectedState())
+    }
 }

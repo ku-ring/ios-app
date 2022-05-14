@@ -28,9 +28,13 @@ struct AdminMessageView: View {
                 .ignoresSafeArea(edges: .horizontal)
             
             VStack(alignment: .leading, spacing: 8) {
-                Text(adminName)
+                HStack {
+                    Text(adminName)
                     .font(.subheadline.bold())
                     .foregroundColor(ColorSet.Label.green.color)
+                    
+                    Spacer()
+                }
                 
                 Group {
                     if showsMore {

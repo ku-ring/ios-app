@@ -27,6 +27,7 @@ class UsernameRequestState: CampusState {
         }
         
     }
+    
     func updateUsername(to username: String, context: CampusViewModel) {
         
         let params = UserUpdateParams()
@@ -36,9 +37,14 @@ class UsernameRequestState: CampusState {
             completionHandler: { [context] error in
                 if let error = error {
                     Logger.error(error)
+                    context.onError = true
                 }
                 context.changeState(to: ConnectedState())
             }
         )
+    }
+    
+    func restart(context: CampusViewModel) {
+        // calls 
     }
 }

@@ -11,7 +11,7 @@ import SendbirdChatSDK
 extension ChatViewModel: OpenChannelDelegate {
     func channel(_ channel: BaseChannel, didReceive message: BaseMessage) {
         self.sentMessages.append(message)
-        self.lastMessageIndex = message.requestID
+        self.updateLastMessageIndex()
     }
     
     func channel(_ channel: OpenChannel, userDidEnter user: User) {
