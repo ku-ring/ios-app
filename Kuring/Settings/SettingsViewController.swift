@@ -40,6 +40,7 @@ class SettingsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        HapticManager.shared.createImpact()
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath.section {

@@ -118,6 +118,7 @@ extension KUAlarmViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
+        HapticManager.shared.createImpact()
         tableView.beginUpdates()
         let date = dates[indexPath.section]
         Kuring.removeNotification(at: indexPath.row, forDate: date)

@@ -45,6 +45,7 @@ class CampusViewModel: ObservableObject {
     
     func signInWithApple() {
         guard let currentState = self.currentState as? LoginState else { return }
+        HapticManager.shared.createImpact()
         currentState.loginWithApple(context: self)
     }
     
@@ -60,12 +61,17 @@ class CampusViewModel: ObservableObject {
     
     func setupUsername() {
         isConformsToRegex = pendingUsername.conformsToUsernameProtocol && pendingUsername.count > 5 && pendingUsername.count <= 15
-        guard isConformsToRegex else { return }
+        guard isConformsToRegex else {
+            HapticManager.shared.createNotification(.error)
+            return
+        }
+        HapticManager.shared.createImpact()
         guard let currentState = self.currentState as? UsernameRequestState else { return }
         currentState.checkAvailablity(username: pendingUsername, context: self)
     }
     
     func didFailToSetupUsername(with message: String) {
+        HapticManager.shared.createNotification(.error)
         errorMessage = message
         Logger.error(message)
     }
@@ -76,6 +82,7 @@ class CampusViewModel: ObservableObject {
     }
     
     func startChat() {
+        HapticManager.shared.createImpact()
         guard let currentState = self.currentState as? ConnectedState else { return }
         currentState.startChat(context: self)
     }
@@ -86,6 +93,7 @@ class CampusViewModel: ObservableObject {
     }
     
     func restart() {
+        HapticManager.shared.createImpact()
         onError = false
         currentState.restart(context: self)
     }

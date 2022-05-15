@@ -102,6 +102,7 @@ class CategorySelectViewController : UIViewController {
     
     @objc
     func didTapSave() {
+        HapticManager.shared.createImpact()
         resetButton.isEnabled = false
         saveButton.isEnabled = false
         
@@ -112,6 +113,7 @@ class CategorySelectViewController : UIViewController {
     
     @objc
     func didTapReset() {
+        HapticManager.shared.createImpact()
         selectedCategories.removeAll()
         unSelectedCategories.removeAll()
         
@@ -182,6 +184,7 @@ extension CategorySelectViewController {
     private func setupBinding() {
         selectedCollectionView.rx.itemSelected
             .bind { [self] indexPath in
+                HapticManager.shared.createImpact()
                 let selectItem = self.selectedCategories[indexPath.row]
                 
                 if let firstIndex = selectedCategories.firstIndex(of: selectItem) {
@@ -199,6 +202,7 @@ extension CategorySelectViewController {
         
         unSelectedCollectionView.rx.itemSelected
             .bind{ [self] indexPath in
+                HapticManager.shared.createImpact()
                 let selectItem = unSelectedCategories[indexPath.row]
                 
                 if let firstIndex = unSelectedCategories.firstIndex(of: selectItem) {

@@ -325,6 +325,7 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
 
             let notice = self.currentNotices[indexPath.row]
             
+            HapticManager.shared.createImpact()
             if !Kuring.noticeBookmark.contains(notice) {
                 Kuring.noticeBookmark.append(notice)
             }
