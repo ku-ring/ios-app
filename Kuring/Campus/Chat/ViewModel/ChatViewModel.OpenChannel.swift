@@ -12,7 +12,7 @@ extension ChatViewModel: OpenChannelDelegate {
     func channel(_ channel: BaseChannel, didReceive message: BaseMessage) {
         self.sentMessages.append(message)
         self.updateLastMessageIndex()
-        notifiesNewMessage = !isScrollable
+        notifiesNewMessage = !isAutoScrollable
     }
     
     func channel(_ channel: OpenChannel, userDidEnter user: User) {

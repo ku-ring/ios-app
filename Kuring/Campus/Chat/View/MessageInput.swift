@@ -64,7 +64,14 @@ struct MessageInput: UIViewRepresentable {
                 self.parent.isEditing = false
             }
         }
+        
         func textViewDidChange(_ textView: UITextView) {
+            if textView.text.count > 300 {
+                let start = textView.text.index(textView.text.startIndex, offsetBy: 0)
+                let end = textView.text.index(textView.text.startIndex, offsetBy: 300)
+                textView.text = String(textView.text[start..<end])
+            }
+            
             DispatchQueue.main.async {
                 self.parent.height = textView.contentSize.height
                 self.parent.text = textView.text

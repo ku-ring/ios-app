@@ -59,7 +59,7 @@ struct AdminMessageView: View {
         }
         .contextMenu {
             Button(action: share) {
-                Label("공유하기", systemImage: "doc.on.doc")
+                Label("복사하기", systemImage: "doc.on.doc")
             }
         }
         .id(messageID)

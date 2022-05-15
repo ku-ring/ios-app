@@ -25,6 +25,9 @@ struct ChatView: View, KeyboardReadable {
                 ZStack {
                     ZStack(alignment: .bottom) {
                         messageList
+                            .onTapGesture {
+                                hideKeyboard()
+                            }
                         
                         if viewModel.notifiesNewMessage {
                             Button(action: viewModel.scrollToBottom) {
@@ -46,9 +49,6 @@ struct ChatView: View, KeyboardReadable {
                                 ColorSet.Background.primary.color
                                     .ignoresSafeArea()
                             }
-                    }
-                    .onTapGesture {
-                        hideKeyboard()
                     }
                 }
                 .background(ColorSet.Background.primary.color)

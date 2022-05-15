@@ -97,7 +97,6 @@ struct UserMessageView: View {
                 
                 Text(attributedString)
                     .multilineTextAlignment(.leading)
-                    .lineLimit(10)
             }
             .padding(.vertical, 8)
             .padding(.horizontal, 20)
