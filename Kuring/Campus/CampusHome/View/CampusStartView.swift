@@ -53,6 +53,8 @@ struct CampusStartView: View {
                             colorScheme == .light ? .black : .white
                         )
                         .frame(height: 45)
+                        .frame(maxWidth: 350)
+                        .padding(.horizontal, 20)
                     default:
                         Button(action: viewModel.startChat) {
                             RoundedRectangle(cornerRadius: 26)

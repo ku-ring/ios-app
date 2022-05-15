@@ -70,6 +70,7 @@ struct ChatView: View, KeyboardReadable {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
+                        HapticManager.shared.createImpact()
                         presentationMode.wrappedValue.dismiss()
                     } label: {
                         Image(systemName: "xmark")
