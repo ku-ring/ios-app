@@ -17,7 +17,7 @@ class ChatViewModel: ObservableObject {
     @Published var failedMessages: [UserMessage] = []
     
     @Published var notifiesNewMessage: Bool = false
-    @Published var isScrollable: Bool = true
+    @Published var isAutoScrollable: Bool = true
     @Published var bottomOffset: CGFloat = 0
     @Published var lastMessageIndex: String = ""
     
@@ -56,26 +56,26 @@ class ChatViewModel: ObservableObject {
     
     func fetchPreviousMessageList() {
         guard let connectedState = self.currentState as? ChatConnectedState else { return }
-        isScrollable = true
+        isAutoScrollable = true
         connectedState.fetchPreviousMessageList(context: self)
     }
     
     func sendUserMessage() {
         guard let connectedState = self.currentState as? ChatConnectedState else { return }
-        isScrollable = true
+        isAutoScrollable = true
         HapticManager.shared.createImpact(style: .soft)
         connectedState.sendUserMessage(context: self)
     }
     
     func resendUserMessage(requestID: String) {
         guard let connectedState = self.currentState as? ChatConnectedState else { return }
-        isScrollable = true
+        isAutoScrollable = true
         connectedState.resendUserMessage(requestID: requestID, context: self)
     }
     
     func deleteNotSentMessage(requestID: String) {
         Logger.debug(#function)
-        isScrollable = true
+        isAutoScrollable = true
         failedMessages.removeAll { $0.requestID == requestID }
         pendingMessages.removeAll { $0.requestID == requestID }
         updateLastMessageIndex()
@@ -92,7 +92,7 @@ class ChatViewModel: ObservableObject {
     }
     
     func scrollToBottom() {
-        isScrollable = true
+        isAutoScrollable = true
         updateLastMessageIndex()
         notifiesNewMessage = false
     }

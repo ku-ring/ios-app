@@ -146,7 +146,7 @@ struct ChatView: View, KeyboardReadable {
                 }
                 .onChange(of: viewModel.lastMessageIndex) { newValue in
                     guard !newValue.isEmpty else { return }
-                    guard viewModel.isScrollable else { return }
+                    guard viewModel.isAutoScrollable else { return }
                     withAnimation {
                         reader.scrollTo(newValue, anchor: .bottom)
                     }
@@ -171,9 +171,9 @@ struct ChatView: View, KeyboardReadable {
             let isNewBottom = viewModel.bottomOffset + 30 > value
             if isNewBottom {
                 viewModel.bottomOffset = value
-                viewModel.isScrollable = true
+                viewModel.isAutoScrollable = true
             } else {
-                viewModel.isScrollable = false
+                viewModel.isAutoScrollable = false
             }
         }
     }
