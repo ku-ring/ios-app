@@ -317,23 +317,23 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let notice = self.currentNotices[indexPath.row]
+        let isBookmarked = Kuring.noticeBookmark.contains(notice)
         let subscribeAction = UIContextualAction(
             style: .normal,
             title: nil
-        ) { [weak self] action, view, completionHandler in
-            guard let self = self else { return }
-
-            let notice = self.currentNotices[indexPath.row]
-            
+        ) { [notice, isBookmarked] action, view, completionHandler in
             HapticManager.shared.createImpact()
-            if !Kuring.noticeBookmark.contains(notice) {
+            if !isBookmarked {
                 Kuring.noticeBookmark.append(notice)
+            } else {
+                Kuring.noticeBookmark.removeAll { $0.id == notice.id }
             }
-            
+            tableView.reloadData()
             completionHandler(true)
         }
         subscribeAction.backgroundColor = ColorSet.green
-        subscribeAction.image = UIImage(systemName: "bookmark.fill")
+        subscribeAction.image = UIImage(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
         
         return UISwipeActionsConfiguration(actions: [subscribeAction])
     }
