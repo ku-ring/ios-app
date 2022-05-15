@@ -181,7 +181,7 @@ struct ChatView: View, KeyboardReadable {
     }
     
     private var messageInputField: some View {
-        HStack(spacing: 0) {
+        HStack(alignment: .bottom, spacing: 0) {
             MessageInput(
                 text: $viewModel.text,
                 height: $inputHeight
