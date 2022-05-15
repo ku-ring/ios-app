@@ -63,7 +63,7 @@ class ChatViewModel: ObservableObject {
     func sendUserMessage() {
         guard let connectedState = self.currentState as? ChatConnectedState else { return }
         isAutoScrollable = true
-        HapticManager.shared.createImpact(style: .soft)
+        HapticManager.shared.createImpact()
         connectedState.sendUserMessage(context: self)
     }
     
@@ -91,6 +91,7 @@ class ChatViewModel: ObservableObject {
     }
     
     func scrollToBottom() {
+        HapticManager.shared.createImpact()
         isAutoScrollable = true
         updateLastMessageIndex()
         notifiesNewMessage = false

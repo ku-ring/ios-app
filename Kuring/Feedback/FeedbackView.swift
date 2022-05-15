@@ -85,6 +85,7 @@ struct FeedbackView: View {
     }
     
     func send() {
+        HapticManager.shared.createImpact()
         viewModel.send {
             presentationMode.wrappedValue.dismiss()
         }

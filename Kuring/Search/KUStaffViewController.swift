@@ -29,6 +29,7 @@ class KUStaffViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        HapticManager.shared.createImpact()
         tableView.deselectRow(at: indexPath, animated: true)
         guard indexPath.section == 1 else { return } // 0: 주요정보, 1: 연락처, 2: 기타정보
         switch indexPath.row {
