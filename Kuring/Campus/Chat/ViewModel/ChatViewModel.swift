@@ -12,31 +12,19 @@ import SendbirdChatSDK
 class ChatViewModel: ObservableObject {
     @Published private(set) var onDismiss: Bool = false
     
-    @Published var sentMessages: [BaseMessage] = [] {
-        didSet {
-            Logger.debug("viewModel.sentMessages 에 \(String(describing: sentMessages.last))를 추가하였습니다.")
-        }
-    }
-    @Published var pendingMessages: [UserMessage] = [] {
-        didSet {
-            Logger.debug("viewModel.pendingMessages 에 \(String(describing: pendingMessages.last))를 추가하였습니다.")
-        }
-    }
-    @Published var failedMessages: [UserMessage] = [] {
-        didSet {
-            Logger.debug("viewModel.failedMessages 에 \(String(describing: failedMessages.last))를 추가하였습니다.")
-        }
-    }
-    @Published var isScrollable: Bool = true
-    @Published var lastMessageIndex: String = "" {
-        didSet {
-            Logger.debug("viewModel.lastMessageIndex = \(lastMessageIndex)")
-        }
-    }
+    @Published var sentMessages: [BaseMessage] = []
+    @Published var pendingMessages: [UserMessage] = []
+    @Published var failedMessages: [UserMessage] = []
+    
+    @Published var notifiesNewMessage: Bool = false
+    @Published var isAutoScrollable: Bool = true
+    @Published var bottomOffset: CGFloat = 0
+    @Published var lastMessageIndex: String = ""
     
     // TODO: 글자수 제한 300자
     @Published var text: String = ""
     @Published var isLoading: Bool = false
+    @Published var hasMorePreviousMessages: Bool = false
     
     @Published var currentState: ChatState {
         willSet { currentState.finish(context: self) }
@@ -45,6 +33,7 @@ class ChatViewModel: ObservableObject {
     
     var openChannel: OpenChannel
     var query: PreviousMessageListQuery?
+    
     
     enum MessageStatus {
         case sent
@@ -67,34 +56,45 @@ class ChatViewModel: ObservableObject {
     
     func fetchPreviousMessageList() {
         guard let connectedState = self.currentState as? ChatConnectedState else { return }
+        isAutoScrollable = true
         connectedState.fetchPreviousMessageList(context: self)
     }
     
     func sendUserMessage() {
         guard let connectedState = self.currentState as? ChatConnectedState else { return }
+        isAutoScrollable = true
         HapticManager.shared.createImpact(style: .soft)
         connectedState.sendUserMessage(context: self)
     }
     
     func resendUserMessage(requestID: String) {
         guard let connectedState = self.currentState as? ChatConnectedState else { return }
+        isAutoScrollable = true
         connectedState.resendUserMessage(requestID: requestID, context: self)
     }
     
     func deleteNotSentMessage(requestID: String) {
         Logger.debug(#function)
+        isAutoScrollable = true
         failedMessages.removeAll { $0.requestID == requestID }
         pendingMessages.removeAll { $0.requestID == requestID }
         updateLastMessageIndex()
     }
     
     func updateLastMessageIndex() {
+        lastMessageIndex = ""
         lastMessageIndex = self.pendingMessages.last?.requestID
         ?? self.failedMessages.last?.requestID
         ?? ""
         if lastMessageIndex.isEmpty, let lastSentMessage = self.sentMessages.last {
             lastMessageIndex = "\(lastSentMessage.messageID)"
         }
+    }
+    
+    func scrollToBottom() {
+        isAutoScrollable = true
+        updateLastMessageIndex()
+        notifiesNewMessage = false
     }
     
     func didFetchPreviousMessageList(with result: Result<[BaseMessage], Error>) {

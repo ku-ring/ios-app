@@ -26,7 +26,13 @@ struct StringSet {
     
     struct Campus {
         static let baseString = "com.kuring.campus"
-        static let channelID = "kuring_main_anonymous"
+        static let channelID = {
+            #if DEBUG
+            return "kuring_main_anonymous"
+            #else
+            return "kuring_campus_main_anonymous"
+            #endif
+        }()
         static let adminName = "🍿 쿠링이 알려드려요!"
         
         struct UserDefaults {

@@ -11,12 +11,18 @@ import KuringCommons
 protocol CampusState {
     /// 상태가 변하면 바로 호출 됩니다.
     func start(context: CampusViewModel)
+    /// 상태에서 API 에러가 발생한 경우 재시도를 합니다.
+    func restart(context: CampusViewModel)
     /// 상태가 다른 상태로 옮겨지기 직전 마지막으로 호출됩니다.
     func finish(context: CampusViewModel)
 }
 
 extension CampusState {
     func start(context: CampusViewModel) {
+        Logger.debug("\(self) \(#function)")
+    }
+    
+    func restart(context: CampusViewModel) {
         Logger.debug("\(self) \(#function)")
     }
     

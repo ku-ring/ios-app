@@ -32,6 +32,7 @@ class AppleLoginState: CampusState {
             }
         case .failure(let error):
             Logger.error(error)
+            context.changeState(to: LoginState())
         }
     }
 }

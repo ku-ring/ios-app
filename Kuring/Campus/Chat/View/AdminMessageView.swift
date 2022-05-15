@@ -23,40 +23,43 @@ struct AdminMessageView: View {
     let message: String
     
     var body: some View {
-        ZStack {
-            ColorSet.Background.green.color
-                .ignoresSafeArea(edges: .horizontal)
-            
-            VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
                 Text(adminName)
                     .font(.subheadline.bold())
                     .foregroundColor(ColorSet.Label.green.color)
                 
-                Group {
-                    if showsMore {
-                        Text(message)
-                    } else {
-                        Text(prevMessage)
-                    }
-                }
-                .font(.subheadline)
-                .foregroundColor(ColorSet.Label.green.color)
-                .multilineTextAlignment(.leading)
-                
-                if message.count > 255 {
-                    Button(action: showMore) {
-                        Text(showsMore ? "생략하기" : "더보기")
-                            .font(.subheadline)
-                            .foregroundColor(ColorSet.Label.secondary.color)
-                    }
+                Spacer()
+            }
+            
+            Group {
+                if showsMore {
+                    Text(message)
+                } else {
+                    Text(prevMessage)
                 }
             }
-            .padding(.vertical, 8)
-            .padding(.horizontal, 20)
+            .font(.subheadline)
+            .foregroundColor(ColorSet.Label.green.color)
+            .multilineTextAlignment(.leading)
+            
+            if message.count > 255 {
+                Button(action: showMore) {
+                    Text(showsMore ? "생략하기" : "더보기")
+                        .font(.subheadline)
+                        .foregroundColor(ColorSet.Label.secondary.color)
+                }
+            }
+        }
+        .padding(.vertical, 8)
+        .padding(.horizontal, 20)
+        .background {
+            ColorSet.Background.green.color
+                .ignoresSafeArea(edges: .horizontal)
         }
         .contextMenu {
             Button(action: share) {
-                Label("공유하기", systemImage: "doc.on.doc")
+                Label("복사하기", systemImage: "doc.on.doc")
             }
         }
         .id(messageID)

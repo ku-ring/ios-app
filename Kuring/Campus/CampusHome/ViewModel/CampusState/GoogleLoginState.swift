@@ -10,7 +10,7 @@ import KuringCommons
 
 class GoogleLoginState: CampusState {
     init() {
-        // 카카오 SDK 초기화
+        
 //        let signInConfig = GIDConfiguration.init(clientID: "YOUR_IOS_CLIENT_ID")
     }
 }

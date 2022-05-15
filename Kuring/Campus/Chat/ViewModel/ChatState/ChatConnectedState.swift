@@ -33,20 +33,24 @@ class ChatConnectedState: ChatState {
             defer { Logger.error(error) }
             let fetchedMessages = messages ?? []
             Logger.debug("\(fetchedMessages.count) 개의 메세지를 가져왔습니다.")
-            if fetchedMessages.isEmpty { return }
-            for message in fetchedMessages {
-                switch message {
-                case let userMessage as UserMessage:
-                    if userMessage.messageID == context.sentMessages.last?.messageID { return }
-                    context.sentMessages.insert(message, at: 0)
-                case let adminMessage as AdminMessage:
-                    if adminMessage.messageID == context.sentMessages.last?.messageID { return }
-                    context.sentMessages.insert(message, at: 0)
-                default: return
-                }
+            if !fetchedMessages.isEmpty {
+                for message in fetchedMessages {
+                    switch message {
+                    case let userMessage as UserMessage:
+                        if userMessage.messageID == context.sentMessages.last?.messageID { return }
+                        context.sentMessages.insert(message, at: 0)
+                    case let adminMessage as AdminMessage:
+                        if adminMessage.messageID == context.sentMessages.last?.messageID { return }
+                        context.sentMessages.insert(message, at: 0)
+                    default: return
+                    }
+                }                
             }
+            context.hasMorePreviousMessages = fetchedMessages.count >= 100
             context.updateLastMessageIndex()
-            context.changeState(ChatConnectedState(channel: self.channel))
+            if context.isLoading == true {
+                context.isLoading = false
+            }
         }
     }
     
@@ -100,6 +104,6 @@ class ChatConnectedState: ChatState {
     }
     
     func onConnecting(context: ChatViewModel) {
-        context.changeState(ChatConnectingState(channel: channel))
+        context.changeState(ChatConnectingState(channel: channel, isReconnecting: true))
     }
 }

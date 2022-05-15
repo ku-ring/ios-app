@@ -19,9 +19,6 @@ struct CampusHomeView: View {
                 switch viewModel.currentState {
                 case is UsernameRequestState:
                     CampusUsernameView(viewModel: viewModel)
-                    
-                case let chatStartedState as ChatStartedState:
-                    ChatView(channel: chatStartedState.channel)
                 default:
                     CampusStartView(viewModel: viewModel)
                 }
@@ -40,6 +37,11 @@ struct CampusHomeView: View {
                 }
             }
             .tint(ColorSet.green.color)
+        }
+        .fullScreenCover(isPresented: $viewModel.onChat) {
+            if let chatStartedState = viewModel.currentState as? ChatStartedState {
+                ChatView(channel: chatStartedState.channel)
+            }
         }
     }
 }

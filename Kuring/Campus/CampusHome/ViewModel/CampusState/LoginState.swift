@@ -8,7 +8,7 @@
 import Foundation
 
 class LoginState: CampusState {
-    func loginWithKakao(context: CampusViewModel) {
+    func loginWithGoogle(context: CampusViewModel) {
         context.changeState(to: GoogleLoginState())
     }
     

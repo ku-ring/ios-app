@@ -11,8 +11,8 @@ import KuringCommons
 import SendbirdChatSDK
 
 struct UserMessageView: View {
-    @Environment(\.openURL) var openURL
     @ObservedObject var viewModel: ChatViewModel
+    @State private var showsNoticeWebView: Bool = false
     
     let messageID: String
     let requestID: String
@@ -21,12 +21,6 @@ struct UserMessageView: View {
     let sentAt: Date
     let isSentByMe: Bool
     let sendingState: SendingState
-    
-    struct NoticeInfo {
-        let subject: String
-        let url: String
-    }
-    var noticeInfo: NoticeInfo?
     
     enum SendingState {
         case sent
@@ -68,7 +62,7 @@ struct UserMessageView: View {
             if let myUsername = SendbirdChat.getCurrentUser()?.nickname, let range = text.range(of: myUsername) {
                 text[range].foregroundColor = isSentByMe
                 ? ColorSet.Background.primary.color
-                : ColorSet.green.color
+                : ColorSet.Label.primary.color
                 text[range].font = .footnote.bold()
             }
      
@@ -101,22 +95,8 @@ struct UserMessageView: View {
                         .foregroundColor(ColorSet.green.color)
                 }
                 
-                if let noticeInfo = noticeInfo {
-                    Label(noticeInfo.subject, systemImage: "megaphone.fill")
-                        .font(.footnote.bold())
-                        .foregroundColor(
-                            isSentByMe
-                            ? ColorSet.Background.primary.color
-                            : ColorSet.Label.primary.color
-                        )
-                        .onTapGesture {
-                            openURL(URL(string: noticeInfo.url)!)
-                        }
-                }
-                
                 Text(attributedString)
                     .multilineTextAlignment(.leading)
-                    .lineLimit(10)
             }
             .padding(.vertical, 8)
             .padding(.horizontal, 20)
@@ -174,17 +154,6 @@ struct UserMessageView: View {
             : Double(userMessage.createdAt) / 1000
         )
         self.isSentByMe = userMessage.sender?.userID == Kuring.userID
-        
-        if let data = userMessage.data.data(using: .utf8) {
-            let decoder = JSONDecoder()
-            if let noticeInfo = try? decoder.decode([String: String].self, from: data) {
-                self.noticeInfo = NoticeInfo(
-                    subject: noticeInfo[StringSet.Campus.MessagePayloadKey.noticeSubject] ?? "",
-                    url: noticeInfo[StringSet.Campus.MessagePayloadKey.noticeURL] ?? ""
-                )
-            }
-        }
-        
         
         switch userMessage.sendingStatus {
         case .succeeded:

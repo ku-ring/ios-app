@@ -19,6 +19,7 @@ class ConnectingState: CampusState {
         
         SendbirdChat.connect(userID: userID) { [context] user, error in
             guard let user = user else {
+                context.onError = true
                 Logger.error(error)
                 return
             }
@@ -28,5 +29,9 @@ class ConnectingState: CampusState {
                 context.changeState(to: ConnectedState())
             }
         }
+    }
+    
+    func restart(context: CampusViewModel) {
+        self.start(context: context)
     }
 }
