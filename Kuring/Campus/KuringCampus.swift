@@ -16,7 +16,6 @@ struct KuringCampus {
             SendbirdChat.initialize(params: params)
         }
     }
-    static var userID: String = ""
     
     static func getUser(named username: String, resultHandler: @escaping (Result<User?, Error>) -> Void) {
         let urlString = "https://api-\(KuringCampus.appID).sendbird.com/v3/users?nickname=\(username)"
