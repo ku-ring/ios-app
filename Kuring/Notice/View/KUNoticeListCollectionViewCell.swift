@@ -7,6 +7,7 @@
 
 import UIKit
 import KuringSDK
+import KuringCommons
 
 class KUNoticeListCollectionViewCell: UICollectionViewCell {
     static let identifier = "noticeTypeCell"

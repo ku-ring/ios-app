@@ -6,8 +6,10 @@
 //
 
 import UIKit
-import KuringSDK
+import SwiftUI
 import Lottie
+import KuringSDK
+import KuringCommons
 
 class KUNoticeListViewController: UIViewController {
     /// 현재 공지 타입. 기본값: `.학사`
@@ -237,6 +239,19 @@ class KUNoticeListViewController: UIViewController {
         }
         refreshControl.tintColor = .clear
     }
+    
+    // TODO: 쿠링캠퍼스
+    @IBAction func didTapCampus() {
+        // Sendbird connect
+        // Sendbird nickname nil?
+        // - Shows onboarding
+        
+//        let viewModel = KuringChatViewModel()
+//        let chatView = UIHostingController(rootView: KuringChatView(viewModel: viewModel))
+        let chatView = CampusViewController()
+        chatView.modalPresentationStyle = .fullScreen
+        self.present(chatView, animated: true, completion: nil)
+    }
 }
 
 extension KUNoticeListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -291,6 +306,7 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let notice = currentNotices[indexPath.row]
+        Kuring.cachedNotices.updateValue(notice, forKey: notice.articleID)
         notice.read()
         tableView.reloadData()
         

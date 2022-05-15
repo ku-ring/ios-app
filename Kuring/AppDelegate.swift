@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import KuringSDK
+import KuringCommons
 import AppsFlyerLib
 import AppTrackingTransparency
 import GoogleMobileAds
@@ -21,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // MARK: Kuring
         Kuring.apiKey = "4BEC2A05-2F67-4083-83E2-866AEAF6CFDC"
         Kuring.addDelegate(self, forKey: "AppDelegate")
+        KuringCampus.appID = "4BEC2A05-2F67-4083-83E2-866AEAF6CFDC"
+        KuringCampus.userID = "kuring-no-token"
+        
         
         HapticManager.shared.setupGenerator()
         

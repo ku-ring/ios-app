@@ -7,6 +7,7 @@
 
 import UIKit
 import KuringSDK
+import KuringCommons
 
 class KUNoticeListViewCell: UITableViewCell {
     static let identifier = "noticeListCell"

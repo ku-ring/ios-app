@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KuringCommons
 
 class KUAlarmHeaderView: UIView {
     lazy var backgroundView: UIView = {

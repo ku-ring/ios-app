@@ -8,9 +8,11 @@
 import UIKit
 import WebKit
 import KuringSDK
+import KuringCommons
 import SnapKit
 import GoogleMobileAds
 import Lottie
+import SendbirdChatSDK
 
 class NoticeWebViewController: UIViewController {
     @IBOutlet weak var webView: WKWebView! {
@@ -58,6 +60,7 @@ class NoticeWebViewController: UIViewController {
     // MARK: Properties
     var articleURL: String!
     var articleID: String!
+    var channel: OpenChannel?
     
     override func loadView() {
         super.loadView()
@@ -122,6 +125,25 @@ class NoticeWebViewController: UIViewController {
             $0.center.equalToSuperview()
         }
     }
+    
+    func sendToChannel(notice: Notice, url: String) {
+        let params = UserMessageCreateParams(message: "")
+        let noticeInfo = [
+            StringSet.Campus.MessagePayloadKey.noticeSubject: notice.subject,
+            StringSet.Campus.MessagePayloadKey.noticeURL: url
+        ]
+        let encoder = JSONEncoder()
+        if let jsonData = try? encoder.encode(noticeInfo) {
+            params.data = String(data: jsonData, encoding: .utf8)
+        }
+        self.channel?.sendUserMessage(params: params, completionHandler: { message, error in
+            DispatchQueue.main.async {
+                self.indicatorView.stop()
+                self.indicatorView.isHidden = true
+                self.showError("성공적으로 전달했습니다.")
+            }
+        })
+    }
 }
 
 
@@ -156,7 +178,7 @@ extension NoticeWebViewController: WKUIDelegate, WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        Logger.debug("[com.kuring.service] Failed provisional navigation: \(error.localizedDescription)")
+        Logger.error(error)
     }
 }
 
@@ -187,18 +209,18 @@ extension NoticeWebViewController: GADBannerViewDelegate {
     }
     
     func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
-        print("bannerViewDidRecordImpression")
+        Logger.debug("bannerViewDidRecordImpression")
     }
     
     func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
-        print("bannerViewWillPresentScreen")
+        Logger.debug("bannerViewWillPresentScreen")
     }
     
     func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {
-        print("bannerViewWillDIsmissScreen")
+        Logger.debug("bannerViewWillDIsmissScreen")
     }
     
     func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
-        print("bannerViewDidDismissScreen")
+        Logger.debug("bannerViewDidDismissScreen")
     }
 }

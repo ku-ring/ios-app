@@ -7,6 +7,7 @@
 
 import UIKit
 import KuringSDK
+import KuringCommons
 
 class KUSearchViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!

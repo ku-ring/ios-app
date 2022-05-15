@@ -23,4 +23,31 @@ struct StringSet {
     struct Lottie {
         static let loading = "lottieLoading"
     }
+    
+    struct Campus {
+        static let baseString = "com.kuring.campus"
+        static let channelID = {
+            #if DEBUG
+            return "kuring_main_anonymous"
+            #else
+            return "kuring_campus_main_anonymous"
+            #endif
+        }()
+        static let adminName = "🍿 쿠링이 알려드려요!"
+        
+        struct UserDefaults {
+            static let baseString = "\(StringSet.Campus.baseString).userdefaults"
+            static let usernameKey = "\(baseString).username"
+        }
+        
+        // MARK: Chat
+        static let chatString = "\(baseString).chat"
+        static let channelDelegateID = "\(chatString).delegate.channel"
+        static let connectionDelegateID = "\(chatString).delegate.connection"
+        
+        struct MessagePayloadKey {
+            static let noticeSubject = "notice.subject"
+            static let noticeURL = "notice.url"
+        }
+    }
 }

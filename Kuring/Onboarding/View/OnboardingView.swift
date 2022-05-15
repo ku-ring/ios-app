@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import KuringCommons
 
 struct OnboardingView: View {
     @ObservedObject var viewModel: OnboardingViewModel

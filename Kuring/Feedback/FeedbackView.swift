@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import KuringCommons
 
 struct FeedbackView: View {
     @Environment(\.presentationMode) var presentationMode

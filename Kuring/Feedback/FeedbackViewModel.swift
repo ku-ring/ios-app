@@ -7,6 +7,7 @@
 
 import SwiftUI
 import KuringSDK
+import KuringCommons
 
 class FeedbackViewModel: ObservableObject {
     @Published var feedback: String {
