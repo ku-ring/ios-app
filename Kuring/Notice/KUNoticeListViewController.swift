@@ -239,19 +239,6 @@ class KUNoticeListViewController: UIViewController {
         }
         refreshControl.tintColor = .clear
     }
-    
-    // TODO: 쿠링캠퍼스
-    @IBAction func didTapCampus() {
-        // Sendbird connect
-        // Sendbird nickname nil?
-        // - Shows onboarding
-        
-//        let viewModel = KuringChatViewModel()
-//        let chatView = UIHostingController(rootView: KuringChatView(viewModel: viewModel))
-        let chatView = CampusViewController()
-        chatView.modalPresentationStyle = .fullScreen
-        self.present(chatView, animated: true, completion: nil)
-    }
 }
 
 extension KUNoticeListViewController: UICollectionViewDelegate, UICollectionViewDataSource {

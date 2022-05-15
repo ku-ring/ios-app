@@ -82,7 +82,6 @@ class ChatViewModel: ObservableObject {
     }
     
     func updateLastMessageIndex() {
-        lastMessageIndex = ""
         lastMessageIndex = self.pendingMessages.last?.requestID
         ?? self.failedMessages.last?.requestID
         ?? ""

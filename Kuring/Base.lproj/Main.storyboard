@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4Fv-pX-dcU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XB8-g9-pCB">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -39,7 +39,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5D6-oB-PeD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2113.0434782608695" y="3626.7857142857142"/>
+            <point key="canvasLocation" x="80" y="5845"/>
         </scene>
         <!--🔍 검색-->
         <scene sceneID="JNH-Yl-pmB">
@@ -234,7 +234,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTU-aS-qUe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-313" y="2922"/>
+            <point key="canvasLocation" x="-1655" y="4367"/>
         </scene>
         <!--Staff View Controller-->
         <scene sceneID="lp2-3T-8rO">
@@ -254,14 +254,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="교수 이름" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fdA-AP-fub">
-                                                    <rect key="frame" x="20" y="8" width="63" height="20.5"/>
+                                                    <rect key="frame" x="20" y="7.5" width="52.5" height="17"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" name="ColorSet.Label.primary"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="학과 또는 학부 · 단과대학" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iKz-P3-JNW">
-                                                    <rect key="frame" x="20" y="28.5" width="111.5" height="13.5"/>
+                                                    <rect key="frame" x="20" y="27" width="111.5" height="13.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" name="ColorSet.Label.primary"/>
@@ -365,7 +365,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hqa-CZ-gof" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="467" y="2922"/>
+            <point key="canvasLocation" x="-799" y="4367"/>
         </scene>
         <!--Notice List View Controller-->
         <scene sceneID="ad8-3f-W1p">
@@ -458,30 +458,6 @@
                             </imageReference>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="more" id="Z2Q-CM-mXa">
-                                <imageReference key="image" image="ellipsis" catalog="system" renderingMode="hierarchical">
-                                    <hierarchicalColors>
-                                        <color systemColor="labelColor"/>
-                                        <color systemColor="secondaryLabelColor"/>
-                                        <color systemColor="tertiaryLabelColor"/>
-                                    </hierarchicalColors>
-                                </imageReference>
-                                <connections>
-                                    <segue destination="sdJ-L9-SXK" kind="show" id="T9w-ZK-LH4"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem id="fsi-QQ-2hH">
-                                <imageReference key="image" image="magnifyingglass" catalog="system" renderingMode="hierarchical">
-                                    <hierarchicalColors>
-                                        <color systemColor="labelColor"/>
-                                        <color systemColor="secondaryLabelColor"/>
-                                        <color systemColor="tertiaryLabelColor"/>
-                                    </hierarchicalColors>
-                                </imageReference>
-                                <connections>
-                                    <segue destination="7ZN-GQ-3pw" kind="show" id="HIl-f6-cpj"/>
-                                </connections>
-                            </barButtonItem>
                             <barButtonItem title="Item" id="XM4-Fr-2ms">
                                 <imageReference key="image" image="bell" catalog="system" renderingMode="hierarchical">
                                     <hierarchicalColors>
@@ -492,12 +468,6 @@
                                 </imageReference>
                                 <connections>
                                     <segue destination="vtV-ei-QVP" kind="show" identifier="showNotification" id="smu-ZT-6js"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="message" catalog="system" id="4OP-pa-Ikm">
-                                <color key="tintColor" name="ColorSet.Label.primary"/>
-                                <connections>
-                                    <action selector="didTapCampus" destination="14F-oY-WCU" id="wQO-FW-4rB"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem id="Tlp-OZ-Fp2">
@@ -581,7 +551,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lY9-4J-wYK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1655.072463768116" y="2921.6517857142858"/>
+            <point key="canvasLocation" x="486" y="3627"/>
         </scene>
         <!--내 알림-->
         <scene sceneID="xeY-an-EbP">
@@ -698,11 +668,21 @@
             </objects>
             <point key="canvasLocation" x="-313" y="2228"/>
         </scene>
+        <!--쿠링캠퍼스-->
+        <scene sceneID="0KG-xF-b5w">
+            <objects>
+                <hostingController id="D5m-5y-Vrh" customClass="CampusViewController" customModule="Kuring" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="쿠링캠퍼스" image="building.columns" catalog="system" id="URz-KC-Qb6"/>
+                </hostingController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zfc-gE-e7I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2494" y="5085"/>
+        </scene>
         <!--공지사항-->
         <scene sceneID="wHk-7O-kXE">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Fv-pX-dcU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="공지사항" id="jmK-F7-Zce"/>
+                    <tabBarItem key="tabBarItem" title="공지사항" image="list.bullet" catalog="system" id="jmK-F7-Zce"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xY1-J4-5VB">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -718,7 +698,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Wf-hK-7Mq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2526" y="3627"/>
+            <point key="canvasLocation" x="-2494" y="3627"/>
         </scene>
         <!--🗃공지 보관함-->
         <scene sceneID="g3N-dY-gyy">
@@ -734,9 +714,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9nM-2T-sYy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-313" y="4367"/>
+            <point key="canvasLocation" x="-313" y="2922"/>
         </scene>
-        <!--설정-->
+        <!--👋 더보기-->
         <scene sceneID="Hcg-UQ-DfZ">
             <objects>
                 <tableViewController id="sdJ-L9-SXK" customClass="SettingsViewController" customModule="Kuring" customModuleProvider="target" sceneMemberID="viewController">
@@ -982,7 +962,7 @@
                             <outlet property="delegate" destination="sdJ-L9-SXK" id="a0m-bL-uAc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="설정" id="vAs-2v-fP1"/>
+                    <navigationItem key="navigationItem" title="👋 더보기" id="vAs-2v-fP1"/>
                     <connections>
                         <outlet property="customNotificationSwitch" destination="4CI-gf-BPL" id="RYa-Fv-aPH"/>
                         <outlet property="versionLabel" destination="qdv-Sr-IqI" id="TBm-KQ-b2R"/>
@@ -991,7 +971,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GOv-Hc-ndQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="597.10144927536237" y="3626.7857142857142"/>
+            <point key="canvasLocation" x="-1655" y="5845"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yxG-2u-UdV">
@@ -1009,7 +989,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vO5-RA-1bt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1376.8115942028987" y="3626.7857142857142"/>
+            <point key="canvasLocation" x="-800" y="5845"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YNA-8c-UMG">
@@ -1027,17 +1007,83 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="inX-La-yV9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2494" y="2922"/>
+            <point key="canvasLocation" x="-313" y="3627"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="jxH-2p-7yY">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="XB8-g9-pCB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3sy-L8-uZv">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="ColorSet.Background.primary"/>
+                        <color key="tintColor" name="ColorSet.green"/>
+                        <color key="selectedImageTintColor" name="ColorSet.green"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="4Fv-pX-dcU" kind="relationship" relationship="viewControllers" id="Ddb-bt-qLP"/>
+                        <segue destination="2tm-PS-k9z" kind="relationship" relationship="viewControllers" id="CN6-FV-llP"/>
+                        <segue destination="D5m-5y-Vrh" kind="relationship" relationship="viewControllers" id="1WW-MA-zPz"/>
+                        <segue destination="nN6-vj-hRW" kind="relationship" relationship="viewControllers" id="epH-KL-8PY"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ihd-g3-rlc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3420" y="5085"/>
+        </scene>
+        <!--검색-->
+        <scene sceneID="lb7-iu-XX0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2tm-PS-k9z" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="검색" image="magnifyingglass" catalog="system" id="LG5-Gi-gFw"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="MPd-hJ-BQY"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G7a-ab-2di">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7ZN-GQ-3pw" kind="relationship" relationship="rootViewController" id="crm-OC-MtJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="619-CY-JPd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2494.202898550725" y="4366.7410714285716"/>
+        </scene>
+        <!--더보기-->
+        <scene sceneID="Vbs-Ld-VSh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nN6-vj-hRW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="더보기" image="ellipsis" catalog="system" id="BAE-3w-Dlb"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="dtA-G9-d3f"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3CM-Rd-plc">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sdJ-L9-SXK" kind="relationship" relationship="rootViewController" id="axj-zp-O3c"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="grU-SI-9fT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2494" y="5845"/>
         </scene>
     </scenes>
     <resources>
         <image name="appIconLabel" width="32.5" height="24"/>
         <image name="archivebox" catalog="system" width="128" height="106"/>
         <image name="bell" catalog="system" width="128" height="124"/>
+        <image name="building.columns" catalog="system" width="128" height="113"/>
         <image name="checklist" catalog="system" width="128" height="105"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
+        <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="message" catalog="system" width="128" height="113"/>
+        <namedColor name="ColorSet.Background.primary">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="ColorSet.Label.green">
             <color red="0.012000000104308128" green="0.41999998688697815" blue="0.24699999392032623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

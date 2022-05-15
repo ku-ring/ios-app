@@ -10,7 +10,7 @@ import KuringCommons
 import AuthenticationServices
 
 struct CampusHomeView: View {
-    @ObservedObject var viewModel: CampusViewModel
+    @StateObject var viewModel = CampusViewModel()
     
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
@@ -24,12 +24,6 @@ struct CampusHomeView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: viewModel.dismiss) {
-                        Image(systemName: "xmark")
-                            .foregroundColor(ColorSet.green.color)
-                    }
-                }
                 ToolbarItem(placement: .principal) {
                     Text("쿠링캠퍼스")
                         .font(.title3.bold())
