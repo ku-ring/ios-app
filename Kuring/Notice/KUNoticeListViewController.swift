@@ -102,7 +102,9 @@ class KUNoticeListViewController: UIViewController {
         tableView.refreshControl = refreshControl
         Kuring.addDelegate(self, forKey: "KUNoticeListViewController")
         
-        load()
+        if !isLoading {
+            load()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -205,12 +207,17 @@ class KUNoticeListViewController: UIViewController {
                 
                 // Update offset
                 let prevOffset = self.offsetList[noticeType] ?? 0
-                let currentOffset = prevOffset + notices.count
-                self.offsetList.updateValue(currentOffset, forKey: noticeType)
+                var currentOffset = prevOffset
                 
                 // Update notices
                 var currentNotices = self.noticeList[noticeType] ?? []
-                notices.forEach { currentNotices.append($0) }
+                notices.forEach {
+                    if !currentNotices.contains($0) {
+                        currentNotices.append($0)
+                        currentOffset += 1
+                    }
+                }
+                self.offsetList.updateValue(currentOffset, forKey: noticeType)
                 self.noticeList.updateValue(currentNotices, forKey: noticeType)
                 
                 // 뷰 업데이트
