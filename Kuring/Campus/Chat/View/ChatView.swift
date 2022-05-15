@@ -23,10 +23,33 @@ struct ChatView: View, KeyboardReadable {
         NavigationView {
             ZStack {
                 ZStack {
-                    messageList
-                        .onTapGesture {
-                            hideKeyboard()
+                    ZStack(alignment: .bottom) {
+                        messageList
+                        
+                        if viewModel.notifiesNewMessage {
+                            Button(action: viewModel.scrollToBottom) {
+                                Text("새로운 메세지가 왔습니다.")
+                                    .font(.subheadline.bold())
+                                    .foregroundColor(ColorSet.Label.green.color)
+                                    .padding(.vertical, 8)
+                                    .padding(.horizontal, 20)
+                                    .background {
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .fill(ColorSet.Background.green.color)
+                                    }
+                            }
                         }
+                    }
+                    .safeAreaInset(edge: .bottom) {
+                        messageInputField
+                            .background {
+                                ColorSet.Background.primary.color
+                                    .ignoresSafeArea()
+                            }
+                    }
+                    .onTapGesture {
+                        hideKeyboard()
+                    }
                 }
                 .background(ColorSet.Background.primary.color)
                 
@@ -128,6 +151,12 @@ struct ChatView: View, KeyboardReadable {
                         reader.scrollTo(newValue, anchor: .bottom)
                     }
                 }
+                .onChange(of: viewModel.notifiesNewMessage) { newValue in
+                    guard !newValue else { return }
+                    withAnimation {
+                        reader.scrollTo(viewModel.lastMessageIndex, anchor: .bottom)
+                    }
+                }
                 .onReceive(keyboardPublisher) { _ in
                     withAnimation {
                         reader.scrollTo(viewModel.lastMessageIndex, anchor: .bottom)
@@ -139,14 +168,13 @@ struct ChatView: View, KeyboardReadable {
         }
         .coordinateSpace(name: "scroll")
         .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
-            //
-        }
-        .safeAreaInset(edge: .bottom) {
-            messageInputField
-                .background {
-                    ColorSet.Background.primary.color
-                        .ignoresSafeArea()
-                }
+            let isNewBottom = viewModel.bottomOffset + 30 > value
+            if isNewBottom {
+                viewModel.bottomOffset = value
+                viewModel.isScrollable = true
+            } else {
+                viewModel.isScrollable = false
+            }
         }
     }
     

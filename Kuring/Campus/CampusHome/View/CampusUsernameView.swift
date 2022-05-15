@@ -26,11 +26,7 @@ struct CampusUsernameView: View {
                     
                     TextField("이름을 입력해주세요", text: $viewModel.pendingUsername)
                         .focused($firstResponder)
-                        .foregroundColor(
-                            viewModel.pendingUsername.conformsToUsernameProtocol
-                            ? ColorSet.Label.primary.color
-                            : ColorSet.pink.color
-                        )
+                        .foregroundColor(ColorSet.Label.primary.color)
                 }
                 .padding(12)
                 .background {
@@ -47,15 +43,15 @@ struct CampusUsernameView: View {
                         .padding(.horizontal)
                 }
                 
-                Text("이름에는 \"한글, 알파벳 대소문자, 숫자, ., _\"가 가능합니다.")
-                    .font(.caption)
-                    .foregroundColor(ColorSet.pink.color)
-                    .opacity(
-                        viewModel.pendingUsername.conformsToUsernameProtocol
-                        || viewModel.pendingUsername.count < 5
-                        ? 0 : 1
-                    )
-                    .padding(.horizontal)
+                VStack(alignment: .leading) {
+                    Text("- 이름에는 \"한글, 알파벳 대소문자, 숫자, ., _\"가 가능합니다.")
+                    
+                    Text("- 6~15글자 사이만 가능합니다.")
+                }
+                .font(.caption)
+                .foregroundColor(ColorSet.pink.color)
+                .opacity(viewModel.isConformsToRegex ? 0 : 1)
+                .padding(.horizontal)
             }
             .padding(.horizontal, 16)
             

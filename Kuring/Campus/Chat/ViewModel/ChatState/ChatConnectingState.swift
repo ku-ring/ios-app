@@ -11,13 +11,34 @@ import SendbirdChatSDK
 
 class ChatConnectingState: ChatState {
     let channel: OpenChannel
+    let isReconnecting: Bool
     
-    init(channel: OpenChannel) {
+    init(channel: OpenChannel, isReconnecting: Bool = false) {
         self.channel = channel
+        self.isReconnecting = isReconnecting
     }
     
     func start(context: ChatViewModel) {
-        retriveMessageList(context: context)
+        if isReconnecting {
+            retreiveNewMessageList(context: context)
+        } else {
+            retriveMessageList(context: context)
+        }
+    }
+    
+    func retreiveNewMessageList(context: ChatViewModel) {
+        context.isLoading = true
+        
+        let params = MessageListParams()
+        params.nextResultSize = 100
+        let timestamp = context.sentMessages.last?.createdAt ?? .max
+        channel.getMessagesByTimestamp(timestamp, params: params) { messages, error in
+            if let error = error {
+                context.didFetchPreviousMessageList(with: .failure(error))
+            } else {
+                context.didFetchPreviousMessageList(with: .success(messages ?? []))
+            }
+        }
     }
     
     func retriveMessageList(context: ChatViewModel) {
@@ -25,7 +46,7 @@ class ChatConnectingState: ChatState {
         
         let params = MessageListParams()
         params.previousResultSize = 100
-        let timestamp = context.sentMessages.first?.createdAt ?? .max
+        let timestamp = Int64.max
         channel.getMessagesByTimestamp(timestamp, params: params) { messages, error in
             if let error = error {
                 context.didFetchPreviousMessageList(with: .failure(error))
@@ -41,17 +62,7 @@ class ChatConnectingState: ChatState {
             let fetchedMessages = messages
             Logger.debug("\(fetchedMessages.count) 개의 메세지를 가져왔습니다.")
             if !fetchedMessages.isEmpty {
-                for message in fetchedMessages {
-                    switch message {
-                    case let userMessage as UserMessage:
-                        if userMessage.messageID == context.sentMessages.last?.messageID { return }
-                        context.sentMessages.append(message)
-                    case let adminMessage as AdminMessage:
-                        if adminMessage.messageID == context.sentMessages.last?.messageID { return }
-                        context.sentMessages.append(message)
-                    default: return
-                    }
-                }                
+                context.sentMessages = fetchedMessages
             }
             context.hasMorePreviousMessages = fetchedMessages.count >= 100
             context.updateLastMessageIndex()

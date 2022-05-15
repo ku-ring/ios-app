@@ -48,7 +48,9 @@ class ChatConnectedState: ChatState {
             }
             context.hasMorePreviousMessages = fetchedMessages.count >= 100
             context.updateLastMessageIndex()
-            context.changeState(ChatConnectedState(channel: self.channel))
+            if context.isLoading == true {
+                context.isLoading = false
+            }
         }
     }
     
@@ -102,6 +104,6 @@ class ChatConnectedState: ChatState {
     }
     
     func onConnecting(context: ChatViewModel) {
-        context.changeState(ChatConnectingState(channel: channel))
+        context.changeState(ChatConnectingState(channel: channel, isReconnecting: true))
     }
 }

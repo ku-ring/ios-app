@@ -18,13 +18,12 @@ extension ChatViewModel: ConnectionDelegate {
     
     func didSucceedReconnection() {
         Logger.debug(#function)
-        sentMessages = []
         
-        currentState.onConnected(context: self)
-        guard let connectedState = self.currentState as? ChatConnectedState else {
-            return
+        if let connectingState = self.currentState as? ChatConnectingState {
+            connectingState.onConnected(context: self)
+        } else {
+            self.currentState.onConnecting(context: self)
         }
-        connectedState.fetchPreviousMessageList(context: self)
     }
     
     func didFailReconnection() {
