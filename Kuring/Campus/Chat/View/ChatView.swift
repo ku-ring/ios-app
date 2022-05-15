@@ -168,12 +168,14 @@ struct ChatView: View, KeyboardReadable {
         }
         .coordinateSpace(name: "scroll")
         .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
-            let isNewBottom = viewModel.bottomOffset + 30 > value
-            if isNewBottom {
-                viewModel.bottomOffset = value
-                viewModel.isAutoScrollable = true
-            } else {
-                viewModel.isAutoScrollable = false
+            DispatchQueue.main.async {
+                let isNewBottom = viewModel.bottomOffset + 30 > value
+                if isNewBottom {
+                    viewModel.bottomOffset = value
+                    viewModel.isAutoScrollable = true
+                } else {
+                    viewModel.isAutoScrollable = false
+                }
             }
         }
     }
