@@ -140,8 +140,9 @@ struct ChatView: View, KeyboardReadable {
                     
                     GeometryReader { proxy in
                         let offset = proxy.frame(in: .named("scroll")).minY
-                        Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
                         
+                        Color.clear
+                            .preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
                     }
                 }
                 .onChange(of: viewModel.lastMessageIndex) { newValue in
@@ -159,6 +160,7 @@ struct ChatView: View, KeyboardReadable {
                 }
                 .onReceive(keyboardPublisher) { _ in
                     withAnimation {
+                        guard viewModel.isAutoScrollable else { return }
                         reader.scrollTo(viewModel.lastMessageIndex, anchor: .bottom)
                     }
                 }
@@ -168,15 +170,7 @@ struct ChatView: View, KeyboardReadable {
         }
         .coordinateSpace(name: "scroll")
         .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
-            DispatchQueue.main.async {
-                let isNewBottom = viewModel.bottomOffset + 30 > value
-                if isNewBottom {
-                    viewModel.bottomOffset = value
-                    viewModel.isAutoScrollable = true
-                } else {
-                    viewModel.isAutoScrollable = false
-                }
-            }
+            viewModel.updateNewBottom(to: value)
         }
     }
     

@@ -54,6 +54,18 @@ class ChatViewModel: ObservableObject {
         self.currentState = newState
     }
     
+    func updateNewBottom(to value: CGFloat) {
+        DispatchQueue.main.async { [self] in
+            let isNewBottom = bottomOffset + 30 > value
+            if isNewBottom {
+                bottomOffset = value
+                isAutoScrollable = true
+            } else {
+                isAutoScrollable = false
+            }
+        }
+    }
+    
     func fetchPreviousMessageList() {
         guard let connectedState = self.currentState as? ChatConnectedState else { return }
         isAutoScrollable = true
