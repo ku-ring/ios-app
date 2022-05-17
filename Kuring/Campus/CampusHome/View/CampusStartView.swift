@@ -7,6 +7,7 @@
 
 import SwiftUI
 import KuringCommons
+import SendbirdChatSDK
 import AuthenticationServices
 
 struct CampusStartView: View {
@@ -16,10 +17,16 @@ struct CampusStartView: View {
     
     var body: some View {
         VStack(spacing: 64) {
-            Spacer()
+            if let username = SendbirdChat.getCurrentUser()?.nickname {
+                Text("\(username)님 환영합니다.")
+                    .font(.headline)
+                    .foregroundColor(ColorSet.Label.primary.color)
+            }
             
             Image("campus.man.sitdown")
-                .padding(.horizontal, 64)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 200, height: 200)
                 .clipped()
             
             Text("쿠링 청심대에서 다같이 모여 메세지를 보내세요")
@@ -42,6 +49,7 @@ struct CampusStartView: View {
                     switch viewModel.currentState{
                     case is InitialState, is ConnectingState, is ChannelRetrievalState:
                         LottieView(filename: StringSet.Lottie.loading)
+                            .frame(width: 52, height: 52)
                     case is LoginState, is AppleLoginState, is GoogleLoginState:
                         SignInWithAppleButton(.signIn) { request in
                             viewModel.signInWithApple()
