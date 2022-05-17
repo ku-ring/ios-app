@@ -113,6 +113,10 @@ struct UserMessageView: View {
                     Button(action: copy) {
                         Label("복사하기", systemImage: "doc.on.doc")
                     }
+                    
+                    Button(action: mention) {
+                        Label("멘션하기", systemImage: "at")
+                    }
                 } else {
                     Button(action: { viewModel.resendUserMessage(requestID: requestID) }) {
                         Label("재전송하기", systemImage: "paperplane")
@@ -169,5 +173,9 @@ struct UserMessageView: View {
     
     func copy() {
         UIPasteboard.general.string = message
+    }
+    
+    func mention() {
+        viewModel.text += username
     }
 }
