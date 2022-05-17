@@ -12,7 +12,7 @@ import SendbirdChatSDK
 
 struct UserMessageView: View {
     @ObservedObject var viewModel: ChatViewModel
-    @State private var showsNoticeWebView: Bool = false
+    @State private var onReporting: Bool = false
     
     let messageID: String
     let requestID: String
@@ -114,8 +114,14 @@ struct UserMessageView: View {
                         Label("복사하기", systemImage: "doc.on.doc")
                     }
                     
-                    Button(action: mention) {
-                        Label("멘션하기", systemImage: "at")
+                    if !isSentByMe {
+                        Button(action: mention) {
+                            Label("닉네임 복사하기", systemImage: "at")
+                        }
+                        
+                        Button(action: report) {
+                            Label("신고하기", systemImage: "hand.raised")
+                        }
                     }
                 } else {
                     Button(action: { viewModel.resendUserMessage(requestID: requestID) }) {
@@ -143,6 +149,11 @@ struct UserMessageView: View {
             }
         }
         .padding(.horizontal)
+        .alert("신고하시겠습니까?", isPresented: $onReporting, actions: {
+            Button("아이KU! 잘못 눌렀어요.", role: .cancel, action: {})
+            
+            Button("네, 신고합니다.", role: .destructive, action: { viewModel.reportMessage(id: messageID) })
+        })
         .id(messageID == "0" ? requestID : messageID)
     }
     
@@ -176,6 +187,10 @@ struct UserMessageView: View {
     }
     
     func mention() {
-        viewModel.text += username
+        UIPasteboard.general.string = username
+    }
+    
+    func report() {
+        onReporting = true
     }
 }

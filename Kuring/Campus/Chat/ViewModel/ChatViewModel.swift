@@ -93,6 +93,12 @@ class ChatViewModel: ObservableObject {
         updateLastMessageIndex()
     }
     
+    func reportMessage(id: String) {
+        guard let message = sentMessages.first(where: { "\($0.messageID)" == id}) as? UserMessage else { return }
+        guard let connectedState = self.currentState as? ChatConnectedState else { return }
+        connectedState.reportMessage(message)
+    }
+    
     func updateLastMessageIndex() {
         lastMessageIndex = self.pendingMessages.last?.requestID
         ?? self.failedMessages.last?.requestID

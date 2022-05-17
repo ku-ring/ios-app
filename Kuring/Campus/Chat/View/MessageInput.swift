@@ -34,7 +34,6 @@ struct MessageInput: UIViewRepresentable {
             uiView.text = self.isEditing ? "" : placeholder
             uiView.textColor = self.isEditing ? ColorSet.Label.primary : ColorSet.Label.tertiary
         } else {
-            uiView.text = "\(text) "
             uiView.textColor = ColorSet.Label.primary
         }
         

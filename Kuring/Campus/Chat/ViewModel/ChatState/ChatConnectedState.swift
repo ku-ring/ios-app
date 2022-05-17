@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KuringSDK
 import KuringCommons
 import SendbirdChatSDK
 
@@ -97,6 +98,16 @@ class ChatConnectedState: ChatState {
             }
         }
         context.pendingMessages.append(pendingMessage)
+    }
+    
+    func reportMessage(_ message: UserMessage) {
+        guard let myUserID = SendbirdChat.getCurrentUser()?.userID else { return }
+        let description = "\(myUserID)가 \(message.sender?.userID ?? "")를 신고했습니다."
+        channel.report(message: message, reportCategory: .inappropriate, reportDescription: description) { error in
+            Logger.error(error) // TODO: 이벤트 수집
+        }
+        let feedback = "🤬 \(description) - 메세지내용: \(message.message)"
+        Kuring.sendFeedback(feedback) { _ in }
     }
     
     func onDisconnected(context: ChatViewModel) {
