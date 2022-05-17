@@ -29,7 +29,6 @@ class UsernameRequestState: CampusState {
     }
     
     func updateUsername(to username: String, context: CampusViewModel) {
-        
         let params = UserUpdateParams()
         params.nickname = username
         SendbirdChat.updateCurrentUserInfo(

@@ -32,6 +32,9 @@ class ConnectingState: CampusState {
             if let email = self.email {
                 user.updateMetaData(["email": email], completionHandler: nil)
             }
+            if let token = SendbirdChat.getPendingPushToken(), error == nil {
+                SendbirdChat.registerDevicePushToken(token, unique: false)
+            }
             if user.nickname == nil || user.nickname?.isEmpty == true {
                 context.changeState(to: UsernameRequestState())
             } else {
