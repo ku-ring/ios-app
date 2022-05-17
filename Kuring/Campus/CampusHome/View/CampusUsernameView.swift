@@ -15,11 +15,16 @@ struct CampusUsernameView: View {
     var body: some View {
         VStack(spacing: 64) {
             Spacer()
-  
+            
             Text("상대방에게 보여지는 이름을 설정해주세요.")
                 .lineLimit(2)
             
+            
             VStack(alignment: .leading) {
+                Text("설정된 이름은 변경이 불가능합니다.")
+                    .font(.footnote.bold())
+                    .foregroundColor(ColorSet.green.color)
+                
                 HStack {
                     Text("@")
                         .foregroundColor(ColorSet.green.color)
