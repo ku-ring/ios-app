@@ -45,7 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // MARK: 인앱광고
         GADMobileAds.sharedInstance().start(completionHandler: nil)
 
-
         return true
     }
     

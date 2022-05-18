@@ -51,7 +51,7 @@ struct CampusUsernameView: View {
                 VStack(alignment: .leading) {
                     Text("- 이름에는 \"한글, 알파벳 대소문자, 숫자, ., _\"가 가능합니다.")
                     
-                    Text("- 6~15글자 사이만 가능합니다.")
+                    Text("- 2~15글자 사이만 가능합니다.")
                 }
                 .font(.caption)
                 .foregroundColor(ColorSet.pink.color)

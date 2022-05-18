@@ -11,10 +11,10 @@ import SendbirdChatSDK
 
 class UsernameRequestState: CampusState {
     func checkAvailablity(username: String, context: CampusViewModel) {
-        KuringCampus.getUser(named: username) { result in
+        KuringCampus.checkUnique(username: username) { result in
             switch result {
-            case .success(let users):
-                if users.isEmpty {
+            case .success(let isUnique):
+                if isUnique {
                     context.updateUsername()
                 } else {
                     context.didFailToSetupUsername(with: "이미 존재하는 닉네임입니다")
