@@ -53,23 +53,20 @@ struct UserMessageView: View {
     
     // Move to extension?
     var attributedString: AttributedString {
-        do {
-            var text = try AttributedString(markdown: message)
-            text.font = .footnote
-            text.foregroundColor = isSentByMe
+        var text = AttributedString(message)
+        text.font = .subheadline
+        text.foregroundColor = isSentByMe
+        ? ColorSet.Background.primary.color
+        : ColorSet.Label.primary.color
+        if let myUsername = SendbirdChat.getCurrentUser()?.nickname, let range = text.range(of: myUsername) {
+            text[range].foregroundColor = isSentByMe
             ? ColorSet.Background.primary.color
-            : ColorSet.Label.primary.color
-            if let myUsername = SendbirdChat.getCurrentUser()?.nickname, let range = text.range(of: myUsername) {
-                text[range].foregroundColor = isSentByMe
-                ? ColorSet.Background.primary.color
-                : ColorSet.Label.primary.color
-                text[range].font = .footnote.bold()
-            }
-     
-            return text
-        } catch {
-            return .init(message)
+            : ColorSet.Label.green.color
+            text[range].font = .subheadline.bold()
+            text[range].backgroundColor = isSentByMe ? .clear : ColorSet.Background.green
         }
+        
+        return text
     }
     
     var body: some View {
@@ -91,7 +88,7 @@ struct UserMessageView: View {
             VStack(alignment: .leading) {
                 if !isSentByMe {
                     Text(username)
-                        .font(.subheadline.bold())
+                        .font(.footnote.bold())
                         .foregroundColor(ColorSet.green.color)
                 }
                 
