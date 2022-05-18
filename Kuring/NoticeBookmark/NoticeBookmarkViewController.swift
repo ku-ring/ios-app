@@ -106,9 +106,7 @@ extension NoticeBookmarkViewController: UITableViewDelegate, UITableViewDataSour
     func showEmptyData() {
         let emptyDataLabel = UILabel()
         emptyDataLabel.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-        emptyDataLabel.text = Kuring.categoryStrings.isEmpty
-        ? StringSet.MyNotification.noSubscription
-        : StringSet.MyNotification.empty
+        emptyDataLabel.text = StringSet.Bookmark.empty
         emptyDataLabel.textAlignment = .center
         emptyDataLabel.textColor = ColorSet.green
         emptyDataLabel.sizeToFit()
