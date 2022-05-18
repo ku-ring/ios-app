@@ -7,6 +7,7 @@
 
 import UIKit
 import KuringSDK
+import KuringCommons
 
 class NoticeBookmarkViewController: UIViewController {
     
@@ -19,6 +20,8 @@ class NoticeBookmarkViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if Kuring.noticeBookmark.isEmpty { showEmptyData() }
         
         setupViews()
     }
@@ -91,10 +94,23 @@ extension NoticeBookmarkViewController: UITableViewDelegate, UITableViewDataSour
         case .delete:
             tableView.beginUpdates()
             Kuring.noticeBookmark.remove(at: indexPath.row)
+            if Kuring.noticeBookmark.isEmpty { showEmptyData() }
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
         default:
             break
         }
+    }
+    
+    func showEmptyData() {
+        let emptyDataLabel = UILabel()
+        emptyDataLabel.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+        emptyDataLabel.text = StringSet.Bookmark.empty
+        emptyDataLabel.textAlignment = .center
+        emptyDataLabel.textColor = ColorSet.green
+        emptyDataLabel.sizeToFit()
+        emptyDataLabel.center.x = tableView.center.x
+        emptyDataLabel.center.y = tableView.frame.height - emptyDataLabel.frame.height
+        tableView.backgroundView = emptyDataLabel
     }
 }
