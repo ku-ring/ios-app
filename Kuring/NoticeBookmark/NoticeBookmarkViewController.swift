@@ -21,9 +21,7 @@ class NoticeBookmarkViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if Kuring.noticeBookmark.isEmpty {
-            showEmptyData()
-        }
+        if Kuring.noticeBookmark.isEmpty { showEmptyData() }
         
         setupViews()
     }
@@ -96,6 +94,7 @@ extension NoticeBookmarkViewController: UITableViewDelegate, UITableViewDataSour
         case .delete:
             tableView.beginUpdates()
             Kuring.noticeBookmark.remove(at: indexPath.row)
+            if Kuring.noticeBookmark.isEmpty { showEmptyData() }
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
         default:
