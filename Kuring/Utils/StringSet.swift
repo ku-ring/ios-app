@@ -19,6 +19,10 @@ struct StringSet {
         static let empty = "받은 알림이 없습니다."
     }
     
+    struct Bookmark {
+        static let empty = "보관된 공지사항이 없습니다."
+    }
+    
     /// lottie-ios JSON 파일 name
     struct Lottie {
         static let loading = "lottieLoading"
