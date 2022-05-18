@@ -17,7 +17,7 @@ struct KuringCampus {
         }
     }
     
-    static func getUser(named username: String, resultHandler: @escaping (Result<User?, Error>) -> Void) {
+    static func getUser(named username: String, resultHandler: @escaping (Result<[User], Error>) -> Void) {
         let urlString = "https://api-\(KuringCampus.appID).sendbird.com/v3/users?nickname=\(username)"
         let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
 
@@ -50,11 +50,8 @@ struct KuringCampus {
                 resultHandler(.failure(NSError(domain: StringSet.Campus.baseString, code: 400)))
                 return
             }
-            var user = try? JSONDecoder().decode(User.self, from: data)
-            if user?.userID.isEmpty == true {
-                user = nil
-            }
-            resultHandler(.success(user))
+            let users = try? JSONDecoder().decode([User].self, from: data)
+            resultHandler(.success(users ?? []))
         }
         .resume()
     }

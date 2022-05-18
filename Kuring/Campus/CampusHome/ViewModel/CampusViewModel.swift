@@ -66,7 +66,7 @@ class CampusViewModel: ObservableObject {
     }
     
     func setupUsername() {
-        isConformsToRegex = pendingUsername.conformsToUsernameProtocol && pendingUsername.count > 5 && pendingUsername.count <= 15
+        isConformsToRegex = pendingUsername.conformsToUsernameProtocol && pendingUsername.count > 2 && pendingUsername.count <= 15
         guard isConformsToRegex else {
             HapticManager.shared.createNotification(.error)
             return
