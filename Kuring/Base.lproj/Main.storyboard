@@ -114,7 +114,7 @@
                                         <rect key="frame" x="52" y="11" width="310" height="18.5"/>
                                         <color key="textColor" name="ColorSet.Label.primary"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
@@ -254,14 +254,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="교수 이름" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fdA-AP-fub">
-                                                    <rect key="frame" x="20" y="7.5" width="52.5" height="17"/>
+                                                    <rect key="frame" x="20" y="8" width="63" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" name="ColorSet.Label.primary"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="학과 또는 학부 · 단과대학" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iKz-P3-JNW">
-                                                    <rect key="frame" x="20" y="27" width="111.5" height="13.5"/>
+                                                    <rect key="frame" x="20" y="28.5" width="111.5" height="13.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" name="ColorSet.Label.primary"/>
@@ -1015,6 +1015,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="XB8-g9-pCB" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3sy-L8-uZv">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" name="ColorSet.Background.primary"/>
                         <color key="tintColor" name="ColorSet.green"/>
@@ -1094,7 +1095,7 @@
             <color red="0.32499998807907104" green="0.35699999332427979" blue="0.36500000953674316" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ColorSet.green">
-            <color red="0.23921568627450981" green="0.74117647058823533" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23899999260902405" green="0.74099999666213989" blue="0.50199997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ColorSet.pink">
             <color red="0.89411764705882357" green="0.35686274509803922" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
