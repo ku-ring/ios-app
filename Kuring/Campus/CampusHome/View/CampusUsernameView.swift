@@ -11,6 +11,7 @@ import KuringCommons
 struct CampusUsernameView: View {
     @ObservedObject var viewModel: CampusViewModel
     @FocusState private var firstResponder: Bool
+    @State private var agreesTerms: Bool = false
     
     var body: some View {
         VStack(spacing: 64) {
@@ -58,23 +59,52 @@ struct CampusUsernameView: View {
                 .opacity(viewModel.isConformsToRegex ? 0 : 1)
                 .padding(.horizontal)
             }
-            .padding(.horizontal, 16)
-            
             
             Spacer()
             
-            Button(action: viewModel.setupUsername) {
-                RoundedRectangle(cornerRadius: 26)
-                    .frame(width: 232, height: 52)
-                    .foregroundColor(ColorSet.green.color)
-                    .overlay {
-                        Text("시작하기")
-                            .foregroundColor(ColorSet.Background.primary.color)
+            Group {
+                VStack(alignment: .leading, spacing: 8) {
+                    Group {
+                        Text("[개인정보🛡 처리방침](https://kuring.notion.site/65ba27f2367044e0be7061e885e7415c)과 [📄서비스 이용약관](https://kuring.notion.site/e88095d4d67d4c4c92983fd85cb693b9)을")
+                        
+                        HStack {
+                            Text("반드시 확인해주세요.")
+
+                            Spacer()
+                        }
                     }
-                    .padding(.bottom, 64)
+                    .font(.footnote)
+                    .lineLimit(4)
+                    .padding(.bottom, 8)
+                    
+                    Toggle("약관에 동의합니다", isOn: $agreesTerms)
+                        .toggleStyle(CheckToggleStyle())
+                }
+                .padding()
+                .background {
+                    RoundedRectangle(cornerRadius: 26)
+                        .stroke(ColorSet.green.color, lineWidth: 1)
+                }
+                
+                Button(action: viewModel.setupUsername) {
+                    RoundedRectangle(cornerRadius: 26)
+                        .frame(width: 232, height: 52)
+                        .foregroundColor(
+                            agreesTerms
+                            ? ColorSet.green.color
+                            : ColorSet.secondaryGray.color
+                        )
+                        .overlay {
+                            Text("시작하기")
+                                .foregroundColor(ColorSet.Background.primary.color)
+                        }
+                        .padding(.bottom, 64)
+                }
+                .disabled(!agreesTerms)
             }
             .opacity(viewModel.pendingUsername.isEmpty ? 0 : 1)
         }
+        .padding(.horizontal, 16)
     }
 }
 

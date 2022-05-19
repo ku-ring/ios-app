@@ -19,6 +19,7 @@
 		A966E1B02824364200F6AF3D /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A966E1AF2824364200F6AF3D /* LottieView.swift */; };
 		A966E1B2282436C900F6AF3D /* CampusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A966E1B1282436C900F6AF3D /* CampusViewController.swift */; };
 		A994014727E9E5AC00FE9989 /* View.Kuring.swift in Sources */ = {isa = PBXBuildFile; fileRef = A994014627E9E5AC00FE9989 /* View.Kuring.swift */; };
+		A99CFCAE2836B6A0008B26DD /* CheckToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99CFCAD2836B6A0008B26DD /* CheckToggleStyle.swift */; };
 		A9C445BC27C552FB0094D9A9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C445BB27C552FB0094D9A9 /* OnboardingView.swift */; };
 		A9C447DF27C7877E0094D9A9 /* CategorySelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447DE27C7877E0094D9A9 /* CategorySelectView.swift */; };
 		A9C447E327C788A50094D9A9 /* OnboardingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C447E227C788A50094D9A9 /* OnboardingRow.swift */; };
@@ -128,6 +129,7 @@
 		A966E1AF2824364200F6AF3D /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		A966E1B1282436C900F6AF3D /* CampusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusViewController.swift; sourceTree = "<group>"; };
 		A994014627E9E5AC00FE9989 /* View.Kuring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.Kuring.swift; sourceTree = "<group>"; };
+		A99CFCAD2836B6A0008B26DD /* CheckToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckToggleStyle.swift; sourceTree = "<group>"; };
 		A9C445BB27C552FB0094D9A9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		A9C447DE27C7877E0094D9A9 /* CategorySelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectView.swift; sourceTree = "<group>"; };
 		A9C447E227C788A50094D9A9 /* OnboardingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRow.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				A9D2482D282396DB00F6FC51 /* AdminMessageView.swift */,
 				A94A4FDD282ED9E400CDA575 /* MessageDateView.swift */,
 				A9D2481D2822E0D700F6FC51 /* ChatView.swift */,
+				A99CFCAD2836B6A0008B26DD /* CheckToggleStyle.swift */,
 				A94A4FE828303C8D00CDA575 /* MessageInput.swift */,
 				A94A4FE6283031F100CDA575 /* KeyboardReadable.swift */,
 			);
@@ -735,6 +738,7 @@
 				A9DA6CE327B98D2300F3B786 /* Opensource.swift in Sources */,
 				A94A4FE928303C8D00CDA575 /* MessageInput.swift in Sources */,
 				A9C447E727C7A2560094D9A9 /* OnboardingIntroView.swift in Sources */,
+				A99CFCAE2836B6A0008B26DD /* CheckToggleStyle.swift in Sources */,
 				A9D248252822E16400F6FC51 /* ChatViewModel.Connection.swift in Sources */,
 				A94A4FD22829390D00CDA575 /* ChatConnectedState.swift in Sources */,
 				A9D248232822E15100F6FC51 /* ChatViewModel.OpenChannel.swift in Sources */,

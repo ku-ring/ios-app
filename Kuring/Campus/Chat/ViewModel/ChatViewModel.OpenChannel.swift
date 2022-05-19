@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import KuringSDK
 import SendbirdChatSDK
 
 extension ChatViewModel: OpenChannelDelegate {
     func channel(_ channel: BaseChannel, didReceive message: BaseMessage) {
+        guard Kuring.blockedUserIDs.contains(message.sender?.userID ?? "") == false else { return }
         self.sentMessages.append(message)
         self.updateLastMessageIndex()
         notifiesNewMessage = !isAutoScrollable
