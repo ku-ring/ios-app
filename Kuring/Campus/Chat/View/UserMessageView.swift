@@ -13,6 +13,7 @@ import SendbirdChatSDK
 struct UserMessageView: View {
     @ObservedObject var viewModel: ChatViewModel
     @State private var onReporting: Bool = false
+    @State private var onBlocking: Bool = false
     
     let messageID: String
     let requestID: String
@@ -119,6 +120,10 @@ struct UserMessageView: View {
                         Button(action: report) {
                             Label("신고하기", systemImage: "hand.raised")
                         }
+                        
+                        Button(action: block) {
+                            Label("차단하기", systemImage: "person.fill.xmark")
+                        }
                     }
                 } else {
                     Button(action: { viewModel.resendUserMessage(requestID: requestID) }) {
@@ -150,6 +155,11 @@ struct UserMessageView: View {
             Button("아이KU! 잘못 눌렀어요.", role: .cancel, action: {})
             
             Button("네, 신고합니다.", role: .destructive, action: { viewModel.reportMessage(id: messageID) })
+        })
+        .alert("\(username)을 차단하시겠습니까?", isPresented: $onBlocking, actions: {
+            Button("아이KU! 잘못 눌렀어요.", role: .cancel, action: {})
+
+            Button("네, 차단합니다.", role: .destructive, action: { viewModel.blockUser(messageID: messageID) })
         })
         .id(messageID == "0" ? requestID : messageID)
     }
@@ -189,5 +199,9 @@ struct UserMessageView: View {
     
     func report() {
         onReporting = true
+    }
+    
+    func block() {
+        onBlocking = true
     }
 }

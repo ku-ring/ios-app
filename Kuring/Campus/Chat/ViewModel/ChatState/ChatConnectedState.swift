@@ -27,7 +27,7 @@ class ChatConnectedState: ChatState {
         context.isLoading = true
         
         let params = MessageListParams()
-        params.previousResultSize = 100
+        params.previousResultSize = 50
         params.reverse = true
         let timestamp = context.sentMessages.first?.createdAt ?? .max
         channel.getMessagesByTimestamp(timestamp, params: params) { messages, error in
@@ -100,14 +100,33 @@ class ChatConnectedState: ChatState {
         context.pendingMessages.append(pendingMessage)
     }
     
-    func reportMessage(_ message: UserMessage) {
-        guard let myUserID = SendbirdChat.getCurrentUser()?.userID else { return }
+    func reportMessage(_ message: UserMessage, context: ChatViewModel) {
+        guard let myUserID = SendbirdChat.getCurrentUser()?.userID else {
+            context.didReportMessage()
+            return
+        }
         let description = "\(myUserID)가 \(message.sender?.userID ?? "")를 신고했습니다."
         channel.report(message: message, reportCategory: .inappropriate, reportDescription: description) { error in
             Logger.error(error) // TODO: 이벤트 수집
         }
         let feedback = "🤬 \(description) - 메세지내용: \(message.message)"
         Kuring.sendFeedback(feedback) { _ in }
+        
+        context.didReportMessage()
+    }
+    
+    func blockMessage(_ message: UserMessage, context: ChatViewModel) {
+        guard let myUserID = SendbirdChat.getCurrentUser()?.userID, let sender = message.sender else {
+            context.didBlockUser()
+            return
+        }
+        let description = "\(myUserID)가 \(message.sender?.userID ?? "")를 차단했습니다."
+        Kuring.blockedUserIDs.insert(sender.userID)
+        
+        let feedback = "🤬 \(description) - 메세지내용: \(message.message)"
+        Kuring.sendFeedback(feedback) { _ in }
+        
+        context.didBlockUser()
     }
     
     func onDisconnected(context: ChatViewModel) {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KuringSDK
 import KuringCommons
 import SendbirdChatSDK
 import FirebaseMessaging
@@ -13,9 +14,13 @@ import FirebaseMessaging
 class ConnectedState: CampusState {
     func start(context: CampusViewModel) {
         if let token = SendbirdChat.getPendingPushToken() {
-            SendbirdChat.registerDevicePushToken(token, unique: false)
+            SendbirdChat.registerDevicePushToken(token, unique: false) { registrationStatus, error in
+                SendbirdChat.setPushTriggerOption(Kuring.isCustomNotificationEnabled ? .all : .off)
+            }
         } else if let token = Messaging.messaging().apnsToken {
-            SendbirdChat.registerDevicePushToken(token, unique: false)
+            SendbirdChat.registerDevicePushToken(token, unique: false) { registrationStatus, error in
+                SendbirdChat.setPushTriggerOption(Kuring.isCustomNotificationEnabled ? .all : .off)
+            }
         }
     }
     func startChat(context: CampusViewModel) {

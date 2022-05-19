@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import KuringSDK
 import KuringCommons
 import SendbirdChatSDK
 
@@ -25,6 +26,9 @@ class ChatViewModel: ObservableObject {
     @Published var text: String = ""
     @Published var isLoading: Bool = false
     @Published var hasMorePreviousMessages: Bool = false
+    
+    @Published var onReported: Bool = false
+    @Published var onBlocked: Bool = false
     
     @Published var currentState: ChatState {
         willSet { currentState.finish(context: self) }
@@ -96,7 +100,25 @@ class ChatViewModel: ObservableObject {
     func reportMessage(id: String) {
         guard let message = sentMessages.first(where: { "\($0.messageID)" == id}) as? UserMessage else { return }
         guard let connectedState = self.currentState as? ChatConnectedState else { return }
-        connectedState.reportMessage(message)
+        connectedState.reportMessage(message, context: self)
+    }
+    
+    func didReportMessage() {
+        onReported = true
+    }
+    
+    func blockUser(messageID: String) {
+        guard let message = sentMessages.first(where: { "\($0.messageID)" == messageID}) as? UserMessage else { return }
+        guard let connectedState = self.currentState as? ChatConnectedState else { return }
+        connectedState.blockMessage(message, context: self)
+    }
+    
+    func didBlockUser() {
+        let currentMessage = sentMessages
+        sentMessages = currentMessage
+            .filter { Kuring.blockedUserIDs.contains($0.sender?.userID ?? "") == false }
+        
+        onBlocked = true
     }
     
     func updateLastMessageIndex() {

@@ -30,7 +30,9 @@ extension AppDelegate {
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
         Messaging.messaging().apnsToken = deviceToken
-        SendbirdChat.registerDevicePushToken(deviceToken, unique: false)
+        SendbirdChat.registerDevicePushToken(deviceToken, unique: false) { registrationStatus, error in
+            SendbirdChat.setPushTriggerOption(Kuring.isCustomNotificationEnabled ? .all : .off)
+        }
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

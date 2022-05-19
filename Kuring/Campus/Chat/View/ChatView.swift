@@ -83,6 +83,18 @@ struct ChatView: View, KeyboardReadable {
                         .foregroundColor(ColorSet.Label.primary.color)
                 }
             }
+            .alert(isPresented: $viewModel.onReported) {
+                    Alert(
+                        title: Text("접수되었습니다"),
+                        message: Text("24시간 이내로 신고가 처리됩니다.")
+                    )
+                }
+            .alert(isPresented: $viewModel.onBlocked) {
+                Alert(
+                    title: Text("차단되었습니다."),
+                    message: Text("더이상 해당 유저의 메세지를 볼 수 없습니다.")
+                )
+            }
         }
     }
     
