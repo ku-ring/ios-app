@@ -21,7 +21,7 @@ class KUAlarmTableViewCell: UITableViewCell {
     @IBOutlet weak var noticeTypeLabel: UILabel!
     @IBOutlet weak var hstackView: UIStackView!
     
-    var notification: KuringSDK.Notification! {
+    var notification: Notice! {
         didSet {
             updateUI()
         }
