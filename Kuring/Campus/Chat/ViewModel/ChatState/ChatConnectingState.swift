@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KuringSDK
 import KuringCommons
 import SendbirdChatSDK
 
@@ -63,6 +64,7 @@ class ChatConnectingState: ChatState {
             Logger.debug("\(fetchedMessages.count) 개의 메세지를 가져왔습니다.")
             if !fetchedMessages.isEmpty {
                 context.sentMessages = fetchedMessages
+                    .filter { Kuring.blockedUserIDs.contains($0.sender?.userID ?? "") == false }
             }
             context.hasMorePreviousMessages = fetchedMessages.count >= 100
             context.updateLastMessageIndex()

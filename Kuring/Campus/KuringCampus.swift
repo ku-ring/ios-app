@@ -16,9 +16,8 @@ struct KuringCampus {
             SendbirdChat.initialize(params: params)
         }
     }
-    static var userID: String = ""
     
-    static func getUser(named username: String, resultHandler: @escaping (Result<User?, Error>) -> Void) {
+    static func checkUnique(username: String, resultHandler: @escaping (Result<Bool, Error>) -> Void) {
         let urlString = "https://api-\(KuringCampus.appID).sendbird.com/v3/users?nickname=\(username)"
         let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
 
@@ -51,11 +50,9 @@ struct KuringCampus {
                 resultHandler(.failure(NSError(domain: StringSet.Campus.baseString, code: 400)))
                 return
             }
-            var user = try? JSONDecoder().decode(User.self, from: data)
-            if user?.userID.isEmpty == true {
-                user = nil
-            }
-            resultHandler(.success(user))
+            let jsonObject = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+            let users = jsonObject?["users"] as? [[String: Any]] ?? []
+            resultHandler(.success(users.isEmpty))
         }
         .resume()
     }

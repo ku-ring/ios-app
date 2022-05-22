@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import KuringSDK
 import KuringCommons
 import SendbirdChatSDK
 
@@ -25,6 +26,9 @@ class ChatViewModel: ObservableObject {
     @Published var text: String = ""
     @Published var isLoading: Bool = false
     @Published var hasMorePreviousMessages: Bool = false
+    
+    @Published var onReported: Bool = false
+    @Published var onBlocked: Bool = false
     
     @Published var currentState: ChatState {
         willSet { currentState.finish(context: self) }
@@ -54,6 +58,18 @@ class ChatViewModel: ObservableObject {
         self.currentState = newState
     }
     
+    func updateNewBottom(to value: CGFloat) {
+        DispatchQueue.main.async { [self] in
+            let isNewBottom = bottomOffset + 30 > value
+            if isNewBottom {
+                bottomOffset = value
+                isAutoScrollable = true
+            } else {
+                isAutoScrollable = false
+            }
+        }
+    }
+    
     func fetchPreviousMessageList() {
         guard let connectedState = self.currentState as? ChatConnectedState else { return }
         isAutoScrollable = true
@@ -79,6 +95,30 @@ class ChatViewModel: ObservableObject {
         failedMessages.removeAll { $0.requestID == requestID }
         pendingMessages.removeAll { $0.requestID == requestID }
         updateLastMessageIndex()
+    }
+    
+    func reportMessage(id: String) {
+        guard let message = sentMessages.first(where: { "\($0.messageID)" == id}) as? UserMessage else { return }
+        guard let connectedState = self.currentState as? ChatConnectedState else { return }
+        connectedState.reportMessage(message, context: self)
+    }
+    
+    func didReportMessage() {
+        onReported = true
+    }
+    
+    func blockUser(messageID: String) {
+        guard let message = sentMessages.first(where: { "\($0.messageID)" == messageID}) as? UserMessage else { return }
+        guard let connectedState = self.currentState as? ChatConnectedState else { return }
+        connectedState.blockMessage(message, context: self)
+    }
+    
+    func didBlockUser() {
+        let currentMessage = sentMessages
+        sentMessages = currentMessage
+            .filter { Kuring.blockedUserIDs.contains($0.sender?.userID ?? "") == false }
+        
+        onBlocked = true
     }
     
     func updateLastMessageIndex() {

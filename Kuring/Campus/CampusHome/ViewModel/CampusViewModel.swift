@@ -22,7 +22,13 @@ class CampusViewModel: ObservableObject {
         didSet { currentState.start(context: self) }
     }
     @Published var isConformsToRegex: Bool = true
-    @Published var onError: Bool = false
+    @Published var onError: Bool = false {
+        didSet {
+            if onError {
+                Logger.debug("\(currentState)에서 에러가 발생했습니다.")
+            }
+        }
+    }
     @Published var onChat: Bool = false {
         didSet {
             if !onChat { endChat() }
@@ -60,7 +66,7 @@ class CampusViewModel: ObservableObject {
     }
     
     func setupUsername() {
-        isConformsToRegex = pendingUsername.conformsToUsernameProtocol && pendingUsername.count > 5 && pendingUsername.count <= 15
+        isConformsToRegex = pendingUsername.conformsToUsernameProtocol && pendingUsername.count >= 2 && pendingUsername.count <= 15
         guard isConformsToRegex else {
             HapticManager.shared.createNotification(.error)
             return

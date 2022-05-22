@@ -33,6 +33,8 @@ struct MessageInput: UIViewRepresentable {
         if text.isEmpty {
             uiView.text = self.isEditing ? "" : placeholder
             uiView.textColor = self.isEditing ? ColorSet.Label.primary : ColorSet.Label.tertiary
+        } else {
+            uiView.textColor = ColorSet.Label.primary
         }
         
         DispatchQueue.main.async {

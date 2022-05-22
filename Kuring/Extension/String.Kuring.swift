@@ -15,7 +15,7 @@ struct UsernameProtocol {
     /// [a-zA-Z가-힣0-9._] // allowed characters
     /// (?<![_.]) // no _ or . at the end
     /// ```
-    static let regex: NSRegularExpression = try! NSRegularExpression(pattern: "^(?=.{5,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z가-힣0-9._]+(?<![_.])$")
+    static let regex: NSRegularExpression = try! NSRegularExpression(pattern: "^(?=.{2,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z가-힣0-9._]+(?<![_.])$")
 }
 
 extension String {

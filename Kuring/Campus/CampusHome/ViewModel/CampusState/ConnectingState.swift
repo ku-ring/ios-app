@@ -11,6 +11,12 @@ import KuringCommons
 import SendbirdChatSDK
 
 class ConnectingState: CampusState {
+    var email: String?
+    
+    init(email: String? = nil) {
+        self.email = email
+    }
+    
     func start(context: CampusViewModel) {
         guard let userID = Kuring.userID, !userID.isEmpty else {
             context.changeState(to: LoginState())
@@ -22,6 +28,9 @@ class ConnectingState: CampusState {
                 context.onError = true
                 Logger.error(error)
                 return
+            }
+            if let email = self.email {
+                user.updateMetaData(["email": email], completionHandler: nil)
             }
             if user.nickname == nil || user.nickname?.isEmpty == true {
                 context.changeState(to: UsernameRequestState())

@@ -102,7 +102,9 @@ class KUNoticeListViewController: UIViewController {
         tableView.refreshControl = refreshControl
         Kuring.addDelegate(self, forKey: "KUNoticeListViewController")
         
-        load()
+        if !isLoading {
+            load()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -205,12 +207,17 @@ class KUNoticeListViewController: UIViewController {
                 
                 // Update offset
                 let prevOffset = self.offsetList[noticeType] ?? 0
-                let currentOffset = prevOffset + notices.count
-                self.offsetList.updateValue(currentOffset, forKey: noticeType)
+                var currentOffset = prevOffset
                 
                 // Update notices
                 var currentNotices = self.noticeList[noticeType] ?? []
-                notices.forEach { currentNotices.append($0) }
+                notices.forEach {
+                    if !currentNotices.contains($0) {
+                        currentNotices.append($0)
+                        currentOffset += 1
+                    }
+                }
+                self.offsetList.updateValue(currentOffset, forKey: noticeType)
                 self.noticeList.updateValue(currentNotices, forKey: noticeType)
                 
                 // 뷰 업데이트
@@ -317,23 +324,23 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let notice = self.currentNotices[indexPath.row]
+        let isBookmarked = Kuring.noticeBookmark.contains(notice)
         let subscribeAction = UIContextualAction(
             style: .normal,
             title: nil
-        ) { [weak self] action, view, completionHandler in
-            guard let self = self else { return }
-
-            let notice = self.currentNotices[indexPath.row]
-            
+        ) { [notice, isBookmarked] action, view, completionHandler in
             HapticManager.shared.createImpact()
-            if !Kuring.noticeBookmark.contains(notice) {
+            if !isBookmarked {
                 Kuring.noticeBookmark.append(notice)
+            } else {
+                Kuring.noticeBookmark.removeAll { $0.id == notice.id }
             }
-            
+            tableView.reloadData()
             completionHandler(true)
         }
         subscribeAction.backgroundColor = ColorSet.green
-        subscribeAction.image = UIImage(systemName: "bookmark.fill")
+        subscribeAction.image = UIImage(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
         
         return UISwipeActionsConfiguration(actions: [subscribeAction])
     }

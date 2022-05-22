@@ -23,10 +23,11 @@ class AppleLoginState: CampusState {
             case let appleIdCredential as ASAuthorizationAppleIDCredential:
                 // appleIdCredentials.email
                 // appleIdCredentials.user
-                if let email = appleIdCredential.email {
-                    Kuring.userID = email
-                }
-                context.changeState(to: ConnectingState())
+                Kuring.userID = appleIdCredential.user
+                
+                context.changeState(
+                    to: ConnectingState(email: appleIdCredential.email)
+                )
             default:
                 Logger.error("알 수 없는 이유로 로그인 정보에 이메일을 가져올 수 없습니다.")
             }

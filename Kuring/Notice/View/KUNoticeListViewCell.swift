@@ -44,8 +44,12 @@ class KUNoticeListViewCell: UITableViewCell {
     }
     
     func updateUI() {
-        dotView.isHidden = !notice.isNew
-        dotView.backgroundColor = notice.isSubscribed ? .systemPink : .gray
+        dotView.isHidden = !notice.isNew && !isBookmarked
+        dotView.backgroundColor = isBookmarked
+            ? ColorSet.green
+            : notice.isSubscribed
+                ? ColorSet.pink
+                : ColorSet.gray
         titleLabel.text = notice.subject
         
         // 스택을 초기화합니다
@@ -81,5 +85,9 @@ class KUNoticeListViewCell: UITableViewCell {
     /// 읽었던 공지 인지
     private var isRead: Bool {
         Kuring.readNoticeIDs.contains(notice.articleID)
+    }
+    
+    private var isBookmarked: Bool {
+        Kuring.noticeBookmark.contains(notice)
     }
 }

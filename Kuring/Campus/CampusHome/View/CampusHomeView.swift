@@ -25,7 +25,7 @@ struct CampusHomeView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("쿠링캠퍼스")
+                    Text("🏛 쿠링캠퍼스")
                         .font(.title3.bold())
                         .foregroundColor(ColorSet.Label.primary.color)
                 }

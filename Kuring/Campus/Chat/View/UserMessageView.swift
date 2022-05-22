@@ -12,7 +12,8 @@ import SendbirdChatSDK
 
 struct UserMessageView: View {
     @ObservedObject var viewModel: ChatViewModel
-    @State private var showsNoticeWebView: Bool = false
+    @State private var onReporting: Bool = false
+    @State private var onBlocking: Bool = false
     
     let messageID: String
     let requestID: String
@@ -53,23 +54,20 @@ struct UserMessageView: View {
     
     // Move to extension?
     var attributedString: AttributedString {
-        do {
-            var text = try AttributedString(markdown: message)
-            text.font = .footnote
-            text.foregroundColor = isSentByMe
+        var text = AttributedString(message)
+        text.font = .subheadline
+        text.foregroundColor = isSentByMe
+        ? ColorSet.Background.primary.color
+        : ColorSet.Label.primary.color
+        if let myUsername = SendbirdChat.getCurrentUser()?.nickname, let range = text.range(of: myUsername) {
+            text[range].foregroundColor = isSentByMe
             ? ColorSet.Background.primary.color
-            : ColorSet.Label.primary.color
-            if let myUsername = SendbirdChat.getCurrentUser()?.nickname, let range = text.range(of: myUsername) {
-                text[range].foregroundColor = isSentByMe
-                ? ColorSet.Background.primary.color
-                : ColorSet.Label.primary.color
-                text[range].font = .footnote.bold()
-            }
-     
-            return text
-        } catch {
-            return .init(message)
+            : ColorSet.Label.green.color
+            text[range].font = .subheadline.bold()
+            text[range].backgroundColor = isSentByMe ? .clear : ColorSet.Background.green
         }
+        
+        return text
     }
     
     var body: some View {
@@ -91,7 +89,7 @@ struct UserMessageView: View {
             VStack(alignment: .leading) {
                 if !isSentByMe {
                     Text(username)
-                        .font(.subheadline.bold())
+                        .font(.footnote.bold())
                         .foregroundColor(ColorSet.green.color)
                 }
                 
@@ -112,6 +110,20 @@ struct UserMessageView: View {
                 if sendingState == .sent {
                     Button(action: copy) {
                         Label("복사하기", systemImage: "doc.on.doc")
+                    }
+                    
+                    if !isSentByMe {
+                        Button(action: mention) {
+                            Label("닉네임 복사하기", systemImage: "at")
+                        }
+                        
+                        Button(action: report) {
+                            Label("신고하기", systemImage: "hand.raised")
+                        }
+                        
+                        Button(action: block) {
+                            Label("차단하기", systemImage: "person.fill.xmark")
+                        }
                     }
                 } else {
                     Button(action: { viewModel.resendUserMessage(requestID: requestID) }) {
@@ -139,6 +151,16 @@ struct UserMessageView: View {
             }
         }
         .padding(.horizontal)
+        .alert("신고하시겠습니까?", isPresented: $onReporting, actions: {
+            Button("아이KU! 잘못 눌렀어요.", role: .cancel, action: {})
+            
+            Button("네, 신고합니다.", role: .destructive, action: { viewModel.reportMessage(id: messageID) })
+        })
+        .alert("\(username)을 차단하시겠습니까?", isPresented: $onBlocking, actions: {
+            Button("아이KU! 잘못 눌렀어요.", role: .cancel, action: {})
+
+            Button("네, 차단합니다.", role: .destructive, action: { viewModel.blockUser(messageID: messageID) })
+        })
         .id(messageID == "0" ? requestID : messageID)
     }
     
@@ -169,5 +191,17 @@ struct UserMessageView: View {
     
     func copy() {
         UIPasteboard.general.string = message
+    }
+    
+    func mention() {
+        UIPasteboard.general.string = username
+    }
+    
+    func report() {
+        onReporting = true
+    }
+    
+    func block() {
+        onBlocking = true
     }
 }

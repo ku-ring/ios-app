@@ -70,6 +70,7 @@ struct ChatView: View, KeyboardReadable {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
+                        HapticManager.shared.createImpact()
                         presentationMode.wrappedValue.dismiss()
                     } label: {
                         Image(systemName: "xmark")
@@ -81,6 +82,18 @@ struct ChatView: View, KeyboardReadable {
                         .font(.title3.bold())
                         .foregroundColor(ColorSet.Label.primary.color)
                 }
+            }
+            .alert(isPresented: $viewModel.onReported) {
+                    Alert(
+                        title: Text("접수되었습니다"),
+                        message: Text("24시간 이내로 신고가 처리됩니다.")
+                    )
+                }
+            .alert(isPresented: $viewModel.onBlocked) {
+                Alert(
+                    title: Text("차단되었습니다."),
+                    message: Text("더이상 해당 유저의 메세지를 볼 수 없습니다.")
+                )
             }
         }
     }
@@ -140,8 +153,9 @@ struct ChatView: View, KeyboardReadable {
                     
                     GeometryReader { proxy in
                         let offset = proxy.frame(in: .named("scroll")).minY
-                        Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
                         
+                        Color.clear
+                            .preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
                     }
                 }
                 .onChange(of: viewModel.lastMessageIndex) { newValue in
@@ -159,6 +173,7 @@ struct ChatView: View, KeyboardReadable {
                 }
                 .onReceive(keyboardPublisher) { _ in
                     withAnimation {
+                        guard viewModel.isAutoScrollable else { return }
                         reader.scrollTo(viewModel.lastMessageIndex, anchor: .bottom)
                     }
                 }
@@ -168,15 +183,7 @@ struct ChatView: View, KeyboardReadable {
         }
         .coordinateSpace(name: "scroll")
         .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
-            DispatchQueue.main.async {
-                let isNewBottom = viewModel.bottomOffset + 30 > value
-                if isNewBottom {
-                    viewModel.bottomOffset = value
-                    viewModel.isAutoScrollable = true
-                } else {
-                    viewModel.isAutoScrollable = false
-                }
-            }
+            viewModel.updateNewBottom(to: value)
         }
     }
     
