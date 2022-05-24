@@ -135,7 +135,7 @@ extension AppDelegate {
 
 // MARK: - KuringDelegate
 extension AppDelegate: KuringDelegate {
-    func didReceiveNotification(_ notification: KuringSDK.Notification) {
+    func didReceiveNotification(_ notification: Notice) {
         Logger.debug("Received \(notification.subject)")
     }
 

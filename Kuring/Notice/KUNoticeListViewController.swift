@@ -347,7 +347,7 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
 }
 
 extension KUNoticeListViewController: KuringDelegate {
-    func didReceiveNotification(_ notification: KuringSDK.Notification) {
+    func didReceiveNotification(_ notification: Notice) {
         updateNotifcationButton()
     }
     

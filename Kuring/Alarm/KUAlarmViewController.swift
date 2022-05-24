@@ -10,7 +10,7 @@ import KuringSDK
 import KuringCommons
 
 class KUAlarmViewController: UITableViewController {
-    var notifications: [String : [KuringSDK.Notification]] {
+    var notifications: [String : [Notice]] {
         Kuring.notifications
     }
     var dates: [String] {
@@ -102,9 +102,9 @@ extension KUAlarmViewController {
         guard let notification = notifications[date]?[indexPath.row] else { return }
         notification.isNew = false
         
-        let urlString = notification.baseURLString.isEmpty
-        ? StringSet.URL.konkuk
-        : notification.baseURLString
+        let urlString = notification.urlString.isEmpty
+        ? "https://kunkuk.ac.kr"
+        : notification.urlString
         
         showNoticeWebViewController(
             url: urlString,
@@ -129,7 +129,7 @@ extension KUAlarmViewController {
 }
 
 extension KUAlarmViewController: KuringDelegate {
-    func didReceiveNotification(_ notification: KuringSDK.Notification) {
+    func didReceiveNotification(_ notification: Notice) {
         tableView.reloadData()
     }
 
