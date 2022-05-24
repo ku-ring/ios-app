@@ -7,6 +7,8 @@
 
 import UIKit
 import KuringSDK
+import KuringCommons
+import SwiftUI
 
 enum URLLink: String {
     case whatsNew = "https://kuring.notion.site/iOS-eef51c986b7f4320b97424df3f4a5e3c"
@@ -38,6 +40,7 @@ class SettingsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        HapticManager.shared.createImpact()
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath.section {
@@ -78,7 +81,8 @@ class SettingsViewController: UITableViewController {
     }
     
     func showFeedback() {
-        performSegue(withIdentifier: "showFeedback", sender: nil)
+        let feedbackVC = UIHostingController(rootView: FeedbackView())
+        self.present(feedbackVC, animated: true, completion: nil)
     }
 }
 
@@ -86,7 +90,7 @@ class SettingsViewController: UITableViewController {
 extension UIViewController {
     func showSubscription() {
         //  푸쉬 알림 설정 오브젝트 생성
-        let subscriptionVC = AlarmTagViewController()
+        let subscriptionVC = CategorySelectViewController()
         
         // 네비게이션 컨트롤러로 감싸고 modal present
         let nav = UINavigationController(rootViewController: subscriptionVC)

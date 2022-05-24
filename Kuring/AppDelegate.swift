@@ -8,8 +8,10 @@
 import UIKit
 import Firebase
 import KuringSDK
+import KuringCommons
 import AppsFlyerLib
 import AppTrackingTransparency
+import GoogleMobileAds
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // MARK: Kuring
+        Kuring.apiKey = "4BEC2A05-2F67-4083-83E2-866AEAF6CFDC"
         Kuring.addDelegate(self, forKey: "AppDelegate")
+        KuringCampus.appID = "4BEC2A05-2F67-4083-83E2-866AEAF6CFDC"
+        
+        
+        HapticManager.shared.setupGenerator()
         
         // MARK: Firebase
         FirebaseApp.configure()
@@ -34,6 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
         AppsFlyerLib.shared().delegate = self
+        
+        // MARK: 인앱광고
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
 
         return true
     }
@@ -64,10 +74,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 case .authorized:
                     Logger.debug("앱트래킹이 허용되었습니다.")
                 @unknown default:
-                    Logger.error("알 수 없는 앱트래킹 상태가 감지되었습니다.")
-                    fatalError("Invalid authorization status")
+                    Logger.debug("알 수 없는 앱트래킹 상태가 감지되었습니다.")
                 }
             }
         }
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        HapticManager.shared.release()
     }
 }

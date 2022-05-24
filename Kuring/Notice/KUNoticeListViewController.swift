@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import SwiftUI
+import Lottie
 import KuringSDK
-import SkeletonView
+import KuringCommons
 
 class KUNoticeListViewController: UIViewController {
     /// 현재 공지 타입. 기본값: `.학사`
@@ -36,21 +38,46 @@ class KUNoticeListViewController: UIViewController {
     var query: NoticeListQuery?
     /// 한번 요청 시 가져올 수 있는 공지 사항 개수 최댓값
     let loadLimit = 20
+    /// 데이터가 로딩되는 동안에 나타는 애니메이션 뷰(lottie)
+    let loadingView: AnimationView = .init(name: StringSet.Lottie.loading)
+    /// 데이터가 refresh를 통해 로딩되는 동안에 나타나는 동안에 보여질 애니메이션 뷰(lottie)
+    let indicatorView: AnimationView = .init(name: StringSet.Lottie.loading)
     /// 현재 공지사항 리스트를 가져오는 중인지 여부
-    var isLoading = false
+    var isLoading = false {
+        didSet {
+            if isLoading {
+                if refreshControl.isRefreshing {
+                    indicatorView.isHidden = false
+                    indicatorView.loopMode = .loop
+                    indicatorView.play()
+                } else {
+                    loadingView.isHidden = false
+                    loadingView.loopMode = .loop
+                    loadingView.play()
+                }
+            } else {
+                loadingView.isHidden = true
+                indicatorView.isHidden = true
+                
+                loadingView.stop()
+                indicatorView.stop()
+            }
+        }
+    }
     
     @IBOutlet weak var notificationButton: UIBarButtonItem!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var tableView: UITableView! {
-        didSet {
-            tableView.isSkeletonable = true
-            tableView.estimatedRowHeight = 68
-        }
-    }
+    @IBOutlet weak var tableView: UITableView!
     
     let refreshControl = UIRefreshControl()
+    
+    override func loadView() {
+        super.loadView()
+        
+        self.setupAnimationViews()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +90,6 @@ class KUNoticeListViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.isSkeletonable = true
         
         let nibName = UINib(nibName: "KUNoticeListViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: KUNoticeListViewCell.identifier)
@@ -76,22 +102,16 @@ class KUNoticeListViewController: UIViewController {
         tableView.refreshControl = refreshControl
         Kuring.addDelegate(self, forKey: "KUNoticeListViewController")
         
-        load()
+        if !isLoading {
+            load()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         updateNotifcationButton()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        tableView.hideSkeleton()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -166,7 +186,6 @@ class KUNoticeListViewController: UIViewController {
     func load() {
         if hasNextList[currentType] == false { return }
         isLoading = true
-        tableView.showSkeleton()
         let currentOffset = offsetList[currentType] ?? 0
         let params = NoticeListQuery.Params(
             type: currentType,
@@ -177,7 +196,7 @@ class KUNoticeListViewController: UIViewController {
         query?.load { [weak self] result in
             guard let self = self else { return }
             self.isLoading = false
-            self.tableView.hideSkeleton()
+            
             switch result {
                 // FIXME: - see above
             case .success(let notices):
@@ -188,12 +207,17 @@ class KUNoticeListViewController: UIViewController {
                 
                 // Update offset
                 let prevOffset = self.offsetList[noticeType] ?? 0
-                let currentOffset = prevOffset + notices.count
-                self.offsetList.updateValue(currentOffset, forKey: noticeType)
+                var currentOffset = prevOffset
                 
                 // Update notices
                 var currentNotices = self.noticeList[noticeType] ?? []
-                notices.forEach { currentNotices.append($0) }
+                notices.forEach {
+                    if !currentNotices.contains($0) {
+                        currentNotices.append($0)
+                        currentOffset += 1
+                    }
+                }
+                self.offsetList.updateValue(currentOffset, forKey: noticeType)
                 self.noticeList.updateValue(currentNotices, forKey: noticeType)
                 
                 // 뷰 업데이트
@@ -203,6 +227,24 @@ class KUNoticeListViewController: UIViewController {
                 Logger.debug(error.localizedDescription)
             }
         }
+    }
+    
+    private func setupAnimationViews() {
+        // main loading
+        view.addSubview(loadingView)
+        loadingView.snp.makeConstraints {
+            $0.width.height.equalTo(100)
+            $0.center.equalToSuperview()
+        }
+        isLoading = true
+        
+        // refresh indicator
+        refreshControl.addSubview(indicatorView)
+        indicatorView.snp.makeConstraints {
+            $0.width.height.equalTo(100)
+            $0.center.equalToSuperview()
+        }
+        refreshControl.tintColor = .clear
     }
 }
 
@@ -231,7 +273,10 @@ extension KUNoticeListViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         let cell = collectionView.cellForItem(at: indexPath) as! KUNoticeListCollectionViewCell
+        guard self.currentType != cell.noticeType else { return }
+        
         self.currentType = cell.noticeType
+        HapticManager.shared.createImpact()
     }
 }
 
@@ -255,30 +300,18 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let notice = currentNotices[indexPath.row]
+        Kuring.cachedNotices.updateValue(notice, forKey: notice.articleID)
         notice.read()
         tableView.reloadData()
-        let urlString = articleURL(from: notice)
-        showNoticeWebViewController(with: urlString)
-    }
-    
-    /// 선택된 `Notice` 값으로 부터 유효한 웹주소 가져오기
-    func articleURL(from notice: Notice) -> String {
-        if var articleArray = readArticle as? [String] {
-            let id = notice.articleID
-            if !articleArray.contains(id) {
-                articleArray.append(id)
-                UserDefaults.standard.set(articleArray, forKey: articleKey)
-                readArticle = articleArray
-            }
-        }
         
-        let articleURL = currentType == .도서관
-        ? "\(libraryBaseUrl)\(notice.articleID)"
-        : "\(originalBaseUrl)?id=\(notice.articleID)"
+        let urlString = notice.urlString.isEmpty
+        ? "https://kunkuk.ac.kr"
+        : notice.urlString
         
-        return articleURL.isEmpty
-        ? "https://konkuk.ac.kr"
-        : articleURL
+        showNoticeWebViewController(
+            url: urlString,
+            articleID: notice.articleID
+        )
     }
     
     /// 스크롤 시 호출되는 메소드
@@ -290,9 +323,26 @@ extension KUNoticeListViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        // TODO: 추후에 공지 보관함 기능 추가
-        return nil
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let notice = self.currentNotices[indexPath.row]
+        let isBookmarked = Kuring.noticeBookmark.contains(notice)
+        let subscribeAction = UIContextualAction(
+            style: .normal,
+            title: nil
+        ) { [notice, isBookmarked] action, view, completionHandler in
+            HapticManager.shared.createImpact()
+            if !isBookmarked {
+                Kuring.noticeBookmark.append(notice)
+            } else {
+                Kuring.noticeBookmark.removeAll { $0.id == notice.id }
+            }
+            tableView.reloadData()
+            completionHandler(true)
+        }
+        subscribeAction.backgroundColor = ColorSet.green
+        subscribeAction.image = UIImage(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
+        
+        return UISwipeActionsConfiguration(actions: [subscribeAction])
     }
 }
 
@@ -304,23 +354,4 @@ extension KUNoticeListViewController: KuringDelegate {
     func didReadyToCreateNotificationBanner(title: String, body: String, identifier: String) { }
     
     func didUpdateSubscription(_ subscription: Subscription) { }
-}
-
-extension KUNoticeListViewController: SkeletonTableViewDelegate { }
-
-extension KUNoticeListViewController: SkeletonTableViewDataSource {
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return KUNoticeListViewCell.identifier
-    }
-}
-
-extension UIColor {
-    // TODO: use fucking enum
-    static func named(_ name: String) -> UIColor {
-        return self.init(named: name) ?? .gray
-    }
 }

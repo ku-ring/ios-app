@@ -1,0 +1,80 @@
+//
+//  AdminMessageView.swift
+//  Kuring
+//
+//  Created by Jaesung Lee on 2022/05/05.
+//
+
+import SwiftUI
+import KuringCommons
+import SendbirdChatSDK
+
+struct AdminMessageView: View {
+    @State private var showsMore: Bool = false
+    let messageID: String
+    let adminName: String = StringSet.Campus.adminName
+    var prevMessage: String {
+        if message.count > 255 {
+            return String(message[message.index(message.startIndex, offsetBy: 0)...message.index(message.startIndex, offsetBy: 255)]) + "..."
+        } else {
+            return message
+        }
+    }
+    let message: String
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text(adminName)
+                    .font(.subheadline.bold())
+                    .foregroundColor(ColorSet.Label.green.color)
+                
+                Spacer()
+            }
+            
+            Group {
+                if showsMore {
+                    Text(message)
+                } else {
+                    Text(prevMessage)
+                }
+            }
+            .font(.subheadline)
+            .foregroundColor(ColorSet.Label.green.color)
+            .multilineTextAlignment(.leading)
+            
+            if message.count > 255 {
+                Button(action: showMore) {
+                    Text(showsMore ? "생략하기" : "더보기")
+                        .font(.subheadline)
+                        .foregroundColor(ColorSet.Label.secondary.color)
+                }
+            }
+        }
+        .padding(.vertical, 8)
+        .padding(.horizontal, 20)
+        .background {
+            ColorSet.Background.green.color
+                .ignoresSafeArea(edges: .horizontal)
+        }
+        .contextMenu {
+            Button(action: share) {
+                Label("복사하기", systemImage: "doc.on.doc")
+            }
+        }
+        .id(messageID)
+    }
+    
+    init(adminMessage:AdminMessage) {
+        self.messageID = "\(adminMessage.messageID)"
+        self.message = adminMessage.message
+    }
+    
+    func share() {
+        UIPasteboard.general.string = message
+    }
+    
+    func showMore() {
+        showsMore.toggle()
+    }
+}

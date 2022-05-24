@@ -7,6 +7,7 @@
 
 import UIKit
 import KuringSDK
+import KuringCommons
 
 class KUAlarmViewController: UITableViewController {
     var notifications: [String : [KuringSDK.Notification]] {
@@ -40,7 +41,7 @@ class KUAlarmViewController: UITableViewController {
 
     @IBAction func didTapSubscription() {
         //  푸쉬 알림 설정 오브젝트 생성
-        let subscriptionVC = AlarmTagViewController()
+        let subscriptionVC = CategorySelectViewController()
         
         // 네비게이션 컨트롤러로 감싸고 modal present
         let nav = UINavigationController(rootViewController: subscriptionVC)
@@ -51,8 +52,8 @@ class KUAlarmViewController: UITableViewController {
         let emptyDataLabel = UILabel()
         emptyDataLabel.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         emptyDataLabel.text = Kuring.categoryStrings.isEmpty
-        ? "구독중인 카테고리가 없습니다."
-        : "받은 알림이 없습니다."
+        ? StringSet.MyNotification.noSubscription
+        : StringSet.MyNotification.empty
         emptyDataLabel.textAlignment = .center
         emptyDataLabel.textColor = ColorSet.green
         emptyDataLabel.sizeToFit()
@@ -100,8 +101,15 @@ extension KUAlarmViewController {
         let date = dates[indexPath.section]
         guard let notification = notifications[date]?[indexPath.row] else { return }
         notification.isNew = false
-        let urlString = articleURL(from: notification)
-        showNoticeWebViewController(with: urlString)
+        
+        let urlString = notification.baseURLString.isEmpty
+        ? StringSet.URL.konkuk
+        : notification.baseURLString
+        
+        showNoticeWebViewController(
+            url: urlString,
+            articleID: notification.articleID
+        )
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -110,6 +118,7 @@ extension KUAlarmViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
+        HapticManager.shared.createImpact()
         tableView.beginUpdates()
         let date = dates[indexPath.section]
         Kuring.removeNotification(at: indexPath.row, forDate: date)
@@ -117,26 +126,6 @@ extension KUAlarmViewController {
         tableView.endUpdates()
     }
     
-    /// 선택된 `Notice` 값으로 부터 유효한 웹주소 가져오기
-    func articleURL(from notification: KuringSDK.Notification) -> String {
-        if var articleArray = readArticle as? [String] {
-            let id = notification.articleID
-            if !articleArray.contains(id) {
-                articleArray.append(id)
-                UserDefaults.standard.set(articleArray, forKey: articleKey)
-                readArticle = UserDefaults.standard.array(forKey: articleKey)!
-            }
-        }
-        
-        // TODO: notification의 category 값 확인 필요
-        let articleURL = notification.category == NoticeType.도서관
-        ? "\(libraryBaseUrl)\(notification.articleID)"
-        : "\(originalBaseUrl)?id=\(notification.articleID)"
-        
-        return articleURL.isEmpty
-        ? "https://konkuk.ac.kr"
-        : articleURL
-    }
 }
 
 extension KUAlarmViewController: KuringDelegate {

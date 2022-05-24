@@ -30,6 +30,7 @@ extension KUSearchViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
         guard let cell = collectionView.cellForItem(at: indexPath) as? KUSearchTypeCollectionViewCell else { return }
+        HapticManager.shared.createImpact()
         currentType = cell.type
     }
 }

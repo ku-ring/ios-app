@@ -11,13 +11,13 @@ import KuringSDK
 struct CategorySelectView: UIViewControllerRepresentable {
     @Binding var selectedCategories: [NoticeType]
     
-    func makeUIViewController(context: Context) -> AlarmTagViewController {
-        let viewController = AlarmTagViewController()
+    func makeUIViewController(context: Context) -> CategorySelectViewController {
+        let viewController = CategorySelectViewController()
         viewController.delegate = context.coordinator
         return viewController
     }
     
-    func updateUIViewController(_ uiViewController: AlarmTagViewController, context: Context) {
+    func updateUIViewController(_ uiViewController: CategorySelectViewController, context: Context) {
         
     }
     
@@ -25,7 +25,7 @@ struct CategorySelectView: UIViewControllerRepresentable {
         Coordinator(self)
     }
     
-    class Coordinator: NSObject, AlarmTagViewControllerDelegate {
+    class Coordinator: NSObject, CategorySelectViewControllerDelegate {
         var parent: CategorySelectView
         
         init(_ categorySelctor: CategorySelectView) {

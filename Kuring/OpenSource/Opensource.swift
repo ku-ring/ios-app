@@ -23,9 +23,11 @@ extension Opensource {
         Opensource(link: "https://github.com/RxSwiftCommunity/RxAlamofire"),
         Opensource(link: "https://github.com/RxSwiftCommunity/RxDataSources"),
         Opensource(link: "https://github.com/RxSwiftCommunity/RxGesture"),
-        Opensource(link: "https://github.com/Juanpe/SkeletonView"),
+        Opensource(link: "https://github.com/airbnb/lottie-ios"),
         Opensource(link: "https://github.com/SnapKit/SnapKit"),
         Opensource(link: "https://github.com/daltoniam/Starscream"),
         Opensource(link: "https://github.com/devxoul/Then"),
-    ]
+    ].sorted {
+        $0.link.components(separatedBy: "/").last ?? "" < $1.link.components(separatedBy: "/").last ?? ""
+    }
 }

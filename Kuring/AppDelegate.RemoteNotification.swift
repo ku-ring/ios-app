@@ -7,6 +7,8 @@
 
 import UIKit
 import KuringSDK
+import KuringCommons
+import SendbirdChatSDK
 import FirebaseMessaging
 
 extension AppDelegate {
@@ -28,10 +30,13 @@ extension AppDelegate {
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
         Messaging.messaging().apnsToken = deviceToken
+        SendbirdChat.registerDevicePushToken(deviceToken, unique: false) { registrationStatus, error in
+            SendbirdChat.setPushTriggerOption(Kuring.isCustomNotificationEnabled ? .all : .off)
+        }
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        Logger.debug("Failed to register for remote notification with error: \(error.localizedDescription)")
+        Logger.error("Failed to register for remote notification with error: \(error.localizedDescription)")
     }
 }
 
@@ -79,7 +84,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         Messaging.messaging().appDidReceiveMessage(userInfo)
         Logger.debug("푸시 알림을 받았습니다: \(userInfo)")
 
-        // TODO: 알림 받으면 웹뷰로 바로 이동
         openBanner(with: userInfo)
         
         completionHandler()
@@ -87,28 +91,20 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     /// 배너를 눌렀을 때, 웹뷰를 보여줍니다.
     func openBanner(with userInfo: [AnyHashable: Any]) {
-        guard let articleID = userInfo["articleId"] else { return }
+        guard let articleID = userInfo["articleId"] as? String else { return }
         guard let categoryString = userInfo["category"] as? String else { return }
         guard let navigationController = self.window?.rootViewController as? UINavigationController else { return }
-        let articleURL = NoticeType.from(categoryString) == .도서관
-        ? "\(libraryBaseUrl)\(articleID)"
-        : "\(originalBaseUrl)?id=\(articleID)"
         
-        // TODO: UserDefault로 저장 + 프로퍼티래퍼 공부중
-        if var articleArray = readArticle as? [String] {
-            let id = articleURL
-            if !articleArray.contains(id) {
-                articleArray.append(id)
-                UserDefaults.standard.set(articleArray, forKey: articleKey)
-                readArticle = articleArray
-            }
-        }
+        let articleURL = NoticeType.from(categoryString) == .도서관
+        ? Notice.NoticeURL.library(articleID).urlString
+        : Notice.NoticeURL.original(articleID).urlString
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let noticeWebVC = storyboard.instantiateViewController(
             withIdentifier: "NoticeWebViewController"
         ) as? NoticeWebViewController else { return }
         noticeWebVC.articleURL = articleURL
+        noticeWebVC.articleID = "\(articleID)"
         navigationController.pushViewController(noticeWebVC, animated: true)
     }
 }

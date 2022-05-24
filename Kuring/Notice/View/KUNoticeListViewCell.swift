@@ -7,7 +7,7 @@
 
 import UIKit
 import KuringSDK
-import SkeletonView
+import KuringCommons
 
 class KUNoticeListViewCell: UITableViewCell {
     static let identifier = "noticeListCell"
@@ -15,28 +15,16 @@ class KUNoticeListViewCell: UITableViewCell {
     @IBOutlet weak var dotView: UIView! {
         didSet {
             dotView.isHidden = true
-            dotView.isSkeletonable = false
             dotView.layer.cornerRadius = 4
             dotView.layer.masksToBounds = true
         }
     }
-    @IBOutlet weak var titleLabel: UILabel! {
-        didSet {
-            titleLabel.isSkeletonable = true
-            titleLabel.linesCornerRadius = 4
-        }
-    }
-    @IBOutlet weak var dateLabel: UILabel! {
-        didSet {
-            dateLabel.isSkeletonable = true
-            dateLabel.linesCornerRadius = 4
-        }
-    }
-    @IBOutlet weak var hstackView: UIStackView! {
-        didSet {
-            hstackView.isSkeletonable = true
-        }
-    }
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    @IBOutlet weak var hstackView: UIStackView!
+    
     var notice: Notice! {
         didSet {
             updateUI()
@@ -47,7 +35,6 @@ class KUNoticeListViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        self.isSkeletonable = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -57,8 +44,12 @@ class KUNoticeListViewCell: UITableViewCell {
     }
     
     func updateUI() {
-        dotView.isHidden = !notice.isNew
-        dotView.backgroundColor = notice.isSubscribed ? .systemPink : .gray
+        dotView.isHidden = !notice.isNew && !isBookmarked
+        dotView.backgroundColor = isBookmarked
+            ? ColorSet.green
+            : notice.isSubscribed
+                ? ColorSet.pink
+                : ColorSet.gray
         titleLabel.text = notice.subject
         
         // 스택을 초기화합니다
@@ -85,18 +76,18 @@ class KUNoticeListViewCell: UITableViewCell {
         // 읽음 여부에 따라 label의 색상을 업데이트 합니다
         [titleLabel, dateLabel]
             .forEach {
-                $0?.textColor = readNotice()
+                $0?.textColor = isRead
                 ? ColorSet.Label.tertiary
                 : ColorSet.Label.primary
             }
     }
     
-    private func readNotice() -> Bool {
-        if let articleArray = readArticle as? [String] {
-            let id = notice.articleID
-            return articleArray.contains(id)
-        } else {
-            return false
-        }
+    /// 읽었던 공지 인지
+    private var isRead: Bool {
+        Kuring.readNoticeIDs.contains(notice.articleID)
+    }
+    
+    private var isBookmarked: Bool {
+        Kuring.noticeBookmark.contains(notice)
     }
 }

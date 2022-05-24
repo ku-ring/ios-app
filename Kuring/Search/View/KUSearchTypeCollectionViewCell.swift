@@ -7,6 +7,7 @@
 
 import UIKit
 import KuringSDK
+import KuringCommons
 
 class KUSearchTypeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
