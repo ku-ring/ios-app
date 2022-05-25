@@ -11,7 +11,6 @@ import KuringSDK
 class OnboardingViewModel: ObservableObject {
     @Published private(set) var onDismiss: Bool = false
     @Published private(set) var currentPage = 0
-    @Published var selectedCategories: [NoticeType] = []
     
     func goBack() {
         if currentPage == 1 {
@@ -25,8 +24,6 @@ class OnboardingViewModel: ObservableObject {
     }
     
     func dismiss() {
-        let subscribeList: [String] = selectedCategories.compactMap { $0.stringValue }
-        Kuring.updateSubscription(categories: subscribeList) { _ in }
         onDismiss = true
     }
 }
