@@ -14,6 +14,12 @@ struct StringSet {
         static let konkukLibrary = "https://library.konkuk.ac.kr"
     }
     
+    struct Subscription {
+        static let title = "푸시 알림 설정"
+        static let description = "어떤 알림들을 받아보시겠습니까?\n알림 받고 싶은 카테고리를 선택해주세요."
+        static let kuisNoticeTypes = "대학 공지 카테고리"
+    }
+    
     struct MyNotification {
         static let noSubscription = "구독중인 카테고리가 없습니다."
         static let empty = "받은 알림이 없습니다."
