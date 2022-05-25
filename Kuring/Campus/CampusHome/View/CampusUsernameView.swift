@@ -14,7 +14,7 @@ struct CampusUsernameView: View {
     @State private var agreesTerms: Bool = false
     
     var body: some View {
-        VStack(spacing: 64) {
+        VStack(spacing: 32) {
             Spacer()
             
             Text("상대방에게 보여지는 이름을 설정해주세요.")
@@ -60,29 +60,21 @@ struct CampusUsernameView: View {
                 .padding(.horizontal)
             }
             
-            Spacer()
-            
-            Group {
+            VStack(spacing: 16) {
+                Spacer()
+                
                 VStack(alignment: .leading, spacing: 8) {
-                    Group {
-                        Text("[개인정보🛡 처리방침](https://kuring.notion.site/65ba27f2367044e0be7061e885e7415c)과 [📄서비스 이용약관](https://kuring.notion.site/e88095d4d67d4c4c92983fd85cb693b9)을")
-                        
-                        HStack {
-                            Text("반드시 확인해주세요.")
-
-                            Spacer()
-                        }
-                    }
-                    .font(.footnote)
-                    .lineLimit(4)
-                    .padding(.bottom, 8)
+                    Text("[🛡개인정보 처리방침](https://kuring.notion.site/65ba27f2367044e0be7061e885e7415c) | [📄서비스 이용약관](https://kuring.notion.site/e88095d4d67d4c4c92983fd85cb693b9)")
+                        .font(.footnote)
+                        .lineLimit(4)
+                        .padding(.bottom, 8)
                     
                     Toggle("약관에 동의합니다", isOn: $agreesTerms)
                         .toggleStyle(CheckToggleStyle())
                 }
                 .padding()
                 .background {
-                    RoundedRectangle(cornerRadius: 26)
+                    RoundedRectangle(cornerRadius: 16)
                         .stroke(ColorSet.green.color, lineWidth: 1)
                 }
                 

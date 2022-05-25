@@ -10,13 +10,14 @@ import KuringCommons
 
 struct OnboardingView: View {
     @ObservedObject var viewModel: OnboardingViewModel
+    @StateObject private var subscription = NoticeTypeSubscription()
     
     var body: some View {
         ZStack {
             OnboardingIntroView()
                 .offset(x: viewModel.currentPage == 1 ? -UIScreen.main.bounds.width : 0)
             
-            CategorySelectView(selectedCategories: $viewModel.selectedCategories)
+            SubscriptionView(showsToolbar: false, subscription: subscription)
                 .edgesIgnoringSafeArea(.all)
                 .offset(x: viewModel.currentPage == 1 ? 0 : UIScreen.main.bounds.width)
             
@@ -34,8 +35,8 @@ struct OnboardingView: View {
                 
                 Spacer()
                 
-                if viewModel.currentPage == 1 && viewModel.selectedCategories.isEmpty {
-                    Button("나중에 설정할게요", action: viewModel.goNext)
+                if viewModel.currentPage == 1 && subscription.selectedNoticeTypes.isEmpty {
+                    Button("나중에 설정할게요", action: goNext)
                         .foregroundColor(
                             viewModel.currentPage == 1
                             ? .white
@@ -43,7 +44,7 @@ struct OnboardingView: View {
                         )
                         .padding()
                 } else {
-                    Button(action: viewModel.goNext) {
+                    Button(action: goNext) {
                         HStack {
                             Text(viewModel.currentPage == 1 ? "완료" : "계속")
                             
@@ -63,6 +64,13 @@ struct OnboardingView: View {
             }
             .padding(.horizontal, 16)
         }
+    }
+    
+    func goNext() {
+        if viewModel.currentPage == 1 {
+            subscription.save()
+        }
+        viewModel.goNext()
     }
 }
                 

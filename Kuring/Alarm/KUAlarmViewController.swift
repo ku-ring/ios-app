@@ -8,9 +8,10 @@
 import UIKit
 import KuringSDK
 import KuringCommons
+import SwiftUI
 
 class KUAlarmViewController: UITableViewController {
-    var notifications: [String : [KuringSDK.Notification]] {
+    var notifications: [String : [Notice]] {
         Kuring.notifications
     }
     var dates: [String] {
@@ -41,11 +42,8 @@ class KUAlarmViewController: UITableViewController {
 
     @IBAction func didTapSubscription() {
         //  푸쉬 알림 설정 오브젝트 생성
-        let subscriptionVC = CategorySelectViewController()
-        
-        // 네비게이션 컨트롤러로 감싸고 modal present
-        let nav = UINavigationController(rootViewController: subscriptionVC)
-        present(nav, animated: true, completion: nil)
+        let subscriptionVC = UIHostingController(rootView: SubscriptionView())
+        present(subscriptionVC, animated: true, completion: nil)
     }
     
     func showEmptyData() {
@@ -102,9 +100,9 @@ extension KUAlarmViewController {
         guard let notification = notifications[date]?[indexPath.row] else { return }
         notification.isNew = false
         
-        let urlString = notification.baseURLString.isEmpty
-        ? StringSet.URL.konkuk
-        : notification.baseURLString
+        let urlString = notification.urlString.isEmpty
+        ? "https://kunkuk.ac.kr"
+        : notification.urlString
         
         showNoticeWebViewController(
             url: urlString,
@@ -129,7 +127,7 @@ extension KUAlarmViewController {
 }
 
 extension KUAlarmViewController: KuringDelegate {
-    func didReceiveNotification(_ notification: KuringSDK.Notification) {
+    func didReceiveNotification(_ notification: Notice) {
         tableView.reloadData()
     }
 
