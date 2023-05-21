@@ -6,14 +6,10 @@
 //
 
 import SwiftUI
-import KuringLink
 import ComposableArchitecture
 
 struct DepartmentSelector: View {
     let store: StoreOf<Major>
-    @State private var searchText: String = ""
-    @State private var selectedDepartment: NoticeProvider?
-    @State private var allDepartments: [NoticeProvider] = []
     
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
@@ -59,6 +55,7 @@ struct DepartmentSelector: View {
                             } label: {
                                 Text(department.korName)
                                     .font(.footnote)
+                                    .padding(.vertical, 12)
                             }
                             .foregroundColor(.primary)
                         }
