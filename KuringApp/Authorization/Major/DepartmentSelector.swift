@@ -14,7 +14,7 @@ struct DepartmentSelector: View {
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack(alignment: .leading, spacing: 12) {
-                Text("전공이 무엇인가요?")
+                Text("무엇을 전공하고 있나요?")
                     .font(.title3.bold())
                 
                 Text("맞춤 세팅을 위한 정보입니다. 외부적으로 노출되지 않습니다.")
@@ -40,6 +40,10 @@ struct DepartmentSelector: View {
                                 ? .green
                                 : .primary
                             )
+                            
+                            Image(systemName: "checkmark.diamond.fill")
+                                .foregroundColor(.green)
+                                .opacity(viewStore.selectedMajor != nil ? 1.0 : 0.0)
                         }
                     }
                 }

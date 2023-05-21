@@ -79,9 +79,3 @@ struct SignUp: ReducerProtocol {
         }
     }
 }
-
-extension KuringLink {
-    public static func kuringIDs(startsWith: String) async throws -> [String] {
-        return []
-    }
-}
