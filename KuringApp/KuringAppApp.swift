@@ -14,7 +14,12 @@ import Satellite
 struct KuringAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DepartmentSelector(
+                store: .init(
+                    initialState: .init(),
+                    reducer: { Major() }
+                )
+            )
         }
     }
     
