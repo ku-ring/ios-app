@@ -13,7 +13,8 @@ let project = Project.make(
             dependencies: [
                 .project(target: "KuringLink", path: .relativeToRoot("Projects/KuringLink")),
                 .project(target: "DesignSystem", path: .relativeToRoot("Projects/DesignSystem")),
-                .externalsrt("TCA")
+                .externalsrt("TCA"),
+                .externalsrt("TCACoordinators")
             ]
         ),
         .make(
@@ -25,7 +26,8 @@ let project = Project.make(
             dependencies: [
                 .project(target: "KuringLink", path: .relativeToRoot("Projects/KuringLink")),
                 .project(target: "DesignSystem", path: .relativeToRoot("Projects/DesignSystem")),
-                .externalsrt("TCA")
+                .externalsrt("TCA"),
+                .externalsrt("TCACoordinators")
             ]
         )
     ]

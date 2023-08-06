@@ -30,6 +30,12 @@
                   location = "group:checkouts"
                   name = "checkouts">
                   <FileRef
+                     location = "group:FlowStacks/FlowStacks.xcodeproj">
+                  </FileRef>
+                  <FileRef
+                     location = "group:TCACoordinators/TCACoordinators.xcodeproj">
+                  </FileRef>
+                  <FileRef
                      location = "group:combine-schedulers/combine-schedulers.xcodeproj">
                   </FileRef>
                   <FileRef
