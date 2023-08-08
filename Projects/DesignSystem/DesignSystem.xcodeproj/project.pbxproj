@@ -3,11 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		6D871A202338108F5CB225EA /* dummy.swift in Resources */ = {isa = PBXBuildFile; fileRef = 506355977A995224999B8883 /* dummy.swift */; };
+		B1E244FD2A82A8B000AFC330 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1E244FC2A82A8B000AFC330 /* Assets.xcassets */; };
+		B1E244FF2A82A8C400AFC330 /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E244FE2A82A8C400AFC330 /* ColorSet.swift */; };
+		B1E245022A82A8F500AFC330 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E245012A82A8F500AFC330 /* Bundle+.swift */; };
 		B6141864696563C4A5ACCAAD /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81113A0E07DA08476ED140C2 /* dummy.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +32,9 @@
 		69B7BBEAD5472C7195924AC8 /* DesignSystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DesignSystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81113A0E07DA08476ED140C2 /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
 		8937FA9427EEA938B58C5B3E /* DesignSystem-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DesignSystem-Info.plist"; sourceTree = "<group>"; };
+		B1E244FC2A82A8B000AFC330 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B1E244FE2A82A8C400AFC330 /* ColorSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
+		B1E245012A82A8F500AFC330 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				81113A0E07DA08476ED140C2 /* dummy.swift */,
+				B1E245002A82A8C900AFC330 /* ColorSet */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -86,9 +93,19 @@
 		9C29548CCBEAF62FB7951500 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B1E244FC2A82A8B000AFC330 /* Assets.xcassets */,
 				506355977A995224999B8883 /* dummy.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		B1E245002A82A8C900AFC330 /* ColorSet */ = {
+			isa = PBXGroup;
+			children = (
+				B1E244FE2A82A8C400AFC330 /* ColorSet.swift */,
+				B1E245012A82A8F500AFC330 /* Bundle+.swift */,
+			);
+			path = ColorSet;
 			sourceTree = "<group>";
 		};
 		EC9821EEC8CC800276475F6C = {
@@ -136,8 +153,6 @@
 			isa = PBXProject;
 			attributes = {
 				ORGANIZATIONNAME = Team.Kuring;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 5C0CBBA2BFE0CEE21375AF0A /* Build configuration list for PBXProject "DesignSystem" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -162,6 +177,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1E244FD2A82A8B000AFC330 /* Assets.xcassets in Resources */,
 				6D871A202338108F5CB225EA /* dummy.swift in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,6 +189,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1E245022A82A8F500AFC330 /* Bundle+.swift in Sources */,
+				B1E244FF2A82A8C400AFC330 /* ColorSet.swift in Sources */,
 				B6141864696563C4A5ACCAAD /* dummy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
