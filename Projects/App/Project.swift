@@ -3,6 +3,12 @@ import ProjectDescriptionHelpers
 
 let project = Project.make(
     name: "App",
+    packages: [
+        .remote(
+            url: "https://github.com/firebase/firebase-ios-sdk.git",
+            requirement : .upToNextMajor(from: "10.4.0")
+        )
+    ],
     targets: [
         .make(
             name: "Kuring",
@@ -14,7 +20,7 @@ let project = Project.make(
                 .project(target: "KuringLink", path: .relativeToRoot("Projects/KuringLink")),
                 .project(target: "DesignSystem", path: .relativeToRoot("Projects/DesignSystem")),
                 .externalsrt("TCA"),
-                .externalsrt("TCACoordinators")
+                .externalsrt("FirebaseMessaging"),
             ]
         ),
         .make(
@@ -27,7 +33,7 @@ let project = Project.make(
                 .project(target: "KuringLink", path: .relativeToRoot("Projects/KuringLink")),
                 .project(target: "DesignSystem", path: .relativeToRoot("Projects/DesignSystem")),
                 .externalsrt("TCA"),
-                .externalsrt("TCACoordinators")
+                .externalsrt("FirebaseMessaging"),
             ]
         )
     ]
