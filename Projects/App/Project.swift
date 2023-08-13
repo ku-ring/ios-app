@@ -20,7 +20,7 @@ let project = Project.make(
                 .project(target: "KuringLink", path: .relativeToRoot("Projects/KuringLink")),
                 .project(target: "DesignSystem", path: .relativeToRoot("Projects/DesignSystem")),
                 .externalsrt("TCA"),
-                .externalsrt("FirebaseMessaging"),
+                .package(product: "FirebaseMessaging")
             ]
         ),
         .make(
@@ -33,7 +33,7 @@ let project = Project.make(
                 .project(target: "KuringLink", path: .relativeToRoot("Projects/KuringLink")),
                 .project(target: "DesignSystem", path: .relativeToRoot("Projects/DesignSystem")),
                 .externalsrt("TCA"),
-                .externalsrt("FirebaseMessaging"),
+                .package(product: "FirebaseMessaging")
             ]
         )
     ]

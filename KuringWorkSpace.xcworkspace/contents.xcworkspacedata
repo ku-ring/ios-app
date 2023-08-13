@@ -30,22 +30,7 @@
                   location = "group:checkouts"
                   name = "checkouts">
                   <FileRef
-                     location = "group:GoogleDataTransport/GoogleDataTransport.xcodeproj">
-                  </FileRef>
-                  <FileRef
-                     location = "group:GoogleUtilities/GoogleUtilities.xcodeproj">
-                  </FileRef>
-                  <FileRef
                      location = "group:combine-schedulers/combine-schedulers.xcodeproj">
-                  </FileRef>
-                  <FileRef
-                     location = "group:firebase-ios-sdk/Firebase.xcodeproj">
-                  </FileRef>
-                  <FileRef
-                     location = "group:nanopb/nanopb.xcodeproj">
-                  </FileRef>
-                  <FileRef
-                     location = "group:promises/Promises.xcodeproj">
                   </FileRef>
                   <FileRef
                      location = "group:swift-case-paths/swift-case-paths.xcodeproj">

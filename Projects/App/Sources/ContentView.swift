@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import FirebaseMessaging
 
 struct ContentView: View {
     
