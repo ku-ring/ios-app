@@ -8,6 +8,7 @@
 
 import Foundation
 import Satellite
+import Cache
 
 class KuringLink {
     

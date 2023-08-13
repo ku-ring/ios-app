@@ -30,6 +30,9 @@
                   location = "group:checkouts"
                   name = "checkouts">
                   <FileRef
+                     location = "group:Cache/Cache.xcodeproj">
+                  </FileRef>
+                  <FileRef
                      location = "group:combine-schedulers/combine-schedulers.xcodeproj">
                   </FileRef>
                   <FileRef

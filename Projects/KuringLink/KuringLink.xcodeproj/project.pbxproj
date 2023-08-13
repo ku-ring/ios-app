@@ -10,6 +10,7 @@
 		1174D7677A602C7BA1D132BA /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC57F3A0745EFEDE3806593D /* dummy.swift */; };
 		4221AFCA2ECCDCC5E953549E /* dummy.swift in Resources */ = {isa = PBXBuildFile; fileRef = 7236370FAD5289671DA134E6 /* dummy.swift */; };
 		ACA0FAC24360EDDF52B9A4AA /* Satellite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143878B6E393A6BA05EB2131 /* Satellite.framework */; platformFilter = ios; };
+		AFCE44CC29202561FAD4709C /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 733EAD943A705E61F7716826 /* Cache.framework */; platformFilter = ios; };
 		D9D034B196CBE85691D9D19D /* KuringLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E6658B5842E81D22734F6 /* KuringLink.swift */; };
 		E1925D21F4972D1BBC7C5277 /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F5CEB8A9130ACAE1ED345 /* dummy.swift */; };
 /* End PBXBuildFile section */
@@ -43,6 +44,7 @@
 		2E73BEA32F3908336EAB33BF /* KuringLinkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KuringLinkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C6116813C5E5C61C7890C28 /* KuringLinkTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "KuringLinkTests-Info.plist"; sourceTree = "<group>"; };
 		7236370FAD5289671DA134E6 /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
+		733EAD943A705E61F7716826 /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0E6658B5842E81D22734F6 /* KuringLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringLink.swift; sourceTree = "<group>"; };
 		8F2148FBF7F0C805BE47C377 /* KuringLink.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KuringLink.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D8F5CEB8A9130ACAE1ED345 /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFCE44CC29202561FAD4709C /* Cache.framework in Frameworks */,
 				ACA0FAC24360EDDF52B9A4AA /* Satellite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,6 +143,7 @@
 		DAF92C31DF3B2F4ADC164C2E /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				733EAD943A705E61F7716826 /* Cache.framework */,
 				8F2148FBF7F0C805BE47C377 /* KuringLink.framework */,
 				2E73BEA32F3908336EAB33BF /* KuringLinkTests.xctest */,
 				143878B6E393A6BA05EB2131 /* Satellite.framework */,

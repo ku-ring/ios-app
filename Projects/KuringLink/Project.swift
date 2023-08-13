@@ -11,7 +11,8 @@ let project = Project.make(
             sources: ["Sources/**"],
             resources: ["Resources/**"],
             dependencies: [
-                .externalsrt("Satellite")
+                .external(name: "Satellite"),
+                .external(name: "Cache")
             ]
         ),
         .unitTests(name: "KuringLink")
