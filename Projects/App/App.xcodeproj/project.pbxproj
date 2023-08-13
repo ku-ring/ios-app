@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0347C3C81E15F3D26AA3F162 /* _CollectionsUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A28094A3B3BF946A393C78B6 /* _CollectionsUtilities.framework */; platformFilter = ios; };
 		07E0862DE903EC93739ED1BE /* Clocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84DFD565B033CA050F168176 /* Clocks.framework */; platformFilter = ios; };
 		12FDFC7857D50B93E1BA34C9 /* KuringLink.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA1B6C9BF7D89694A2CACB2 /* KuringLink.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1D9EA8F0B873198472C76B56 /* XCTestDynamicOverlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ABCE1D18ED04979D1840E1 /* XCTestDynamicOverlay.framework */; platformFilter = ios; };
@@ -33,6 +34,7 @@
 		81C66635865A31475CCDF125 /* DesignSystem.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E9369BFA2C65412102538303 /* DesignSystem.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84D33F77FAFCBAB4D79ACC51 /* DesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9369BFA2C65412102538303 /* DesignSystem.framework */; platformFilter = ios; };
 		886CEB733F4D89AAC7DEA045 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 057A3CD8D734F9C1B4948C18 /* LaunchScreen.storyboard */; };
+		90341A1FCE0060DED7132A18 /* _CollectionsUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A28094A3B3BF946A393C78B6 /* _CollectionsUtilities.framework */; platformFilter = ios; };
 		95F4B8798F202DF086415460 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F7F83A194E1D17030DCA033 /* Assets.xcassets */; };
 		9DD435BEA74919432226908D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E38436ED8889DC7424B93FD /* ContentView.swift */; };
 		9EA67337939AA5091F518297 /* CustomDump.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FF70F273D3C15685D4A7E93 /* CustomDump.framework */; platformFilter = ios; };
@@ -98,6 +100,7 @@
 		84DFD565B033CA050F168176 /* Clocks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Clocks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F7F83A194E1D17030DCA033 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		98BED0FE1D67D36C26EF5261 /* ConcurrencyExtras.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConcurrencyExtras.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A28094A3B3BF946A393C78B6 /* _CollectionsUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = _CollectionsUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A42885E5471D20470BB1624C /* Kuring_Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuring_Dev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D07B2C98B0A0DE8661A2B9B2 /* Kuring-Dev-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Kuring-Dev-Info.plist"; sourceTree = "<group>"; };
 		D9C8E1FBE2BCCD3E70D87DDE /* SwiftUINavigationCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftUINavigationCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +127,7 @@
 				3AD25E979DEF5FADD602244B /* OrderedCollections.framework in Frameworks */,
 				43157BCBA938FA8C02F49966 /* SwiftUINavigationCore.framework in Frameworks */,
 				1D9EA8F0B873198472C76B56 /* XCTestDynamicOverlay.framework in Frameworks */,
+				90341A1FCE0060DED7132A18 /* _CollectionsUtilities.framework in Frameworks */,
 				B90512E52CE18712D36EBBE3 /* FirebaseMessaging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,6 +149,7 @@
 				80B6C76E93F41BDC57F06D7B /* OrderedCollections.framework in Frameworks */,
 				C7FFFEBEE24403ED925403E4 /* SwiftUINavigationCore.framework in Frameworks */,
 				5A0F3F4BB32EABF08D3B9546 /* XCTestDynamicOverlay.framework in Frameworks */,
+				0347C3C81E15F3D26AA3F162 /* _CollectionsUtilities.framework in Frameworks */,
 				3322A0ADB49F7132E4EB77F3 /* FirebaseMessaging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,6 +223,7 @@
 		E9C3DB3EC6D7655028A9C0D3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				A28094A3B3BF946A393C78B6 /* _CollectionsUtilities.framework */,
 				1EEBEB53C8803AC8D44217FE /* CasePaths.framework */,
 				84DFD565B033CA050F168176 /* Clocks.framework */,
 				478531940A89E69929252124 /* CombineSchedulers.framework */,

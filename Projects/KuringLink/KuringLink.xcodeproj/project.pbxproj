@@ -8,9 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		1174D7677A602C7BA1D132BA /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC57F3A0745EFEDE3806593D /* dummy.swift */; };
+		1C5F564032935B9156D487F8 /* _CollectionsUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D52F38F901CF8346423C903 /* _CollectionsUtilities.framework */; platformFilter = ios; };
+		2B29F7293372E886F6B0257A /* DequeModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4449473311392EBDA004E2 /* DequeModule.framework */; platformFilter = ios; };
+		4006793DF062BAD29539A597 /* SortedCollections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35238F83C22F58CAE50DEC85 /* SortedCollections.framework */; platformFilter = ios; };
 		4221AFCA2ECCDCC5E953549E /* dummy.swift in Resources */ = {isa = PBXBuildFile; fileRef = 7236370FAD5289671DA134E6 /* dummy.swift */; };
+		69D24FDD85C8B636F19554A5 /* _RopeModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF82DE22AAE5D1DCF6CD114 /* _RopeModule.framework */; platformFilter = ios; };
+		7FE7106A699DBD0640E5C9FC /* Collections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0745FC023FA3A069126413B5 /* Collections.framework */; platformFilter = ios; };
+		A58F2DC53D0FE3660F48C469 /* HashTreeCollections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8710214B337527B27FC9B716 /* HashTreeCollections.framework */; platformFilter = ios; };
+		A7325ADE46A38C5D6D66433D /* OrderedCollections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEAA3C3DC9A0AC5D5534AF44 /* OrderedCollections.framework */; platformFilter = ios; };
 		ACA0FAC24360EDDF52B9A4AA /* Satellite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143878B6E393A6BA05EB2131 /* Satellite.framework */; platformFilter = ios; };
 		AFCE44CC29202561FAD4709C /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 733EAD943A705E61F7716826 /* Cache.framework */; platformFilter = ios; };
+		B0A42F4D4CC76BD8406B0C76 /* BitCollections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD40CBBBEFC90EFAB523DB39 /* BitCollections.framework */; platformFilter = ios; };
+		D8E5BBFF78C5927E232AF237 /* HeapModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70C4CD52B5513CC0622CAEE3 /* HeapModule.framework */; platformFilter = ios; };
 		D9D034B196CBE85691D9D19D /* KuringLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E6658B5842E81D22734F6 /* KuringLink.swift */; };
 		E1925D21F4972D1BBC7C5277 /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F5CEB8A9130ACAE1ED345 /* dummy.swift */; };
 /* End PBXBuildFile section */
@@ -39,16 +48,25 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0745FC023FA3A069126413B5 /* Collections.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Collections.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		143878B6E393A6BA05EB2131 /* Satellite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Satellite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A6F169D420169813F1E0068 /* KuringLink-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "KuringLink-Info.plist"; sourceTree = "<group>"; };
+		1D52F38F901CF8346423C903 /* _CollectionsUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = _CollectionsUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E73BEA32F3908336EAB33BF /* KuringLinkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KuringLinkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		35238F83C22F58CAE50DEC85 /* SortedCollections.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SortedCollections.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C6116813C5E5C61C7890C28 /* KuringLinkTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "KuringLinkTests-Info.plist"; sourceTree = "<group>"; };
+		5DF82DE22AAE5D1DCF6CD114 /* _RopeModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = _RopeModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		70C4CD52B5513CC0622CAEE3 /* HeapModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HeapModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7236370FAD5289671DA134E6 /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
 		733EAD943A705E61F7716826 /* Cache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8710214B337527B27FC9B716 /* HashTreeCollections.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HashTreeCollections.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0E6658B5842E81D22734F6 /* KuringLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringLink.swift; sourceTree = "<group>"; };
 		8F2148FBF7F0C805BE47C377 /* KuringLink.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KuringLink.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D8F5CEB8A9130ACAE1ED345 /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
+		BD40CBBBEFC90EFAB523DB39 /* BitCollections.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BitCollections.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC57F3A0745EFEDE3806593D /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
+		DE4449473311392EBDA004E2 /* DequeModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DequeModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEAA3C3DC9A0AC5D5534AF44 /* OrderedCollections.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OrderedCollections.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +74,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0A42F4D4CC76BD8406B0C76 /* BitCollections.framework in Frameworks */,
 				AFCE44CC29202561FAD4709C /* Cache.framework in Frameworks */,
+				7FE7106A699DBD0640E5C9FC /* Collections.framework in Frameworks */,
+				2B29F7293372E886F6B0257A /* DequeModule.framework in Frameworks */,
+				A58F2DC53D0FE3660F48C469 /* HashTreeCollections.framework in Frameworks */,
+				D8E5BBFF78C5927E232AF237 /* HeapModule.framework in Frameworks */,
+				A7325ADE46A38C5D6D66433D /* OrderedCollections.framework in Frameworks */,
 				ACA0FAC24360EDDF52B9A4AA /* Satellite.framework in Frameworks */,
+				4006793DF062BAD29539A597 /* SortedCollections.framework in Frameworks */,
+				1C5F564032935B9156D487F8 /* _CollectionsUtilities.framework in Frameworks */,
+				69D24FDD85C8B636F19554A5 /* _RopeModule.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,10 +170,19 @@
 		DAF92C31DF3B2F4ADC164C2E /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				1D52F38F901CF8346423C903 /* _CollectionsUtilities.framework */,
+				5DF82DE22AAE5D1DCF6CD114 /* _RopeModule.framework */,
+				BD40CBBBEFC90EFAB523DB39 /* BitCollections.framework */,
 				733EAD943A705E61F7716826 /* Cache.framework */,
+				0745FC023FA3A069126413B5 /* Collections.framework */,
+				DE4449473311392EBDA004E2 /* DequeModule.framework */,
+				8710214B337527B27FC9B716 /* HashTreeCollections.framework */,
+				70C4CD52B5513CC0622CAEE3 /* HeapModule.framework */,
 				8F2148FBF7F0C805BE47C377 /* KuringLink.framework */,
 				2E73BEA32F3908336EAB33BF /* KuringLinkTests.xctest */,
+				FEAA3C3DC9A0AC5D5534AF44 /* OrderedCollections.framework */,
 				143878B6E393A6BA05EB2131 /* Satellite.framework */,
+				35238F83C22F58CAE50DEC85 /* SortedCollections.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";

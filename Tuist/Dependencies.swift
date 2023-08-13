@@ -13,8 +13,11 @@ let dependencies = Dependencies(
         .remote(
             url: "https://github.com/cozzin/Cache",
             requirement: .upToNextMajor(from: "1.0.0")
+        ),
+        .remote(
+            url: "https://github.com/apple/swift-collections",
+            requirement: .branch("main")
         )
-        
     ],
     platforms: [.iOS]
 )

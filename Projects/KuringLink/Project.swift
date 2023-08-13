@@ -12,7 +12,8 @@ let project = Project.make(
             resources: ["Resources/**"],
             dependencies: [
                 .external(name: "Satellite"),
-                .external(name: "Cache")
+                .external(name: "Cache"),
+                .external(name: "Collections")
             ]
         ),
         .unitTests(name: "KuringLink")
