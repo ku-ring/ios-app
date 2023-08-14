@@ -5,7 +5,8 @@ let workspace = Workspace(
     projects: [
         "Projects/App",
         "Projects/KuringLink",
-        "Projects/DesignSystem"
+        "Projects/DesignSystem",
+        "Projects/Core"
     ],
     schemes: [
         Scheme(

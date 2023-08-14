@@ -446,7 +446,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.kuringlink;
+				PRODUCT_BUNDLE_IDENTIFIER = team.kuring.kuringlink;
 				PRODUCT_NAME = KuringLink;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -502,7 +502,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.kuringlink;
+				PRODUCT_BUNDLE_IDENTIFIER = team.kuring.kuringlink;
 				PRODUCT_NAME = KuringLink;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
