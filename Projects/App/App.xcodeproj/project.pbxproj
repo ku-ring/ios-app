@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,7 @@
 		26E1B12F66580DDE45E71090 /* KuringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA434B67C1ABC307A467E8C0 /* KuringApp.swift */; };
 		3322A0ADB49F7132E4EB77F3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = F4076B2568A477D35BD03665 /* FirebaseMessaging */; };
 		350EBDBFCD8E5CDDA4151C63 /* IdentifiedCollections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AFA34C380CB7C93A0A68BE /* IdentifiedCollections.framework */; platformFilter = ios; };
+		3948CC1FA4FDB4E624506265 /* info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A52B7E154F6B4B67D459D206 /* info.plist */; };
 		3AD25E979DEF5FADD602244B /* OrderedCollections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DED7A8F9C145D5F5C144C1E /* OrderedCollections.framework */; platformFilter = ios; };
 		3C4A4F750B4B7E22AA747322 /* DesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9369BFA2C65412102538303 /* DesignSystem.framework */; platformFilter = ios; };
 		3C7854D45F6876DBFFC613CA /* CustomDump.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FF70F273D3C15685D4A7E93 /* CustomDump.framework */; platformFilter = ios; };
@@ -26,9 +27,11 @@
 		576E65B1C25F0D1B3AD5A5EF /* Dependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABA8438B4F227DF7CACA059 /* Dependencies.framework */; platformFilter = ios; };
 		5787222CB9182D0542CDC67D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F7F83A194E1D17030DCA033 /* Assets.xcassets */; };
 		5A0F3F4BB32EABF08D3B9546 /* XCTestDynamicOverlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ABCE1D18ED04979D1840E1 /* XCTestDynamicOverlay.framework */; platformFilter = ios; };
+		5F97AC56843D3C30EF8CDDF5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E554DAA4AB515DAF86082D9E /* GoogleService-Info.plist */; };
 		62A9B4F5A27C6BB61D6619EE /* CombineSchedulers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478531940A89E69929252124 /* CombineSchedulers.framework */; platformFilter = ios; };
 		681D64D8225B90ABACFF4137 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7210F22777D23AD1713BCADE /* AppDelegate.swift */; };
 		714B58DD2331DDC4D85C32EC /* CombineSchedulers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478531940A89E69929252124 /* CombineSchedulers.framework */; platformFilter = ios; };
+		76ABF0856884B56917528FE4 /* info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A52B7E154F6B4B67D459D206 /* info.plist */; };
 		78B7DC24A723ED0129D9B009 /* IdentifiedCollections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AFA34C380CB7C93A0A68BE /* IdentifiedCollections.framework */; platformFilter = ios; };
 		80B6C76E93F41BDC57F06D7B /* OrderedCollections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DED7A8F9C145D5F5C144C1E /* OrderedCollections.framework */; platformFilter = ios; };
 		81C66635865A31475CCDF125 /* DesignSystem.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E9369BFA2C65412102538303 /* DesignSystem.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -47,6 +50,7 @@
 		BED8BA2B0361FC5BBCB10AAB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 057A3CD8D734F9C1B4948C18 /* LaunchScreen.storyboard */; };
 		C7FFFEBEE24403ED925403E4 /* SwiftUINavigationCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C8E1FBE2BCCD3E70D87DDE /* SwiftUINavigationCore.framework */; platformFilter = ios; };
 		D0B9D0A5E75DB674F0E28A73 /* ConcurrencyExtras.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98BED0FE1D67D36C26EF5261 /* ConcurrencyExtras.framework */; platformFilter = ios; };
+		D4110DD193FDED61974A0F73 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E554DAA4AB515DAF86082D9E /* GoogleService-Info.plist */; };
 		DECC6598189A341F3B0FC560 /* CasePaths.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EEBEB53C8803AC8D44217FE /* CasePaths.framework */; platformFilter = ios; };
 		E0A82FA5317D0CC7EFBEE120 /* KuringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA434B67C1ABC307A467E8C0 /* KuringApp.swift */; };
 		EE3E4B45F5BDEF7AF0176467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7210F22777D23AD1713BCADE /* AppDelegate.swift */; };
@@ -102,11 +106,11 @@
 		98BED0FE1D67D36C26EF5261 /* ConcurrencyExtras.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConcurrencyExtras.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A28094A3B3BF946A393C78B6 /* _CollectionsUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = _CollectionsUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A42885E5471D20470BB1624C /* Kuring_Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuring_Dev.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D07B2C98B0A0DE8661A2B9B2 /* Kuring-Dev-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Kuring-Dev-Info.plist"; sourceTree = "<group>"; };
+		A52B7E154F6B4B67D459D206 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = info.plist; sourceTree = "<group>"; };
 		D9C8E1FBE2BCCD3E70D87DDE /* SwiftUINavigationCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftUINavigationCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA434B67C1ABC307A467E8C0 /* KuringApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringApp.swift; sourceTree = "<group>"; };
+		E554DAA4AB515DAF86082D9E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E9369BFA2C65412102538303 /* DesignSystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DesignSystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F5D8AC42FD1D3CB813FC98F6 /* Kuring-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Kuring-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,7 +173,6 @@
 		52611B11A5E6A7198C4E57A3 /* Project */ = {
 			isa = PBXGroup;
 			children = (
-				B3BCDE38B26B330C9A04FADE /* Derived */,
 				62EFB15EC88C1D2636544B42 /* Resources */,
 				858C4E433DBF0294DFED1B0C /* Sources */,
 			);
@@ -181,18 +184,11 @@
 			children = (
 				8F7F83A194E1D17030DCA033 /* Assets.xcassets */,
 				7481DB2962520B4C722E6AF4 /* dummy.swift */,
+				E554DAA4AB515DAF86082D9E /* GoogleService-Info.plist */,
+				A52B7E154F6B4B67D459D206 /* info.plist */,
 				057A3CD8D734F9C1B4948C18 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		66EB57D721CBB7D427955C21 /* InfoPlists */ = {
-			isa = PBXGroup;
-			children = (
-				D07B2C98B0A0DE8661A2B9B2 /* Kuring-Dev-Info.plist */,
-				F5D8AC42FD1D3CB813FC98F6 /* Kuring-Info.plist */,
-			);
-			path = InfoPlists;
 			sourceTree = "<group>";
 		};
 		858C4E433DBF0294DFED1B0C /* Sources */ = {
@@ -203,14 +199,6 @@
 				DA434B67C1ABC307A467E8C0 /* KuringApp.swift */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		B3BCDE38B26B330C9A04FADE /* Derived */ = {
-			isa = PBXGroup;
-			children = (
-				66EB57D721CBB7D427955C21 /* InfoPlists */,
-			);
-			path = Derived;
 			sourceTree = "<group>";
 		};
 		BDD1182E50DC622819F25364 /* Frameworks */ = {
@@ -295,8 +283,6 @@
 			isa = PBXProject;
 			attributes = {
 				ORGANIZATIONNAME = Team.Kuring;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = B3FD05C59F197F398A0B04AB /* Build configuration list for PBXProject "App" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -326,8 +312,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5787222CB9182D0542CDC67D /* Assets.xcassets in Resources */,
+				D4110DD193FDED61974A0F73 /* GoogleService-Info.plist in Resources */,
 				BED8BA2B0361FC5BBCB10AAB /* LaunchScreen.storyboard in Resources */,
 				F58CF16F3989329B6C1981B3 /* dummy.swift in Resources */,
+				3948CC1FA4FDB4E624506265 /* info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,8 +324,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				95F4B8798F202DF086415460 /* Assets.xcassets in Resources */,
+				5F97AC56843D3C30EF8CDDF5 /* GoogleService-Info.plist in Resources */,
 				886CEB733F4D89AAC7DEA045 /* LaunchScreen.storyboard in Resources */,
 				F4FA828272E3A4A1E3945BB6 /* dummy.swift in Resources */,
+				76ABF0856884B56917528FE4 /* info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,7 +363,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Derived/InfoPlists/Kuring-Info.plist";
+				INFOPLIST_FILE = Resources/info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -451,7 +441,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Derived/InfoPlists/Kuring-Dev-Info.plist";
+				INFOPLIST_FILE = Resources/info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -475,7 +465,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Derived/InfoPlists/Kuring-Info.plist";
+				INFOPLIST_FILE = Resources/info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -499,7 +489,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Derived/InfoPlists/Kuring-Dev-Info.plist";
+				INFOPLIST_FILE = Resources/info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
