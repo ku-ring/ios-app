@@ -14,7 +14,6 @@ let project = Project.make(
             name: "Kuring",
             product: .app,
             bundleId: "com.kuring.service",
-            infoPlist: .file(path: "Resources/info.plist"),
             sources: ["Sources/**"],
             resources: ["Resources/**"],
             dependencies: [
@@ -29,7 +28,6 @@ let project = Project.make(
             name: "Kuring-Dev",
             product: .app,
             bundleId: "com.kuring.service-dev",
-            infoPlist: .file(path: "Resources/info.plist"),
             sources: ["Sources/**"],
             resources: ["Resources/**"],
             dependencies: [

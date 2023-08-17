@@ -10,7 +10,7 @@ extension Target {
         resources: ResourceFileElements? = nil,
         dependencies: [TargetDependency] = [],
         settings: Settings? = nil
-    ) -> Target {        
+    ) -> Target {
         return Target(
             name: name,
             platform: .iOS,
