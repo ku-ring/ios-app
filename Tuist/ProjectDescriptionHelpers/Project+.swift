@@ -9,7 +9,7 @@ extension Project {
     ) -> Project {
         return Project(
             name: name,
-            organizationName: "Team.Kuring",
+            organizationName: "com.Kuring",
             options: .options(
                 disableBundleAccessors: true,
                 disableSynthesizedResourceAccessors: true

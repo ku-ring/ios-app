@@ -135,7 +135,7 @@
 		F639F9585E77B0BBBB642E14 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				ORGANIZATIONNAME = Team.Kuring;
+				ORGANIZATIONNAME = com.Kuring;
 				TargetAttributes = {
 				};
 			};

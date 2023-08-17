@@ -12,7 +12,6 @@
 		12FDFC7857D50B93E1BA34C9 /* KuringLink.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA1B6C9BF7D89694A2CACB2 /* KuringLink.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1D9EA8F0B873198472C76B56 /* XCTestDynamicOverlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ABCE1D18ED04979D1840E1 /* XCTestDynamicOverlay.framework */; platformFilter = ios; };
 		2046FAC02499BE955CA43C34 /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D62970894D43D9AF58B84AB /* ComposableArchitecture.framework */; platformFilter = ios; };
-		20C19017F39E00C901309A89 /* libCoreKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A03C11398FB100A44C7E824 /* libCoreKit.a */; platformFilter = ios; };
 		25112E3E4E0F660118CFDB66 /* ConcurrencyExtras.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98BED0FE1D67D36C26EF5261 /* ConcurrencyExtras.framework */; platformFilter = ios; };
 		26E1B12F66580DDE45E71090 /* KuringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA434B67C1ABC307A467E8C0 /* KuringApp.swift */; };
 		3322A0ADB49F7132E4EB77F3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = F4076B2568A477D35BD03665 /* FirebaseMessaging */; };
@@ -27,6 +26,7 @@
 		576E65B1C25F0D1B3AD5A5EF /* Dependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABA8438B4F227DF7CACA059 /* Dependencies.framework */; platformFilter = ios; };
 		5787222CB9182D0542CDC67D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F7F83A194E1D17030DCA033 /* Assets.xcassets */; };
 		5A0F3F4BB32EABF08D3B9546 /* XCTestDynamicOverlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ABCE1D18ED04979D1840E1 /* XCTestDynamicOverlay.framework */; platformFilter = ios; };
+		5F97AC56843D3C30EF8CDDF5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E554DAA4AB515DAF86082D9E /* GoogleService-Info.plist */; };
 		62A9B4F5A27C6BB61D6619EE /* CombineSchedulers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478531940A89E69929252124 /* CombineSchedulers.framework */; platformFilter = ios; };
 		681D64D8225B90ABACFF4137 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7210F22777D23AD1713BCADE /* AppDelegate.swift */; };
 		714B58DD2331DDC4D85C32EC /* CombineSchedulers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478531940A89E69929252124 /* CombineSchedulers.framework */; platformFilter = ios; };
@@ -36,7 +36,6 @@
 		84D33F77FAFCBAB4D79ACC51 /* DesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9369BFA2C65412102538303 /* DesignSystem.framework */; platformFilter = ios; };
 		886CEB733F4D89AAC7DEA045 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 057A3CD8D734F9C1B4948C18 /* LaunchScreen.storyboard */; };
 		90341A1FCE0060DED7132A18 /* _CollectionsUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A28094A3B3BF946A393C78B6 /* _CollectionsUtilities.framework */; platformFilter = ios; };
-		92E40D6D8CFC3CD0EF531411 /* libCoreKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A03C11398FB100A44C7E824 /* libCoreKit.a */; platformFilter = ios; };
 		95F4B8798F202DF086415460 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F7F83A194E1D17030DCA033 /* Assets.xcassets */; };
 		9DD435BEA74919432226908D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E38436ED8889DC7424B93FD /* ContentView.swift */; };
 		9EA67337939AA5091F518297 /* CustomDump.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FF70F273D3C15685D4A7E93 /* CustomDump.framework */; platformFilter = ios; };
@@ -49,6 +48,7 @@
 		BED8BA2B0361FC5BBCB10AAB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 057A3CD8D734F9C1B4948C18 /* LaunchScreen.storyboard */; };
 		C7FFFEBEE24403ED925403E4 /* SwiftUINavigationCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C8E1FBE2BCCD3E70D87DDE /* SwiftUINavigationCore.framework */; platformFilter = ios; };
 		D0B9D0A5E75DB674F0E28A73 /* ConcurrencyExtras.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98BED0FE1D67D36C26EF5261 /* ConcurrencyExtras.framework */; platformFilter = ios; };
+		D4110DD193FDED61974A0F73 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E554DAA4AB515DAF86082D9E /* GoogleService-Info.plist */; };
 		DECC6598189A341F3B0FC560 /* CasePaths.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EEBEB53C8803AC8D44217FE /* CasePaths.framework */; platformFilter = ios; };
 		E0A82FA5317D0CC7EFBEE120 /* KuringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA434B67C1ABC307A467E8C0 /* KuringApp.swift */; };
 		EE3E4B45F5BDEF7AF0176467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7210F22777D23AD1713BCADE /* AppDelegate.swift */; };
@@ -88,7 +88,6 @@
 		057A3CD8D734F9C1B4948C18 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09ABCE1D18ED04979D1840E1 /* XCTestDynamicOverlay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCTestDynamicOverlay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FA1B6C9BF7D89694A2CACB2 /* KuringLink.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KuringLink.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A03C11398FB100A44C7E824 /* libCoreKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EEBEB53C8803AC8D44217FE /* CasePaths.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CasePaths.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27FD9FFC2B1B9294BDB1BB3F /* Kuring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FF70F273D3C15685D4A7E93 /* CustomDump.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CustomDump.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +107,7 @@
 		D07B2C98B0A0DE8661A2B9B2 /* Kuring-Dev-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Kuring-Dev-Info.plist"; sourceTree = "<group>"; };
 		D9C8E1FBE2BCCD3E70D87DDE /* SwiftUINavigationCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftUINavigationCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA434B67C1ABC307A467E8C0 /* KuringApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringApp.swift; sourceTree = "<group>"; };
+		E554DAA4AB515DAF86082D9E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E9369BFA2C65412102538303 /* DesignSystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DesignSystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D8AC42FD1D3CB813FC98F6 /* Kuring-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Kuring-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,7 +122,6 @@
 				62A9B4F5A27C6BB61D6619EE /* CombineSchedulers.framework in Frameworks */,
 				2046FAC02499BE955CA43C34 /* ComposableArchitecture.framework in Frameworks */,
 				D0B9D0A5E75DB674F0E28A73 /* ConcurrencyExtras.framework in Frameworks */,
-				92E40D6D8CFC3CD0EF531411 /* libCoreKit.a in Frameworks */,
 				9EA67337939AA5091F518297 /* CustomDump.framework in Frameworks */,
 				576E65B1C25F0D1B3AD5A5EF /* Dependencies.framework in Frameworks */,
 				3C4A4F750B4B7E22AA747322 /* DesignSystem.framework in Frameworks */,
@@ -145,7 +144,6 @@
 				714B58DD2331DDC4D85C32EC /* CombineSchedulers.framework in Frameworks */,
 				451EFBE3199FFD2B704D3381 /* ComposableArchitecture.framework in Frameworks */,
 				25112E3E4E0F660118CFDB66 /* ConcurrencyExtras.framework in Frameworks */,
-				20C19017F39E00C901309A89 /* libCoreKit.a in Frameworks */,
 				3C7854D45F6876DBFFC613CA /* CustomDump.framework in Frameworks */,
 				BEC98AAAA6679D960094BA14 /* Dependencies.framework in Frameworks */,
 				84D33F77FAFCBAB4D79ACC51 /* DesignSystem.framework in Frameworks */,
@@ -186,6 +184,7 @@
 			children = (
 				8F7F83A194E1D17030DCA033 /* Assets.xcassets */,
 				7481DB2962520B4C722E6AF4 /* dummy.swift */,
+				E554DAA4AB515DAF86082D9E /* GoogleService-Info.plist */,
 				057A3CD8D734F9C1B4948C18 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
@@ -241,7 +240,6 @@
 				A42885E5471D20470BB1624C /* Kuring_Dev.app */,
 				27FD9FFC2B1B9294BDB1BB3F /* Kuring.app */,
 				0FA1B6C9BF7D89694A2CACB2 /* KuringLink.framework */,
-				1A03C11398FB100A44C7E824 /* libCoreKit.a */,
 				7DED7A8F9C145D5F5C144C1E /* OrderedCollections.framework */,
 				D9C8E1FBE2BCCD3E70D87DDE /* SwiftUINavigationCore.framework */,
 				09ABCE1D18ED04979D1840E1 /* XCTestDynamicOverlay.framework */,
@@ -300,7 +298,7 @@
 		6B590BF25178DC7D824D09CE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				ORGANIZATIONNAME = Team.Kuring;
+				ORGANIZATIONNAME = com.Kuring;
 				TargetAttributes = {
 				};
 			};
@@ -332,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5787222CB9182D0542CDC67D /* Assets.xcassets in Resources */,
+				D4110DD193FDED61974A0F73 /* GoogleService-Info.plist in Resources */,
 				BED8BA2B0361FC5BBCB10AAB /* LaunchScreen.storyboard in Resources */,
 				F58CF16F3989329B6C1981B3 /* dummy.swift in Resources */,
 			);
@@ -342,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95F4B8798F202DF086415460 /* Assets.xcassets in Resources */,
+				5F97AC56843D3C30EF8CDDF5 /* GoogleService-Info.plist in Resources */,
 				886CEB733F4D89AAC7DEA045 /* LaunchScreen.storyboard in Resources */,
 				F4FA828272E3A4A1E3945BB6 /* dummy.swift in Resources */,
 			);

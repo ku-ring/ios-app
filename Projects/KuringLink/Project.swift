@@ -7,7 +7,7 @@ let project = Project.make(
         .make(
             name: "KuringLink",
             product: .framework,
-            bundleId: "team.kuring.kuringlink",
+            bundleId: "com.kuring.kuringlink",
             sources: ["Sources/**"],
             resources: ["Resources/**"],
             dependencies: [

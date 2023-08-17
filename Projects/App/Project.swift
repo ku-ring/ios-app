@@ -19,7 +19,6 @@ let project = Project.make(
             dependencies: [
                 .project(target: "KuringLink", path: .relativeToRoot("Projects/KuringLink")),
                 .project(target: "DesignSystem", path: .relativeToRoot("Projects/DesignSystem")),
-                .project(target: "CoreKit", path: .relativeToRoot("Projects/Core")),
                 .external(name: "ComposableArchitecture"),
                 .package(product: "FirebaseMessaging")
             ]
@@ -32,8 +31,7 @@ let project = Project.make(
             resources: ["Resources/**"],
             dependencies: [
                 .project(target: "KuringLink", path: .relativeToRoot("Projects/KuringLink")),
-                .project(target: "DesignSystem", path: .relativeToRoot("Projects/DesignSystem")),
-                .project(target: "CoreKit", path: .relativeToRoot("Projects/Core")),
+                .project(target: "DesignSystem", path: .relativeToRoot("Projects/DesignSystem")), 
                 .external(name: "ComposableArchitecture"),
                 .package(product: "FirebaseMessaging")
             ]
