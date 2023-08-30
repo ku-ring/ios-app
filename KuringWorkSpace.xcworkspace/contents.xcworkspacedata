@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:Projects"
+      name = "Projects">
+      <FileRef
+         location = "group:App/App.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:DesignSystem/DesignSystem.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:KuringLink/KuringLink.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "group:Tuist"
+      name = "Tuist">
+      <Group
+         location = "group:Dependencies"
+         name = "Dependencies">
+         <Group
+            location = "group:SwiftPackageManager"
+            name = "SwiftPackageManager">
+            <Group
+               location = "group:.build"
+               name = ".build">
+               <Group
+                  location = "group:checkouts"
+                  name = "checkouts">
+                  <FileRef
+                     location = "group:Cache/Cache.xcodeproj">
+                  </FileRef>
+                  <FileRef
+                     location = "group:combine-schedulers/combine-schedulers.xcodeproj">
+                  </FileRef>
+                  <FileRef
+                     location = "group:swift-case-paths/swift-case-paths.xcodeproj">
+                  </FileRef>
+                  <FileRef
+                     location = "group:swift-clocks/swift-clocks.xcodeproj">
+                  </FileRef>
+                  <FileRef
+                     location = "group:swift-collections/swift-collections.xcodeproj">
+                  </FileRef>
+                  <FileRef
+                     location = "group:swift-composable-architecture/swift-composable-architecture.xcodeproj">
+                  </FileRef>
+                  <FileRef
+                     location = "group:swift-concurrency-extras/swift-concurrency-extras.xcodeproj">
+                  </FileRef>
+                  <FileRef
+                     location = "group:swift-custom-dump/swift-custom-dump.xcodeproj">
+                  </FileRef>
+                  <FileRef
+                     location = "group:swift-dependencies/swift-dependencies.xcodeproj">
+                  </FileRef>
+                  <FileRef
+                     location = "group:swift-identified-collections/swift-identified-collections.xcodeproj">
+                  </FileRef>
+                  <FileRef
+                     location = "group:swiftui-navigation/swiftui-navigation.xcodeproj">
+                  </FileRef>
+                  <FileRef
+                     location = "group:the-satellite/Satellite.xcodeproj">
+                  </FileRef>
+                  <FileRef
+                     location = "group:xctest-dynamic-overlay/xctest-dynamic-overlay.xcodeproj">
+                  </FileRef>
+               </Group>
+            </Group>
+         </Group>
+      </Group>
+   </Group>
+</Workspace>
