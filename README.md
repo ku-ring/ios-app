@@ -28,7 +28,14 @@
 
 [Discussions](https://github.com/ku-ring/app-ios-v2/discussions/2) 의 Contribution 가이드를 참고해주세요.
 
-## How to work
+## How to start
+
+### Tuist
+
+```bash
+tuist fetch
+tuist generate
+```
 
 ### TCA
 
