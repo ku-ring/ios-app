@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A947DCB82AB47A6A00A6D614 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A947DCB72AB4799400A6D614 /* Debug.xcconfig */; };
-		A947DCB92AB47A6C00A6D614 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A947DCB62AB4798A00A6D614 /* Release.xcconfig */; };
 		A947DCBE2AB47D3800A6D614 /* Notices in Frameworks */ = {isa = PBXBuildFile; productRef = A947DCBD2AB47D3800A6D614 /* Notices */; };
 		A947DCC02AB47D3B00A6D614 /* Feedbacks in Frameworks */ = {isa = PBXBuildFile; productRef = A947DCBF2AB47D3B00A6D614 /* Feedbacks */; };
 		A947DCC22AB47D3E00A6D614 /* Subscriptions in Frameworks */ = {isa = PBXBuildFile; productRef = A947DCC12AB47D3E00A6D614 /* Subscriptions */; };
@@ -19,8 +17,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A947DCB62AB4798A00A6D614 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		A947DCB72AB4799400A6D614 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		A9DAFA502AB1F04B0064F748 /* KuringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KuringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DAFA532AB1F04B0064F748 /* KuringApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringApp.swift; sourceTree = "<group>"; };
 		A9DAFA552AB1F04B0064F748 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -43,15 +39,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A947DCB52AB4797C00A6D614 /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				A947DCB62AB4798A00A6D614 /* Release.xcconfig */,
-				A947DCB72AB4799400A6D614 /* Debug.xcconfig */,
-			);
-			path = Config;
-			sourceTree = "<group>";
-		};
 		A947DCBA2AB47BA300A6D614 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -62,7 +49,6 @@
 		A9DAFA472AB1F04B0064F748 = {
 			isa = PBXGroup;
 			children = (
-				A947DCB52AB4797C00A6D614 /* Config */,
 				A9DAFA662AB1F09B0064F748 /* KuringModulePackage */,
 				A9DAFA522AB1F04B0064F748 /* KuringApp */,
 				A9DAFA512AB1F04B0064F748 /* Products */,
@@ -162,10 +148,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A947DCB92AB47A6C00A6D614 /* Release.xcconfig in Resources */,
 				A9DAFA5B2AB1F04C0064F748 /* Preview Assets.xcassets in Resources */,
 				A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */,
-				A947DCB82AB47A6A00A6D614 /* Debug.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,7 +289,6 @@
 		};
 		A9DAFA5F2AB1F04C0064F748 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A947DCB72AB4799400A6D614 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -335,7 +318,6 @@
 		};
 		A9DAFA602AB1F04C0064F748 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A947DCB62AB4798A00A6D614 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
