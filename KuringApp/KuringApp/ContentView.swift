@@ -38,7 +38,7 @@ struct NoticeList: View {
             }
             .listStyle(.plain)
             .onAppear {
-//                viewStore.send(.onAppear)
+                viewStore.send(.onAppear)
             }
         }
     }

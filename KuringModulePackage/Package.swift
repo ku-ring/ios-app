@@ -33,7 +33,17 @@ let package = Package(
                 .product(name: "Satellite", package: "the-satellite"),
                 "Model"
             ],
-            path: "Sources/Network/KuringLink"
+            path: "Sources/Network/KuringLink",
+            resources: [.process("Resources/KuringLink-Info.plist")]
+        ),
+        .testTarget(
+            name: "KuringLinkTests",
+            dependencies: [
+                .product(name: "Satellite", package: "the-satellite"),
+                "KuringLink",
+                "Model"
+            ],
+            path: "Tests/Network/KuringLinkTests"
         ),
         
         // MARK: Dependencies

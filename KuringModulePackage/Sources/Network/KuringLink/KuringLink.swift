@@ -17,7 +17,15 @@ public typealias Page = Int
 public typealias FCMToken = String
 
 public struct KuringLink {
-    static let satellite = Satellite(host: <#API_HOST#>, scheme: <#.https#>)
+    static var satellite: Satellite {
+        let plistURL = Bundle.module.url(forResource: "KuringLink-Info", withExtension: "plist")!
+        let dict = try! NSDictionary(contentsOf: plistURL, error: ())
+        let satellite = Satellite(
+            host: (dict["API_HOST"] as? String) ?? "",
+            scheme: (dict["USING_HTTPS"] as? Bool) ?? true ? .https : .http
+        )
+        return satellite
+    }
     static let appVersion = "" // NEXT_VERSION
     static let iosVersion = {
         let osVersion = ProcessInfo.processInfo.operatingSystemVersion
