@@ -6,4 +6,4 @@ DerivedData/
 .swiftpm/configuration/registries.json
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .netrc
-/Sources/Network/KuringLink/Resources/KuringLink-Info.plist
+Sources/Network/KuringLink/Resources/KuringLink-Info.plist
