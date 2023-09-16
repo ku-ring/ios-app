@@ -17,12 +17,9 @@
 | name | URL | branch | description |
 | ---- | ---- | ------ | ----- |
 | Cache | https://github.com/cozzin/Cache | main | 캐싱 모듈 |
-| ChatUI | https://github.com/jaesung-0o0/ChatUI | main | 채팅UI |
-| Enigma | https://github.com/ku-ring/Enigma | main | 쿠링 내부 리소스 |
-| KuringLink | https://github.com/ku-ring/KuringLink | 추후 업데이트 | 쿠링 API 파싱 및 스토리지 관리 모듈 |
+| The Satellite | https://github.com/ku-ring/the-satellite | main | iOS API 통신모듈  |
 | Swift Collections | https://github.com/apple/swift-collections | main | OrderedSet |  
 | The Composable Architecture | https://github.com/pointfreeco/swift-composable-architecture | main | TCA 구조를 위한 스위프트 패키지 |
-| The Satellite | https://github.com/ku-ring/the-satellite | main | API 통신모듈  |
 
 ## Contributions
 
@@ -30,12 +27,11 @@
 
 ## How to start
 
-### Tuist
+### Package Based Modularization
 
-```bash
-tuist fetch
-tuist generate
-```
+`KuringApp.xcodeproj` 열기
+
+빌드 타겟: `KuringApp` 으로 설정
 
 ### TCA
 
