@@ -10,6 +10,7 @@
 		A947DCBE2AB47D3800A6D614 /* Notices in Frameworks */ = {isa = PBXBuildFile; productRef = A947DCBD2AB47D3800A6D614 /* Notices */; };
 		A947DCC02AB47D3B00A6D614 /* Feedbacks in Frameworks */ = {isa = PBXBuildFile; productRef = A947DCBF2AB47D3B00A6D614 /* Feedbacks */; };
 		A947DCC22AB47D3E00A6D614 /* Subscriptions in Frameworks */ = {isa = PBXBuildFile; productRef = A947DCC12AB47D3E00A6D614 /* Subscriptions */; };
+		A959E3192AB654DA00307C6F /* Departments in Frameworks */ = {isa = PBXBuildFile; productRef = A959E3182AB654DA00307C6F /* Departments */; };
 		A9DAFA542AB1F04B0064F748 /* KuringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA532AB1F04B0064F748 /* KuringApp.swift */; };
 		A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA552AB1F04B0064F748 /* ContentView.swift */; };
 		A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA572AB1F04C0064F748 /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 			files = (
 				A947DCBE2AB47D3800A6D614 /* Notices in Frameworks */,
 				A947DCC02AB47D3B00A6D614 /* Feedbacks in Frameworks */,
+				A959E3192AB654DA00307C6F /* Departments in Frameworks */,
 				A947DCC22AB47D3E00A6D614 /* Subscriptions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -103,6 +105,7 @@
 				A947DCBD2AB47D3800A6D614 /* Notices */,
 				A947DCBF2AB47D3B00A6D614 /* Feedbacks */,
 				A947DCC12AB47D3E00A6D614 /* Subscriptions */,
+				A959E3182AB654DA00307C6F /* Departments */,
 			);
 			productName = KuringApp;
 			productReference = A9DAFA502AB1F04B0064F748 /* KuringApp.app */;
@@ -380,6 +383,10 @@
 		A947DCC12AB47D3E00A6D614 /* Subscriptions */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Subscriptions;
+		};
+		A959E3182AB654DA00307C6F /* Departments */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Departments;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

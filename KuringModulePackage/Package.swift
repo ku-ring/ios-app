@@ -19,6 +19,10 @@ let package = Package(
         .library(
             name: "Subscriptions",
             targets: ["SubscriptionFeature"]
+        ),
+        .library(
+            name: "Departments",
+            targets: ["DepartmentFeature"]
         )
     ],
     dependencies: [
@@ -72,7 +76,6 @@ let package = Package(
             dependencies: ["NoticeListFeature", "Model"],
             path: "Tests/Feature/NoticeListFeatureTests"
         ),
-        
         .target(
             name: "FeedbackFeature",
             dependencies: [
@@ -86,7 +89,14 @@ let package = Package(
             dependencies: ["FeedbackFeature", "Model"],
             path: "Tests/Feature/FeedbackFeatureTests"
         ),
-        
+        .target(
+            name: "DepartmentFeature",
+            dependencies: [
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                "Model"
+            ],
+            path: "Sources/Feature/Departments"
+        ),
         .target(
             name: "SubscriptionFeature",
             dependencies: [
