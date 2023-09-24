@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import NoticeListFeature
 import ComposableArchitecture
 
 struct ContentView: View {
@@ -26,23 +25,7 @@ struct ContentView: View {
         }
     }
 }
-struct NoticeList: View {
-    let store: StoreOf<NoticeListFeature>
-    
-    var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            List {
-                ForEach(viewStore.notices) {
-                    NoticeRow(title: $0.subject)
-                }
-            }
-            .listStyle(.plain)
-            .onAppear {
-                viewStore.send(.onAppear)
-            }
-        }
-    }
-}
+
 
 struct NoticeRow: View {
     let title: String
@@ -63,15 +46,5 @@ struct NoticeRow: View {
 
 #Preview {
     ContentView()
-}
-
-
-#Preview {
-    NoticeList(
-        store: Store(
-            initialState: NoticeListFeature.State(),
-            reducer: { NoticeListFeature() }
-        )
-    )
 }
 
