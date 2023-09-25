@@ -77,6 +77,7 @@ struct SubscriptionApp: View {
                      action: SubscriptionAppFeature.Path.Action.departmentEditor
                 ) { store in
                     DepartmentEditor(store: store)
+                        .navigationTitle("Department Editor")
                 }
             }
         }

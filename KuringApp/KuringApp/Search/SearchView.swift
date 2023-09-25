@@ -105,7 +105,6 @@ struct SearchView: View {
                 }
             }
             .bind(viewStore.$focus, to: self.$focus)
-            .navigationTitle("Search View")
         }
     }
 }
@@ -118,5 +117,6 @@ struct SearchView: View {
                 reducer: { SearchFeature() }
             )
         )        
+        .navigationTitle("Search View")
     }
 }

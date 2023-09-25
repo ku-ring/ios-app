@@ -138,7 +138,6 @@ struct DepartmentEditor: View {
                     }
                 }
             }
-            .navigationTitle("Department Editor")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("전체 삭제") {
@@ -162,5 +161,6 @@ struct DepartmentEditor: View {
                 reducer: { DepartmentEditorFeature() }
             )
         )
+        .navigationTitle("Department Editor")
     }
 }

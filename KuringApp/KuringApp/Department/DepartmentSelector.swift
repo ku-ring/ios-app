@@ -72,7 +72,6 @@ struct DepartmentSelector: View {
                     viewStore.send(.editDepartmentsButtonTapped)
                 }
             }
-            .navigationTitle("Department Selector")
         }
     }
 }
@@ -85,5 +84,6 @@ struct DepartmentSelector: View {
                 reducer: { DepartmentSelectorFeature() }
             )
         )
+        .navigationTitle("Department Selector")
     }
 }

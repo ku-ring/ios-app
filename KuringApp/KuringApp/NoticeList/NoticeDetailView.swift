@@ -90,7 +90,7 @@ struct NoticeDetailView: View {
                     Text("URL")
                 }
             }
-            .navigationTitle("Notice Detail View")
+            // TODO: Move to parent
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -116,5 +116,6 @@ struct NoticeDetailView: View {
                 reducer: { NoticeDetailFeature() }
             )
         )
+        .navigationTitle("Notice Detail View")
     }
 }

@@ -75,6 +75,7 @@ struct NoticeAppView: View {
                      action: NoticeAppFeature.Path.Action.detail
                 ) { store in
                     NoticeDetailView(store: store)
+                        .navigationTitle("Notice Detail View")
                 }
                 
             case .search:
@@ -83,6 +84,7 @@ struct NoticeAppView: View {
                      action: NoticeAppFeature.Path.Action.search
                 ) { store in
                     SearchView(store: store)
+                        .navigationTitle("Search View")
                 }
                 
             case .departmentEditor:
@@ -91,6 +93,7 @@ struct NoticeAppView: View {
                      action: NoticeAppFeature.Path.Action.departmentEditor
                 ) { store in
                     DepartmentEditor(store: store)
+                        .navigationTitle("Department Editor")
                 }
             }
         }
