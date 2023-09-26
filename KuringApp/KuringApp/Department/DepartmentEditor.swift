@@ -20,16 +20,31 @@ struct DepartmentEditorFeature: Reducer {
         enum Field {
             case search
         }
+        
+        @PresentationState var alert: AlertState<Action.Alert>?
     }
     
     enum Action: BindableAction {
         case binding(BindingAction<State>)
-
-        case addDepartmentButtonTapped(id: Department.ID)
-        case cancelAdditionButtonTapped(id: Department.ID)
         
+        /// 학과 추가 버튼 눌렀을 때
+        case addDepartmentButtonTapped(id: Department.ID)
+        /// 추가했던 학과 취소 버튼 눌렀을 때
+        case cancelAdditionButtonTapped(id: Department.ID)
+        /// 내 학과 삭제 버튼 눌렀을 때
         case deleteMyDepartmentButtonTapped(id: Department.ID)
+        /// 내 학과 전체삭제 버튼 눌렀을 때
         case deleteAllMyDepartmentButtonTapped
+        
+        /// 알림
+        enum Alert: Equatable {
+            /// 개별 학과 삭제 알림 시 삭제 버튼 눌렀을 때
+            case confirmDelete(id: Department.ID)
+            /// 전체 삭제 알림 시 삭제 버튼 눌렀을 때
+            case confirmDeleteAll
+        }
+        /// 알림 관련 액션
+        case alert(PresentationAction<Alert>)
     }
     
     var body: some ReducerOf<Self> {
@@ -51,17 +66,53 @@ struct DepartmentEditorFeature: Reducer {
                 state.myDepartments.remove(id: id)
                 return .none
                 
-                // TODO: Alert 띄우도록
             case let .deleteMyDepartmentButtonTapped(id: id):
-                state.myDepartments.remove(id: id)
+                guard let department = state.results.first(where: { $0.id == id }) else {
+                    return .none
+                }
+                state.alert = AlertState {
+                    TextState("\(department.korName)를\n삭제하시겠습니까?")
+                } actions: {
+                    ButtonState(role: .cancel) {
+                        TextState("취소하기")
+                    }
+                    
+                    ButtonState(role: .destructive, action: .confirmDelete(id: id)) {
+                        TextState("삭제하기")
+                    }
+                }
                 return .none
                 
-                // TODO: Alert 띄우도록
             case .deleteAllMyDepartmentButtonTapped:
-                state.myDepartments.removeAll()
+                state.alert = AlertState {
+                    TextState("모든 학과를 삭제하시겠습니까?")
+                } actions: {
+                    ButtonState(role: .cancel) {
+                        TextState("취소하기")
+                    }
+                    
+                    ButtonState(role: .destructive, action: .confirmDeleteAll) {
+                        TextState("삭제하기")
+                    }
+                }
+                return .none
+                
+                // MARK: Alert
+            case let .alert(.presented(alertAction)):
+                switch alertAction {
+                case let .confirmDelete(id: id):
+                    state.myDepartments.remove(id: id)
+                    return .none
+                case .confirmDeleteAll:
+                    state.myDepartments.removeAll()
+                    return .none
+                }
+                
+            case .alert(.dismiss):
                 return .none
             }
         }
+        .ifLet(\.$alert, action: /Action.alert)
     }
 }
 
@@ -143,8 +194,15 @@ struct DepartmentEditor: View {
                     Button("전체 삭제") {
                         viewStore.send(.deleteAllMyDepartmentButtonTapped)
                     }
+                    .disabled(viewStore.myDepartments.isEmpty)
                 }
             }
+            .alert(
+                store: self.store.scope(
+                    state: \.$alert,
+                    action: { .alert($0) }
+                )
+            )
         }
     }
 }
