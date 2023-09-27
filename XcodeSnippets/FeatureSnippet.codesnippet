@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>feature</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>struct &lt;#Feature#&gt;: Reducer {
+    struct State: Equatable {
+        
+    }
+    
+    enum Action {
+        
+    }
+    
+    var body: some ReducerOf&lt;Self&gt; {
+        Reduce { state, action in
+            switch action {
+                
+            }
+        }
+    }
+}
+
+struct &lt;#View#&gt;: View {
+    let store: StoreOf&lt;&lt;#Feature#&gt;&gt;
+    
+    var body: some View {
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            Text("Hello world")
+        }
+    }
+}
+
+#Preview {
+    &lt;#View#&gt;(
+        store: Store(
+            initialState: &lt;#Feature.State#&gt;,
+            reducer: { &lt;#Feature#&gt; }
+        )
+    )
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>A7AA6377-34F7-4CFA-BC42-D3F053CF01FA</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetPlatformFamily</key>
+	<string>iphoneos</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>The template for some feature that conforms to Reducer protocol.</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Feature Template</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

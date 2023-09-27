@@ -39,6 +39,18 @@
 
 > **📄 개발 문서** [Documentation | ComposableArchitecture](https://pointfreeco.github.io/swift-composable-architecture/main/documentation/composablearchitecture/)
 
+**Xcode 코드 스니펫**
+
+다음 경로에 자동으로 `Reducer` 와 `View`, `Preview` 까지 생성하는 코드 스니펫 파일이 있습니다.
+> /XcodeSnippets/FeatureSnippet.codesnippet
+
+터미널을 열고 다음 명령어를 실행하여 Xcode에 코드 스니펫 관리 폴더를 엽니다.
+> $ open Library/Developer/Xcode/UserData/CodeSnippets/
+
+폴더에 코드 스니펫 파일을 복사 붙여넣기 합니다.
+
+이제 Xcode 로 돌아가 `.swift` 파일에서 `feature` 를 입력하면 자동완성 목록에 뜨는 걸 확인할 수 있습니다.
+
 ### 디자인
 
 > **정보** 아래 링크는 쿠링 멤버만 볼 수 있는 노션 링크 입니다.
