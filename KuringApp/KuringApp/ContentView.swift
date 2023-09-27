@@ -10,37 +10,21 @@ import ComposableArchitecture
 
 struct ContentView: View {
     var body: some View {
-        NavigationStack {
-            NoticeList(
+        TabView {
+            NoticeAppView(
                 store: Store(
-                    initialState: .init(),
-                    reducer: { NoticeListFeature() }
+                    initialState: NoticeAppFeature.State(
+                        noticeList: NoticeListFeature.State(notices: [.random])
+                    ),
+                    reducer: { NoticeAppFeature() }
                 )
             )
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Image("kuring.label")
-                }
+            .tabItem {
+                Image(systemName: "list.dash")
+                
+                Text("공지사항")
             }
         }
-    }
-}
-
-
-struct NoticeRow: View {
-    let title: String
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(title)
-                .font(.subheadline)
-            
-            Text("2023.01.01")
-                .font(.system(size: 14))
-                .foregroundStyle(.secondary)
-        }
-        .padding(.vertical, 12)
-        .padding(.horizontal, 20)
     }
 }
 
