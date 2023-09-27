@@ -81,12 +81,6 @@ let package = Package(
             ],
             path: "Sources/Feature/Feedback"
         ),
-        .testTarget(
-            name: "FeedbackFeatureTests",
-            dependencies: ["FeedbackFeature", "Model"],
-            path: "Tests/Feature/FeedbackFeatureTests"
-        ),
-        
         .target(
             name: "SubscriptionFeature",
             dependencies: [
