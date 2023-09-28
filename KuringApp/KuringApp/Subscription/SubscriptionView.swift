@@ -7,13 +7,15 @@
 
 import Model
 import SwiftUI
+import SubscriptionFeature
 import ComposableArchitecture
 
 struct SubscriptionFeature: Reducer {
     struct State: Equatable {
-        @BindingState var subscriptionType: SubscriptionType = .university
+        var subscriptionType: SubscriptionType = .university
         
-        var myDepartments: IdentifiedArrayOf<Department> = []
+        var myDepartments: IdentifiedArrayOf<Department> = [.산업디자인학과, .전기전자공학부, .컴퓨터공학부, .건국대학교, .경제학과, .수의학과, .영문학과, .의생명공학과]
+        var selectedDepartment: Department = Department.컴퓨터공학부
         
         enum SubscriptionType: Equatable {
             case university
@@ -21,23 +23,23 @@ struct SubscriptionFeature: Reducer {
         }
     }
     
-    enum Action: BindableAction {
-        case binding(BindingAction<State>)
-        
+    enum Action {
+        case chipButtonTapped(State.SubscriptionType)
+        case departmentRowTapped(Department)
         case confirmButtonTapped
         case editDepartmentsButtonTapped
     }
     
     
     var body: some ReducerOf<Self> {
-        BindingReducer()
-        
         Reduce { state, action in
             switch action {
-                
-            case .binding:
+            case .chipButtonTapped(let subscriptionType):
+                state.subscriptionType = subscriptionType
                 return .none
-                
+            case .departmentRowTapped(let department):
+                state.selectedDepartment = department
+                return .none
             case .confirmButtonTapped:
                 return .none
                 
@@ -51,57 +53,162 @@ struct SubscriptionFeature: Reducer {
 struct SubscriptionView: View {
     let store: StoreOf<SubscriptionFeature>
     
+    struct Constants {
+        static let TextTitle: Color = Color(red: 0.1, green: 0.12, blue: 0.15)
+        static let KuringPrimary: Color = Color(red: 0.24, green: 0.74, blue: 0.5)
+    }
+    
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            List {
-                Text("알림 받고 싶은 카테고리를 선택해 주세요")
-                
-                /**
-                 - `viewStore.$subscriptionType`
-                 */
-                Section {
-                    Picker("", selection: viewStore.$subscriptionType) {
-                        Text("일반 카테고리")
-                            .tag(SubscriptionFeature.State.SubscriptionType.university)
-                        
-                        Text("학과 카테고리")
-                            .tag(SubscriptionFeature.State.SubscriptionType.department)
-                    }
-                    .pickerStyle(.segmented)
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("알림 받고 싶은 \n카테고리를 선택해주세요")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(Constants.TextTitle)
                 }
+                .padding(.top, 32)
+                .padding(.bottom, 60)
                 
-                /**
-                 - `.editDepartmentsButtonTapped`
-                 */
-                if viewStore.subscriptionType == .department {
-                    Section {
-                        Button(
-                            viewStore.myDepartments.isEmpty
-                            ? "학과 추가하기"
-                            : "학과 편집하기"
-                        ) {
-                            viewStore.send(.editDepartmentsButtonTapped)
-                        }
-                        
-                        NavigationLink(
-                            state: SubscriptionAppFeature.Path.State.departmentEditor(
-                                // TODO: init parameter 수정 (현재는 테스트용)
-                                DepartmentEditorFeature.State(
-                                    myDepartments: [.전기전자공학부, .컴퓨터공학부],
-                                    results: [.전기전자공학부, .컴퓨터공학부, .산업디자인학과]
-                                )
-                            )
-                        ) {
-                            Text(
-                                viewStore.myDepartments.isEmpty
-                                ? "학과 추가하기"
-                                : "학과 편집하기"
-                            )
+                LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 2)) {
+                    // TODO: - 디자인 시스템으로 분리
+                    VStack {
+                        if viewStore.subscriptionType == .university {
+                            didSelectChipView("일반 카테고리")
+                        } else {
+                            deSelectChipView("일반 카테고리")
+                                .onTapGesture {
+                                    viewStore.send(.chipButtonTapped(.university))
+                                }
                         }
                     }
+                    .font(.system(size: 16, weight: .bold))
+                    
+                    VStack {
+                        if viewStore.subscriptionType == .department {
+                            didSelectChipView("학과 카테고리")
+                        } else {
+                            deSelectChipView("학과 카테고리")
+                                .onTapGesture {
+                                    viewStore.send(.chipButtonTapped(.department))
+                                }
+                        }
+                    }
+                    .font(.system(size: 16, weight: .bold))
+                }
+                .padding(.bottom, 48)
+                
+                
+                switch viewStore.subscriptionType {
+                case .university:
+                    VStack {
+                        LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3)) {
+                            ForEach(["학사", "취창업", "국제", "장학", "입학", "학생", "산학", "일반"], id: \.self) { noticeType in
+                                ZStack {
+                                    Color(.systemGroupedBackground)
+                                        .cornerRadius(16)
+                                    VStack {
+                                        Image(noticeType, bundle: Bundle.subscriptions)
+                                        Text(noticeType)
+                                    }
+                                    .padding()
+                                }
+                            }
+                        }
+                        Spacer()
+                    }
+                case .department:
+                    VStack {
+                        if viewStore.myDepartments.isEmpty {
+                            VStack(alignment: .center) {
+                                Spacer()
+                                HStack {
+                                    Spacer()
+                                    Text("아직 추가된 학과가 없어요.\n관심 학과를 추가하고 공지를 확인해 보세요!")
+                                        .font(.system(size: 16, weight: .medium))
+                                        .multilineTextAlignment(.center)
+                                        .foregroundColor(Color(red: 0.68, green: 0.69, blue: 0.71))
+                                    Spacer()
+                                }
+                                Spacer()
+                            }
+                        } else {
+                            VStack(spacing: 0) {
+                                ScrollView {
+                                    ForEach(viewStore.myDepartments) { department in
+                                        VStack(spacing: 0) {
+                                            HStack {
+                                                Text(department.id)
+                                                    .font(.system(size: 16, weight: .semibold))
+                                                    .foregroundColor(.black)
+                                                Spacer()
+                                                Image(systemName: viewStore.selectedDepartment.id == department.id ? "checkmark.circle.fill" : "circle")
+                                                    .foregroundStyle(viewStore.selectedDepartment.id == department.id ? Constants.KuringPrimary : Color.black.opacity(0.1))
+                                                    .frame(width: 20, height: 20)
+                                            }
+                                            .padding(.horizontal, 21.5)
+                                            .padding(.top, viewStore.myDepartments.first?.id == department.id ? 22 : 0)
+                                            .padding(.bottom, viewStore.myDepartments.last?.id == department.id ? 22 : 0)
+                                            .contentShape(Rectangle())
+                                            .onTapGesture {
+                                                viewStore.send(.departmentRowTapped(department))
+                                            }
+                                            
+                                            // 밑줄
+                                            if viewStore.myDepartments.last?.id != department.id {
+                                                Rectangle()
+                                                    .frame(height: 0.5)
+                                                    .foregroundColor(Color.black.opacity(0.1))
+                                                    .padding(.top, 16)
+                                                    .padding(.bottom, 16)
+                                            }
+                                        }
+                                    }
+                                }
+                                Spacer()
+                            }
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .foregroundStyle(Color.black.opacity(0.03))
+                            )
+                            Spacer()
+                        }
+                    }
                 }
                 
+                VStack {
+                    // 블러
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(height: 36)
+                        .background(
+                            LinearGradient(
+                                stops: [
+                                    Gradient.Stop(color: .white, location: 0.00),
+                                    Gradient.Stop(color: .white.opacity(0), location: 1.00),
+                                ],
+                                startPoint: UnitPoint(x: 0.47, y: 1),
+                                endPoint: UnitPoint(x: 0.47, y: 0.18)
+                            )
+                        )
+                    
+                    // 버튼
+                    HStack(alignment: .center, spacing: 10) {
+                        Spacer()
+                        Text(viewStore.myDepartments.isEmpty ? "학과 추가하기" : "학과 편집하기")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundStyle(Color.white)
+                        Spacer()
+                    }
+                    .padding(.horizontal, 50)
+                    .padding(.vertical, 16)
+                    .frame(height: 50, alignment: .center)
+                    .background(Color(red: 0.24, green: 0.74, blue: 0.5))
+                    .cornerRadius(100)
+                }
+                //                    .padding(.bottom, 40)
+                Spacer()
             }
+            .padding(.horizontal, 20)
             .navigationTitle("Subscription View")
             .toolbar {
                 Button("완료") {
@@ -110,15 +217,31 @@ struct SubscriptionView: View {
             }
         }
     }
-}
-
-#Preview {
-    NavigationStack {
-        SubscriptionView(
-            store: Store(
-                initialState: SubscriptionFeature.State(),
-                reducer: { SubscriptionFeature() }
-            )
-        )
+    
+    @ViewBuilder
+    private func didSelectChipView(_ title: String) -> some View {
+        Group {
+            Text(title)
+            Rectangle()
+                .frame(height: 1.5)
+        }
+        .foregroundStyle(Color(red: 0.24, green: 0.74, blue: 0.5))
+    }
+    
+    @ViewBuilder
+    private func deSelectChipView(_ title: String) -> some View {
+        Text(title)
+            .foregroundColor(.black.opacity(0.3))
     }
 }
+
+//#Preview {
+//    NavigationStack {
+//        SubscriptionView(
+//            store: Store(
+//                initialState: SubscriptionFeature.State(),
+//                reducer: { SubscriptionFeature() }
+//            )
+//        )
+//    }
+//}

@@ -24,6 +24,7 @@
 		A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA552AB1F04B0064F748 /* ContentView.swift */; };
 		A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA572AB1F04C0064F748 /* Assets.xcassets */; };
 		A9DAFA5B2AB1F04C0064F748 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */; };
+		B1E8E8412AC5F49B0077ADF7 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8E8402AC5F49B0077ADF7 /* SwiftUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		A9DAFA572AB1F04C0064F748 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A9DAFA662AB1F09B0064F748 /* KuringModulePackage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = KuringModulePackage; path = ../KuringModulePackage; sourceTree = "<group>"; };
+		B1E8E8402AC5F49B0077ADF7 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				A965B7AA2AC0750E0026ECDC /* SubscriptionView.swift */,
 				A965B7AE2AC084D20026ECDC /* SubscriptionApp.swift */,
+				B1E8E8402AC5F49B0077ADF7 /* SwiftUIView.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1E8E8412AC5F49B0077ADF7 /* SwiftUIView.swift in Sources */,
 				A9B4F0142ABCA86500354C00 /* NoticeApp.swift in Sources */,
 				A965B7AB2AC0750E0026ECDC /* SubscriptionView.swift in Sources */,
 				A9B4F01A2ABCAF9800354C00 /* NoticeList.swift in Sources */,
