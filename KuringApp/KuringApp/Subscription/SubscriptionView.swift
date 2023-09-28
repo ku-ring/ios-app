@@ -212,39 +212,41 @@ struct SubscriptionView: View {
                             Spacer()
                         }
                     }
+                    
+                    // TODO: 디자인 시스템 분리 - 상단에 블러가 존재하는 버튼
+                    VStack {
+                        // 블러
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(height: 36)
+                            .background(
+                                LinearGradient(
+                                    stops: [
+                                        Gradient.Stop(color: .white, location: 0.00),
+                                        Gradient.Stop(color: .white.opacity(0), location: 1.00),
+                                    ],
+                                    startPoint: UnitPoint(x: 0.47, y: 1),
+                                    endPoint: UnitPoint(x: 0.47, y: 0.18)
+                                )
+                            )
+                        
+                        // 버튼
+                        HStack(alignment: .center, spacing: 10) {
+                            Spacer()
+                            Text(viewStore.myDepartments.isEmpty ? "학과 추가하기" : "학과 편집하기")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundStyle(Color.white)
+                            Spacer()
+                        }
+                        .padding(.horizontal, 50)
+                        .padding(.vertical, 16)
+                        .frame(height: 50, alignment: .center)
+                        .background(Constants.kuringPrimary)
+                        .cornerRadius(100)
+                    }
                 }
                 
-                // TODO: 디자인 시스템 분리 - 상단에 블러가 존재하는 버튼
-                VStack {
-                    // 블러
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(height: 36)
-                        .background(
-                            LinearGradient(
-                                stops: [
-                                    Gradient.Stop(color: .white, location: 0.00),
-                                    Gradient.Stop(color: .white.opacity(0), location: 1.00),
-                                ],
-                                startPoint: UnitPoint(x: 0.47, y: 1),
-                                endPoint: UnitPoint(x: 0.47, y: 0.18)
-                            )
-                        )
-                    
-                    // 버튼
-                    HStack(alignment: .center, spacing: 10) {
-                        Spacer()
-                        Text(viewStore.myDepartments.isEmpty ? "학과 추가하기" : "학과 편집하기")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundStyle(Color.white)
-                        Spacer()
-                    }
-                    .padding(.horizontal, 50)
-                    .padding(.vertical, 16)
-                    .frame(height: 50, alignment: .center)
-                    .background(Constants.kuringPrimary)
-                    .cornerRadius(100)
-                }
+                
             }
             .padding(.horizontal, 20)
             // TODO: TCA에 따라 외부에서 구현
