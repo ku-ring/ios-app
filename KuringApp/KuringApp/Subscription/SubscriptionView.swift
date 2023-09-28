@@ -14,7 +14,14 @@ struct SubscriptionFeature: Reducer {
     struct State: Equatable {
         var subscriptionType: SubscriptionType = .university
         
+        /// 대학 공지 리스트
+        let univNoticeTypes: [String] = ["학사", "취창업", "국제", "장학", "입학", "학생", "산학", "일반"]
+        /// 대학 공지 리스트 중 내가 구독한 공지
+        var selectedunivNoticeType: [String] = []
+        
+        /// 내가 추가한 공지 리스트
         var myDepartments: IdentifiedArrayOf<Department> = [.산업디자인학과, .전기전자공학부, .컴퓨터공학부, .건국대학교, .경제학과, .수의학과, .영문학과, .의생명공학과]
+        /// 내가 추가한 공지 리스트 중 지금 선택한 학과
         var selectedDepartment: Department = Department.컴퓨터공학부
         
         enum SubscriptionType: Equatable {
@@ -25,7 +32,9 @@ struct SubscriptionFeature: Reducer {
     
     enum Action {
         case chipButtonTapped(State.SubscriptionType)
-        case departmentRowTapped(Department)
+        
+        case univNoticeTypeGridTapped(String)
+        case departmentGridTapped(Department)
         case confirmButtonTapped
         case editDepartmentsButtonTapped
     }
@@ -36,14 +45,25 @@ struct SubscriptionFeature: Reducer {
             switch action {
             case .chipButtonTapped(let subscriptionType):
                 state.subscriptionType = subscriptionType
+                
                 return .none
-            case .departmentRowTapped(let department):
+            case .univNoticeTypeGridTapped(let univNoticeType):
+                if let index = state.selectedunivNoticeType.firstIndex(of: univNoticeType) {
+                    state.selectedunivNoticeType.remove(at: index)
+                } else {
+                    state.selectedunivNoticeType.append(univNoticeType)
+                }
+                
+                return .none
+            case .departmentGridTapped(let department):
                 state.selectedDepartment = department
+                
                 return .none
             case .confirmButtonTapped:
-                return .none
                 
+                return .none
             case .editDepartmentsButtonTapped:
+                
                 return .none
             }
         }
@@ -55,8 +75,7 @@ struct SubscriptionView: View {
     
     // TODO: 디자인 시스템 분리 - ColorSet
     struct Constants {
-        static let TextTitle: Color = Color(red: 0.1, green: 0.12, blue: 0.15)
-        static let KuringPrimary: Color = Color(red: 0.24, green: 0.74, blue: 0.5)
+        static let kuringPrimary: Color = Color(red: 0.24, green: 0.74, blue: 0.5)
     }
     
     var body: some View {
@@ -65,7 +84,7 @@ struct SubscriptionView: View {
                 HStack {
                     Text("알림 받고 싶은 \n카테고리를 선택해주세요")
                         .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(Constants.TextTitle)
+                        .foregroundColor(Color(red: 0.1, green: 0.12, blue: 0.15))
                 }
                 .padding(.top, 32)
                 .padding(.bottom, 60)
@@ -103,16 +122,28 @@ struct SubscriptionView: View {
                 case .university:
                     VStack {
                         LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3)) {
-                            ForEach(["학사", "취창업", "국제", "장학", "입학", "학생", "산학", "일반"], id: \.self) { noticeType in
+                            ForEach(viewStore.univNoticeTypes, id: \.self) { univNoticeType in
+                                let isSelected = viewStore.selectedunivNoticeType.contains(univNoticeType)
+                                
                                 ZStack {
-                                    Color(.systemGroupedBackground)
-                                        .cornerRadius(16)
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .inset(by: 1)
+                                        .stroke(isSelected ? Constants.kuringPrimary : Color.clear,
+                                                lineWidth: isSelected ? 2 : 0)
+                                        .background(isSelected ? Constants.kuringPrimary.opacity(0.1) : Color.black.opacity(0.03))
+                                        
                                     VStack {
-                                        Image(noticeType, bundle: Bundle.subscriptions)
-                                        Text(noticeType)
+                                        Image(univNoticeType, bundle: Bundle.subscriptions)
+                                        Text(univNoticeType)
+                                            .font(.system(size: 16, weight: .semibold))
+                                            .foregroundStyle(isSelected ? Constants.kuringPrimary : Color(red: 0.32, green: 0.32, blue: 0.32))
                                     }
                                     .padding()
                                 }
+                                .onTapGesture {
+                                    viewStore.send(.univNoticeTypeGridTapped(univNoticeType))
+                                }
+                                
                             }
                         }
                         Spacer()
@@ -143,7 +174,7 @@ struct SubscriptionView: View {
                                                     .foregroundColor(.black)
                                                 Spacer()
                                                 Image(systemName: viewStore.selectedDepartment.id == department.id ? "checkmark.circle.fill" : "circle")
-                                                    .foregroundStyle(viewStore.selectedDepartment.id == department.id ? Constants.KuringPrimary : Color.black.opacity(0.1))
+                                                    .foregroundStyle(viewStore.selectedDepartment.id == department.id ? Constants.kuringPrimary : Color.black.opacity(0.1))
                                                     .frame(width: 20, height: 20)
                                             }
                                             .padding(.horizontal, 21.5)
@@ -151,7 +182,7 @@ struct SubscriptionView: View {
                                             .padding(.bottom, viewStore.myDepartments.last?.id == department.id ? 22 : 0)
                                             .contentShape(Rectangle())
                                             .onTapGesture {
-                                                viewStore.send(.departmentRowTapped(department))
+                                                viewStore.send(.departmentGridTapped(department))
                                             }
                                             
                                             // 밑줄
@@ -205,7 +236,7 @@ struct SubscriptionView: View {
                     .padding(.horizontal, 50)
                     .padding(.vertical, 16)
                     .frame(height: 50, alignment: .center)
-                    .background(Color(red: 0.24, green: 0.74, blue: 0.5))
+                    .background(Constants.kuringPrimary)
                     .cornerRadius(100)
                 }
             }
