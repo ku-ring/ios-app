@@ -201,14 +201,12 @@ struct SubscriptionView: View {
                                             }
                                         }
                                     }
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .foregroundStyle(Color.black.opacity(0.03))
+                                    )
                                 }
-                                
-                                Spacer()
                             }
-                            .background(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .foregroundStyle(Color.black.opacity(0.03))
-                            )
                             Spacer()
                         }
                     }
