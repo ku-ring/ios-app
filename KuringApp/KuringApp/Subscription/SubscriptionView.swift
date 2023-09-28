@@ -53,6 +53,7 @@ struct SubscriptionFeature: Reducer {
 struct SubscriptionView: View {
     let store: StoreOf<SubscriptionFeature>
     
+    // TODO: 디자인 시스템 분리 - ColorSet
     struct Constants {
         static let TextTitle: Color = Color(red: 0.1, green: 0.12, blue: 0.15)
         static let KuringPrimary: Color = Color(red: 0.24, green: 0.74, blue: 0.5)
@@ -70,7 +71,7 @@ struct SubscriptionView: View {
                 .padding(.bottom, 60)
                 
                 LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 2)) {
-                    // TODO: - 디자인 시스템으로 분리
+                    // TODO: 디자인 시스템 분리 - 칩
                     VStack {
                         if viewStore.subscriptionType == .university {
                             didSelectChipView("일반 카테고리")
@@ -133,7 +134,7 @@ struct SubscriptionView: View {
                             }
                         } else {
                             VStack(spacing: 0) {
-                                ScrollView {
+                                ScrollView(showsIndicators: false) {
                                     ForEach(viewStore.myDepartments) { department in
                                         VStack(spacing: 0) {
                                             HStack {
@@ -164,6 +165,7 @@ struct SubscriptionView: View {
                                         }
                                     }
                                 }
+                                
                                 Spacer()
                             }
                             .background(
@@ -175,6 +177,7 @@ struct SubscriptionView: View {
                     }
                 }
                 
+                // TODO: 디자인 시스템 분리 - 상단에 블러가 존재하는 버튼
                 VStack {
                     // 블러
                     Rectangle()
@@ -205,11 +208,11 @@ struct SubscriptionView: View {
                     .background(Color(red: 0.24, green: 0.74, blue: 0.5))
                     .cornerRadius(100)
                 }
-                //                    .padding(.bottom, 40)
-                Spacer()
             }
             .padding(.horizontal, 20)
-            .navigationTitle("Subscription View")
+            // TODO: TCA에 따라 외부에서 구현
+            .navigationTitle("푸시 알림 설정")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 Button("완료") {
                     viewStore.send(.confirmButtonTapped)
@@ -218,6 +221,7 @@ struct SubscriptionView: View {
         }
     }
     
+    // TODO: 디자인 시스템 분리 - 칩
     @ViewBuilder
     private func didSelectChipView(_ title: String) -> some View {
         Group {
@@ -228,6 +232,7 @@ struct SubscriptionView: View {
         .foregroundStyle(Color(red: 0.24, green: 0.74, blue: 0.5))
     }
     
+    // TODO: 디자인 시스템 분리 - 칩
     @ViewBuilder
     private func deSelectChipView(_ title: String) -> some View {
         Text(title)
