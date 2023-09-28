@@ -36,6 +36,7 @@ struct SubscriptionFeature: Reducer {
         case univNoticeTypeGridTapped(String)
         case departmentGridTapped(Department)
         case confirmButtonTapped
+        case addDepartmentsButtonTapped
         case editDepartmentsButtonTapped
     }
     
@@ -64,6 +65,9 @@ struct SubscriptionFeature: Reducer {
                 
                 return .none
             case .confirmButtonTapped:
+                
+                return .none
+            case .addDepartmentsButtonTapped:
                 
                 return .none
             case .editDepartmentsButtonTapped:
@@ -224,6 +228,13 @@ struct SubscriptionView: View {
                     .background {
                         LinearGradient(gradient: Gradient(colors: [.white.opacity(0.1), .white]), startPoint: .top, endPoint: .bottom)
                             .offset(x: 0, y: -32)
+                    }
+                    .onTapGesture {
+                        if viewStore.myDepartments.isEmpty {
+                            viewStore.send(.addDepartmentsButtonTapped)
+                        } else {
+                            viewStore.send(.editDepartmentsButtonTapped)
+                        }
                     }
                 }
                 
