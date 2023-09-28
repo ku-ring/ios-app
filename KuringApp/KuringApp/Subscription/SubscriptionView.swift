@@ -22,7 +22,7 @@ struct SubscriptionFeature: Reducer {
         /// 내가 추가한 공지 리스트
         var myDepartments: IdentifiedArrayOf<Department> = [.산업디자인학과, .전기전자공학부, .컴퓨터공학부, .건국대학교, .경제학과, .수의학과, .영문학과, .의생명공학과]
         /// 내가 추가한 공지 리스트 중 지금 선택한 학과
-        var selectedDepartment: Department = Department.컴퓨터공학부
+        var selectedDepartment: [Department] = [Department.컴퓨터공학부]
         
         enum SubscriptionType: Equatable {
             case university
@@ -56,7 +56,11 @@ struct SubscriptionFeature: Reducer {
                 
                 return .none
             case .departmentGridTapped(let department):
-                state.selectedDepartment = department
+                if let index = state.selectedDepartment.firstIndex(of: department) {
+                    state.selectedDepartment.remove(at: index)
+                } else {
+                    state.selectedDepartment.append(department)
+                }
                 
                 return .none
             case .confirmButtonTapped:
@@ -167,14 +171,16 @@ struct SubscriptionView: View {
                             VStack(spacing: 0) {
                                 ScrollView(showsIndicators: false) {
                                     ForEach(viewStore.myDepartments) { department in
+                                        let isSelected = viewStore.selectedDepartment.contains(department)
+                                        
                                         VStack(spacing: 0) {
                                             HStack {
                                                 Text(department.id)
                                                     .font(.system(size: 16, weight: .semibold))
                                                     .foregroundColor(.black)
                                                 Spacer()
-                                                Image(systemName: viewStore.selectedDepartment.id == department.id ? "checkmark.circle.fill" : "circle")
-                                                    .foregroundStyle(viewStore.selectedDepartment.id == department.id ? Constants.kuringPrimary : Color.black.opacity(0.1))
+                                                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                                                    .foregroundStyle(isSelected ? Constants.kuringPrimary : Color.black.opacity(0.1))
                                                     .frame(width: 20, height: 20)
                                             }
                                             .padding(.horizontal, 21.5)
