@@ -11,43 +11,32 @@ import ComposableArchitecture
 struct SettingListFeature: Reducer {
     struct State: Equatable {
         @PresentationState var selectAppIcon: AppIconSelect.State?
-        var currentAppIcon: String?
+        var currentAppIcon: KuringIcon?
     }
     
     enum Action: Equatable {
-        case appIconChangeButtonTapped
+        case appIconPresentButtonTapped
         case changeIcon(PresentationAction<AppIconSelect.Action>)
         
-        // MARK: Toolbar Action
-        case save
     }
     
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case .appIconChangeButtonTapped:
+            case .appIconPresentButtonTapped:
                 state.selectAppIcon = AppIconSelect.State(
-                    selectedIcon: state.currentAppIcon ?? "kuring.app.classic"
+                    selectedIcon: state.currentAppIcon ?? KuringIcon.kuring_app
                 )
                 return .none
                 
             case let .changeIcon(.presented(.delegate(action))):
                 switch action {
-                case let .appIconChanged(app):
-                    state.currentAppIcon = app
+                case let .alternativeAppIconSave(icon):
+                    state.currentAppIcon = icon
+                    state.selectAppIcon = nil
                     return .none
                 }
                 
-            case .save:
-                UIApplication.shared.setAlternateIconName(state.currentAppIcon) { error in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    } else {
-                        print("setting done")
-                    }
-                }
-                state.selectAppIcon = nil
-                return .none
             default:
                 return .none
             }
@@ -67,12 +56,13 @@ struct SettingView: View {
                 Section {
                     List {
                         Button {
-                            viewStore.send(.appIconChangeButtonTapped)
+                            viewStore.send(.appIconPresentButtonTapped)
                         } label: {
                             HStack {
                                 Text("앱 아이콘 바꾸기")
                                 Spacer()
-                                Text(viewStore.state.currentAppIcon ?? "kuring.app.classic")
+                                Text(viewStore.state.currentAppIcon?.korValue ?? KuringIcon.kuring_app.korValue)
+                                Image(systemName: "chevron.right")
                             }
                         }
                     }
@@ -89,15 +79,6 @@ struct SettingView: View {
                 NavigationStack {
                     AppIconSelectView(store: store)
                         .navigationTitle("App Icon select Page")
-                        .toolbar {
-                            ToolbarItem(placement: .topBarTrailing) {
-                                Button {
-                                    viewStore.send(.save)
-                                } label: {
-                                    Text("저장")
-                                }
-                            }
-                        }
                 }
                 
             }

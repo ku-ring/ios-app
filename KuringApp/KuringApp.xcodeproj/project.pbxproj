@@ -14,6 +14,10 @@
 		A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA552AB1F04B0064F748 /* ContentView.swift */; };
 		A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA572AB1F04C0064F748 /* Assets.xcassets */; };
 		A9DAFA5B2AB1F04C0064F748 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */; };
+		DF062D502AC8801000FC48C0 /* kuring_app_classic.png in Resources */ = {isa = PBXBuildFile; fileRef = DF062D4C2AC8801000FC48C0 /* kuring_app_classic.png */; };
+		DF062D512AC8801000FC48C0 /* kuring_app_blueprint.png in Resources */ = {isa = PBXBuildFile; fileRef = DF062D4D2AC8801000FC48C0 /* kuring_app_blueprint.png */; };
+		DF062D522AC8801000FC48C0 /* kuring_app.png in Resources */ = {isa = PBXBuildFile; fileRef = DF062D4E2AC8801000FC48C0 /* kuring_app.png */; };
+		DF062D532AC8801000FC48C0 /* kuring_app_sketch.png in Resources */ = {isa = PBXBuildFile; fileRef = DF062D4F2AC8801000FC48C0 /* kuring_app_sketch.png */; };
 		DFE7AB152AC332DB00230934 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE7AB142AC332DB00230934 /* SettingView.swift */; };
 		DFE7AB172AC33D6700230934 /* AppIconSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE7AB162AC33D6700230934 /* AppIconSelectView.swift */; };
 /* End PBXBuildFile section */
@@ -25,6 +29,11 @@
 		A9DAFA572AB1F04C0064F748 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A9DAFA662AB1F09B0064F748 /* KuringModulePackage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = KuringModulePackage; path = ../KuringModulePackage; sourceTree = "<group>"; };
+		DF062D4A2AC87B6D00FC48C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DF062D4C2AC8801000FC48C0 /* kuring_app_classic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kuring_app_classic.png; path = "../../../../../../../Downloads/쿠링앱아이콘/kuring_app_classic.png"; sourceTree = "<group>"; };
+		DF062D4D2AC8801000FC48C0 /* kuring_app_blueprint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kuring_app_blueprint.png; path = "../../../../../../../Downloads/쿠링앱아이콘/kuring_app_blueprint.png"; sourceTree = "<group>"; };
+		DF062D4E2AC8801000FC48C0 /* kuring_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kuring_app.png; path = "../../../../../../../Downloads/쿠링앱아이콘/kuring_app.png"; sourceTree = "<group>"; };
+		DF062D4F2AC8801000FC48C0 /* kuring_app_sketch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kuring_app_sketch.png; path = "../../../../../../../Downloads/쿠링앱아이콘/kuring_app_sketch.png"; sourceTree = "<group>"; };
 		DFE7AB142AC332DB00230934 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		DFE7AB162AC33D6700230934 /* AppIconSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconSelectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,6 +80,7 @@
 		A9DAFA522AB1F04B0064F748 /* KuringApp */ = {
 			isa = PBXGroup;
 			children = (
+				DF062D4A2AC87B6D00FC48C0 /* Info.plist */,
 				DFE7AB132AC332D200230934 /* Setting */,
 				A9DAFA532AB1F04B0064F748 /* KuringApp.swift */,
 				A9DAFA552AB1F04B0064F748 /* ContentView.swift */,
@@ -88,9 +98,21 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		DF062D4B2AC8800000FC48C0 /* AppLogos */ = {
+			isa = PBXGroup;
+			children = (
+				DF062D4D2AC8801000FC48C0 /* kuring_app_blueprint.png */,
+				DF062D4C2AC8801000FC48C0 /* kuring_app_classic.png */,
+				DF062D4E2AC8801000FC48C0 /* kuring_app.png */,
+				DF062D4F2AC8801000FC48C0 /* kuring_app_sketch.png */,
+			);
+			path = AppLogos;
+			sourceTree = "<group>";
+		};
 		DFE7AB132AC332D200230934 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				DF062D4B2AC8800000FC48C0 /* AppLogos */,
 				DFE7AB142AC332DB00230934 /* SettingView.swift */,
 				DFE7AB162AC33D6700230934 /* AppIconSelectView.swift */,
 			);
@@ -163,7 +185,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9DAFA5B2AB1F04C0064F748 /* Preview Assets.xcassets in Resources */,
+				DF062D532AC8801000FC48C0 /* kuring_app_sketch.png in Resources */,
+				DF062D512AC8801000FC48C0 /* kuring_app_blueprint.png in Resources */,
+				DF062D502AC8801000FC48C0 /* kuring_app_classic.png in Resources */,
 				A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */,
+				DF062D522AC8801000FC48C0 /* kuring_app.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +340,7 @@
 				DEVELOPMENT_TEAM = 77CD4KLN3Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KuringApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -343,6 +370,7 @@
 				DEVELOPMENT_TEAM = 77CD4KLN3Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KuringApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
