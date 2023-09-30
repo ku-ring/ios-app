@@ -7,6 +7,7 @@
 
 import Model
 import SwiftUI
+import NoticeListFeature
 import ComposableArchitecture
 
 struct NoticeAppFeature: Reducer {
@@ -67,6 +68,21 @@ struct NoticeAppView: View {
                     action: { .noticeList($0) }
                 )
             )
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    Image("appIconLabel", bundle: Bundle.noticeList)
+                }
+                
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button {
+                        // TODO: - to SearchView
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundStyle(Color.black)
+                    }
+                }
+            }
+            
         } destination: { state in
             switch state {
             case .detail:
@@ -94,20 +110,26 @@ struct NoticeAppView: View {
                 ) { store in
                     DepartmentEditor(store: store)
                         .navigationTitle("Department Editor")
+//                        .navigationBarBackButtonHidden(true)
+//                        .toolbar {
+//                            ToolbarItemGroup(placement: .navigationBarLeading) {
+//                                Image(systemName: "chevron.left")
+//                            }
+//                        }
                 }
+                
             }
         }
-
     }
 }
-
-#Preview {
-    NoticeAppView(
-        store: Store(
-            initialState: NoticeAppFeature.State(
-                noticeList: NoticeListFeature.State(notices: [.random])
-            ),
-            reducer: { NoticeAppFeature() }
-        )
-    )
-}
+//
+//#Preview {
+//    NoticeAppView(
+//        store: Store(
+//            initialState: NoticeAppFeature.State(
+//                noticeList: NoticeListFeature.State(notices: [.국제: .init(arrayLiteral: .random)])
+//            ),
+//            reducer: { NoticeAppFeature() }
+//        )
+//    )
+//}
