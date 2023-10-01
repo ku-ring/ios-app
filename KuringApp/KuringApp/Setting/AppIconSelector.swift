@@ -8,6 +8,27 @@
 import SwiftUI
 import ComposableArchitecture
 
+extension DependencyValues {
+    public var appIcons: AppIcons {
+        get { self[AppIcons.self] }
+        set { self[AppIcons.self] = newValue }
+    }
+}
+
+public struct AppIcons: DependencyKey {
+    public static let liveValue: AppIcons  = AppIcons()
+    
+    @MainActor
+    func changeTo(_ icon: KuringIcon) async {
+        guard UIApplication.shared.supportsAlternateIcons else { return }
+        do {
+            try await UIApplication.shared.setAlternateIconName(icon.rawValue)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+}
+
 enum KuringIcon: String, CaseIterable, Identifiable {
     var id: String { self.rawValue }
     case kuring_app
@@ -42,6 +63,8 @@ struct AppIconSelectFeature: Reducer {
         }
     }
     
+    @Dependency(\.appIcons) var appIcons
+    
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
@@ -49,25 +72,12 @@ struct AppIconSelectFeature: Reducer {
                 state.selectedIcon = icon
                 return .none
                 
-                
             case .saveButtonTapped:
-                
                 return .run { [selectedIcon = state.selectedIcon] send in
-                    if await UIApplication.shared.supportsAlternateIcons {
-                        DispatchQueue.main.async {
-                            Task {
-                                do {
-                                    try await UIApplication.shared.setAlternateIconName(selectedIcon?.rawValue)
-                                    send(.delegate(.alternativeAppIconSave(selectedIcon ?? KuringIcon.kuring_app)))
-                                } catch let error {
-                                    print(error.localizedDescription)
-                                }
-                                
-                            }
-                        }
-                        
+                    guard let selectedIcon else { return }
+                    await appIcons.changeTo(selectedIcon)
+                    await send(.delegate(.alternativeAppIconSave(selectedIcon)))
                     }
-                }
                 
             case .delegate:
                 return .none
