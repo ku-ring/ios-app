@@ -10,13 +10,13 @@ import ComposableArchitecture
 
 struct SettingListFeature: Reducer {
     struct State: Equatable {
-        @PresentationState var selectAppIcon: AppIconSelect.State?
+        @PresentationState var selectAppIcon: AppIconSelectFeature.State?
         var currentAppIcon: KuringIcon?
     }
     
     enum Action: Equatable {
         case appIconPresentButtonTapped
-        case changeIcon(PresentationAction<AppIconSelect.Action>)
+        case selectAppIcon(PresentationAction<AppIconSelectFeature.Action>)
         
     }
     
@@ -24,12 +24,12 @@ struct SettingListFeature: Reducer {
         Reduce { state, action in
             switch action {
             case .appIconPresentButtonTapped:
-                state.selectAppIcon = AppIconSelect.State(
+                state.selectAppIcon = AppIconSelectFeature.State(
                     selectedIcon: state.currentAppIcon ?? KuringIcon.kuring_app
                 )
                 return .none
                 
-            case let .changeIcon(.presented(.delegate(action))):
+            case let .selectAppIcon(.presented(.delegate(action))):
                 switch action {
                 case let .alternativeAppIconSave(icon):
                     state.currentAppIcon = icon
@@ -41,8 +41,8 @@ struct SettingListFeature: Reducer {
                 return .none
             }
         }
-        .ifLet(\.$selectAppIcon, action: /Action.changeIcon) {
-            AppIconSelect()
+        .ifLet(\.$selectAppIcon, action: /Action.selectAppIcon) {
+            AppIconSelectFeature()
         }
     }
 }
@@ -73,11 +73,11 @@ struct SettingView: View {
             .sheet(
                 store: self.store.scope(
                     state: \.$selectAppIcon,
-                    action: { .changeIcon($0) }
+                    action: { .selectAppIcon($0) }
                 )
             ) { store in
                 NavigationStack {
-                    AppIconSelectView(store: store)
+                    AppIconSelector(store: store)
                         .navigationTitle("App Icon select Page")
                 }
                 

@@ -1,5 +1,5 @@
 //
-//  AppIconSelectView.swift
+//  AppIconSelector.swift
 //  KuringApp
 //
 //  Created by 박성수 on 2023/09/27.
@@ -8,7 +8,8 @@
 import SwiftUI
 import ComposableArchitecture
 
-enum KuringIcon: String, CaseIterable {
+enum KuringIcon: String, CaseIterable, Identifiable {
+    var id: String { self.rawValue }
     case kuring_app
     case kuring_app_classic
     case kuring_app_blueprint
@@ -24,14 +25,14 @@ enum KuringIcon: String, CaseIterable {
     }
 }
 
-struct AppIconSelect: Reducer {
+struct AppIconSelectFeature: Reducer {
     struct State: Equatable {
-        var appIcons: [KuringIcon] = KuringIcon.allCases
+        var appIcons: IdentifiedArrayOf<KuringIcon> = IdentifiedArray(uniqueElements: KuringIcon.allCases)
         var selectedIcon: KuringIcon?
     }
     
     enum Action: Equatable {
-        case appIconButtonTapped(tappedValue: KuringIcon)
+        case appIconSelected(KuringIcon)
         case saveButtonTapped
         
         // MARK: To SettingView
@@ -44,11 +45,13 @@ struct AppIconSelect: Reducer {
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case let .appIconButtonTapped(tappedValue: tappedValue):
-                state.selectedIcon = tappedValue
+            case let .appIconSelected(icon):
+                state.selectedIcon = icon
                 return .none
                 
+                
             case .saveButtonTapped:
+                
                 return .run { [selectedIcon = state.selectedIcon] send in
                     if await UIApplication.shared.supportsAlternateIcons {
                         DispatchQueue.main.async {
@@ -73,12 +76,12 @@ struct AppIconSelect: Reducer {
     }
 }
 
-struct AppIconSelectView: View {
-    let store: StoreOf<AppIconSelect>
+struct AppIconSelector: View {
+    let store: StoreOf<AppIconSelectFeature>
     
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            List(viewStore.appIcons, id: \.self) { icon in
+            List(viewStore.appIcons) { icon in
                 HStack {
                     VStack {
                         Image(uiImage: UIImage(named: icon.rawValue)!)
@@ -89,7 +92,7 @@ struct AppIconSelectView: View {
                     .padding(.trailing)
                     
                     Button {
-                        viewStore.send(.appIconButtonTapped(tappedValue: icon))
+                        viewStore.send(.appIconSelected(icon))
                     } label: {
                         Text(icon.korValue)
                             .foregroundStyle(.black)
@@ -116,14 +119,14 @@ struct AppIconSelectView: View {
 }
 
 #Preview {
-    AppIconSelectView(
+    AppIconSelector(
         store: Store(
             initialState: 
-                AppIconSelect.State(
+                AppIconSelectFeature.State(
                     selectedIcon: KuringIcon.kuring_app
                 ),
             reducer: {
-                AppIconSelect()
+                AppIconSelectFeature()
             }
         )
     )
