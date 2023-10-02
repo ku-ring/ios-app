@@ -39,8 +39,6 @@ struct SearchFeature: Reducer {
                 case searching
                 /// 검색 완료 (결과가 있는 상태)
                 case complete
-                /// 검색 완료 (결과가 없는 상태)
-                case completeNoResult
                 /// 검색 실패
                 case failure
             }
@@ -260,7 +258,7 @@ struct SearchView: View {
             beforePhaseView
         case .searching:
             searchingPhaseView
-        case .complete, .completeNoResult, .failure:
+        case .complete, .failure:
             feedbackPhaseView
         }
     }
