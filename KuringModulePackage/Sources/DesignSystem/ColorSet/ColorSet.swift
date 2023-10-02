@@ -54,112 +54,128 @@ public struct ColorSet {
     
     /// 특정 카테고리에 속하지 않는 일반 색상입니다.
     public struct General {
+        
+        
         /// 쿠링 초록색 입니다. 버튼의 배경색상, 테두리 색상 등에 사용되며 다른 초록색 계열과 함께 사용되지 않도록 해야합니다.
-        public static let green = UIColor(
-            named: "ColorSet.green",
-            in: Bundle.commonModule,
-            compatibleWith: nil
-        ) ?? UIColor.green
+        public static let green = UIColor(resource: .colorSetGreen)
+//        public static let green = UIColor(
+//            named: "ColorSet.green",
+//            in: .module,
+//            compatibleWith: nil
+//        ) ?? UIColor.green
         
         /// 쿠링 연한 초록색 입니다. (다크모드는 진한 초록색) 진한 초록색상과 동일한 컴포넌트에서 초록색상을 써야할 때 사용합니다.
-        public static let secondaryGreen = UIColor(
-            named: "ColorSet.secondaryGreen",
-            in: Bundle.commonModule,
-            compatibleWith: nil
-        ) ?? UIColor.green.withAlphaComponent(0.5)
+        public static let secondaryGreen = UIColor(resource: .colorSetSecondaryGreen)
+//        public static let secondaryGreen = UIColor(
+//            named: "ColorSet.secondaryGreen",
+//            in: .module,
+//            compatibleWith: nil
+//        ) ?? UIColor.green.withAlphaComponent(0.5)
         
         /// 쿠링 3순위 초록색입니다. 살짝만 초륵색의 느낌을 주고 싶을 때 사용합니다. 주로 selector 의 배경색에 사용됩니다.
-        static let tertiaryGreen = UIColor(
-            named: "ColorSet.tertiaryGreen",
-            in: Bundle.commonModule,
-            compatibleWith: nil
-        ) ?? UIColor.green.withAlphaComponent(0.25)
+        public static let tertiaryGreen = UIColor(resource: .colorSetTertiaryGreen)
+//        static let tertiaryGreen = UIColor(
+//            named: "ColorSet.tertiaryGreen",
+//            in: .module,
+//            compatibleWith: nil
+//        ) ?? UIColor.green.withAlphaComponent(0.25)
 
         /// 쿠링 분홍색입니다. 에러나 삭제와 같이 위험성을 강조해야하는 경우에 사용됩니다.
-        public static let pink = UIColor(
-            named: "ColorSet.pink",
-            in: Bundle.commonModule,
-            compatibleWith: nil
-        ) ?? UIColor.systemPink
+        public static let pink = UIColor(resource: .colorSetPink)
+//        public static let pink = UIColor(
+//            named: "ColorSet.pink",
+//            in: .module,
+//            compatibleWith: nil
+//        ) ?? UIColor.systemPink
         
         /// 쿠링 파란색입니다. 가급적 사용을 지양하며 초록색을 쓰는 것을 권장합니다.
-        public static let blue = UIColor(
-            named: "ColorSet.blue",
-            in: Bundle.commonModule,
-            compatibleWith: nil
-        ) ?? UIColor.systemBlue
+        public static let blue = UIColor(resource: .colorSetBlue)
+//        public static let blue = UIColor(
+//            named: "ColorSet.blue",
+//            in: .module,
+//            compatibleWith: nil
+//        ) ?? UIColor.systemBlue
         
         /// 쿠링 회색입니다.
-        public static let gray = UIColor(
-            named: "ColorSet.gray",
-            in: Bundle.commonModule,
-            compatibleWith: nil
-        ) ?? UIColor.gray
+        public static let gray = UIColor(resource: .colorSetGray)
+//        public static let gray = UIColor(
+//            named: "ColorSet.gray",
+//            in: .module,
+//            compatibleWith: nil
+//        ) ?? UIColor.gray
         
         /// 쿠링 연한 회색입니다. (다크모드는 진한 회색)
-        public static let secondaryGray = UIColor(
-            named: "ColorSet.secondaryGray",
-            in: Bundle.commonModule,
-            compatibleWith: nil
-        ) ?? UIColor.lightGray
+        public static let secondaryGray = UIColor(resource: .colorSetSecondaryGray)
+//        public static let secondaryGray = UIColor(
+//            named: "ColorSet.secondaryGray",
+//            in: .module,
+//            compatibleWith: nil
+//        ) ?? UIColor.lightGray
     }
     
     /// 라벨, 텍스트에 사용하는 것을 목적으로 하는 색상입니다.
     public struct Label {
         /// 쿠링의 일반 글자색입니다. 기본은 검정색이며, 다크모드는 흰색입니다.
-        public static let primary = UIColor(
-            named: "ColorSet.Label.primary",
-            in: Bundle.commonModule,
-            compatibleWith: nil
-        ) ?? UIColor.label
+        public static let primary = UIColor(resource: .colorSetLabelPrimary)
+//        public static let primary = UIColor(
+//            named: "ColorSet.Label.primary",
+//            in: .module,
+//            compatibleWith: nil
+//        ) ?? UIColor.label
         
         /// 쿠링의 2순위 글자색입니다. 기본은 진한 회색이며, 다크모드는 연한 흰색입니다.
-        public static let secondary = UIColor(
-            named: "ColorSet.Label.secondary",
-            in: Bundle.commonModule,
-            compatibleWith: nil
-        ) ?? UIColor.secondaryLabel
+        public static let secondary = UIColor(resource: .colorSetLabelSecondary)
+//        public static let secondary = UIColor(
+//            named: "ColorSet.Label.secondary",
+//            in: .module,
+//            compatibleWith: nil
+//        ) ?? UIColor.secondaryLabel
         
         /// 쿠링의 3순위 글자색입니다. 기본은 회색입니다.
         /// `secondary` 가 쓰이고 있는 경우에만 사용하는 것을 권장합니다.
-        public static let tertiary = UIColor(
-            named: "ColorSet.Label.tertiary",
-            in: Bundle.commonModule,
-            compatibleWith: nil
-        ) ?? UIColor.tertiaryLabel
+        public static let tertiary = UIColor(resource: .colorSetLabelTertiary)
+//        public static let tertiary = UIColor(
+//            named: "ColorSet.Label.tertiary",
+//            in: .module,
+//            compatibleWith: nil
+//        ) ?? UIColor.tertiaryLabel
         
         /// 쿠링 텍스트용 초록색입니다. `ColorSet.green` 보다 진한 초록색입니다.
         /// 배경에 `Background.green` 또는 `ColorSet.secondaryGreen`이 쓰이는 경우 사용하는 것을 권장합니다.
-        public static let green = UIColor(
-            named: "ColorSet.Label.green",
-            in: Bundle.commonModule,
-            compatibleWith: nil
-        ) ?? UIColor.green
+        public static let green = UIColor(resource: .colorSetLabelGreen)
+//        public static let green = UIColor(
+//            named: "ColorSet.Label.green",
+//            in: .module,
+//            compatibleWith: nil
+//        ) ?? UIColor.green
     }
     
     /// 배경에 사용하는 것을 목적으로 하는 색상입니다.
     public struct Background {
         /// 쿠링 기본 배경색입니다. 기본은 흰색이며, 다크모드는 매우 짙은 회색입니다.
-        public static let primary = UIColor(
-            named: "ColorSet.Background.primary",
-            in: Bundle.commonModule,
-            compatibleWith: nil
-        ) ?? UIColor.secondarySystemGroupedBackground
+        public static let primary = UIColor(resource: .colorSetBackgroundPrimary)
+//        public static let primary = UIColor(
+//            named: "ColorSet.Background.primary",
+//            in: .module,
+//            compatibleWith: nil
+//        ) ?? UIColor.secondarySystemGroupedBackground
         
         /// 쿠링 배경용 초록색입니다. `ColorSet.green` 보다 연한 초록색입니다.
         /// 글자색으로 `Label.green` 을 사용하는 컴포넌트의 배경색으로 사용합니다.
-        public static let green = UIColor(
-            named: "ColorSet.secondaryGreen",
-            in: Bundle.commonModule,
-            compatibleWith: nil
-        ) ?? UIColor.green.withAlphaComponent(0.5)
+        public static let green = UIColor(resource: .colorSetTertiaryGreen)
+//        public static let green = UIColor(
+//            named: "ColorSet.secondaryGreen",
+//            in: .module,
+//            compatibleWith: nil
+//        ) ?? UIColor.green.withAlphaComponent(0.5)
         
         /// 쿠링맵 전용 배경색으로 양피지 같은 연한 노란색입니다. (다크모드는 짙은 청록색)
-        public static let kuringMap = UIColor(
-            named: "ColorSet.kuringMapBackground",
-            in: Bundle.commonModule,
-            compatibleWith: nil
-        ) ?? UIColor.secondarySystemGroupedBackground
+        public static let kuringMap = UIColor(resource: .colorSetKuringMapBackground)
+//        public static let kuringMap = UIColor(
+//            named: "ColorSet.kuringMapBackground",
+//            in: .module,
+//            compatibleWith: nil
+//        ) ?? UIColor.secondarySystemGroupedBackground
     }
 }
 
