@@ -42,13 +42,25 @@ public struct TopBlurButton: View {
 
 #Preview {
     VStack {
-        Spacer()
         Rectangle()
             .foregroundStyle(Color.red)
             .frame(height: 40)
         TopBlurButton(
             "쿠링",
             fontColor: ColorSet.Background.green.color,
-            backgroundColor: ColorSet.Background.green.color.opacity(0.2))
+            backgroundColor: ColorSet.Background.green.color.opacity(0.15))
+        
+        Rectangle()
+            .frame(height: 10)
+        Rectangle()
+            .foregroundStyle(Color.red)
+            .frame(height: 40)
+        TopBlurButton(
+            "쿠링",
+            fontColor: .white,
+            backgroundColor: ColorSet.Background.green.color)
+        
+        
+        Spacer()
     }
 }
