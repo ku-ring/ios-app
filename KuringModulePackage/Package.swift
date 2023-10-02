@@ -19,6 +19,10 @@ let package = Package(
         .library(
             name: "Subscriptions",
             targets: ["SubscriptionFeature"]
+        ),
+        .library(
+            name: "DesignSystem",
+            targets: ["DesignSystem"]
         )
     ],
     dependencies: [
@@ -72,7 +76,6 @@ let package = Package(
             dependencies: ["NoticeListFeature", "Model"],
             path: "Tests/Feature/NoticeListFeatureTests"
         ),
-        
         .target(
             name: "FeedbackFeature",
             dependencies: [
@@ -90,7 +93,12 @@ let package = Package(
             path: "Sources/Feature/Subscriptions",
             resources: [.process("Resources")]
         ),
-        
+        // MARK: - DesignSystem
+        .target(
+            name: "DesignSystem",
+            path: "Sources/DesignSystem/ColorSet",
+            resources: [.process("Resources")]
+        ),
         // MARK: Shared
         .target(
             name: "Model",
