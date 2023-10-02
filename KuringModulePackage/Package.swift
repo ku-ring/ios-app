@@ -21,8 +21,12 @@ let package = Package(
             targets: ["SubscriptionFeature"]
         ),
         .library(
-            name: "DesignSystem",
-            targets: ["DesignSystem"]
+            name: "ColorSet",
+            targets: ["ColorSet"]
+        ),
+        .library(
+            name: "UIComponents",
+            targets: ["UIComponents"]
         )
     ],
     dependencies: [
@@ -95,9 +99,14 @@ let package = Package(
         ),
         // MARK: - DesignSystem
         .target(
-            name: "DesignSystem",
+            name: "ColorSet",
             path: "Sources/DesignSystem/ColorSet",
             resources: [.process("Resources")]
+        ),
+        .target(
+            name: "UIComponents",
+            dependencies: ["Model"],
+            path: "Sources/DesignSystem/UIComponents"
         ),
         // MARK: Shared
         .target(

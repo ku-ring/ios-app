@@ -7,7 +7,8 @@
 
 import SwiftUI
 import ComposableArchitecture
-import DesignSystem
+import UIComponents
+import ColorSet
 
 @main
 struct KuringApp: App {

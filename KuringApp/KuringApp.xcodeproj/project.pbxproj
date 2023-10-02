@@ -24,7 +24,8 @@
 		A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA552AB1F04B0064F748 /* ContentView.swift */; };
 		A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA572AB1F04C0064F748 /* Assets.xcassets */; };
 		A9DAFA5B2AB1F04C0064F748 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */; };
-		B11DBDC42ACAB24600501CA8 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = B11DBDC32ACAB24600501CA8 /* DesignSystem */; };
+		B11DBDC62ACAC9B900501CA8 /* ColorSet in Frameworks */ = {isa = PBXBuildFile; productRef = B11DBDC52ACAC9B900501CA8 /* ColorSet */; };
+		B11DBDC82ACAC9B900501CA8 /* UIComponents in Frameworks */ = {isa = PBXBuildFile; productRef = B11DBDC72ACAC9B900501CA8 /* UIComponents */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,7 +55,8 @@
 				A947DCBE2AB47D3800A6D614 /* Notices in Frameworks */,
 				A947DCC02AB47D3B00A6D614 /* Feedbacks in Frameworks */,
 				A947DCC22AB47D3E00A6D614 /* Subscriptions in Frameworks */,
-				B11DBDC42ACAB24600501CA8 /* DesignSystem in Frameworks */,
+				B11DBDC62ACAC9B900501CA8 /* ColorSet in Frameworks */,
+				B11DBDC82ACAC9B900501CA8 /* UIComponents in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +177,8 @@
 				A947DCBD2AB47D3800A6D614 /* Notices */,
 				A947DCBF2AB47D3B00A6D614 /* Feedbacks */,
 				A947DCC12AB47D3E00A6D614 /* Subscriptions */,
-				B11DBDC32ACAB24600501CA8 /* DesignSystem */,
+				B11DBDC52ACAC9B900501CA8 /* ColorSet */,
+				B11DBDC72ACAC9B900501CA8 /* UIComponents */,
 			);
 			productName = KuringApp;
 			productReference = A9DAFA502AB1F04B0064F748 /* KuringApp.app */;
@@ -464,9 +467,13 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Subscriptions;
 		};
-		B11DBDC32ACAB24600501CA8 /* DesignSystem */ = {
+		B11DBDC52ACAC9B900501CA8 /* ColorSet */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = DesignSystem;
+			productName = ColorSet;
+		};
+		B11DBDC72ACAC9B900501CA8 /* UIComponents */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UIComponents;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
