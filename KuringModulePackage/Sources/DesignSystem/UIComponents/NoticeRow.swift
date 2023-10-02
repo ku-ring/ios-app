@@ -33,7 +33,7 @@ public struct NoticeRow: View {
         ZStack {
             switch rowType {
             case .important, .importantAndBookmark:
-                Color(red: 0.24, green: 0.74, blue: 0.5, opacity: 0.1)
+                Color(uiColor: ColorSet.green.withAlphaComponent(0.1))
             default:
                 Color.clear
             }
@@ -107,13 +107,13 @@ public struct NoticeRow: View {
             .font(.system(size: 12, weight: .semibold))
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
-            .foregroundStyle(Color(red: 0.24, green: 0.74, blue: 0.5))
+            .foregroundStyle(ColorSet.Label.green.color)
             .background(Color.white)
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .inset(by: 0.25)
-                    .stroke(Color(red: 0.24, green: 0.74, blue: 0.5), lineWidth: 0.5)
+                    .stroke(ColorSet.green.color, lineWidth: 0.5)
             )
     }
 
@@ -121,15 +121,14 @@ public struct NoticeRow: View {
     private var titleView: some View {
         Text(notice.subject)
             .font(.system(size: 15, weight: .medium))
-            .foregroundColor(Color(red: 0.21, green: 0.24, blue: 0.29))
+            .foregroundColor(ColorSet.Label.gray.color)
     }
 
     @ViewBuilder
     private var dateView: some View {
-        // TODO: - 정보 재구성
         Text(notice.postedDate)
             .font(.system(size: 14))
-            .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+            .foregroundStyle(ColorSet.Label.gray.color.opacity(0.6))
     }
 
     @ViewBuilder
@@ -137,14 +136,13 @@ public struct NoticeRow: View {
         ZStack {
             RoundedRectangle(cornerRadius: 2)
                 .compositingGroup()
-                .foregroundStyle(Color(red: 0.24, green: 0.74, blue: 0.5))
+                .foregroundStyle(ColorSet.green.color)
                 .frame(width: 16, height: 21)
 
             RoundedRectangle(cornerRadius: 2)
                 .rotation(.degrees(45))
                 .frame(width: 16, height: 16)
                 .offset(x: 0, y: 14.5)
-                .foregroundStyle(Color.red)
                 .blendMode(.destinationOut)
         }
         .compositingGroup()
