@@ -105,7 +105,7 @@ let package = Package(
         ),
         .target(
             name: "UIComponents",
-            dependencies: ["Model"],
+            dependencies: ["Model", "ColorSet"],
             path: "Sources/DesignSystem/UIComponents"
         ),
         // MARK: Shared
