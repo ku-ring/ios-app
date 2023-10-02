@@ -24,6 +24,7 @@
 		A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA552AB1F04B0064F748 /* ContentView.swift */; };
 		A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA572AB1F04C0064F748 /* Assets.xcassets */; };
 		A9DAFA5B2AB1F04C0064F748 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */; };
+		B11DBDCA2ACB2F9D00501CA8 /* StaffRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11DBDC92ACB2F9D00501CA8 /* StaffRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		A9DAFA572AB1F04C0064F748 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A9DAFA662AB1F09B0064F748 /* KuringModulePackage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = KuringModulePackage; path = ../KuringModulePackage; sourceTree = "<group>"; };
+		B11DBDC92ACB2F9D00501CA8 /* StaffRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				A9B4F01C2ABCB4CE00354C00 /* SearchView.swift */,
+				B11DBDC92ACB2F9D00501CA8 /* StaffRow.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				A9B4F01D2ABCB4CE00354C00 /* SearchView.swift in Sources */,
 				A965B7A32AC013060026ECDC /* DepartmentEditor.swift in Sources */,
 				A965B7A52AC013BF0026ECDC /* DepartmentSelector.swift in Sources */,
+				B11DBDCA2ACB2F9D00501CA8 /* StaffRow.swift in Sources */,
 				A9B4F0162ABCA93400354C00 /* NoticeApp.Path.swift in Sources */,
 				A965B7A72AC0696B0026ECDC /* Department.swift in Sources */,
 				A9B4F0182ABCA9AF00354C00 /* NoticeDetailView.swift in Sources */,
