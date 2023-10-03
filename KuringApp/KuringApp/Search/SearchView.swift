@@ -122,7 +122,9 @@ struct SearchFeature: Reducer {
                 return .none
                 
             case .appendRecents:
-                state.recents = state.recents + [state.searchInfo.text]
+                if !state.searchInfo.text.isEmpty {
+                    state.recents = state.recents + [state.searchInfo.text]
+                }
                 return .none
                 
             }
@@ -189,7 +191,7 @@ struct SearchView: View {
                     .padding(.top, 20)
                     .padding(.bottom, 12)
                     
-                    ScrollView(.horizontal) {
+                    ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack {
                             ForEach(viewStore.recents, id: \.self) { recent in
                                 HStack(alignment: .center, spacing: 6) {
