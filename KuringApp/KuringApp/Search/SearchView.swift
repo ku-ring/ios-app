@@ -9,7 +9,7 @@ import Model
 import SwiftUI
 import KuringDependencies
 import ComposableArchitecture
-
+import OSLog
 
 struct SearchFeature: Reducer {
     struct State: Equatable {
@@ -59,6 +59,8 @@ struct SearchFeature: Reducer {
         case fetchNotices([Notice])
         /// 검색된 스태프
         case fetchStaffs([Staff])
+        /// 검색 에러 핸들러
+        case searchFailure(State.SearchInfo.SearchType)
         /// 최근 검색어 업데이트
         case appendRecents
         case binding(BindingAction<State>)
@@ -88,12 +90,16 @@ struct SearchFeature: Reducer {
                     return .run { [keyword = state.searchInfo.text] send in
                         let notices = try await kuringLink.searchNotices(keyword)
                         await send(.fetchNotices(notices))
+                    } catch: { error, send in
+                        await send(.searchFailure(.notice))
                     }
                 case .staff:
                     state.searchInfo.staffSearchPhase = .searching
                     return .run { [keyword = state.searchInfo.text] send in
                         let staffs = try await kuringLink.searchStaffs(keyword)
                         await send(.fetchStaffs(staffs))
+                    } catch: { error, send in
+                        await send(.searchFailure(.staff))
                     }
                 }
                 
@@ -105,6 +111,17 @@ struct SearchFeature: Reducer {
             case .fetchStaffs(let staffs):
                 state.searchInfo.staffSearchPhase = .complete
                 state.resultStaffs = staffs
+                return .none
+                
+            case .searchFailure(let searchType):
+                switch searchType {
+                case .notice:
+                    state.searchInfo.noticeSearchPhase = .failure
+                    state.resultNotices = nil
+                case .staff:
+                    state.searchInfo.staffSearchPhase = .failure
+                    state.resultStaffs = nil
+                }
                 return .none
                 
             case .appendRecents:
