@@ -78,7 +78,6 @@ struct SearchFeature: Reducer {
                 return .none
              
             case .deleteAllRecentsButtonTapped:
-                // FIXME: - TextField onSubmit에서 이게 무조건적으로 호출되고 있음.
                 state.recents.removeAll()
                 return .none
             
@@ -109,10 +108,9 @@ struct SearchFeature: Reducer {
                 return .none
                 
             case .appendRecents:
-                print("state.recents \(state.recents)")
                 state.recents = state.recents + [state.searchInfo.text]
-                print("state.recents2 \(state.recents)")
                 return .none
+                
             }
         }
     }
@@ -275,7 +273,7 @@ struct SearchView: View {
                             }
                         }
                     } else {
-                        emptyPhaseView(viewStore.searchInfo.noticeSearchPhase)
+                        emptyPhaseView(viewStore.searchInfo.staffSearchPhase)
                     }
                 }
                 
