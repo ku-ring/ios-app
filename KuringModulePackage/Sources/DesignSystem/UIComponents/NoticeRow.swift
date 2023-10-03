@@ -26,7 +26,7 @@ public struct NoticeRow: View {
         /// 북마크
         case bookmark
         /// 기본
-        case none
+        case normal
     }
 
     public var body: some View {
@@ -84,7 +84,7 @@ public struct NoticeRow: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 12)
-            case .none:
+            case .normal:
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
                         titleView
@@ -154,7 +154,7 @@ public struct NoticeRow: View {
         NoticeRow(.importantAndBookmark, notice: .random)
         NoticeRow(.important, notice: .random)
         NoticeRow(.bookmark, notice: .random)
-        NoticeRow(.none, notice: .random)
+        NoticeRow(.normal, notice: .random)
     }
     .listStyle(.plain)
 }
