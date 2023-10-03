@@ -76,9 +76,6 @@ struct SearchFeature: Reducer {
             case .binding:
                 return .none
                 
-            case .binding(\.$searchInfo):
-                return .none
-             
             case .deleteAllRecentsButtonTapped:
                 state.recents.removeAll()
                 return .none
