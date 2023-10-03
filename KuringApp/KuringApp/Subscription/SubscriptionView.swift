@@ -31,7 +31,7 @@ struct SubscriptionFeature: Reducer {
     }
     
     enum Action {
-        case chipButtonTapped(State.SubscriptionType)
+        case segmentSelected(State.SubscriptionType)
         
         case univNoticeTypeGridTapped(String)
         case departmentGridTapped(Department)
@@ -44,7 +44,7 @@ struct SubscriptionFeature: Reducer {
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case .chipButtonTapped(let subscriptionType):
+            case .segmentSelected(let subscriptionType):
                 state.subscriptionType = subscriptionType
                 
                 return .none
@@ -103,10 +103,11 @@ struct SubscriptionView: View {
                         if viewStore.subscriptionType == .university {
                             didSelectChipView("일반 카테고리")
                         } else {
-                            deSelectChipView("일반 카테고리")
-                                .onTapGesture {
-                                    viewStore.send(.chipButtonTapped(.university))
-                                }
+                            Button {
+                                viewStore.send(.segmentSelected(.university))
+                            } label: {
+                                deSelectChipView("일반 카테고리")
+                            }
                         }
                     }
                     .font(.system(size: 16, weight: .bold))
@@ -115,10 +116,11 @@ struct SubscriptionView: View {
                         if viewStore.subscriptionType == .department {
                             didSelectChipView("학과 카테고리")
                         } else {
-                            deSelectChipView("학과 카테고리")
-                                .onTapGesture {
-                                    viewStore.send(.chipButtonTapped(.department))
-                                }
+                            Button {
+                                viewStore.send(.segmentSelected(.department))
+                            } label: {
+                                deSelectChipView("학과 카테고리")
+                            }
                         }
                     }
                     .font(.system(size: 16, weight: .bold))
