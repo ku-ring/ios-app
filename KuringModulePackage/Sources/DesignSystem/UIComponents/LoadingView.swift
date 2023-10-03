@@ -19,15 +19,15 @@ public struct LoadingView: View {
         HStack(spacing: 5) {
             circle
                 .offset(y: isAnimating1 ? 12 : -5)
-                .animation(.easeInOut(duration: 0.5).repeatForever(),
+                .animation(.easeInOut(duration: 0.4).repeatForever(),
                            value: isAnimating1)
             circle
                 .offset(y: isAnimating2 ? 12 : -5)
-                .animation(.easeInOut(duration: 0.5).repeatForever(),
+                .animation(.easeInOut(duration: 0.4).repeatForever(),
                            value: isAnimating2)
             circle
                 .offset(y: isAnimating3 ? 12 : -5)
-                .animation(.easeInOut(duration: 0.5).repeatForever(),
+                .animation(.easeInOut(duration: 0.4).repeatForever(),
                            value: isAnimating3)
         }
         .onAppear {
