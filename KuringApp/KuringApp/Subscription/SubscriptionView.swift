@@ -33,8 +33,8 @@ struct SubscriptionFeature: Reducer {
     enum Action {
         case segmentSelected(State.SubscriptionType)
         
-        case univNoticeTypeGridTapped(String)
-        case departmentGridTapped(Department)
+        case univNoticeTypeSelected(String)
+        case departmentSelected(Department)
         case confirmButtonTapped
         case addDepartmentsButtonTapped
         case editDepartmentsButtonTapped
@@ -48,7 +48,7 @@ struct SubscriptionFeature: Reducer {
                 state.subscriptionType = subscriptionType
                 
                 return .none
-            case .univNoticeTypeGridTapped(let univNoticeType):
+            case .univNoticeTypeSelected(let univNoticeType):
                 if let index = state.selectedunivNoticeType.firstIndex(of: univNoticeType) {
                     state.selectedunivNoticeType.remove(at: index)
                 } else {
@@ -56,7 +56,7 @@ struct SubscriptionFeature: Reducer {
                 }
                 
                 return .none
-            case .departmentGridTapped(let department):
+            case .departmentSelected(let department):
                 if let index = state.selectedDepartment.firstIndex(of: department) {
                     state.selectedDepartment.remove(at: index)
                 } else {
@@ -151,7 +151,7 @@ struct SubscriptionView: View {
                                     .padding()
                                 }
                                 .onTapGesture {
-                                    viewStore.send(.univNoticeTypeGridTapped(univNoticeType))
+                                    viewStore.send(.univNoticeTypeSelected(univNoticeType))
                                 }
                                 
                             }
@@ -193,7 +193,7 @@ struct SubscriptionView: View {
                                             .padding(.bottom, viewStore.myDepartments.last?.id == department.id ? 22 : 0)
                                             .contentShape(Rectangle())
                                             .onTapGesture {
-                                                viewStore.send(.departmentGridTapped(department))
+                                                viewStore.send(.departmentSelected(department))
                                             }
                                             
                                             // 밑줄
