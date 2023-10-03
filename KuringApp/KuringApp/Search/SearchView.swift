@@ -56,6 +56,10 @@ struct SearchFeature: Reducer {
         case deleteAllRecentsButtonTapped
         /// 검색
         case search
+        /// 검색된 공지
+        case fetchNotices([Notice])
+        /// 검색된 스태프
+        case fetchStaffs([Staff])
         case binding(BindingAction<State>)
     }
     
@@ -74,14 +78,28 @@ struct SearchFeature: Reducer {
             case .search:
                 switch state.searchInfo.searchType {
                 case .notice:
-                    // 학과 검색
-                    return .run { send in
-                        let a = kuringLink.fetchNotices
+                    state.searchInfo.noticeSearchPhase = .searching
+                    return .run { [keyword = state.searchInfo.text] send in
+                        let notices = try await kuringLink.searchNotices(keyword)
+                        await send(.fetchNotices(notices))
                     }
                 case .staff:
-                    // 스태프 검색
-                    return .none
+                    state.searchInfo.staffSearchPhase = .searching
+                    return .run { [keyword = state.searchInfo.text] send in
+                        let staffs = try await kuringLink.searchStaffs(keyword)
+                        await send(.fetchStaffs(staffs))
+                    }
                 }
+                
+            case .fetchNotices(let notices):
+                state.searchInfo.noticeSearchPhase = .complete
+                state.resultNotices = notices
+                return .none
+                
+            case .fetchStaffs(let staffs):
+                state.searchInfo.staffSearchPhase = .complete
+                state.resultStaffs = staffs
+                return .none
                 
             case .binding:
                 return .none
