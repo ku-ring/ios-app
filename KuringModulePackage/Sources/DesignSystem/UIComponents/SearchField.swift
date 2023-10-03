@@ -24,7 +24,6 @@ final class SearchModel: ObservableObject {
             .store(in: &subscriptions)
     }
     
-    
     deinit {
         subscriptions.forEach { $0.cancel() }
     }
@@ -83,16 +82,16 @@ public struct SearchField: View {
     }
 }
 
-//#Preview {
-//    @State var searchText: String = "empty"
-//    
-//    return VStack {
-//        SearchField(placeholder: "PlaceHolder") { text in
-//            searchText = text
-//        } clear: {
-//            searchText = "clear"
-//        }
-//        
-//        Text(searchText)
-//    }
-//}
+#Preview {
+    @State var searchText: String = "empty"
+    
+    return VStack {
+        SearchField(placeholder: "PlaceHolder") { text in
+            searchText = text
+        } clear: {
+            searchText = "clear"
+        }
+        
+        Text(searchText)
+    }
+}
