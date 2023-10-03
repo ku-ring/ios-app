@@ -165,6 +165,7 @@ struct SearchView: View {
                         }
                         
                         Spacer()
+                        
                         Button {
                             viewStore.send(.deleteAllRecentsButtonTapped)
                         } label: {
@@ -267,7 +268,7 @@ struct SearchView: View {
                         } else {
                             List(staffs, id: \.self) { staff in
                                 Button {
-                                    // TODO: -
+                                    // TODO: - 프레젠트 액션 연결하기
                                 } label: {
                                     StaffRow(staff: staff)
                                 }
