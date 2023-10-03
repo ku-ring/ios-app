@@ -83,18 +83,16 @@ public struct SearchField: View {
     }
 }
 
-
-// TODO: - 테스트 가능한 Preview 고민
-#Preview {
-    @State var searchText: String = "empty"
-    
-    return VStack {
-        SearchField(placeholder: "PlaceHolder") { text in
-            searchText = text
-        } clear: {
-            searchText = "clear"
-        }
-        
-        Text(searchText)
-    }
-}
+//#Preview {
+//    @State var searchText: String = "empty"
+//    
+//    return VStack {
+//        SearchField(placeholder: "PlaceHolder") { text in
+//            searchText = text
+//        } clear: {
+//            searchText = "clear"
+//        }
+//        
+//        Text(searchText)
+//    }
+//}
