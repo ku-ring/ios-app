@@ -7,7 +7,9 @@
 
 import Model
 import SwiftUI
+import KuringDependencies
 import ComposableArchitecture
+
 
 struct SearchFeature: Reducer {
     struct State: Equatable {
@@ -52,22 +54,39 @@ struct SearchFeature: Reducer {
     enum Action: BindableAction {
         /// 최근 검색어 전체 삭제
         case deleteAllRecentsButtonTapped
+        /// 검색
+        case search
         case binding(BindingAction<State>)
     }
+    
+    @Dependency(\.kuringLink) var kuringLink
     
     var body: some ReducerOf<Self> {
         BindingReducer()
         
         Reduce { state, action in
             switch action {
+            
+            case .deleteAllRecentsButtonTapped:
+                state.recents.removeAll()
+                return .none
+            
+            case .search:
+                switch state.searchInfo.searchType {
+                case .notice:
+                    // 학과 검색
+                    return .run { send in
+                        let a = kuringLink.fetchNotices
+                    }
+                case .staff:
+                    // 스태프 검색
+                    return .none
+                }
+                
             case .binding:
                 return .none
                 
             case .binding(\.$searchInfo):
-                return .none
-                
-            case .deleteAllRecentsButtonTapped:
-                state.recents.removeAll()
                 return .none
                 
             }
@@ -92,6 +111,9 @@ struct SearchView: View {
                         
                         TextField("검색어를 입력해주세요", text: viewStore.$searchInfo.text)
                             .focused($focus, equals: .search)
+                            .onSubmit {
+                                viewStore.send(.deleteAllRecentsButtonTapped)
+                            }
                         
                         if viewStore.searchInfo.text.isEmpty {
                             Image(systemName: "xmark")

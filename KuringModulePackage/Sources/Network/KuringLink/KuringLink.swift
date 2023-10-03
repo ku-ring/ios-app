@@ -37,6 +37,11 @@ public struct KuringLink {
     public var fetchNotices: (NoticeCount, NoticeType, Department?, Page) async throws -> [Notice]
     
     public var sendFeedback: (String, FCMToken) async throws -> Bool
+    
+    // MARK: - Search
+    public var searchNotices: (_ keyword: String) async throws -> [Notice]
+    
+    public var searchStaffs: (_ keyword: String) async throws -> [Staff]
 }
 
 
@@ -70,6 +75,26 @@ extension KuringLink {
                 )
             let isSucceed = (200..<300) ~= response.code
             return isSucceed
+        },
+        searchNotices: { keyword in
+            let response: Response<[Notice]> = try await satellite
+                .response(for: Path.searchNotices.path, // api/v2/notices/search
+                          httpMethod: .get,
+                          queryItems: [
+                            .init(name: "content", value: keyword)
+                          ]
+                )
+            return response.data
+        },
+        searchStaffs: { keyword in
+            let response: Response<[Staff]> = try await satellite
+                .response(for: Path.searchStaffs.path,
+                          httpMethod: .get,
+                          queryItems: [
+                            .init(name: "content", value: keyword)
+                          ]
+                )
+            return response.data
         }
     )
 }
@@ -82,6 +107,12 @@ extension KuringLink {
         },
         sendFeedback: { text, fcmToken in
             return true
+        },
+        searchNotices: { keyword in
+            return []
+        },
+        searchStaffs: { keyword in
+            return []
         }
     )
 }
