@@ -30,7 +30,7 @@ final class SearchModel: ObservableObject {
     }
 }
 
-public struct KuringTextField: View {
+public struct SearchField: View {
     @StateObject private var dataModel = SearchModel()
     
     let placeholder: String
@@ -89,7 +89,7 @@ public struct KuringTextField: View {
     @State var searchText: String = "empty"
     
     return VStack {
-        KuringTextField(placeholder: "PlaceHolder") { text in
+        SearchField(placeholder: "PlaceHolder") { text in
             searchText = text
         } clear: {
             searchText = "clear"
