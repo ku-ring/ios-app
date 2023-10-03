@@ -12,7 +12,17 @@ import ComposableArchitecture
 struct KuringApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            NavigationStack {
+                SearchView(
+                    store: Store(
+                        initialState: SearchFeature.State(recents: ["방학", "운송수단", "운임표"]),
+                        reducer: { SearchFeature() }
+                    )
+                )
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationTitle("Search View")
+            }
         }
     }
 }

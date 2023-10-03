@@ -14,7 +14,6 @@ import ComposableArchitecture
 struct SearchFeature: Reducer {
     struct State: Equatable {
         var recents: [String] = []
-        var results: [String]? = nil
         
         var resultNotices: [Notice]? = nil
         var resultStaffs: [Staff]? = nil
@@ -60,6 +59,8 @@ struct SearchFeature: Reducer {
         case fetchNotices([Notice])
         /// 검색된 스태프
         case fetchStaffs([Staff])
+        /// 최근 검색어 업데이트
+        case appendRecents
         case binding(BindingAction<State>)
     }
     
@@ -70,8 +71,14 @@ struct SearchFeature: Reducer {
         
         Reduce { state, action in
             switch action {
-            
+            case .binding:
+                return .none
+                
+            case .binding(\.$searchInfo):
+                return .none
+             
             case .deleteAllRecentsButtonTapped:
+                // FIXME: - TextField onSubmit에서 이게 무조건적으로 호출되고 있음.
                 state.recents.removeAll()
                 return .none
             
@@ -101,12 +108,11 @@ struct SearchFeature: Reducer {
                 state.resultStaffs = staffs
                 return .none
                 
-            case .binding:
+            case .appendRecents:
+                print("state.recents \(state.recents)")
+                state.recents = state.recents + [state.searchInfo.text]
+                print("state.recents2 \(state.recents)")
                 return .none
-                
-            case .binding(\.$searchInfo):
-                return .none
-                
             }
         }
     }
@@ -130,7 +136,10 @@ struct SearchView: View {
                         TextField("검색어를 입력해주세요", text: viewStore.$searchInfo.text)
                             .focused($focus, equals: .search)
                             .onSubmit {
-                                viewStore.send(.deleteAllRecentsButtonTapped)
+                                DispatchQueue.main.async {
+                                    focus = nil
+                                }
+                                viewStore.send(.appendRecents)
                             }
                         
                         if viewStore.searchInfo.text.isEmpty {
@@ -147,9 +156,14 @@ struct SearchView: View {
                 
                 if !viewStore.recents.isEmpty {
                     HStack {
-                        Text("최근검색어")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+                        Button {
+                            viewStore.send(.appendRecents)
+                        } label: {
+                            Text("최근검색어")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundColor(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+                        }
+                        
                         Spacer()
                         Button {
                             viewStore.send(.deleteAllRecentsButtonTapped)
@@ -168,6 +182,7 @@ struct SearchView: View {
                                 HStack(alignment: .center, spacing: 6) {
                                     Button {
                                         // TODO: 검색
+                                        viewStore.send(.search)
                                     } label: {
                                         Text(recent)
                                             .font(.system(size: 14))
