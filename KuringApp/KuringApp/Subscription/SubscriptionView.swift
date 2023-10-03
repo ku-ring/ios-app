@@ -17,7 +17,7 @@ struct SubscriptionFeature: Reducer {
         /// 대학 공지 리스트
         let univNoticeTypes: [String] = ["학사", "취창업", "국제", "장학", "입학", "학생", "산학", "일반"]
         /// 대학 공지 리스트 중 내가 구독한 공지
-        var selectedunivNoticeType: [String] = []
+        var selectedUnivNoticeType: [String] = []
         
         /// 내가 추가한 공지 리스트
         var myDepartments: IdentifiedArrayOf<Department> = [.산업디자인학과, .전기전자공학부, .컴퓨터공학부, .건국대학교, .경제학과, .수의학과, .영문학과, .의생명공학과]
@@ -49,10 +49,10 @@ struct SubscriptionFeature: Reducer {
                 
                 return .none
             case .univNoticeTypeSelected(let univNoticeType):
-                if let index = state.selectedunivNoticeType.firstIndex(of: univNoticeType) {
-                    state.selectedunivNoticeType.remove(at: index)
+                if let index = state.selectedUnivNoticeType.firstIndex(of: univNoticeType) {
+                    state.selectedUnivNoticeType.remove(at: index)
                 } else {
-                    state.selectedunivNoticeType.append(univNoticeType)
+                    state.selectedUnivNoticeType.append(univNoticeType)
                 }
                 
                 return .none
@@ -133,7 +133,7 @@ struct SubscriptionView: View {
                     VStack {
                         LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3)) {
                             ForEach(viewStore.univNoticeTypes, id: \.self) { univNoticeType in
-                                let isSelected = viewStore.selectedunivNoticeType.contains(univNoticeType)
+                                let isSelected = viewStore.selectedUnivNoticeType.contains(univNoticeType)
                                 
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 8)
