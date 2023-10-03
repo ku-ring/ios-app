@@ -33,7 +33,7 @@ public struct NoticeRow: View {
         ZStack {
             switch rowType {
             case .important, .importantAndBookmark:
-                Color(uiColor: ColorSet.green.withAlphaComponent(0.1))
+                ColorSet.green.opacity(0.1)
             default:
                 Color.clear
             }
@@ -107,13 +107,13 @@ public struct NoticeRow: View {
             .font(.system(size: 12, weight: .semibold))
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
-            .foregroundStyle(ColorSet.Label.green.color)
+            .foregroundStyle(ColorSet.Label.green)
             .background(Color.white)
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .inset(by: 0.25)
-                    .stroke(ColorSet.green.color, lineWidth: 0.5)
+                    .stroke(ColorSet.green, lineWidth: 0.5)
             )
     }
 
@@ -121,14 +121,14 @@ public struct NoticeRow: View {
     private var titleView: some View {
         Text(notice.subject)
             .font(.system(size: 15, weight: .medium))
-            .foregroundColor(ColorSet.Label.gray.color)
+            .foregroundColor(ColorSet.Label.gray)
     }
 
     @ViewBuilder
     private var dateView: some View {
         Text(notice.postedDate)
             .font(.system(size: 14))
-            .foregroundStyle(ColorSet.Label.gray.color.opacity(0.6))
+            .foregroundStyle(ColorSet.Label.gray.opacity(0.6))
     }
 
     @ViewBuilder
@@ -136,7 +136,7 @@ public struct NoticeRow: View {
         ZStack {
             RoundedRectangle(cornerRadius: 2)
                 .compositingGroup()
-                .foregroundStyle(ColorSet.green.color)
+                .foregroundStyle(ColorSet.green)
                 .frame(width: 16, height: 21)
 
             RoundedRectangle(cornerRadius: 2)

@@ -51,9 +51,9 @@ public struct ChipView: View {
         let chipSize = CGSize(width: 64, height: 48)
         let lineHeight: CGFloat = 3
         ChipView("쿠링", chipSize: chipSize, lineHeight: lineHeight, lineVisible: true)
-            .foregroundStyle(ColorSet.green.color)
+            .foregroundStyle(ColorSet.green)
         ChipView("쿠링", chipSize: chipSize, lineHeight: lineHeight, lineVisible: false)
-            .foregroundStyle(ColorSet.Label.gray.color.opacity(0.5))
+            .foregroundStyle(ColorSet.Label.gray.opacity(0.5))
     }
     .font(.system(size: 16, weight: .semibold))
 }

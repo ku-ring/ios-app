@@ -46,7 +46,7 @@ public struct LoadingView: View {
     private var circle: some View {
         Circle()
             .frame(width: size.width, height: size.height)
-            .foregroundStyle(ColorSet.green.color)
+            .foregroundStyle(ColorSet.green)
     }
 }
 

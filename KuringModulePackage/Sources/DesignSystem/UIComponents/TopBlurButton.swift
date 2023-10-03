@@ -47,8 +47,8 @@ public struct TopBlurButton: View {
             .frame(height: 40)
         TopBlurButton(
             "쿠링",
-            fontColor: ColorSet.Background.green.color,
-            backgroundColor: ColorSet.Background.green.color.opacity(0.15))
+            fontColor: ColorSet.Background.green,
+            backgroundColor: ColorSet.Background.green.opacity(0.15))
         
         Rectangle()
             .frame(height: 10)
@@ -58,7 +58,7 @@ public struct TopBlurButton: View {
         TopBlurButton(
             "쿠링",
             fontColor: .white,
-            backgroundColor: ColorSet.Background.green.color)
+            backgroundColor: ColorSet.Background.green)
         
         
         Spacer()
