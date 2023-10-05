@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A91454FE2ACF39E000B82A8E /* SettingsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91454FD2ACF39E000B82A8E /* SettingsApp.swift */; };
+		A91455002ACF3A3D00B82A8E /* SetttingsApp.Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91454FF2ACF3A3D00B82A8E /* SetttingsApp.Path.swift */; };
+		A91455032ACF44CE00B82A8E /* KuringIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91455022ACF44CE00B82A8E /* KuringIcon.swift */; };
+		A91455062ACF451E00B82A8E /* AppIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91455052ACF451E00B82A8E /* AppIcons.swift */; };
 		A947DCBE2AB47D3800A6D614 /* Notices in Frameworks */ = {isa = PBXBuildFile; productRef = A947DCBD2AB47D3800A6D614 /* Notices */; };
 		A947DCC02AB47D3B00A6D614 /* Feedbacks in Frameworks */ = {isa = PBXBuildFile; productRef = A947DCBF2AB47D3B00A6D614 /* Feedbacks */; };
 		A947DCC22AB47D3E00A6D614 /* Subscriptions in Frameworks */ = {isa = PBXBuildFile; productRef = A947DCC12AB47D3E00A6D614 /* Subscriptions */; };
@@ -33,6 +37,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A91454FD2ACF39E000B82A8E /* SettingsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsApp.swift; sourceTree = "<group>"; };
+		A91454FF2ACF3A3D00B82A8E /* SetttingsApp.Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetttingsApp.Path.swift; sourceTree = "<group>"; };
+		A91455022ACF44CE00B82A8E /* KuringIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringIcon.swift; sourceTree = "<group>"; };
+		A91455052ACF451E00B82A8E /* AppIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcons.swift; sourceTree = "<group>"; };
 		A965B7A22AC013060026ECDC /* DepartmentEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentEditor.swift; sourceTree = "<group>"; };
 		A965B7A42AC013BF0026ECDC /* DepartmentSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentSelector.swift; sourceTree = "<group>"; };
 		A965B7A62AC0696B0026ECDC /* Department.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
@@ -72,6 +80,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A91455012ACF44BD00B82A8E /* AppIcon */ = {
+			isa = PBXGroup;
+			children = (
+				DFE7AB162AC33D6700230934 /* AppIconSelector.swift */,
+				A91455022ACF44CE00B82A8E /* KuringIcon.swift */,
+			);
+			path = AppIcon;
+			sourceTree = "<group>";
+		};
+		A91455042ACF44F400B82A8E /* Depedencies */ = {
+			isa = PBXGroup;
+			children = (
+				A91455052ACF451E00B82A8E /* AppIcons.swift */,
+			);
+			path = Depedencies;
+			sourceTree = "<group>";
+		};
 		A947DCBA2AB47BA300A6D614 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,7 +193,7 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		DF062D4B2AC8800000FC48C0 /* AppLogos */ = {
+		DF062D4B2AC8800000FC48C0 /* AppIcons */ = {
 			isa = PBXGroup;
 			children = (
 				DF331DAA2AC917E000D0BB08 /* kuring_app_blueprint.png */,
@@ -176,15 +201,18 @@
 				DF331DA92AC917E000D0BB08 /* kuring_app_sketch.png */,
 				DF331DA72AC917E000D0BB08 /* kuring_app.png */,
 			);
-			path = AppLogos;
+			path = AppIcons;
 			sourceTree = "<group>";
 		};
 		DFE7AB132AC332D200230934 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				DF062D4B2AC8800000FC48C0 /* AppLogos */,
+				A91455042ACF44F400B82A8E /* Depedencies */,
+				DF062D4B2AC8800000FC48C0 /* AppIcons */,
 				DFE7AB142AC332DB00230934 /* SettingView.swift */,
-				DFE7AB162AC33D6700230934 /* AppIconSelector.swift */,
+				A91454FD2ACF39E000B82A8E /* SettingsApp.swift */,
+				A91454FF2ACF3A3D00B82A8E /* SetttingsApp.Path.swift */,
+				A91455012ACF44BD00B82A8E /* AppIcon */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -273,6 +301,8 @@
 				DFE7AB152AC332DB00230934 /* SettingView.swift in Sources */,
 				A9B4F0142ABCA86500354C00 /* NoticeApp.swift in Sources */,
 				A965B7AB2AC0750E0026ECDC /* SubscriptionView.swift in Sources */,
+				A91455002ACF3A3D00B82A8E /* SetttingsApp.Path.swift in Sources */,
+				A91455062ACF451E00B82A8E /* AppIcons.swift in Sources */,
 				A9B4F01A2ABCAF9800354C00 /* NoticeList.swift in Sources */,
 				A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */,
 				A9B4F01D2ABCB4CE00354C00 /* SearchView.swift in Sources */,
@@ -282,6 +312,8 @@
 				A965B7A72AC0696B0026ECDC /* Department.swift in Sources */,
 				A9B4F0182ABCA9AF00354C00 /* NoticeDetailView.swift in Sources */,
 				A965B7AF2AC084D20026ECDC /* SubscriptionApp.swift in Sources */,
+				A91455032ACF44CE00B82A8E /* KuringIcon.swift in Sources */,
+				A91454FE2ACF39E000B82A8E /* SettingsApp.swift in Sources */,
 				A9DAFA542AB1F04B0064F748 /* KuringApp.swift in Sources */,
 				DFE7AB172AC33D6700230934 /* AppIconSelector.swift in Sources */,
 			);

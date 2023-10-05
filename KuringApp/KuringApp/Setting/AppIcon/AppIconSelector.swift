@@ -8,58 +8,33 @@
 import SwiftUI
 import ComposableArchitecture
 
-extension DependencyValues {
-    public var appIcons: AppIcons {
-        get { self[AppIcons.self] }
-        set { self[AppIcons.self] = newValue }
-    }
-}
-
-public struct AppIcons: DependencyKey {
-    public static let liveValue: AppIcons  = AppIcons()
-    
-    @MainActor
-    func changeTo(_ icon: KuringIcon) async {
-        guard UIApplication.shared.supportsAlternateIcons else { return }
-        do {
-            try await UIApplication.shared.setAlternateIconName(icon.rawValue)
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
-}
-
-enum KuringIcon: String, CaseIterable, Identifiable {
-    var id: String { self.rawValue }
-    case kuring_app
-    case kuring_app_classic
-    case kuring_app_blueprint
-    case kuring_app_sketch
-    
-    var korValue: String {
-        switch self {
-        case .kuring_app: return "쿠링 기본"
-        case .kuring_app_classic: return "쿠링 클래식"
-        case .kuring_app_blueprint: return "쿠링 블루프린트"
-        case .kuring_app_sketch: return "쿠링 스케치"
-        }
-    }
-}
-
-struct AppIconSelectFeature: Reducer {
+struct AppIconSelectorFeature: Reducer {
     struct State: Equatable {
         var appIcons: IdentifiedArrayOf<KuringIcon> = IdentifiedArray(uniqueElements: KuringIcon.allCases)
         var selectedIcon: KuringIcon?
+        var currentIcon: KuringIcon
+        
+        init(
+            appIcons: IdentifiedArrayOf<KuringIcon> = IdentifiedArray(uniqueElements: KuringIcon.allCases),
+             selectedIcon: KuringIcon? = nil
+        ) {
+            @Dependency(\.appIcons) var appIconClient
+            self.appIcons = appIcons
+            self.selectedIcon = selectedIcon ?? appIconClient.currentAppIcon
+            self.currentIcon = appIconClient.currentAppIcon
+        }
     }
     
     enum Action: Equatable {
+        /// 앱 아이콘 선택
         case appIconSelected(KuringIcon)
+        /// 앱 아이콘 저장하기 버튼
         case saveButtonTapped
         
-        // MARK: To SettingView
         case delegate(Delegate)
+        
         enum Delegate: Equatable {
-            case alternativeAppIconSave(KuringIcon)
+            case completeAppIconChange
         }
     }
     
@@ -76,8 +51,8 @@ struct AppIconSelectFeature: Reducer {
                 return .run { [selectedIcon = state.selectedIcon] send in
                     guard let selectedIcon else { return }
                     await appIcons.changeTo(selectedIcon)
-                    await send(.delegate(.alternativeAppIconSave(selectedIcon)))
-                    }
+                    await send(.delegate(.completeAppIconChange))
+                }
                 
             case .delegate:
                 return .none
@@ -87,7 +62,7 @@ struct AppIconSelectFeature: Reducer {
 }
 
 struct AppIconSelector: View {
-    let store: StoreOf<AppIconSelectFeature>
+    let store: StoreOf<AppIconSelectorFeature>
     
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
@@ -98,6 +73,7 @@ struct AppIconSelector: View {
                             .resizable()
                             .frame(width: 70, height: 70)
                             .cornerRadius(10)
+                            .shadow(radius: 0.5)
                     }
                     .padding(.trailing)
                     
@@ -109,9 +85,11 @@ struct AppIconSelector: View {
                     }
                     
                     if icon == viewStore.state.selectedIcon {
-                        withAnimation {
-                            Image(systemName: "checkmark.circle")
-                        }
+                        Spacer()
+                        
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.title3)
+                            .foregroundStyle(.tint)
                     }
                 }
             }
@@ -122,6 +100,7 @@ struct AppIconSelector: View {
                     } label: {
                         Text("저장")
                     }
+                    .disabled(viewStore.selectedIcon == viewStore.currentIcon)
                 }
             }
         }
@@ -131,13 +110,9 @@ struct AppIconSelector: View {
 #Preview {
     AppIconSelector(
         store: Store(
-            initialState: 
-                AppIconSelectFeature.State(
-                    selectedIcon: KuringIcon.kuring_app
-                ),
-            reducer: {
-                AppIconSelectFeature()
-            }
+            initialState: AppIconSelectorFeature.State(),
+            reducer: { AppIconSelectorFeature() }
         )
     )
+    .tint(.green)
 }
