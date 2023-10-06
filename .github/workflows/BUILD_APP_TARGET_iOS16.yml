@@ -1,0 +1,35 @@
+name: 쿠링 앱타겟 최소 버전에서 빌드하기
+
+on:
+  push:
+    branches: [ main ]
+      
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-13  #최신버전
+    steps:
+    # 코드를 체크아웃 합니다.
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    
+    # Xcode 버전을 설정합니다.
+    - name: Setup Xcode version
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: '15.0'
+
+    # KuringModulePackage 스킴을 빌드합니다.
+#    - name: KuringModulePackage 빌드
+#      run: |
+#        cd KuringApp
+#        xcodebuild build -scheme KuringModulePackage -destination 'platform=iOS Simulator,OS=16.0,name=iPhone 14 Pro' CODE_SIGNING_REQUIRED=NO
+
+    # KuringApp 스킴을 빌드합니다.
+    - name: KuringApp 빌드
+      run: |
+        cd KuringApp
+        xcodebuild build -scheme KuringApp -destination 'platform=iOS Simulator,OS=16.2,name=iPhone 14 Pro' CODE_SIGNING_REQUIRED=NO
