@@ -1,0 +1,71 @@
+name: 쿠링 스위프트 패키지 빌드하기
+
+on:
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  build:
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/쿠링') && contains(github.event.comment.body, '패키지 빌드')
+    runs-on: macos-13  #최신버전
+    steps:
+      # 빌드 요청 시작
+      - name: Build iOS17
+        run: |
+          echo "start build"
+         
+      # build package 빌드 응답 커멘트
+      - name: Add Build comment
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🔨 iOS 16.2 iPhone 14 Pro 에서 스위프트 패키지를 빌드합니다.'
+            })
+
+      # 코드를 체크아웃 합니다.
+      - name: Checkout repository
+        uses: actions/checkout@v2
+    
+      # Xcode 버전을 설정합니다.
+      - name: Setup Xcode version
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.0'
+
+      # KuringModulePackage 패키지를 빌드합니다. (최소 버전)
+      - name: KuringModulePackage 빌드
+        run: |
+          cd KuringModulePackage
+          xcodebuild build -scheme KuringModulePackage -destination 'platform=iOS Simulator,OS=16.2,name=iPhone 14 Pro'
+      
+      # 빌드 성공시 커멘트
+      - name: Add Build comment
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '✅ 패키지를 성공적으로 빌드했습니다.'
+            })
+            
+      # 빌드 실패시 커멘트
+      - name: Notify failure
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '📬 패키지 빌드에 실패했습니다. Actions에서 실패 결과를 확인해주세요.'
+            })
+        if: failure()
