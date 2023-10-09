@@ -12,7 +12,7 @@ struct UnivNoticeTypeSelector: View {
     
     var body: some View {
         LazyVGrid(columns: columns, spacing: 20) {
-            ForEach(["학사", "취창업", "국제", "장학", "입학", "학생", "산학", "일반"], id: \.self) { noticeType in
+            ForEach(["bachor", "employment", "national", "scholarship", "student", "industry_university", "normal", "library"], id: \.self) { noticeType in
                 ZStack {
                     Color(.systemGroupedBackground)
                         .cornerRadius(15)
