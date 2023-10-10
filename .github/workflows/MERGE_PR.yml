@@ -26,12 +26,11 @@ jobs:
       
       # 머지 완료 알리기
       - name: Notify Merge
-        if: steps.automerge.outputs.mergeResult == "merged"
         run: |
           echo "PR #${{ steps.automerge.outputs.pullRequestNumber }}이 머지되었습니다."
             
       # 머지 실패 알리기
       - name: Notify failure
-        if: steps.automerge.outputs.mergeResult != "merged"
+        if: failure()
         run: |
           echo "머지 시도 실패. 승인 개수, 테스트 성공 여부 등 자동 머지 조건을 만족하는지 확인하세요."

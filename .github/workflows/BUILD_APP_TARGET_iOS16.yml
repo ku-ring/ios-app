@@ -47,7 +47,7 @@ jobs:
       - name: KuringApp 빌드
         run: |
           cd KuringApp
-          xcodebuild build -scheme KuringApp -destination 'platform=iOS Simulator,OS=16.2,name=iPhone 14 Pro' CODE_SIGNING_REQUIRED=NO
+          xcodebuild build -scheme KuringApp -destination 'platform=iOS Simulator,OS=16.2,name=iPhone 14 Pro'
 
       # 빌드 성공시 커멘트
       - name: Add Build comment
