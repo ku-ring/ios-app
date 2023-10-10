@@ -10,7 +10,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct NoticeAppFeature: Reducer {
-    struct State {
+    struct State: Equatable {
         var path = StackState<Path.State>()
         var noticeList = NoticeListFeature.State()
     }

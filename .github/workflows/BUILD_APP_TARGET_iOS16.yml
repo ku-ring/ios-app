@@ -30,7 +30,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '🔨 iOS 16.2 iPhone 14 Pro 에서 쿠링 앱을 빌드합니다.'
+              body: '🔨 iOS 16 iPhone 14 Pro 에서 쿠링 앱을 빌드합니다.'
             })
             
       # 코드를 체크아웃 합니다.
@@ -41,13 +41,13 @@ jobs:
       - name: Setup Xcode version
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '14.3'
+          xcode-version: '15.0'
 
       # KuringApp 스킴을 빌드합니다.
       - name: KuringApp 빌드
         run: |
           cd KuringApp
-          xcodebuild build -scheme KuringApp -destination 'platform=iOS Simulator,OS=16.2,name=iPhone 14 Pro'
+          xcodebuild clean test -project KuringApp.xcodeproj -scheme KuringApp -destination 'platform=iOS Simulator,OS=16.2,name=iPhone 14 Pro'
 
       # 빌드 성공시 커멘트
       - name: Add Build comment
