@@ -69,6 +69,11 @@ https://www.notion.so/kuring/v2-55977b79a8014c2883ad4c89085e1464?pvs=4
 ### PR 머지
 - `머지`
 
+### 추가 사용법
+```
+/쿠링 ios17 앱 빌드하고 패키지 빌드하고 머지해줘
+```
+
 ## Code owners
 
 - [jaesung-0o0](https://github.com/jaesung-0o0)
