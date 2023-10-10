@@ -53,7 +53,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '📬 iOS17 에서 앱 타겟 빌드가 종료되었습니다. Actions에서 빌드 결과를 확인해주세요.'
+              body: '✅ iOS17 에서 앱 타겟을 성공적으로 빌드했습니다.'
             })
 
       # 빌드 실패시 커멘트
