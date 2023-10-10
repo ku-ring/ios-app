@@ -9,13 +9,23 @@ jobs:
     if: github.event.issue.pull_request && contains(github.event.comment.body, '/쿠링') && contains(github.event.comment.body, '머지')
     runs-on: ubuntu-latest #최신버전
     steps:
+      ## 체크아웃
+      - name: checkout
+        uses: actions/checkout@v2
+        
+      ## automerge 라벨 추가
+      - name: add label
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: automerge
+          
       # 머지 시도 시작
       - name: Build iOS17
         run: |
           echo "PR 머지를 시도합니다"
       
       # 자동 머지
-      - id: automerge
+      - id: automerge # 라벨과 관련이 있나...?
         name: automerge
         uses: "pascalgn/automerge-action@v0.15.6"
         env:
