@@ -3,7 +3,9 @@ name: 쿠링 앱타겟 최소 버전에서 빌드하기
 on:
   push:
     branches: [ main ]
-      
+  issue_comment:
+    types: [created, edited]
+    
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
