@@ -6,13 +6,13 @@ on:
 
 jobs:
   build:
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/ios17 앱 빌드해줘')
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/쿠링') && contains(github.event.comment.body, 'ios17 앱 빌드')
     runs-on: macos-13  #최신버전
     steps:
       # 빌드 요청 시작
       - name: Build iOS17
         run: |
-          echo "start build"
+          echo "iOS17 에서 앱 타겟을 빌드합니다."
          
       # iOS17 빌드 응답 커멘트
       - name: Add Build comment
@@ -24,7 +24,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '🔨 iOS 17.0 iPhone 14 Pro 에서 앱타겟을 빌드합니다.'
+              body: '🔨 iOS 17.0 iPhone 14 Pro 에서 쿠링 앱을 빌드합니다.'
             })
 
       # 코드를 체크아웃 합니다.
@@ -53,5 +53,19 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '📬 테스트가 종료되었습니다. Actions에서 결과를 확인해주세요.'
+              body: '📬 iOS17 에서 앱 타겟 빌드가 종료되었습니다. Actions에서 빌드 결과를 확인해주세요.'
             })
+
+      # 빌드 실패시 커멘트
+      - name: Notify failure
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '📬 iOS17 에서 앱 타겟 빌드에 실패했습니다. Actions에서 실패 결과를 확인해주세요.'
+            })
+        if: failure()

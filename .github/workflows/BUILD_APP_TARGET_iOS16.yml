@@ -10,26 +10,66 @@ concurrency:
 
 jobs:
   build:
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/쿠링') && contains(github.event.comment.body, 'ios16 앱 빌드')
     runs-on: macos-13  #최신버전
     steps:
-    # 코드를 체크아웃 합니다.
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      # 빌드 요청 시작
+      - name: Build iOS16
+        run: |
+          echo "iOS16 에서 앱 타겟을 빌드합니다."
+          
+      # build package 빌드 응답 커멘트
+      - name: Add Build comment
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🔨 iOS 16.2 iPhone 14 Pro 에서 쿠링 앱을 빌드합니다.'
+            })
+            
+      # 코드를 체크아웃 합니다.
+      - name: Checkout repository
+        uses: actions/checkout@v2
     
-    # Xcode 버전을 설정합니다.
-    - name: Setup Xcode version
-      uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: '15.0'
+      # Xcode 버전을 설정합니다.
+      - name: Setup Xcode version
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.0'
 
-    # KuringModulePackage 스킴을 빌드합니다.
-#    - name: KuringModulePackage 빌드
-#      run: |
-#        cd KuringApp
-#        xcodebuild build -scheme KuringModulePackage -destination 'platform=iOS Simulator,OS=16.0,name=iPhone 14 Pro' CODE_SIGNING_REQUIRED=NO
+      # KuringApp 스킴을 빌드합니다.
+      - name: KuringApp 빌드
+        run: |
+          cd KuringApp
+          xcodebuild build -scheme KuringApp -destination 'platform=iOS Simulator,OS=16.2,name=iPhone 14 Pro' CODE_SIGNING_REQUIRED=NO
 
-    # KuringApp 스킴을 빌드합니다.
-    - name: KuringApp 빌드
-      run: |
-        cd KuringApp
-        xcodebuild build -scheme KuringApp -destination 'platform=iOS Simulator,OS=16.2,name=iPhone 14 Pro' CODE_SIGNING_REQUIRED=NO
+      # 빌드 성공시 커멘트
+      - name: Add Build comment
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '📬 iOS16 에서 앱 타겟 빌드가 종료되었습니다. Actions에서 빌드 결과를 확인해주세요.'
+            })
+            
+      # 빌드 실패시 커멘트
+      - name: Notify failure
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '📬 iOS16 에서 앱 타겟 빌드에 실패했습니다. Actions에서 실패 결과를 확인해주세요.'
+            })
+        if: failure()
