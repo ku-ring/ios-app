@@ -67,7 +67,7 @@ https://www.notion.so/kuring/v2-55977b79a8014c2883ad4c89085e1464?pvs=4
 - `패키지 빌드`
 
 ### PR 머지
-- `자동 머지`
+- `머지`
 
 ## Code owners
 
