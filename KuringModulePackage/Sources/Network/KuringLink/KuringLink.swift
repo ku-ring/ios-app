@@ -77,24 +77,34 @@ extension KuringLink {
             return isSucceed
         },
         searchNotices: { keyword in
-            let response: Response<[Notice]> = try await satellite
-                .response(for: Path.searchNotices.path, // api/v2/notices/search
-                          httpMethod: .get,
-                          queryItems: [
-                            .init(name: "content", value: keyword)
-                          ]
+            // TODO: 서버 수정되면 제거하기
+            struct SearchedNoticeList: Decodable {
+                let noticeList: [SearchedNotice]
+            }
+            let response: Response<SearchedNoticeList> = try await satellite
+                .response(
+                    for: Path.searchNotices.path,
+                    httpMethod: .get,
+                    queryItems: [
+                        .init(name: "content", value: keyword)
+                    ]
                 )
-            return response.data
+            return response.data.noticeList.compactMap { $0.asNotice }
         },
         searchStaffs: { keyword in
-            let response: Response<[Staff]> = try await satellite
-                .response(for: Path.searchStaffs.path,
-                          httpMethod: .get,
-                          queryItems: [
-                            .init(name: "content", value: keyword)
-                          ]
+            // TODO: 서버 수정되면 제거하기
+            struct StaffList: Decodable {
+                let staffList: [Staff]
+            }
+            let response: Response<StaffList> = try await satellite
+                .response(
+                    for: Path.searchStaffs.path,
+                    httpMethod: .get,
+                    queryItems: [
+                        .init(name: "content", value: keyword)
+                    ]
                 )
-            return response.data
+            return response.data.staffList
         }
     )
 }
