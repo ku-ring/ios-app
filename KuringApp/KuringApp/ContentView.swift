@@ -31,8 +31,6 @@ struct ContentView: View {
                     reducer: { SettingsAppFeature() }
                 )
             )
-            .navigationTitle("더보기")
-            .navigationBarTitleDisplayMode(.inline)
             .tabItem {
                 Image(systemName: "ellipsis")
                 
