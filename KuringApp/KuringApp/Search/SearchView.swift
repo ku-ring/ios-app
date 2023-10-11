@@ -24,9 +24,7 @@ struct SearchFeature: Reducer {
         struct SearchInfo: Equatable {
             var text: String = ""
             var searchType: SearchType = .notice
-
-            var noticeSearchPhase: SearchPhase = .before
-            var staffSearchPhase: SearchPhase = .before
+            var searchPhase: SearchPhase = .before
             
             enum SearchType: String {
                 case notice
@@ -53,14 +51,15 @@ struct SearchFeature: Reducer {
     enum Action: BindableAction {
         /// 최근 검색어 전체 삭제
         case deleteAllRecentsButtonTapped
+        /// 검색어 제거
+        case clearKeywordButtonTapped
         /// 검색
         case search
-        
         /// 검색 결과
         case searchResponse(Result<SearchResult, SearchError>)
+        /// 최근 검색어 선택. associated value 는 최근 검색어.
+        case recentSearchKeywordTapped(String)
         
-        /// 최근 검색어 업데이트
-        case appendRecents
         case binding(BindingAction<State>)
         
         enum SearchResult {
@@ -87,11 +86,24 @@ struct SearchFeature: Reducer {
             case .deleteAllRecentsButtonTapped:
                 state.recents.removeAll()
                 return .none
+                
+            case .clearKeywordButtonTapped:
+                state.searchInfo.text = ""
+                return .none
             
             case .search:
+                guard !state.searchInfo.text.isEmpty else { return .none }
+                
+                state.focus = nil
+                
+                // 최근 검색어 추가
+                if !state.recents.contains(state.searchInfo.text) { // 중복체크
+                    state.recents.append(state.searchInfo.text)
+                }
+                
+                state.searchInfo.searchPhase = .searching
                 switch state.searchInfo.searchType {
                 case .notice:
-                    state.searchInfo.noticeSearchPhase = .searching
                     return .run { [keyword = state.searchInfo.text] send in
                         let notices = try await kuringLink.searchNotices(keyword)
                         await send(.searchResponse(.success(.notices(notices))))
@@ -99,7 +111,6 @@ struct SearchFeature: Reducer {
                         await send(.searchResponse(.failure(SearchError.notice(error))))
                     }
                 case .staff:
-                    state.searchInfo.staffSearchPhase = .searching
                     return .run { [keyword = state.searchInfo.text] send in
                         let staffs = try await kuringLink.searchStaffs(keyword)
                         await send(.searchResponse(.success(.staffs(staffs))))
@@ -108,36 +119,32 @@ struct SearchFeature: Reducer {
                     }
                 }
                 
+            case let .recentSearchKeywordTapped(keyword):
+                state.searchInfo.text = keyword
+                return .send(.search)
+                
             case let .searchResponse(.success(results)):
                 switch results {
                 case let .notices(values):
-                    state.searchInfo.noticeSearchPhase = .complete
                     state.resultNotices = values
                     
                 case let .staffs(values):
-                    state.searchInfo.staffSearchPhase = .complete
                     state.resultStaffs = values
                 }
+                state.searchInfo.searchPhase = .complete
                 return .none
                 
             case let .searchResponse(.failure(searchError)):
                 switch searchError {
                 case let .notice(error):
                     print(error.localizedDescription)
-                    state.searchInfo.noticeSearchPhase = .failure
                     state.resultNotices = nil
                     
                 case let .staff(error):
                     print(error.localizedDescription)
-                    state.searchInfo.staffSearchPhase = .failure
                     state.resultStaffs = nil
                 }
-                return .none
-                
-            case .appendRecents:
-                if !state.searchInfo.text.isEmpty {
-                    state.recents = state.recents + [state.searchInfo.text]
-                }
+                state.searchInfo.searchPhase = .failure
                 return .none
             }
         }
@@ -152,26 +159,31 @@ struct SearchView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack(spacing: 0) {
                 ZStack {
+                    /// 검색창
                     HStack(alignment: .center, spacing: 12) {
-                        if viewStore.searchInfo.text.isEmpty {
-                            Image(systemName: "magnifyingglass")
-                                .frame(width: 16, height: 16)
-                                .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
-                        }
+                        /// 검색 아이콘
+                        Image(systemName: "magnifyingglass")
+                            .frame(width: 16, height: 16)
+                            .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
                         
                         TextField("검색어를 입력해주세요", text: viewStore.$searchInfo.text)
                             .focused($focus, equals: .search)
-                            .onSubmit {
-                                DispatchQueue.main.async {
-                                    focus = nil
-                                }
-                                viewStore.send(.appendRecents)
-                            }
+                            .onSubmit { viewStore.send(.search) }
                         
-                        if viewStore.searchInfo.text.isEmpty {
-                            Image(systemName: "xmark")
-                                .frame(width: 16, height: 16)
-                                .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+                        if viewStore.searchInfo.searchPhase == .searching {
+                            /// 검색 중 로딩 인디케이터
+                            ProgressView()
+                        } else {
+                            if !viewStore.searchInfo.text.isEmpty {
+                                /// 검색어 삭제 버튼
+                                Button {
+                                    viewStore.send(.clearKeywordButtonTapped)
+                                } label: {
+                                    Image(systemName: "xmark")
+                                        .frame(width: 16, height: 16)
+                                        .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+                                }
+                            }                            
                         }
                     }
                     .padding(.horizontal, 16)
@@ -182,16 +194,14 @@ struct SearchView: View {
                 
                 if !viewStore.recents.isEmpty {
                     HStack {
-                        Button {
-                            viewStore.send(.appendRecents)
-                        } label: {
-                            Text("최근검색어")
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
-                        }
+                        /// 최근 검색어
+                        Text("최근검색어")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
                         
                         Spacer()
                         
+                        /// 전체 삭제
                         Button {
                             viewStore.send(.deleteAllRecentsButtonTapped)
                         } label: {
@@ -203,13 +213,13 @@ struct SearchView: View {
                     .padding(.top, 20)
                     .padding(.bottom, 12)
                     
+                    /// 최근 검색어 목록
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack {
                             ForEach(viewStore.recents, id: \.self) { recent in
                                 HStack(alignment: .center, spacing: 6) {
                                     Button {
-                                        // TODO: 검색
-                                        viewStore.send(.search)
+                                        viewStore.send(.recentSearchKeywordTapped(recent))
                                     } label: {
                                         Text(recent)
                                             .font(.system(size: 14))
@@ -237,6 +247,7 @@ struct SearchView: View {
                     Spacer()
                 }
                 
+                /// 검색타입 세그먼트
                 Rectangle()
                     .foregroundColor(.clear)
                     .frame(height: 50)
@@ -244,64 +255,56 @@ struct SearchView: View {
                     .background(Color(red: 0.95, green: 0.95, blue: 0.96))
                     .cornerRadius(10)
                     .overlay {
-                        switch viewStore.searchInfo.searchType {
-                        case .notice:
-                            HStack {
-                                segmentView("공지", isSelect: true)
-                                
-                                Button {
-                                    let type = SearchFeature.State.SearchInfo(searchType: .staff)
-                                    viewStore.send(.binding(.set(\.$searchInfo, type)))
-                                } label: {
-                                    segmentView("교직원", isSelect: false)
-                                }
+                        HStack {
+                            Button {
+                                let type = SearchFeature.State.SearchInfo(searchType: .notice)
+                                viewStore.send(.binding(.set(\.$searchInfo, type)))
+                            } label: {
+                                SegmentView("공지", isSelect: viewStore.searchInfo.searchType == .notice)
                             }
-                            .padding(5)
                             
-                        case .staff:
-                            HStack {
-                                Button {
-                                    let type = SearchFeature.State.SearchInfo(searchType: .notice)
-                                    viewStore.send(.binding(.set(\.$searchInfo, type)))
-                                } label: {
-                                    segmentView("공지", isSelect: false)
-                                }
-                                
-                                segmentView("교직원", isSelect: true)
+                            Button {
+                                let type = SearchFeature.State.SearchInfo(searchType: .staff)
+                                viewStore.send(.binding(.set(\.$searchInfo, type)))
+                            } label: {
+                                SegmentView("교직원", isSelect: viewStore.searchInfo.searchType == .staff)
                             }
-                            .padding(5)
                         }
+                        .padding(5)
                     }
                 
+                /// 검색결과
                 switch viewStore.searchInfo.searchType {
                 case .notice:
-                    if let notices = viewStore.resultNotices {
-                        if notices.isEmpty {
-                            feedbackPhaseView
-                        } else {
-                            List(notices, id: \.self) { notice in
-                                // TODO: - 디자인 시스템 NoticeRow
-                                Text("NoticeRow 적용하기")
-                            }
-                        }
-                    } else {
-                        emptyPhaseView(viewStore.searchInfo.noticeSearchPhase)
-                    }
-                case .staff:
-                    if let staffs = viewStore.resultStaffs {
-                        if staffs.isEmpty {
-                            feedbackPhaseView
-                        } else {
-                            List(staffs, id: \.self) { staff in
-                                Button {
-                                    // TODO: - 프레젠트 액션 연결하기
-                                } label: {
-                                    StaffRow(staff: staff)
+                    if let notices = viewStore.resultNotices, !notices.isEmpty {
+                        List(notices, id: \.self) { notice in
+                            VStack(alignment: .leading) {
+                                Text(notice.subject)
+
+                                HStack {
+                                    Text(notice.postedDate)
+
+                                    Spacer()
                                 }
                             }
                         }
+                        .listStyle(.plain)
                     } else {
-                        emptyPhaseView(viewStore.searchInfo.staffSearchPhase)
+                        beforePhaseView
+                    }
+                case .staff:
+                    if let staffs = viewStore.resultStaffs, !staffs.isEmpty {
+                        List(staffs, id: \.self) { staff in
+                            Button {
+                                // TODO: - 프레젠트 액션 연결하기
+                            } label: {
+                                StaffRow(staff: staff)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                        .listStyle(.plain)
+                    } else {
+                        beforePhaseView
                     }
                 }
                 
@@ -312,45 +315,29 @@ struct SearchView: View {
     }
     
     @ViewBuilder
-    private func segmentView(_ title: String, isSelect: Bool) -> some View {
-        if isSelect {
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(.white)
-                .shadow(color: .black.opacity(0.1), radius: 6, x: 0, y: 0)
-                .overlay {
-                    Text(title)
-                        .font(.system(size: 16, weight: .bold))
-                        .foregroundStyle(Color(red: 0.24, green: 0.74, blue: 0.5))
-                }
-        } else {
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(.clear)
-                .overlay {
-                    Text(title)
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
-                }
-        }
-    }
-    
-    @ViewBuilder
-    private func emptyPhaseView(_ phase: SearchFeature.State.SearchInfo.SearchPhase) -> some View {
-        switch phase {
-        case .before:
-            beforePhaseView
-        case .searching:
-            searchingPhaseView
-        case .complete, .failure:
-            feedbackPhaseView
-        }
+    private func SegmentView(_ title: String, isSelect: Bool) -> some View {
+        RoundedRectangle(cornerRadius: 10)
+            .foregroundColor(isSelect ? .white : .clear)
+            .shadow(
+                color: .black.opacity(isSelect ? 0.1 : 0),
+                radius: 6, x: 0, y: 0
+            )
+            .overlay {
+                Text(title)
+                    .font(.system(size: 16, weight: isSelect ? .bold : .medium))
+                    .foregroundStyle(
+                        isSelect 
+                        ? Color(red: 0.24, green: 0.74, blue: 0.5)
+                        : Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6)
+                    )
+            }
     }
     
     @ViewBuilder
     private var beforePhaseView: some View {
         VStack {
             Group {
-                Text("쿠링에서는 원하는 공지와 교직원을 한눈에")
-                Text("최고의 알고리즘으로 원하는 결과를 빠르게 찾아드려요.")
+                Text("검색 결과가 없어요")
             }
             .foregroundColor(Color(red: 0.56, green: 0.56, blue: 0.56))
             .font(.system(size: 16))
@@ -359,49 +346,6 @@ struct SearchView: View {
         }
         .padding(.top, 72)
     }
-    
-    @ViewBuilder
-    private var feedbackPhaseView: some View {
-        VStack {
-            Group {
-                Text("찾은 결과가 없어요.")
-                Text("검색에 문제가 있는 것 같다면 피드백을 보내주세요.")
-                Text("보내주신 피드백은 글자 한 톨까지 꼼꼼하게 쿠링팀이 살펴볼게요.")
-            }
-            .foregroundColor(Color(red: 0.56, green: 0.56, blue: 0.56))
-            .font(.system(size: 12))
-            
-            Button {
-                // TODO: 피드백
-            } label: {
-                RoundedRectangle(cornerRadius: 100)
-                    .foregroundStyle(Color(red: 0.24, green: 0.74, blue: 0.5).opacity(0.15))
-                    .frame(height: 50)
-                    .overlay {
-                        Text("피드백 보내기")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundStyle(Color(red: 0.24, green: 0.74, blue: 0.5))
-                    }
-            }
-            .padding(.top, 36)
-            
-            Spacer()
-        }
-        .padding(.top, 72)
-    }
-    
-    @ViewBuilder
-    private var searchingPhaseView: some View {
-        VStack {
-            Text("검색중...")
-                .foregroundColor(Color(red: 0.56, green: 0.56, blue: 0.56))
-                .font(.system(size: 16))
-            
-            Spacer()
-        }
-        .padding(.top, 72)
-    }
-    
 }
 
 #Preview {
