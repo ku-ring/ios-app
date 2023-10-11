@@ -27,3 +27,6 @@ struct StaffRow: View {
     }
 }
 
+#Preview {
+    StaffRow(staff: Staff.random())
+}

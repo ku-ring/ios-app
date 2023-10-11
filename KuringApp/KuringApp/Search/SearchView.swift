@@ -55,15 +55,23 @@ struct SearchFeature: Reducer {
         case deleteAllRecentsButtonTapped
         /// 검색
         case search
-        /// 검색된 공지
-        case fetchNotices([Notice])
-        /// 검색된 스태프
-        case fetchStaffs([Staff])
-        /// 검색 에러 핸들러
-        case searchFailure(State.SearchInfo.SearchType)
+        
+        /// 검색 결과
+        case searchResponse(Result<SearchResult, SearchError>)
+        
         /// 최근 검색어 업데이트
         case appendRecents
         case binding(BindingAction<State>)
+        
+        enum SearchResult {
+            case notices([Notice])
+            case staffs([Staff])
+        }
+    }
+    
+    enum SearchError: Error {
+        case notice(Error)
+        case staff(Error)
     }
     
     @Dependency(\.kuringLink) var kuringLink
@@ -86,36 +94,41 @@ struct SearchFeature: Reducer {
                     state.searchInfo.noticeSearchPhase = .searching
                     return .run { [keyword = state.searchInfo.text] send in
                         let notices = try await kuringLink.searchNotices(keyword)
-                        await send(.fetchNotices(notices))
+                        await send(.searchResponse(.success(.notices(notices))))
                     } catch: { error, send in
-                        await send(.searchFailure(.notice))
+                        await send(.searchResponse(.failure(SearchError.notice(error))))
                     }
                 case .staff:
                     state.searchInfo.staffSearchPhase = .searching
                     return .run { [keyword = state.searchInfo.text] send in
                         let staffs = try await kuringLink.searchStaffs(keyword)
-                        await send(.fetchStaffs(staffs))
+                        await send(.searchResponse(.success(.staffs(staffs))))
                     } catch: { error, send in
-                        await send(.searchFailure(.staff))
+                        await send(.searchResponse(.failure(SearchError.staff(error))))
                     }
                 }
                 
-            case .fetchNotices(let notices):
-                state.searchInfo.noticeSearchPhase = .complete
-                state.resultNotices = notices
+            case let .searchResponse(.success(results)):
+                switch results {
+                case let .notices(values):
+                    state.searchInfo.noticeSearchPhase = .complete
+                    state.resultNotices = values
+                    
+                case let .staffs(values):
+                    state.searchInfo.staffSearchPhase = .complete
+                    state.resultStaffs = values
+                }
                 return .none
                 
-            case .fetchStaffs(let staffs):
-                state.searchInfo.staffSearchPhase = .complete
-                state.resultStaffs = staffs
-                return .none
-                
-            case .searchFailure(let searchType):
-                switch searchType {
-                case .notice:
+            case let .searchResponse(.failure(searchError)):
+                switch searchError {
+                case let .notice(error):
+                    print(error.localizedDescription)
                     state.searchInfo.noticeSearchPhase = .failure
                     state.resultNotices = nil
-                case .staff:
+                    
+                case let .staff(error):
+                    print(error.localizedDescription)
                     state.searchInfo.staffSearchPhase = .failure
                     state.resultStaffs = nil
                 }
@@ -126,7 +139,6 @@ struct SearchFeature: Reducer {
                     state.recents = state.recents + [state.searchInfo.text]
                 }
                 return .none
-                
             }
         }
     }
