@@ -9,7 +9,6 @@ import Model
 import SwiftUI
 import KuringDependencies
 import ComposableArchitecture
-import OSLog
 
 struct SearchFeature: Reducer {
     struct State: Equatable {
