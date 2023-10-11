@@ -24,6 +24,20 @@ struct ContentView: View {
                 
                 Text("공지사항")
             }
+            
+            SettingsApp(
+                store: Store(
+                    initialState: SettingsAppFeature.State(),
+                    reducer: { SettingsAppFeature() }
+                )
+            )
+            .navigationTitle("더보기")
+            .navigationBarTitleDisplayMode(.inline)
+            .tabItem {
+                Image(systemName: "ellipsis")
+                
+                Text("더보기")
+            }
         }
     }
 }

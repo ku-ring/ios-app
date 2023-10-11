@@ -79,14 +79,10 @@ struct SettingsApp: View {
 }
 
 #Preview {
-    NavigationStack {
-        SettingsApp(
-            store: Store(
-                initialState: SettingsAppFeature.State(),
-                reducer: { SettingsAppFeature() }
-            )
+    SettingsApp(
+        store: Store(
+            initialState: SettingsAppFeature.State(),
+            reducer: { SettingsAppFeature() }
         )
-        .navigationTitle("더보기")
-        .navigationBarTitleDisplayMode(.inline)
-    }
+    )
 }
