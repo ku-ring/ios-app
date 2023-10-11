@@ -11,7 +11,7 @@ import ComposableArchitecture
 
 extension NoticeAppFeature {
     struct Path: Reducer {
-        enum State {
+        enum State: Equatable {
             case detail(NoticeDetailFeature.State)
             case search(SearchFeature.State)
             case departmentEditor(DepartmentEditorFeature.State)

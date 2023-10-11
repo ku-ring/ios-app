@@ -1,0 +1,62 @@
+name: PR을 자동 머지 합니다
+
+on:
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  automerge-pr:
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/쿠링') && contains(github.event.comment.body, '머지')
+    runs-on: ubuntu-latest #최신버전
+    steps:
+      ## 체크아웃
+      - name: checkout
+        uses: actions/checkout@v2
+        
+      ## automerge 라벨 추가
+      - name: add label
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: automerge
+          
+      # 머지 시도 시작
+      - name: Build iOS17
+        run: |
+          echo "PR 머지를 시도합니다"
+      
+      # 자동 머지
+      - id: automerge # 라벨과 관련이 있나...?
+        name: automerge
+        uses: "pascalgn/automerge-action@v0.15.6"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MERGE_METHOD: "squash" # 스쿼시하고 머지
+          MERGE_REQUIRED_APPROVALS: "1" # 최소 승인 개수
+      
+      # 머지 완료 알리기
+      - name: Notify Merge
+        if: steps.automerge.outputs.mergeResult == 'merged'
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🕊️ PR #${{ steps.automerge.outputs.pullRequestNumber }}이 머지되었습니다.'
+            })
+            
+      # 머지 실패 알리기
+      - name: Notify failure
+        if: steps.automerge.outputs.mergeResult != 'merged'
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🗿 머지 시도 실패. 승인 개수, 테스트 성공 여부 등 자동 머지 조건을 만족하는지 확인하세요.'
+            })
