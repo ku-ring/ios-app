@@ -37,27 +37,46 @@ struct SettingView: View {
     
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            Form {
+            List {
                 Section {
-                    List {
-                        NavigationLink(
-                            state: SettingsAppFeature.Path.State.appIconSelector(
-                                AppIconSelectorFeature.State()
-                            )
-                        ) {
-                            HStack {
-                                Text("앱 아이콘 바꾸기")
-                                
-                                Spacer()
-                                
-                                Text(viewStore.state.currentAppIcon?.korValue ?? KuringIcon.kuring_app.korValue)
-                            }
+                    Label("공지 구독하기", systemImage: "bell")
+                    
+                    Label("기타 알림 받기", systemImage: "bell")
+                } header: {
+                    Text("공지구독")
+                }
+                
+                Section {
+                    NavigationLink(
+                        state: SettingsAppFeature.Path.State.appIconSelector(
+                            AppIconSelectorFeature.State()
+                        )
+                    ) {
+                        HStack {
+                            Text("앱 아이콘 바꾸기")
+                            
+                            Spacer()
+                            
+                            Text(viewStore.state.currentAppIcon?.korValue ?? KuringIcon.kuring_app.korValue)
                         }
                     }
                 } header: {
                     Text("정보")
                 }
+                
+                Section {
+                    
+                } header: {
+                    Text("SNS")
+                }
+                
+                Section {
+                    
+                } header: {
+                    Text("피드백")
+                }
             }
+            .navigationTitle("더보기")
         }
     }
 }
