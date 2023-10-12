@@ -39,10 +39,6 @@ struct SubscriptionFeature: Reducer {
         case departmentSelected(Department)
         /// 완료 버튼 탭
         case confirmButtonTapped
-        /// 학과 추가하기 버튼 탭
-        case addDepartmentsButtonTapped
-        /// 학과 편집하기 버튼 탭
-        case editDepartmentsButtonTapped
     }
     
     
@@ -71,12 +67,6 @@ struct SubscriptionFeature: Reducer {
                 
             case .confirmButtonTapped:
                 return .none
-                
-            case .addDepartmentsButtonTapped:
-                return .none
-                
-            case .editDepartmentsButtonTapped:
-                return .none
             }
         }
     }
@@ -84,11 +74,6 @@ struct SubscriptionFeature: Reducer {
 
 struct SubscriptionView: View {
     let store: StoreOf<SubscriptionFeature>
-    
-    // TODO: 디자인 시스템 분리 - ColorSet
-    struct Constants {
-        static let kuringPrimary: Color = Color(red: 0.24, green: 0.74, blue: 0.5)
-    }
     
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
@@ -102,6 +87,7 @@ struct SubscriptionView: View {
                 .padding(.bottom, 60)
                 
                 // TODO: 디자인 시스템 분리 - 칩 (Search 랑 합쳐서 KuringPicker) 같은거 있으면 좋을 것 같아요.
+                /// 일반 / 학과 카테고리 세그먼트
                 LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 2)) {
                     Button {
                         viewStore.send(.segmentSelected(.university))
@@ -123,9 +109,11 @@ struct SubscriptionView: View {
                 }
                 .padding(.bottom, 33)
                 
-                
+                // TODO: TCA 하위 도메인으로 분리 + 뷰 분리
+                /// 카테고리 목록
                 switch viewStore.subscriptionType {
                 case .university:
+                    /// 일반 카테고리 목록
                     VStack {
                         LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3)) {
                             ForEach(viewStore.univNoticeTypes) { univNoticeType in
@@ -165,21 +153,28 @@ struct SubscriptionView: View {
                         }
                         Spacer()
                     }
+                    
                 case .department:
+                    /// 빈 페이지 (내 학과 목록이 없을 때)
                     if viewStore.myDepartments.isEmpty {
                         VStack(alignment: .center) {
                             Spacer()
+                            
                             HStack {
                                 Spacer()
+                                
                                 Text("아직 추가된 학과가 없어요.\n관심 학과를 추가하고 공지를 확인해 보세요!")
                                     .font(.system(size: 16, weight: .medium))
                                     .multilineTextAlignment(.center)
                                     .foregroundStyle(Color(red: 0.68, green: 0.69, blue: 0.71))
+                                
                                 Spacer()
                             }
+                            
                             Spacer()
                         }
                     } else {
+                        /// 학과 카테고리 리스트
                         VStack(spacing: 0) {
                             ScrollView(showsIndicators: false) {
                                 ForEach(viewStore.myDepartments) { department in
@@ -224,6 +219,7 @@ struct SubscriptionView: View {
                     }
                     
                     // TODO: 디자인 시스템 분리 - 상단에 블러가 존재하는 버튼
+                    /// 학과 추가/편집하기 버튼 - `DepartmentEditor` 로 이동
                     NavigationLink(
                         state: SubscriptionAppFeature.Path.State.departmentEditor(
                             // TODO: init parameter 수정 (현재는 테스트용)
