@@ -81,8 +81,12 @@ struct SubscriptionFeature: Reducer {
                     async let univSubscription = kuringLink.subscribeUnivNotices(typeNames, fcmToken)
                     async let deptSubscription = kuringLink.subscribeDepartments(hostPrefixes, fcmToken)
                     
-                    let results = try await [univSubscription, deptSubscription]
-                    await send(.subscriptionResponse(!results.contains(false)))
+                    do {
+                        let results = try await [univSubscription, deptSubscription]
+                        await send(.subscriptionResponse(!results.contains(false)))
+                    } catch {
+                        await send(.subscriptionResponse(false))
+                    }
                 }
                 
             case let .subscriptionResponse(isSucceeded):
