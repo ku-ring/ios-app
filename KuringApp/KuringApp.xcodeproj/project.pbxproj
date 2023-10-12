@@ -30,6 +30,8 @@
 		A9DAFA5B2AB1F04C0064F748 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */; };
 		B11DBDCC2ACB370500501CA8 /* StaffRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11DBDCB2ACB370500501CA8 /* StaffRow.swift */; };
 		CA52DF392AD58F4B009B9272 /* NoticeAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA52DF382AD58F4B009B9272 /* NoticeAppTests.swift */; };
+		CA640C192AD7FEFD002836E0 /* SubscriptionSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640C182AD7FEFD002836E0 /* SubscriptionSegment.swift */; };
+		CA640C1B2AD8064B002836E0 /* NoticeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640C1A2AD8064B002836E0 /* NoticeProvider.swift */; };
 		DF331DAB2AC917E100D0BB08 /* kuring_app.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA72AC917E000D0BB08 /* kuring_app.png */; };
 		DF331DAC2AC917E100D0BB08 /* kuring_app_classic.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */; };
 		DF331DAD2AC917E100D0BB08 /* kuring_app_sketch.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA92AC917E000D0BB08 /* kuring_app_sketch.png */; };
@@ -72,6 +74,8 @@
 		B11DBDCB2ACB370500501CA8 /* StaffRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffRow.swift; sourceTree = "<group>"; };
 		CA52DF2F2AD58DF2009B9272 /* KuringAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KuringAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA52DF382AD58F4B009B9272 /* NoticeAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeAppTests.swift; sourceTree = "<group>"; };
+		CA640C182AD7FEFD002836E0 /* SubscriptionSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionSegment.swift; sourceTree = "<group>"; };
+		CA640C1A2AD8064B002836E0 /* NoticeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeProvider.swift; sourceTree = "<group>"; };
 		DF062D4A2AC87B6D00FC48C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DF331DA72AC917E000D0BB08 /* kuring_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app.png; sourceTree = "<group>"; };
 		DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app_classic.png; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				A965B7A62AC0696B0026ECDC /* Department.swift */,
+				CA640C1A2AD8064B002836E0 /* NoticeProvider.swift */,
 			);
 			path = WillBeRemoved;
 			sourceTree = "<group>";
@@ -156,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				A965B7AA2AC0750E0026ECDC /* SubscriptionView.swift */,
+				CA640C182AD7FEFD002836E0 /* SubscriptionSegment.swift */,
 				A965B7AE2AC084D20026ECDC /* SubscriptionApp.swift */,
 			);
 			path = Subscription;
@@ -368,6 +374,7 @@
 				A91455062ACF451E00B82A8E /* AppIcons.swift in Sources */,
 				A9B4F01A2ABCAF9800354C00 /* NoticeList.swift in Sources */,
 				A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */,
+				CA640C1B2AD8064B002836E0 /* NoticeProvider.swift in Sources */,
 				A9B4F01D2ABCB4CE00354C00 /* SearchView.swift in Sources */,
 				A965B7A32AC013060026ECDC /* DepartmentEditor.swift in Sources */,
 				A965B7A52AC013BF0026ECDC /* DepartmentSelector.swift in Sources */,
@@ -377,6 +384,7 @@
 				A9B4F0182ABCA9AF00354C00 /* NoticeDetailView.swift in Sources */,
 				A965B7AF2AC084D20026ECDC /* SubscriptionApp.swift in Sources */,
 				A91455032ACF44CE00B82A8E /* KuringIcon.swift in Sources */,
+				CA640C192AD7FEFD002836E0 /* SubscriptionSegment.swift in Sources */,
 				A91454FE2ACF39E000B82A8E /* SettingsApp.swift in Sources */,
 				A9DAFA542AB1F04B0064F748 /* KuringApp.swift in Sources */,
 				DFE7AB172AC33D6700230934 /* AppIconSelector.swift in Sources */,
