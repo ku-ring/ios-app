@@ -27,6 +27,13 @@ struct SubscriptionAppFeature: Reducer {
         
         Reduce { state, action in
             switch action {
+            case let .path(.popFrom(id: id)):
+                guard case let .some(.departmentEditor(departmentEditorState)) = state.path[id: id] else {
+                    return .none
+                }
+                state.subscriptionView.myDepartments = departmentEditorState.myDepartments
+                return .none
+                
             case .path:
                 return .none
                 

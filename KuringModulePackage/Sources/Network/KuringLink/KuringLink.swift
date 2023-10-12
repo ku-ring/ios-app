@@ -16,6 +16,9 @@ public typealias Page = Int
 
 public typealias FCMToken = String
 
+public typealias NoticeTypeName = String
+public typealias DepartmentHostPrefix = String
+
 public struct KuringLink {
     static var satellite: Satellite {
         let plistURL = Bundle.module.url(forResource: "KuringLink-Info", withExtension: "plist")!
@@ -24,6 +27,7 @@ public struct KuringLink {
             host: (dict["API_HOST"] as? String) ?? "",
             scheme: (dict["USING_HTTPS"] as? Bool) ?? true ? .https : .http
         )
+//        satellite._startGPS()
         return satellite
     }
     static let appVersion = "" // NEXT_VERSION
@@ -42,6 +46,10 @@ public struct KuringLink {
     public var searchNotices: (_ keyword: String) async throws -> [Notice]
     
     public var searchStaffs: (_ keyword: String) async throws -> [Staff]
+    
+    public var subscribeUnivNotices: ([NoticeTypeName], FCMToken) async throws -> Bool
+    
+    public var subscribeDepartments: ([DepartmentHostPrefix], FCMToken) async throws -> Bool
 }
 
 
@@ -105,7 +113,36 @@ extension KuringLink {
                     ]
                 )
             return response.data.staffList
+        },
+        subscribeUnivNotices: { typeNames, fcmToken in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.subscribeUnivNotices.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ],
+                    httpBody: UnivNoticeSubscription(categories: typeNames)
+                )
+            let isSucceed = (200..<300) ~= response.code
+            return isSucceed
+        },
+        subscribeDepartments: { hostPrefixes, fcmToken in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.subscribeDepartments.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ],
+                    httpBody: DepartmentSubscription(departments: hostPrefixes)
+                )
+            let isSucceed = (200..<300) ~= response.code
+            return isSucceed
         }
+        
     )
 }
 
@@ -123,6 +160,12 @@ extension KuringLink {
         },
         searchStaffs: { keyword in
             return [Staff.random()]
+        },
+        subscribeUnivNotices: { typeNames, fcmToken in
+            return true
+        },
+        subscribeDepartments: { hostPrefixes, fcmToken in
+            return true
         }
     )
 }

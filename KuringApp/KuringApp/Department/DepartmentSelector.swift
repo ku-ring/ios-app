@@ -11,13 +11,13 @@ import ComposableArchitecture
 
 struct DepartmentSelectorFeature: Reducer {
     struct State: Equatable {
-        var currentDepartment: Department?
-        var addedDepartment: IdentifiedArrayOf<Department>
+        var currentDepartment: NoticeProvider?
+        var addedDepartment: IdentifiedArrayOf<NoticeProvider>
     }
     
     enum Action {
         // TODO: String -> Department
-        case selectDepartment(id: Department.ID)
+        case selectDepartment(id: NoticeProvider.ID)
         case editDepartmentsButtonTapped
         case delegate(Delegate)
         
@@ -80,7 +80,13 @@ struct DepartmentSelector: View {
     NavigationStack {
         DepartmentSelector(
             store: Store(
-                initialState: DepartmentSelectorFeature.State(addedDepartment: [.전기전자공학부, .컴퓨터공학부, .산업디자인학과]),
+                initialState: DepartmentSelectorFeature.State(
+                    addedDepartment: [
+                        NoticeProvider.departments[0],
+                        NoticeProvider.departments[1],
+                        NoticeProvider.departments[2],
+                    ]
+                ),
                 reducer: { DepartmentSelectorFeature() }
             )
         )
