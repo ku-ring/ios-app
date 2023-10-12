@@ -49,7 +49,7 @@ public struct KuringLink {
     
     public var subscribeUnivNotices: ([NoticeTypeName], FCMToken) async throws -> Bool
     
-    public var subscribeDepartment: ([DepartmentHostPrefix], FCMToken) async throws -> Bool
+    public var subscribeDepartments: ([DepartmentHostPrefix], FCMToken) async throws -> Bool
 }
 
 
@@ -128,7 +128,7 @@ extension KuringLink {
             let isSucceed = (200..<300) ~= response.code
             return isSucceed
         },
-        subscribeDepartment: { hostPrefixes, fcmToken in
+        subscribeDepartments: { hostPrefixes, fcmToken in
             let response: EmptyResponse = try await satellite
                 .response(
                     for: Path.subscribeDepartments.path,
@@ -164,7 +164,7 @@ extension KuringLink {
         subscribeUnivNotices: { typeNames, fcmToken in
             return true
         },
-        subscribeDepartment: { hostPrefixes, fcmToken in
+        subscribeDepartments: { hostPrefixes, fcmToken in
             return true
         }
     )
