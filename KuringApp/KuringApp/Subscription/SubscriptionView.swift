@@ -79,7 +79,7 @@ struct SubscriptionFeature: Reducer {
                     let typeNames = state.selectedUnivNoticeType.compactMap { $0.name }
                     let hostPrefixes = state.selectedDepartment.compactMap { $0.hostPrefix }
                     async let univSubscription = kuringLink.subscribeUnivNotices(typeNames, fcmToken)
-                    async let deptSubscription = kuringLink.subscribeDepartment(hostPrefixes, fcmToken)
+                    async let deptSubscription = kuringLink.subscribeDepartments(hostPrefixes, fcmToken)
                     
                     let results = try await [univSubscription, deptSubscription]
                     await send(.subscriptionResponse(!results.contains(false)))
