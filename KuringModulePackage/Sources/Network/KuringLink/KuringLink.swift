@@ -119,10 +119,10 @@ extension KuringLink {
             return true
         },
         searchNotices: { keyword in
-            return []
+            return [Notice.random]
         },
         searchStaffs: { keyword in
-            return []
+            return [Staff.random()]
         }
     )
 }
