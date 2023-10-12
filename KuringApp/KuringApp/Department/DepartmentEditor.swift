@@ -24,7 +24,7 @@ struct DepartmentEditorFeature: Reducer {
         @PresentationState var alert: AlertState<Action.Alert>?
     }
     
-    enum Action: BindableAction {
+    enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
         
         /// 학과 추가 버튼 눌렀을 때
@@ -59,6 +59,9 @@ struct DepartmentEditorFeature: Reducer {
                 guard let department = state.results.first(where: { $0.id == id }) else {
                     return .none
                 }
+                guard !state.myDepartments.contains(department) else {
+                    return .none
+                }
                 state.myDepartments.append(department)
                 return .none
                 
@@ -67,7 +70,7 @@ struct DepartmentEditorFeature: Reducer {
                 return .none
                 
             case let .deleteMyDepartmentButtonTapped(id: id):
-                guard let department = state.results.first(where: { $0.id == id }) else {
+                guard let department = state.myDepartments.first(where: { $0.id == id }) else {
                     return .none
                 }
                 state.alert = AlertState {

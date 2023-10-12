@@ -15,7 +15,7 @@ struct SubscriptionAppFeature: Reducer {
         var subscriptionView = SubscriptionFeature.State()
     }
     
-    enum Action {
+    enum Action: Equatable {
         case path(StackAction<Path.State, Path.Action>)
         case subscriptionView(SubscriptionFeature.Action)
     }
@@ -51,7 +51,7 @@ struct SubscriptionAppFeature: Reducer {
             case departmentEditor(DepartmentEditorFeature.State)
         }
         
-        enum Action {
+        enum Action: Equatable {
             case departmentEditor(DepartmentEditorFeature.Action)
         }
         
