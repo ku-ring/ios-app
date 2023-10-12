@@ -37,6 +37,11 @@ public struct KuringLink {
     public var fetchNotices: (NoticeCount, NoticeType, Department?, Page) async throws -> [Notice]
     
     public var sendFeedback: (String, FCMToken) async throws -> Bool
+    
+    // MARK: - Search
+    public var searchNotices: (_ keyword: String) async throws -> [Notice]
+    
+    public var searchStaffs: (_ keyword: String) async throws -> [Staff]
 }
 
 
@@ -70,6 +75,36 @@ extension KuringLink {
                 )
             let isSucceed = (200..<300) ~= response.code
             return isSucceed
+        },
+        searchNotices: { keyword in
+            // TODO: 서버 수정되면 제거하기
+            struct SearchedNoticeList: Decodable {
+                let noticeList: [SearchedNotice]
+            }
+            let response: Response<SearchedNoticeList> = try await satellite
+                .response(
+                    for: Path.searchNotices.path,
+                    httpMethod: .get,
+                    queryItems: [
+                        .init(name: "content", value: keyword)
+                    ]
+                )
+            return response.data.noticeList.compactMap { $0.asNotice }
+        },
+        searchStaffs: { keyword in
+            // TODO: 서버 수정되면 제거하기
+            struct StaffList: Decodable {
+                let staffList: [Staff]
+            }
+            let response: Response<StaffList> = try await satellite
+                .response(
+                    for: Path.searchStaffs.path,
+                    httpMethod: .get,
+                    queryItems: [
+                        .init(name: "content", value: keyword)
+                    ]
+                )
+            return response.data.staffList
         }
     )
 }
@@ -82,6 +117,12 @@ extension KuringLink {
         },
         sendFeedback: { text, fcmToken in
             return true
+        },
+        searchNotices: { keyword in
+            return [Notice.random]
+        },
+        searchStaffs: { keyword in
+            return [Staff.random()]
         }
     )
 }
