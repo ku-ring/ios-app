@@ -182,7 +182,7 @@ struct SubscriptionView: View {
                                     
                                     VStack(spacing: 0) {
                                         HStack {
-                                            Text(department.id)
+                                            Text(department.korName)
                                                 .font(.system(size: 16, weight: .semibold))
                                                 .foregroundStyle(.black)
                                             
@@ -193,15 +193,15 @@ struct SubscriptionView: View {
                                                 .frame(width: 20, height: 20)
                                         }
                                         .padding(.horizontal, 21.5)
-                                        .padding(.top, viewStore.myDepartments.first?.id == department.id ? 22 : 0)
-                                        .padding(.bottom, viewStore.myDepartments.last?.id == department.id ? 22 : 0)
+                                        .padding(.top, viewStore.myDepartments.first == department ? 22 : 0)
+                                        .padding(.bottom, viewStore.myDepartments.last == department ? 22 : 0)
                                         .contentShape(Rectangle())
                                         .onTapGesture {
                                             viewStore.send(.departmentSelected(department))
                                         }
                                         
                                         // 밑줄
-                                        if viewStore.myDepartments.last?.id != department.id {
+                                        if viewStore.myDepartments.last != department {
                                             Rectangle()
                                                 .frame(height: 0.5)
                                                 .foregroundStyle(.black.opacity(0.1))
