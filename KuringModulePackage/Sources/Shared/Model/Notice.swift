@@ -57,7 +57,7 @@ public struct SearchedNotice: Codable, Hashable {
         hasher.combine(baseUrl)
     }
     
-    var asNotice: Notice {
+    public var asNotice: Notice {
         Notice(
             articleId: articleId,
             postedDate: postedDate,
