@@ -92,38 +92,30 @@ struct SubscriptionView: View {
                 HStack {
                     Text("알림 받고 싶은 \n카테고리를 선택해주세요")
                         .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(Color(red: 0.1, green: 0.12, blue: 0.15))
+                        .foregroundStyle(Color(red: 0.1, green: 0.12, blue: 0.15))
                 }
                 .padding(.top, 32)
                 .padding(.bottom, 60)
                 
                 LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 2)) {
                     // TODO: 디자인 시스템 분리 - 칩
-                    VStack {
-                        if viewStore.subscriptionType == .university {
-                            didSelectChipView("일반 카테고리")
-                        } else {
-                            Button {
-                                viewStore.send(.segmentSelected(.university))
-                            } label: {
-                                deSelectChipView("일반 카테고리")
-                            }
-                        }
+                    Button {
+                        viewStore.send(.segmentSelected(.university))
+                    } label: {
+                        SubscriptionSegment(
+                            title: "일반 카테고리",
+                            isSelected: viewStore.subscriptionType == .university
+                        )
                     }
-                    .font(.system(size: 16, weight: .bold))
                     
-                    VStack {
-                        if viewStore.subscriptionType == .department {
-                            didSelectChipView("학과 카테고리")
-                        } else {
-                            Button {
-                                viewStore.send(.segmentSelected(.department))
-                            } label: {
-                                deSelectChipView("학과 카테고리")
-                            }
-                        }
+                    Button {
+                        viewStore.send(.segmentSelected(.department))
+                    } label: {
+                        SubscriptionSegment(
+                            title: "학과 카테고리",
+                            isSelected: viewStore.subscriptionType == .department
+                        )
                     }
-                    .font(.system(size: 16, weight: .bold))
                 }
                 .padding(.bottom, 48)
                 
@@ -167,7 +159,7 @@ struct SubscriptionView: View {
                                     Text("아직 추가된 학과가 없어요.\n관심 학과를 추가하고 공지를 확인해 보세요!")
                                         .font(.system(size: 16, weight: .medium))
                                         .multilineTextAlignment(.center)
-                                        .foregroundColor(Color(red: 0.68, green: 0.69, blue: 0.71))
+                                        .foregroundStyle(Color(red: 0.68, green: 0.69, blue: 0.71))
                                     Spacer()
                                 }
                                 Spacer()
@@ -182,7 +174,7 @@ struct SubscriptionView: View {
                                             HStack {
                                                 Text(department.id)
                                                     .font(.system(size: 16, weight: .semibold))
-                                                    .foregroundColor(.black)
+                                                    .foregroundStyle(.black)
                                                 Spacer()
                                                 Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
                                                     .foregroundStyle(isSelected ? Constants.kuringPrimary : Color.black.opacity(0.1))
@@ -200,7 +192,7 @@ struct SubscriptionView: View {
                                             if viewStore.myDepartments.last?.id != department.id {
                                                 Rectangle()
                                                     .frame(height: 0.5)
-                                                    .foregroundColor(Color.black.opacity(0.1))
+                                                    .foregroundStyle(.black.opacity(0.1))
                                                     .padding(.top, 16)
                                                     .padding(.bottom, 16)
                                             }
@@ -253,23 +245,29 @@ struct SubscriptionView: View {
             }
         }
     }
+}
+
+struct SubscriptionSegment: View {
+    let title: String
+    let isSelected: Bool
     
-    // TODO: 디자인 시스템 분리 - 칩
-    @ViewBuilder
-    private func didSelectChipView(_ title: String) -> some View {
-        Group {
+    var body: some View {
+        VStack {
             Text(title)
+                .font(.system(size: 16, weight: .bold))
+                .foregroundStyle(
+                    isSelected
+                    ? Color(red: 0.24, green: 0.74, blue: 0.5)
+                    : Color.black.opacity(0.3)
+                )
+
             Rectangle()
+                .foregroundStyle(
+                    Color(red: 0.24, green: 0.74, blue: 0.5)
+                        .opacity(isSelected ? 1 : 0)
+                )
                 .frame(height: 1.5)
         }
-        .foregroundStyle(Color(red: 0.24, green: 0.74, blue: 0.5))
-    }
-    
-    // TODO: 디자인 시스템 분리 - 칩
-    @ViewBuilder
-    private func deSelectChipView(_ title: String) -> some View {
-        Text(title)
-            .foregroundColor(.black.opacity(0.3))
     }
 }
 
