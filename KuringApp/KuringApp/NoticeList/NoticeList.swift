@@ -13,7 +13,7 @@ struct NoticeListFeature: Reducer {
     struct State: Equatable {
         var notices: IdentifiedArrayOf<Notice> = []
 
-        var currentDepartment: Department?
+        var currentDepartment: NoticeProvider?
         @PresentationState var changeDepartment: DepartmentSelectorFeature.State?
         
         // TODO: (고민포인트) AppFeature 단으로 (부모 리듀서) 로 옮길 필요는 없을까? - 도메인에 대한 고민
@@ -40,7 +40,7 @@ struct NoticeListFeature: Reducer {
             case .changeDepartmentButtonTapped:
                 state.changeDepartment = DepartmentSelectorFeature.State(
                     currentDepartment: state.currentDepartment,
-                    addedDepartment: [.전기전자공학부, .컴퓨터공학부, .산업디자인학과]
+                    addedDepartment: IdentifiedArray(uniqueElements: NoticeProvider.departments)
                 )
                 return .none
                 
@@ -63,7 +63,7 @@ struct NoticeListFeature: Reducer {
                 state.currentDepartment = selectedDepartment
                 return .none
                 
-            case .changeSubscription(.presented(.subscriptionView(.confirmButtonTapped))):
+            case .changeSubscription(.presented(.subscriptionView(.subscriptionResponse))):
                 state.changeSubscription = nil
                 return .none
                 
@@ -92,7 +92,7 @@ struct NoticeList: View {
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             List {
-                Button((viewStore.currentDepartment ?? .전기전자공학부).korName) {
+                Button((viewStore.currentDepartment ?? NoticeProvider.departments[0]).korName) {
                     viewStore.send(.changeDepartmentButtonTapped)
                 }
                 

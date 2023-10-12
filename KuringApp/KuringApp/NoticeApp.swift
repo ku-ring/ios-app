@@ -38,8 +38,8 @@ struct NoticeAppFeature: Reducer {
                         Path.State.departmentEditor(
                             // TODO: init parameter 수정 (현재는 테스트용)
                             DepartmentEditorFeature.State(
-                                myDepartments: [.전기전자공학부, .컴퓨터공학부],
-                                results: [.전기전자공학부, .컴퓨터공학부, .산업디자인학과]
+                                myDepartments: IdentifiedArray(uniqueElements: NoticeProvider.departments),
+                                results: IdentifiedArray(uniqueElements: NoticeProvider.departments)
                             )
                         )
                     )

@@ -11,8 +11,8 @@ import ComposableArchitecture
 
 struct DepartmentEditorFeature: Reducer {
     struct State: Equatable {
-        var myDepartments: IdentifiedArrayOf<Department> = []
-        var results: IdentifiedArrayOf<Department> = []
+        var myDepartments: IdentifiedArrayOf<NoticeProvider> = []
+        var results: IdentifiedArrayOf<NoticeProvider> = []
         
         @BindingState var searchText: String = ""
         @BindingState var focus: Field? = .search
@@ -28,18 +28,18 @@ struct DepartmentEditorFeature: Reducer {
         case binding(BindingAction<State>)
         
         /// 학과 추가 버튼 눌렀을 때
-        case addDepartmentButtonTapped(id: Department.ID)
+        case addDepartmentButtonTapped(id: NoticeProvider.ID)
         /// 추가했던 학과 취소 버튼 눌렀을 때
-        case cancelAdditionButtonTapped(id: Department.ID)
+        case cancelAdditionButtonTapped(id: NoticeProvider.ID)
         /// 내 학과 삭제 버튼 눌렀을 때
-        case deleteMyDepartmentButtonTapped(id: Department.ID)
+        case deleteMyDepartmentButtonTapped(id: NoticeProvider.ID)
         /// 내 학과 전체삭제 버튼 눌렀을 때
         case deleteAllMyDepartmentButtonTapped
         
         /// 알림
         enum Alert: Equatable {
             /// 개별 학과 삭제 알림 시 삭제 버튼 눌렀을 때
-            case confirmDelete(id: Department.ID)
+            case confirmDelete(id: NoticeProvider.ID)
             /// 전체 삭제 알림 시 삭제 버튼 눌렀을 때
             case confirmDeleteAll
         }
@@ -213,8 +213,15 @@ struct DepartmentEditor: View {
         DepartmentEditor(
             store: Store(
                 initialState: DepartmentEditorFeature.State(
-                    myDepartments: [.전기전자공학부, .컴퓨터공학부],
-                    results: [.전기전자공학부, .컴퓨터공학부, .산업디자인학과]
+                    myDepartments: [
+                        NoticeProvider.departments[0],
+                        NoticeProvider.departments[1]
+                    ],
+                    results: [
+                        NoticeProvider.departments[0],
+                        NoticeProvider.departments[1],
+                        NoticeProvider.departments[2]
+                    ]
                 ),
                 reducer: { DepartmentEditorFeature() }
             )

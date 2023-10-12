@@ -59,3 +59,24 @@ extension NoticeProvider {
         ),
     ]
 }
+
+/// Mock 데이터
+extension NoticeProvider {
+    static let departments: [NoticeProvider] = [
+        NoticeProvider(
+            name: "education",
+            hostPrefix: "edu",
+            korName: "교직과"
+        ),
+        NoticeProvider(
+            name: "physical_education",
+            hostPrefix: "kupe",
+            korName: "체육교육과"
+        ),
+        NoticeProvider(
+            name: "computer_science",
+            hostPrefix: "cse",
+            korName: "컴퓨터공학부"
+        ),
+    ]
+}

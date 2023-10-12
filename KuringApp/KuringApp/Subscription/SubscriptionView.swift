@@ -15,14 +15,16 @@ struct SubscriptionFeature: Reducer {
         var subscriptionType: SubscriptionType = .university
         
         /// 대학 공지 리스트
-        let univNoticeTypes: IdentifiedArrayOf<NoticeProvider> = IdentifiedArray(NoticeProvider.univNoticeTypes)
+        let univNoticeTypes: IdentifiedArrayOf<NoticeProvider> = IdentifiedArray(uniqueElements: NoticeProvider.univNoticeTypes)
         /// 대학 공지 리스트 중 내가 구독한 공지
         var selectedUnivNoticeType: IdentifiedArrayOf<NoticeProvider> = []
         
         /// 내가 추가한 공지 리스트
-        var myDepartments: IdentifiedArrayOf<Department> = [.산업디자인학과, .전기전자공학부, .컴퓨터공학부, .건국대학교, .경제학과, .수의학과, .영문학과, .의생명공학과]
+        var myDepartments: IdentifiedArrayOf<NoticeProvider> = IdentifiedArray(uniqueElements: NoticeProvider.departments)
         /// 내가 추가한 공지 리스트 중 지금 선택한 학과
-        var selectedDepartment: IdentifiedArrayOf<Department> = [Department.컴퓨터공학부]
+        var selectedDepartment: IdentifiedArrayOf<NoticeProvider> = []
+        
+        var isWaitingResponse: Bool = false
         
         enum SubscriptionType: Equatable {
             case university
@@ -36,11 +38,14 @@ struct SubscriptionFeature: Reducer {
         /// 일반 공지 카테고리 중 하나 선택
         case univNoticeTypeSelected(NoticeProvider)
         /// 학과 공지 카테고리 중 하나 선택
-        case departmentSelected(Department)
+        case departmentSelected(NoticeProvider)
         /// 완료 버튼 탭
         case confirmButtonTapped
+        /// 구독 성공 여부 (API 응답)
+        case subscriptionResponse(Bool)
     }
     
+    @Dependency(\.kuringLink) var kuringLink
     
     var body: some ReducerOf<Self> {
         Reduce { state, action in
@@ -65,7 +70,25 @@ struct SubscriptionFeature: Reducer {
                 }
                 return .none
                 
+            // TODO: API & NoticeListFeature 쪽에 Delegate 방식 처리 체크
             case .confirmButtonTapped:
+                state.isWaitingResponse = true
+                return .run { [state] send in
+                    // TODO: 제거
+                    let fcmToken = "cZSHjO4_bUjirvsrxWzig5:APA91bHPojABL5oEXi5AcjJ8v4Vcp3KpJfFUD_3b-HhfV8m23_R6czJa3PwqcVqBZSHBb2t7Z3odUeD0cFKaMSkMmrGxTqyjJPfEZVfTPvmewV-xiMTWbrk-QKuc4Nrxd_BhEArO7Svo"
+                    let typeNames = state.selectedUnivNoticeType.compactMap { $0.name }
+                    let hostPrefixes = state.selectedDepartment.compactMap { $0.hostPrefix }
+                    async let univSubscription = kuringLink.subscribeUnivNotices(typeNames, fcmToken)
+                    async let deptSubscription = kuringLink.subscribeDepartment(hostPrefixes, fcmToken)
+                    
+                    let results = try await [univSubscription, deptSubscription]
+                    await send(.subscriptionResponse(!results.contains(false)))
+                }
+                
+            case let .subscriptionResponse(isSucceeded):
+                // TODO: UX 어떻게 할지 디자이너 분들과 논의 해야함 (알림을 띄울지 말지)
+                print(isSucceeded ? "구독 성공~" : "구독 실패")
+                state.isWaitingResponse = false
                 return .none
             }
         }
@@ -259,8 +282,12 @@ struct SubscriptionView: View {
             .navigationTitle("푸시 알림 설정")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                Button("완료") {
-                    viewStore.send(.confirmButtonTapped)
+                if viewStore.isWaitingResponse {
+                    ProgressView()
+                } else {
+                    Button("완료") {
+                        viewStore.send(.confirmButtonTapped)
+                    }                    
                 }
             }
         }

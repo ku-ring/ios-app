@@ -16,7 +16,6 @@
 		A947DCC22AB47D3E00A6D614 /* Subscriptions in Frameworks */ = {isa = PBXBuildFile; productRef = A947DCC12AB47D3E00A6D614 /* Subscriptions */; };
 		A965B7A32AC013060026ECDC /* DepartmentEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965B7A22AC013060026ECDC /* DepartmentEditor.swift */; };
 		A965B7A52AC013BF0026ECDC /* DepartmentSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965B7A42AC013BF0026ECDC /* DepartmentSelector.swift */; };
-		A965B7A72AC0696B0026ECDC /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965B7A62AC0696B0026ECDC /* Department.swift */; };
 		A965B7AB2AC0750E0026ECDC /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965B7AA2AC0750E0026ECDC /* SubscriptionView.swift */; };
 		A965B7AF2AC084D20026ECDC /* SubscriptionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965B7AE2AC084D20026ECDC /* SubscriptionApp.swift */; };
 		A9B4F0142ABCA86500354C00 /* NoticeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B4F0132ABCA86500354C00 /* NoticeApp.swift */; };
@@ -57,7 +56,6 @@
 		A91455052ACF451E00B82A8E /* AppIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcons.swift; sourceTree = "<group>"; };
 		A965B7A22AC013060026ECDC /* DepartmentEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentEditor.swift; sourceTree = "<group>"; };
 		A965B7A42AC013BF0026ECDC /* DepartmentSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentSelector.swift; sourceTree = "<group>"; };
-		A965B7A62AC0696B0026ECDC /* Department.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
 		A965B7AA2AC0750E0026ECDC /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		A965B7AE2AC084D20026ECDC /* SubscriptionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionApp.swift; sourceTree = "<group>"; };
 		A9B4F0132ABCA86500354C00 /* NoticeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeApp.swift; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 		A965B7A82AC074BD0026ECDC /* WillBeRemoved */ = {
 			isa = PBXGroup;
 			children = (
-				A965B7A62AC0696B0026ECDC /* Department.swift */,
 				CA640C1A2AD8064B002836E0 /* NoticeProvider.swift */,
 			);
 			path = WillBeRemoved;
@@ -380,7 +377,6 @@
 				A965B7A52AC013BF0026ECDC /* DepartmentSelector.swift in Sources */,
 				B11DBDCC2ACB370500501CA8 /* StaffRow.swift in Sources */,
 				A9B4F0162ABCA93400354C00 /* NoticeApp.Path.swift in Sources */,
-				A965B7A72AC0696B0026ECDC /* Department.swift in Sources */,
 				A9B4F0182ABCA9AF00354C00 /* NoticeDetailView.swift in Sources */,
 				A965B7AF2AC084D20026ECDC /* SubscriptionApp.swift in Sources */,
 				A91455032ACF44CE00B82A8E /* KuringIcon.swift in Sources */,
