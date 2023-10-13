@@ -31,6 +31,8 @@
 		CA52DF392AD58F4B009B9272 /* NoticeAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA52DF382AD58F4B009B9272 /* NoticeAppTests.swift */; };
 		CA640C192AD7FEFD002836E0 /* SubscriptionSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640C182AD7FEFD002836E0 /* SubscriptionSegment.swift */; };
 		CA640C1B2AD8064B002836E0 /* NoticeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640C1A2AD8064B002836E0 /* NoticeProvider.swift */; };
+		CA640C1D2AD84E10002836E0 /* SubscriptionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640C1C2AD84E10002836E0 /* SubscriptionViewTests.swift */; };
+		CA640C1F2AD8525D002836E0 /* SubscriptionAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640C1E2AD8525D002836E0 /* SubscriptionAppTests.swift */; };
 		DF331DAB2AC917E100D0BB08 /* kuring_app.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA72AC917E000D0BB08 /* kuring_app.png */; };
 		DF331DAC2AC917E100D0BB08 /* kuring_app_classic.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */; };
 		DF331DAD2AC917E100D0BB08 /* kuring_app_sketch.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA92AC917E000D0BB08 /* kuring_app_sketch.png */; };
@@ -74,6 +76,8 @@
 		CA52DF382AD58F4B009B9272 /* NoticeAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeAppTests.swift; sourceTree = "<group>"; };
 		CA640C182AD7FEFD002836E0 /* SubscriptionSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionSegment.swift; sourceTree = "<group>"; };
 		CA640C1A2AD8064B002836E0 /* NoticeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeProvider.swift; sourceTree = "<group>"; };
+		CA640C1C2AD84E10002836E0 /* SubscriptionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewTests.swift; sourceTree = "<group>"; };
+		CA640C1E2AD8525D002836E0 /* SubscriptionAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionAppTests.swift; sourceTree = "<group>"; };
 		DF062D4A2AC87B6D00FC48C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DF331DA72AC917E000D0BB08 /* kuring_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app.png; sourceTree = "<group>"; };
 		DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app_classic.png; sourceTree = "<group>"; };
@@ -225,6 +229,8 @@
 			isa = PBXGroup;
 			children = (
 				CA52DF382AD58F4B009B9272 /* NoticeAppTests.swift */,
+				CA640C1C2AD84E10002836E0 /* SubscriptionViewTests.swift */,
+				CA640C1E2AD8525D002836E0 /* SubscriptionAppTests.swift */,
 			);
 			path = KuringAppTests;
 			sourceTree = "<group>";
@@ -392,6 +398,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA52DF392AD58F4B009B9272 /* NoticeAppTests.swift in Sources */,
+				CA640C1D2AD84E10002836E0 /* SubscriptionViewTests.swift in Sources */,
+				CA640C1F2AD8525D002836E0 /* SubscriptionAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

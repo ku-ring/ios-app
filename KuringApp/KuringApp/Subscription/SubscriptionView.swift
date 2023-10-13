@@ -32,7 +32,7 @@ struct SubscriptionFeature: Reducer {
         }
     }
     
-    enum Action {
+    enum Action: Equatable {
         /// 일반 / 학과 카테고리 세그먼트 선택
         case segmentSelected(State.SubscriptionType)
         /// 일반 공지 카테고리 중 하나 선택
@@ -298,13 +298,13 @@ struct SubscriptionView: View {
     }
 }
 
-//#Preview {
-//    NavigationStack {
-//        SubscriptionView(
-//            store: Store(
-//                initialState: SubscriptionFeature.State(),
-//                reducer: { SubscriptionFeature() }
-//            )
-//        )
-//    }
-//}
+#Preview {
+    NavigationStack {
+        SubscriptionView(
+            store: Store(
+                initialState: SubscriptionFeature.State(),
+                reducer: { SubscriptionFeature() }
+            )
+        )
+    }
+}
