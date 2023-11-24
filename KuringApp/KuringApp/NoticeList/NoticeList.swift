@@ -248,8 +248,8 @@ struct NoticeList: View {
         ) { store in
             NavigationStack {
                 DepartmentSelector(store: store)
+                    .navigationTitle("Department Selector")
             }
-            .presentationDetents([.medium])
         }
     }
     

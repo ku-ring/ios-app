@@ -35,8 +35,6 @@ struct DepartmentEditorFeature: Reducer {
         case deleteMyDepartmentButtonTapped(id: NoticeProvider.ID)
         /// 내 학과 전체삭제 버튼 눌렀을 때
         case deleteAllMyDepartmentButtonTapped
-        /// 텍스트 필드의 xmark를 눌렀을 때
-        case clearTextFieldButtonTapped
         
         /// 알림
         enum Alert: Equatable {
@@ -101,9 +99,6 @@ struct DepartmentEditorFeature: Reducer {
                     }
                 }
                 return .none
-            case .clearTextFieldButtonTapped:
-                state.searchText = ""
-                return .none
                 
                 // MARK: Alert
             case let .alert(.presented(alertAction)):
@@ -132,76 +127,51 @@ struct DepartmentEditor: View {
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack {
-                HStack {
-                    Text("학과를 추가하거나 \n삭제할 수 있어요")
-                        .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(Color(red: 0.1, green: 0.12, blue: 0.15))
-                    Spacer()
-                }
-                .padding(.top, 28)
-                .padding(.bottom, 24)
-                
-                HStack(alignment: .center, spacing: 12) {
-                    if viewStore.searchText.isEmpty {
-                        Image(systemName: "magnifyingglass")
-                            .frame(width: 16, height: 16)
-                            .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+                List {
+                    Text("학과를 추가하거나 삭제할 수 있어요")
+                    
+                    /**
+                     - `viewStore.$searchText`
+                     - `bind(viewStore.$focus, to: $focus)`
+                     */
+                    Section {
+                        TextField("추가할 학과를 검색해 주세요", text: viewStore.$searchText)
+                            .focused($focus, equals: .search)
+                            .bind(viewStore.$focus, to: self.$focus)
                     }
                     
-                    TextField("추가할 학과를 검색해 주세요", text: viewStore.$searchText)
-                        .focused($focus, equals: .search)
-                        .bind(viewStore.$focus, to: self.$focus)
-                    
-                    if !viewStore.searchText.isEmpty {
-                        Image(systemName: "xmark")
-                            .frame(width: 16, height: 16)
-                            .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
-                            .onTapGesture {
-                                viewStore.send(.clearTextFieldButtonTapped)
-                                focus = nil
-                            }
-                    }
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 7)
-                .background(Color(red: 0.95, green: 0.95, blue: 0.96))
-                .cornerRadius(20)
-                .padding(.bottom, 16)
-                
-                HStack(alignment: .center, spacing: 10) {
-                    Text(viewStore.searchText.isEmpty ? "내 학과" : "검색 결과")
-                        .font(.system(size: 14))
-                        .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
-                    Spacer()
-                }
-                .padding(.horizontal, 4)
-                .padding(.vertical, 10)
-                
-                if viewStore.searchText.isEmpty {
-                    // 내학과
-                    ScrollView {
+                    /**
+                     - `viewStore.myDepartments`
+                     - `.deleteMyDepartmentButtonTapped`
+                     */
+                    Section {
                         ForEach(viewStore.myDepartments) { myDepartment in
-                            HStack(alignment: .center) {
+                            HStack {
                                 Text(myDepartment.korName)
+                                
                                 Spacer()
-                                Button {
+                                
+                                Button("삭제") {
                                     viewStore.send(.deleteMyDepartmentButtonTapped(id: myDepartment.id))
-                                } label: {
-                                    Text("삭제")
-                                        .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
                                 }
                             }
-                            .padding(.horizontal, 4)
-                            .padding(.vertical, 10)
                         }
+                    } header: {
+                        Text("내 학과")
                     }
-                } else {
-                    // 검색결과
-                    ScrollView {
+                    
+                    /**
+                     - `viewStore.results`
+                     - `addDepartmentButtonTapped`
+                     - `cancelAdditionButtonTapped`
+                     */
+                    Section {
                         ForEach(viewStore.results) { result in
-                            HStack(alignment: .center) {
+                            HStack {
                                 Text(result.korName)
+                                
                                 Spacer()
+                                
                                 Button {
                                     if viewStore.myDepartments.contains(result) {
                                         viewStore.send(.cancelAdditionButtonTapped(id: result.id))
@@ -209,45 +179,27 @@ struct DepartmentEditor: View {
                                         viewStore.send(.addDepartmentButtonTapped(id: result.id))
                                     }
                                 } label: {
-                                    let isSelected = viewStore.myDepartments.contains(result)
                                     Image(
-                                        systemName: isSelected
+                                        systemName: viewStore.myDepartments.contains(result)
                                         ? "checkmark.circle.fill"
                                         : "plus.circle"
                                     )
-                                    .foregroundStyle(
-                                        isSelected
-                                        ? Color(red: 0.24, green: 0.74, blue: 0.5)
-                                        : Color.black.opacity(0.1)
-                                    )
                                 }
                             }
-                            .padding(.horizontal, 4)
-                            .padding(.vertical, 10)
                         }
+                    } header: {
+                        Text("검색 결과")
                     }
                 }
-                
-                Spacer()
             }
-            .padding(.horizontal, 20)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
+                    Button("전체 삭제") {
                         viewStore.send(.deleteAllMyDepartmentButtonTapped)
-                        focus = .search
-                    } label: {
-                        Text("전체 삭제")
-                            .foregroundStyle(
-                                viewStore.myDepartments.isEmpty
-                                ? Color(red: 0.21, green: 0.21, blue: 0.21).opacity(0.5)
-                                : Color(red: 0.24, green: 0.74, blue: 0.5)
-                            )
                     }
                     .disabled(viewStore.myDepartments.isEmpty)
                 }
             }
-            .bind(viewStore.$focus, to: self.$focus)
             .alert(
                 store: self.store.scope(
                     state: \.$alert,
@@ -255,9 +207,9 @@ struct DepartmentEditor: View {
                 )
             )
         }
-        
     }
 }
+
 
 #Preview {
     NavigationStack {
@@ -278,6 +230,5 @@ struct DepartmentEditor: View {
             )
         )
         .navigationTitle("Department Editor")
-//        .toolbarTitleDisplayMode(.inline)
     }
 }
