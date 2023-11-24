@@ -15,7 +15,7 @@ struct DepartmentSelectorFeature: Reducer {
         var addedDepartment: IdentifiedArrayOf<NoticeProvider>
     }
     
-    enum Action {
+    enum Action: Equatable {
         // TODO: String -> Department
         case selectDepartment(id: NoticeProvider.ID)
         case editDepartmentsButtonTapped
@@ -36,7 +36,7 @@ struct DepartmentSelectorFeature: Reducer {
                 }
                 state.currentDepartment = department
                 return .none
-            
+                
             case .editDepartmentsButtonTapped:
                 return .send(.delegate(.editDepartment))
                 
@@ -52,26 +52,79 @@ struct DepartmentSelector: View {
     
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            List {
-                Section {
+            VStack {
+                HStack(alignment: .center, spacing: 10) {
+                    Text("대표 학과 선택")
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundStyle(Color.black)
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 24)
+                .padding(.bottom, 12)
+                .frame(width: 375, alignment: .leading)
+                
+                ScrollView {
                     ForEach(viewStore.addedDepartment) { department in
-                        Button {
-                            viewStore.send(.selectDepartment(id: department.id))
-                        } label: {
-                            Label(
-                                department.korName,
-                                systemImage: department == viewStore.currentDepartment
+                        HStack {
+                            Text(department.korName)
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundColor(.black)
+                            
+                            Spacer()
+                            
+                            Image(
+                                systemName: department == viewStore.currentDepartment
                                 ? "checkmark.circle.fill"
                                 : "circle"
                             )
+                            .foregroundStyle(
+                                department == viewStore.currentDepartment
+                                ? Color.accentColor
+                                : Color.black.opacity(0.1)
+                            )
+                            .frame(width: 20, height: 20)
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 12)
+                        .background(.white)
+                        .onTapGesture {
+                            viewStore.send(.selectDepartment(id: department.id))
                         }
                     }
                 }
                 
-                Button("내 학과 편집하기") {
+                Button {
                     viewStore.send(.editDepartmentsButtonTapped)
+                } label: {
+                    topBlurButton(
+                        "내 학과 편집하기",
+                        fontColor: Color.accentColor,
+                        backgroundColor: Color.accentColor.opacity(0.15)
+                    )
                 }
+                .padding(.horizontal, 20)
             }
+        }
+    }
+    
+    // TODO: 디자인 시스템 분리 - 상단에 블러가 존재하는 버튼
+    @ViewBuilder
+    private func topBlurButton(_ title: String, fontColor: Color, backgroundColor: Color) -> some View {
+        HStack(alignment: .center, spacing: 10) {
+            Spacer()
+            Text(title)
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(fontColor)
+            Spacer()
+        }
+        .padding(.horizontal, 50)
+        .padding(.vertical, 16)
+        .frame(height: 50, alignment: .center)
+        .background(backgroundColor)
+        .cornerRadius(100)
+        .background {
+            LinearGradient(gradient: Gradient(colors: [.white.opacity(0.1), .white]), startPoint: .top, endPoint: .bottom)
+                .offset(x: 0, y: -32)
         }
     }
 }
