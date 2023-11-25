@@ -17,7 +17,7 @@ struct NoticeTypeColumn: View {
         let itemSize: CGSize = CGSize(width: 64, height: 48)
         let lineHeight: CGFloat = 3
         
-        Text(noticeType.koreanValue)
+        Text(noticeType.rawValue)
             .font(.system(size: 16, weight: noticeType.id == selectedID ? .semibold : .regular))
             .padding(.vertical, 8)
             .frame(width: itemSize.width, height: itemSize.height)

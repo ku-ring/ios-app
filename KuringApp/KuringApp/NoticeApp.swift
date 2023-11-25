@@ -90,7 +90,7 @@ struct NoticeAppView: View {
     var body: some View {
         NavigationStackStore(self.store.scope(state: \.path, action: { .path($0) })) {
             WithViewStore(self.store, observe: { $0 }) { viewStore in
-                NoticeList(
+                NoticeContentView(
                     store: self.store.scope(
                         state: \.noticeList,
                         action: { .noticeList($0) }
@@ -102,21 +102,21 @@ struct NoticeAppView: View {
                     }
                     
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        // MARK: 푸시 알림 선택 진입
-                        Button {
-                            viewStore.send(.changeSubscriptionButtonTapped)
-                        } label: {
-                            Image(systemName: "bell")
-                                .foregroundStyle(Color.black)
-                        }
-                    }
-                    
-                    ToolbarItemGroup(placement: .navigationBarTrailing) {
                         Button {
                             // TODO: - to SearchView
                         } label: {
                             Image(systemName: "magnifyingglass")
                                 .foregroundStyle(Color.black)
+                        }
+                    }
+                    
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        // MARK: 푸시 알림 선택 진입
+                        Button {
+                            viewStore.send(.changeSubscriptionButtonTapped)
+                        } label: {
+                            Image(systemName: "bell")
+                                .foregroundStyle(.black)
                         }
                     }
                 }

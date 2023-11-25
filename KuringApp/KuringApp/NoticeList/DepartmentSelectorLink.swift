@@ -30,7 +30,9 @@ struct DepartmentSelectorLink: View {
 }
 
 #Preview {
-    DepartmentSelectorLink(department: .init(name: "산업디자인학과", hostPrefix: "kuid", korName: "산업디자인학과")) {
+    DepartmentSelectorLink(
+        department: .init(name: "산업디자인학과", hostPrefix: "kuid", korName: "산업디자인학과", category: .학과)
+    ) {
         // 액션 정의. 예) `viewStore.send(.changeDepartmentButtonTapped)`
     }
 }

@@ -13,14 +13,14 @@ struct NoticeTypeGrid: View {
     let store: StoreOf<NoticeListFeature>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0.currentNoticeType }) { viewStore in
+        WithViewStore(self.store, observe: { $0.provider }) { viewStore in
             ScrollViewReader { proxy in
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 0) {
                         ForEach(NoticeType.allCases, id: \.self) { noticeType in
                             NoticeTypeColumn(
                                 noticeType: noticeType,
-                                selectedID: viewStore.id
+                                selectedID: viewStore.category.id
                             )
                             .onTapGesture {
                                 viewStore.send(.noticeTypeSegmentTapped(noticeType))

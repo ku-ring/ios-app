@@ -1,13 +1,14 @@
 //
-//  NoticeList.NoDepartment.swift
+//  NoticeContentView.NoDepartment.swift
 //  KuringApp
 //
 //  Created by 이재성 on 11/24/23.
 //
 
+import Model
 import SwiftUI
 
-extension NoticeList {
+extension NoticeContentView {
     @ViewBuilder
     func NoDepartmentView() -> some View {
         VStack(spacing: 0) {
