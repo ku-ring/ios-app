@@ -15,8 +15,6 @@ struct NoticeListFeature: Reducer {
         // MARK: 네비게이션
         @PresentationState var changeDepartment: DepartmentSelectorFeature.State?
         
-        var notices: IdentifiedArrayOf<Notice> = []
-        
         /// 현재 공지리스트를 제공하는 `NoticeProvider` 값
         ///
         /// - IMPORTANT: 추가한 학과가 있으면 추가한 학과의 첫번째 값이 초기값으로 세팅되고 없으면 `.학사`
@@ -119,6 +117,9 @@ struct NoticeListFeature: Reducer {
                 return .none
 
             case .fetchNotices:
+                if state.provider == .emptyDepartment {
+                    return .none
+                }
                 return .run { [provider = state.provider, noticeDictionary = state.noticeDictionary] send in
                     let retrievalInfo = noticeDictionary[provider] ?? State.NoticeInfo()
                     

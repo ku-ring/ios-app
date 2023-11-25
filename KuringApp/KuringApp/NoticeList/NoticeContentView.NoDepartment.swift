@@ -7,6 +7,7 @@
 
 import Model
 import SwiftUI
+import ComposableArchitecture
 
 extension NoticeContentView {
     @ViewBuilder
@@ -25,14 +26,14 @@ extension NoticeContentView {
                 state: NoticeAppFeature.Path.State.departmentEditor(
                     // TODO: - Mock 데이터 추후 제거
                     DepartmentEditorFeature.State(
-                        myDepartments: [
-                            NoticeProvider.departments[0],
-                            NoticeProvider.departments[1]
-                        ],
+                        myDepartments: IdentifiedArray(uniqueElements: NoticeProvider.departments),
                         results: [
-                            NoticeProvider.departments[0],
-                            NoticeProvider.departments[1],
-                            NoticeProvider.departments[2]
+                            NoticeProvider(
+                                name: "education",
+                                hostPrefix: "edu",
+                                korName: "교직과",
+                                category: .학과
+                            ),
                         ]
                     )
                 )
