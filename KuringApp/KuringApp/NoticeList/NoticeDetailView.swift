@@ -15,12 +15,12 @@ struct NoticeDetailFeature: Reducer {
         var isBookmarked: Bool = false
     }
     
-    enum Action {
+    enum Action: Equatable {
         case bookmarkButtonTapped
         
         case delegate(Delegate)
         
-        enum Delegate {
+        enum Delegate: Equatable {
             case bookmarkUpdated(Bool)
         }
     }
