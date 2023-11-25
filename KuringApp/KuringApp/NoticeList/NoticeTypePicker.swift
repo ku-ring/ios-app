@@ -9,30 +9,33 @@ import Model
 import SwiftUI
 import ComposableArchitecture
 
-struct NoticeTypePicker: View {
-    let store: StoreOf<NoticeListFeature>
+struct NoticeCategoryPicker: View {
+    @Binding var selection: NoticeProvider
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0.provider }) { viewStore in
-            ScrollViewReader { proxy in
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(spacing: 0) {
-                        ForEach(NoticeType.allCases, id: \.self) { noticeType in
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: 0) {
+                    ForEach(NoticeType.allCases, id: \.self) { category in
+                        Button {
+                            selection = category.provider
+                        } label: {
                             NoticeTypeColumn(
-                                noticeType: noticeType,
-                                selectedID: viewStore.category.id
+                                noticeType: category,
+                                selectedID: selection.category.id
                             )
-                            .onTapGesture {
-                                viewStore.send(.noticeTypeSegmentTapped(noticeType))
-                                withAnimation {
-                                    proxy.scrollTo(noticeType, anchor: .center)
-                                }
-                            }
                         }
+                        .buttonStyle(.plain)
                     }
-                    .padding(.leading, 10)
+                }
+                .padding(.leading, 10)
+                .onChange(of: selection) { value in
+                    withAnimation {
+                        proxy.scrollTo(value.category.id, anchor: .center)
+                    }
                 }
             }
         }
+        .frame(height: 48)
     }
 }

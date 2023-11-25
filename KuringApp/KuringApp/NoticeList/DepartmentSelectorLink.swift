@@ -10,6 +10,7 @@ import SwiftUI
 
 struct DepartmentSelectorLink: View {
     let department: NoticeProvider
+    @Binding var isLoading: Bool
     let action: () -> Void
     
     var body: some View {
@@ -20,18 +21,26 @@ struct DepartmentSelectorLink: View {
             
             Spacer()
             
-            Image(systemName: "chevron.right")
+            if isLoading {
+                ProgressView()
+            } else {
+                Image(systemName: "chevron.right")
+            }
         }
         .contentShape(Rectangle())
         .padding(.horizontal, 20)
         .padding(.vertical, 16)
-        .onTapGesture(perform: action)
+        .onTapGesture {
+            guard !isLoading else { return }
+            action()
+        }
     }
 }
 
 #Preview {
     DepartmentSelectorLink(
-        department: .init(name: "산업디자인학과", hostPrefix: "kuid", korName: "산업디자인학과", category: .학과)
+        department: .init(name: "산업디자인학과", hostPrefix: "kuid", korName: "산업디자인학과", category: .학과),
+        isLoading: .constant(false)
     ) {
         // 액션 정의. 예) `viewStore.send(.changeDepartmentButtonTapped)`
     }

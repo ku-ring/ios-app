@@ -18,8 +18,10 @@ struct NoticeListFeature: Reducer {
         /// 현재 공지리스트를 제공하는 `NoticeProvider` 값
         ///
         /// - IMPORTANT: 추가한 학과가 있으면 추가한 학과의 첫번째 값이 초기값으로 세팅되고 없으면 `.학사`
-        var provider: NoticeProvider = NoticeProvider.departments.first ?? NoticeProvider.학사
+        @BindingState var provider: NoticeProvider = NoticeProvider.departments.first ?? NoticeProvider.학사
         
+        /// 현재 공지를 가져오는 중인지 알려주는 Bool 값
+        @BindingState var isLoading = false
         
         /// 공지
         var noticeDictionary: [NoticeProvider: NoticeInfo] = [:]
@@ -36,13 +38,14 @@ struct NoticeListFeature: Reducer {
         }
     }
     
-    enum Action {
+    enum Action: BindableAction {
+        case binding(BindingAction<State>)
+        
+        /// `onAppear` 이 호출된 경우
+        case onAppear
+        
         /// 학과 변경하기 버튼을 탭한 경우
         case changeDepartmentButtonTapped
-        
-        /// 공지 카테고리 세그먼트를 탭한 경우
-        /// - Parameter noticeType: 선택한 공지 카테고리.
-        case noticeTypeSegmentTapped(NoticeType)
         
         /// ``DepartmentSelectorFeature`` 의 Presentation 액션
         case changeDepartment(PresentationAction<DepartmentSelectorFeature.Action>)
@@ -54,7 +57,7 @@ struct NoticeListFeature: Reducer {
         case fetchNotices
         
         /// 네트워크 요청에 대한 응답을 받은 경우
-        case responseNotices(TaskResult<(NoticeProvider, [Notice])>)
+        case noticesResponse(TaskResult<(NoticeProvider, [Notice])>)
         
         /// 북마크 버튼을 탭한 경우
         /// - Parameter notice: 북마크 액션 대상인 공지
@@ -67,11 +70,23 @@ struct NoticeListFeature: Reducer {
         }
     }
     
+    enum CancelID {
+        case fetchNotices
+    }
+    
     @Dependency(\.kuringLink) var kuringLink
     
     var body: some ReducerOf<Self> {
+        BindingReducer()
+        
         Reduce { state, action in
             switch action {
+            case .binding(\.$provider):
+                return .send(.fetchNotices)
+                
+            case .onAppear:
+                return .send(.fetchNotices)
+                
             case .changeDepartmentButtonTapped:
                 state.changeDepartment = DepartmentSelectorFeature.State(
                     currentDepartment: state.provider,
@@ -79,26 +94,12 @@ struct NoticeListFeature: Reducer {
                 )
                 return .none
                 
-            case let .noticeTypeSegmentTapped(noticeType):
-                let provider = noticeType.provider
-                guard provider.id != state.provider.id else {
-                    return .none
-                }
-                state.provider = provider
-                return .run { send in
-                    await send(.fetchNotices)
-                }
-                
             case let .changeDepartment(.presented(.delegate(delegate))):
                 switch delegate {
                 case .editDepartment:
                     state.changeDepartment = nil
                     return .send(.delegate(.editDepartment))
                 }
-                
-                // TODO: Delegate
-            case .delegate:
-                return .none
                 
             case .changeDepartment(.presented(.selectDepartment)):
                 /// ``DepartmentSelectorFeature`` 액션
@@ -109,17 +110,14 @@ struct NoticeListFeature: Reducer {
                 return .none
                 
             case .changeDepartment(.dismiss):
-                return .run { send in
-                    await send(.fetchNotices)
-                }
-            
-            case .changeDepartment:
-                return .none
+                return .send(.fetchNotices)
 
             case .fetchNotices:
                 if state.provider == .emptyDepartment {
                     return .none
                 }
+                state.isLoading = true
+                
                 return .run { [provider = state.provider, noticeDictionary = state.noticeDictionary] send in
                     let retrievalInfo = noticeDictionary[provider] ?? State.NoticeInfo()
                     
@@ -128,21 +126,23 @@ struct NoticeListFeature: Reducer {
                     } else {
                         nil
                     }
-                    
-                    do {
-                        let notices = try await kuringLink.fetchNotices(
-                            retrievalInfo.loadLimit,
-                            provider.category == .학과 ? "dep" : provider.hostPrefix, // TODO: korean name 도 쓸 거 고려해서 문자열 말고 좀 더 나은걸로
-                            department,
-                            retrievalInfo.page
+                    await send(
+                        .noticesResponse(
+                            TaskResult {
+                                let notices = try await kuringLink.fetchNotices(
+                                    retrievalInfo.loadLimit,
+                                    provider.category == .학과 ? "dep" : provider.hostPrefix, // TODO: korean name 도 쓸 거 고려해서 문자열 말고 좀 더 나은걸로
+                                    department,
+                                    retrievalInfo.page
+                                )
+                                return (provider, notices)
+                            }
                         )
-                        await send(.responseNotices(.success((provider, notices))))
-                    } catch {
-                        await send(.responseNotices(.failure(error)))
-                    }
+                    )
                 }
+                .cancellable(id: CancelID.fetchNotices, cancelInFlight: true)
                 
-            case let .responseNotices(.success((noticeType, notices))):
+            case let .noticesResponse(.success((noticeType, notices))):
                 if state.noticeDictionary[noticeType] == nil {
                     state.noticeDictionary[noticeType] = State.NoticeInfo()
                 }
@@ -153,15 +153,19 @@ struct NoticeListFeature: Reducer {
                 noticeInfo.notices += notices
                 
                 state.noticeDictionary[noticeType] = noticeInfo
-                
+                state.isLoading = false
                 return .none
             
-            case let .responseNotices(.failure(error)):
+            case let .noticesResponse(.failure(error)):
                 print(error.localizedDescription)
+                state.isLoading = false
                 return .none
             
             case let .bookmarkTapped(notice):
                 print("공지#\(notice.articleId)을 북마크 했습니다.")
+                return .none
+                
+            case .binding, .delegate, .changeDepartment:
                 return .none
             }
         }
@@ -181,19 +185,16 @@ struct NoticeContentView: View {
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack(spacing: 0) {
-                // 공지 카테고리 리스트
-                NoticeTypePicker(store: self.store)
-                    .frame(height: 48)
-                    .onAppear {
-                        print("on Appear")
-                        viewStore.send(.fetchNotices)
-                    }
+                NoticeCategoryPicker(selection: viewStore.$provider)
                 
                 if viewStore.provider == .emptyDepartment {
                     NoDepartmentView()
                 } else {
                     NoticeList(store: self.store)
                 }
+            }
+            .onAppear {
+                viewStore.send(.onAppear)
             }
         }
         .sheet(

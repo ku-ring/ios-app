@@ -11,7 +11,6 @@ import ComposableArchitecture
 struct NoticeList: View {
     let store: StoreOf<NoticeListFeature>
     
-    
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             let noticeType = viewStore.provider
@@ -49,7 +48,10 @@ struct NoticeList: View {
                 .listStyle(.plain)
             } header: {
                 if viewStore.provider.category == .학과 {
-                    DepartmentSelectorLink(department: viewStore.provider) {
+                    DepartmentSelectorLink(
+                        department: viewStore.provider,
+                        isLoading: viewStore.$isLoading
+                    ) {
                         viewStore.send(.changeDepartmentButtonTapped)
                     }
                 } else {
