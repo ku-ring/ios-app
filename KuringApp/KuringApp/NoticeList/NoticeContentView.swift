@@ -23,9 +23,11 @@ struct NoticeListFeature: Reducer {
         /// 현재 공지를 가져오는 중인지 알려주는 Bool 값
         @BindingState var isLoading = false
         
+        // TODO: 공지 데이터 저장 관련 로직은 전부 디펜던시로 옮기기
         /// 공지
         var noticeDictionary: [NoticeProvider: NoticeInfo] = [:]
         
+        // TODO: 공지 데이터 저장 관련 로직은 전부 디펜던시로 옮기기
         struct NoticeInfo: Equatable {
             /// 공지
             var notices: [Notice] = []
@@ -119,6 +121,7 @@ struct NoticeListFeature: Reducer {
                 state.isLoading = true
                 
                 return .run { [provider = state.provider, noticeDictionary = state.noticeDictionary] send in
+                    // TODO: 공지 데이터 저장 관련 로직은 전부 디펜던시로 옮기기
                     let retrievalInfo = noticeDictionary[provider] ?? State.NoticeInfo()
                     
                     let department: String? = if provider.category == .학과 {
