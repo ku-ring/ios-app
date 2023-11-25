@@ -37,6 +37,7 @@
 		CAD5A4292B10724100DED0D5 /* NoticeTypeColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A4282B10724100DED0D5 /* NoticeTypeColumn.swift */; };
 		CAD5A42B2B10750800DED0D5 /* DepartmentSelectorLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A42A2B10750800DED0D5 /* DepartmentSelectorLink.swift */; };
 		CAD5A42D2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A42C2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift */; };
+		CAD5A42F2B11DBAF00DED0D5 /* NoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A42E2B11DBAF00DED0D5 /* NoticeList.swift */; };
 		DF331DAB2AC917E100D0BB08 /* kuring_app.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA72AC917E000D0BB08 /* kuring_app.png */; };
 		DF331DAC2AC917E100D0BB08 /* kuring_app_classic.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */; };
 		DF331DAD2AC917E100D0BB08 /* kuring_app_sketch.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA92AC917E000D0BB08 /* kuring_app_sketch.png */; };
@@ -86,6 +87,7 @@
 		CAD5A4282B10724100DED0D5 /* NoticeTypeColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTypeColumn.swift; sourceTree = "<group>"; };
 		CAD5A42A2B10750800DED0D5 /* DepartmentSelectorLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentSelectorLink.swift; sourceTree = "<group>"; };
 		CAD5A42C2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeContentView.NoDepartment.swift; sourceTree = "<group>"; };
+		CAD5A42E2B11DBAF00DED0D5 /* NoticeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeList.swift; sourceTree = "<group>"; };
 		DF062D4A2AC87B6D00FC48C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DF331DA72AC917E000D0BB08 /* kuring_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app.png; sourceTree = "<group>"; };
 		DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app_classic.png; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			children = (
 				A9B4F0172ABCA9AF00354C00 /* NoticeDetailView.swift */,
 				A9B4F0192ABCAF9800354C00 /* NoticeContentView.swift */,
+				CAD5A42E2B11DBAF00DED0D5 /* NoticeList.swift */,
 				CAD5A42C2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift */,
 				B1CBFA652AC7113C00C1E0ED /* NoticeRow.swift */,
 				CAD5A4262B10723500DED0D5 /* NoticeTypeGrid.swift */,
@@ -389,6 +392,7 @@
 				A91455062ACF451E00B82A8E /* AppIcons.swift in Sources */,
 				A9B4F01A2ABCAF9800354C00 /* NoticeContentView.swift in Sources */,
 				A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */,
+				CAD5A42F2B11DBAF00DED0D5 /* NoticeList.swift in Sources */,
 				A9B4F01D2ABCB4CE00354C00 /* SearchView.swift in Sources */,
 				CAD5A42D2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift in Sources */,
 				CAD5A4272B10723500DED0D5 /* NoticeTypeGrid.swift in Sources */,

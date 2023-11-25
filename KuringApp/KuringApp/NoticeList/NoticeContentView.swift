@@ -189,22 +189,9 @@ struct NoticeContentView: View {
                         viewStore.send(.fetchNotices)
                     }
                 
-                switch viewStore.provider.category {
-                case .학과:
-                    // 학과공지
-                    if viewStore.provider == .emptyDepartment {
-                        NoDepartmentView()
-                    } else {
-                        Section {
-                            NoticeList(store: self.store)
-                        } header: {
-                            DepartmentSelectorLink(department: viewStore.provider) {
-                                viewStore.send(.changeDepartmentButtonTapped)
-                            }
-                        }
-                    }
-                default:
-                    // 대학공지
+                if viewStore.provider == .emptyDepartment {
+                    NoDepartmentView()
+                } else {
                     NoticeList(store: self.store)
                 }
             }
@@ -219,48 +206,6 @@ struct NoticeContentView: View {
                 DepartmentSelector(store: store)
                     .navigationTitle("Department Selector")
             }
-        }
-    }
-}
-
-struct NoticeList: View {
-    let store: StoreOf<NoticeListFeature>
-    
-    
-    var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            let noticeType = viewStore.provider
-            let notices = viewStore.noticeDictionary[noticeType]?.notices
-            
-            List(notices ?? [], id: \.id) { notice in
-                NavigationLink(
-                    state: NoticeAppFeature.Path.State.detail(
-                        NoticeDetailFeature.State(notice: notice)
-                    )
-                ) {
-                    NoticeRow(notice: notice)
-                        .listRowInsets(EdgeInsets())
-                        .onAppear {
-                            let type = viewStore.provider
-                            let noticeInfo = viewStore.noticeDictionary[type]
-                            
-                            /// 마지막 공지가 보이면 update
-                            if noticeInfo?.notices.last == notice {
-                                viewStore.send(.fetchNotices)
-                            }
-                        }
-                        .swipeActions(edge: .leading) {
-                            Button {
-                                viewStore.send(.bookmarkTapped(notice))
-                            } label: {
-                                Image(systemName: "bookmark.slash")
-                                // Image(systemName: isBookmark ? "bookmark.slash" : "bookmark")
-                            }
-                            .tint(Color.accentColor)
-                        }
-                }
-            }
-            .listStyle(.plain)
         }
     }
 }

@@ -156,14 +156,7 @@ struct NoticeAppView: View {
                 ) { store in
                     DepartmentEditor(store: store)
                         .navigationTitle("Department Editor")
-                        .navigationBarBackButtonHidden(true)
-                        .toolbar {
-                            ToolbarItemGroup(placement: .navigationBarLeading) {
-                                Image(systemName: "chevron.left")
-                            }
-                        }
                 }
-                
             }
         }
     }
