@@ -33,7 +33,7 @@
 		CA640C192AD7FEFD002836E0 /* SubscriptionSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640C182AD7FEFD002836E0 /* SubscriptionSegment.swift */; };
 		CA640C1D2AD84E10002836E0 /* SubscriptionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640C1C2AD84E10002836E0 /* SubscriptionViewTests.swift */; };
 		CA640C1F2AD8525D002836E0 /* SubscriptionAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640C1E2AD8525D002836E0 /* SubscriptionAppTests.swift */; };
-		CAD5A4272B10723500DED0D5 /* NoticeTypeGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A4262B10723500DED0D5 /* NoticeTypeGrid.swift */; };
+		CAD5A4272B10723500DED0D5 /* NoticeTypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A4262B10723500DED0D5 /* NoticeTypePicker.swift */; };
 		CAD5A4292B10724100DED0D5 /* NoticeTypeColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A4282B10724100DED0D5 /* NoticeTypeColumn.swift */; };
 		CAD5A42B2B10750800DED0D5 /* DepartmentSelectorLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A42A2B10750800DED0D5 /* DepartmentSelectorLink.swift */; };
 		CAD5A42D2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A42C2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift */; };
@@ -83,7 +83,7 @@
 		CA640C182AD7FEFD002836E0 /* SubscriptionSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionSegment.swift; sourceTree = "<group>"; };
 		CA640C1C2AD84E10002836E0 /* SubscriptionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewTests.swift; sourceTree = "<group>"; };
 		CA640C1E2AD8525D002836E0 /* SubscriptionAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionAppTests.swift; sourceTree = "<group>"; };
-		CAD5A4262B10723500DED0D5 /* NoticeTypeGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTypeGrid.swift; sourceTree = "<group>"; };
+		CAD5A4262B10723500DED0D5 /* NoticeTypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTypePicker.swift; sourceTree = "<group>"; };
 		CAD5A4282B10724100DED0D5 /* NoticeTypeColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTypeColumn.swift; sourceTree = "<group>"; };
 		CAD5A42A2B10750800DED0D5 /* DepartmentSelectorLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentSelectorLink.swift; sourceTree = "<group>"; };
 		CAD5A42C2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeContentView.NoDepartment.swift; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 				CAD5A42E2B11DBAF00DED0D5 /* NoticeList.swift */,
 				CAD5A42C2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift */,
 				B1CBFA652AC7113C00C1E0ED /* NoticeRow.swift */,
-				CAD5A4262B10723500DED0D5 /* NoticeTypeGrid.swift */,
+				CAD5A4262B10723500DED0D5 /* NoticeTypePicker.swift */,
 				CAD5A4282B10724100DED0D5 /* NoticeTypeColumn.swift */,
 				CAD5A42A2B10750800DED0D5 /* DepartmentSelectorLink.swift */,
 			);
@@ -395,7 +395,7 @@
 				CAD5A42F2B11DBAF00DED0D5 /* NoticeList.swift in Sources */,
 				A9B4F01D2ABCB4CE00354C00 /* SearchView.swift in Sources */,
 				CAD5A42D2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift in Sources */,
-				CAD5A4272B10723500DED0D5 /* NoticeTypeGrid.swift in Sources */,
+				CAD5A4272B10723500DED0D5 /* NoticeTypePicker.swift in Sources */,
 				A965B7A32AC013060026ECDC /* DepartmentEditor.swift in Sources */,
 				A965B7A52AC013BF0026ECDC /* DepartmentSelector.swift in Sources */,
 				B11DBDCC2ACB370500501CA8 /* StaffRow.swift in Sources */,

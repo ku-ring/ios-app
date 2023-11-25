@@ -1,5 +1,5 @@
 //
-//  NoticeTypeGrid.swift
+//  NoticeTypePicker.swift
 //  KuringApp
 //
 //  Created by 이재성 on 11/24/23.
@@ -9,7 +9,7 @@ import Model
 import SwiftUI
 import ComposableArchitecture
 
-struct NoticeTypeGrid: View {
+struct NoticeTypePicker: View {
     let store: StoreOf<NoticeListFeature>
     
     var body: some View {

@@ -182,7 +182,7 @@ struct NoticeContentView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack(spacing: 0) {
                 // 공지 카테고리 리스트
-                NoticeTypeGrid(store: self.store)
+                NoticeTypePicker(store: self.store)
                     .frame(height: 48)
                     .onAppear {
                         print("on Appear")
