@@ -19,9 +19,6 @@ struct NoticeListFeature: Reducer {
         
         @PresentationState var changeDepartment: DepartmentSelectorFeature.State?
         
-        // TODO: (고민포인트) AppFeature 단으로 (부모 리듀서) 로 옮길 필요는 없을까? - 도메인에 대한 고민
-        @PresentationState var changeSubscription: SubscriptionAppFeature.State?
-        
         /// 공지
         var noticeDictionary: [NoticeType: NoticeInfo] = [:]
         
@@ -41,18 +38,12 @@ struct NoticeListFeature: Reducer {
         /// 학과 변경하기 버튼을 탭한 경우
         case changeDepartmentButtonTapped
         
-        /// 구독 변경 버튼을 탭한 경우
-        case changeSubscriptionButtonTapped
-        
         /// 공지 카테고리 세그먼트를 탭한 경우
         /// - Parameter noticeType: 선택한 공지 카테고리.
         case noticeTypeSegmentTapped(NoticeType)
         
         /// ``DepartmentSelectorFeature`` 의 Presentation 액션
         case changeDepartment(PresentationAction<DepartmentSelectorFeature.Action>)
-        
-        /// ``SubscriptionAppFeature`` 의 Presentation 액션
-        case changeSubscription(PresentationAction<SubscriptionAppFeature.Action>)
         
         /// ``NoticeAppFeature`` 으로 액션을 전달하기 위한 델리게이트
         case delegate(Delegate)
@@ -86,10 +77,6 @@ struct NoticeListFeature: Reducer {
                 )
                 return .none
                 
-            case .changeSubscriptionButtonTapped:
-                state.changeSubscription = SubscriptionAppFeature.State()
-                return .none
-                
             case let .noticeTypeSegmentTapped(noticeType):
                 if state.currentNoticeType != noticeType {
                     state.currentNoticeType = noticeType
@@ -120,15 +107,7 @@ struct NoticeListFeature: Reducer {
                 state.currentDepartment = selectedDepartment
                 return .none
             
-            case .changeSubscription(.presented(.subscriptionView(.confirmButtonTapped))):
-                /// ``SubscriptionAppFeature`` 액션
-                state.changeSubscription = nil
-                return .none
-                
             case .changeDepartment:
-                return .none
-                
-            case .changeSubscription:
                 return .none
 
             case .fetchNotices:
@@ -182,15 +161,11 @@ struct NoticeListFeature: Reducer {
                 return .none
             
             case let .bookmarkTapped(notice):
-                
                 return .none
             }
         }
         .ifLet(\.$changeDepartment, action: /Action.changeDepartment) {
             DepartmentSelectorFeature()
-        }
-        .ifLet(\.$changeSubscription, action: /Action.changeSubscription) {
-            SubscriptionAppFeature()
         }
     }
     
