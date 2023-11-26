@@ -27,6 +27,11 @@ struct NoticeListFeature: Reducer {
         /// 공지
         var noticeDictionary: [NoticeProvider: NoticeInfo] = [:]
         
+        /// 현재 `NoticeProvider` 에 대한 공지 데이터 리스트값
+        var currentNotices: [Notice] {
+            self.noticeDictionary[self.provider]?.notices ?? []
+        }
+        
         // TODO: 공지 데이터 저장 관련 로직은 전부 디펜던시로 옮기기
         struct NoticeInfo: Equatable {
             /// 공지

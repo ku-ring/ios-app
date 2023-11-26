@@ -13,11 +13,8 @@ struct NoticeList: View {
     
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            let noticeType = viewStore.provider
-            let notices = viewStore.noticeDictionary[noticeType]?.notices
-            
             Section {
-                List(notices ?? [], id: \.id) { notice in
+                List(viewStore.currentNotices, id: \.id) { notice in
                     NavigationLink(
                         state: NoticeAppFeature.Path.State.detail(
                             NoticeDetailFeature.State(notice: notice)
@@ -68,16 +65,6 @@ struct NoticeList: View {
                     DepartmentSelector(store: store)
                 }
                 .presentationDetents([.medium])
-            }
-            .sheet(
-                store: self.store.scope(
-                    state: \.$changeSubscription,
-                    action: { .changeSubscription($0) }
-                )
-            ) { store in
-                NavigationStack {
-                    SubscriptionApp(store: store)
-                }
             }
         }
     }
