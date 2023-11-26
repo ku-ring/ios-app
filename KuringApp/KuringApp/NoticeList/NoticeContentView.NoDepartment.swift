@@ -18,7 +18,7 @@ extension NoticeContentView {
             Text("아직 추가된 학과가 없어요.\n관심 학과를 추가하고 공지를 확인해 보세요!")
                 .font(.system(size: 15, weight: .medium))
                 .multilineTextAlignment(.center)
-                .foregroundColor(.black.opacity(0.36))
+                .foregroundStyle(.black.opacity(0.36))
             
             Spacer()
             
