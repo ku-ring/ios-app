@@ -38,6 +38,7 @@
 		CAD5A42B2B10750800DED0D5 /* DepartmentSelectorLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A42A2B10750800DED0D5 /* DepartmentSelectorLink.swift */; };
 		CAD5A42D2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A42C2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift */; };
 		CAD5A42F2B11DBAF00DED0D5 /* NoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A42E2B11DBAF00DED0D5 /* NoticeList.swift */; };
+		CAD5A4312B121B2F00DED0D5 /* StaffDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A4302B121B2F00DED0D5 /* StaffDetail.swift */; };
 		DF331DAB2AC917E100D0BB08 /* kuring_app.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA72AC917E000D0BB08 /* kuring_app.png */; };
 		DF331DAC2AC917E100D0BB08 /* kuring_app_classic.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */; };
 		DF331DAD2AC917E100D0BB08 /* kuring_app_sketch.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA92AC917E000D0BB08 /* kuring_app_sketch.png */; };
@@ -88,6 +89,7 @@
 		CAD5A42A2B10750800DED0D5 /* DepartmentSelectorLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentSelectorLink.swift; sourceTree = "<group>"; };
 		CAD5A42C2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeContentView.NoDepartment.swift; sourceTree = "<group>"; };
 		CAD5A42E2B11DBAF00DED0D5 /* NoticeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeList.swift; sourceTree = "<group>"; };
+		CAD5A4302B121B2F00DED0D5 /* StaffDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffDetail.swift; sourceTree = "<group>"; };
 		DF062D4A2AC87B6D00FC48C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DF331DA72AC917E000D0BB08 /* kuring_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app.png; sourceTree = "<group>"; };
 		DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app_classic.png; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				A9B4F01C2ABCB4CE00354C00 /* SearchView.swift */,
+				CAD5A4302B121B2F00DED0D5 /* StaffDetail.swift */,
 				B11DBDCB2ACB370500501CA8 /* StaffRow.swift */,
 			);
 			path = Search;
@@ -402,6 +405,7 @@
 				A9B4F0162ABCA93400354C00 /* NoticeApp.Path.swift in Sources */,
 				CAD5A42B2B10750800DED0D5 /* DepartmentSelectorLink.swift in Sources */,
 				A9B4F0182ABCA9AF00354C00 /* NoticeDetailView.swift in Sources */,
+				CAD5A4312B121B2F00DED0D5 /* StaffDetail.swift in Sources */,
 				CAD5A4292B10724100DED0D5 /* NoticeTypeColumn.swift in Sources */,
 				B1CBFA662AC7113C00C1E0ED /* NoticeRow.swift in Sources */,
 				A965B7AF2AC084D20026ECDC /* SubscriptionApp.swift in Sources */,

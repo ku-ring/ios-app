@@ -96,15 +96,19 @@ struct NoticeAppView: View {
                         action: { .noticeList($0) }
                     )
                 )
+                .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarLeading) {
                         Image("appIconLabel", bundle: Bundle.noticeList)
                     }
                     
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        Button {
-                            // TODO: - to SearchView
-                        } label: {
+                        // MARK: 검색창 진입
+                        NavigationLink(
+                            state: NoticeAppFeature.Path.State.search(
+                                SearchFeature.State()
+                            )
+                        ) {
                             Image(systemName: "magnifyingglass")
                                 .foregroundStyle(Color.black)
                         }
@@ -146,7 +150,8 @@ struct NoticeAppView: View {
                      action: NoticeAppFeature.Path.Action.search
                 ) { store in
                     SearchView(store: store)
-                        .navigationTitle("Search View")
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationTitle("검색하기")
                 }
                 
             case .departmentEditor:

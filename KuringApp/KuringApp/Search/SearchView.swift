@@ -12,6 +12,8 @@ import ComposableArchitecture
 
 struct SearchFeature: Reducer {
     struct State: Equatable {
+        @PresentationState var staffDetail: StaffDetailFeature.State?
+        
         var recents: [String] = []
         
         var resultNotices: [Notice]? = nil
@@ -48,6 +50,8 @@ struct SearchFeature: Reducer {
     }
     
     enum Action: BindableAction {
+        /// 트리 네비게이션 - ``StaffDetailFeature`` 액션
+        case staffDetail(PresentationAction<StaffDetailFeature.Action>)
         /// 최근 검색어 전체 삭제
         case deleteAllRecentsButtonTapped
         /// 검색어 제거
@@ -58,6 +62,8 @@ struct SearchFeature: Reducer {
         case searchResponse(Result<SearchResult, SearchError>)
         /// 최근 검색어 선택. associated value 는 최근 검색어.
         case recentSearchKeywordTapped(String)
+        /// ``StaffRow`` 선택
+        case staffRowSelected(Staff)
         
         case binding(BindingAction<State>)
         
@@ -145,7 +151,21 @@ struct SearchFeature: Reducer {
                 }
                 state.searchInfo.searchPhase = .failure
                 return .none
+                
+            case let .staffRowSelected(staff):
+                state.staffDetail = StaffDetailFeature.State(staff: staff)
+                return .none
+                
+            case .staffDetail(.dismiss):
+                state.staffDetail = nil
+                return .none
+                
+            case .staffDetail:
+                return .none
             }
+        }
+        .ifLet(\.$staffDetail, action: /Action.staffDetail) {
+            StaffDetailFeature()
         }
     }
 }
@@ -182,7 +202,7 @@ struct SearchView: View {
                                         .frame(width: 16, height: 16)
                                         .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
                                 }
-                            }                            
+                            }
                         }
                     }
                     .padding(.horizontal, 16)
@@ -277,13 +297,19 @@ struct SearchView: View {
                 case .notice:
                     if let notices = viewStore.resultNotices, !notices.isEmpty {
                         List(notices, id: \.self) { notice in
-                            VStack(alignment: .leading) {
-                                Text(notice.subject)
-
-                                HStack {
-                                    Text(notice.postedDate)
-
-                                    Spacer()
+                            NavigationLink(
+                                state: NoticeAppFeature.Path.State.detail(
+                                    NoticeDetailFeature.State(notice: notice)
+                                )
+                            ) {
+                                VStack(alignment: .leading) {
+                                    Text(notice.subject)
+                                    
+                                    HStack {
+                                        Text(notice.postedDate)
+                                        
+                                        Spacer()
+                                    }
                                 }
                             }
                         }
@@ -295,7 +321,7 @@ struct SearchView: View {
                     if let staffs = viewStore.resultStaffs, !staffs.isEmpty {
                         List(staffs, id: \.self) { staff in
                             Button {
-                                // TODO: - 프레젠트 액션 연결하기
+                                viewStore.send(.staffRowSelected(staff))
                             } label: {
                                 StaffRow(staff: staff)
                             }
@@ -310,6 +336,15 @@ struct SearchView: View {
             }
             .padding(.horizontal, 20)
             .bind(viewStore.$focus, to: self.$focus)
+        }
+        .sheet(
+            store: self.store.scope(
+                state: \.$staffDetail,
+                action: { .staffDetail($0) }
+            )
+        ) { store in
+            StaffDetailView(store: store)
+                .presentationDetents([.medium])
         }
     }
     
