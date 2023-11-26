@@ -58,6 +58,27 @@ struct NoticeList: View {
                     EmptyView()
                 }
             }
+            .sheet(
+                store: self.store.scope(
+                    state: \.$changeDepartment,
+                    action: { .changeDepartment($0) }
+                )
+            ) { store in
+                NavigationStack {
+                    DepartmentSelector(store: store)
+                }
+                .presentationDetents([.medium])
+            }
+            .sheet(
+                store: self.store.scope(
+                    state: \.$changeSubscription,
+                    action: { .changeSubscription($0) }
+                )
+            ) { store in
+                NavigationStack {
+                    SubscriptionApp(store: store)
+                }
+            }
         }
     }
 }
