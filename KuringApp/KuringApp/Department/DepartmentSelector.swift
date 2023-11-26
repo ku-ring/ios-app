@@ -68,7 +68,7 @@ struct DepartmentSelector: View {
                         HStack {
                             Text(department.korName)
                                 .font(.system(size: 16, weight: .medium))
-                                .foregroundColor(.black)
+                                .foregroundStyle(.black)
                             
                             Spacer()
                             

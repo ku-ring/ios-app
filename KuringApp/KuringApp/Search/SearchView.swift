@@ -183,7 +183,7 @@ struct SearchView: View {
                         /// 검색 아이콘
                         Image(systemName: "magnifyingglass")
                             .frame(width: 16, height: 16)
-                            .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+                            .foregroundStyle(Color.caption1.opacity(0.6))
                         
                         TextField("검색어를 입력해주세요", text: viewStore.$searchInfo.text)
                             .focused($focus, equals: .search)
@@ -200,7 +200,7 @@ struct SearchView: View {
                                 } label: {
                                     Image(systemName: "xmark")
                                         .frame(width: 16, height: 16)
-                                        .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+                                        .foregroundStyle(Color.caption1.opacity(0.6))
                                 }
                             }
                         }
@@ -216,7 +216,7 @@ struct SearchView: View {
                         /// 최근 검색어
                         Text("최근검색어")
                             .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+                            .foregroundStyle(Color.caption1.opacity(0.6))
                         
                         Spacer()
                         
@@ -242,10 +242,10 @@ struct SearchView: View {
                                     } label: {
                                         Text(recent)
                                             .font(.system(size: 14))
-                                            .foregroundStyle(Color(red: 0.24, green: 0.74, blue: 0.5))
+                                            .foregroundStyle(Color.accentColor)
                                             .padding(.horizontal, 12)
                                             .padding(.vertical, 4)
-                                            .background(Color(red: 0.24, green: 0.74, blue: 0.5).opacity(0.1))
+                                            .background(Color.accentColor.opacity(0.1))
                                             .cornerRadius(20)
                                     }
                                 }
@@ -259,7 +259,7 @@ struct SearchView: View {
                 HStack {
                     Text("검색결과")
                         .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+                        .foregroundStyle(Color.caption1.opacity(0.6))
                         .padding(.top, 20)
                         .padding(.bottom, 12)
                     
@@ -268,7 +268,7 @@ struct SearchView: View {
                 
                 /// 검색타입 세그먼트
                 Rectangle()
-                    .foregroundColor(.clear)
+                    .foregroundStyle(Color.clear)
                     .frame(height: 50)
                     .padding(.horizontal, 20)
                     .background(Color(red: 0.95, green: 0.95, blue: 0.96))
@@ -351,7 +351,7 @@ struct SearchView: View {
     @ViewBuilder
     private func SegmentView(_ title: String, isSelect: Bool) -> some View {
         RoundedRectangle(cornerRadius: 10)
-            .foregroundColor(isSelect ? .white : .clear)
+            .foregroundStyle(isSelect ? Color.white : Color.clear)
             .shadow(
                 color: .black.opacity(isSelect ? 0.1 : 0),
                 radius: 6, x: 0, y: 0
@@ -361,8 +361,8 @@ struct SearchView: View {
                     .font(.system(size: 16, weight: isSelect ? .bold : .medium))
                     .foregroundStyle(
                         isSelect 
-                        ? Color(red: 0.24, green: 0.74, blue: 0.5)
-                        : Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6)
+                        ? Color.accentColor
+                        : Color.caption1.opacity(0.6)
                     )
             }
     }
