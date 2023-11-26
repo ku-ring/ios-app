@@ -14,7 +14,7 @@ struct ContentView: View {
             NoticeAppView(
                 store: Store(
                     initialState: NoticeAppFeature.State(
-                        noticeList: NoticeListFeature.State(notices: [.random])
+                        noticeList: NoticeListFeature.State()
                     ),
                     reducer: { NoticeAppFeature() }
                 )

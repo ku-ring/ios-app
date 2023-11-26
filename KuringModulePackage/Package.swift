@@ -65,7 +65,8 @@ let package = Package(
                 "Model",
                 "KuringDependencies"
             ],
-            path: "Sources/Feature/NoticeList"
+            path: "Sources/Feature/NoticeList",
+            resources: [.process("Resources")]
         ),
         .testTarget(
             name: "NoticeListFeatureTests",

@@ -1,167 +1,63 @@
 //
-//  NoticeList.swift
+//  NoticeContentView.NoticeList.swift
 //  KuringApp
 //
-//  Created by Jaesung Lee on 2023/09/22.
+//  Created by 이재성 on 11/25/23.
 //
 
-import Model
 import SwiftUI
 import ComposableArchitecture
-
-struct NoticeListFeature: Reducer {
-    struct State: Equatable {
-        var notices: IdentifiedArrayOf<Notice> = []
-
-        var currentDepartment: NoticeProvider?
-        @PresentationState var changeDepartment: DepartmentSelectorFeature.State?
-        
-        // TODO: (고민포인트) AppFeature 단으로 (부모 리듀서) 로 옮길 필요는 없을까? - 도메인에 대한 고민
-        @PresentationState var changeSubscription: SubscriptionAppFeature.State?
-    }
-    
-    enum Action {
-        case changeDepartmentButtonTapped
-        case changeSubscriptionButtonTapped
-        
-        case changeDepartment(PresentationAction<DepartmentSelectorFeature.Action>)
-        case changeSubscription(PresentationAction<SubscriptionAppFeature.Action>)
-        
-        case delegate(Delegate)
-        
-        enum Delegate {
-            case editDepartment
-        }
-    }
-    
-    var body: some ReducerOf<Self> {
-        Reduce { state, action in
-            switch action {
-            case .changeDepartmentButtonTapped:
-                state.changeDepartment = DepartmentSelectorFeature.State(
-                    currentDepartment: state.currentDepartment,
-                    addedDepartment: IdentifiedArray(uniqueElements: NoticeProvider.departments)
-                )
-                return .none
-                
-            case .changeSubscriptionButtonTapped:
-                state.changeSubscription = SubscriptionAppFeature.State()
-                return .none
-                
-            case let .changeDepartment(.presented(.delegate(delegate))):
-                switch delegate {
-                case .editDepartment:
-                    state.changeDepartment = nil
-                    return .send(.delegate(.editDepartment))
-                }
-                
-                // TODO: Delegate
-            case .changeDepartment(.presented(.selectDepartment)):
-                guard let selectedDepartment = state.changeDepartment?.currentDepartment else {
-                    return .none
-                }
-                state.currentDepartment = selectedDepartment
-                return .none
-                
-            case .changeSubscription(.presented(.subscriptionView(.subscriptionResponse))):
-                state.changeSubscription = nil
-                return .none
-                
-            case .changeDepartment:
-                return .none
-
-            case .changeSubscription:
-                return .none
-                
-            case .delegate:
-                return .none
-            }
-        }
-        .ifLet(\.$changeDepartment, action: /Action.changeDepartment) {
-            DepartmentSelectorFeature()
-        }
-        .ifLet(\.$changeSubscription, action: /Action.changeSubscription) {
-            SubscriptionAppFeature()
-        }
-    }
-}
 
 struct NoticeList: View {
     let store: StoreOf<NoticeListFeature>
     
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            List {
-                Button((viewStore.currentDepartment ?? NoticeProvider.departments[0]).korName) {
-                    viewStore.send(.changeDepartmentButtonTapped)
-                }
-                
-                ForEach(viewStore.state.notices) { notice in
+            let noticeType = viewStore.provider
+            let notices = viewStore.noticeDictionary[noticeType]?.notices
+            
+            Section {
+                List(notices ?? [], id: \.id) { notice in
                     NavigationLink(
                         state: NoticeAppFeature.Path.State.detail(
                             NoticeDetailFeature.State(notice: notice)
                         )
                     ) {
-                        VStack(alignment: .leading) {
-                            Text(notice.subject)
-                            
-                            Text(notice.postedDate)
-                        }
+                        NoticeRow(notice: notice)
+                            .listRowInsets(EdgeInsets())
+                            .onAppear {
+                                let type = viewStore.provider
+                                let noticeInfo = viewStore.noticeDictionary[type]
+                                
+                                /// 마지막 공지가 보이면 update
+                                if noticeInfo?.notices.last == notice {
+                                    viewStore.send(.fetchNotices)
+                                }
+                            }
+                            .swipeActions(edge: .leading) {
+                                Button {
+                                    viewStore.send(.bookmarkTapped(notice))
+                                } label: {
+                                    Image(systemName: "bookmark.slash")
+                                    // Image(systemName: isBookmark ? "bookmark.slash" : "bookmark")
+                                }
+                                .tint(Color.accentColor)
+                            }
                     }
                 }
-            }
-            .navigationTitle("Notice List")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink(
-                        state: NoticeAppFeature.Path.State.search(
-                            SearchFeature.State()
-                        )
+                .listStyle(.plain)
+            } header: {
+                if viewStore.provider.category == .학과 {
+                    DepartmentSelectorLink(
+                        department: viewStore.provider,
+                        isLoading: viewStore.$isLoading
                     ) {
-                        Image(systemName: "magnifyingglass")
+                        viewStore.send(.changeDepartmentButtonTapped)
                     }
-                }
-                
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        viewStore.send(.changeSubscriptionButtonTapped)
-                    } label: {
-                        Image(systemName: "bell")
-                    }
-                }
-            }
-            .sheet(
-                store: self.store.scope(
-                    state: \.$changeDepartment,
-                    action: { .changeDepartment($0) }
-                )
-            ) { store in
-                NavigationStack {
-                    DepartmentSelector(store: store)
-                        .navigationTitle("Department Selector")
-                }
-            }
-            .sheet(
-                store: self.store.scope(
-                    state: \.$changeSubscription,
-                    action: { .changeSubscription($0) }
-                )
-            ) { store in
-                NavigationStack {
-                    SubscriptionApp(store: store)
+                } else {
+                    EmptyView()
                 }
             }
         }
-    }
-}
-
-#Preview {
-    NavigationStack {
-        NoticeList(
-            store: Store(
-                initialState: NoticeListFeature.State(notices: [.random]),
-                reducer: { NoticeListFeature() }
-            )
-        )
     }
 }
