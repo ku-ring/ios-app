@@ -72,6 +72,15 @@ struct SettingsApp: View {
                     AppIconSelector(store: store)
                         .navigationTitle("앱 아이콘")
                 }
+            case .openSourceList:
+                CaseLet(
+                    /SettingsAppFeature.Path.State.openSourceList,
+                     action: SettingsAppFeature.Path.Action.openSourceList
+                ) { store in
+                    OpenSourceView(store: store)
+                        .navigationTitle("사용된 오픈소스")
+                    
+                }
             }
         }
 
