@@ -20,7 +20,7 @@ struct SettingListFeature: Reducer {
     struct State: Equatable {
         // TODO: 나중에 디펜던시로
         var currentAppIcon: KuringIcon?
-        var isCustomAlarmOn: Bool = false
+        @BindingState var isCustomAlarmOn: Bool = false
         
         @PresentationState var webViewOpen: InformationWebViewFeature.State?
         @PresentationState var feedbackViewPresent: FeedbackFeature.State?
@@ -33,8 +33,8 @@ struct SettingListFeature: Reducer {
         }
     }
     
-    enum Action: Equatable {
-        
+    enum Action: Equatable, BindableAction {
+        case binding(BindingAction<State>)
         // 알림 설정 관련
         case customAlarmToggle(Bool)
         
@@ -52,6 +52,8 @@ struct SettingListFeature: Reducer {
     }
     
     var body: some ReducerOf<Self> {
+        BindingReducer()
+        
         Reduce { state, action in
             switch action {
                 
@@ -112,9 +114,9 @@ struct SettingView: View {
                     HStack {
                         Label("기타 알림 받기", systemImage: "bell")
                         Spacer()
-                        Toggle(isOn: viewStore.binding(get: \.isCustomAlarmOn, send: { .customAlarmToggle($0) })) {
+                        Toggle(isOn: viewStore.$isCustomAlarmOn, label: {
                             Text("")
-                        }
+                        })
                     }
                 } header: {
                     Text("공지구독")
