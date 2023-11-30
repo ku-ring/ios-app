@@ -13,7 +13,6 @@ enum InformationURL: String {
     case privacy = "https://kuring.notion.site/65ba27f2367044e0be7061e885e7415c"
     case policy = "https://kuring.notion.site/e88095d4d67d4c4c92983fd85cb693b9"
     case instagram = "https://instagram.com/kuring.konkuk"
-    case kakao = "https://apps.apple.com/kr/app/%EC%BF%A0%EB%A7%81-%EA%B1%B4%EA%B5%AD%EB%8C%80%ED%95%99%EA%B5%90-%EA%B3%B5%EC%A7%80%EC%95%B1/id1609873520"
 }
 
 struct SettingListFeature: Reducer {
@@ -184,13 +183,6 @@ struct SettingView: View {
                         viewStore.send(.sns(InformationURL.instagram.rawValue))
                     }, label: {
                         Text("인스타그램")
-                    }).tint(.black)
-                    
-                    
-                    Button(action: {
-                        viewStore.send(.sns(InformationURL.kakao.rawValue))
-                    }, label: {
-                        Text("카카오톡 채널")
                     }).tint(.black)
                     
                 } header: {
