@@ -21,9 +21,10 @@ struct SettingListFeature: Reducer {
     struct State: Equatable {
         // TODO: 나중에 디펜던시로
         var currentAppIcon: KuringIcon?
+        var isCustomAlarmOn: Bool = false
         
-        @PresentationState var feedbackViewPresent: FeedbackFeature.State?
         @PresentationState var webViewOpen: InformationWebViewFeature.State?
+        @PresentationState var feedbackViewPresent: FeedbackFeature.State?
         
         
         init(currentAppIcon: KuringIcon? = nil) {
@@ -34,6 +35,10 @@ struct SettingListFeature: Reducer {
     }
     
     enum Action: Equatable {
+        
+        // 알림 설정 관련
+        case customAlarmToggle(Bool)
+        
         // url 이동
         case urlButtonTapped(String)
         case eraseWebView(PresentationAction<InformationWebViewFeature.Action>)
@@ -51,12 +56,16 @@ struct SettingListFeature: Reducer {
         Reduce { state, action in
             switch action {
                 
-                // 열어주는 역할만
-            case .urlButtonTapped(let url):
+            case let .customAlarmToggle(value):
+                state.isCustomAlarmOn = value
+                return .none
+                
+            // 열어주는 역할
+            case let .urlButtonTapped(url):
                 state.webViewOpen = InformationWebViewFeature.State(url: url)
                 return .none
                 
-                // 뷰 지워주는 역할만
+            // 지워주는 역할
             case let .eraseWebView(.presented(.delegate(action))):
                 switch action {
                 case .erase:
@@ -76,9 +85,8 @@ struct SettingListFeature: Reducer {
                 }
                 
             case let .sns(url):
-                UIApplication.shared.open(URL(string: url)!, options: [:])
+                UIApplication.shared.open(URL(string: url)!)
                 return .none
-                
                 
             default:
                 return .none
@@ -105,7 +113,7 @@ struct SettingView: View {
                     HStack {
                         Label("기타 알림 받기", systemImage: "bell")
                         Spacer()
-                        Toggle(isOn: .constant(true)) {
+                        Toggle(isOn: viewStore.binding(get: \.isCustomAlarmOn, send: { .customAlarmToggle($0) })) {
                             Text("")
                         }
                     }

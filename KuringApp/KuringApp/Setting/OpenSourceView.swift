@@ -42,6 +42,7 @@ struct OpenSourceView: View {
                     }) {
                         Text(item.link)
                     }
+                    .tint(.green)
                 }
             }
         }
