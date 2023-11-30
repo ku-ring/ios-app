@@ -11,9 +11,9 @@ import ComposableArchitecture
 struct FeedbackFeature: Reducer {
     
     struct State: Equatable {
-        @BindingState var feedbackSendable: Bool = false
+        var text: String = "피드백을 남겨주세요."
         
-        }
+    }
     
     enum Action: Equatable {
         case eraseView
@@ -23,6 +23,7 @@ struct FeedbackFeature: Reducer {
             case erase
         }
         
+        case typing(String)
         case sendFeedback
         
     }
@@ -37,7 +38,9 @@ struct FeedbackFeature: Reducer {
                 
             case .delegate:
                 return .none
-                
+            case let .typing(value):
+                state.text = value
+                return .none
             case .sendFeedback:
                 return .none
             }
@@ -58,14 +61,24 @@ struct FeedbackView: View {
                     .resizable()
                     .frame(width: 120, height: 120)
                 Text("피드백을 보내주시면\n앱 성장에 많은 도움이 됩니다.😇")
+                    .multilineTextAlignment(.center)
                 
                 VStack {
-                    TextEditor(text: /*@START_MENU_TOKEN@*/.constant("Placeholder")/*@END_MENU_TOKEN@*/)
-                        .padding()
-                        .frame(height: 200)
-                        .background(.gray)
-                        .cornerRadius(8)
-                        .padding(.horizontal)
+                    TextEditor(text: viewStore.binding(
+                        get: \.text,
+                        send: { .typing($0) })
+                    )
+                    .padding()
+                    .frame(height: 200)
+                    .cornerRadius(8)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(.green, lineWidth: 1)
+                            .foregroundColor(.clear)
+                            .frame(maxHeight: 180)
+                    )
+                    .padding(.horizontal)
+                    
                     
                     HStack {
                         Spacer()
@@ -76,12 +89,12 @@ struct FeedbackView: View {
                 
                 Spacer()
                 Button(action: {
-                    
+                    viewStore.send(.sendFeedback)
                 }) {
                     Text("피드백 보내기")
                 }
+                .disabled(viewStore.text.count < 4)
                 .padding(.bottom)
-                .disabled(viewStore.feedbackSendable)
             }
             .onDisappear {
                 viewStore.send(.eraseView)
