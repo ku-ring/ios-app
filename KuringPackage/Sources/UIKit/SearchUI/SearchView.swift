@@ -1,4 +1,5 @@
 import SwiftUI
+import ColorSet
 import NoticeFeatures
 import SearchFeatures
 import ComposableArchitecture
@@ -26,7 +27,7 @@ public struct SearchView: View {
                     /// 검색 아이콘
                     Image(systemName: "magnifyingglass")
                         .frame(width: 16, height: 16)
-                        .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+                        .foregroundStyle(Color.caption1.opacity(0.6))
                     
                     TextField("검색어를 입력해주세요", text: $store.searchInfo.text)
                         .focused($focus, equals: .search)
@@ -43,7 +44,7 @@ public struct SearchView: View {
                             } label: {
                                 Image(systemName: "xmark")
                                     .frame(width: 16, height: 16)
-                                    .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+                                    .foregroundStyle(Color.caption1.opacity(0.6))
                             }
                         }
                     }
@@ -59,7 +60,7 @@ public struct SearchView: View {
                     /// 최근 검색어
                     Text("최근검색어")
                         .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+                        .foregroundStyle(Color.caption1.opacity(0.6))
                     
                     Spacer()
                     
@@ -69,6 +70,7 @@ public struct SearchView: View {
                     } label: {
                         Text("전체삭제")
                             .font(.system(size: 12))
+                            .foregroundStyle(Color.caption1)
                             .foregroundColor(Color(red: 0.56, green: 0.56, blue: 0.56))
                     }
                 }
@@ -102,7 +104,7 @@ public struct SearchView: View {
             HStack {
                 Text("검색결과")
                     .font(.system(size: 14, weight: .medium))
-                    .foregroundColor(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+                    .foregroundStyle(Color.caption1.opacity(0.6))
                     .padding(.top, 20)
                     .padding(.bottom, 12)
                 
@@ -202,7 +204,7 @@ public struct SearchView: View {
                     .foregroundStyle(
                         isSelect
                         ? Color.accentColor
-                        : Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6)
+                        : Color.caption1.opacity(0.6)
                     )
             }
     }

@@ -1,6 +1,8 @@
+import Models
 import SwiftUI
 import DepartmentUI
 import NoticeFeatures
+import DepartmentFeatures
 import ComposableArchitecture
 
 struct NoticeContentView: View {
@@ -19,7 +21,7 @@ struct NoticeContentView: View {
             }
         }
         .onAppear {
-            self.store.send(.onAppear)
+//            store.send(.onAppear) // TODO: error
         }
         .sheet(
             item: $store.scope(

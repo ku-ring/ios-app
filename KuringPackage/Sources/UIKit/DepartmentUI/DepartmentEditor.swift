@@ -1,9 +1,10 @@
+import Models
 import SwiftUI
 import DepartmentFeatures
 import ComposableArchitecture
 
 public struct DepartmentEditor: View {
-    @Bindable private var store: StoreOf<DepartmentEditorFeature>
+    @Bindable var store: StoreOf<DepartmentEditorFeature>
     
     @FocusState private var focus: DepartmentEditorFeature.State.Field?
     
@@ -11,14 +12,14 @@ public struct DepartmentEditor: View {
         VStack(alignment: .leading) {
             Text("학과를 추가하거나\n삭제할 수 있어요")
                 .font(.system(size: 24, weight: .bold))
-                .foregroundColor(Color(red: 0.1, green: 0.12, blue: 0.15))
+                .foregroundStyle(Color(red: 0.1, green: 0.12, blue: 0.15))
                 .padding(.top, 28)
                 .padding(.bottom, 24)
             
             HStack(alignment: .center, spacing: 12) {
                 Image(systemName: "magnifyingglass")
                     .frame(width: 16, height: 16)
-                    .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+                    .foregroundStyle(Color.caption1.opacity(0.6))
                 
                 TextField("추가할 학과를 검색해 주세요", text: $store.searchText)
                     .focused($focus, equals: .search)
@@ -27,7 +28,7 @@ public struct DepartmentEditor: View {
                 if !store.searchText.isEmpty {
                     Image(systemName: "xmark")
                         .frame(width: 16, height: 16)
-                        .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+                        .foregroundStyle(Color.caption1.opacity(0.6))
                         .onTapGesture {
                             store.send(.clearTextFieldButtonTapped)
                             focus = nil
@@ -42,7 +43,7 @@ public struct DepartmentEditor: View {
             
             Text(store.searchText.isEmpty ? "내 학과" : "검색 결과")
                 .font(.system(size: 14))
-                .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
+                .foregroundStyle(Color.caption1.opacity(0.6))
                 .padding(.horizontal, 4)
                 .padding(.vertical, 10)
             
@@ -50,11 +51,11 @@ public struct DepartmentEditor: View {
                 // 내학과
                 ScrollView {
                     ForEach(store.myDepartments) { myDepartment in
-                        Button {
+                        DepartmentRow(
+                            department: myDepartment,
+                            style: .delete
+                        ) {
                             store.send(.deleteMyDepartmentButtonTapped(id: myDepartment.id))
-                        } label: {
-                            Text("삭제")
-                                .foregroundStyle(Color(red: 0.21, green: 0.24, blue: 0.29).opacity(0.6))
                         }
                     }
                 }
@@ -62,23 +63,15 @@ public struct DepartmentEditor: View {
                 // 검색결과
                 ScrollView {
                     ForEach(store.results) { result in
-                        Button {
+                        DepartmentRow(
+                            department: result,
+                            style: .radio(store.myDepartments.contains(result))
+                        ) {
                             if store.myDepartments.contains(result) {
                                 store.send(.cancelAdditionButtonTapped(id: result.id))
                             } else {
                                 store.send(.addDepartmentButtonTapped(id: result.id))
                             }
-                        } label: {
-                            Image(
-                                systemName: store.myDepartments.contains(result)
-                                ? "checkmark.circle.fill"
-                                : "plus.circle"
-                            )
-                            .foregroundStyle(
-                                store.myDepartments.contains(result)
-                                ? Color.accentColor
-                                : Color.black.opacity(0.1)
-                            )
                         }
                         .padding(.horizontal, 4)
                         .padding(.vertical, 10)
@@ -99,23 +92,37 @@ public struct DepartmentEditor: View {
             }
         }
         .alert(
-            store: store.scope(
+            store: self.store.scope(
                 state: \.$alert,
                 action: \.alert
             )
         )
     }
     
-    public init(store: StoreOf<DepartmentEditorFeature>) {
+    public init(store: StoreOf<DepartmentEditorFeature>, focus: DepartmentEditorFeature.State.Field? = nil) {
         self.store = store
+        self.focus = focus
     }
 }
 
 #Preview {
-    DepartmentEditor(
-        store: Store(
-            initialState: DepartmentEditorFeature.State(),
-            reducer: { DepartmentEditorFeature() }
+    NavigationStack {
+        DepartmentEditor(
+            store: Store(
+                initialState: DepartmentEditorFeature.State(
+                    myDepartments: [
+                        NoticeProvider.departments[0],
+                        NoticeProvider.departments[1]
+                    ],
+                    results: [
+                        NoticeProvider.departments[0],
+                        NoticeProvider.departments[1],
+                        NoticeProvider.departments[2]
+                    ]
+                ),
+                reducer: { DepartmentEditorFeature() }
+            )
         )
-    )
+        .navigationTitle("Department Editor")
+    }
 }

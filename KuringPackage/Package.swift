@@ -29,6 +29,7 @@ let package = Package(
             name: "NoticeUI",
             dependencies: [
                 "NoticeFeatures", "SearchFeatures", "SubscriptionUI", "DepartmentUI", "SearchUI",
+                "ColorSet",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/UIKit/NoticeUI",
@@ -38,6 +39,7 @@ let package = Package(
             name: "SubscriptionUI",
             dependencies: [
                 "SubscriptionFeatures", "DepartmentUI", "DepartmentFeatures",
+                "ColorSet",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/UIKit/SubscriptionUI",
@@ -47,6 +49,7 @@ let package = Package(
             name: "DepartmentUI",
             dependencies: [
                 "DepartmentFeatures",
+                "ColorSet",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/UIKit/DepartmentUI"
@@ -55,6 +58,7 @@ let package = Package(
             name: "SearchUI",
             dependencies: [
                 "SearchFeatures", "NoticeFeatures",
+                "ColorSet",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/UIKit/SearchUI"
@@ -102,6 +106,13 @@ let package = Package(
             path: "Sources/Features/SearchFeatures"
         ),
         
+        // MARK: - Shared
+        
+        // MARK: Colors
+        .target(
+            name: "ColorSet",
+            path: "Sources/UIKit/ColorSet"
+        ),
         // MARK: Networks
         .target(
             name: "KuringLink",

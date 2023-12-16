@@ -52,7 +52,9 @@ public struct NoticeListFeature {
         }
     }
     
-    public enum Action {
+    public enum Action: BindableAction {
+        case binding(BindingAction<State>)
+        
         /// `onAppear` 이 호출된 경우
         case onAppear
         
@@ -93,6 +95,8 @@ public struct NoticeListFeature {
     @Dependency(\.kuringLink) public var kuringLink
     
     public var body: some ReducerOf<Self> {
+        BindingReducer()
+        
         Reduce { state, action in
             switch action {
             case .onAppear:
@@ -183,9 +187,9 @@ public struct NoticeListFeature {
                 
             case let .providerChanged(provider):
                 state.provider = provider
-                return .none
+                return .send(.fetchNotices)
                 
-            case .changeDepartment, .delegate:
+            case .binding, .delegate, .changeDepartment:
                 return .none
             }
         }

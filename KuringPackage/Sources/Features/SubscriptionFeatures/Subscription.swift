@@ -1,4 +1,5 @@
 import Models
+import KuringLink
 import ComposableArchitecture
 
 @Reducer
@@ -52,6 +53,8 @@ public struct SubscriptionFeature {
         case subscriptionResponse(Bool)
     }
     
+    @Dependency(\.kuringLink) var kuringLink
+    
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
@@ -79,11 +82,19 @@ public struct SubscriptionFeature {
             case .confirmButtonTapped:
                 state.isWaitingResponse = true
                 return .run { [state] send in
-                    // TODO: API
+                    // TODO: 제거
                     let fcmToken = "cZSHjO4_bUjirvsrxWzig5:APA91bHPojABL5oEXi5AcjJ8v4Vcp3KpJfFUD_3b-HhfV8m23_R6czJa3PwqcVqBZSHBb2t7Z3odUeD0cFKaMSkMmrGxTqyjJPfEZVfTPvmewV-xiMTWbrk-QKuc4Nrxd_BhEArO7Svo"
                     let typeNames = state.selectedUnivNoticeType.compactMap { $0.name }
                     let hostPrefixes = state.selectedDepartment.compactMap { $0.hostPrefix }
-                    await send(.subscriptionResponse(true))
+                    async let univSubscription = kuringLink.subscribeUnivNotices(typeNames, fcmToken)
+                    async let deptSubscription = kuringLink.subscribeDepartments(hostPrefixes, fcmToken)
+                    
+                    do {
+                        let results = try await [univSubscription, deptSubscription]
+                        await send(.subscriptionResponse(!results.contains(false)))
+                    } catch {
+                        await send(.subscriptionResponse(false))
+                    }
                 }
                 
             case let .subscriptionResponse(isSucceeded):
