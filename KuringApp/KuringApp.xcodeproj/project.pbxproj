@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,34 +11,14 @@
 		A91455002ACF3A3D00B82A8E /* SetttingsApp.Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91454FF2ACF3A3D00B82A8E /* SetttingsApp.Path.swift */; };
 		A91455032ACF44CE00B82A8E /* KuringIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91455022ACF44CE00B82A8E /* KuringIcon.swift */; };
 		A91455062ACF451E00B82A8E /* AppIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91455052ACF451E00B82A8E /* AppIcons.swift */; };
-		A947DCBE2AB47D3800A6D614 /* Notices in Frameworks */ = {isa = PBXBuildFile; productRef = A947DCBD2AB47D3800A6D614 /* Notices */; };
-		A947DCC02AB47D3B00A6D614 /* Feedbacks in Frameworks */ = {isa = PBXBuildFile; productRef = A947DCBF2AB47D3B00A6D614 /* Feedbacks */; };
-		A947DCC22AB47D3E00A6D614 /* Subscriptions in Frameworks */ = {isa = PBXBuildFile; productRef = A947DCC12AB47D3E00A6D614 /* Subscriptions */; };
-		A965B7A32AC013060026ECDC /* DepartmentEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965B7A22AC013060026ECDC /* DepartmentEditor.swift */; };
-		A965B7A52AC013BF0026ECDC /* DepartmentSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965B7A42AC013BF0026ECDC /* DepartmentSelector.swift */; };
-		A965B7AB2AC0750E0026ECDC /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965B7AA2AC0750E0026ECDC /* SubscriptionView.swift */; };
-		A965B7AF2AC084D20026ECDC /* SubscriptionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965B7AE2AC084D20026ECDC /* SubscriptionApp.swift */; };
-		A9B4F0142ABCA86500354C00 /* NoticeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B4F0132ABCA86500354C00 /* NoticeApp.swift */; };
-		A9B4F0162ABCA93400354C00 /* NoticeApp.Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B4F0152ABCA93400354C00 /* NoticeApp.Path.swift */; };
-		A9B4F0182ABCA9AF00354C00 /* NoticeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B4F0172ABCA9AF00354C00 /* NoticeDetailView.swift */; };
-		A9B4F01A2ABCAF9800354C00 /* NoticeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B4F0192ABCAF9800354C00 /* NoticeContentView.swift */; };
-		A9B4F01D2ABCB4CE00354C00 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B4F01C2ABCB4CE00354C00 /* SearchView.swift */; };
 		A9DAFA542AB1F04B0064F748 /* KuringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA532AB1F04B0064F748 /* KuringApp.swift */; };
 		A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA552AB1F04B0064F748 /* ContentView.swift */; };
 		A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA572AB1F04C0064F748 /* Assets.xcassets */; };
 		A9DAFA5B2AB1F04C0064F748 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */; };
-		B11DBDCC2ACB370500501CA8 /* StaffRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11DBDCB2ACB370500501CA8 /* StaffRow.swift */; };
-		B1CBFA662AC7113C00C1E0ED /* NoticeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CBFA652AC7113C00C1E0ED /* NoticeRow.swift */; };
 		CA52DF392AD58F4B009B9272 /* NoticeAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA52DF382AD58F4B009B9272 /* NoticeAppTests.swift */; };
-		CA640C192AD7FEFD002836E0 /* SubscriptionSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640C182AD7FEFD002836E0 /* SubscriptionSegment.swift */; };
 		CA640C1D2AD84E10002836E0 /* SubscriptionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640C1C2AD84E10002836E0 /* SubscriptionViewTests.swift */; };
 		CA640C1F2AD8525D002836E0 /* SubscriptionAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640C1E2AD8525D002836E0 /* SubscriptionAppTests.swift */; };
-		CAD5A4272B10723500DED0D5 /* NoticeTypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A4262B10723500DED0D5 /* NoticeTypePicker.swift */; };
-		CAD5A4292B10724100DED0D5 /* NoticeTypeColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A4282B10724100DED0D5 /* NoticeTypeColumn.swift */; };
-		CAD5A42B2B10750800DED0D5 /* DepartmentSelectorLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A42A2B10750800DED0D5 /* DepartmentSelectorLink.swift */; };
-		CAD5A42D2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A42C2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift */; };
-		CAD5A42F2B11DBAF00DED0D5 /* NoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A42E2B11DBAF00DED0D5 /* NoticeList.swift */; };
-		CAD5A4312B121B2F00DED0D5 /* StaffDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD5A4302B121B2F00DED0D5 /* StaffDetail.swift */; };
+		CAE658662B3992A800CD8A63 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = CAE658652B3992A800CD8A63 /* App */; };
 		DF331DAB2AC917E100D0BB08 /* kuring_app.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA72AC917E000D0BB08 /* kuring_app.png */; };
 		DF331DAC2AC917E100D0BB08 /* kuring_app_classic.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */; };
 		DF331DAD2AC917E100D0BB08 /* kuring_app_sketch.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA92AC917E000D0BB08 /* kuring_app_sketch.png */; };
@@ -62,34 +42,15 @@
 		A91454FF2ACF3A3D00B82A8E /* SetttingsApp.Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetttingsApp.Path.swift; sourceTree = "<group>"; };
 		A91455022ACF44CE00B82A8E /* KuringIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringIcon.swift; sourceTree = "<group>"; };
 		A91455052ACF451E00B82A8E /* AppIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcons.swift; sourceTree = "<group>"; };
-		A965B7A22AC013060026ECDC /* DepartmentEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentEditor.swift; sourceTree = "<group>"; };
-		A965B7A42AC013BF0026ECDC /* DepartmentSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentSelector.swift; sourceTree = "<group>"; };
-		A965B7AA2AC0750E0026ECDC /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
-		A965B7AE2AC084D20026ECDC /* SubscriptionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionApp.swift; sourceTree = "<group>"; };
-		A9B4F0132ABCA86500354C00 /* NoticeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeApp.swift; sourceTree = "<group>"; };
-		A9B4F0152ABCA93400354C00 /* NoticeApp.Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeApp.Path.swift; sourceTree = "<group>"; };
-		A9B4F0172ABCA9AF00354C00 /* NoticeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailView.swift; sourceTree = "<group>"; };
-		A9B4F0192ABCAF9800354C00 /* NoticeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeContentView.swift; sourceTree = "<group>"; };
-		A9B4F01C2ABCB4CE00354C00 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		A9DAFA502AB1F04B0064F748 /* KuringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KuringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DAFA532AB1F04B0064F748 /* KuringApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringApp.swift; sourceTree = "<group>"; };
 		A9DAFA552AB1F04B0064F748 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A9DAFA572AB1F04C0064F748 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		A9DAFA662AB1F09B0064F748 /* KuringModulePackage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = KuringModulePackage; path = ../KuringModulePackage; sourceTree = "<group>"; };
-		B11DBDCB2ACB370500501CA8 /* StaffRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffRow.swift; sourceTree = "<group>"; };
-		B1CBFA652AC7113C00C1E0ED /* NoticeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRow.swift; sourceTree = "<group>"; };
 		CA52DF2F2AD58DF2009B9272 /* KuringAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KuringAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA52DF382AD58F4B009B9272 /* NoticeAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeAppTests.swift; sourceTree = "<group>"; };
-		CA640C182AD7FEFD002836E0 /* SubscriptionSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionSegment.swift; sourceTree = "<group>"; };
 		CA640C1C2AD84E10002836E0 /* SubscriptionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewTests.swift; sourceTree = "<group>"; };
 		CA640C1E2AD8525D002836E0 /* SubscriptionAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionAppTests.swift; sourceTree = "<group>"; };
-		CAD5A4262B10723500DED0D5 /* NoticeTypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTypePicker.swift; sourceTree = "<group>"; };
-		CAD5A4282B10724100DED0D5 /* NoticeTypeColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTypeColumn.swift; sourceTree = "<group>"; };
-		CAD5A42A2B10750800DED0D5 /* DepartmentSelectorLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentSelectorLink.swift; sourceTree = "<group>"; };
-		CAD5A42C2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeContentView.NoDepartment.swift; sourceTree = "<group>"; };
-		CAD5A42E2B11DBAF00DED0D5 /* NoticeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeList.swift; sourceTree = "<group>"; };
-		CAD5A4302B121B2F00DED0D5 /* StaffDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffDetail.swift; sourceTree = "<group>"; };
 		DF062D4A2AC87B6D00FC48C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DF331DA72AC917E000D0BB08 /* kuring_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app.png; sourceTree = "<group>"; };
 		DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app_classic.png; sourceTree = "<group>"; };
@@ -104,9 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A947DCBE2AB47D3800A6D614 /* Notices in Frameworks */,
-				A947DCC02AB47D3B00A6D614 /* Feedbacks in Frameworks */,
-				A947DCC22AB47D3E00A6D614 /* Subscriptions in Frameworks */,
+				CAE658662B3992A800CD8A63 /* App in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,61 +103,9 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A965B7A82AC074BD0026ECDC /* WillBeRemoved */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = WillBeRemoved;
-			sourceTree = "<group>";
-		};
-		A965B7A92AC074CC0026ECDC /* Department */ = {
-			isa = PBXGroup;
-			children = (
-				A965B7A22AC013060026ECDC /* DepartmentEditor.swift */,
-				A965B7A42AC013BF0026ECDC /* DepartmentSelector.swift */,
-			);
-			path = Department;
-			sourceTree = "<group>";
-		};
-		A965B7AC2AC083080026ECDC /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				A9B4F01C2ABCB4CE00354C00 /* SearchView.swift */,
-				CAD5A4302B121B2F00DED0D5 /* StaffDetail.swift */,
-				B11DBDCB2ACB370500501CA8 /* StaffRow.swift */,
-			);
-			path = Search;
-			sourceTree = "<group>";
-		};
-		A965B7AD2AC0830F0026ECDC /* Subscription */ = {
-			isa = PBXGroup;
-			children = (
-				A965B7AA2AC0750E0026ECDC /* SubscriptionView.swift */,
-				CA640C182AD7FEFD002836E0 /* SubscriptionSegment.swift */,
-				A965B7AE2AC084D20026ECDC /* SubscriptionApp.swift */,
-			);
-			path = Subscription;
-			sourceTree = "<group>";
-		};
-		A9B4F01B2ABCB4B600354C00 /* NoticeList */ = {
-			isa = PBXGroup;
-			children = (
-				A9B4F0172ABCA9AF00354C00 /* NoticeDetailView.swift */,
-				A9B4F0192ABCAF9800354C00 /* NoticeContentView.swift */,
-				CAD5A42E2B11DBAF00DED0D5 /* NoticeList.swift */,
-				CAD5A42C2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift */,
-				B1CBFA652AC7113C00C1E0ED /* NoticeRow.swift */,
-				CAD5A4262B10723500DED0D5 /* NoticeTypePicker.swift */,
-				CAD5A4282B10724100DED0D5 /* NoticeTypeColumn.swift */,
-				CAD5A42A2B10750800DED0D5 /* DepartmentSelectorLink.swift */,
-			);
-			path = NoticeList;
-			sourceTree = "<group>";
-		};
 		A9DAFA472AB1F04B0064F748 = {
 			isa = PBXGroup;
 			children = (
-				A9DAFA662AB1F09B0064F748 /* KuringModulePackage */,
 				A9DAFA522AB1F04B0064F748 /* KuringApp */,
 				CA52DF302AD58DF2009B9272 /* KuringAppTests */,
 				A9DAFA512AB1F04B0064F748 /* Products */,
@@ -221,13 +128,6 @@
 				DF062D4A2AC87B6D00FC48C0 /* Info.plist */,
 				DFE7AB132AC332D200230934 /* Setting */,
 				A9DAFA532AB1F04B0064F748 /* KuringApp.swift */,
-				A9B4F0132ABCA86500354C00 /* NoticeApp.swift */,
-				A9B4F0152ABCA93400354C00 /* NoticeApp.Path.swift */,
-				A965B7AC2AC083080026ECDC /* Search */,
-				A965B7AD2AC0830F0026ECDC /* Subscription */,
-				A965B7A92AC074CC0026ECDC /* Department */,
-				A965B7A82AC074BD0026ECDC /* WillBeRemoved */,
-				A9B4F01B2ABCB4B600354C00 /* NoticeList */,
 				A9DAFA552AB1F04B0064F748 /* ContentView.swift */,
 				A9DAFA572AB1F04C0064F748 /* Assets.xcassets */,
 				A9DAFA592AB1F04C0064F748 /* Preview Content */,
@@ -294,9 +194,7 @@
 			);
 			name = KuringApp;
 			packageProductDependencies = (
-				A947DCBD2AB47D3800A6D614 /* Notices */,
-				A947DCBF2AB47D3B00A6D614 /* Feedbacks */,
-				A947DCC12AB47D3E00A6D614 /* Subscriptions */,
+				CAE658652B3992A800CD8A63 /* App */,
 			);
 			productName = KuringApp;
 			productReference = A9DAFA502AB1F04B0064F748 /* KuringApp.app */;
@@ -349,6 +247,7 @@
 			);
 			mainGroup = A9DAFA472AB1F04B0064F748;
 			packageReferences = (
+				CAE658642B3992A800CD8A63 /* XCLocalSwiftPackageReference "../KuringPackage" */,
 			);
 			productRefGroup = A9DAFA512AB1F04B0064F748 /* Products */;
 			projectDirPath = "";
@@ -389,28 +288,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFE7AB152AC332DB00230934 /* SettingView.swift in Sources */,
-				A9B4F0142ABCA86500354C00 /* NoticeApp.swift in Sources */,
-				A965B7AB2AC0750E0026ECDC /* SubscriptionView.swift in Sources */,
 				A91455002ACF3A3D00B82A8E /* SetttingsApp.Path.swift in Sources */,
 				A91455062ACF451E00B82A8E /* AppIcons.swift in Sources */,
-				A9B4F01A2ABCAF9800354C00 /* NoticeContentView.swift in Sources */,
 				A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */,
-				CAD5A42F2B11DBAF00DED0D5 /* NoticeList.swift in Sources */,
-				A9B4F01D2ABCB4CE00354C00 /* SearchView.swift in Sources */,
-				CAD5A42D2B1077C200DED0D5 /* NoticeContentView.NoDepartment.swift in Sources */,
-				CAD5A4272B10723500DED0D5 /* NoticeTypePicker.swift in Sources */,
-				A965B7A32AC013060026ECDC /* DepartmentEditor.swift in Sources */,
-				A965B7A52AC013BF0026ECDC /* DepartmentSelector.swift in Sources */,
-				B11DBDCC2ACB370500501CA8 /* StaffRow.swift in Sources */,
-				A9B4F0162ABCA93400354C00 /* NoticeApp.Path.swift in Sources */,
-				CAD5A42B2B10750800DED0D5 /* DepartmentSelectorLink.swift in Sources */,
-				A9B4F0182ABCA9AF00354C00 /* NoticeDetailView.swift in Sources */,
-				CAD5A4312B121B2F00DED0D5 /* StaffDetail.swift in Sources */,
-				CAD5A4292B10724100DED0D5 /* NoticeTypeColumn.swift in Sources */,
-				B1CBFA662AC7113C00C1E0ED /* NoticeRow.swift in Sources */,
-				A965B7AF2AC084D20026ECDC /* SubscriptionApp.swift in Sources */,
 				A91455032ACF44CE00B82A8E /* KuringIcon.swift in Sources */,
-				CA640C192AD7FEFD002836E0 /* SubscriptionSegment.swift in Sources */,
 				A91454FE2ACF39E000B82A8E /* SettingsApp.swift in Sources */,
 				A9DAFA542AB1F04B0064F748 /* KuringApp.swift in Sources */,
 				DFE7AB172AC33D6700230934 /* AppIconSelector.swift in Sources */,
@@ -575,7 +456,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -607,7 +488,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -697,18 +578,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		CAE658642B3992A800CD8A63 /* XCLocalSwiftPackageReference "../KuringPackage" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../KuringPackage;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		A947DCBD2AB47D3800A6D614 /* Notices */ = {
+		CAE658652B3992A800CD8A63 /* App */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Notices;
-		};
-		A947DCBF2AB47D3B00A6D614 /* Feedbacks */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Feedbacks;
-		};
-		A947DCC12AB47D3E00A6D614 /* Subscriptions */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Subscriptions;
+			productName = App;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

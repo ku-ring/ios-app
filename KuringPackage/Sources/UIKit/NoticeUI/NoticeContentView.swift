@@ -21,18 +21,18 @@ struct NoticeContentView: View {
             }
         }
         .onAppear {
-//            store.send(.onAppear) // TODO: error
+            store.send(.onAppear) // TODO: error on the preview canvas
         }
         .sheet(
-            item: $store.scope(
-                state: \.changeDepartment,
+            store: self.store.scope(
+                state: \.$changeDepartment,
                 action: \.changeDepartment
             )
         ) { store in
             NavigationStack {
                 DepartmentSelector(store: store)
-                    .navigationTitle("Department Selector")
             }
+            .presentationDetents([.medium])
         }
     }
 }

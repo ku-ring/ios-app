@@ -49,17 +49,6 @@ struct NoticeList: View {
                 EmptyView()
             }
         }
-        .sheet(
-            store: self.store.scope(
-                state: \.$changeDepartment,
-                action: \.changeDepartment
-            )
-        ) { store in
-            NavigationStack {
-                DepartmentSelector(store: store)
-            }
-            .presentationDetents([.medium])
-        }
     }
 }
 

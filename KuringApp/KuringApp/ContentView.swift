@@ -6,17 +6,19 @@
 //
 
 import SwiftUI
+import NoticeUI
+import NoticeFeatures
 import ComposableArchitecture
 
 struct ContentView: View {
     var body: some View {
         TabView {
-            NoticeAppView(
+            NoticeApp(
                 store: Store(
                     initialState: NoticeAppFeature.State(
                         noticeList: NoticeListFeature.State()
                     ),
-                    reducer: { NoticeAppFeature() }
+                    reducer: { NoticeAppFeature()._printChanges() }
                 )
             )
             .tabItem {

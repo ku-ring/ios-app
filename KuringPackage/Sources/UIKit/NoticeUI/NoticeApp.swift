@@ -6,10 +6,10 @@ import NoticeFeatures
 import SearchFeatures
 import ComposableArchitecture
 
-struct NoticeAppView: View {
+public struct NoticeApp: View {
     @Bindable var store: StoreOf<NoticeAppFeature>
     
-    var body: some View {
+    public var body: some View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
             NoticeContentView(
                 store: self.store.scope(
@@ -74,10 +74,14 @@ struct NoticeAppView: View {
             }
         }
     }
+    
+    public init(store: StoreOf<NoticeAppFeature>) {
+        self.store = store
+    }
 }
 
 #Preview {
-    NoticeAppView(
+    NoticeApp(
         store: Store(
             initialState: NoticeAppFeature.State(
                 noticeList: NoticeListFeature.State()
