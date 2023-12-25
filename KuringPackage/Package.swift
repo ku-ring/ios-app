@@ -129,5 +129,21 @@ let package = Package(
         .target(
             name: "Models"
         ),
+        
+        // MARK: - Tests
+        .testTarget(
+            name: "NoticeFeaturesTests",
+            dependencies: [
+                "NoticeFeatures", "SearchFeatures", "Models",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+            ]
+        ),
+        .testTarget(
+            name: "SubscriptionFeaturesTests",
+            dependencies: [
+                "SubscriptionFeatures", "DepartmentFeatures", "Models",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+            ]
+        ),
     ]
 )

@@ -1,16 +1,11 @@
-//
-//  SubscriptionViewTests.swift
-//  KuringAppTests
-//
-//  Created by 이재성 on 10/13/23.
-//
-
 import XCTest
 import ComposableArchitecture
-@testable import KuringApp
+@testable import Models
+@testable import DepartmentFeatures
+@testable import SubscriptionFeatures
 
 @MainActor
-class SubscriptionViewTests: XCTestCase {
+class SubscriptionTests: XCTestCase {
     func test_tapConfirmButton() async throws {
         let store = TestStore(
             initialState: SubscriptionFeature.State(),
@@ -48,7 +43,8 @@ class SubscriptionViewTests: XCTestCase {
         let department = NoticeProvider(
             name: "computer_science",
             hostPrefix: "cse",
-            korName: "컴퓨터공학부"
+            korName: "컴퓨터공학부",
+            category: .학과
         )
         let store = TestStore(
             initialState: SubscriptionFeature.State(myDepartments: [department]),

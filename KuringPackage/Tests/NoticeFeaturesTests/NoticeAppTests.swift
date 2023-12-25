@@ -1,13 +1,7 @@
-//
-//  NoticeAppTests.swift
-//  KuringAppTests
-//
-//  Created by 이재성 on 10/10/23.
-//
-
 import XCTest
 import ComposableArchitecture
-@testable import KuringApp
+@testable import NoticeFeatures
+@testable import SearchFeatures
 
 @MainActor
 final class NoticeAppTests: XCTestCase {

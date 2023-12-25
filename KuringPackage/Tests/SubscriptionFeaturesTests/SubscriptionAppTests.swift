@@ -1,13 +1,8 @@
-//
-//  SubscriptionAppTests.swift
-//  KuringAppTests
-//
-//  Created by 이재성 on 10/13/23.
-//
-
 import XCTest
 import ComposableArchitecture
-@testable import KuringApp
+@testable import Models
+@testable import DepartmentFeatures
+@testable import SubscriptionFeatures
 
 @MainActor
 class SubscriptionAppTests: XCTestCase {
@@ -15,12 +10,14 @@ class SubscriptionAppTests: XCTestCase {
         let 컴퓨터공학부 = NoticeProvider(
             name: "computer_science",
             hostPrefix: "cse",
-            korName: "컴퓨터공학부"
+            korName: "컴퓨터공학부",
+            category: .학과
         )
         let 체육교육과 = NoticeProvider(
             name: "physical_education",
             hostPrefix: "kupe",
-            korName: "체육교육과"
+            korName: "체육교육과",
+            category: .학과
         )
         
         let store = TestStore(
