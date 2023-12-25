@@ -24,7 +24,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '🔨 iOS 17.0 iPhone 15 Pro 에서 쿠링 앱을 테스트 합니다.'
+              body: '🔨 iOS 17.0 iPhone 15 Pro 에서 쿠링 패키지를 테스트 합니다.'
             })
 
       # 코드를 체크아웃 합니다.
@@ -37,19 +37,16 @@ jobs:
         with:
           xcode-version: '15.0'
     
-      # KuringPackage 경로로 이동
-      - name: 패키지 경로로 이동
-        run: |
-          cd KuringPackage
-      
       # NoticeFeaturesTests 스킴을 테스트합니다.
       - name: NoticeFeaturesTests 테스트
         run: |
+          cd KuringPackage
           xcodebuild test -scheme NoticeFeaturesTests -destination 'platform=iOS Simulator,OS=17.0,name=iPhone 15 Pro'
           
       # SubscriptionFeaturesTests 스킴을 테스트합니다.
       - name: SubscriptionFeaturesTests 테스트
         run: |
+          cd KuringPackage
           xcodebuild test -scheme SubscriptionFeaturesTests -destination 'platform=iOS Simulator,OS=17.0,name=iPhone 15 Pro'
       
       # 테스트 성공시 커멘트
