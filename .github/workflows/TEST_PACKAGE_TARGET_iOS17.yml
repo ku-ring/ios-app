@@ -41,13 +41,13 @@ jobs:
       - name: NoticeFeaturesTests 테스트
         run: |
           cd KuringPackage
-          xcodebuild test -scheme NoticeFeaturesTests -destination 'platform=iOS Simulator,OS=17.0,name=iPhone 15 Pro'
+          xcodebuild test -scheme NoticeFeaturesTests -destination 'platform=iOS Simulator,OS=17.0,name=iPhone 15 Pro' -skipMacroValidation
           
       # SubscriptionFeaturesTests 스킴을 테스트합니다.
       - name: SubscriptionFeaturesTests 테스트
         run: |
           cd KuringPackage
-          xcodebuild test -scheme SubscriptionFeaturesTests -destination 'platform=iOS Simulator,OS=17.0,name=iPhone 15 Pro'
+          xcodebuild test -scheme SubscriptionFeaturesTests -destination 'platform=iOS Simulator,OS=17.0,name=iPhone 15 Pro' -skipMacroValidation
       
       # 테스트 성공시 커멘트
       - name: Add Build comment
