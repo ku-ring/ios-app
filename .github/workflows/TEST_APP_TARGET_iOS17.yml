@@ -24,7 +24,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '🔨 iOS 17.0 iPhone 14 Pro 에서 쿠링 앱을 테스트 합니다.'
+              body: '🔨 iOS 17.0.1 iPhone 14 Pro 에서 쿠링 앱을 테스트 합니다.'
             })
 
       # 코드를 체크아웃 합니다.
@@ -41,7 +41,7 @@ jobs:
       - name: KuringApp 테스트
         run: |
           cd KuringApp
-          xcodebuild clean test -scheme KuringApp -destination 'platform=iOS Simulator,OS=17.0,name=iPhone 14 Pro' -skipMacroValidation
+          xcodebuild clean test -scheme KuringApp -destination 'platform=iOS Simulator,OS=17.0.1,name=iPhone 14 Pro' -skipMacroValidation
       
       # 테스트 성공시 커멘트
       - name: Add Build comment

@@ -24,7 +24,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '🔨 iOS 17.0 iPhone 14 Pro 에서 스위프트 패키지를 빌드합니다.'
+              body: '🔨 iOS 17.0.1 iPhone 15 Pro 에서 스위프트 패키지를 빌드합니다.'
             })
 
       # 코드를 체크아웃 합니다.
