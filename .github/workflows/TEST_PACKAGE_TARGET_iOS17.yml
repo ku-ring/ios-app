@@ -39,7 +39,7 @@ jobs:
     
       # KuringPackage 경로로 이동
       - name: 패키지 경로로 이동
-      run: |
+        run: |
           cd KuringPackage
       
       # NoticeFeaturesTests 스킴을 테스트합니다.
