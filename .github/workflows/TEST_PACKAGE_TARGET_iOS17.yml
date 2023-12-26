@@ -50,6 +50,12 @@ jobs:
         run: |
           cd KuringPackage
           xcodebuild test -scheme SubscriptionFeaturesTests -destination 'platform=iOS Simulator,OS=latest,name=iPhone 15 Pro' -skipMacroValidation
+          
+      # BookmarkFeaturesTests 스킴을 테스트합니다.
+      - name: BookmarkFeaturesTests 테스트
+        run: |
+          cd KuringPackage
+          xcodebuild test -scheme BookmarkFeaturesTests -destination 'platform=iOS Simulator,OS=latest,name=iPhone 15 Pro' -skipMacroValidation
       
       # 테스트 성공시 커멘트
       - name: Add Build comment
