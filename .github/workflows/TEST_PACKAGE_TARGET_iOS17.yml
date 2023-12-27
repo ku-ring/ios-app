@@ -1,18 +1,20 @@
-name: 쿠링 앱타겟 iOS17에서 테스트하기
+name: 쿠링 패키지 iOS17에서 테스트하기
 
 on:
   issue_comment:
     types: [created, edited]
 
+# TODO: 각 스킴 비동기로 실행하도록 하기
+
 jobs:
   build:
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/쿠링') && contains(github.event.comment.body, 'ios17 앱 테스트')
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/쿠링') && contains(github.event.comment.body, '패키지 테스트')
     runs-on: macos-13  #최신버전
     steps:
       # 테스트 요청 시작
       - name: Test iOS17
         run: |
-          echo "iOS17 에서 앱 타겟을 테스트 합니다."
+          echo "iOS17 에서 패키지의 모든 테스트 타겟을 테스트 합니다."
          
       # iOS17 테스트 응답 커멘트
       - name: Add Test comment
@@ -24,7 +26,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '🔨 iOS 17 iPhone 14 Pro 에서 쿠링 앱을 테스트 합니다.'
+              body: '🔨 iOS 17 iPhone 15 Pro 에서 쿠링 패키지를 테스트 합니다.'
             })
 
       # 코드를 체크아웃 합니다.
@@ -36,12 +38,18 @@ jobs:
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '15.0'
-
-      # KuringApp 스킴을 테스트합니다.
-      - name: KuringApp 테스트
+    
+      # NoticeFeaturesTests 스킴을 테스트합니다.
+      - name: NoticeFeaturesTests 테스트
         run: |
-          cd KuringApp
-          xcodebuild clean test -scheme KuringApp -destination 'platform=iOS Simulator,OS=latest,name=iPhone 14 Pro' -skipMacroValidation
+          cd KuringPackage
+          xcodebuild test -scheme NoticeFeaturesTests -destination 'platform=iOS Simulator,OS=latest,name=iPhone 15 Pro' -skipMacroValidation
+          
+      # SubscriptionFeaturesTests 스킴을 테스트합니다.
+      - name: SubscriptionFeaturesTests 테스트
+        run: |
+          cd KuringPackage
+          xcodebuild test -scheme SubscriptionFeaturesTests -destination 'platform=iOS Simulator,OS=latest,name=iPhone 15 Pro' -skipMacroValidation
       
       # 테스트 성공시 커멘트
       - name: Add Build comment
@@ -53,7 +61,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '✅ iOS17 에서 앱 타겟을 성공적으로 테스트 했습니다.'
+              body: '✅ iOS17 에서 패키지를 성공적으로 테스트 했습니다.'
             })
 
       # 테스트 실패시 커멘트
@@ -66,6 +74,6 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '📬 iOS17 에서 앱 타겟 테스트에 실패했습니다. Actions에서 실패 결과를 확인해주세요.'
+              body: '📬 iOS17 에서 패키지 테스트에 실패했습니다. Actions에서 실패 결과를 확인해주세요.'
             })
         if: failure()

@@ -24,7 +24,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '🔨 iOS 16.2 iPhone 14 Pro 에서 스위프트 패키지를 빌드합니다.'
+              body: '🔨 iOS 17.0.1 iPhone 15 Pro 에서 스위프트 패키지를 빌드합니다.'
             })
 
       # 코드를 체크아웃 합니다.
@@ -37,11 +37,11 @@ jobs:
         with:
           xcode-version: '15.0'
 
-      # KuringModulePackage 패키지를 빌드합니다. (최소 버전)
-      - name: KuringModulePackage 빌드
+      # KuringPackage 패키지를 빌드합니다. (최소 버전)
+      - name: KuringPackage 의 App 스킴 빌드
         run: |
-          cd KuringModulePackage
-          xcodebuild build -scheme KuringModulePackage -destination 'platform=iOS Simulator,OS=latest,name=iPhone 14 Pro'
+          cd KuringPackage
+          xcodebuild build -scheme App -destination 'platform=iOS Simulator,OS=latest,name=iPhone 14 Pro' -skipMacroValidation
       
       # 빌드 성공시 커멘트
       - name: Add Build comment
