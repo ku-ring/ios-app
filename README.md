@@ -15,16 +15,15 @@
 ## 요구 사항
 
 - Xcode 15.0 (Swift 5.9+)
-- iOS 16+
+- iOS 17+
 
 ## 사용하는 스위프트 패키지
 
 | name | URL | branch | description |
 | ---- | ---- | ------ | ----- |
-| Cache | https://github.com/cozzin/Cache | main | 캐싱 모듈 |
 | The Satellite | https://github.com/ku-ring/the-satellite | main | iOS API 통신모듈  |
 | Swift Collections | https://github.com/apple/swift-collections | main | OrderedSet |  
-| The Composable Architecture | https://github.com/pointfreeco/swift-composable-architecture | main | TCA 구조를 위한 스위프트 패키지 |
+| Composable Architecture | https://github.com/pointfreeco/swift-composable-architecture | observation-beta | TCA 구조를 위한 스위프트 패키지 |
 
 ## 기여
 
@@ -64,11 +63,16 @@ https://www.notion.so/kuring/v2-55977b79a8014c2883ad4c89085e1464?pvs=4
 
 ## 깃헙 액션 (GitHub Actions)
 
+> **정보** 자세한 내용은 [Discussion](https://github.com/ku-ring/ios-app/discussions/56) 을 참고하세요.
+
 반드시 `/쿠링` 으로 시작할 것.
 
 ### 빌드
 - `ios17 앱 빌드`
 - `패키지 빌드`
+
+### 테스트
+- `패키지 테스트`
 
 ### PR 머지
 - `머지`
