@@ -9,45 +9,29 @@ import WebKit
 import SwiftUI
 import ComposableArchitecture
 
-struct InformationWebViewFeature: Reducer {
+@Reducer
+struct InformationWebViewFeature {
+    @ObservableState
     struct State: Equatable {
         var url: String?
     }
     
     enum Action: Equatable {
-        case eraseView
         
-        case delegate(Delegate)
-        enum Delegate: Equatable {
-            case erase
-        }
     }
     
     var body: some ReducerOf<Self> {
         Reduce { state, action in
-            switch action {
-            case .eraseView:
-                return .run { send in
-                    await send(.delegate(.erase))
-                }
-                
-            case .delegate:
-                return .none
-            }
+            return .none
         }
     }
 }
 
 struct InformationWebView: View {
-    let store: StoreOf<InformationWebViewFeature>
+    @Bindable var store: StoreOf<InformationWebViewFeature>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            WebView(urlToLoad: viewStore.url ?? InformationURL.kuringTeam.rawValue)
-                .onDisappear {
-                    viewStore.send(.eraseView)
-                }
-        }
+        WebView(urlToLoad: store.url ?? InformationURL.kuringTeam.rawValue)
     }
 }
 

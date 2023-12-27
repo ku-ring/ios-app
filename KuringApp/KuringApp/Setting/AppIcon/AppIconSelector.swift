@@ -8,7 +8,9 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct AppIconSelectorFeature: Reducer {
+@Reducer
+struct AppIconSelectorFeature {
+    @ObservableState
     struct State: Equatable {
         var appIcons: IdentifiedArrayOf<KuringIcon> = IdentifiedArray(uniqueElements: KuringIcon.allCases)
         var selectedIcon: KuringIcon?
@@ -16,7 +18,7 @@ struct AppIconSelectorFeature: Reducer {
         
         init(
             appIcons: IdentifiedArrayOf<KuringIcon> = IdentifiedArray(uniqueElements: KuringIcon.allCases),
-             selectedIcon: KuringIcon? = nil
+            selectedIcon: KuringIcon? = nil
         ) {
             @Dependency(\.appIcons) var appIconClient
             self.appIcons = appIcons
@@ -62,46 +64,44 @@ struct AppIconSelectorFeature: Reducer {
 }
 
 struct AppIconSelector: View {
-    let store: StoreOf<AppIconSelectorFeature>
+    @Bindable var store: StoreOf<AppIconSelectorFeature>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            List(viewStore.appIcons) { icon in
-                HStack {
-                    VStack {
-                        Image(uiImage: UIImage(named: icon.rawValue)!)
-                            .resizable()
-                            .frame(width: 70, height: 70)
-                            .cornerRadius(10)
-                            .shadow(radius: 0.5)
-                    }
-                    .padding(.trailing)
+        List(store.appIcons) { icon in
+            HStack {
+                VStack {
+                    Image(uiImage: UIImage(named: icon.rawValue)!)
+                        .resizable()
+                        .frame(width: 70, height: 70)
+                        .cornerRadius(10)
+                        .shadow(radius: 0.5)
+                }
+                .padding(.trailing)
+                
+                Button {
+                    store.send(.appIconSelected(icon))
+                } label: {
+                    Text(icon.korValue)
+                        .foregroundStyle(.black)
+                }
+                
+                if icon == store.state.selectedIcon {
+                    Spacer()
                     
-                    Button {
-                        viewStore.send(.appIconSelected(icon))
-                    } label: {
-                        Text(icon.korValue)
-                            .foregroundStyle(.black)
-                    }
-                    
-                    if icon == viewStore.state.selectedIcon {
-                        Spacer()
-                        
-                        Image(systemName: "checkmark.circle.fill")
-                            .font(.title3)
-                            .foregroundStyle(.tint)
-                    }
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.title3)
+                        .foregroundStyle(.tint)
                 }
             }
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        viewStore.send(.saveButtonTapped)
-                    } label: {
-                        Text("저장")
-                    }
-                    .disabled(viewStore.selectedIcon == viewStore.currentIcon)
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    store.send(.saveButtonTapped)
+                } label: {
+                    Text("저장")
                 }
+                .disabled(store.selectedIcon == store.currentIcon)
             }
         }
     }
@@ -114,5 +114,5 @@ struct AppIconSelector: View {
             reducer: { AppIconSelectorFeature() }
         )
     )
-    .tint(.green)
+    .tint(Color.accentColor)
 }

@@ -8,7 +8,9 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct SettingsAppFeature: Reducer {
+@Reducer
+struct SettingsAppFeature {
+    @ObservableState
     struct State: Equatable {
         /// 스택 기반 네비게이션 Path
         var path = StackState<Path.State>()
@@ -24,7 +26,7 @@ struct SettingsAppFeature: Reducer {
     }
     
     var body: some ReducerOf<Self> {
-        Scope(state: \.settingList, action: /Action.settingList) {
+        Scope(state: \.settingList, action: \.settingList) {
             SettingListFeature()
         }
     
@@ -45,45 +47,37 @@ struct SettingsAppFeature: Reducer {
                 return .none
             }
         }
-        .forEach(\.path, action: /Action.path) {
+        .forEach(\.path, action: \.path) {
             Path()
         }
     }
 }
 
 struct SettingsApp: View {
-    let store: StoreOf<SettingsAppFeature>
+    @Bindable var store: StoreOf<SettingsAppFeature>
     
     var body: some View {
-        NavigationStackStore(self.store.scope(state: \.path, action: { .path($0) })) {
+        NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
             SettingView(
                 store: self.store.scope(
                     state: \.settingList,
-                    action: { .settingList($0) }
+                    action: \.settingList
                 )
             )
-        } destination: { state in
-            switch state {
+        } destination: { store in
+            switch store.state {
             case .appIconSelector:
-                CaseLet(
-                    /SettingsAppFeature.Path.State.appIconSelector,
-                     action: SettingsAppFeature.Path.Action.appIconSelector
-                ) { store in
+                if let store = store.scope(state: \.appIconSelector, action: \.appIconSelector) {
                     AppIconSelector(store: store)
                         .navigationTitle("앱 아이콘")
                 }
             case .openSourceList:
-                CaseLet(
-                    /SettingsAppFeature.Path.State.openSourceList,
-                     action: SettingsAppFeature.Path.Action.openSourceList
-                ) { store in
+                if let store = store.scope(state: \.openSourceList, action: \.openSourceList) {
                     OpenSourceView(store: store)
                         .navigationTitle("사용된 오픈소스")
-                    
                 }
             }
         }
-
     }
 }
 

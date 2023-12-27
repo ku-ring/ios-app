@@ -8,42 +8,53 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct OpenSourceFeature: Reducer {
+@Reducer
+struct OpenSourceFeature {
+    @ObservableState
     struct State: Equatable {
-        
+        let opensources: [Opensource] = Opensource.items
     }
     
-    enum Action {
+    enum Action: Equatable, BindableAction {
+        case binding(BindingAction<State>)
         
+        case linkTapped(_ link: String)
     }
     
     var body: some ReducerOf<Self> {
+        BindingReducer()
+        
         Reduce { state, action in
             switch action {
+            case .binding:
+                return .none
                 
+            case let .linkTapped(link):
+                guard let url = URL(string: link) else { return .none }
+                UIApplication.shared.open(url)
+                return .none
             }
         }
     }
 }
 
 struct OpenSourceView: View {
-    let store: StoreOf<OpenSourceFeature>
+    @Bindable var store: StoreOf<OpenSourceFeature>
     
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            List(Opensource.items, id: \.self) { item in
-                VStack(alignment: .leading) {
-                    Text(item.name)
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .padding(.bottom)
-                    Button(action: {
-                        UIApplication.shared.open(URL(string: item.link)!)
-                    }) {
-                        Text(item.link)
-                    }
-                    .tint(.green)
+        List(store.opensources) { opensource in
+            VStack(alignment: .leading) {
+                Text(opensource.name)
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .padding(.bottom)
+                
+                Button {
+                    store.send(.linkTapped(opensource.link))
+                } label: {
+                    Text(opensource.link)
                 }
+                .tint(Color.accentColor)
             }
         }
     }
@@ -58,17 +69,17 @@ struct OpenSourceView: View {
     )
 }
 
-struct Opensource: Hashable {
-    var name: String
-    var link: String
+struct Opensource: Equatable, Identifiable {
+    var id: String { name }
+    let name: String
+    let link: String
     
 }
 
 extension Opensource {
     static let items: [Opensource] = [
-        Opensource(name: "TCA - The Composable Architecture", link: "https://github.com/pointfreeco/swift-composable-architecture/tree/main"),
-        Opensource(name: "Lottie", link: "https://github.com/airbnb/lottie-ios"),
-        Opensource(name: "KuringCommons", link: "https://github.com/KU-Stacks/kuring-ios-commons"),
+        Opensource(name: "Composable Architecture", link: "https://github.com/pointfreeco/swift-composable-architecture/tree/main"),
+        Opensource(name: "KuringPackage", link: "https://github.com/ku-ring/ios-app"),
         Opensource(name: "The Satellite", link: "https://github.com/ku-ring/the-satellite"),
         
     ]

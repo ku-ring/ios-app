@@ -9,7 +9,9 @@ import SwiftUI
 import ComposableArchitecture
 
 extension SettingsAppFeature {
-    struct Path: Reducer {
+    @Reducer
+    struct Path {
+        @ObservableState
         enum State: Equatable {
             case appIconSelector(AppIconSelectorFeature.State)
             case openSourceList(OpenSourceFeature.State)
@@ -21,10 +23,10 @@ extension SettingsAppFeature {
         }
         
         var body: some ReducerOf<Self> {
-            Scope(state: /State.appIconSelector, action: /Action.appIconSelector) {
+            Scope(state: \.appIconSelector, action: \.appIconSelector) {
                 AppIconSelectorFeature()
             }
-            Scope(state: /State.openSourceList, action: /Action.openSourceList) {
+            Scope(state: \.openSourceList, action: \.openSourceList) {
                 OpenSourceFeature()
             }
         }
