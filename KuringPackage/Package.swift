@@ -21,6 +21,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", branch: "observation-beta"),
+        .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.1.5"),
         .package(url: "https://github.com/ku-ring/the-satellite", branch: "main")
     ],
     targets: [
@@ -105,8 +106,27 @@ let package = Package(
             ],
             path: "Sources/Features/SearchFeatures"
         ),
+        .target(
+            name: "BookmarkFeatures",
+            dependencies: [
+                "Models",
+                "Caches",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/Features/BookmarkFeatures"
+        ),
         
         // MARK: - Shared
+        
+        // MARK: Caches
+        .target(
+            name: "Caches",
+            dependencies: [
+                "Models",
+                .product(name: "Dependencies", package: "swift-dependencies"),
+            ],
+            path: "Sources/Caches"
+        ),
         
         // MARK: Colors
         .target(
@@ -142,6 +162,13 @@ let package = Package(
             name: "SubscriptionFeaturesTests",
             dependencies: [
                 "SubscriptionFeatures", "DepartmentFeatures", "Models",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+            ]
+        ),
+        .testTarget(
+            name: "BookmarkFeaturesTests",
+            dependencies: [
+                "BookmarkFeatures", "Caches", "Models",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]
         ),

@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Notice: Codable, Hashable, Identifiable, Equatable {
-    public var id: String { url }
+    public var id: String { "\(category)_\(articleId)" }
     /// e.g., `"5b45b56"`
     public let articleId: String
     /// e.g., `"post_date_1"`
