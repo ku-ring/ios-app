@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum KuringIcon: String, CaseIterable, Identifiable {
+enum KuringIcon: String, CaseIterable, Identifiable, Equatable {
     var id: String { self.rawValue }
     case kuring_app
     case kuring_app_classic

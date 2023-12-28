@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SubscriptionFeatures
 import ComposableArchitecture
 
 extension SettingsAppFeature {
@@ -13,21 +14,21 @@ extension SettingsAppFeature {
     struct Path {
         @ObservableState
         enum State: Equatable {
+            case openSourceList(OpenSourceListFeature.State)
             case appIconSelector(AppIconSelectorFeature.State)
-            case openSourceList(OpenSourceFeature.State)
         }
         
-        enum Action {
+        enum Action: Equatable {
+            case openSourceList(OpenSourceListFeature.Action)
             case appIconSelector(AppIconSelectorFeature.Action)
-            case openSourceList(OpenSourceFeature.Action)
         }
         
         var body: some ReducerOf<Self> {
+            Scope(state: \.openSourceList, action: \.openSourceList) {
+                OpenSourceListFeature()
+            }
             Scope(state: \.appIconSelector, action: \.appIconSelector) {
                 AppIconSelectorFeature()
-            }
-            Scope(state: \.openSourceList, action: \.openSourceList) {
-                OpenSourceFeature()
             }
         }
     }

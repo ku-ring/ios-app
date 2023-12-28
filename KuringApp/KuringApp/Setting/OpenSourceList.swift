@@ -1,5 +1,5 @@
 //
-//  OpenSourceView.swift
+//  OpenSourceList.swift
 //  KuringApp
 //
 //  Created by 박성수 on 11/30/23.
@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 @Reducer
-struct OpenSourceFeature {
+struct OpenSourceListFeature {
     @ObservableState
     struct State: Equatable {
         let opensources: [Opensource] = Opensource.items
@@ -38,8 +38,8 @@ struct OpenSourceFeature {
     }
 }
 
-struct OpenSourceView: View {
-    @Bindable var store: StoreOf<OpenSourceFeature>
+struct OpenSourceList: View {
+    @Bindable var store: StoreOf<OpenSourceListFeature>
     
     var body: some View {
         List(store.opensources) { opensource in
@@ -61,10 +61,10 @@ struct OpenSourceView: View {
 }
 
 #Preview {
-    OpenSourceView(
+    OpenSourceList(
         store: Store(
-            initialState: OpenSourceFeature.State(),
-            reducer: { OpenSourceFeature() }
+            initialState: OpenSourceListFeature.State(),
+            reducer: { OpenSourceListFeature() }
         )
     )
 }

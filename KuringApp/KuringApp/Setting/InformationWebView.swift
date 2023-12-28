@@ -31,7 +31,7 @@ struct InformationWebView: View {
     @Bindable var store: StoreOf<InformationWebViewFeature>
     
     var body: some View {
-        WebView(urlToLoad: store.url ?? InformationURL.kuringTeam.rawValue)
+        WebView(urlToLoad: store.url ?? URLLink.team.rawValue)
     }
 }
 
