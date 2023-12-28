@@ -7,25 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A91454FE2ACF39E000B82A8E /* SettingsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91454FD2ACF39E000B82A8E /* SettingsApp.swift */; };
-		A91455002ACF3A3D00B82A8E /* SetttingsApp.Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91454FF2ACF3A3D00B82A8E /* SetttingsApp.Path.swift */; };
-		A91455032ACF44CE00B82A8E /* KuringIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91455022ACF44CE00B82A8E /* KuringIcon.swift */; };
-		A91455062ACF451E00B82A8E /* AppIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91455052ACF451E00B82A8E /* AppIcons.swift */; };
 		A9DAFA542AB1F04B0064F748 /* KuringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA532AB1F04B0064F748 /* KuringApp.swift */; };
 		A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA552AB1F04B0064F748 /* ContentView.swift */; };
 		A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA572AB1F04C0064F748 /* Assets.xcassets */; };
 		A9DAFA5B2AB1F04C0064F748 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */; };
-		CA7AC5462B3DD38C00BDFC4B /* SettingsApp.Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7AC5452B3DD38C00BDFC4B /* SettingsApp.Destination.swift */; };
-		CA7AC5482B3DD78D00BDFC4B /* SettingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7AC5472B3DD78D00BDFC4B /* SettingList.swift */; };
 		CAE658662B3992A800CD8A63 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = CAE658652B3992A800CD8A63 /* App */; };
 		DF331DAB2AC917E100D0BB08 /* kuring_app.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA72AC917E000D0BB08 /* kuring_app.png */; };
 		DF331DAC2AC917E100D0BB08 /* kuring_app_classic.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */; };
 		DF331DAD2AC917E100D0BB08 /* kuring_app_sketch.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA92AC917E000D0BB08 /* kuring_app_sketch.png */; };
 		DF331DAE2AC917E100D0BB08 /* kuring_app_blueprint.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DAA2AC917E000D0BB08 /* kuring_app_blueprint.png */; };
-		DF8A2FC62B16D261003D10F8 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A2FC52B16D261003D10F8 /* FeedbackView.swift */; };
-		DF8A2FC82B16D9B8003D10F8 /* InformationWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A2FC72B16D9B8003D10F8 /* InformationWebView.swift */; };
-		DF8A2FCA2B17ACBC003D10F8 /* OpenSourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A2FC92B17ACBC003D10F8 /* OpenSourceList.swift */; };
-		DFE7AB172AC33D6700230934 /* AppIconSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE7AB162AC33D6700230934 /* AppIconSelector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,27 +29,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A91454FD2ACF39E000B82A8E /* SettingsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsApp.swift; sourceTree = "<group>"; };
-		A91454FF2ACF3A3D00B82A8E /* SetttingsApp.Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetttingsApp.Path.swift; sourceTree = "<group>"; };
-		A91455022ACF44CE00B82A8E /* KuringIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringIcon.swift; sourceTree = "<group>"; };
-		A91455052ACF451E00B82A8E /* AppIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcons.swift; sourceTree = "<group>"; };
 		A9DAFA502AB1F04B0064F748 /* KuringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KuringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DAFA532AB1F04B0064F748 /* KuringApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringApp.swift; sourceTree = "<group>"; };
 		A9DAFA552AB1F04B0064F748 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A9DAFA572AB1F04C0064F748 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CA52DF2F2AD58DF2009B9272 /* KuringAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KuringAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CA7AC5452B3DD38C00BDFC4B /* SettingsApp.Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsApp.Destination.swift; sourceTree = "<group>"; };
-		CA7AC5472B3DD78D00BDFC4B /* SettingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingList.swift; sourceTree = "<group>"; };
 		DF062D4A2AC87B6D00FC48C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DF331DA72AC917E000D0BB08 /* kuring_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app.png; sourceTree = "<group>"; };
 		DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app_classic.png; sourceTree = "<group>"; };
 		DF331DA92AC917E000D0BB08 /* kuring_app_sketch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app_sketch.png; sourceTree = "<group>"; };
 		DF331DAA2AC917E000D0BB08 /* kuring_app_blueprint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app_blueprint.png; sourceTree = "<group>"; };
-		DF8A2FC52B16D261003D10F8 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
-		DF8A2FC72B16D9B8003D10F8 /* InformationWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationWebView.swift; sourceTree = "<group>"; };
-		DF8A2FC92B17ACBC003D10F8 /* OpenSourceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceList.swift; sourceTree = "<group>"; };
-		DFE7AB162AC33D6700230934 /* AppIconSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconSelector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,23 +61,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A91455012ACF44BD00B82A8E /* AppIcon */ = {
-			isa = PBXGroup;
-			children = (
-				DFE7AB162AC33D6700230934 /* AppIconSelector.swift */,
-				A91455022ACF44CE00B82A8E /* KuringIcon.swift */,
-			);
-			path = AppIcon;
-			sourceTree = "<group>";
-		};
-		A91455042ACF44F400B82A8E /* Depedencies */ = {
-			isa = PBXGroup;
-			children = (
-				A91455052ACF451E00B82A8E /* AppIcons.swift */,
-			);
-			path = Depedencies;
-			sourceTree = "<group>";
-		};
 		A947DCBA2AB47BA300A6D614 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,16 +129,7 @@
 		DFE7AB132AC332D200230934 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				A91455042ACF44F400B82A8E /* Depedencies */,
 				DF062D4B2AC8800000FC48C0 /* AppIcons */,
-				DF8A2FC52B16D261003D10F8 /* FeedbackView.swift */,
-				DF8A2FC72B16D9B8003D10F8 /* InformationWebView.swift */,
-				A91454FD2ACF39E000B82A8E /* SettingsApp.swift */,
-				CA7AC5472B3DD78D00BDFC4B /* SettingList.swift */,
-				A91454FF2ACF3A3D00B82A8E /* SetttingsApp.Path.swift */,
-				CA7AC5452B3DD38C00BDFC4B /* SettingsApp.Destination.swift */,
-				DF8A2FC92B17ACBC003D10F8 /* OpenSourceList.swift */,
-				A91455012ACF44BD00B82A8E /* AppIcon */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -290,18 +244,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A91455002ACF3A3D00B82A8E /* SetttingsApp.Path.swift in Sources */,
-				CA7AC5462B3DD38C00BDFC4B /* SettingsApp.Destination.swift in Sources */,
-				A91455062ACF451E00B82A8E /* AppIcons.swift in Sources */,
 				A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */,
-				DF8A2FC82B16D9B8003D10F8 /* InformationWebView.swift in Sources */,
-				DF8A2FCA2B17ACBC003D10F8 /* OpenSourceList.swift in Sources */,
-				DF8A2FC62B16D261003D10F8 /* FeedbackView.swift in Sources */,
-				CA7AC5482B3DD78D00BDFC4B /* SettingList.swift in Sources */,
-				A91455032ACF44CE00B82A8E /* KuringIcon.swift in Sources */,
-				A91454FE2ACF39E000B82A8E /* SettingsApp.swift in Sources */,
 				A9DAFA542AB1F04B0064F748 /* KuringApp.swift in Sources */,
-				DFE7AB172AC33D6700230934 /* AppIconSelector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

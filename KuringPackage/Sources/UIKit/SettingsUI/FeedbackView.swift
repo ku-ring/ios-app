@@ -1,49 +1,11 @@
-//
-//  FeedbackView.swift
-//  KuringApp
-//
-//  Created by 박성수 on 11/29/23.
-//
-
 import SwiftUI
+import SettingsFeatures
 import ComposableArchitecture
 
-@Reducer
-struct FeedbackFeature {
-    @ObservableState
-    struct State: Equatable {
-        var text: String = "피드백을 남겨주세요."
-    }
-    
-    enum Action: Equatable, BindableAction {
-        case binding(BindingAction<State>)
-        
-        case sendFeedback
-    }
-    
-    @Dependency(\.dismiss) var dismiss
-    
-    var body: some ReducerOf<Self> {
-        BindingReducer()
-        
-        Reduce { state, action in
-            switch action {
-            case .binding:
-                return .none
-                
-            case .sendFeedback:
-                return .run { _ in
-                    await dismiss()
-                }
-            }
-        }
-    }
-}
-
-struct FeedbackView: View {
+public struct FeedbackView: View {
     @Bindable var store: StoreOf<FeedbackFeature>
     
-    var body: some View {
+    public var body: some View {
         VStack(spacing: 30) {
             Text("피드백 보내기")
                 .fontWeight(.bold)
@@ -85,6 +47,10 @@ struct FeedbackView: View {
             .disabled(store.text.count < 4)
             .padding(.bottom)
         }
+    }
+    
+    public init(store: StoreOf<FeedbackFeature>) {
+        self.store = store
     }
 }
 

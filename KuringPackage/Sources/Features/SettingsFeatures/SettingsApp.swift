@@ -1,26 +1,18 @@
-//
-//  SettingsApp.swift
-//  KuringApp
-//
-//  Created by Jaesung Lee on 2023/10/06.
-//
-
-import SwiftUI
 import SubscriptionFeatures
 import ComposableArchitecture
 
 @Reducer
-struct SettingsAppFeature {
+public struct SettingsAppFeature {
     @ObservableState
-    struct State: Equatable {
+    public struct State: Equatable {
         /// 트리 기반 네비게이션 Path
-        @Presents var destination: Destination.State?
+        @Presents public var destination: Destination.State?
         /// 스택 기반 네비게이션 Path
-        var path = StackState<Path.State>()
+        public var path = StackState<Path.State>()
         /// Root
-        var settingList = SettingListFeature.State()
+        public var settingList = SettingListFeature.State()
         
-        init(
+        public init(
             destination: Destination.State? = nil,
             path: StackState<Path.State> = .init(),
             root: SettingListFeature.State = .init()
@@ -31,7 +23,7 @@ struct SettingsAppFeature {
         }
     }
     
-    enum Action: Equatable, BindableAction {
+    public enum Action: Equatable, BindableAction {
         case binding(BindingAction<State>)
         /// Root
         case settingList(SettingListFeature.Action)
@@ -41,7 +33,7 @@ struct SettingsAppFeature {
         case destination(PresentationAction<Destination.Action>)
     }
     
-    var body: some ReducerOf<Self> {
+    public var body: some ReducerOf<Self> {
         BindingReducer()
         
         Scope(state: \.settingList, action: \.settingList) {
@@ -58,31 +50,31 @@ struct SettingsAppFeature {
                     
                 case .showWhatsNew:
                     state.destination = .informationWeb(
-                        InformationWebViewFeature.State(url: URLLink.whatsNew.rawValue)
+                        InformationWebFeature.State(url: URLLink.whatsNew.rawValue)
                     )
                     return .none
                     
                 case .showTeam:
                     state.destination = .informationWeb(
-                        InformationWebViewFeature.State(url: URLLink.team.rawValue)
+                        InformationWebFeature.State(url: URLLink.team.rawValue)
                     )
                     return .none
                     
                 case .showPrivacyPolicy:
                     state.destination = .informationWeb(
-                        InformationWebViewFeature.State(url: URLLink.privacy.rawValue)
+                        InformationWebFeature.State(url: URLLink.privacy.rawValue)
                     )
                     return .none
                     
                 case .showTermsOfService:
                     state.destination = .informationWeb(
-                        InformationWebViewFeature.State(url: URLLink.terms.rawValue)
+                        InformationWebFeature.State(url: URLLink.terms.rawValue)
                     )
                     return .none
                     
                 case .showInstagram:
                     state.destination = .informationWeb(
-                        InformationWebViewFeature.State(url: URLLink.instagram.rawValue)
+                        InformationWebFeature.State(url: URLLink.instagram.rawValue)
                     )
                     return .none
                     
@@ -116,66 +108,6 @@ struct SettingsAppFeature {
             Path()
         }
     }
-}
-
-import SubscriptionUI
-
-struct SettingsApp: View {
-    @Bindable var store: StoreOf<SettingsAppFeature>
     
-    var body: some View {
-        NavigationStack(
-            path: $store.scope(state: \.path, action: \.path)
-        ) {
-            SettingList(
-                store: store.scope(state: \.settingList, action: \.settingList)
-            )
-        } destination: { store in
-            switch store.state {
-            case .appIconSelector:
-                if let store = store.scope(state: \.appIconSelector, action: \.appIconSelector) {
-                    AppIconSelector(store: store)
-                        .navigationTitle("앱 아이콘")
-                }
-            case .openSourceList:
-                if let store = store.scope(state: \.openSourceList, action: \.openSourceList) {
-                    OpenSourceList(store: store)
-                        .navigationTitle("사용된 오픈소스")
-                }
-            }
-        }
-        .sheet(
-            store: self.store.scope(
-                state: \.$destination.subscription,
-                action: \.destination.subscription
-            )
-        ) { store in
-            SubscriptionApp(store: store)
-        }
-        .sheet(
-            store: self.store.scope(
-                state: \.$destination.feedback,
-                action: \.destination.feedback
-            )
-        ) { store in
-            FeedbackView(store: store)
-        }
-        .sheet(
-            store: self.store.scope(
-                state: \.$destination.informationWeb,
-                action: \.destination.informationWeb
-            )
-        ) { store in
-            InformationWebView(store: store)
-        }
-    }
-}
-
-#Preview {
-    SettingsApp(
-        store: Store(
-            initialState: SettingsAppFeature.State(),
-            reducer: { SettingsAppFeature() }
-        )
-    )
+    public init() { }
 }

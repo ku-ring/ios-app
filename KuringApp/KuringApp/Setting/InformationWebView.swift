@@ -27,22 +27,7 @@ struct InformationWebViewFeature {
     }
 }
 
-struct InformationWebView: View {
-    @Bindable var store: StoreOf<InformationWebViewFeature>
-    
-    var body: some View {
-        WebView(urlToLoad: store.url ?? URLLink.team.rawValue)
-    }
-}
 
-#Preview {
-    InformationWebView(
-        store: Store(
-            initialState: InformationWebViewFeature.State(),
-            reducer: { InformationWebViewFeature() }
-        )
-    )
-}
 
  
 struct WebView: UIViewRepresentable {

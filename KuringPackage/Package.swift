@@ -16,6 +16,7 @@ let package = Package(
                 "SubscriptionUI",
                 "DepartmentUI",
                 "SearchUI",
+                "SettingsUI",
             ]
         ),
     ],
@@ -63,6 +64,16 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/UIKit/SearchUI"
+        ),
+        .target(
+            name: "SettingsUI",
+            dependencies: [
+                "SettingsFeatures", "SubscriptionFeatures", "SubscriptionUI",
+                "Caches",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/UIKit/SettingsUI",
+            resources: [.process("Resources")]
         ),
         
         // MARK: Features
@@ -114,6 +125,16 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Features/BookmarkFeatures"
+        ),
+        .target(
+            name: "SettingsFeatures",
+            dependencies: [
+                "Models",
+                "Caches",
+                "SubscriptionFeatures",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/Features/SettingsFeatures"
         ),
         
         // MARK: - Shared
