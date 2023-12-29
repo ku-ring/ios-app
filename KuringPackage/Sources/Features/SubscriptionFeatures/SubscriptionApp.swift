@@ -6,25 +6,29 @@ import ComposableArchitecture
 public struct SubscriptionAppFeature {
     @ObservableState
     public struct State: Equatable {
+        /// 스택 기반 네비게이션 Path
         public var path = StackState<Path.State>()
+        /// Root
         public var subscriptionView = SubscriptionFeature.State()
         
         public init(
-            path: StackState<Path.State> = StackState<Path.State>(),
-            subscriptionView: SubscriptionFeature.State = SubscriptionFeature.State()
+            path: StackState<SubscriptionAppFeature.Path.State> = .init(),
+            root: SubscriptionFeature.State = .init()
         ) {
             self.path = path
-            self.subscriptionView = subscriptionView
+            self.subscriptionView = root
         }
     }
     
     public enum Action: Equatable {
+        /// 스택 기반 네비게이션 Path
         case path(StackAction<Path.State, Path.Action>)
+        /// Root
         case subscriptionView(SubscriptionFeature.Action)
     }
     
     public var body: some ReducerOf<Self> {
-        Scope(state: \.subscriptionView, action: /Action.subscriptionView) {
+        Scope(state: \.subscriptionView, action: \.subscriptionView) {
             SubscriptionFeature()
         }
         
@@ -44,7 +48,7 @@ public struct SubscriptionAppFeature {
                 return .none
             }
         }
-        .forEach(\.path, action: /Action.path) {
+        .forEach(\.path, action: \.path) {
             Path()
         }
     }

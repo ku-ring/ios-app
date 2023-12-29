@@ -22,7 +22,7 @@ class SubscriptionAppTests: XCTestCase {
         
         let store = TestStore(
             initialState: SubscriptionAppFeature.State(
-                subscriptionView: SubscriptionFeature.State(myDepartments: [컴퓨터공학부])
+                root: SubscriptionFeature.State(myDepartments: [컴퓨터공학부])
             ),
             reducer: { SubscriptionAppFeature() }
         )

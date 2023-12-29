@@ -20,15 +20,15 @@ extension NoticeAppFeature {
         }
         
         public var body: some ReducerOf<Self> {
-            Scope(state: /State.detail, action: /Action.detail) {
+            Scope(state: \.detail, action: \.detail) {
                 NoticeDetailFeature()
             }
             
-            Scope(state: /State.search, action: /Action.search) {
+            Scope(state: \.search, action: \.search) {
                 SearchFeature()
             }
             
-            Scope(state: /State.departmentEditor, action: /Action.departmentEditor) {
+            Scope(state: \.departmentEditor, action: \.departmentEditor) {
                 DepartmentEditorFeature()
             }
         }

@@ -5,7 +5,7 @@ import ComposableArchitecture
 public struct SettingsAppFeature {
     @ObservableState
     public struct State: Equatable {
-        /// 트리 기반 네비게이션 Path
+        /// 트리 기반 네비게이션 Destination
         @Presents public var destination: Destination.State?
         /// 스택 기반 네비게이션 Path
         public var path = StackState<Path.State>()
@@ -20,6 +20,7 @@ public struct SettingsAppFeature {
             // 디펜던시로 세팅
             self.destination = destination
             self.path = path
+            self.settingList = root
         }
     }
     

@@ -39,7 +39,7 @@ public struct SubscriptionApp: View {
     SubscriptionApp(
         store: Store(
             initialState: SubscriptionAppFeature.State(
-                subscriptionView: SubscriptionFeature.State()
+                root: SubscriptionFeature.State()
             ),
             reducer: { SubscriptionAppFeature() }
         )
