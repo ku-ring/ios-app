@@ -56,7 +56,7 @@ struct SubscriptionView: View {
                                         isSelected ? Color.accentColor : Color.clear,
                                         lineWidth: isSelected ? 2 : 0
                                     )
-                                    .background(
+                                    .fill(
                                         isSelected
                                         ? Color.accentColor.opacity(0.1)
                                         : Color.black.opacity(0.03)
