@@ -7,9 +7,14 @@ import ComposableArchitecture
 @MainActor
 class SubscriptionTests: XCTestCase {
     func test_tapConfirmButton() async throws {
+        let dismissed = self.expectation(description: "dismissed")
+
         let store = TestStore(
             initialState: SubscriptionFeature.State(),
-            reducer: { SubscriptionFeature() }
+            reducer: { SubscriptionFeature() },
+            withDependencies: {
+                $0.dismiss = DismissEffect { dismissed.fulfill() }
+            }
         )
         await store.send(.confirmButtonTapped) {
             $0.isWaitingResponse = true
@@ -18,6 +23,8 @@ class SubscriptionTests: XCTestCase {
         await store.receive(.subscriptionResponse(true)) {
             $0.isWaitingResponse = false
         }
+        
+        await self.fulfillment(of: [dismissed])
     }
     
     func test_selectSegment() async throws {
