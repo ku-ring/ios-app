@@ -42,7 +42,7 @@ public struct NoticeAppFeature {
     }
     
     public var body: some ReducerOf<Self> {
-        Scope(state: \.noticeList, action: /Action.noticeList) {
+        Scope(state: \.noticeList, action: \.noticeList) {
             NoticeListFeature()
         }
         
@@ -80,10 +80,10 @@ public struct NoticeAppFeature {
                 return .none
             }
         }
-        .forEach(\.path, action: /Action.path) {
+        .forEach(\.path, action: \.path) {
             Path()
         }
-        .ifLet(\.$changeSubscription, action: /Action.changeSubscription) {
+        .ifLet(\.$changeSubscription, action: \.changeSubscription) {
             SubscriptionAppFeature()
         }
     }
