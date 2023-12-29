@@ -1,5 +1,5 @@
 import UIKit
-import ComposableArchitecture
+import Dependencies
 
 public enum KuringIcon: String, CaseIterable, Identifiable, Equatable {
     public var id: String { self.rawValue }

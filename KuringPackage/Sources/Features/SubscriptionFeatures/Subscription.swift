@@ -54,6 +54,7 @@ public struct SubscriptionFeature {
     }
     
     @Dependency(\.kuringLink) var kuringLink
+    @Dependency(\.dismiss) var dismiss
     
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
@@ -101,7 +102,9 @@ public struct SubscriptionFeature {
                 // TODO: UX 어떻게 할지 디자이너 분들과 논의 해야함 (알림을 띄울지 말지)
                 print(isSucceeded ? "구독 성공~" : "구독 실패")
                 state.isWaitingResponse = false
-                return .none
+                return .run { _ in
+                    await dismiss()
+                }
             }
         }
     }

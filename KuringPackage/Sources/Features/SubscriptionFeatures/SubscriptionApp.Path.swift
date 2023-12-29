@@ -15,7 +15,7 @@ extension SubscriptionAppFeature {
         }
         
         public var body: some ReducerOf<Self> {
-            Scope(state: /State.departmentEditor, action: /Action.departmentEditor) {
+            Scope(state: \.departmentEditor, action: \.departmentEditor) {
                 DepartmentEditorFeature()
             }
         }

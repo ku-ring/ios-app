@@ -24,8 +24,7 @@ public struct DepartmentEditorFeature {
             case myDepartment
         }
         
-        @Presents
-        public var alert: AlertState<Action.Alert>?
+        @Presents public var alert: AlertState<Action.Alert>?
         
         public init(
             myDepartments: IdentifiedArrayOf<NoticeProvider> = [],
@@ -58,6 +57,8 @@ public struct DepartmentEditorFeature {
         /// 텍스트 필드의 xmark를 눌렀을 때
         case clearTextFieldButtonTapped
         
+        /// 알림 관련 액션
+        case alert(PresentationAction<Alert>)
         /// 알림
         public enum Alert: Equatable {
             /// 개별 학과 삭제 알림 시 삭제 버튼 눌렀을 때
@@ -65,8 +66,6 @@ public struct DepartmentEditorFeature {
             /// 전체 삭제 알림 시 삭제 버튼 눌렀을 때
             case confirmDeleteAll
         }
-        /// 알림 관련 액션
-        case alert(PresentationAction<Alert>)
     }
     
     public var body: some ReducerOf<Self> {
@@ -121,6 +120,7 @@ public struct DepartmentEditorFeature {
                     }
                 }
                 return .none
+                
             case .clearTextFieldButtonTapped:
                 state.searchText.removeAll()
                 return .none
@@ -140,7 +140,7 @@ public struct DepartmentEditorFeature {
                 return .none
             }
         }
-        .ifLet(\.$alert, action: /Action.alert)
+        .ifLet(\.$alert, action: \.alert)
     }
     
     public init() { }
