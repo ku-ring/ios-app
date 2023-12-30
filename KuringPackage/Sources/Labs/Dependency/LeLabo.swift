@@ -6,21 +6,38 @@ import Dependencies
 /// @Dependency(\.leLabo) var leLabo
 /// ```
 public struct LeLabo {
-    public var isBetaAEnabled: Bool
+    public typealias NewValue = Bool
+    
+    public enum Experiment: String, Equatable {
+        case betaA = "beta-a"
+        
+        var key: String {
+            let baseKey = "com.kuring.service.lelabo.experiments"
+            switch self {
+            case .betaA:
+                return "\(baseKey).\(self.rawValue)"
+            }
+        }
+    }
+    
+    public var status: (Experiment) -> Bool
+    public var set: (NewValue, Experiment) -> Void
 }
 
 extension LeLabo {
     public static let `default` = LeLabo(
-        isBetaAEnabled: (UserDefaults.standard.value(forKey: "lelabo/beta-a") as? Bool) ?? false
+        status: { experiment in
+            let value = UserDefaults.standard.value(forKey: experiment.key) as? Bool
+            return value ?? false
+        },
+        set: { newValue, experiment in
+            UserDefaults.standard.set(newValue, forKey: experiment.key)
+        }
     )
 }
 
 extension LeLabo: DependencyKey {
     public static var liveValue = LeLabo.default
-    
-    public static var testValue = LeLabo(
-        isBetaAEnabled: false
-    )
 }
 
 extension DependencyValues {

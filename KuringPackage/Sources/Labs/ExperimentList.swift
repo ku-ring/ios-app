@@ -1,7 +1,7 @@
 import ComposableArchitecture
 
 @Reducer
-public struct BetaListFeature {
+public struct ExperimentListFeature {
     @ObservableState
     public struct State: Equatable {
         public init() { }
@@ -22,8 +22,8 @@ public struct BetaListFeature {
 
 import SwiftUI
 
-public struct BetaList: View {
-    @Bindable public var store: StoreOf<BetaListFeature>
+public struct ExperimentList: View {
+    @Bindable public var store: StoreOf<ExperimentListFeature>
     
     public var body: some View {
         List {
@@ -37,16 +37,16 @@ public struct BetaList: View {
         }
     }
     
-    public init(store: StoreOf<BetaListFeature>) {
+    public init(store: StoreOf<ExperimentListFeature>) {
         self.store = store
     }
 }
 
 #Preview {
-    BetaList(
+    ExperimentList(
         store: Store(
-            initialState: BetaListFeature.State(),
-            reducer: { BetaListFeature() }
+            initialState: ExperimentListFeature.State(),
+            reducer: { ExperimentListFeature() }
         )
     )
 }

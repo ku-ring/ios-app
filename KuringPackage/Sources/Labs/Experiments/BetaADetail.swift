@@ -13,7 +13,7 @@ public struct BetaADetailFeature {
         
         public init(isEnabled: Bool? = nil) {
             @Dependency(\.leLabo) var leLabo
-            self.isEnabled = isEnabled ?? leLabo.isBetaAEnabled
+            self.isEnabled = leLabo.status(.betaA)
         }
     }
     
@@ -29,7 +29,7 @@ public struct BetaADetailFeature {
         Reduce { state, action in
             switch action {
             case .binding(\.isEnabled):
-//                leLabo.isBetaAEnabled = state.isEnabled
+                leLabo.set(state.isEnabled, .betaA)
                 return .none
                 
             case .binding:

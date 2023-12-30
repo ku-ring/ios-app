@@ -7,11 +7,11 @@ public struct LabAppFeature {
         /// 스택 기반 네비게이션
         public var path = StackState<Path.State>()
         /// root
-        public var betaList = BetaListFeature.State()
+        public var betaList = ExperimentListFeature.State()
         
         public init(
             path: StackState<Path.State> = .init(),
-            root: BetaListFeature.State = .init()
+            root: ExperimentListFeature.State = .init()
         ) {
             self.path = path
             self.betaList = root
@@ -20,14 +20,14 @@ public struct LabAppFeature {
     
     public enum Action: Equatable {
         /// root
-        case betaList(BetaListFeature.Action)
+        case betaList(ExperimentListFeature.Action)
         /// 스택 기반 네비게이션
         case path(StackAction<Path.State, Path.Action>)
     }
     
     public var body: some ReducerOf<Self> {
         Scope(state: \.betaList, action: \.betaList) {
-            BetaListFeature()
+            ExperimentListFeature()
         }
         
         Reduce { state, action in
@@ -54,7 +54,7 @@ public struct LabApp: View {
     
     public var body: some View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
-            BetaList(
+            ExperimentList(
                 store: store.scope(
                     state: \.betaList,
                     action: \.betaList
