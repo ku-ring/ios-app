@@ -13,10 +13,7 @@ public struct LeLabo {
         
         var key: String {
             let baseKey = "com.kuring.service.lelabo.experiments"
-            switch self {
-            case .betaA:
-                return "\(baseKey).\(self.rawValue)"
-            }
+            return "\(baseKey).\(self.rawValue)"
         }
     }
     
