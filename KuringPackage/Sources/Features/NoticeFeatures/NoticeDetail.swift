@@ -1,3 +1,4 @@
+import Caches
 import Models
 import SwiftUI
 import ComposableArchitecture
@@ -11,7 +12,12 @@ public struct NoticeDetailFeature {
         
         public init(notice: Notice, isBookmarked: Bool = false) {
             self.notice = notice
-            self.isBookmarked = isBookmarked
+            @Dependency(\.bookmarks) var bookmarks
+            do {
+                self.isBookmarked = try bookmarks().contains(notice)
+            } catch {
+                self.isBookmarked = false
+            }
         }
     }
     
@@ -25,11 +31,22 @@ public struct NoticeDetailFeature {
         }
     }
     
+    @Dependency(\.bookmarks) var bookmarks
+    
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
             case .bookmarkButtonTapped:
-                state.isBookmarked.toggle()
+                do {
+                    if state.isBookmarked {
+                        try bookmarks.remove(state.notice.id)
+                    } else {
+                        try bookmarks.add(state.notice)
+                    }
+                    state.isBookmarked.toggle()
+                } catch {
+                    print("북마크 업데이트에 실패했습니다: \(error.localizedDescription)")
+                }
                 return .none
                 
             case .delegate:

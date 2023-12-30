@@ -35,7 +35,7 @@ let package = Package(
             name: "NoticeUI",
             dependencies: [
                 "NoticeFeatures", "SearchFeatures", "SubscriptionUI", "DepartmentUI", "SearchUI",
-                "ColorSet",
+                "ColorSet", "Caches",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/UIKit/NoticeUI",
@@ -86,6 +86,7 @@ let package = Package(
             name: "NoticeFeatures",
             dependencies: [
                 "Models",
+                "Caches",
                 "DepartmentFeatures",
                 "SearchFeatures",
                 "SubscriptionFeatures",
