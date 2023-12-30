@@ -63,6 +63,7 @@ public struct LabApp: View {
             .navigationTitle("🧪 쿠링 실험실")
         } destination: { store in
             switch store.state {
+            /// - Important: 테스트를 위한 케이스 이므로 삭제하지 말 것
             case .betaA:
                 if let store = store.scope(state: \.betaA, action: \.betaA) {
                     BetaADetailView(store: store)

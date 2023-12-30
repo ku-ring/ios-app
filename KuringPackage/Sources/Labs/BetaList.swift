@@ -8,19 +8,12 @@ public struct BetaListFeature {
     }
     
     public enum Action: Equatable {
-        case delegate(Delegate)
         
-        public enum Delegate: Equatable {
-            case showBetaA
-        }
     }
     
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
-            switch action {
-            case .delegate:
-                return .none
-            }
+            return .none
         }
     }
     

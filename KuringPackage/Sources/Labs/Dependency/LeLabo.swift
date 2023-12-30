@@ -17,6 +17,10 @@ extension LeLabo {
 
 extension LeLabo: DependencyKey {
     public static var liveValue = LeLabo.default
+    
+    public static var testValue = LeLabo(
+        isBetaAEnabled: false
+    )
 }
 
 extension DependencyValues {
