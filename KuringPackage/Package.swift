@@ -19,6 +19,10 @@ let package = Package(
                 "SettingsUI",
             ]
         ),
+        .library(
+            name: "Labs",
+            targets: ["Labs"]
+        )
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", branch: "observation-beta"),
@@ -70,6 +74,7 @@ let package = Package(
             dependencies: [
                 "SettingsFeatures", "SubscriptionFeatures", "SubscriptionUI",
                 "Caches",
+                "Labs",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/UIKit/SettingsUI",
@@ -132,9 +137,18 @@ let package = Package(
                 "Models",
                 "Caches",
                 "SubscriptionFeatures",
+                "Labs",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Features/SettingsFeatures"
+        ),
+        
+        // MARK: - Labs
+        .target(
+            name: "Labs",
+            dependencies: [
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ]
         ),
         
         // MARK: - Shared
@@ -190,6 +204,13 @@ let package = Package(
             name: "BookmarkFeaturesTests",
             dependencies: [
                 "BookmarkFeatures", "Caches", "Models",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+            ]
+        ),
+        .testTarget(
+            name: "LabsTests",
+            dependencies: [
+                "Labs",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]
         ),

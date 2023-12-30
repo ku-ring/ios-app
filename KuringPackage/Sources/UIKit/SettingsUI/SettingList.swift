@@ -78,6 +78,11 @@ public struct SettingList: View {
                     Text("사용된 오픈소스")
                 }
                 
+                Button {
+                    store.send(.delegate(.showLabs))
+                } label: {
+                    Text("쿠링 실험실")
+                }
             } header: {
                 Text("정보")
             }

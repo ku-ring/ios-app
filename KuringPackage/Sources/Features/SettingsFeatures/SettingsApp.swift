@@ -1,3 +1,4 @@
+import Labs
 import SubscriptionFeatures
 import ComposableArchitecture
 
@@ -59,6 +60,10 @@ public struct SettingsAppFeature {
                     state.destination = .informationWeb(
                         InformationWebFeature.State(url: URLLink.team.rawValue)
                     )
+                    return .none
+                    
+                case .showLabs:
+                    state.destination = .labs(LabAppFeature.State())
                     return .none
                     
                 case .showPrivacyPolicy:
