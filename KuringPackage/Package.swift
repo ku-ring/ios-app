@@ -190,7 +190,7 @@ let package = Package(
         .testTarget(
             name: "NoticeFeaturesTests",
             dependencies: [
-                "NoticeFeatures", "SearchFeatures", "Models",
+                "NoticeFeatures", "SearchFeatures", "Models", "Caches",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]
         ),
