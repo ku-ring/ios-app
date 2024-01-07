@@ -1,5 +1,7 @@
+import Caches
 import Models
 import SwiftUI
+import ComposableArchitecture
 
 public struct NoticeRow: View {
     var rowType: NoticeRowType
@@ -8,13 +10,19 @@ public struct NoticeRow: View {
     public init(notice: Notice) {
         self.notice = notice
         
-        var bookmarkedNotices = [Notice]()
-        let isBookmark: Bool = bookmarkedNotices.contains(notice)
+        var isBookmarked: Bool
+        @Dependency(\.bookmarks) var bookmarks
+        do {
+            let bookmarkedNotices = try bookmarks()
+            isBookmarked = bookmarkedNotices.contains(self.notice)
+        } catch {
+            isBookmarked = false
+        }
         if notice.important {
-            if isBookmark { self.rowType = .importantAndBookmark }
+            if isBookmarked { self.rowType = .importantAndBookmark }
             else { self.rowType = .important }
         } else {
-            if isBookmark { self.rowType = .bookmark }
+            if isBookmarked { self.rowType = .bookmark }
             else { self.rowType = .none }
         }
     }

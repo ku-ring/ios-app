@@ -1,3 +1,4 @@
+import Caches
 import Models
 import KuringLink
 import DepartmentFeatures
@@ -92,6 +93,7 @@ public struct NoticeListFeature {
         case fetchNotices
     }
     
+    @Dependency(\.bookmarks) public var bookmarks
     @Dependency(\.kuringLink) public var kuringLink
     
     public var body: some ReducerOf<Self> {
@@ -178,7 +180,12 @@ public struct NoticeListFeature {
                 return .none
             
             case let .bookmarkTapped(notice):
-                print("공지#\(notice.articleId)을 북마크 했습니다.")
+                do {
+                    print("공지#\(notice.articleId)을 북마크 했습니다.")
+                    try bookmarks.add(notice)
+                } catch {
+                    print("북마크 하는 중에 에러가 발생했습니다: \(error.localizedDescription)")
+                }
                 return .none
                 
             case let .loadingChanged(isLoading):
@@ -193,7 +200,7 @@ public struct NoticeListFeature {
                 return .none
             }
         }
-        .ifLet(\.$changeDepartment, action: /Action.changeDepartment) {
+        .ifLet(\.$changeDepartment, action: \.changeDepartment) {
             DepartmentSelectorFeature()
         }
     }
