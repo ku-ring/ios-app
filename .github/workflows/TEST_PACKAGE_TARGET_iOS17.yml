@@ -3,14 +3,12 @@ name: 쿠링 패키지 iOS17에서 테스트하기
 on:
   issue_comment:
     types: [created, edited]
-  pull_request_review_comment:
-    types: [created, edited]
 
 # TODO: 각 스킴 비동기로 실행하도록 하기
 
 jobs:
   build:
-    if: contains(github.event.comment.body, '/쿠링') && contains(github.event.comment.body, '패키지 테스트')
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/쿠링') && contains(github.event.comment.body, '패키지 테스트')
     runs-on: macos-13  #최신버전
     steps:
       # 테스트 요청 시작
@@ -31,9 +29,11 @@ jobs:
               body: '🔨 iOS 17 iPhone 15 Pro 에서 쿠링 패키지를 테스트 합니다.'
             })
 
-      # 코드를 체크아웃 합니다.
+      # 코드를 PR 브랜치 HEAD로 체크아웃 합니다.
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ github.event.issue.number }}/head
     
       # Xcode 버전을 설정합니다.
       - name: Setup Xcode version
