@@ -9,16 +9,18 @@ public struct FeedbackView: View {
     
     public var body: some View {
         VStack(spacing: 4) {
-            Image("feedback", bundle: Bundle.settings)
-                .resizable()
-                .frame(width: 120, height: 120)
-                .clipped()
-                .padding(.top, 56)
+            if !isFocused {
+                Image("feedback", bundle: Bundle.settings)
+                    .resizable()
+                    .frame(width: 120, height: 120)
+                    .clipped()
+                    .padding(.top, 56)
                 
-            Text("피드백을 보내주시면\n앱 성장에 많은 도움이 됩니다.😇")
-                .lineLimit(2)
-                .multilineTextAlignment(.center)
-                .padding(.bottom, 23)
+                Text("피드백을 보내주시면\n앱 성장에 많은 도움이 됩니다.😇")
+                    .lineLimit(2)
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 23)
+            }
             
             VStack {
                 TextEditor(text: $store.text)
