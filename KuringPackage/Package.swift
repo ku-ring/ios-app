@@ -75,6 +75,7 @@ let package = Package(
                 "SettingsFeatures", "SubscriptionFeatures", "SubscriptionUI",
                 "Caches",
                 "Labs",
+                "ColorSet",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/UIKit/SettingsUI",

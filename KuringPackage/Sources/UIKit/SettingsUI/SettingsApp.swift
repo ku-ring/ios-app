@@ -59,7 +59,11 @@ public struct SettingsApp: View {
                 action: \.destination.feedback
             )
         ) { store in
-            FeedbackView(store: store)
+            NavigationStack {
+                FeedbackView(store: store)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle("피드백 보내기")
+            }
         }
         .sheet(
             store: self.store.scope(

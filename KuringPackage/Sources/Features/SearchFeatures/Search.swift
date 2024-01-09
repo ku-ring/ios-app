@@ -58,7 +58,7 @@ public struct SearchFeature {
             resultNotices: [Notice]? = nil,
             resultStaffs: [Staff]? = nil, 
             searchInfo: SearchInfo = .init(),
-            focus: Field? = nil
+            focus: Field? = .search
         ) {
             self.staffDetail = staffDetail
             self.recents = recents
