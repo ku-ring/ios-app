@@ -24,8 +24,8 @@ struct NoticeContentView: View {
             store.send(.onAppear) // TODO: error on the preview canvas
         }
         .sheet(
-            store: self.store.scope(
-                state: \.$changeDepartment,
+            item: $store.scope(
+                state: \.changeDepartment,
                 action: \.changeDepartment
             )
         ) { store in

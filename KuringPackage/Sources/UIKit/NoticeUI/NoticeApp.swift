@@ -46,8 +46,8 @@ public struct NoticeApp: View {
                 }
             }
             .sheet(
-                store: self.store.scope(
-                    state: \.$changeSubscription,
+                item: $store.scope(
+                    state: \.changeSubscription,
                     action: \.changeSubscription
                 )
             ) { store in

@@ -195,7 +195,7 @@ public struct SearchFeature {
                 return .none
             }
         }
-        .ifLet(\.$staffDetail, action: /Action.staffDetail) {
+        .ifLet(\.$staffDetail, action: \.staffDetail) {
             StaffDetailFeature()
         }
     }
