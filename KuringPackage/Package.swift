@@ -140,6 +140,7 @@ let package = Package(
                 "Caches",
                 "SubscriptionFeatures",
                 "Labs",
+                "KuringLink",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Features/SettingsFeatures"

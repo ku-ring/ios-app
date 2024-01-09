@@ -17,7 +17,7 @@ extension KuringLink: DependencyKey {
                 )
             return response.data
         },
-        sendFeedback: { text, fcmToken in
+        sendFeedback: { text in
             let response: EmptyResponse = try await satellite
                 .response(
                     for: Path.sendFeedback.path,
@@ -105,7 +105,7 @@ extension KuringLink {
         fetchNotices: { count, type, department, page in
             return [Notice.random]
         },
-        sendFeedback: { text, fcmToken in
+        sendFeedback: { text in
             return true
         },
         searchNotices: { keyword in

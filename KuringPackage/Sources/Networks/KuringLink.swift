@@ -29,11 +29,13 @@ public struct KuringLink {
         let iosVersion = "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
         return iosVersion
     }()
+    // TODO: kuring.set(\.fcmToken, "{FCM.TOKEN}")
+    static var fcmToken: String = ""
     
     // MARK: - Notices
     public var fetchNotices: (NoticeCount, NoticeType, Department?, Page) async throws -> [Notice]
     
-    public var sendFeedback: (String, FCMToken) async throws -> Bool
+    public var sendFeedback: (String) async throws -> Bool
     
     // MARK: - Search
     public var searchNotices: (_ keyword: String) async throws -> [Notice]

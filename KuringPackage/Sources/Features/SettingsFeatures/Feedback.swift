@@ -1,5 +1,6 @@
 import Models
 import Foundation
+import KuringLink
 import ComposableArchitecture
 
 @Reducer
@@ -41,6 +42,7 @@ public struct FeedbackFeature {
     }
     
     @Dependency(\.dismiss) public var dismiss
+    @Dependency(\.kuringLink) public var kuringLink
     
     public var body: some ReducerOf<Self> {
         BindingReducer()
@@ -63,7 +65,8 @@ public struct FeedbackFeature {
             case .sendFeedback:
                 state.isFocused = false
                 state.text = state.placeholder
-                return .run { _ in
+                return .run { [text = state.text] _ in
+                    let _ = try await kuringLink.sendFeedback(text)
                     await dismiss()
                 }
             }
