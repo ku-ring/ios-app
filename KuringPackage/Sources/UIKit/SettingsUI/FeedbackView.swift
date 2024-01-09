@@ -52,7 +52,7 @@ public struct FeedbackView: View {
                             ? Color.accentColor
                             : Color.red // TODO: error color 적용
                         )
-                        .padding(.bottom, 8)
+                        .padding(.trailing, 8)
                 }
             }
             .padding(.horizontal, 16)

@@ -16,7 +16,7 @@ public struct FeedbackFeature {
         public var text: String = ""
         
         /// TextEditor 활성화 여부
-        public var isFocused: Bool = true
+        public var isFocused: Bool = false
         
         /// TextEditor 하단에 보여질 안내문구
         public var guideline: String {
