@@ -4,7 +4,7 @@ import SearchFeatures
 import ComposableArchitecture
 
 public struct StaffDetailView: View {
-    let store: StoreOf<StaffDetailFeature>
+    @Bindable var store: StoreOf<StaffDetailFeature>
     
     public var body: some View {
         List {

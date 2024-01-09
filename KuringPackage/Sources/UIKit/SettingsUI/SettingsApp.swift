@@ -5,7 +5,7 @@ import SettingsFeatures
 import ComposableArchitecture
 
 public struct SettingsApp: View {
-    @Bindable public var store: StoreOf<SettingsAppFeature>
+    @Bindable var store: StoreOf<SettingsAppFeature>
     
     public var body: some View {
         NavigationStack(
@@ -38,32 +38,32 @@ public struct SettingsApp: View {
             }
         }
         .sheet(
-            store: self.store.scope(
-                state: \.$destination.labs,
+            item: $store.scope(
+                state: \.destination?.labs,
                 action: \.destination.labs
             )
         ) { store in
             LabApp(store: store)
         }
         .sheet(
-            store: self.store.scope(
-                state: \.$destination.subscription,
+            item: $store.scope(
+                state: \.destination?.subscription,
                 action: \.destination.subscription
             )
         ) { store in
             SubscriptionApp(store: store)
         }
         .sheet(
-            store: self.store.scope(
-                state: \.$destination.feedback,
+            item: $store.scope(
+                state: \.destination?.feedback,
                 action: \.destination.feedback
             )
         ) { store in
             FeedbackView(store: store)
         }
         .sheet(
-            store: self.store.scope(
-                state: \.$destination.informationWeb,
+            item: $store.scope(
+                state: \.destination?.informationWeb,
                 action: \.destination.informationWeb
             )
         ) { store in

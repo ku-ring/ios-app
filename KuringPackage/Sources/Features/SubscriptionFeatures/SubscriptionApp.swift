@@ -51,6 +51,9 @@ public struct SubscriptionAppFeature {
         .forEach(\.path, action: \.path) {
             Path()
         }
+        .onChange(of: \.path.first?.departmentEditor?.myDepartments) { _, _ in
+            EmptyReducer()
+        }
     }
     
     public init() {

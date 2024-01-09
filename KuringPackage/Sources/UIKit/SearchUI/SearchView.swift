@@ -180,8 +180,8 @@ public struct SearchView: View {
         .padding(.horizontal, 20)
         .bind($store.focus, to: self.$focus)
         .sheet(
-            store: self.store.scope(
-                state: \.$staffDetail,
+            item: $store.scope(
+                state: \.staffDetail,
                 action: \.staffDetail
             )
         ) { store in

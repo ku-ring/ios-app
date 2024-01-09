@@ -35,6 +35,6 @@ struct DepartmentSelectorLink: View {
         department: .init(name: "산업디자인학과", hostPrefix: "kuid", korName: "산업디자인학과", category: .학과),
         isLoading: .constant(false)
     ) {
-        // 액션 정의. 예) `viewStore.send(.changeDepartmentButtonTapped)`
+        // 액션 정의. 예) `store.send(.changeDepartmentButtonTapped)`
     }
 }
