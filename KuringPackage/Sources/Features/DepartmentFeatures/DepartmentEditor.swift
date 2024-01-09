@@ -30,7 +30,7 @@ public struct DepartmentEditorFeature {
             myDepartments: IdentifiedArrayOf<NoticeProvider> = [],
             results: IdentifiedArrayOf<NoticeProvider> = [],
             searchText: String = "",
-            focus: Field? = nil,
+            focus: Field? = .search,
             displayOption: Display = .myDepartment,
             alert: AlertState<Action.Alert>? = nil
         ) {
