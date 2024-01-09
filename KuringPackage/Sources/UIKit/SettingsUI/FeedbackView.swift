@@ -26,7 +26,7 @@ public struct FeedbackView: View {
                 TextEditor(text: $store.text)
                     .foregroundStyle(
                         store.text == store.placeholder
-                        ? Color.caption1
+                        ? Color.caption1.opacity(0.6)
                         : .primary
                     )
                     .focused($isFocused)
@@ -36,7 +36,7 @@ public struct FeedbackView: View {
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(
                                 store.text == store.placeholder
-                                ? Color.caption1
+                                ? Color.caption1.opacity(0.6)
                                 : Color.accentColor,
                                 lineWidth: 1
                             )
