@@ -29,7 +29,9 @@ jobs:
 
       # 코드를 체크아웃 합니다.
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ github.event.issue.number }}/head
     
       # Xcode 버전을 설정합니다.
       - name: Setup Xcode version
