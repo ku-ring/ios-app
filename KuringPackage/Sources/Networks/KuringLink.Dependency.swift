@@ -62,7 +62,7 @@ extension KuringLink: DependencyKey {
                 )
             return response.data.staffList
         },
-        subscribeUnivNotices: { typeNames, fcmToken in
+        subscribeUnivNotices: { typeNames in
             let response: EmptyResponse = try await satellite
                 .response(
                     for: Path.subscribeUnivNotices.path,
@@ -76,7 +76,7 @@ extension KuringLink: DependencyKey {
             let isSucceed = (200..<300) ~= response.code
             return isSucceed
         },
-        subscribeDepartments: { hostPrefixes, fcmToken in
+        subscribeDepartments: { hostPrefixes in
             let response: EmptyResponse = try await satellite
                 .response(
                     for: Path.subscribeDepartments.path,
@@ -114,10 +114,10 @@ extension KuringLink {
         searchStaffs: { keyword in
             return [Staff.random()]
         },
-        subscribeUnivNotices: { typeNames, fcmToken in
+        subscribeUnivNotices: { typeNames in
             return true
         },
-        subscribeDepartments: { hostPrefixes, fcmToken in
+        subscribeDepartments: { hostPrefixes in
             return true
         }
     )

@@ -30,7 +30,7 @@ public struct KuringLink {
         return iosVersion
     }()
     // TODO: kuring.set(\.fcmToken, "{FCM.TOKEN}")
-    static var fcmToken: String = ""
+    static var fcmToken: String = "cZSHjO4_bUjirvsrxWzig5:APA91bHPojABL5oEXi5AcjJ8v4Vcp3KpJfFUD_3b-HhfV8m23_R6czJa3PwqcVqBZSHBb2t7Z3odUeD0cFKaMSkMmrGxTqyjJPfEZVfTPvmewV-xiMTWbrk-QKuc4Nrxd_BhEArO7Svo"
     
     // MARK: - Notices
     public var fetchNotices: (NoticeCount, NoticeType, Department?, Page) async throws -> [Notice]
@@ -42,7 +42,7 @@ public struct KuringLink {
     
     public var searchStaffs: (_ keyword: String) async throws -> [Staff]
     
-    public var subscribeUnivNotices: ([NoticeTypeName], FCMToken) async throws -> Bool
+    public var subscribeUnivNotices: ([NoticeTypeName]) async throws -> Bool
     
-    public var subscribeDepartments: ([DepartmentHostPrefix], FCMToken) async throws -> Bool
+    public var subscribeDepartments: ([DepartmentHostPrefix]) async throws -> Bool
 }

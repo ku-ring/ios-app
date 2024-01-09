@@ -83,12 +83,10 @@ public struct SubscriptionFeature {
             case .confirmButtonTapped:
                 state.isWaitingResponse = true
                 return .run { [state] send in
-                    // TODO: 제거
-                    let fcmToken = "cZSHjO4_bUjirvsrxWzig5:APA91bHPojABL5oEXi5AcjJ8v4Vcp3KpJfFUD_3b-HhfV8m23_R6czJa3PwqcVqBZSHBb2t7Z3odUeD0cFKaMSkMmrGxTqyjJPfEZVfTPvmewV-xiMTWbrk-QKuc4Nrxd_BhEArO7Svo"
                     let typeNames = state.selectedUnivNoticeType.compactMap { $0.name }
                     let hostPrefixes = state.selectedDepartment.compactMap { $0.hostPrefix }
-                    async let univSubscription = kuringLink.subscribeUnivNotices(typeNames, fcmToken)
-                    async let deptSubscription = kuringLink.subscribeDepartments(hostPrefixes, fcmToken)
+                    async let univSubscription = kuringLink.subscribeUnivNotices(typeNames)
+                    async let deptSubscription = kuringLink.subscribeDepartments(hostPrefixes)
                     
                     do {
                         let results = try await [univSubscription, deptSubscription]

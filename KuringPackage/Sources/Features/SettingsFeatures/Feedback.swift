@@ -64,9 +64,12 @@ public struct FeedbackFeature {
                 
             case .sendFeedback:
                 state.isFocused = false
-                state.text = state.placeholder
                 return .run { [text = state.text] _ in
-                    let _ = try await kuringLink.sendFeedback(text)
+                    do {
+                        let _ = try await kuringLink.sendFeedback(text)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                     await dismiss()
                 }
             }
