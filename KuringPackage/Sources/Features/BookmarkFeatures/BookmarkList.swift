@@ -11,7 +11,9 @@ public struct BookmarkListFeature: Reducer {
     public struct State: Equatable {
         public var bookmarkedNotices: IdentifiedArrayOf<Notice> = []
         
-        public var selectedIDs: [Notice.ID] = []
+        /// 편집시 선택한 북마크 ID
+        /// - Note: 순서는 중요하지 않고 중복제거만 중요하므로 `Set` 사용
+        public var selectedIDs: Set<Notice.ID> = []
         
         public var editMode: EditMode = .none
         
@@ -34,6 +36,8 @@ public struct BookmarkListFeature: Reducer {
         case bookmarksUpdate([Notice])
         /// 편집 버튼 눌렀을 때
         case editButtonTapped
+        /// 전체 선택 버튼 눌렀을 때
+        case selectAllButtonTapped
         /// 삭제 버튼 눌렀을 때
         case deleteButtonTapped
     }
@@ -66,6 +70,10 @@ public struct BookmarkListFeature: Reducer {
                 
             case .editButtonTapped:
                 state.editMode = .editing(deletable: false)
+                return .none
+                
+            case .selectAllButtonTapped:
+                state.selectedIDs = Set(state.bookmarkedNotices.ids)
                 return .none
                 
             case .deleteButtonTapped:

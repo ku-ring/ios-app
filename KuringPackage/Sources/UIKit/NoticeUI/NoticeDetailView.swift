@@ -3,10 +3,10 @@ import SwiftUI
 import NoticeFeatures
 import ComposableArchitecture
 
-struct NoticeDetailView: View {
+public struct NoticeDetailView: View {
     @Bindable var store: StoreOf<NoticeDetailFeature>
     
-    var body: some View {
+    public var body: some View {
         List {
             Section {
                 Text(self.store.notice.articleId)
@@ -62,6 +62,10 @@ struct NoticeDetailView: View {
                 }
             }
         }
+    }
+    
+    public init(store: StoreOf<NoticeDetailFeature>) {
+        self.store = store
     }
 }
 
