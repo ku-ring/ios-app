@@ -5,11 +5,11 @@ import ComposableArchitecture
 
 public struct FeedbackView: View {
     @Bindable var store: StoreOf<FeedbackFeature>
-    @FocusState var isFocused: Bool
+    @FocusState private var isFocused: Bool
     
     public var body: some View {
-        VStack(spacing: 4) {
-            if !isFocused {
+        VStack(spacing: 0) {
+            if !store.isTopHidden {
                 Image("feedback", bundle: Bundle.settings)
                     .resizable()
                     .frame(width: 120, height: 120)
@@ -19,7 +19,6 @@ public struct FeedbackView: View {
                 Text("피드백을 보내주시면\n앱 성장에 많은 도움이 됩니다.😇")
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
-                    .padding(.bottom, 23)
             }
             
             VStack {
@@ -57,8 +56,11 @@ public struct FeedbackView: View {
             }
             .padding(.horizontal, 16)
             .padding(.bottom, 24)
+            .padding(.top, store.isTopHidden ? 32 : 27)
             
-            Spacer()
+            if !store.isTopHidden {
+                Spacer()
+            }
             
             Button {
                 guard store.isSendable else { return }
@@ -77,8 +79,18 @@ public struct FeedbackView: View {
             .allowsHitTesting(store.isSendable)
             .padding(.horizontal, 20)
             .padding(.bottom)
+            .padding(.top, 24)
+            
+            if store.isTopHidden {
+                Spacer()
+            }
         }
         .bind($store.isFocused, to: $isFocused)
+        .onChange(of: isFocused) { oldValue, newValue in
+            withAnimation {
+                store.isTopHidden = newValue
+            }
+        }
     }
     
     public init(store: StoreOf<FeedbackFeature>) {
