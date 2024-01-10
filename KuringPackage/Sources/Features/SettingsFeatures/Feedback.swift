@@ -18,6 +18,10 @@ public struct FeedbackFeature {
         /// TextEditor 활성화 여부
         public var isFocused: Bool = false
         
+        /// 상단 텍스트, 아이콘 보여주는 여부.
+        /// - Important: `isFocused` 값과 항상 동일하며 뷰의 `.withAnimation` 에서 업데이트
+        public var isTopHidden: Bool = false
+        
         /// TextEditor 하단에 보여질 안내문구
         public var guideline: String {
             isSendable
