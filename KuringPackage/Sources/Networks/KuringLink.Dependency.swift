@@ -90,7 +90,7 @@ extension KuringLink: DependencyKey {
             let isSucceed = (200..<300) ~= response.code
             return isSucceed
         }
-        )
+    )
 }
 
 extension DependencyValues {

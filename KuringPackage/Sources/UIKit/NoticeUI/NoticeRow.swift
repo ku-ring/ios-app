@@ -7,7 +7,7 @@ public struct NoticeRow: View {
     var rowType: NoticeRowType
     let notice: Notice
     
-    public init(notice: Notice) {
+    public init(notice: Notice, rowType: NoticeRowType? = nil) {
         self.notice = notice
         
         var isBookmarked: Bool
@@ -18,6 +18,12 @@ public struct NoticeRow: View {
         } catch {
             isBookmarked = false
         }
+        
+        if let rowType {
+            self.rowType = rowType
+            return
+        }
+        
         if notice.important {
             if isBookmarked { self.rowType = .importantAndBookmark }
             else { self.rowType = .important }

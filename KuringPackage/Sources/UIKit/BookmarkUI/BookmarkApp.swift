@@ -3,7 +3,7 @@ import NoticeUI
 import BookmarkFeatures
 import ComposableArchitecture
 
-struct BookmarkApp: View {
+public struct BookmarkApp: View {
     @Bindable var store: StoreOf<BookmarkAppFeature>
     
     public var body: some View {
@@ -36,9 +36,7 @@ struct BookmarkApp: View {
     BookmarkApp(
         store: Store(
             initialState: BookmarkAppFeature.State(
-                bookmarkList: BookmarkListFeature.State(
-                    bookmarkedNotices: [.random]
-                )
+                bookmarkList: BookmarkListFeature.State()
             ),
             reducer: { BookmarkAppFeature() }
         )

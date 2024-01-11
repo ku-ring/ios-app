@@ -7,8 +7,10 @@
 
 import SwiftUI
 import NoticeUI
+import BookmarkUI
 import SettingsUI
 import NoticeFeatures
+import BookmarkFeatures
 import SettingsFeatures
 import ComposableArchitecture
 
@@ -27,6 +29,20 @@ struct ContentView: View {
                 Image(systemName: "list.dash")
                 
                 Text("공지사항")
+            }
+            
+            BookmarkApp(
+                store: Store(
+                    initialState: BookmarkAppFeature.State(
+                        bookmarkList: BookmarkListFeature.State()
+                    ),
+                    reducer: { BookmarkAppFeature() }
+                )
+            )
+            .tabItem {
+                Image(systemName: "archivebox")
+                
+                Text("공지보관함")
             }
             
             SettingsApp(

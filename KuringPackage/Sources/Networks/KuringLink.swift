@@ -42,6 +42,7 @@ public struct KuringLink {
     
     public var searchStaffs: (_ keyword: String) async throws -> [Staff]
     
+    // MARK: - Subscriptions
     public var subscribeUnivNotices: ([NoticeTypeName]) async throws -> Bool
     
     public var subscribeDepartments: ([DepartmentHostPrefix]) async throws -> Bool
