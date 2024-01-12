@@ -14,7 +14,8 @@ jobs:
       - name: 커밋 체크
         run: |
           TARGET_FILES=("KuringPackage/Sources/Networks/Resources/KuringLink-info.plist")
-          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
+          SPECIFIC_COMMIT="34576698dc5c6b3d72792e473469489c9ea20dfa"
+          CHANGED_FILES=$(git diff --name-only $SPECIFIC_COMMIT HEAD)
           
           MODIFIED_TARGET_FILES=()
           for TARGET_FILE in "${TARGET_FILES[@]}"; do
