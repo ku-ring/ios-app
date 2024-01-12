@@ -12,7 +12,7 @@ final class BookmarkListTests: XCTestCase {
     }
     
     /// 북마크 리스트 가져오기
-    func test_onTask() async throws {
+    func test_onAppear() async throws {
         let store = TestStore(
             initialState: BookmarkListFeature.State(),
             reducer: { BookmarkListFeature() },
@@ -22,9 +22,7 @@ final class BookmarkListTests: XCTestCase {
         )
         let notice = Notice.random
         
-        await store.send(.onTask)
-        
-        await store.receive(.bookmarksUpdate([notice])) {
+        await store.send(.onAppear) {
             $0.bookmarkedNotices = IdentifiedArray(uniqueElements: [notice])
         }
     }
@@ -48,7 +46,7 @@ final class BookmarkListTests: XCTestCase {
     /// 삭제 가능 상태인지 체크
     func test_editButtonTappedAndSelectedIDsUpdated() async throws {
         let store = TestStore(
-            initialState: BookmarkListFeature.State(bookmarkedNotices: [Notice.random]),
+            initialState: BookmarkListFeature.State(),
             reducer: { BookmarkListFeature() },
             withDependencies: {
                 $0.bookmarks = Bookmarks.default
@@ -71,7 +69,7 @@ final class BookmarkListTests: XCTestCase {
     /// 편집모드 업데이트 되는지 확인
     func test_editButtonTappedAndDeleteButtonTapped() async throws {
         let store = TestStore(
-            initialState: BookmarkListFeature.State(bookmarkedNotices: [Notice.random]),
+            initialState: BookmarkListFeature.State(),
             reducer: { BookmarkListFeature() },
             withDependencies: {
                 $0.bookmarks = Bookmarks.default
@@ -91,10 +89,7 @@ final class BookmarkListTests: XCTestCase {
         
         await store.send(.deleteButtonTapped) {
             $0.bookmarkedNotices = []
-        }
-        
-        await store.receive(.binding(.set(\.selectedIDs, []))) {
-            $0.editMode = .editing(deletable: false)
+            $0.editMode = .none
         }
     }
 }
