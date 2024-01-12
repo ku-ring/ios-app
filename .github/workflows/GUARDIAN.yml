@@ -1,0 +1,32 @@
+name: 커밋 검증
+
+on:
+  pull_request:
+    branches:
+      - 'develop/**'
+
+jobs:
+  guard-modifications:
+    name: 위험한 수정이 있는지 확인
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 커밋 체크
+        run: |
+          TARGET_FILES=("KuringPackage/Sources/Networks/Resources/KuringLink-info.plist")
+          ORIGIN_COMMIT=$(git rev-list base)
+          CHANGED_FILES=$(git diff --name-only $FIRST_COMMIT HEAD)
+          
+          MODIFIED_TARGET_FILES=()
+          for TARGET_FILE in "${TARGET_FILES[@]}"; do
+            if [[ $CHANGED_FILES == *"$TARGET_FILE"* ]]; then
+              MODIFIED_TARGET_FILES+=("$TARGET_FILE")
+            fi
+          done
+
+          if [ ${#MODIFIED_TARGET_FILES[@]} -gt 0 ]; then
+            for MODIFIED_FILE in "${MODIFIED_TARGET_FILES[@]}"; do
+              echo "::error:: $MODIFIED_FILE 에서 올바르지 않은 수정이 발견되었습니다."
+            done
+            exit 1
+          fi
