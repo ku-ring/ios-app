@@ -14,7 +14,7 @@ jobs:
       - name: 커밋 체크
         run: |
           TARGET_FILES=("KuringPackage/Sources/Networks/Resources/KuringLink-info.plist")
-          ORIGIN_COMMIT=$(git rev-list base)
+          ORIGIN_COMMIT=$(git rev-list --max-parents=0 HEAD)
           CHANGED_FILES=$(git diff --name-only $FIRST_COMMIT HEAD)
           
           MODIFIED_TARGET_FILES=()
