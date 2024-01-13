@@ -17,10 +17,9 @@ jobs:
       - name: 커밋 체크
         run: |
           TARGET_FILES=("KuringPackage/Sources/Networks/Resources/KuringLink-info.plist")
-          ORIGIN_COMMIT=$(git rev-list HEAD^)
-          CHANGED_FILES=$(git diff --name-only $ORIGIN_COMMIT HEAD)
+          CHANGED_FILES=$(git diff --name-only HEAD^)
           
-          echo "$ORIGIN_COMMIT"
+          echo "$CHANGED_FILES"
           
           MODIFIED_TARGET_FILES=()
           for TARGET_FILE in "${TARGET_FILES[@]}"; do
