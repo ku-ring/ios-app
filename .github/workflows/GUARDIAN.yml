@@ -11,11 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
       - name: 커밋 체크
         run: |
           TARGET_FILES=("KuringPackage/Sources/Networks/Resources/KuringLink-info.plist")
-          SPECIFIC_COMMIT="34576698dc5c6b3d72792e473469489c9ea20dfa"
-          CHANGED_FILES=$(git diff --name-only $SPECIFIC_COMMIT HEAD)
+          ORIGIN_COMMIT=$(git rev-list HEAD^)
+          CHANGED_FILES=$(git diff --name-only $ORIGIN_COMMIT HEAD)
+          
+          echo "$ORIGIN_COMMIT"
           
           MODIFIED_TARGET_FILES=()
           for TARGET_FILE in "${TARGET_FILES[@]}"; do
