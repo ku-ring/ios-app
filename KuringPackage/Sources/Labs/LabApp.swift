@@ -68,6 +68,10 @@ public struct LabApp: View {
                 if let store = store.scope(state: \.betaA, action: \.betaA) {
                     BetaADetailView(store: store)
                 }
+            case .appIcon:
+                if let store = store.scope(state: \.appIcon, action: \.appIcon) {
+                    AppIconDetailView(store: store)
+                }
             }
         }
 

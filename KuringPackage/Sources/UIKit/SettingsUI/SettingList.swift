@@ -5,6 +5,7 @@ import ComposableArchitecture
 
 public struct SettingList: View {
     @Bindable public var store: StoreOf<SettingListFeature>
+    @Dependency(\.leLabo) var leLabo
     
     public var body: some View {
         List {
@@ -65,6 +66,8 @@ public struct SettingList: View {
                 }
             } header: {
                 Text("정보")
+            } footer: {
+                Text("Designed by 이소영, 김예은.\nDeveloped by 이재성, 이건우, 박성수.\nManaged by 조병관, 채수빈")
             }
             .tint(.black)
             
@@ -88,8 +91,6 @@ public struct SettingList: View {
                         Text(store.state.currentAppIcon?.korValue ?? KuringIcon.kuring_app.korValue)
                     }
                 }
-                
-                
             } header: {
                 Text("쿠링 실험실")
             }

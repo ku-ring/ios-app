@@ -9,7 +9,9 @@ public struct LeLabo {
     public typealias NewValue = Bool
     
     public enum Experiment: String, Equatable {
+        // 기능 추가
         case betaA = "beta-a"
+        case appIcon = "appicon"
         
         var key: String {
             let baseKey = "com.kuring.service.lelabo.experiments"
