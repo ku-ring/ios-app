@@ -5,6 +5,7 @@ import ComposableArchitecture
 
 public struct SettingList: View {
     @Bindable public var store: StoreOf<SettingListFeature>
+    @Dependency(\.leLabo) var leLabo
     
     public var body: some View {
         List {
@@ -30,20 +31,6 @@ public struct SettingList: View {
             .tint(.black)
             
             Section {
-                NavigationLink(
-                    state: SettingsAppFeature.Path.State.appIconSelector(
-                        AppIconSelectorFeature.State()
-                    )
-                ) {
-                    HStack {
-                        Text("앱 아이콘 바꾸기")
-                        
-                        Spacer()
-                        
-                        Text(store.state.currentAppIcon?.korValue ?? KuringIcon.kuring_app.korValue)
-                    }
-                }
-                
                 HStack {
                     Text("앱 버전")
                     
@@ -77,16 +64,36 @@ public struct SettingList: View {
                 ) {
                     Text("사용된 오픈소스")
                 }
-                
+            } header: {
+                Text("정보")
+            } footer: {
+                Text("Designed by 이소영, 김예은.\nDeveloped by 이재성, 이건우, 박성수.\nManaged by 조병관, 채수빈")
+            }
+            .tint(.black)
+            
+            Section {
                 Button {
                     store.send(.delegate(.showLabs))
                 } label: {
-                    Text("쿠링 실험실")
+                    Label("쿠링 실험실", systemImage: "flask")
+                }
+                
+                NavigationLink(
+                    state: SettingsAppFeature.Path.State.appIconSelector(
+                        AppIconSelectorFeature.State()
+                    )
+                ) {
+                    HStack {
+                        Text("앱 아이콘 바꾸기")
+                        
+                        Spacer()
+                        
+                        Text(store.state.currentAppIcon?.korValue ?? KuringIcon.kuring_app.korValue)
+                    }
                 }
             } header: {
-                Text("정보")
+                Text("쿠링 실험실")
             }
-            .tint(.black)
             
             Section {
                 Button {
@@ -113,6 +120,7 @@ public struct SettingList: View {
             .tint(.black)
         }
         .navigationTitle("더보기")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     public init(store: StoreOf<SettingListFeature>) {

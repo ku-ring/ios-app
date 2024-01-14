@@ -34,6 +34,14 @@ public struct ExperimentList: View {
             ) {
                 Text("베타 A")
             }
+            
+            NavigationLink(
+                state: LabAppFeature.Path.State.appIcon(
+                    AppIconDetailFeature.State()
+                )
+            ) {
+                Text("앱 아이콘 변경하기")
+            }
         }
     }
     
