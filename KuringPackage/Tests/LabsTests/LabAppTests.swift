@@ -1,10 +1,10 @@
-import XCTest
+import Testing
 import ComposableArchitecture
 @testable import Labs
 
 @MainActor
-final class LabAppTests: XCTestCase {
-    func test_selectBetaA() async throws {
+struct LabAppTests {
+    @Test func selectBetaA() async throws {
         let leLabo = LeLabo.testValue
         let store = TestStore(
             initialState: LabAppFeature.State(),
@@ -30,7 +30,7 @@ final class LabAppTests: XCTestCase {
         withDependencies {
             $0.leLabo = leLabo
         } operation: {
-            XCTAssertEqual(leLabo.status(.betaA), true)
+            #expect(leLabo.status(.betaA))
         }
     }
 }

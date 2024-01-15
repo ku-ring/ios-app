@@ -28,7 +28,8 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", branch: "observation-beta"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.1.5"),
-        .package(url: "https://github.com/ku-ring/the-satellite", branch: "main")
+        .package(url: "https://github.com/ku-ring/the-satellite", branch: "main"),
+        .package(url: "https://github.com/apple/swift-testing", branch: "main") // Swift 5.9 이하는 테스팅 라이브러리를 지원하지 않습니다; 왜 테스팅 패키지 스위프트 버전은 5.9?
     ],
     targets: [
         // MARK: App Library Dependencies
@@ -225,6 +226,7 @@ let package = Package(
             dependencies: [
                 "Labs",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "Testing", package: "swift-testing")
             ]
         ),
     ]
