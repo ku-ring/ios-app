@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Labs
 import SubscriptionFeatures
 import ComposableArchitecture
@@ -12,14 +17,14 @@ extension SettingsAppFeature {
             case subscription(SubscriptionAppFeature.State)
             case informationWeb(InformationWebFeature.State)
         }
-        
+
         public enum Action: Equatable {
             case labs(LabAppFeature.Action)
             case feedback(FeedbackFeature.Action)
             case subscription(SubscriptionAppFeature.Action)
             case informationWeb(InformationWebFeature.Action)
         }
-        
+
         public var body: some ReducerOf<Self> {
             Scope(state: \.labs, action: \.labs) {
                 LabAppFeature()
@@ -34,7 +39,7 @@ extension SettingsAppFeature {
                 InformationWebFeature()
             }
         }
-        
+
         public init() { }
     }
 }

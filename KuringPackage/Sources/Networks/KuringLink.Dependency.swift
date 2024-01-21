@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Models
 import ComposableArchitecture
 
@@ -12,7 +17,7 @@ extension KuringLink: DependencyKey {
                         .init(name: "type", value: type),
                         .init(name: "department", value: department),
                         .init(name: "page", value: String(page)),
-                        .init(name: "size", value: String(count))
+                        .init(name: "size", value: String(count)),
                     ]
                 )
             return response.data
@@ -25,11 +30,11 @@ extension KuringLink: DependencyKey {
                     httpHeaders: [
                         "Content-Type": "application/json",
                         "User-Token": fcmToken,
-                        "User-Agent": "Kuring/\(appVersion) iOS/\(iosVersion)"
+                        "User-Agent": "Kuring/\(appVersion) iOS/\(iosVersion)",
                     ],
                     httpBody: Feedback(content: text)
                 )
-            let isSucceed = (200..<300) ~= response.code
+            let isSucceed = (200 ..< 300) ~= response.code
             return isSucceed
         },
         searchNotices: { keyword in
@@ -42,7 +47,7 @@ extension KuringLink: DependencyKey {
                     for: Path.searchNotices.path,
                     httpMethod: .get,
                     queryItems: [
-                        .init(name: "content", value: keyword)
+                        .init(name: "content", value: keyword),
                     ]
                 )
             return response.data.noticeList.compactMap { $0.asNotice }
@@ -57,7 +62,7 @@ extension KuringLink: DependencyKey {
                     for: Path.searchStaffs.path,
                     httpMethod: .get,
                     queryItems: [
-                        .init(name: "content", value: keyword)
+                        .init(name: "content", value: keyword),
                     ]
                 )
             return response.data.staffList
@@ -69,11 +74,11 @@ extension KuringLink: DependencyKey {
                     httpMethod: .post,
                     httpHeaders: [
                         "Content-Type": "application/json",
-                        "User-Token": fcmToken
+                        "User-Token": fcmToken,
                     ],
                     httpBody: UnivNoticeSubscription(categories: typeNames)
                 )
-            let isSucceed = (200..<300) ~= response.code
+            let isSucceed = (200 ..< 300) ~= response.code
             return isSucceed
         },
         subscribeDepartments: { hostPrefixes in
@@ -83,11 +88,11 @@ extension KuringLink: DependencyKey {
                     httpMethod: .post,
                     httpHeaders: [
                         "Content-Type": "application/json",
-                        "User-Token": fcmToken
+                        "User-Token": fcmToken,
                     ],
                     httpBody: DepartmentSubscription(departments: hostPrefixes)
                 )
-            let isSucceed = (200..<300) ~= response.code
+            let isSucceed = (200 ..< 300) ~= response.code
             return isSucceed
         }
     )
@@ -101,24 +106,24 @@ extension DependencyValues {
 }
 
 extension KuringLink {
-    public static let testValue: KuringLink = KuringLink(
-        fetchNotices: { count, type, department, page in
-            return [Notice.random]
+    public static let testValue: KuringLink = .init(
+        fetchNotices: { _, _, _, _ in
+            [Notice.random]
         },
-        sendFeedback: { text in
-            return true
+        sendFeedback: { _ in
+            true
         },
-        searchNotices: { keyword in
-            return [Notice.random]
+        searchNotices: { _ in
+            [Notice.random]
         },
-        searchStaffs: { keyword in
-            return [Staff.random()]
+        searchStaffs: { _ in
+            [Staff.random()]
         },
-        subscribeUnivNotices: { typeNames in
-            return true
+        subscribeUnivNotices: { _ in
+            true
         },
-        subscribeDepartments: { hostPrefixes in
-            return true
+        subscribeDepartments: { _ in
+            true
         }
     )
 }

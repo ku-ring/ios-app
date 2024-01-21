@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Foundation
 
 public struct Notice: Codable, Hashable, Identifiable, Equatable {
@@ -49,7 +54,7 @@ public struct SearchedNotice: Codable, Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(baseUrl)
     }
-    
+
     public var asNotice: Notice {
         Notice(
             articleId: articleId,

@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import SwiftUI
 import NoticeUI
 import BookmarkFeatures
@@ -5,7 +10,7 @@ import ComposableArchitecture
 
 public struct BookmarkApp: View {
     @Bindable var store: StoreOf<BookmarkAppFeature>
-    
+
     public var body: some View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
             BookmarkList(
@@ -16,7 +21,7 @@ public struct BookmarkApp: View {
             )
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("보관함")
-            
+
         } destination: { store in
             switch store.state {
             case .detail:
@@ -26,7 +31,7 @@ public struct BookmarkApp: View {
             }
         }
     }
-    
+
     public init(store: StoreOf<BookmarkAppFeature>) {
         self.store = store
     }

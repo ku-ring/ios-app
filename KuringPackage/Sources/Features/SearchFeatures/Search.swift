@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Models
 import KuringLink
 import ComposableArchitecture
@@ -7,25 +12,25 @@ public struct SearchFeature {
     @ObservableState
     public struct State: Equatable {
         @Presents public var staffDetail: StaffDetailFeature.State?
-        
+
         public var recents: [String] = []
-        
+
         public var resultNotices: [Notice]? = nil
         public var resultStaffs: [Staff]? = nil
-        
-        public var searchInfo: SearchInfo = SearchInfo()
+
+        public var searchInfo: SearchInfo = .init()
         public var focus: Field? = .search
-        
+
         public struct SearchInfo: Equatable {
             public var text: String = ""
             public var searchType: SearchType = .notice
             public var searchPhase: SearchPhase = .before
-            
+
             public enum SearchType: String {
                 case notice
                 case staff
             }
-            
+
             public enum SearchPhase {
                 /// 검색 시작 전 (API 요청 전 상태)
                 case before
@@ -36,7 +41,7 @@ public struct SearchFeature {
                 /// 검색 실패
                 case failure
             }
-            
+
             public init(
                 text: String = "",
                 searchType: SearchType = .notice,
@@ -47,16 +52,16 @@ public struct SearchFeature {
                 self.searchPhase = searchPhase
             }
         }
-        
+
         public enum Field {
             case search
         }
-        
+
         public init(
             staffDetail: StaffDetailFeature.State? = nil,
             recents: [String] = [],
             resultNotices: [Notice]? = nil,
-            resultStaffs: [Staff]? = nil, 
+            resultStaffs: [Staff]? = nil,
             searchInfo: SearchInfo = .init(),
             focus: Field? = .search
         ) {
@@ -68,7 +73,7 @@ public struct SearchFeature {
             self.focus = focus
         }
     }
-    
+
     public enum Action: BindableAction {
         /// 트리 네비게이션 - ``StaffDetailFeature`` 액션
         case staffDetail(PresentationAction<StaffDetailFeature.Action>)
@@ -86,30 +91,30 @@ public struct SearchFeature {
         case recentSearchKeywordTapped(String)
         /// ``StaffRow`` 선택
         case staffRowSelected(Staff)
-        
+
         case binding(BindingAction<State>)
-        
+
         public enum SearchResult {
             case notices([Notice])
             case staffs([Staff])
         }
     }
-    
+
     public enum SearchError: Error {
         case notice(Error)
         case staff(Error)
     }
-    
+
     @Dependency(\.kuringLink) var kuringLink
-    
+
     public var body: some ReducerOf<Self> {
         BindingReducer()
-        
+
         Reduce { state, action in
             switch action {
             case .binding:
                 return .none
-                
+
             case let .selectSearchType(searchType):
                 switch searchType {
                 case .notice:
@@ -118,25 +123,25 @@ public struct SearchFeature {
                     state.searchInfo = SearchFeature.State.SearchInfo(searchType: .staff)
                 }
                 return .none
-                
+
             case .deleteAllRecentsButtonTapped:
                 state.recents.removeAll()
                 return .none
-                
+
             case .clearKeywordButtonTapped:
                 state.searchInfo.text = ""
                 return .none
-            
+
             case .search:
                 guard !state.searchInfo.text.isEmpty else { return .none }
-                
+
                 state.focus = nil
-                
+
                 // 최근 검색어 추가
                 if !state.recents.contains(state.searchInfo.text) { // 중복체크
                     state.recents.append(state.searchInfo.text)
                 }
-                
+
                 state.searchInfo.searchPhase = .searching
                 switch state.searchInfo.searchType {
                 case .notice:
@@ -154,43 +159,43 @@ public struct SearchFeature {
                         await send(.searchResponse(.failure(SearchError.staff(error))))
                     }
                 }
-                
+
             case let .recentSearchKeywordTapped(keyword):
                 state.searchInfo.text = keyword
                 return .send(.search)
-                
+
             case let .searchResponse(.success(results)):
                 switch results {
                 case let .notices(values):
                     state.resultNotices = values
-                    
+
                 case let .staffs(values):
                     state.resultStaffs = values
                 }
                 state.searchInfo.searchPhase = .complete
                 return .none
-                
+
             case let .searchResponse(.failure(searchError)):
                 switch searchError {
                 case let .notice(error):
                     print(error.localizedDescription)
                     state.resultNotices = nil
-                    
+
                 case let .staff(error):
                     print(error.localizedDescription)
                     state.resultStaffs = nil
                 }
                 state.searchInfo.searchPhase = .failure
                 return .none
-                
+
             case let .staffRowSelected(staff):
                 state.staffDetail = StaffDetailFeature.State(staff: staff)
                 return .none
-                
+
             case .staffDetail(.dismiss):
                 state.staffDetail = nil
                 return .none
-                
+
             case .staffDetail:
                 return .none
             }
@@ -199,7 +204,6 @@ public struct SearchFeature {
             StaffDetailFeature()
         }
     }
-    
+
     public init() { }
 }
-

@@ -1,10 +1,15 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import SwiftUI
 import SettingsFeatures
 import ComposableArchitecture
 
 public struct AppIconSelector: View {
     @Bindable var store: StoreOf<AppIconSelectorFeature>
-    
+
     public var body: some View {
         List(store.appIcons) { icon in
             HStack {
@@ -16,17 +21,17 @@ public struct AppIconSelector: View {
                         .shadow(radius: 0.5)
                 }
                 .padding(.trailing)
-                
+
                 Button {
                     store.send(.appIconSelected(icon))
                 } label: {
                     Text(icon.korValue)
                         .foregroundStyle(.black)
                 }
-                
+
                 if icon == store.state.selectedIcon {
                     Spacer()
-                    
+
                     Image(systemName: "checkmark.circle.fill")
                         .font(.title3)
                         .foregroundStyle(.tint)
@@ -44,7 +49,7 @@ public struct AppIconSelector: View {
             }
         }
     }
-    
+
     public init(store: StoreOf<AppIconSelectorFeature>) {
         self.store = store
     }

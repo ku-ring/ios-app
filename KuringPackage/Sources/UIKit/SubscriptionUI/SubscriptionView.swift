@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import SwiftUI
 import DepartmentFeatures
 import SubscriptionFeatures
@@ -5,7 +10,7 @@ import ComposableArchitecture
 
 struct SubscriptionView: View {
     @Bindable var store: StoreOf<SubscriptionFeature>
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -15,7 +20,7 @@ struct SubscriptionView: View {
             }
             .padding(.top, 32)
             .padding(.bottom, 60)
-            
+
             // TODO: 디자인 시스템 분리 - 칩 (Search 랑 합쳐서 KuringPicker) 같은거 있으면 좋을 것 같아요.
             /// 일반 / 학과 카테고리 세그먼트
             LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 2)) {
@@ -27,7 +32,7 @@ struct SubscriptionView: View {
                         isSelected: store.subscriptionType == .university
                     )
                 }
-                
+
                 Button {
                     store.send(.segmentSelected(.department))
                 } label: {
@@ -38,7 +43,7 @@ struct SubscriptionView: View {
                 }
             }
             .padding(.bottom, 33)
-            
+
             // TODO: TCA 하위 도메인으로 분리 + 뷰 분리
             /// 카테고리 목록
             switch store.subscriptionType {
@@ -48,7 +53,7 @@ struct SubscriptionView: View {
                     LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3)) {
                         ForEach(store.univNoticeTypes) { univNoticeType in
                             let isSelected = store.selectedUnivNoticeType.contains(univNoticeType)
-                            
+
                             ZStack {
                                 RoundedRectangle(cornerRadius: 8)
                                     .inset(by: 1)
@@ -58,19 +63,19 @@ struct SubscriptionView: View {
                                     )
                                     .fill(
                                         isSelected
-                                        ? Color.accentColor.opacity(0.1)
-                                        : Color.black.opacity(0.03)
+                                            ? Color.accentColor.opacity(0.1)
+                                            : Color.black.opacity(0.03)
                                     )
-                                
+
                                 VStack {
                                     Image(univNoticeType.name, bundle: Bundle.subscriptions)
-                                    
+
                                     Text(univNoticeType.korName)
                                         .font(.system(size: 16, weight: .semibold))
                                         .foregroundStyle(
                                             isSelected
-                                            ? Color.accentColor
-                                            : Color(red: 0.32, green: 0.32, blue: 0.32)
+                                                ? Color.accentColor
+                                                : Color(red: 0.32, green: 0.32, blue: 0.32)
                                         )
                                 }
                                 .padding()
@@ -78,29 +83,28 @@ struct SubscriptionView: View {
                             .onTapGesture {
                                 store.send(.univNoticeTypeSelected(univNoticeType))
                             }
-                            
                         }
                     }
                     Spacer()
                 }
-                
+
             case .department:
                 /// 빈 페이지 (내 학과 목록이 없을 때)
                 if store.myDepartments.isEmpty {
                     VStack(alignment: .center) {
                         Spacer()
-                        
+
                         HStack {
                             Spacer()
-                            
+
                             Text("아직 추가된 학과가 없어요.\n관심 학과를 추가하고 공지를 확인해 보세요!")
                                 .font(.system(size: 16, weight: .medium))
                                 .multilineTextAlignment(.center)
                                 .foregroundStyle(Color(red: 0.68, green: 0.69, blue: 0.71))
-                            
+
                             Spacer()
                         }
-                        
+
                         Spacer()
                     }
                 } else {
@@ -109,15 +113,15 @@ struct SubscriptionView: View {
                         ScrollView(showsIndicators: false) {
                             ForEach(store.myDepartments) { department in
                                 let isSelected = store.selectedDepartment.contains(department)
-                                
+
                                 VStack(spacing: 0) {
                                     HStack {
                                         Text(department.korName)
                                             .font(.system(size: 16, weight: .semibold))
                                             .foregroundStyle(.black)
-                                        
+
                                         Spacer()
-                                        
+
                                         Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
                                             .foregroundStyle(isSelected ? Color.accentColor : Color.black.opacity(0.1))
                                             .frame(width: 20, height: 20)
@@ -129,7 +133,7 @@ struct SubscriptionView: View {
                                     .onTapGesture {
                                         store.send(.departmentSelected(department))
                                     }
-                                    
+
                                     // 밑줄
                                     if store.myDepartments.last != department {
                                         Rectangle()
@@ -147,7 +151,7 @@ struct SubscriptionView: View {
                         }
                     }
                 }
-                
+
                 // TODO: 디자인 시스템 분리 - 상단에 블러가 존재하는 버튼
                 /// 학과 추가/편집하기 버튼 - `DepartmentEditor` 로 이동
                 NavigationLink(
@@ -160,11 +164,11 @@ struct SubscriptionView: View {
                 ) {
                     HStack(alignment: .center, spacing: 10) {
                         Spacer()
-                        
+
                         Text(store.myDepartments.isEmpty ? "학과 추가하기" : "학과 편집하기")
                             .font(.system(size: 16, weight: .semibold))
                             .foregroundStyle(Color.white)
-                        
+
                         Spacer()
                     }
                     .padding(.horizontal, 50)
@@ -181,8 +185,6 @@ struct SubscriptionView: View {
                     }
                 }
             }
-            
-            
         }
         .padding(.horizontal, 20)
         // TODO: TCA에 따라 외부에서 구현

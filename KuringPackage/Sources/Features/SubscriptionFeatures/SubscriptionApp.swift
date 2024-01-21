@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Models
 import SwiftUI
 import ComposableArchitecture
@@ -10,7 +15,7 @@ public struct SubscriptionAppFeature {
         public var path = StackState<Path.State>()
         /// Root
         public var subscriptionView = SubscriptionFeature.State()
-        
+
         public init(
             path: StackState<SubscriptionAppFeature.Path.State> = .init(),
             root: SubscriptionFeature.State = .init()
@@ -19,19 +24,19 @@ public struct SubscriptionAppFeature {
             self.subscriptionView = root
         }
     }
-    
+
     public enum Action: Equatable {
         /// 스택 기반 네비게이션 Path
         case path(StackAction<Path.State, Path.Action>)
         /// Root
         case subscriptionView(SubscriptionFeature.Action)
     }
-    
+
     public var body: some ReducerOf<Self> {
         Scope(state: \.subscriptionView, action: \.subscriptionView) {
             SubscriptionFeature()
         }
-        
+
         Reduce { state, action in
             switch action {
             case let .path(.popFrom(id: id)):
@@ -40,10 +45,10 @@ public struct SubscriptionAppFeature {
                 }
                 state.subscriptionView.myDepartments = departmentEditorState.myDepartments
                 return .none
-                
+
             case .path:
                 return .none
-                
+
             case .subscriptionView:
                 return .none
             }
@@ -55,8 +60,6 @@ public struct SubscriptionAppFeature {
             EmptyReducer()
         }
     }
-    
-    public init() {
-        
-    }
+
+    public init() { }
 }

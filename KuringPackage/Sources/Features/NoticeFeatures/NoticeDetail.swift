@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Caches
 import Models
 import SwiftUI
@@ -9,7 +14,7 @@ public struct NoticeDetailFeature {
     public struct State: Equatable {
         public var notice: Notice
         public var isBookmarked: Bool = false
-        
+
         public init(notice: Notice, isBookmarked: Bool = false) {
             self.notice = notice
             @Dependency(\.bookmarks) var bookmarks
@@ -20,19 +25,19 @@ public struct NoticeDetailFeature {
             }
         }
     }
-    
+
     public enum Action: Equatable {
         case bookmarkButtonTapped
-        
+
         case delegate(Delegate)
-        
+
         public enum Delegate: Equatable {
             case bookmarkUpdated(Bool)
         }
     }
-    
+
     @Dependency(\.bookmarks) var bookmarks
-    
+
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
@@ -48,17 +53,17 @@ public struct NoticeDetailFeature {
                     print("북마크 업데이트에 실패했습니다: \(error.localizedDescription)")
                 }
                 return .none
-                
+
             case .delegate:
                 return .none
             }
         }
-        .onChange(of: \.isBookmarked) { oldValue, newValue in
-            Reduce { state, action in
-                return .send(.delegate(.bookmarkUpdated(newValue)))
+        .onChange(of: \.isBookmarked) { _, newValue in
+            Reduce { _, _ in
+                .send(.delegate(.bookmarkUpdated(newValue)))
             }
         }
     }
-    
+
     public init() { }
 }

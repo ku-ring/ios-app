@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import XCTest
 import ComposableArchitecture
 @testable import Models
@@ -19,7 +24,7 @@ class SubscriptionAppTests: XCTestCase {
             korName: "체육교육과",
             category: .학과
         )
-        
+
         let store = TestStore(
             initialState: SubscriptionAppFeature.State(
                 root: SubscriptionFeature.State(myDepartments: [컴퓨터공학부])
@@ -33,7 +38,7 @@ class SubscriptionAppTests: XCTestCase {
         await store.send(.path(.push(id: 0, state: departmentEditorState))) {
             $0.path[id: 0] = departmentEditorState
         }
-        
+
         await store.send(
             .path(
                 .element(
@@ -48,13 +53,13 @@ class SubscriptionAppTests: XCTestCase {
                 ButtonState(role: .cancel) {
                     TextState("취소하기")
                 }
-                
+
                 ButtonState(role: .destructive, action: .confirmDelete(id: 컴퓨터공학부.id)) {
                     TextState("삭제하기")
                 }
             }
         }
-        
+
         await store.send(
             .path(
                 .element(
@@ -66,7 +71,7 @@ class SubscriptionAppTests: XCTestCase {
             $0.path[id: 0, case: /SubscriptionAppFeature.Path.State.departmentEditor]?.alert = nil
             $0.path[id: 0, case: /SubscriptionAppFeature.Path.State.departmentEditor]?.myDepartments = []
         }
-        
+
         await store.send(
             .path(
                 .element(

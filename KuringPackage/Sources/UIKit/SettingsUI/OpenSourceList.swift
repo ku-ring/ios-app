@@ -1,10 +1,15 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import SwiftUI
 import SettingsFeatures
 import ComposableArchitecture
 
 public struct OpenSourceList: View {
     @Bindable public var store: StoreOf<OpenSourceListFeature>
-    
+
     public var body: some View {
         List(store.opensources) { opensource in
             VStack(alignment: .leading) {
@@ -12,7 +17,7 @@ public struct OpenSourceList: View {
                     .font(.title3)
                     .fontWeight(.bold)
                     .padding(.bottom)
-                
+
                 Button {
                     store.send(.linkTapped(opensource.link))
                 } label: {
@@ -22,7 +27,7 @@ public struct OpenSourceList: View {
             }
         }
     }
-    
+
     public init(store: StoreOf<OpenSourceListFeature>) {
         self.store = store
     }
@@ -36,4 +41,3 @@ public struct OpenSourceList: View {
         )
     )
 }
-

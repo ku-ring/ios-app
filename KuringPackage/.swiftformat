@@ -1,0 +1,17 @@
+--header "\nCopyright (c) {year} 쿠링\nSee the 'License.txt' file for licensing information.\n"
+
+--self init-only 
+--semicolons never 
+--extensionacl on-declarations
+--importgrouping length
+
+--xcodeindentation enabled
+
+--guardelse same-line
+--stripunusedargs closure-only
+--emptybraces spaced
+--wrapternary before-operators
+
+--disable redundantRawValues
+--disable redundantFileprivate
+--disable redundantClosure

@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import XCTest
 import Models
 import Caches
@@ -17,8 +22,7 @@ final class NoticeDetailTests: XCTestCase {
         await store.send(.bookmarkButtonTapped) {
             $0.isBookmarked = !isNoticeBookmarked
         }
-        
+
         await store.receive(.delegate(.bookmarkUpdated(!isNoticeBookmarked)))
     }
-
 }

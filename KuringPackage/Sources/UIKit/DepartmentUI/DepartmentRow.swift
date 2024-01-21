@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Models
 import SwiftUI
 import ColorSet
@@ -7,18 +12,18 @@ struct DepartmentRow: View {
     let department: NoticeProvider
     let style: ButtonStyle
     let action: () -> Void
-    
+
     enum ButtonStyle {
         case delete
         case radio(Bool)
     }
-    
+
     var body: some View {
         HStack(alignment: .center) {
             Text(department.korName)
-            
+
             Spacer()
-            
+
             switch style {
             case .delete:
                 Button(action: action) {
@@ -29,13 +34,13 @@ struct DepartmentRow: View {
                 Button(action: action) {
                     Image(
                         systemName: isSelected
-                        ? "checkmark.circle.fill"
-                        : "plus.circle"
+                            ? "checkmark.circle.fill"
+                            : "plus.circle"
                     )
                     .foregroundStyle(
                         isSelected
-                        ? Color.accentColor
-                        : Color.black.opacity(0.1)
+                            ? Color.accentColor
+                            : Color.black.opacity(0.1)
                     )
                 }
             }
@@ -48,9 +53,9 @@ struct DepartmentRow: View {
 #Preview {
     Group {
         DepartmentRow(department: .국제, style: .delete) { }
-    
+
         DepartmentRow(department: .국제, style: .radio(true)) { }
-        
+
         DepartmentRow(department: .국제, style: .radio(false)) { }
     }
 }

@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Models
 import SwiftUI
 
@@ -5,15 +10,15 @@ struct DepartmentSelectorLink: View {
     let department: NoticeProvider
     @Binding var isLoading: Bool
     let action: () -> Void
-    
+
     var body: some View {
         HStack {
             Text(department.korName)
                 .font(.system(size: 18, weight: .semibold))
                 .foregroundStyle(Color.black.opacity(0.8))
-            
+
             Spacer()
-            
+
             if isLoading {
                 ProgressView()
             } else {

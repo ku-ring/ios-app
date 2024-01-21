@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Foundation
 
 public struct Staff: Codable, Hashable, Equatable {
@@ -11,6 +16,7 @@ public struct Staff: Codable, Hashable, Equatable {
 }
 
 // MARK: 테스트용
+
 extension Staff {
     public static func random(
         name: String = "박능수 (Neungsoo Park)",

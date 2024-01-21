@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Models
 import SwiftUI
 import DepartmentFeatures
@@ -5,7 +10,7 @@ import ComposableArchitecture
 
 public struct DepartmentSelector: View {
     @Bindable var store: StoreOf<DepartmentSelectorFeature>
-    
+
     public var body: some View {
         VStack {
             HStack(alignment: .center, spacing: 10) {
@@ -17,25 +22,25 @@ public struct DepartmentSelector: View {
             .padding(.top, 24)
             .padding(.bottom, 12)
             .frame(width: 375, alignment: .leading)
-            
+
             ScrollView {
                 ForEach(store.addedDepartment) { department in
                     HStack {
                         Text(department.korName)
                             .font(.system(size: 16, weight: .medium))
                             .foregroundStyle(.black)
-                        
+
                         Spacer()
-                        
+
                         Image(
                             systemName: department == store.currentDepartment
-                            ? "checkmark.circle.fill"
-                            : "circle"
+                                ? "checkmark.circle.fill"
+                                : "circle"
                         )
                         .foregroundStyle(
                             department == store.currentDepartment
-                            ? Color.accentColor
-                            : Color.black.opacity(0.1)
+                                ? Color.accentColor
+                                : Color.black.opacity(0.1)
                         )
                         .frame(width: 20, height: 20)
                     }
@@ -47,7 +52,7 @@ public struct DepartmentSelector: View {
                     }
                 }
             }
-            
+
             Button {
                 store.send(.editDepartmentsButtonTapped)
             } label: {
@@ -60,7 +65,7 @@ public struct DepartmentSelector: View {
             .padding(.horizontal, 20)
         }
     }
-    
+
     // TODO: 디자인 시스템 분리 - 상단에 블러가 존재하는 버튼
     @ViewBuilder
     private func topBlurButton(_ title: String, fontColor: Color, backgroundColor: Color) -> some View {
@@ -81,7 +86,7 @@ public struct DepartmentSelector: View {
                 .offset(x: 0, y: -32)
         }
     }
-    
+
     public init(store: StoreOf<DepartmentSelectorFeature>) {
         self.store = store
     }
