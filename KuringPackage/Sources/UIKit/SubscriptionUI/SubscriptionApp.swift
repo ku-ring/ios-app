@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import SwiftUI
 import DepartmentUI
 import SubscriptionFeatures
@@ -5,7 +10,7 @@ import ComposableArchitecture
 
 public struct SubscriptionApp: View {
     @Bindable var store: StoreOf<SubscriptionAppFeature>
-    
+
     public var body: some View {
         NavigationStack(
             path: $store.scope(state: \.path, action: \.path)
@@ -29,7 +34,7 @@ public struct SubscriptionApp: View {
             }
         }
     }
-    
+
     public init(store: StoreOf<SubscriptionAppFeature>) {
         self.store = store
     }

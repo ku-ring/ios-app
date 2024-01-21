@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import ComposableArchitecture
 
 @Reducer
@@ -8,7 +13,7 @@ public struct LabAppFeature {
         public var path = StackState<Path.State>()
         /// root
         public var betaList = ExperimentListFeature.State()
-        
+
         public init(
             path: StackState<Path.State> = .init(),
             root: ExperimentListFeature.State = .init()
@@ -17,24 +22,24 @@ public struct LabAppFeature {
             self.betaList = root
         }
     }
-    
+
     public enum Action: Equatable {
         /// root
         case betaList(ExperimentListFeature.Action)
         /// 스택 기반 네비게이션
         case path(StackAction<Path.State, Path.Action>)
     }
-    
+
     public var body: some ReducerOf<Self> {
         Scope(state: \.betaList, action: \.betaList) {
             ExperimentListFeature()
         }
-        
-        Reduce { state, action in
+
+        Reduce { _, action in
             switch action {
             case .betaList:
                 return .none
-                
+
             case .path:
                 return .none
             }
@@ -43,7 +48,7 @@ public struct LabAppFeature {
             Path()
         }
     }
-    
+
     public init() { }
 }
 
@@ -51,7 +56,7 @@ import SwiftUI
 
 public struct LabApp: View {
     @Bindable public var store: StoreOf<LabAppFeature>
-    
+
     public var body: some View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
             ExperimentList(
@@ -74,9 +79,8 @@ public struct LabApp: View {
                 }
             }
         }
-
     }
-    
+
     public init(store: StoreOf<LabAppFeature>) {
         self.store = store
     }

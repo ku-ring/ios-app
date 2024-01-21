@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Caches
 import Foundation
 import ComposableArchitecture
@@ -17,22 +22,22 @@ public struct SettingListFeature {
         // TODO: 나중에 디펜던시로
         public var currentAppIcon: KuringIcon?
         public var isCustomAlarmOn: Bool = false
-        
+
         public init(
             isCustomAlarmOn: Bool = true,
             appIcon: KuringIcon? = nil
         ) {
             self.isCustomAlarmOn = isCustomAlarmOn
-            
+
             @Dependency(\.appIcons) var appIcons
             self.currentAppIcon = appIcon ?? appIcons.currentAppIcon
         }
     }
-    
+
     public enum Action: Equatable, BindableAction {
         case binding(BindingAction<State>)
         case delegate(Delegate)
-        
+
         public enum Delegate: Equatable {
             case showSubscription
             case showWhatsNew
@@ -44,17 +49,17 @@ public struct SettingListFeature {
             case showFeedback
         }
     }
-    
+
     public var body: some ReducerOf<Self> {
         BindingReducer()
-        
-        Reduce { state, action in
+
+        Reduce { _, action in
             switch action {
             case .binding, .delegate:
                 return .none
             }
         }
     }
-    
+
     public init() { }
 }

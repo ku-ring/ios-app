@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Caches
 import Models
 import SwiftUI
@@ -6,10 +11,10 @@ import ComposableArchitecture
 public struct NoticeRow: View {
     var rowType: NoticeRowType
     let notice: Notice
-    
+
     public init(notice: Notice, rowType: NoticeRowType? = nil) {
         self.notice = notice
-        
+
         var isBookmarked: Bool
         @Dependency(\.bookmarks) var bookmarks
         do {
@@ -18,12 +23,12 @@ public struct NoticeRow: View {
         } catch {
             isBookmarked = false
         }
-        
+
         if let rowType {
             self.rowType = rowType
             return
         }
-        
+
         if notice.important {
             if isBookmarked { self.rowType = .importantAndBookmark }
             else { self.rowType = .important }
@@ -32,7 +37,7 @@ public struct NoticeRow: View {
             else { self.rowType = .none }
         }
     }
-    
+
     public enum NoticeRowType {
         /// 중요이면서 북마크
         case importantAndBookmark
@@ -43,7 +48,7 @@ public struct NoticeRow: View {
         /// 기본
         case none
     }
-    
+
     public var body: some View {
         ZStack {
             switch rowType {
@@ -52,7 +57,7 @@ public struct NoticeRow: View {
             default:
                 Color.clear
             }
-            
+
             switch rowType {
             case .importantAndBookmark:
                 VStack(alignment: .leading, spacing: 4) {
@@ -104,7 +109,7 @@ public struct NoticeRow: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private var importantTagView: some View {
         Text("중요")
@@ -120,14 +125,14 @@ public struct NoticeRow: View {
                     .stroke(Color.accentColor, lineWidth: 0.5)
             )
     }
-    
+
     @ViewBuilder
     private var titleView: some View {
         Text(notice.subject)
             .font(.system(size: 15, weight: .medium))
             .foregroundStyle(Color.caption1)
     }
-    
+
     @ViewBuilder
     private var dateView: some View {
         // TODO: - 정보 재구성
@@ -135,7 +140,7 @@ public struct NoticeRow: View {
             .font(.system(size: 14))
             .foregroundStyle(Color.caption1.opacity(0.6))
     }
-    
+
     @ViewBuilder
     private var bookmarkView: some View {
         // TODO: 디자인 시스템 분리 - 북마크
@@ -144,7 +149,7 @@ public struct NoticeRow: View {
                 .compositingGroup()
                 .foregroundStyle(Color.accentColor)
                 .frame(width: 16, height: 21)
-            
+
             RoundedRectangle(cornerRadius: 2)
                 .rotation(.degrees(45))
                 .frame(width: 16, height: 16)

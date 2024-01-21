@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import XCTest
 import ComposableArchitecture
 @testable import NoticeFeatures
@@ -13,7 +18,7 @@ final class NoticeAppTests: XCTestCase {
             ),
             reducer: { NoticeAppFeature() }
         )
-        
+
         // 푸시 액션: 검색 버튼 눌렀을 때
         await store.send(
             .path(

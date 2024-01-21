@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import SwiftUI
 import NoticeUI
 import NoticeFeatures
@@ -6,7 +11,7 @@ import ComposableArchitecture
 
 public struct BookmarkList: View {
     @Bindable var store: StoreOf<BookmarkListFeature>
-    
+
     public var body: some View {
         ZStack(alignment: .bottom) {
             List {
@@ -15,8 +20,8 @@ public struct BookmarkList: View {
                         NoticeRow(
                             notice: notice,
                             rowType: store.isEditing
-                            ? NoticeRow.NoticeRowType.none
-                            : nil
+                                ? NoticeRow.NoticeRowType.none
+                                : nil
                         )
                         .background {
                             NavigationLink(
@@ -29,7 +34,7 @@ public struct BookmarkList: View {
                             .opacity(0)
                         }
                         .disabled(store.editMode != .none)
-                        
+
                         if store.isEditing {
                             Button {
                                 if store.selectedIDs.contains(notice.id) {
@@ -40,23 +45,22 @@ public struct BookmarkList: View {
                             } label: {
                                 Image(
                                     systemName: store.selectedIDs.contains(notice.id)
-                                    ? "checkmark.circle.fill"
-                                    : "circle"
+                                        ? "checkmark.circle.fill"
+                                        : "circle"
                                 )
                                 .foregroundStyle(
                                     store.selectedIDs.contains(notice.id)
-                                    ? Color.accentColor
-                                    : Color.caption1.opacity(0.15)
+                                        ? Color.accentColor
+                                        : Color.caption1.opacity(0.15)
                                 )
                             }
                         }
                     }
                 }
                 .listRowSeparator(.hidden)
-                
             }
             .listStyle(.plain)
-            
+
             if store.editMode != .none {
                 Button {
                     store.send(.deleteButtonTapped)
@@ -64,11 +68,11 @@ public struct BookmarkList: View {
                     topBlurButton(
                         "삭제하기",
                         fontColor: store.selectedIDs.isEmpty
-                        ? Color.accentColor.opacity(0.4)
-                        : .white,
+                            ? Color.accentColor.opacity(0.4)
+                            : .white,
                         backgroundColor: store.selectedIDs.isEmpty
-                        ? Color.accentColor.opacity(0.15)
-                        : Color.accentColor
+                            ? Color.accentColor.opacity(0.15)
+                            : Color.accentColor
                     )
                 }
                 .padding(.horizontal, 20)
@@ -93,14 +97,14 @@ public struct BookmarkList: View {
                 Button {
                     store.send(
                         store.isEditing
-                        ? .selectAllButtonTapped
-                        : .editButtonTapped
+                            ? .selectAllButtonTapped
+                            : .editButtonTapped
                     )
                 } label: {
                     Text(
                         store.isEditing
-                        ? "전체 선택"
-                        : "편집"
+                            ? "전체 선택"
+                            : "편집"
                     )
                 }
                 .disabled(store.bookmarkedNotices.isEmpty)
@@ -108,7 +112,7 @@ public struct BookmarkList: View {
             }
         }
     }
-    
+
     // TODO: 디자인 시스템 분리 - 상단에 블러가 존재하는 버튼
     @ViewBuilder
     private func topBlurButton(_ title: String, fontColor: Color, backgroundColor: Color) -> some View {
@@ -143,7 +147,7 @@ public struct BookmarkList: View {
         }
         .tabItem {
             Image(systemName: "archivebox")
-            
+
             Text("공지보관함")
         }
     }

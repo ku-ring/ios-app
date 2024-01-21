@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Labs
 import SwiftUI
 import SubscriptionUI
@@ -6,7 +11,7 @@ import ComposableArchitecture
 
 public struct SettingsApp: View {
     @Bindable var store: StoreOf<SettingsAppFeature>
-    
+
     public var body: some View {
         NavigationStack(
             path: $store.scope(state: \.path, action: \.path)
@@ -74,7 +79,7 @@ public struct SettingsApp: View {
             InformationWebView(store: store)
         }
     }
-    
+
     public init(store: StoreOf<SettingsAppFeature>) {
         self.store = store
     }

@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import ComposableArchitecture
 
 @Reducer
@@ -6,17 +11,15 @@ public struct ExperimentListFeature {
     public struct State: Equatable {
         public init() { }
     }
-    
-    public enum Action: Equatable {
-        
-    }
-    
+
+    public enum Action: Equatable { }
+
     public var body: some ReducerOf<Self> {
-        Reduce { state, action in
-            return .none
+        Reduce { _, _ in
+            .none
         }
     }
-    
+
     public init() { }
 }
 
@@ -24,7 +27,7 @@ import SwiftUI
 
 public struct ExperimentList: View {
     @Bindable public var store: StoreOf<ExperimentListFeature>
-    
+
     public var body: some View {
         List {
             NavigationLink(
@@ -34,7 +37,7 @@ public struct ExperimentList: View {
             ) {
                 Text("베타 A")
             }
-            
+
             NavigationLink(
                 state: LabAppFeature.Path.State.appIcon(
                     AppIconDetailFeature.State()
@@ -44,7 +47,7 @@ public struct ExperimentList: View {
             }
         }
     }
-    
+
     public init(store: StoreOf<ExperimentListFeature>) {
         self.store = store
     }

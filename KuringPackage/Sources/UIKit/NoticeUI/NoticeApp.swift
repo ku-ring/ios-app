@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import SwiftUI
 import SearchUI
 import DepartmentUI
@@ -8,7 +13,7 @@ import ComposableArchitecture
 
 public struct NoticeApp: View {
     @Bindable var store: StoreOf<NoticeAppFeature>
-    
+
     public var body: some View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
             NoticeContentView(
@@ -22,9 +27,10 @@ public struct NoticeApp: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Image("appIconLabel", bundle: Bundle.notices)
                 }
-                
+
                 ToolbarItem(placement: .navigationBarTrailing) {
                     // MARK: 검색창 진입
+
                     NavigationLink(
                         state: NoticeAppFeature.Path.State.search(
                             SearchFeature.State()
@@ -34,9 +40,10 @@ public struct NoticeApp: View {
                             .foregroundStyle(Color.black)
                     }
                 }
-                
+
                 ToolbarItem(placement: .navigationBarTrailing) {
                     // MARK: 푸시 알림 선택 진입
+
                     Button {
                         store.send(.changeSubscriptionButtonTapped)
                     } label: {
@@ -74,7 +81,7 @@ public struct NoticeApp: View {
             }
         }
     }
-    
+
     public init(store: StoreOf<NoticeAppFeature>) {
         self.store = store
     }

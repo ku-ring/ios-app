@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Foundation
 import Dependencies
 
@@ -7,18 +12,18 @@ import Dependencies
 /// ```
 public struct LeLabo {
     public typealias NewValue = Bool
-    
+
     public enum Experiment: String, Equatable {
         // 기능 추가
         case betaA = "beta-a"
         case appIcon = "appicon"
-        
+
         var key: String {
             let baseKey = "com.kuring.service.lelabo.experiments"
-            return "\(baseKey).\(self.rawValue)"
+            return "\(baseKey).\(rawValue)"
         }
     }
-    
+
     public var status: (Experiment) -> Bool
     public var set: (NewValue, Experiment) -> Void
 }

@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Models
 import SwiftUI
 import NoticeFeatures
@@ -9,14 +14,14 @@ extension NoticeContentView {
     func NoDepartmentView() -> some View {
         VStack(spacing: 0) {
             Spacer()
-            
+
             Text("아직 추가된 학과가 없어요.\n관심 학과를 추가하고 공지를 확인해 보세요!")
                 .font(.system(size: 15, weight: .medium))
                 .multilineTextAlignment(.center)
                 .foregroundColor(.black.opacity(0.36))
-            
+
             Spacer()
-            
+
             NavigationLink(
                 state: NoticeAppFeature.Path.State.departmentEditor(
                     // TODO: - Mock 데이터 추후 제거
@@ -38,18 +43,18 @@ extension NoticeContentView {
             }
         }
     }
-    
+
     // TODO: 디자인 시스템 분리
     /// 상단에 블러가 존재하는 버튼
     @ViewBuilder
     func OverlayButton(_ title: String) -> some View {
         HStack(alignment: .center, spacing: 10) {
             Spacer()
-            
+
             Text(title)
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundStyle(Color.white)
-            
+
             Spacer()
         }
         .padding(.horizontal, 50)

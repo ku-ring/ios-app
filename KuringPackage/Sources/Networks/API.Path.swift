@@ -1,3 +1,8 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Foundation
 
 enum Path {
@@ -11,7 +16,7 @@ enum Path {
     case searchNotices
     case searchStaffs
     case sendFeedback
-    
+
     var path: String {
         switch self {
         case .subscribeUnivNotices:

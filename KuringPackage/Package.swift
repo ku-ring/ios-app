@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "KuringPackage",
-    platforms: [.iOS(.v17)],
+    platforms: [.iOS(.v17), .macOS(.v14)],
     products: [
         .library(
             name: "App",
@@ -28,7 +28,8 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", branch: "observation-beta"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.1.5"),
-        .package(url: "https://github.com/ku-ring/the-satellite", branch: "main")
+        .package(url: "https://github.com/ku-ring/the-satellite", branch: "main"),
+        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.50.4"),
     ],
     targets: [
         // MARK: App Library Dependencies
