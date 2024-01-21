@@ -84,10 +84,11 @@ https://www.notion.so/kuring/v2-55977b79a8014c2883ad4c89085e1464?pvs=4
 
 ## 코드 관리자
 
-| 건우 | 성수 | 재성 |
+| 프로필 | 깃헙 네임 | 학과 |
 | --- | --- | --- |
-| [lgvv](https://github.com/lgvv) (스마트ICT융합공학과) | [sunshiningsoo](https://github.com/sunshiningsoo) (컴퓨터공학부) | [x_0o0](https://github.com/x-0o0) (전기전자공학부) |
-| ![img](https://github.com/lgvv.png) | ![img](https://github.com/sunshiningsoo.png) | ![img](https://github.com/x-0o0.png) |
+| <img src="https://github.com/x-0o0.png" alt="img" width="60"/> | [x-0o0](https://github.com/x-0o0) | 전기전자공학부 |
+| <img src="https://github.com/lgvv.png" alt="img" width="60"/> | [lgvv](https://github.com/lgvv) | 스마트ICT융합공학과 |
+| <img src="https://github.com/sunshiningsoo.png" alt="img" width="60"/> | [sunshiningsoo](https://github.com/sunshiningsoo) | 컴퓨터공학부 |
 
 ## 문의
 
