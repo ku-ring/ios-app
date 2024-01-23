@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "KuringPackage",
+    name: "package-kuring",
     platforms: [.iOS(.v17), .macOS(.v14)],
     products: [
         .library(

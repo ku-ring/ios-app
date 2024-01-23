@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd ../../KuringPackage
+cd ../../package-kuring
 swift package plugin --allow-writing-to-package-directory swiftformat

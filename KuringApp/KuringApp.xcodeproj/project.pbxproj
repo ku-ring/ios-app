@@ -12,6 +12,8 @@
 		A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA572AB1F04C0064F748 /* Assets.xcassets */; };
 		A9DAFA5B2AB1F04C0064F748 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */; };
 		CAE658662B3992A800CD8A63 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = CAE658652B3992A800CD8A63 /* App */; };
+		CAE94A9A2B5EA3B000F73A7E /* App in Frameworks */ = {isa = PBXBuildFile; productRef = CAE94A992B5EA3B000F73A7E /* App */; };
+		CAE94A9C2B5EA3B000F73A7E /* Labs in Frameworks */ = {isa = PBXBuildFile; productRef = CAE94A9B2B5EA3B000F73A7E /* Labs */; };
 		DF331DAB2AC917E100D0BB08 /* kuring_app.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA72AC917E000D0BB08 /* kuring_app.png */; };
 		DF331DAC2AC917E100D0BB08 /* kuring_app_classic.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */; };
 		DF331DAD2AC917E100D0BB08 /* kuring_app_sketch.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA92AC917E000D0BB08 /* kuring_app_sketch.png */; };
@@ -47,6 +49,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAE94A9A2B5EA3B000F73A7E /* App in Frameworks */,
+				CAE94A9C2B5EA3B000F73A7E /* Labs in Frameworks */,
 				CAE658662B3992A800CD8A63 /* App in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -152,6 +156,8 @@
 			name = KuringApp;
 			packageProductDependencies = (
 				CAE658652B3992A800CD8A63 /* App */,
+				CAE94A992B5EA3B000F73A7E /* App */,
+				CAE94A9B2B5EA3B000F73A7E /* Labs */,
 			);
 			productName = KuringApp;
 			productReference = A9DAFA502AB1F04B0064F748 /* KuringApp.app */;
@@ -204,7 +210,7 @@
 			);
 			mainGroup = A9DAFA472AB1F04B0064F748;
 			packageReferences = (
-				CAE658642B3992A800CD8A63 /* XCLocalSwiftPackageReference "../KuringPackage" */,
+				CAE94A982B5EA3B000F73A7E /* XCLocalSwiftPackageReference "../package-kuring" */,
 			);
 			productRefGroup = A9DAFA512AB1F04B0064F748 /* Products */;
 			projectDirPath = "";
@@ -527,9 +533,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		CAE658642B3992A800CD8A63 /* XCLocalSwiftPackageReference "../KuringPackage" */ = {
+		CAE94A982B5EA3B000F73A7E /* XCLocalSwiftPackageReference "../package-kuring" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../KuringPackage;
+			relativePath = "../package-kuring";
 		};
 /* End XCLocalSwiftPackageReference section */
 
@@ -537,6 +543,14 @@
 		CAE658652B3992A800CD8A63 /* App */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = App;
+		};
+		CAE94A992B5EA3B000F73A7E /* App */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = App;
+		};
+		CAE94A9B2B5EA3B000F73A7E /* Labs */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Labs;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

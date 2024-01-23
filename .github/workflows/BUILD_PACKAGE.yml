@@ -39,10 +39,10 @@ jobs:
         with:
           xcode-version: '15.0'
 
-      # KuringPackage 패키지를 빌드합니다. (최소 버전)
-      - name: KuringPackage 의 App 스킴 빌드
+      # package-kuring 패키지를 빌드합니다. (최소 버전)
+      - name: package-kuring 의 App 스킴 빌드
         run: |
-          cd KuringPackage
+          cd package-kuring
           xcodebuild build -scheme App -destination 'platform=iOS Simulator,OS=latest,name=iPhone 14 Pro' -skipMacroValidation
       
       # 빌드 성공시 커멘트
