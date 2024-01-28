@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CampusUI
 import NoticeUI
 import BookmarkUI
 import SettingsUI
@@ -30,6 +31,13 @@ struct ContentView: View {
                 
                 Text("공지사항")
             }
+            
+            CampusApp()
+                .tabItem {
+                    Image(systemName: "location")
+                    
+                    Text("캠퍼스맵")
+                }
             
             BookmarkApp(
                 store: Store(
