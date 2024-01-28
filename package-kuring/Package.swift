@@ -18,6 +18,7 @@ let package = Package(
                 "SearchUI",
                 "BookmarkUI",
                 "SettingsUI",
+                "CampusUI",
             ]
         ),
         .library(
@@ -29,6 +30,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", branch: "observation-beta"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.1.5"),
         .package(url: "https://github.com/ku-ring/the-satellite", branch: "main"),
+        .package(url: "https://github.com/ku-ring/ios-maps", branch: "main"),
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.50.4"),
     ],
     targets: [
@@ -89,6 +91,14 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/UIKit/SettingsUI",
+            resources: [.process("Resources")]
+        ),
+        .target(
+            name: "CampusUI",
+            dependencies: [
+                .product(name: "KuringMapsUI", package: "ios-maps")
+            ],
+            path: "Sources/UIKit/CampusUI",
             resources: [.process("Resources")]
         ),
         
