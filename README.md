@@ -24,6 +24,7 @@
 | The Satellite | https://github.com/ku-ring/the-satellite | main | iOS API 통신모듈  |
 | Swift Collections | https://github.com/apple/swift-collections | main | OrderedSet |  
 | Composable Architecture | https://github.com/pointfreeco/swift-composable-architecture | observation-beta | TCA 구조를 위한 스위프트 패키지 |
+| SwiftFormat | https://github.com/nicklockwood/SwiftFormat | 0.50.4 | 코드 스타일 관리 |
 
 ## 기여
 
