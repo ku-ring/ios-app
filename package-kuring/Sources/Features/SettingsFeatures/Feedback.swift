@@ -29,7 +29,7 @@ public struct FeedbackFeature {
 
         /// TextEditor 하단에 보여질 안내문구
         public var guideline: String {
-            text.count >= 4
+            text.count >= minLimit
             ? "글자수: \(text.count)/\(maxLimit)"
             : "\(minLimit)글자 이상 입력 해주세요"
         }
