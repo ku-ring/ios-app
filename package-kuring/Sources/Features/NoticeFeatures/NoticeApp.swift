@@ -29,6 +29,13 @@ public struct NoticeAppFeature {
             self.noticeList = noticeList
             self.path = path
             self.changeSubscription = changeSubscription
+            
+            @Dependency(\.bookmarks) var bookmarks
+            do {
+                self.noticeList.bookmarkIDs = Set(try bookmarks().map(\.id))
+            } catch {
+                print("북마크 가져오기를 실패했습니다: \(error.localizedDescription)")
+            }
         }
     }
 
@@ -46,6 +53,8 @@ public struct NoticeAppFeature {
         case changeSubscription(PresentationAction<SubscriptionAppFeature.Action>)
     }
 
+    @Dependency(\.bookmarks) var bookmarks
+    
     public var body: some ReducerOf<Self> {
         Scope(state: \.noticeList, action: \.noticeList) {
             NoticeListFeature()
@@ -53,7 +62,22 @@ public struct NoticeAppFeature {
 
         Reduce { state, action in
             switch action {
-            case .path:
+            case let .path(.element(id: id, action: .detail(.bookmarkButtonTapped))):
+                guard case let .detail(detailState) = state.path[id: id] else {
+                    return .none
+                }
+                let noticeID = detailState.notice.id
+                do {
+                    if detailState.isBookmarked {
+                        state.noticeList.bookmarkIDs.insert(noticeID)
+                        try bookmarks.add(detailState.notice)
+                    } else {
+                        state.noticeList.bookmarkIDs.remove(noticeID)
+                        try bookmarks.remove(noticeID)
+                    }
+                } catch {
+                    print("북마크 업데이트에 실패했습니다: \(error.localizedDescription)")
+                }
                 return .none
 
             case let .noticeList(.delegate(delegate)):
@@ -81,7 +105,7 @@ public struct NoticeAppFeature {
                 state.changeSubscription = SubscriptionAppFeature.State()
                 return .none
 
-            case .noticeList, .changeSubscription:
+            case .path, .noticeList, .changeSubscription:
                 return .none
             }
         }

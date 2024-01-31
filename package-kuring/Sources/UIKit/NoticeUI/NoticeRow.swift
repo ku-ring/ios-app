@@ -12,17 +12,8 @@ public struct NoticeRow: View {
     var rowType: NoticeRowType
     let notice: Notice
 
-    public init(notice: Notice, rowType: NoticeRowType? = nil) {
+    public init(notice: Notice, bookmarked: Bool = false, rowType: NoticeRowType? = nil) {
         self.notice = notice
-
-        var isBookmarked: Bool
-        @Dependency(\.bookmarks) var bookmarks
-        do {
-            let bookmarkedNotices = try bookmarks()
-            isBookmarked = bookmarkedNotices.contains(self.notice)
-        } catch {
-            isBookmarked = false
-        }
 
         if let rowType {
             self.rowType = rowType
@@ -30,10 +21,10 @@ public struct NoticeRow: View {
         }
 
         if notice.important {
-            if isBookmarked { self.rowType = .importantAndBookmark }
+            if bookmarked { self.rowType = .importantAndBookmark }
             else { self.rowType = .important }
         } else {
-            if isBookmarked { self.rowType = .bookmark }
+            if bookmarked { self.rowType = .bookmark }
             else { self.rowType = .none }
         }
     }

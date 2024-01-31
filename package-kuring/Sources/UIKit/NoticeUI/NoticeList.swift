@@ -16,29 +16,37 @@ struct NoticeList: View {
             List(self.store.currentNotices, id: \.id) { notice in
                 NavigationLink(
                     state: NoticeAppFeature.Path.State.detail(
-                        NoticeDetailFeature.State(notice: notice)
+                        NoticeDetailFeature.State(
+                            notice: notice,
+                            isBookmarked: self.store.bookmarkIDs.contains(notice.id)
+                        )
                     )
                 ) {
-                    NoticeRow(notice: notice)
-                        .listRowInsets(EdgeInsets())
-                        .onAppear {
-                            let type = self.store.provider
-                            let noticeInfo = self.store.noticeDictionary[type]
-
-                            /// 마지막 공지가 보이면 update
-                            if noticeInfo?.notices.last == notice {
-                                self.store.send(.fetchNotices)
-                            }
+                    NoticeRow(
+                        notice: notice,
+                        bookmarked: self.store.bookmarkIDs.contains(notice.id)
+                    )
+                    .listRowInsets(EdgeInsets())
+                    .onAppear {
+                        let type = self.store.provider
+                        let noticeInfo = self.store.noticeDictionary[type]
+                        
+                        /// 마지막 공지가 보이면 update
+                        if noticeInfo?.notices.last == notice {
+                            self.store.send(.fetchNotices)
                         }
-                        .swipeActions(edge: .leading) {
-                            Button {
-                                self.store.send(.bookmarkTapped(notice))
-                            } label: {
-                                Image(systemName: "bookmark.slash")
-                                // Image(systemName: isBookmark ? "bookmark.slash" : "bookmark")
-                            }
-                            .tint(Color.accentColor)
+                    }
+                    .swipeActions(edge: .leading) {
+                        Button {
+                            self.store.send(.bookmarkTapped(notice))
+                        } label: {
+                             Image(systemName: self.store.bookmarkIDs.contains(notice.id)
+                                   ? "bookmark.slash"
+                                   : "bookmark"
+                             )
                         }
+                        .tint(Color.accentColor)
+                    }
                 }
             }
             .listStyle(.plain)
