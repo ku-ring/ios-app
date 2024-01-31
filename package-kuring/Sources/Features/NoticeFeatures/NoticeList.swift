@@ -65,7 +65,7 @@ public struct NoticeListFeature {
         }
     }
 
-    public enum Action: BindableAction {
+    public enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
 
         /// `onAppear` 이 호출된 경우
@@ -84,7 +84,7 @@ public struct NoticeListFeature {
         case fetchNotices
 
         /// 네트워크 요청에 대한 응답을 받은 경우
-        case noticesResponse(TaskResult<(NoticeProvider, [Notice])>)
+        case noticesResponse(TaskResult<NoticesResult>)
 
         /// 북마크 버튼을 탭한 경우
         /// - Parameter notice: 북마크 액션 대상인 공지
@@ -95,9 +95,14 @@ public struct NoticeListFeature {
         case providerChanged(NoticeProvider)
 
         /// ``NoticeAppFeature`` 에 전달 될 액션 종류
-        public enum Delegate {
+        public enum Delegate: Equatable {
             /// 학과 편집 버튼을 선택한 경우
             case editDepartment
+        }
+        
+        public struct NoticesResult: Equatable {
+            let provider: NoticeProvider
+            let notices: [Notice]
         }
     }
 
@@ -164,14 +169,19 @@ public struct NoticeListFeature {
                                     department,
                                     retrievalInfo.page
                                 )
-                                return (provider, notices)
+                                return Action.NoticesResult(
+                                    provider: provider,
+                                    notices: notices
+                                )
                             }
                         )
                     )
                 }
                 .cancellable(id: CancelID.fetchNotices, cancelInFlight: true)
 
-            case let .noticesResponse(.success((noticeType, notices))):
+            case let .noticesResponse(.success(noticesResult)):
+                let noticeType = noticesResult.provider
+                let notices = noticesResult.notices
                 if state.noticeDictionary[noticeType] == nil {
                     state.noticeDictionary[noticeType] = State.NoticeInfo()
                 }

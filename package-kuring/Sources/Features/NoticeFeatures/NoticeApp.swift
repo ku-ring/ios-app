@@ -39,7 +39,7 @@ public struct NoticeAppFeature {
         }
     }
 
-    public enum Action {
+    public enum Action: Equatable {
         /// 루트(``NoticeListFeature``) 액션
         case noticeList(NoticeListFeature.Action)
 
@@ -67,11 +67,12 @@ public struct NoticeAppFeature {
                 case let .bookmarkUpdated(notice, isBookmarked):
                     do {
                         if isBookmarked {
-                            state.noticeList.bookmarkIDs.remove(notice.id)
-                            try bookmarks.remove(notice.id)
-                        } else {
+                            
                             state.noticeList.bookmarkIDs.insert(notice.id)
                             try bookmarks.add(notice)
+                        } else {
+                            state.noticeList.bookmarkIDs.remove(notice.id)
+                            try bookmarks.remove(notice.id)
                         }
                     } catch {
                         print("북마크 업데이트에 실패했습니다: \(error.localizedDescription)")

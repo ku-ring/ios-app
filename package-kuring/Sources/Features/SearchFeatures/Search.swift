@@ -26,7 +26,7 @@ public struct SearchFeature {
             public var searchType: SearchType = .notice
             public var searchPhase: SearchPhase = .before
 
-            public enum SearchType: String {
+            public enum SearchType: String, Equatable {
                 case notice
                 case staff
             }
@@ -74,7 +74,7 @@ public struct SearchFeature {
         }
     }
 
-    public enum Action: BindableAction {
+    public enum Action: BindableAction, Equatable {
         /// 트리 네비게이션 - ``StaffDetailFeature`` 액션
         case staffDetail(PresentationAction<StaffDetailFeature.Action>)
         /// 세그먼트에서 검색 타입 선택
@@ -94,15 +94,34 @@ public struct SearchFeature {
 
         case binding(BindingAction<State>)
 
-        public enum SearchResult {
+        public enum SearchResult: Equatable {
             case notices([Notice])
             case staffs([Staff])
         }
     }
 
-    public enum SearchError: Error {
+    public enum SearchError: Error, Equatable {
         case notice(Error)
         case staff(Error)
+        
+        public static func == (lhs: SearchFeature.SearchError, rhs: SearchFeature.SearchError) -> Bool {
+            switch lhs {
+            case let .notice(lError):
+                switch rhs {
+                case let .notice(rError):
+                    return lError.localizedDescription == rError.localizedDescription
+                default:
+                    return false
+                }
+            case let .staff(lError):
+                switch rhs {
+                case let .staff(rError):
+                    return lError.localizedDescription == rError.localizedDescription
+                default:
+                    return false
+                }
+            }
+        }
     }
 
     @Dependency(\.kuringLink) var kuringLink

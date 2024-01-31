@@ -13,8 +13,9 @@ import ComposableArchitecture
 @MainActor
 final class NoticeDetailTests: XCTestCase {
     func test_bookmarkButtonTapped() async throws {
+        let notice = Notice.random
         let store = TestStore(
-            initialState: NoticeDetailFeature.State(notice: Notice.random),
+            initialState: NoticeDetailFeature.State(notice: notice),
             reducer: { NoticeDetailFeature() },
             withDependencies: { $0.bookmarks = Bookmarks.default }
         )
