@@ -62,23 +62,22 @@ public struct NoticeAppFeature {
 
         Reduce { state, action in
             switch action {
-            case let .path(.element(id: id, action: .detail(.bookmarkButtonTapped))):
-                guard case let .detail(detailState) = state.path[id: id] else {
+            case let .path(.element(id: _, action: .detail(.delegate(action)))):
+                switch action {
+                case let .bookmarkUpdated(notice, isBookmarked):
+                    do {
+                        if isBookmarked {
+                            state.noticeList.bookmarkIDs.remove(notice.id)
+                            try bookmarks.remove(notice.id)
+                        } else {
+                            state.noticeList.bookmarkIDs.insert(notice.id)
+                            try bookmarks.add(notice)
+                        }
+                    } catch {
+                        print("북마크 업데이트에 실패했습니다: \(error.localizedDescription)")
+                    }
                     return .none
                 }
-                let noticeID = detailState.notice.id
-                do {
-                    if detailState.isBookmarked {
-                        state.noticeList.bookmarkIDs.insert(noticeID)
-                        try bookmarks.add(detailState.notice)
-                    } else {
-                        state.noticeList.bookmarkIDs.remove(noticeID)
-                        try bookmarks.remove(noticeID)
-                    }
-                } catch {
-                    print("북마크 업데이트에 실패했습니다: \(error.localizedDescription)")
-                }
-                return .none
 
             case let .noticeList(.delegate(delegate)):
                 switch delegate {

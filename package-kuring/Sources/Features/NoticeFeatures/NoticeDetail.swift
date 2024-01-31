@@ -23,17 +23,31 @@ public struct NoticeDetailFeature {
 
     public enum Action: Equatable {
         case bookmarkButtonTapped
-    }
+        
+        case delegate(Delegate)
 
+        public enum Delegate: Equatable {
+            case bookmarkUpdated(_ notice: Notice, _ isBookmarkd: Bool)
+        }
+    }
+    
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
             case .bookmarkButtonTapped:
                 state.isBookmarked.toggle()
                 return .none
+                
+            case .delegate:
+                return .none
+            }
+        }
+        .onChange(of: \.isBookmarked) { _, newValue in
+            Reduce { state, _ in
+                return .send(.delegate(.bookmarkUpdated(state.notice, newValue)))
             }
         }
     }
-
+    
     public init() { }
 }

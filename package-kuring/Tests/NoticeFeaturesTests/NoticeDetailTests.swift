@@ -23,6 +23,6 @@ final class NoticeDetailTests: XCTestCase {
             $0.isBookmarked = !isNoticeBookmarked
         }
 
-        await store.receive(.delegate(.bookmarkUpdated(!isNoticeBookmarked)))
+        await store.receive(.delegate(.bookmarkUpdated(notice, !isNoticeBookmarked)))
     }
 }
