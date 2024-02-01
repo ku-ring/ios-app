@@ -98,6 +98,8 @@ public struct NoticeListFeature {
         public enum Delegate: Equatable {
             /// 학과 편집 버튼을 선택한 경우
             case editDepartment
+            /// 북마크 업데이트 발생한 경우
+            case bookmarkUpdated(Notice)
         }
         
         public struct NoticesResult: Equatable {
@@ -206,7 +208,7 @@ public struct NoticeListFeature {
                 } else {
                     state.bookmarkIDs.insert(notice.id)
                 }
-                return .none
+                return .send(.delegate(.bookmarkUpdated(notice)))
 
             case let .loadingChanged(isLoading):
                 state.isLoading = isLoading

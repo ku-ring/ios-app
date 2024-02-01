@@ -51,6 +51,8 @@ public struct NoticeAppFeature {
 
         /// ``SubscriptionAppFeature`` 의 Presentation 액션
         case changeSubscription(PresentationAction<SubscriptionAppFeature.Action>)
+        
+        case updateBookmarks(_ notice: Notice, _ isBookmarked: Bool)
     }
 
     @Dependency(\.bookmarks) var bookmarks
@@ -65,20 +67,25 @@ public struct NoticeAppFeature {
             case let .path(.element(id: _, action: .detail(.delegate(action)))):
                 switch action {
                 case let .bookmarkUpdated(notice, isBookmarked):
-                    do {
-                        if isBookmarked {
-                            
-                            state.noticeList.bookmarkIDs.insert(notice.id)
-                            try bookmarks.add(notice)
-                        } else {
-                            state.noticeList.bookmarkIDs.remove(notice.id)
-                            try bookmarks.remove(notice.id)
-                        }
-                    } catch {
-                        print("북마크 업데이트에 실패했습니다: \(error.localizedDescription)")
+                    if isBookmarked {
+                        state.noticeList.bookmarkIDs.insert(notice.id)
+                    } else {
+                        state.noticeList.bookmarkIDs.remove(notice.id)
                     }
-                    return .none
+                    return .send(.updateBookmarks(notice, isBookmarked))
                 }
+                  
+            case let .updateBookmarks(notice, isBookmarked):
+                do {
+                    if isBookmarked {
+                        try bookmarks.add(notice)
+                    } else {
+                        try bookmarks.remove(notice.id)
+                    }
+                } catch {
+                    print("북마크 업데이트에 실패했습니다: \(error.localizedDescription)")
+                }
+                return .none
 
             case let .noticeList(.delegate(delegate)):
                 switch delegate {
@@ -94,6 +101,10 @@ public struct NoticeAppFeature {
                         )
                     )
                     return .none
+                
+                case let .bookmarkUpdated(notice):
+                    let isBookmarked = state.noticeList.bookmarkIDs.contains(notice.id)
+                    return.send(.updateBookmarks(notice, isBookmarked))
                 }
 
             case .changeSubscription(.presented(.subscriptionView(.subscriptionResponse))):

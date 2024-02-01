@@ -67,6 +67,10 @@ final class NoticeAppTests: XCTestCase {
             $0.noticeList.bookmarkIDs = [notice.id]
         }
         
+        await store.receive(.noticeList(.delegate(.bookmarkUpdated(notice))))
+        
+        await store.receive(.updateBookmarks(notice, true))
+        
         // 푸시 액션: 공지 디테일
         await store.send(
             .path(.push(id: 0, state: .detail(detailState)))
@@ -90,5 +94,7 @@ final class NoticeAppTests: XCTestCase {
         ) {
             $0.noticeList.bookmarkIDs = []
         }
+        
+        await store.receive(.updateBookmarks(notice, false))
     }
 }
