@@ -32,6 +32,19 @@
 
 ## 시작 가이드
 
+### 커밋 방지 처리
+
+> **Important**: 매우 중요한 단계입니다. 클론 후 즉시 실행하십시오.
+
+루트 폴더 경로에서 `FIRST_ACTION.sh` 스크립트를 실행합니다.
+```bash
+./FIRST_ACTION.sh
+```
+만약 권한 에러가 발생할 경우 아래 명령어를 실행하고 다시 스크립트를 실행합니다.
+```bash
+chmod +x FIRST_ACTION.sh
+```
+
 ### 패키지 기반 모듈화 (Package Based Modularization)
 
 `KuringApp.xcodeproj` 열기

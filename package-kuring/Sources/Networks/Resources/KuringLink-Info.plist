@@ -5,6 +5,6 @@
 	<key>API_HOST</key>
 	<string>🔐</string>
 	<key>USING_HTTPS</key>
-	<true/>
+	<false/>
 </dict>
 </plist>

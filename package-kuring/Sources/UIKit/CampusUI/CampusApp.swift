@@ -9,17 +9,33 @@ import KuringMapsUI
 public struct CampusApp: View {
     private let appearance = Appearance()
     
+    private var linkHost: String {
+        guard let plistURL = Bundle.module.url(forResource: "KuringMaps-Info", withExtension: "plist") else {
+            return ""
+        }
+        let dict = try? NSDictionary(contentsOf: plistURL, error: ())
+        let apiHost = dict?["API_HOST"] as? String
+        return apiHost ?? ""
+    }
+    private var libHost: String {
+        guard let plistURL = Bundle.module.url(forResource: "KuringMaps-Info", withExtension: "plist") else {
+            return ""
+        }
+        let dict = try? NSDictionary(contentsOf: plistURL, error: ())
+        let libraryConfig = dict?["Library Configuration"] as? [String: String]
+        let apiHost = libraryConfig?["API_HOST"]
+        return apiHost ?? ""
+    }
+    
     public var body: some View {
         KuringMap(
-            linkConfig: .init(host: ""),
-            libConfig: .init(host: "")
+            linkConfig: .init(host: linkHost),
+            libConfig: .init(host: libHost)
         )
         .environment(\.mapAppearance, appearance)
     }
     
-    public init() {
-        
-    }
+    public init() { }
 }
 
 #Preview {
