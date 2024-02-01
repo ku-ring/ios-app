@@ -18,7 +18,7 @@ extension NoticeAppFeature {
             case departmentEditor(DepartmentEditorFeature.State)
         }
 
-        public enum Action {
+        public enum Action: Equatable {
             case detail(NoticeDetailFeature.Action)
             case search(SearchFeature.Action)
             case departmentEditor(DepartmentEditorFeature.Action)

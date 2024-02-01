@@ -26,7 +26,7 @@ public struct DepartmentSelectorFeature {
         case editDepartmentsButtonTapped
         case delegate(Delegate)
 
-        public enum Delegate {
+        public enum Delegate: Equatable {
             case editDepartment
         }
     }

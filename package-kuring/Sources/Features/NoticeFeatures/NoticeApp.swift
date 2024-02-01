@@ -29,10 +29,17 @@ public struct NoticeAppFeature {
             self.noticeList = noticeList
             self.path = path
             self.changeSubscription = changeSubscription
+            
+            @Dependency(\.bookmarks) var bookmarks
+            do {
+                self.noticeList.bookmarkIDs = Set(try bookmarks().map(\.id))
+            } catch {
+                print("북마크 가져오기를 실패했습니다: \(error.localizedDescription)")
+            }
         }
     }
 
-    public enum Action {
+    public enum Action: Equatable {
         /// 루트(``NoticeListFeature``) 액션
         case noticeList(NoticeListFeature.Action)
 
@@ -44,8 +51,12 @@ public struct NoticeAppFeature {
 
         /// ``SubscriptionAppFeature`` 의 Presentation 액션
         case changeSubscription(PresentationAction<SubscriptionAppFeature.Action>)
+        
+        case updateBookmarks(_ notice: Notice, _ isBookmarked: Bool)
     }
 
+    @Dependency(\.bookmarks) var bookmarks
+    
     public var body: some ReducerOf<Self> {
         Scope(state: \.noticeList, action: \.noticeList) {
             NoticeListFeature()
@@ -53,7 +64,27 @@ public struct NoticeAppFeature {
 
         Reduce { state, action in
             switch action {
-            case .path:
+            case let .path(.element(id: _, action: .detail(.delegate(action)))):
+                switch action {
+                case let .bookmarkUpdated(notice, isBookmarked):
+                    if isBookmarked {
+                        state.noticeList.bookmarkIDs.insert(notice.id)
+                    } else {
+                        state.noticeList.bookmarkIDs.remove(notice.id)
+                    }
+                    return .send(.updateBookmarks(notice, isBookmarked))
+                }
+                  
+            case let .updateBookmarks(notice, isBookmarked):
+                do {
+                    if isBookmarked {
+                        try bookmarks.add(notice)
+                    } else {
+                        try bookmarks.remove(notice.id)
+                    }
+                } catch {
+                    print("북마크 업데이트에 실패했습니다: \(error.localizedDescription)")
+                }
                 return .none
 
             case let .noticeList(.delegate(delegate)):
@@ -70,6 +101,10 @@ public struct NoticeAppFeature {
                         )
                     )
                     return .none
+                
+                case let .bookmarkUpdated(notice):
+                    let isBookmarked = state.noticeList.bookmarkIDs.contains(notice.id)
+                    return.send(.updateBookmarks(notice, isBookmarked))
                 }
 
             case .changeSubscription(.presented(.subscriptionView(.subscriptionResponse))):
@@ -81,7 +116,7 @@ public struct NoticeAppFeature {
                 state.changeSubscription = SubscriptionAppFeature.State()
                 return .none
 
-            case .noticeList, .changeSubscription:
+            case .path, .noticeList, .changeSubscription:
                 return .none
             }
         }

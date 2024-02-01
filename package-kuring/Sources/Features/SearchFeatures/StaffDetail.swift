@@ -17,7 +17,7 @@ public struct StaffDetailFeature {
         }
     }
 
-    public enum Action {
+    public enum Action: Equatable {
         case emailAddressTapped
         case phoneNumberTapped
     }

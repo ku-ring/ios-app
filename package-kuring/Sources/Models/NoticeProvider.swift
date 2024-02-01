@@ -5,7 +5,7 @@
 
 import Foundation
 
-public enum NoticeType: String, Hashable, CaseIterable, Identifiable {
+public enum NoticeType: String, Hashable, CaseIterable, Identifiable, Equatable {
     case 학과, 학사, 장학, 도서관, 취창업, 국제, 학생, 산학, 일반
 
     public var id: Self { self }
