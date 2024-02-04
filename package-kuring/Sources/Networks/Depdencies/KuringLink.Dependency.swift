@@ -4,7 +4,15 @@
 //
 
 import Models
+import Foundation
 import ComposableArchitecture
+
+extension DependencyValues {
+    public var kuringLink: KuringLink {
+        get { self[KuringLink.self] }
+        set { self[KuringLink.self] = newValue }
+    }
+}
 
 extension KuringLink: DependencyKey {
     public static let liveValue = KuringLink(
@@ -96,13 +104,6 @@ extension KuringLink: DependencyKey {
             return isSucceed
         }
     )
-}
-
-extension DependencyValues {
-    public var kuringLink: KuringLink {
-        get { self[KuringLink.self] }
-        set { self[KuringLink.self] = newValue }
-    }
 }
 
 extension KuringLink {

@@ -19,6 +19,7 @@ let package = Package(
                 "BookmarkUI",
                 "SettingsUI",
                 "CampusUI",
+                "CommonUI",
             ]
         ),
         .library(
@@ -101,6 +102,14 @@ let package = Package(
             path: "Sources/UIKit/CampusUI",
             resources: [.process("Resources")]
         ),
+        .target(
+            name: "CommonUI",
+            dependencies: [
+                "Networks",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/UIKit/CommonUI"
+        ),
         
         // MARK: Features
         .target(
@@ -111,7 +120,7 @@ let package = Package(
                 "DepartmentFeatures",
                 "SearchFeatures",
                 "SubscriptionFeatures",
-                "KuringLink",
+                "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Features/NoticeFeatures"
@@ -121,7 +130,7 @@ let package = Package(
             dependencies: [
                 "Models",
                 "DepartmentFeatures",
-                "KuringLink",
+                "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Features/SubscriptionFeatures"
@@ -130,7 +139,7 @@ let package = Package(
             name: "DepartmentFeatures",
             dependencies: [
                 "Models",
-                "KuringLink",
+                "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Features/DepartmentFeatures"
@@ -139,7 +148,7 @@ let package = Package(
             name: "SearchFeatures",
             dependencies: [
                 "Models",
-                "KuringLink",
+                "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Features/SearchFeatures"
@@ -161,7 +170,7 @@ let package = Package(
                 "Caches",
                 "SubscriptionFeatures",
                 "Labs",
-                "KuringLink",
+                "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Features/SettingsFeatures"
@@ -194,7 +203,7 @@ let package = Package(
         ),
         // MARK: Networks
         .target(
-            name: "KuringLink",
+            name: "Networks",
             dependencies: [
                 "Models",
                 .product(name: "Satellite", package: "the-satellite"),
@@ -228,6 +237,13 @@ let package = Package(
             name: "BookmarkFeaturesTests",
             dependencies: [
                 "BookmarkFeatures", "Caches", "Models",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+            ]
+        ),
+        .testTarget(
+            name: "NetworksTests",
+            dependencies: [
+                "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]
         ),
