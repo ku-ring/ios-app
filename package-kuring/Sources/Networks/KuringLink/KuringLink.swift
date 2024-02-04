@@ -29,7 +29,9 @@ public struct KuringLink {
         return satellite
     }
 
-    static let appVersion = "" // NEXT_VERSION
+    // TODO: 세팅 방식 개선
+    public static let appVersion = "2.0.0" // NEXT_VERSION
+    
     static let iosVersion = {
         let osVersion = ProcessInfo.processInfo.operatingSystemVersion
         let iosVersion = "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
