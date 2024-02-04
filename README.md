@@ -1,8 +1,8 @@
-# app-ios
+[![appstore](https://img.shields.io/badge/쿠링-다운로드-000000.svg?style=for-the-badge)](https://apps.apple.com/kr/app/id1609873520) [![wip](https://img.shields.io/badge/멤버모집중-지원하기-F6C954.svg?style=for-the-badge)](https://github.com/ku-ring/swift-cinema)
+
+# ios-app
 
 쿠링 iOS 앱 v2 레포입니다. SwiftUI + TCA
-
-👉🏼 [멤버 모집중](https://github.com/ku-ring/swift-cinema)
 
 ## 개요
 
@@ -12,11 +12,11 @@
 
 쿠링은 건국대학교 공지사항을 푸시알림으로 제공하는 서비스입니다. 지속적으로 서비스가 제공하는 캠퍼스에 대한 정보의 범위를 확장해 나아가고 있습니다.
 
-[쿠링 |  앱스토어](https://apps.apple.com/kr/app/id1609873520)
+[![appstore](https://img.shields.io/badge/쿠링-다운로드-000000.svg?style=for-the-badge)](https://apps.apple.com/kr/app/id1609873520)
 
 ## 요구 사항
 
-- Xcode 15.0 (Swift 5.9+)
+- Xcode 15.0+ (Swift 5.9+)
 - iOS 17+
 
 ## 사용하는 스위프트 패키지
