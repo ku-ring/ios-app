@@ -11,21 +11,42 @@ public struct OpenSourceList: View {
     @Bindable public var store: StoreOf<OpenSourceListFeature>
 
     public var body: some View {
-        List(store.opensources) { opensource in
-            VStack(alignment: .leading) {
-                Text(opensource.name)
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .padding(.bottom)
-
-                Button {
-                    store.send(.linkTapped(opensource.link))
-                } label: {
-                    Text(opensource.link)
+        List {
+            ForEach(store.opensources) { opensource in
+                Section {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(opensource.name)
+                            .font(.title2.bold())
+                        
+                        HStack {
+                            Rectangle()
+                                .frame(width: 2, height: 15)
+                                .padding(.vertical, 8)
+                            
+                            Text(opensource.purpose)
+                                .font(.footnote)
+                        }
+                        .foregroundColor(.secondary)
+                        
+                        Button {
+                            store.send(.linkTapped(opensource.github))
+                        } label: {
+                            HStack {
+                                Text("GitHub 보기")
+                            }
+                            .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.bordered)
+                        .tint(Color.accentColor)
+                        
+                        Text(opensource.license)
+                            .font(.footnote)
+                            .padding(.vertical, 8)
+                    }
                 }
-                .tint(Color.accentColor)
             }
         }
+        .listStyle(.plain)
     }
 
     public init(store: StoreOf<OpenSourceListFeature>) {

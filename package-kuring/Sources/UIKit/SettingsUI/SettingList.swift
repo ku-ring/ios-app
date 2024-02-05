@@ -67,7 +67,7 @@ public struct SettingList: View {
                         OpenSourceListFeature.State()
                     )
                 ) {
-                    Text("사용된 오픈소스")
+                    Text("오픈소스 라이센스")
                 }
             } header: {
                 Text("정보")

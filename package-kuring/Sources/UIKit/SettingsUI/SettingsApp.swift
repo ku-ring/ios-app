@@ -38,7 +38,7 @@ public struct SettingsApp: View {
                     action: \.openSourceList
                 ) {
                     OpenSourceList(store: store)
-                        .navigationTitle("사용된 오픈소스")
+                        .navigationTitle("오픈소스 라이센스")
                 }
             }
         }
