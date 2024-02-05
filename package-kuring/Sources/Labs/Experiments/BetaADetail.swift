@@ -11,8 +11,8 @@ public struct BetaADetailFeature {
     public struct State: Equatable {
         public let title: String = "베타 기능 A"
         public let description: LocalizedStringKey = """
-        이 기능은 쿠링랩에서 제공하는 베타 기능입니다.
-        이 기능을 활성화 하면 **각 공지별로 몇 번이나 북마크 되었는지 확인**할 수 있습니다.
+        이 기능은 쿠링랩에서 제공하는 베타 기능이에요.
+        이 기능을 활성화 하면 **각 공지별로 몇 번이나 북마크 되었는지 확인**할 수 있어요.
         """
         public var isEnabled: Bool = false
 

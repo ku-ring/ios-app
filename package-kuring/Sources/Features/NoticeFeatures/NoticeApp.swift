@@ -34,7 +34,7 @@ public struct NoticeAppFeature {
             do {
                 self.noticeList.bookmarkIDs = Set(try bookmarks().map(\.id))
             } catch {
-                print("북마크 가져오기를 실패했습니다: \(error.localizedDescription)")
+                print("북마크 가져오기를 실패했어요: \(error.localizedDescription)")
             }
         }
     }
@@ -83,7 +83,7 @@ public struct NoticeAppFeature {
                         try bookmarks.remove(notice.id)
                     }
                 } catch {
-                    print("북마크 업데이트에 실패했습니다: \(error.localizedDescription)")
+                    print("북마크 업데이트에 실패했어요: \(error.localizedDescription)")
                 }
                 return .none
 

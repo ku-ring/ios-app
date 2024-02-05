@@ -48,7 +48,7 @@ class SubscriptionAppTests: XCTestCase {
             )
         ) {
             $0.path[id: 0, case: /SubscriptionAppFeature.Path.State.departmentEditor]?.alert = AlertState {
-                TextState("\(컴퓨터공학부.korName)를\n삭제하시겠습니까?")
+                TextState("\(컴퓨터공학부.korName)를\n내 학과 목록에서 삭제할까요?")
             } actions: {
                 ButtonState(role: .cancel) {
                     TextState("취소하기")
