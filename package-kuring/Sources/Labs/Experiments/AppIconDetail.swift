@@ -12,8 +12,8 @@ public struct AppIconDetailFeature {
         // 제목과 설명 수정
         public let title: String = "앱 아이콘 변경하기"
         public let description: LocalizedStringKey = """
-        이 기능은 쿠링랩에서 제공하는 베타 기능입니다.
-        이 기능을 활성화 하면 **쿠링 앱의 아이콘을 변경할 수 있습니다.**
+        이 기능은 쿠링랩에서 제공하는 베타 기능이에요.
+        이 기능을 활성화 하면 **쿠링 앱의 아이콘을 변경할 수 있어요.**
         """
         public var isEnabled: Bool = false
 

@@ -21,7 +21,7 @@ public struct FeedbackView: View {
                     .clipped()
                     .padding(.top, 56)
 
-                Text("피드백을 보내주시면\n앱 성장에 많은 도움이 됩니다.😇")
+                Text("피드백을 보내주시면\n앱 성장에 많은 도움이 돼요.😇")
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
             }

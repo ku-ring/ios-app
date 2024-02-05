@@ -66,6 +66,8 @@ public struct DepartmentEditorFeature {
         case alert(PresentationAction<Alert>)
         /// 알림
         public enum Alert: Equatable {
+            /// 개별 학과 추가 알림 시 추가 버튼 눌렀을 때
+            case confirmAdd(department: NoticeProvider)
             /// 개별 학과 삭제 알림 시 삭제 버튼 눌렀을 때
             case confirmDelete(id: NoticeProvider.ID)
             /// 전체 삭제 알림 시 삭제 버튼 눌렀을 때
@@ -88,19 +90,28 @@ public struct DepartmentEditorFeature {
                 guard !state.myDepartments.contains(department) else {
                     return .none
                 }
-                state.myDepartments.append(department)
+                state.alert = AlertState {
+                    TextState("\(department.korName)를\n내 학과 목록에 추가할까요?")
+                } actions: {
+                    ButtonState(role: .cancel) {
+                        TextState("취소하기")
+                    }
+
+                    ButtonState(
+                        role: .destructive,
+                        action: .confirmAdd(department: department)
+                    ) {
+                        TextState("추가하기")
+                    }
+                }
                 return .none
 
-            case let .cancelAdditionButtonTapped(id: id):
-                state.myDepartments.remove(id: id)
-                return .none
-
-            case let .deleteMyDepartmentButtonTapped(id: id):
+            case let .deleteMyDepartmentButtonTapped(id: id), let .cancelAdditionButtonTapped(id: id):
                 guard let department = state.myDepartments.first(where: { $0.id == id }) else {
                     return .none
                 }
                 state.alert = AlertState {
-                    TextState("\(department.korName)를\n삭제하시겠습니까?")
+                    TextState("\(department.korName)를\n내 학과 목록에서 삭제할까요?")
                 } actions: {
                     ButtonState(role: .cancel) {
                         TextState("취소하기")
@@ -114,7 +125,7 @@ public struct DepartmentEditorFeature {
 
             case .deleteAllMyDepartmentButtonTapped:
                 state.alert = AlertState {
-                    TextState("모든 학과를 삭제하시겠습니까?")
+                    TextState("내 학과 목록을\n모두 삭제할까요?")
                 } actions: {
                     ButtonState(role: .cancel) {
                         TextState("취소하기")
@@ -134,6 +145,9 @@ public struct DepartmentEditorFeature {
 
             case let .alert(.presented(alertAction)):
                 switch alertAction {
+                case let .confirmAdd(department: department):
+                    state.myDepartments.append(department)
+                    return .none
                 case let .confirmDelete(id: id):
                     state.myDepartments.remove(id: id)
                     return .none
