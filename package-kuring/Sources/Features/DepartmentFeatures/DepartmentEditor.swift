@@ -106,11 +106,7 @@ public struct DepartmentEditorFeature {
                 }
                 return .none
 
-            case let .cancelAdditionButtonTapped(id: id):
-                state.myDepartments.remove(id: id)
-                return .none
-
-            case let .deleteMyDepartmentButtonTapped(id: id):
+            case let .deleteMyDepartmentButtonTapped(id: id), let .cancelAdditionButtonTapped(id: id):
                 guard let department = state.myDepartments.first(where: { $0.id == id }) else {
                     return .none
                 }
