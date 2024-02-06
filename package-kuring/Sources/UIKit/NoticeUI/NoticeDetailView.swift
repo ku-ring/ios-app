@@ -5,6 +5,7 @@
 
 import Models
 import SwiftUI
+import ActivityUI
 import NoticeFeatures
 import ComposableArchitecture
 
@@ -53,9 +54,10 @@ public struct NoticeDetailView: View {
                 Text("URL")
             }
         }
+        .activitySheet($store.shareItem)
         // TODO: Move to parent
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItemGroup(placement: .topBarTrailing) {
                 Button {
                     self.store.send(.bookmarkButtonTapped)
                 } label: {
@@ -64,6 +66,12 @@ public struct NoticeDetailView: View {
                             ? "bookmark.fill"
                             : "bookmark"
                     )
+                }
+                
+                Button {
+                    self.store.send(.shareButtonTapped)
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
                 }
             }
         }

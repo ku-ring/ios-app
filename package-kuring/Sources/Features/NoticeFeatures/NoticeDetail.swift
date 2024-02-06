@@ -6,6 +6,7 @@
 import Caches
 import Models
 import SwiftUI
+import ActivityUI
 import ComposableArchitecture
 
 @Reducer
@@ -14,6 +15,7 @@ public struct NoticeDetailFeature {
     public struct State: Equatable {
         public var notice: Notice
         public var isBookmarked: Bool = false
+        public var shareItem: ActivityItem? = nil
 
         public init(notice: Notice, isBookmarked: Bool = false) {
             self.notice = notice
@@ -21,9 +23,12 @@ public struct NoticeDetailFeature {
         }
     }
 
-    public enum Action: Equatable {
+    public enum Action: BindableAction, Equatable {
         case bookmarkButtonTapped
+        case shareButtonTapped
         
+        case binding(BindingAction<State>)
+
         case delegate(Delegate)
 
         public enum Delegate: Equatable {
@@ -34,8 +39,17 @@ public struct NoticeDetailFeature {
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
+            case .binding:
+                return .none
+                
             case .bookmarkButtonTapped:
                 state.isBookmarked.toggle()
+                return .none
+                
+            case .shareButtonTapped:
+                state.shareItem = ActivityItem(
+                    items: state.notice.url
+                )
                 return .none
                 
             case .delegate:

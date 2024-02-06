@@ -33,6 +33,7 @@ let package = Package(
         .package(url: "https://github.com/ku-ring/the-satellite", branch: "main"),
         .package(url: "https://github.com/ku-ring/ios-maps", branch: "main"),
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.50.4"),
+        .package(url: "https://github.com/ku-ring/package-activityui", branch: "main")
     ],
     targets: [
         // MARK: App Library Dependencies
@@ -41,7 +42,8 @@ let package = Package(
             dependencies: [
                 "NoticeFeatures", "SearchFeatures", "SubscriptionUI", "DepartmentUI", "SearchUI",
                 "ColorSet", "Caches",
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "ActivityUI", package: "package-activityui"),
             ],
             path: "Sources/UIKit/NoticeUI",
             resources: [.process("Resources")]
@@ -121,7 +123,8 @@ let package = Package(
                 "SearchFeatures",
                 "SubscriptionFeatures",
                 "Networks",
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "ActivityUI", package: "package-activityui"),
             ],
             path: "Sources/Features/NoticeFeatures"
         ),
