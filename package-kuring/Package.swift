@@ -227,6 +227,7 @@ let package = Package(
             dependencies: [
                 "NoticeFeatures", "SearchFeatures", "Models", "Caches",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "ActivityUI", package: "package-activityui"),
             ]
         ),
         .testTarget(
