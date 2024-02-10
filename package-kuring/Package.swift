@@ -20,6 +20,7 @@ let package = Package(
                 "SettingsUI",
                 "CampusUI",
                 "CommonUI",
+                "OnboardingUI",
             ]
         ),
         .library(
@@ -109,6 +110,15 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/UIKit/CommonUI"
+        ),
+        .target(
+            name: "OnboardingUI",
+            dependencies: [
+                "DepartmentUI", "SubscriptionUI",
+                "SubscriptionFeatures", "DepartmentFeatures",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/UIKit/OnboardingUI"
         ),
         
         // MARK: Features
