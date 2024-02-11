@@ -96,6 +96,19 @@ class SubscriptionAppTests: XCTestCase {
             }
         }
         
+        // 사용자가 ok 버튼을 눌렀을 때
+        await store.send(
+            .path(
+                .element(
+                    id: 0,
+                    action: .departmentEditor(.alert(.presented(.confirmAdd(department: 체육교육과))))
+                )
+            )
+        ) {
+            $0.path[id: 0, case: /SubscriptionAppFeature.Path.State.departmentEditor]?.alert = nil
+            $0.path[id: 0, case: /SubscriptionAppFeature.Path.State.departmentEditor]?.myDepartments = [체육교육과]
+        }
+        
         await store.send(.path(.popFrom(id: 0))) {
             $0.path = .init()
             $0.subscriptionView.myDepartments = [체육교육과]
