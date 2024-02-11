@@ -96,7 +96,6 @@ class SubscriptionAppTests: XCTestCase {
             }
         }
         
-        // 사용자가 ok 버튼을 눌렀을 때
         await store.send(
             .path(
                 .element(
