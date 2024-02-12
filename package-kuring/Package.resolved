@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "package-activityui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ku-ring/package-activityui",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a8404f0e2d72873eace8f192589d542cbddea0b9"
+      }
+    },
+    {
       "identity" : "swift-case-paths",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-case-paths",

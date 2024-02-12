@@ -80,8 +80,34 @@ class SubscriptionAppTests: XCTestCase {
                 )
             )
         ) {
+            $0.path[id: 0, case: /SubscriptionAppFeature.Path.State.departmentEditor]?.alert = AlertState {
+                TextState("\(체육교육과.korName)를\n내 학과 목록에 추가할까요?")
+            } actions: {
+                ButtonState(role: .cancel) {
+                    TextState("취소하기")
+                }
+                
+                ButtonState(
+                    role: .destructive,
+                    action: .confirmAdd(department: 체육교육과)
+                ) {
+                    TextState("추가하기")
+                }
+            }
+        }
+        
+        await store.send(
+            .path(
+                .element(
+                    id: 0,
+                    action: .departmentEditor(.alert(.presented(.confirmAdd(department: 체육교육과))))
+                )
+            )
+        ) {
+            $0.path[id: 0, case: /SubscriptionAppFeature.Path.State.departmentEditor]?.alert = nil
             $0.path[id: 0, case: /SubscriptionAppFeature.Path.State.departmentEditor]?.myDepartments = [체육교육과]
         }
+        
         await store.send(.path(.popFrom(id: 0))) {
             $0.path = .init()
             $0.subscriptionView.myDepartments = [체육교육과]
