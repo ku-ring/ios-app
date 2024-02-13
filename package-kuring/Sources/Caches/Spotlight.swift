@@ -6,6 +6,8 @@
 //
 
 import Models
+import CoreSpotlight
+import ComposableArchitecture
 
 public struct Spotlight: DependencyKey {
     public var add: (_ notice: Notice) throws -> Void
