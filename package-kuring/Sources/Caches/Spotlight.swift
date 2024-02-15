@@ -6,6 +6,7 @@
 import Models
 import CoreSpotlight
 import ComposableArchitecture
+import UIKit
 
 public struct Spotlight: DependencyKey {
     public var add: (_ notice: Notice) throws -> Void
@@ -21,6 +22,14 @@ extension Spotlight {
     public static let `default` = Spotlight(
         add: { notice in
             let attributeSet = CSSearchableItemAttributeSet(contentType: .text)
+            attributeSet.displayName = notice.subject
+            attributeSet.thumbnailData = UIImage(systemName: "AppIcon")?.pngData()
+            
+            let searchableItem = CSSearchableItem(uniqueIdentifier: notice.id,
+                                                  domainIdentifier: "Kuring",
+                                                  attributeSet: attributeSet)
+            
+            CSSearchableIndex.default().indexSearchableItems([searchableItem]) { _ in }
         }
     )
 }
