@@ -11,6 +11,7 @@
 		A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA552AB1F04B0064F748 /* ContentView.swift */; };
 		A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA572AB1F04C0064F748 /* Assets.xcassets */; };
 		A9DAFA5B2AB1F04C0064F748 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */; };
+		CACC2F4D2B7E63B0003142E2 /* PushNotifications in Frameworks */ = {isa = PBXBuildFile; productRef = CACC2F4C2B7E63B0003142E2 /* PushNotifications */; };
 		CAE658662B3992A800CD8A63 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = CAE658652B3992A800CD8A63 /* App */; };
 		CAE94A9A2B5EA3B000F73A7E /* App in Frameworks */ = {isa = PBXBuildFile; productRef = CAE94A992B5EA3B000F73A7E /* App */; };
 		CAE94A9C2B5EA3B000F73A7E /* Labs in Frameworks */ = {isa = PBXBuildFile; productRef = CAE94A9B2B5EA3B000F73A7E /* Labs */; };
@@ -37,6 +38,7 @@
 		A9DAFA572AB1F04C0064F748 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CA52DF2F2AD58DF2009B9272 /* KuringAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KuringAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CACC2F4B2B7E638C003142E2 /* KuringApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KuringApp.entitlements; sourceTree = "<group>"; };
 		DF062D4A2AC87B6D00FC48C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DF331DA72AC917E000D0BB08 /* kuring_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app.png; sourceTree = "<group>"; };
 		DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app_classic.png; sourceTree = "<group>"; };
@@ -52,6 +54,7 @@
 				CAE94A9A2B5EA3B000F73A7E /* App in Frameworks */,
 				CAE94A9C2B5EA3B000F73A7E /* Labs in Frameworks */,
 				CAE658662B3992A800CD8A63 /* App in Frameworks */,
+				CACC2F4D2B7E63B0003142E2 /* PushNotifications in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +97,7 @@
 		A9DAFA522AB1F04B0064F748 /* KuringApp */ = {
 			isa = PBXGroup;
 			children = (
+				CACC2F4B2B7E638C003142E2 /* KuringApp.entitlements */,
 				DF062D4A2AC87B6D00FC48C0 /* Info.plist */,
 				DFE7AB132AC332D200230934 /* Setting */,
 				A9DAFA532AB1F04B0064F748 /* KuringApp.swift */,
@@ -158,6 +162,7 @@
 				CAE658652B3992A800CD8A63 /* App */,
 				CAE94A992B5EA3B000F73A7E /* App */,
 				CAE94A9B2B5EA3B000F73A7E /* Labs */,
+				CACC2F4C2B7E63B0003142E2 /* PushNotifications */,
 			);
 			productName = KuringApp;
 			productReference = A9DAFA502AB1F04B0064F748 /* KuringApp.app */;
@@ -397,6 +402,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = KuringApp/KuringApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"KuringApp/Preview Content\"";
@@ -429,6 +435,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = KuringApp/KuringApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"KuringApp/Preview Content\"";
@@ -540,6 +547,11 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CACC2F4C2B7E63B0003142E2 /* PushNotifications */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CAE94A982B5EA3B000F73A7E /* XCLocalSwiftPackageReference "../package-kuring" */;
+			productName = PushNotifications;
+		};
 		CAE658652B3992A800CD8A63 /* App */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = App;
