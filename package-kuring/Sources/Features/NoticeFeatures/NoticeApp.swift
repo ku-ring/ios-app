@@ -56,7 +56,6 @@ public struct NoticeAppFeature {
     }
 
     @Dependency(\.bookmarks) var bookmarks
-    @Dependency(\.spotlight) var spotlight
     
     public var body: some ReducerOf<Self> {
         Scope(state: \.noticeList, action: \.noticeList) {
@@ -80,7 +79,6 @@ public struct NoticeAppFeature {
                 do {
                     if isBookmarked {
                         try bookmarks.add(notice)
-                        try spotlight.add(notice)
                     } else {
                         try bookmarks.remove(notice.id)
                     }
