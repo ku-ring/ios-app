@@ -14,69 +14,74 @@ public struct BookmarkList: View {
 
     public var body: some View {
         ZStack(alignment: .bottom) {
-            List {
-                ForEach(self.store.bookmarkedNotices, id: \.id) { notice in
-                    HStack {
-                        NoticeRow(
-                            notice: notice,
-                            rowType: store.isEditing
-                                ? NoticeRow.NoticeRowType.none
-                                : nil
-                        )
-                        .background {
-                            NavigationLink(
-                                state: BookmarkAppFeature.Path.State.detail(
-                                    NoticeDetailFeature.State(notice: notice)
-                                )
-                            ) {
-                                EmptyView()
-                            }
-                            .opacity(0)
-                        }
-                        .disabled(store.editMode != .none)
-
-                        if store.isEditing {
-                            Button {
-                                if store.selectedIDs.contains(notice.id) {
-                                    store.selectedIDs.remove(notice.id)
-                                } else {
-                                    store.selectedIDs.insert(notice.id)
+            if store.bookmarkedNotices.isEmpty {
+                Text("보관된 공지사항이 없습니다.")
+            } else {
+                List {
+                    ForEach(self.store.bookmarkedNotices, id: \.id) { notice in
+                        HStack {
+                            NoticeRow(
+                                notice: notice,
+                                rowType: store.isEditing
+                                    ? NoticeRow.NoticeRowType.none
+                                    : nil
+                            )
+                            .background {
+                                NavigationLink(
+                                    state: BookmarkAppFeature.Path.State.detail(
+                                        NoticeDetailFeature.State(notice: notice)
+                                    )
+                                ) {
+                                    EmptyView()
                                 }
-                            } label: {
-                                Image(
-                                    systemName: store.selectedIDs.contains(notice.id)
-                                        ? "checkmark.circle.fill"
-                                        : "circle"
-                                )
-                                .foregroundStyle(
-                                    store.selectedIDs.contains(notice.id)
-                                        ? Color.accentColor
-                                        : Color.caption1.opacity(0.15)
-                                )
+                                .opacity(0)
+                            }
+                            .disabled(store.editMode != .none)
+
+                            if store.isEditing {
+                                Button {
+                                    if store.selectedIDs.contains(notice.id) {
+                                        store.selectedIDs.remove(notice.id)
+                                    } else {
+                                        store.selectedIDs.insert(notice.id)
+                                    }
+                                } label: {
+                                    Image(
+                                        systemName: store.selectedIDs.contains(notice.id)
+                                            ? "checkmark.circle.fill"
+                                            : "circle"
+                                    )
+                                    .foregroundStyle(
+                                        store.selectedIDs.contains(notice.id)
+                                            ? Color.accentColor
+                                            : Color.caption1.opacity(0.15)
+                                    )
+                                }
                             }
                         }
                     }
+                    .listRowSeparator(.hidden)
                 }
-                .listRowSeparator(.hidden)
-            }
-            .listStyle(.plain)
+                .listStyle(.plain)
 
-            if store.editMode != .none {
-                Button {
-                    store.send(.deleteButtonTapped)
-                } label: {
-                    topBlurButton(
-                        "삭제하기",
-                        fontColor: store.selectedIDs.isEmpty
-                            ? Color.accentColor.opacity(0.4)
-                            : .white,
-                        backgroundColor: store.selectedIDs.isEmpty
-                            ? Color.accentColor.opacity(0.15)
-                            : Color.accentColor
-                    )
+                if store.editMode != .none {
+                    Button {
+                        store.send(.deleteButtonTapped)
+                    } label: {
+                        topBlurButton(
+                            "삭제하기",
+                            fontColor: store.selectedIDs.isEmpty
+                                ? Color.accentColor.opacity(0.4)
+                                : .white,
+                            backgroundColor: store.selectedIDs.isEmpty
+                                ? Color.accentColor.opacity(0.15)
+                                : Color.accentColor
+                        )
+                    }
+                    .padding(.horizontal, 20)
                 }
-                .padding(.horizontal, 20)
             }
+            
         }
         .onAppear { store.send(.onAppear) }
         .toolbar(
