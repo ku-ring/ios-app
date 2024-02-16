@@ -27,6 +27,18 @@ extension Message {
             let link = userInfo["link"] as? String
             
             self = .custom(title: title, body: body ?? "", link: link)
+            
+        case "notice":
+            let notice = Notice(
+                articleId: "123",
+                postedDate: "124",
+                subject: "125",
+                url: "126",
+                category: "127",
+                important: false
+            )
+            self = .notice(notice)
+            
         default:
             // TODO: Notice
             throw MessageError.notSupported

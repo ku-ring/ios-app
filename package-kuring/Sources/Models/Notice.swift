@@ -23,6 +23,15 @@ public struct Notice: Codable, Hashable, Identifiable, Equatable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(url)
     }
+    
+    public init(articleId: String, postedDate: String, subject: String, url: String, category: String, important: Bool) {
+        self.articleId = articleId
+        self.postedDate = postedDate
+        self.subject = subject
+        self.url = url
+        self.category = category
+        self.important = important
+    }
 }
 
 extension Notice {

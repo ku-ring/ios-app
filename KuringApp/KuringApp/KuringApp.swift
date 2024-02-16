@@ -71,23 +71,23 @@ struct KuringApp: App {
                 }
             
                 // MARK: - 테스트: 새 공지
-                #if DEBUG
-                .onAppear {
-                    Task { @MainActor in
-                        try await Task.sleep(for: .seconds(1.5))
-                        let notice = Notice.random
-                        newMessagePublisher.send(.notice(notice))
-                        try await Task.sleep(for: .seconds(1.5))
-                        newMessagePublisher.send(
-                            .custom(
-                                title: "[건대교지] 건빵레터 #47",
-                                body: "#47 [당근알바] 광화문 한복판에서 5미터 ‘천공’ 굴리기",
-                                link: "https://stibee.com/api/v1.0/emails/share/1oXWNovPHiqH-CiArIVZn8tOQmkmHVU"
-                            )
-                        )
-                    }
-                }
-                #endif
+//                #if DEBUG
+//                .onAppear {
+//                    Task { @MainActor in
+//                        try await Task.sleep(for: .seconds(1.5))
+//                        let notice = Notice.random
+//                        newMessagePublisher.send(.notice(notice))
+//                        try await Task.sleep(for: .seconds(1.5))
+//                        newMessagePublisher.send(
+//                            .custom(
+//                                title: "[건대교지] 건빵레터 #47",
+//                                body: "#47 [당근알바] 광화문 한복판에서 5미터 ‘천공’ 굴리기",
+//                                link: "https://stibee.com/api/v1.0/emails/share/1oXWNovPHiqH-CiArIVZn8tOQmkmHVU"
+//                            )
+//                        )
+//                    }
+//                }
+//                #endif
         }
     }
 }
