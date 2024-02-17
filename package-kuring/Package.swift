@@ -20,7 +20,12 @@ let package = Package(
                 "SettingsUI",
                 "CampusUI",
                 "CommonUI",
+                "PushNotifications",
             ]
+        ),
+        .library(
+            name: "PushNotifications",
+            targets: ["PushNotifications"]
         ),
         .library(
             name: "Labs",
@@ -33,7 +38,8 @@ let package = Package(
         .package(url: "https://github.com/ku-ring/the-satellite", branch: "main"),
         .package(url: "https://github.com/ku-ring/ios-maps", branch: "main"),
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.50.4"),
-        .package(url: "https://github.com/ku-ring/package-activityui", branch: "main")
+        .package(url: "https://github.com/ku-ring/package-activityui", branch: "main"),
+        .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "10.21.0"),
     ],
     targets: [
         // MARK: App Library Dependencies
@@ -184,6 +190,15 @@ let package = Package(
             name: "Labs",
             dependencies: [
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ]
+        ),
+        
+        // MARK: - Push Notifications
+        .target(
+            name: "PushNotifications",
+            dependencies: [
+                "Models",
+                .product(name: "FirebaseMessaging", package: "firebase-ios-sdk")
             ]
         ),
         

@@ -50,6 +50,14 @@
 chmod +x FIRST_ACTION.sh
 ```
 
+### FCM 을 위한 GoogleService-Info.plist 추가하기
+
+> **Note**: 푸시 알림 테스트를 위해서 필요합니다.
+
+1. [GoogleService-Info.plist 다운로드하기](https://github.com/ku-ring/ios-certificates/blob/main/GoogleService-Info.plist)
+2. KuringApp.xcproj 를 엽니다
+3. KuringApp 폴더 하위에 Info.plist 와 같은 경로에 다운로드 받은 plist 를 드래그앤드랍 합니다.
+
 ### 패키지 기반 모듈화 (Package Based Modularization)
 
 `KuringApp.xcodeproj` 열기

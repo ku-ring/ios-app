@@ -23,8 +23,74 @@ public struct Notice: Codable, Hashable, Identifiable, Equatable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(url)
     }
+    
+    public init(articleId: String, postedDate: String, subject: String, url: String, category: String, important: Bool) {
+        self.articleId = articleId
+        self.postedDate = postedDate
+        self.subject = subject
+        self.url = url
+        self.category = category
+        self.important = important
+    }
 }
 
+// MARK: - Push Notification
+extension Notice {
+    public init(userInfo: [String: Any]) throws {
+        guard let articleID = userInfo["articleId"] as? String else {
+            throw DecodingError.noArticleID
+        }
+        guard let postedDate = userInfo["postedDate"] as? String else {
+            throw DecodingError.noPostedDate
+        }
+        guard let subject = userInfo["subject"] as? String else {
+            throw DecodingError.noSubject
+        }
+        guard let baseUrl = userInfo["baseUrl"] as? String else {
+            throw DecodingError.noURL
+        }
+        guard let category = userInfo["category"] as? String else {
+            throw DecodingError.noCategory
+        }
+        let important = userInfo["important"] as? Bool
+        
+        self.init(
+            articleId: articleID,
+            postedDate: postedDate,
+            subject: subject,
+            url: baseUrl,
+            category: category,
+            important: important ?? false
+        )
+    }
+    
+    public enum DecodingError: Error {
+        case noArticleID
+        case noSubject
+        case noCategory
+        case noPostedDate
+        case noURL
+    }
+}
+
+extension Notice.DecodingError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .noArticleID:
+            "\"articleId\" 키에 해당하는 값이 없습니다"
+        case .noSubject:
+            "\"subject\" 키에 해당하는 값이 없습니다"
+        case .noCategory:
+            "\"category\" 키에 해당하는 값이 없습니다"
+        case .noPostedDate:
+            "\"postedDate\" 키에 해당하는 값이 없습니다"
+        case .noURL:
+            "\"baseUrl\" 키에 해당하는 값이 없습니다"
+        }
+    }
+}
+
+// MARK: - Test Mock
 extension Notice {
     public static var random: Notice {
         Notice(
