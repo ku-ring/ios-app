@@ -82,7 +82,7 @@ struct KuringApp: App {
 //                            .custom(
 //                                title: "[건대교지] 건빵레터 #47",
 //                                body: "#47 [당근알바] 광화문 한복판에서 5미터 ‘천공’ 굴리기",
-//                                link: "https://stibee.com/api/v1.0/emails/share/1oXWNovPHiqH-CiArIVZn8tOQmkmHVU"
+//                                url: "https://stibee.com/api/v1.0/emails/share/1oXWNovPHiqH-CiArIVZn8tOQmkmHVU"
 //                            )
 //                        )
 //                    }

@@ -7,7 +7,7 @@ import Models
 
 public enum Message {
     case notice(Notice)
-    case custom(title: String, body: String, link: String?)
+    case custom(title: String, body: String, url: String?)
 }
 
 extension Message {
@@ -16,6 +16,13 @@ extension Message {
             throw MessageError.failedParsing
         }
         switch type {
+        // 공지사항
+        case "notice":
+            self = .notice(
+                try Notice(userInfo: userInfo)
+            )
+            
+        // 커스텀 알림
         case "admin":
             guard Notifications.isCustomNotificationEnabled else {
                 throw MessageError.notAllowedType
@@ -24,23 +31,12 @@ extension Message {
                 throw MessageError.failedParsing
             }
             let body = userInfo["body"] as? String
-            let link = userInfo["link"] as? String
+            let url = userInfo["url"] as? String
             
-            self = .custom(title: title, body: body ?? "", link: link)
-            
-        case "notice":
-            let notice = Notice(
-                articleId: "123",
-                postedDate: "124",
-                subject: "125",
-                url: "126",
-                category: "127",
-                important: false
-            )
-            self = .notice(notice)
-            
+            self = .custom(title: title, body: body ?? "", url: url)
+        
+        // 지원하지 않는 알림
         default:
-            // TODO: Notice
             throw MessageError.notSupported
         }
     }
