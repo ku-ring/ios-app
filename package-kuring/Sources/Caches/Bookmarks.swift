@@ -53,7 +53,7 @@ extension Bookmarks {
             try encoder.encode(notice).write(to: fileURL)
             
             @Dependency(\.spotlight) var spotlight
-            try spotlight.add(notice)
+            spotlight.add(notice)
         },
         remove: { noticeID in
             let fileURL = try FileManager.default.url(

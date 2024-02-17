@@ -5,8 +5,8 @@
 
 import UIKit
 import Models
+import Dependencies
 import CoreSpotlight
-import ComposableArchitecture
 
 public struct Spotlight: DependencyKey {
     public var add: (_ notice: Notice) -> Void
