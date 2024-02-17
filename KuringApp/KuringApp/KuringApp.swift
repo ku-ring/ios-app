@@ -47,7 +47,7 @@ struct KuringApp: App {
                         }
                     }
                 }
-                // MARK: 새 공지 알림을 탭 했을 때 호출
+                // MARK: 푸시 알림을 탭 했을 때 호출
                 .onReceive(newMessagePublisher) { message in
                     switch message {
                     // 새 공지
