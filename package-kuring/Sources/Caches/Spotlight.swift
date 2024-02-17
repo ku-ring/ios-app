@@ -3,13 +3,13 @@
 // See the 'License.txt' file for licensing information.
 //
 
+import UIKit
 import Models
 import CoreSpotlight
 import ComposableArchitecture
-import UIKit
 
 public struct Spotlight: DependencyKey {
-    public var add: (_ notice: Notice) throws -> Void
+    public var add: (_ notice: Notice) -> Void
     
     public init(
         add: @escaping (_: Notice) -> Void
