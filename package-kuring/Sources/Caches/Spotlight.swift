@@ -36,6 +36,10 @@ extension Spotlight {
 
 extension Spotlight {
     public static let liveValue: Spotlight = .default
+    
+    public static let testValue: Spotlight = .init(
+        add: { _ in }
+    )
 }
 
 extension DependencyValues {
