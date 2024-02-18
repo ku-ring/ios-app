@@ -8,15 +8,6 @@
 import SwiftUI
 import WebKit
 
-struct A: View {
-    @State var ss: Bool = true
-    @State var s2s: Bool = true
-    
-    var body: some View {
-        WebView(urlString: <#T##String#>)
-    }
-}
-
 struct WebView: UIViewRepresentable {
     
     /// 웹뷰 url 문자열
