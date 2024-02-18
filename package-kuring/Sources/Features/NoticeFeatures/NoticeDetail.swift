@@ -47,7 +47,6 @@ public struct NoticeDetailFeature {
                 
             case .bookmarkButtonTapped:
                 state.isBookmarked.toggle()
-                
                 do {
                     if state.isBookmarked {
                         try bookmarks.add(state.notice)
@@ -57,7 +56,6 @@ public struct NoticeDetailFeature {
                 } catch {
                     print("북마크 업데이트에 실패했어요: \(error.localizedDescription)")
                 }
-                
                 return .none
                 
             case .shareButtonTapped:
