@@ -19,7 +19,7 @@ public struct NoticeRow: View {
             self.rowType = rowType
             return
         }
-
+        
         if notice.important {
             if isBookmark { self.rowType = .importantAndBookmark }
             else { self.rowType = .important }
@@ -39,6 +39,8 @@ public struct NoticeRow: View {
         /// 기본
         case none
     }
+    
+    @Dependency(\.bookmarks) var bookmarks
 
     public var body: some View {
         ZStack {
