@@ -12,34 +12,41 @@ import ComposableArchitecture
 
 public struct NoticeDetailView: View {
     @Bindable var store: StoreOf<NoticeDetailFeature>
-
+    @Environment(\.dismiss) var dismiss
+    
     public var body: some View {
-        VStack {
-            WebView(urlString: store.notice.url)
-        }
-        .activitySheet($store.shareItem)
-        // TODO: Move to parent
-        .toolbar {
-            ToolbarItemGroup(placement: .topBarTrailing) {
-                Button {
-                    self.store.send(.bookmarkButtonTapped)
-                } label: {
-                    Image(
-                        systemName: self.store.isBookmarked
-                            ? "bookmark.fill"
-                            : "bookmark"
-                    )
+        WebView(urlString: store.notice.url)
+            .activitySheet($store.shareItem)
+            .navigationBarBackButtonHidden()
+            .toolbar {
+                ToolbarItemGroup(placement: .topBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                    }
                 }
                 
-                Button {
-                    self.store.send(.shareButtonTapped)
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button {
+                        self.store.send(.bookmarkButtonTapped)
+                    } label: {
+                        Image(
+                            systemName: self.store.isBookmarked
+                            ? "bookmark.fill"
+                            : "bookmark"
+                        )
+                    }
+                    
+                    Button {
+                        self.store.send(.shareButtonTapped)
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                    }
                 }
             }
-        }
     }
-
+    
     public init(store: StoreOf<NoticeDetailFeature>) {
         self.store = store
     }
