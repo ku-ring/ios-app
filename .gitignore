@@ -88,6 +88,4 @@ fastlane/test_output
 #
 # After new code Injection tools there's a generated folder /iOSInjectionProject
 # https://github.com/johnno1962/injectionforxcode
-GoogleService-Info.plist
-KuringLink-Info.plist
 iOSInjectionProject/
