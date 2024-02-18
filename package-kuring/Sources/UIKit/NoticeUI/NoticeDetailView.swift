@@ -12,7 +12,6 @@ import ComposableArchitecture
 
 public struct NoticeDetailView: View {
     @Bindable var store: StoreOf<NoticeDetailFeature>
-    @Environment(\.dismiss) var dismiss
     
     public var body: some View {
         WebView(urlString: store.notice.url)
@@ -21,7 +20,7 @@ public struct NoticeDetailView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .topBarLeading) {
                     Button {
-                        dismiss()
+                        self.store.send(.backButtonTapped)
                     } label: {
                         Image(systemName: "chevron.left")
                     }
