@@ -27,6 +27,11 @@ public struct NoticeDetailView: View {
                     }
                 }
                 
+                ToolbarItem(placement: .principal) {
+                    Text(store.notice.subject)
+                        .font(.system(size: 12))
+                }
+                
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button {
                         self.store.send(.bookmarkButtonTapped)
