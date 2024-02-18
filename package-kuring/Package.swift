@@ -46,7 +46,7 @@ let package = Package(
         .target(
             name: "NoticeUI",
             dependencies: [
-                "NoticeFeatures", "SearchFeatures", "SubscriptionUI", "DepartmentUI", "SearchUI",
+                "NoticeFeatures", "SearchFeatures", "SubscriptionUI", "DepartmentUI", "SearchUI", "CommonUI",
                 "ColorSet", "Caches",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "ActivityUI", package: "package-activityui"),
