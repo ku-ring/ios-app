@@ -36,6 +36,9 @@ public struct NoticeDetailFeature {
         }
     }
     
+    /// 북마크 저장소 디펜던시
+    @Dependency(\.bookmarks) public var bookmarks
+    
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
@@ -44,6 +47,13 @@ public struct NoticeDetailFeature {
                 
             case .bookmarkButtonTapped:
                 state.isBookmarked.toggle()
+                
+                if state.isBookmarked {
+                    try? bookmarks.add(state.notice)
+                } else {
+                    try? bookmarks.remove(state.notice.id)
+                }
+                
                 return .none
                 
             case .shareButtonTapped:

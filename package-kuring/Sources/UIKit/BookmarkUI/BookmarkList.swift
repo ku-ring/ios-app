@@ -22,6 +22,7 @@ public struct BookmarkList: View {
                         HStack {
                             NoticeRow(
                                 notice: notice,
+                                isBookmark: true,
                                 rowType: store.isEditing
                                     ? NoticeRow.NoticeRowType.none
                                     : nil
@@ -29,7 +30,11 @@ public struct BookmarkList: View {
                             .background {
                                 NavigationLink(
                                     state: BookmarkAppFeature.Path.State.detail(
-                                        NoticeDetailFeature.State(notice: notice)
+//                                        NoticeDetailFeature.State(notice: notice)
+                                        NoticeDetailFeature.State(
+                                            notice: notice,
+                                            isBookmarked: true
+                                        )
                                     )
                                 ) {
                                     EmptyView()

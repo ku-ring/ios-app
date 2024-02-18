@@ -4,6 +4,7 @@
 //
 
 import ComposableArchitecture
+import Models
 
 @Reducer
 public struct BookmarkAppFeature {
@@ -31,7 +32,11 @@ public struct BookmarkAppFeature {
 
         /// 스택 네비게이션 액션 (``BookmarkAppFeature/Path/Action``)
         case path(StackAction<Path.State, Path.Action>)
+        
+        case updateBookmarks(_ notice: Notice, _ isBookmarked: Bool)
     }
+    
+    @Dependency(\.bookmarks) var bookmarks
 
     public var body: some ReducerOf<Self> {
         Scope(state: \.bookmarkList, action: \.bookmarkList) {
@@ -44,6 +49,18 @@ public struct BookmarkAppFeature {
                 return .none
 
             case .bookmarkList:
+                return .none
+                
+            case let .updateBookmarks(notice, isBookmarked):
+                do {
+                    if isBookmarked {
+                        try bookmarks.add(notice)
+                    } else {
+                        try bookmarks.remove(notice.id)
+                    }
+                } catch {
+                    print("북마크 업데이트에 실패했어요: \(error.localizedDescription)")
+                }
                 return .none
             }
         }

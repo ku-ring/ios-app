@@ -65,7 +65,7 @@ public struct NoticeApp: View {
             case .detail:
                 if let store = store.scope(state: \.detail, action: \.detail) {
                     NoticeDetailView(store: store)
-                        .navigationTitle("Notice Detail View")
+                        .navigationBarTitleDisplayMode(.inline)
                 }
             case .search:
                 if let store = store.scope(state: \.search, action: \.search) {

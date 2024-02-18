@@ -24,7 +24,7 @@ struct NoticeList: View {
                 ) {
                     NoticeRow(
                         notice: notice,
-                        bookmarked: self.store.bookmarkIDs.contains(notice.id)
+                        isBookmark: self.store.bookmarkIDs.contains(notice.id)
                     )
                     .listRowInsets(EdgeInsets())
                     .onAppear {
