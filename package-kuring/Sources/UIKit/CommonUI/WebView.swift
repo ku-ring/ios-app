@@ -1,8 +1,6 @@
 //
-//  WebView.swift
-//
-//
-//  Created by Geon Woo lee on 2/18/24.
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
 //
 
 import SwiftUI

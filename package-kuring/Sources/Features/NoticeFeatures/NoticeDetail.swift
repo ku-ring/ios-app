@@ -36,8 +36,8 @@ public struct NoticeDetailFeature {
         }
     }
     
-    /// 북마크 저장소 디펜던시
-    @Dependency(\.bookmarks) public var bookmarks
+//    /// 북마크 저장소 디펜던시
+//    @Dependency(\.bookmarks) public var bookmarks
     
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
@@ -47,15 +47,15 @@ public struct NoticeDetailFeature {
                 
             case .bookmarkButtonTapped:
                 state.isBookmarked.toggle()
-                do {
-                    if state.isBookmarked {
-                        try bookmarks.add(state.notice)
-                    } else {
-                        try bookmarks.remove(state.notice.id)
-                    }
-                } catch {
-                    print("북마크 업데이트에 실패했어요: \(error.localizedDescription)")
-                }
+//                do {
+//                    if state.isBookmarked {
+//                        try bookmarks.add(state.notice)
+//                    } else {
+//                        try bookmarks.remove(state.notice.id)
+//                    }
+//                } catch {
+//                    print("북마크 업데이트에 실패했어요: \(error.localizedDescription)")
+//                }
                 return .none
                 
             case .shareButtonTapped:
