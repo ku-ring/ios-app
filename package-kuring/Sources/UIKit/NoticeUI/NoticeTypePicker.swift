@@ -14,13 +14,13 @@ public struct NoticeCategoryPicker: View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 0) {
-                    ForEach(NoticeType.allCases, id: \.self) { category in
+                    ForEach(NoticeProvider.univNoticeTypes) { provider in
                         Button {
-                            selection = category.provider
+                            selection = provider
                         } label: {
                             NoticeTypeColumn(
-                                noticeType: category,
-                                selectedID: selection.category.id
+                                provider: provider,
+                                selectedID: selection.provider.id
                             )
                         }
                         .buttonStyle(.plain)
@@ -29,7 +29,7 @@ public struct NoticeCategoryPicker: View {
                 .padding(.leading, 10)
                 .onChange(of: selection) { value in
                     withAnimation {
-                        proxy.scrollTo(value.category.id, anchor: .center)
+                        proxy.scrollTo(value.provider.id, anchor: .center)
                     }
                 }
             }

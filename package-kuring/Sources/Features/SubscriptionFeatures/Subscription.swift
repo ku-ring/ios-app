@@ -14,14 +14,16 @@ public struct SubscriptionFeature {
         public var subscriptionType: SubscriptionType = .university
 
         /// 대학 공지 리스트
-        public let univNoticeTypes: IdentifiedArrayOf<NoticeProvider> = IdentifiedArray(uniqueElements: NoticeProvider.univNoticeTypes)
+        public let univNoticeTypes: IdentifiedArrayOf<NoticeProvider> = IdentifiedArray(
+            uniqueElements: NoticeProvider.univNoticeTypes
+        )
         /// 대학 공지 리스트 중 내가 구독한 공지
-        public var selectedUnivNoticeType: IdentifiedArrayOf<NoticeProvider> = []
+        public var selectedUnivNoticeType: IdentifiedArrayOf<NoticeProvider>
 
         /// 내가 추가한 공지 리스트
-        public var myDepartments: IdentifiedArrayOf<NoticeProvider> = IdentifiedArray(uniqueElements: NoticeProvider.departments)
+        public var myDepartments: IdentifiedArrayOf<NoticeProvider>
         /// 내가 추가한 공지 리스트 중 지금 선택한 학과
-        public var selectedDepartment: IdentifiedArrayOf<NoticeProvider> = []
+        public var selectedDepartment: IdentifiedArrayOf<NoticeProvider>
 
         public var isWaitingResponse: Bool = false
 
@@ -32,8 +34,12 @@ public struct SubscriptionFeature {
 
         public init(
             subscriptionType: SubscriptionType = .university,
-            selectedUnivNoticeType: IdentifiedArrayOf<NoticeProvider> = [],
-            myDepartments: IdentifiedArrayOf<NoticeProvider> = IdentifiedArray(uniqueElements: NoticeProvider.departments),
+            selectedUnivNoticeType: IdentifiedArrayOf<NoticeProvider> = IdentifiedArray(
+                uniqueElements: NoticeProvider.subscribedUnivNoticeTypes
+            ),
+            myDepartments: IdentifiedArrayOf<NoticeProvider> = IdentifiedArray(
+                uniqueElements: NoticeProvider.addedDepartments
+            ),
             selectedDepartment: IdentifiedArrayOf<NoticeProvider> = [],
             isWaitingResponse: Bool = false
         ) {

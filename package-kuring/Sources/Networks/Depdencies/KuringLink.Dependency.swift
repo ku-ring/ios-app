@@ -102,6 +102,69 @@ extension KuringLink: DependencyKey {
                 )
             let isSucceed = (200 ..< 300) ~= response.code
             return isSucceed
+        },
+        getSubscribedUnivNotices: {
+            let response: Response<[NoticeProvider]> = try await satellite
+                .response(
+                    for: Path.getSubscribedUnivNotices.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ]
+                )
+            // 로컬 값 갱신
+            NoticeProvider.subscribedUnivNoticeTypes = response.data
+                .compactMap { $0.category = .대학 }
+            return NoticeProvider.subscribedUnivNoticeTypes
+        },
+        getSubscribedDepartments: {
+            let response: Response<[NoticeProvider]> = try await satellite
+                .response(
+                    for: Path.getSubscribedDepartments.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ]
+                )
+            
+            // 로컬 값 갱신
+            NoticeProvider.subscribedDepartments = response.data
+                .compactMap { $0.category = .학과 }
+            return NoticeProvider.subscribedDepartments
+        },
+        getAllUnivNoticeType: {
+            let response: Response<[NoticeProvider]> = try await satellite
+                .response(
+                    for: Path.getAllUnivNoticeType.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ]
+                )
+            
+            // 로컬 값 갱신
+            NoticeProvider.univNoticeTypes = response.data
+                .compactMap { $0.category = .대학}
+            return NoticeProvider.univNoticeTypes
+        },
+        getAllDepartments: {
+            let response: Response<[NoticeProvider]> = try await satellite
+                .response(
+                    for: Path.getAllDepartments.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ]
+                )
+            
+            // 로컬 값 갱신
+            NoticeProvider.departments = response.data
+                .compactMap { $0.category = .학과 }
+            return NoticeProvider.departments
         }
     )
 }
@@ -125,6 +188,64 @@ extension KuringLink {
         },
         subscribeDepartments: { _ in
             true
+        },
+        getSubscribedUnivNotices: {
+            [
+                NoticeProvider.학사,
+                NoticeProvider.도서관
+            ]
+        },
+        getSubscribedDepartments: {
+            NoticeProvider(
+                name: "education",
+                hostPrefix: "edu",
+                korName: "교직과",
+                category: .학과
+            ),
+            NoticeProvider(
+                name: "physical_education",
+                hostPrefix: "kupe",
+                korName: "체육교육과",
+                category: .학과
+            ),
+            NoticeProvider(
+                name: "computer_science",
+                hostPrefix: "cse",
+                korName: "컴퓨터공학부",
+                category: .학과
+            )
+        },
+        getAllUnivNoticeType: {
+            [
+                NoticeProvider.학사,
+                NoticeProvider.취창업,
+                NoticeProvider.도서관,
+                NoticeProvider.학생,
+                NoticeProvider.국제,
+                NoticeProvider.장학,
+                NoticeProvider.산학,
+                NoticeProvider.일반,
+            ]
+        },
+        getAllDepartments: {
+            NoticeProvider(
+                name: "education",
+                hostPrefix: "edu",
+                korName: "교직과",
+                category: .학과
+            ),
+            NoticeProvider(
+                name: "physical_education",
+                hostPrefix: "kupe",
+                korName: "체육교육과",
+                category: .학과
+            ),
+            NoticeProvider(
+                name: "computer_science",
+                hostPrefix: "cse",
+                korName: "컴퓨터공학부",
+                category: .학과
+            )
         }
     )
 }

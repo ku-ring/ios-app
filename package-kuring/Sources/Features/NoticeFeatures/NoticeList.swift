@@ -119,6 +119,7 @@ public struct NoticeListFeature {
 
         Reduce { state, action in
             switch action {
+                // TODO: 이니셜라이저로
             case .onAppear:
                 return .send(.fetchNotices)
 
@@ -182,18 +183,18 @@ public struct NoticeListFeature {
                 .cancellable(id: CancelID.fetchNotices, cancelInFlight: true)
 
             case let .noticesResponse(.success(noticesResult)):
-                let noticeType = noticesResult.provider
+                let provider = noticesResult.provider
                 let notices = noticesResult.notices
-                if state.noticeDictionary[noticeType] == nil {
-                    state.noticeDictionary[noticeType] = State.NoticeInfo()
+                if state.noticeDictionary[provider] == nil {
+                    state.noticeDictionary[provider] = State.NoticeInfo()
                 }
-                guard var noticeInfo = state.noticeDictionary[noticeType] else { return .none }
+                guard var noticeInfo = state.noticeDictionary[provider] else { return .none }
 
                 noticeInfo.hasNextList = notices.count >= noticeInfo.loadLimit
                 noticeInfo.page += 1
                 noticeInfo.notices += notices
 
-                state.noticeDictionary[noticeType] = noticeInfo
+                state.noticeDictionary[provider] = noticeInfo
                 state.isLoading = false
                 return .none
 
