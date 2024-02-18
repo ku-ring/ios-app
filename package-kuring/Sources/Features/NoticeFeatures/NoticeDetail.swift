@@ -48,10 +48,14 @@ public struct NoticeDetailFeature {
             case .bookmarkButtonTapped:
                 state.isBookmarked.toggle()
                 
-                if state.isBookmarked {
-                    try? bookmarks.add(state.notice)
-                } else {
-                    try? bookmarks.remove(state.notice.id)
+                do {
+                    if state.isBookmarked {
+                        try bookmarks.add(state.notice)
+                    } else {
+                        try bookmarks.remove(state.notice.id)
+                    }
+                } catch {
+                    print("북마크 업데이트에 실패했어요: \(error.localizedDescription)")
                 }
                 
                 return .none

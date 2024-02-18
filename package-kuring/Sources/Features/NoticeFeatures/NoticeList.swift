@@ -120,6 +120,7 @@ public struct NoticeListFeature {
         Reduce { state, action in
             switch action {
             case .onAppear:
+                print("❄️ 페치노티스")
                 return .send(.fetchNotices)
 
             case .changeDepartmentButtonTapped:
