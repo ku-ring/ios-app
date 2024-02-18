@@ -3,8 +3,8 @@
 // See the 'License.txt' file for licensing information.
 //
 
-import SwiftUI
 import WebKit
+import SwiftUI
 
 public struct WebView: UIViewRepresentable {
     
