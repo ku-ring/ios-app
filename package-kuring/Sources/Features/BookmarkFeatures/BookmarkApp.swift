@@ -32,6 +32,8 @@ public struct BookmarkAppFeature {
         /// 스택 네비게이션 액션 (``BookmarkAppFeature/Path/Action``)
         case path(StackAction<Path.State, Path.Action>)
     }
+    
+    //TODO: bookmark 해지 작업
 
     public var body: some ReducerOf<Self> {
         Scope(state: \.bookmarkList, action: \.bookmarkList) {
@@ -44,7 +46,7 @@ public struct BookmarkAppFeature {
                 return .none
 
             case .bookmarkList:
-                return .none
+                return .none  
             }
         }
         .forEach(\.path, action: \.path) {

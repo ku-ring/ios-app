@@ -12,14 +12,18 @@ public struct NoticeRow: View {
     var rowType: NoticeRowType
     let notice: Notice
 
-    public init(notice: Notice, bookmarked: Bool = false, rowType: NoticeRowType? = nil) {
+    public init(
+        notice: Notice,
+        bookmarked: Bool = false,
+        rowType: NoticeRowType? = nil
+    ) {
         self.notice = notice
 
         if let rowType {
             self.rowType = rowType
             return
         }
-
+        
         if notice.important {
             if bookmarked { self.rowType = .importantAndBookmark }
             else { self.rowType = .important }
@@ -39,7 +43,7 @@ public struct NoticeRow: View {
         /// 기본
         case none
     }
-
+    
     public var body: some View {
         ZStack {
             switch rowType {
