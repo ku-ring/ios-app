@@ -4,7 +4,6 @@
 //
 
 import ComposableArchitecture
-import Models
 
 @Reducer
 public struct BookmarkAppFeature {
@@ -34,7 +33,7 @@ public struct BookmarkAppFeature {
         case path(StackAction<Path.State, Path.Action>)
     }
     
-    @Dependency(\.bookmarks) var bookmarks
+    //TODO: bookmark 해지 작업
 
     public var body: some ReducerOf<Self> {
         Scope(state: \.bookmarkList, action: \.bookmarkList) {
@@ -47,8 +46,7 @@ public struct BookmarkAppFeature {
                 return .none
 
             case .bookmarkList:
-                return .none
-                
+                return .none  
             }
         }
         .forEach(\.path, action: \.path) {

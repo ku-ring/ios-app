@@ -26,7 +26,6 @@ public struct NoticeDetailFeature {
     public enum Action: BindableAction, Equatable {
         case bookmarkButtonTapped
         case shareButtonTapped
-        case backButtonTapped
         
         case binding(BindingAction<State>)
 
@@ -36,8 +35,6 @@ public struct NoticeDetailFeature {
             case bookmarkUpdated(_ notice: Notice, _ isBookmarkd: Bool)
         }
     }
-    
-    @Dependency(\.dismiss) var dismiss
     
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
@@ -54,9 +51,6 @@ public struct NoticeDetailFeature {
                     items: state.notice.url
                 )
                 return .none
-                
-            case .backButtonTapped:
-                return .run { _ in await self.dismiss() }
                 
             case .delegate:
                 return .none

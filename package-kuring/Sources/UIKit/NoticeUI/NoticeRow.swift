@@ -44,8 +44,6 @@ public struct NoticeRow: View {
         case none
     }
     
-    @Dependency(\.bookmarks) var bookmarks
-
     public var body: some View {
         ZStack {
             switch rowType {

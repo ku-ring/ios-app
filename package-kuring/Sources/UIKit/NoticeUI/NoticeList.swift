@@ -62,6 +62,7 @@ struct NoticeList: View {
                 EmptyView()
             }
         }
+        .navigationTitle("")
     }
 }
 

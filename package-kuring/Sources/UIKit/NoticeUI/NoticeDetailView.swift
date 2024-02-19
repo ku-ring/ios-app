@@ -18,14 +18,6 @@ public struct NoticeDetailView: View {
             .activitySheet($store.shareItem)
             .navigationBarBackButtonHidden()
             .toolbar {
-                ToolbarItemGroup(placement: .topBarLeading) {
-                    Button {
-                        self.store.send(.backButtonTapped)
-                    } label: {
-                        Image(systemName: "chevron.left")
-                    }
-                }
-                
                 ToolbarItem(placement: .principal) {
                     Text(store.notice.subject)
                         .font(.system(size: 12))
