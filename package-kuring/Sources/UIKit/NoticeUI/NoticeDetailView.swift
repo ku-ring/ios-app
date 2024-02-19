@@ -16,7 +16,6 @@ public struct NoticeDetailView: View {
     public var body: some View {
         WebView(urlString: store.notice.url)
             .activitySheet($store.shareItem)
-            .navigationBarBackButtonHidden()
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(store.notice.subject)
