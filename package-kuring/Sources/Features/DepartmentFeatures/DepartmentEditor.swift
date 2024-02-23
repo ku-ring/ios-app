@@ -10,13 +10,13 @@ import ComposableArchitecture
 public struct DepartmentEditorFeature {
     @ObservableState
     public struct State: Equatable {
-        public var myDepartments: IdentifiedArrayOf<NoticeProvider> = []
-        public var results: IdentifiedArrayOf<NoticeProvider> = []
+        public var myDepartments: IdentifiedArrayOf<NoticeProvider>
+        public var results: IdentifiedArrayOf<NoticeProvider>
 
-        public var searchText: String = ""
-        public var focus: Field? = .search
+        public var searchText: String
+        public var focus: Field?
 
-        public var displayOption: Display = .myDepartment
+        public var displayOption: Display
 
         public enum Field {
             case search
@@ -32,8 +32,12 @@ public struct DepartmentEditorFeature {
         @Presents public var alert: AlertState<Action.Alert>?
 
         public init(
-            myDepartments: IdentifiedArrayOf<NoticeProvider> = [],
-            results: IdentifiedArrayOf<NoticeProvider> = [],
+            myDepartments: IdentifiedArrayOf<NoticeProvider> = .init(
+                uniqueElements: NoticeProvider.addedDepartments
+            ),
+            results: IdentifiedArrayOf<NoticeProvider> = .init(
+                uniqueElements: NoticeProvider.departments
+            ),
             searchText: String = "",
             focus: Field? = .search,
             displayOption: Display = .myDepartment,
@@ -147,14 +151,16 @@ public struct DepartmentEditorFeature {
                 switch alertAction {
                 case let .confirmAdd(department: department):
                     state.myDepartments.append(department)
-                    return .none
+                    
                 case let .confirmDelete(id: id):
                     state.myDepartments.remove(id: id)
-                    return .none
+                    
                 case .confirmDeleteAll:
                     state.myDepartments.removeAll()
-                    return .none
                 }
+                
+                NoticeProvider.addedDepartments = state.myDepartments.elements
+                return .none
 
             case .alert(.dismiss):
                 return .none

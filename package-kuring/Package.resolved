@@ -100,15 +100,6 @@
       }
     },
     {
-      "identity" : "package-activityui",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ku-ring/package-activityui",
-      "state" : {
-        "branch" : "main",
-        "revision" : "a8404f0e2d72873eace8f192589d542cbddea0b9"
-      }
-    },
-    {
       "identity" : "leveldb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
@@ -124,6 +115,15 @@
       "state" : {
         "revision" : "819d0a2173aff699fb8c364b6fb906f7cdb1a692",
         "version" : "2.30909.0"
+      }
+    },
+    {
+      "identity" : "package-activityui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ku-ring/package-activityui",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a8404f0e2d72873eace8f192589d542cbddea0b9"
       }
     },
     {
@@ -156,10 +156,10 @@
     {
       "identity" : "swift-collections",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-collections",
+      "location" : "https://github.com/apple/swift-collections.git",
       "state" : {
-        "revision" : "a902f1823a7ff3c9ab2fba0f992396b948eda307",
-        "version" : "1.0.5"
+        "branch" : "main",
+        "revision" : "ca8b4ab855f4b8075c1fd29eb50db756b1688e61"
       }
     },
     {

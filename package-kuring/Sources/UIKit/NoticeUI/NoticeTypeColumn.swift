@@ -8,6 +8,7 @@ import SwiftUI
 import ComposableArchitecture
 
 public struct NoticeTypeColumn: View {
+    public let title: String
     public let provider: NoticeProvider
     public let selectedID: NoticeProvider.ID
 
@@ -15,7 +16,7 @@ public struct NoticeTypeColumn: View {
         let itemSize = CGSize(width: 64, height: 48)
         let lineHeight: CGFloat = 3
 
-        Text(provider.korName)
+        Text(title)
             .font(.system(size: 16, weight: provider.id == selectedID ? .semibold : .regular))
             .padding(.vertical, 8)
             .frame(width: itemSize.width, height: itemSize.height)
@@ -36,7 +37,9 @@ public struct NoticeTypeColumn: View {
             .id(provider.id)
     }
 
-    public init(provider: NoticeProvider, selectedID: NoticeProvider.ID) {
+    /// - Parameter key: 보여질 텍스트 값
+    public init(key: String, provider: NoticeProvider, selectedID: NoticeProvider.ID) {
+        self.title = key
         self.provider = provider
         self.selectedID = selectedID
     }

@@ -22,6 +22,13 @@ struct KuringApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .kuringLink(
+                    onRequest: {
+                        print("onRequest")
+                    }, onCompletion: { result in
+                        print("onCompletion: \(result)")
+                    }
+                )
                 // MARK: 앱 업데이트 알림
                 .versionUpdateAlert()
                 // MARK: 새 공지 보여주기 (알림 탭했을 때)

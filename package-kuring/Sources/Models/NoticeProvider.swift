@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import OrderedCollections
 
 /// 공지 제공자 카테고리
 public enum NoticeType: String, Hashable, CaseIterable, Identifiable, Equatable {
@@ -16,9 +17,17 @@ public enum NoticeType: String, Hashable, CaseIterable, Identifiable, Equatable 
     public var provider: NoticeProvider {
         switch self {
         case .학과:
-            return NoticeProvider.departments.first ?? NoticeProvider.emptyDepartment
+            return NoticeProvider.addedDepartments.first ?? NoticeProvider.emptyDepartment
         case .대학:
             return NoticeProvider.학사
+        case .세팅하지않음:
+            // Invalid value
+            return NoticeProvider(
+                name: "", 
+                hostPrefix: "",
+                korName: "",
+                category: .세팅하지않음
+            )
         }
     }
 }
@@ -62,6 +71,33 @@ public struct NoticeProvider: Identifiable, Equatable, Hashable, Decodable {
         self.korName = try container.decode(String.self, forKey: .korName)
         self.category = .세팅하지않음
     }
+}
+
+extension NoticeProvider {
+    /// 공지 카테고리들 (`학과 학사 취창업 도서관 ...`)
+    /// - Important: 학과 카테고리에서 보여질 학과 값을 저장하기 위해 학과의 경우 선택될 때마다 `allNamesForPicker["학과"]`값이 변경되어야 합니다.
+    public static var allNamesForPicker: OrderedDictionary<String, NoticeProvider> = [
+        "학과": addedDepartments.first ?? .emptyDepartment,
+        "학사": .학사,
+        "취창업": .취창업,
+        "도서관": .도서관,
+        "학생": .학생,
+        "국제": .국제,
+        "장학": .장학,
+        "산학": .산학,
+        "일반": .일반,
+    ] {
+        didSet {
+            print(allNamesForPicker)
+        }
+    }
+    
+    public static let invalid = NoticeProvider(
+        name: "",
+        hostPrefix: "",
+        korName: "",
+        category: .세팅하지않음
+    )
 }
 
 // MARK: - 대학 공지
@@ -139,6 +175,7 @@ extension NoticeProvider {
     /// 앱 실행 시 모든 학과 정보를 가져와서 여기에 저장. 그 이후로 다음 앱 실행 전까지 로컬 값만 사용합니다.
     /// 네트워크 요청 실패시 로컬에 저장된 값을 default 값으로 사용합니다.
     public static var departments: [NoticeProvider] = [
+        // TODO: remove mock
         NoticeProvider(
             name: "education",
             hostPrefix: "edu",
@@ -158,15 +195,52 @@ extension NoticeProvider {
             category: .학과
         ),
     ]
-    /// 추가한 학과 (구독여부와 상관없음)
-    public static var addedDepartments: [NoticeProvider]
-    /// 구독한 학과
-    public static var subscribedDepartments: [NoticeProvider] = []
     
+    // TODO: UserDefaults 저장
+    /// 추가한 학과 (구독여부와 상관없음)
+    public static var addedDepartments: [NoticeProvider] = [
+        // TODO: remove mock
+        NoticeProvider(
+            name: "education",
+            hostPrefix: "edu",
+            korName: "교직과",
+            category: .학과
+        ),
+        NoticeProvider(
+            name: "physical_education",
+            hostPrefix: "kupe",
+            korName: "체육교육과",
+            category: .학과
+        ),
+        NoticeProvider(
+            name: "computer_science",
+            hostPrefix: "cse",
+            korName: "컴퓨터공학부",
+            category: .학과
+        ),
+    ]
+    /// 구독한 학과
+    public static var subscribedDepartments: [NoticeProvider] = [
+        // TODO: remove mock
+        NoticeProvider(
+            name: "education",
+            hostPrefix: "edu",
+            korName: "교직과",
+            category: .학과
+        ),
+    ]
+    /// 빈 학과
+    /// - Note: `departmentType(_:)` 인자에 이 값을 넣으면 학과 추가하기 떠야 합니다.
     public static let emptyDepartment = NoticeProvider(
         name: "",
         hostPrefix: "",
-        korName: "",
+        korName: "학과",
         category: .학과
     )
+    
+    /// 공지 카테고리 리스트에 쓰이는 학과 카테고리
+    /// - Parameter department: 보여질 학과 학과
+    public static func departmentTypes(_ department: NoticeProvider?) -> NoticeProvider {
+        department ?? .emptyDepartment
+    }
 }

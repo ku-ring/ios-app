@@ -78,8 +78,6 @@ public struct DepartmentEditor: View {
                                 store.send(.addDepartmentButtonTapped(id: result.id))
                             }
                         }
-                        .padding(.horizontal, 4)
-                        .padding(.vertical, 10)
                     }
                 }
             }

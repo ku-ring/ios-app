@@ -24,18 +24,7 @@ extension NoticeContentView {
 
             NavigationLink(
                 state: NoticeAppFeature.Path.State.departmentEditor(
-                    // TODO: - Mock 데이터 추후 제거
-                    DepartmentEditorFeature.State(
-                        myDepartments: IdentifiedArray(uniqueElements: NoticeProvider.departments),
-                        results: [
-                            NoticeProvider(
-                                name: "education",
-                                hostPrefix: "edu",
-                                korName: "교직과",
-                                category: .학과
-                            ),
-                        ]
-                    )
+                    DepartmentEditorFeature.State()
                 )
             ) {
                 OverlayButton("학과 추가하기")

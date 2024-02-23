@@ -126,7 +126,7 @@ public struct NoticeListFeature {
             case .changeDepartmentButtonTapped:
                 state.changeDepartment = DepartmentSelectorFeature.State(
                     currentDepartment: state.provider,
-                    addedDepartment: IdentifiedArray(uniqueElements: NoticeProvider.departments) // TODO: Dependency
+                    addedDepartment: IdentifiedArray(uniqueElements: NoticeProvider.addedDepartments)
                 )
                 return .none
 
@@ -143,6 +143,10 @@ public struct NoticeListFeature {
                     return .none
                 }
                 state.provider = selectedDepartment
+                NoticeProvider.allNamesForPicker.updateValue(
+                    state.provider,
+                    forKey: "학과"
+                )
                 return .none
 
             case .changeDepartment(.dismiss):
@@ -168,7 +172,9 @@ public struct NoticeListFeature {
                             TaskResult {
                                 let notices = try await kuringLink.fetchNotices(
                                     retrievalInfo.loadLimit,
-                                    provider.category == .학과 ? "dep" : provider.hostPrefix, // TODO: korean name 도 쓸 거 고려해서 문자열 말고 좀 더 나은걸로
+                                    provider.category == .학과 
+                                    ? "dep" // TODO: korean name 도 쓸 거 고려해서 문자열 말고 좀 더 나은걸로
+                                    : provider.hostPrefix,
                                     department,
                                     retrievalInfo.page
                                 )
@@ -217,6 +223,12 @@ public struct NoticeListFeature {
 
             case let .providerChanged(provider):
                 state.provider = provider
+                if provider.category == .학과 {
+                    NoticeProvider.allNamesForPicker.updateValue(
+                        provider,
+                        forKey: "학과"
+                    )
+                }
                 return .send(.fetchNotices)
 
             case .binding, .delegate, .changeDepartment:
