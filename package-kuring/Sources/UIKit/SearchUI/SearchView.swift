@@ -36,6 +36,7 @@ public struct SearchView: View {
 
                     TextField("검색어를 입력해주세요", text: $store.searchInfo.text)
                         .focused($focus, equals: .search)
+                        .autocorrectionDisabled()
                         .onSubmit { store.send(.search) }
 
                     if store.searchInfo.searchPhase == .searching {
