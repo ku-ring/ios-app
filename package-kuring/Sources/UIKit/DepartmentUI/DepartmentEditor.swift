@@ -28,6 +28,7 @@ public struct DepartmentEditor: View {
 
                 TextField("추가할 학과를 검색해 주세요", text: $store.searchText)
                     .focused($focus, equals: .search)
+                    .autocorrectionDisabled()
                     .bind($store.focus, to: self.$focus)
 
                 if !store.searchText.isEmpty {
