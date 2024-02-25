@@ -20,10 +20,13 @@ struct KuringLinkFetcher: ViewModifier {
                 onRequest()
                 do {
                     @Dependency(\.kuringLink) var kuringLink
-                    let _ = try await kuringLink.getAllUnivNoticeType()
-                    let _ = try await kuringLink.getAllDepartments()
-                    let _ = try await kuringLink.getSubscribedDepartments()
-                    let _ = try await kuringLink.getSubscribedUnivNotices()
+                    async let allUnivNoticeTypes = try kuringLink.getAllUnivNoticeType()
+                    async let allDepartments = try kuringLink.getAllDepartments()
+                    let _ = try await [allUnivNoticeTypes, allDepartments]
+                    
+                    async let subscribedDepartments = try kuringLink.getSubscribedDepartments()
+                    async let subscribedUnivNotices = try kuringLink.getSubscribedUnivNotices()
+                    let _ = try await [subscribedDepartments, subscribedUnivNotices]
                     onCompletion(.success(()))
                 } catch {
                     showsNetworkError = true
