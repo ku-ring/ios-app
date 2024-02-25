@@ -111,6 +111,13 @@ public struct NoticeAppFeature {
             case .changeSubscriptionButtonTapped:
                 state.changeSubscription = SubscriptionAppFeature.State()
                 return .none
+                
+            case let .path(.element(id: id, action: .departmentEditor(.delegate(.addedDepartmentsUpdated)))):
+                guard case let .departmentEditor(departmentEditorState) = state.path[id: id] else {
+                    return .none
+                }
+                state.noticeList.provider = departmentEditorState.myDepartments.first ?? .emptyDepartment
+                return .none
 
             case .path, .noticeList, .changeSubscription:
                 return .none

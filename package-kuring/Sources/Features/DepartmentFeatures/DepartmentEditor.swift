@@ -77,6 +77,13 @@ public struct DepartmentEditorFeature {
             /// 전체 삭제 알림 시 삭제 버튼 눌렀을 때
             case confirmDeleteAll
         }
+        
+        /// 델리게이트
+        case delegate(Delegate)
+        
+        public enum Delegate: Equatable {
+            case addedDepartmentsUpdated
+        }
     }
 
     public var body: some ReducerOf<Self> {
@@ -158,15 +165,24 @@ public struct DepartmentEditorFeature {
                 case .confirmDeleteAll:
                     state.myDepartments.removeAll()
                 }
-                
                 NoticeProvider.addedDepartments = state.myDepartments.elements
                 return .none
 
             case .alert(.dismiss):
                 return .none
+                
+                // MARK: Delegate
+                
+            case .delegate:
+                return .none
             }
         }
         .ifLet(\.$alert, action: \.alert)
+        .onChange(of: \.myDepartments) { oldValue, newValue in
+            Reduce { state, _ in
+                return .send(.delegate(.addedDepartmentsUpdated))
+            }
+        }
     }
 
     public init() { }
