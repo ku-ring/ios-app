@@ -110,6 +110,7 @@ extension NoticeProvider {
         .학사, .취창업, .도서관, .학생, .국제, .장학, .산학, .일반,
     ]
     
+    // TODO: UserDefaults 저장
     public static var subscribedUnivNoticeTypes: [NoticeProvider] = []
     
     public static let 학사 = NoticeProvider(
@@ -176,49 +177,51 @@ extension NoticeProvider {
     /// 네트워크 요청 실패시 로컬에 저장된 값을 default 값으로 사용합니다.
     public static var departments: [NoticeProvider] = [
         // TODO: remove mock
-        NoticeProvider(
-            name: "education",
-            hostPrefix: "edu",
-            korName: "교직과",
-            category: .학과
-        ),
-        NoticeProvider(
-            name: "physical_education",
-            hostPrefix: "kupe",
-            korName: "체육교육과",
-            category: .학과
-        ),
-        NoticeProvider(
-            name: "computer_science",
-            hostPrefix: "cse",
-            korName: "컴퓨터공학부",
-            category: .학과
-        ),
+//        NoticeProvider(
+//            name: "education",
+//            hostPrefix: "edu",
+//            korName: "교직과",
+//            category: .학과
+//        ),
+//        NoticeProvider(
+//            name: "physical_education",
+//            hostPrefix: "kupe",
+//            korName: "체육교육과",
+//            category: .학과
+//        ),
+//        NoticeProvider(
+//            name: "computer_science",
+//            hostPrefix: "cse",
+//            korName: "컴퓨터공학부",
+//            category: .학과
+//        ),
     ]
     
     // TODO: UserDefaults 저장
     /// 추가한 학과 (구독여부와 상관없음)
     public static var addedDepartments: [NoticeProvider] = [
         // TODO: remove mock
-        NoticeProvider(
-            name: "education",
-            hostPrefix: "edu",
-            korName: "교직과",
-            category: .학과
-        ),
-        NoticeProvider(
-            name: "physical_education",
-            hostPrefix: "kupe",
-            korName: "체육교육과",
-            category: .학과
-        ),
-        NoticeProvider(
-            name: "computer_science",
-            hostPrefix: "cse",
-            korName: "컴퓨터공학부",
-            category: .학과
-        ),
+//        NoticeProvider(
+//            name: "education",
+//            hostPrefix: "edu",
+//            korName: "교직과",
+//            category: .학과
+//        ),
+//        NoticeProvider(
+//            name: "physical_education",
+//            hostPrefix: "kupe",
+//            korName: "체육교육과",
+//            category: .학과
+//        ),
+//        NoticeProvider(
+//            name: "computer_science",
+//            hostPrefix: "cse",
+//            korName: "컴퓨터공학부",
+//            category: .학과
+//        ),
     ]
+    
+    // TODO: UserDefaults 저장
     /// 구독한 학과
     public static var subscribedDepartments: [NoticeProvider] = [
         // TODO: remove mock

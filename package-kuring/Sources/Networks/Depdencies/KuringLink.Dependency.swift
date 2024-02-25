@@ -170,14 +170,15 @@ extension KuringLink: DependencyKey {
                         category: .대학
                     )
                 }
-            var namesForPicker: OrderedDictionary<String, NoticeProvider> = [:]
+            var namesForPicker: OrderedDictionary<String, NoticeProvider> = ["학과": NoticeProvider.emptyDepartment] // 학과 순위 첫번째 보장
+            NoticeProvider.univNoticeTypes.forEach {
+                namesForPicker.updateValue($0, forKey: $0.korName)
+            }
+            // 서버에서 `hostPrefix: "dep"`, `korName: "학과"` 를 내려주기 때문에 업데이트 필요함
             namesForPicker.updateValue(
                 NoticeProvider.addedDepartments.first ?? .emptyDepartment,
                 forKey: "학과"
             )
-            NoticeProvider.univNoticeTypes.forEach {
-                namesForPicker.updateValue($0, forKey: $0.korName)
-            }
             NoticeProvider.allNamesForPicker = namesForPicker
             return NoticeProvider.univNoticeTypes
         },

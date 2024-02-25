@@ -222,13 +222,9 @@ public struct NoticeListFeature {
                 return .none
 
             case let .providerChanged(provider):
-                state.provider = provider
-                if provider.category == .학과 {
-                    NoticeProvider.allNamesForPicker.updateValue(
-                        provider,
-                        forKey: "학과"
-                    )
-                }
+                state.provider = provider.category == .학과
+                ? NoticeProvider.allNamesForPicker["학과"] ?? NoticeProvider.emptyDepartment
+                : provider
                 return .send(.fetchNotices)
 
             case .binding, .delegate, .changeDepartment:
