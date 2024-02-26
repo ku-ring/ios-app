@@ -5,6 +5,7 @@
 
 import Models
 import Foundation
+import OrderedCollections
 import ComposableArchitecture
 
 extension DependencyValues {
@@ -102,6 +103,107 @@ extension KuringLink: DependencyKey {
                 )
             let isSucceed = (200 ..< 300) ~= response.code
             return isSucceed
+        },
+        getSubscribedUnivNotices: {
+            let response: Response<[NoticeProvider]> = try await satellite
+                .response(
+                    for: Path.getSubscribedUnivNotices.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ]
+                )
+            // 로컬 값 갱신
+            NoticeProvider.subscribedUnivNoticeTypes = response.data
+                .compactMap {
+                    NoticeProvider(
+                        name: $0.name,
+                        hostPrefix: $0.hostPrefix,
+                        korName: $0.korName,
+                        category: .대학
+                    )
+                }
+            return NoticeProvider.subscribedUnivNoticeTypes
+        },
+        getSubscribedDepartments: {
+            let response: Response<[NoticeProvider]> = try await satellite
+                .response(
+                    for: Path.getSubscribedDepartments.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ]
+                )
+            
+            // 로컬 값 갱신
+            NoticeProvider.subscribedDepartments = response.data
+                .compactMap {
+                    NoticeProvider(
+                        name: $0.name, 
+                        hostPrefix: $0.hostPrefix,
+                        korName: $0.korName,
+                        category: .학과
+                    )
+                }
+            return NoticeProvider.subscribedDepartments
+        },
+        getAllUnivNoticeType: {
+            let response: Response<[NoticeProvider]> = try await satellite
+                .response(
+                    for: Path.getAllUnivNoticeType.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ]
+                )
+            
+            // 로컬 값 갱신
+            NoticeProvider.univNoticeTypes = response.data
+                .compactMap {
+                    NoticeProvider(
+                        name: $0.name,
+                        hostPrefix: $0.hostPrefix,
+                        korName: $0.korName,
+                        category: .대학
+                    )
+                }
+            var namesForPicker: OrderedDictionary<String, NoticeProvider> = ["학과": NoticeProvider.emptyDepartment] // 학과 순위 첫번째 보장
+            NoticeProvider.univNoticeTypes.forEach {
+                namesForPicker.updateValue($0, forKey: $0.korName)
+            }
+            // 서버에서 `hostPrefix: "dep"`, `korName: "학과"` 를 내려주기 때문에 업데이트 필요함
+            namesForPicker.updateValue(
+                NoticeProvider.addedDepartments.first ?? .emptyDepartment,
+                forKey: "학과"
+            )
+            NoticeProvider.allNamesForPicker = namesForPicker
+            return NoticeProvider.univNoticeTypes
+        },
+        getAllDepartments: {
+            let response: Response<[NoticeProvider]> = try await satellite
+                .response(
+                    for: Path.getAllDepartments.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ]
+                )
+            
+            // 로컬 값 갱신
+            NoticeProvider.departments = response.data
+                .compactMap {
+                    NoticeProvider(
+                        name: $0.name,
+                        hostPrefix: $0.hostPrefix,
+                        korName: $0.korName,
+                        category: .학과
+                    )
+                }
+            return NoticeProvider.departments
         }
     )
 }
@@ -125,6 +227,68 @@ extension KuringLink {
         },
         subscribeDepartments: { _ in
             true
+        },
+        getSubscribedUnivNotices: {
+            [
+                NoticeProvider.학사,
+                NoticeProvider.도서관
+            ]
+        },
+        getSubscribedDepartments: {
+            [
+                NoticeProvider(
+                    name: "education",
+                    hostPrefix: "edu",
+                    korName: "교직과",
+                    category: .학과
+                ),
+                NoticeProvider(
+                    name: "physical_education",
+                    hostPrefix: "kupe",
+                    korName: "체육교육과",
+                    category: .학과
+                ),
+                NoticeProvider(
+                    name: "computer_science",
+                    hostPrefix: "cse",
+                    korName: "컴퓨터공학부",
+                    category: .학과
+                )
+            ]
+        },
+        getAllUnivNoticeType: {
+            [
+                NoticeProvider.학사,
+                NoticeProvider.취창업,
+                NoticeProvider.도서관,
+                NoticeProvider.학생,
+                NoticeProvider.국제,
+                NoticeProvider.장학,
+                NoticeProvider.산학,
+                NoticeProvider.일반,
+            ]
+        },
+        getAllDepartments: {
+            [
+                NoticeProvider(
+                    name: "education",
+                    hostPrefix: "edu",
+                    korName: "교직과",
+                    category: .학과
+                ),
+                NoticeProvider(
+                    name: "physical_education",
+                    hostPrefix: "kupe",
+                    korName: "체육교육과",
+                    category: .학과
+                ),
+                NoticeProvider(
+                    name: "computer_science",
+                    hostPrefix: "cse",
+                    korName: "컴퓨터공학부",
+                    category: .학과
+                )
+            ]
         }
     )
 }

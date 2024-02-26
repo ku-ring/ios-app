@@ -10,13 +10,13 @@ import ComposableArchitecture
 public struct DepartmentEditorFeature {
     @ObservableState
     public struct State: Equatable {
-        public var myDepartments: IdentifiedArrayOf<NoticeProvider> = []
-        public var results: IdentifiedArrayOf<NoticeProvider> = []
+        public var myDepartments: IdentifiedArrayOf<NoticeProvider>
+        public var results: IdentifiedArrayOf<NoticeProvider>
 
-        public var searchText: String = ""
-        public var focus: Field? = .search
+        public var searchText: String
+        public var focus: Field?
 
-        public var displayOption: Display = .myDepartment
+        public var displayOption: Display
 
         public enum Field {
             case search
@@ -32,8 +32,12 @@ public struct DepartmentEditorFeature {
         @Presents public var alert: AlertState<Action.Alert>?
 
         public init(
-            myDepartments: IdentifiedArrayOf<NoticeProvider> = [],
-            results: IdentifiedArrayOf<NoticeProvider> = [],
+            myDepartments: IdentifiedArrayOf<NoticeProvider> = .init(
+                uniqueElements: NoticeProvider.addedDepartments
+            ),
+            results: IdentifiedArrayOf<NoticeProvider> = .init(
+                uniqueElements: NoticeProvider.departments
+            ),
             searchText: String = "",
             focus: Field? = .search,
             displayOption: Display = .myDepartment,
@@ -72,6 +76,13 @@ public struct DepartmentEditorFeature {
             case confirmDelete(id: NoticeProvider.ID)
             /// 전체 삭제 알림 시 삭제 버튼 눌렀을 때
             case confirmDeleteAll
+        }
+        
+        /// 델리게이트
+        case delegate(Delegate)
+        
+        public enum Delegate: Equatable {
+            case addedDepartmentsUpdated
         }
     }
 
@@ -147,20 +158,31 @@ public struct DepartmentEditorFeature {
                 switch alertAction {
                 case let .confirmAdd(department: department):
                     state.myDepartments.append(department)
-                    return .none
+                    
                 case let .confirmDelete(id: id):
                     state.myDepartments.remove(id: id)
-                    return .none
+                    
                 case .confirmDeleteAll:
                     state.myDepartments.removeAll()
-                    return .none
                 }
+                NoticeProvider.addedDepartments = state.myDepartments.elements
+                return .none
 
             case .alert(.dismiss):
+                return .none
+                
+                // MARK: Delegate
+                
+            case .delegate:
                 return .none
             }
         }
         .ifLet(\.$alert, action: \.alert)
+        .onChange(of: \.myDepartments) { oldValue, newValue in
+            Reduce { state, _ in
+                return .send(.delegate(.addedDepartmentsUpdated))
+            }
+        }
     }
 
     public init() { }

@@ -35,6 +35,8 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", branch: "main"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.1.5"),
+        .package(
+              url: "https://github.com/apple/swift-collections.git", branch: "main"),
         .package(url: "https://github.com/ku-ring/the-satellite", branch: "main"),
         .package(url: "https://github.com/ku-ring/ios-maps", branch: "main"),
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.50.4"),
@@ -226,6 +228,7 @@ let package = Package(
                 "Models",
                 .product(name: "Satellite", package: "the-satellite"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "Collections", package: "swift-collections"),
             ],
             path: "Sources/Networks",
             resources: [.process("Resources/KuringLink-Info.plist")]

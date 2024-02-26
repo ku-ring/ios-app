@@ -119,13 +119,14 @@ public struct NoticeListFeature {
 
         Reduce { state, action in
             switch action {
+                // TODO: 이니셜라이저로
             case .onAppear:
                 return .send(.fetchNotices)
 
             case .changeDepartmentButtonTapped:
                 state.changeDepartment = DepartmentSelectorFeature.State(
                     currentDepartment: state.provider,
-                    addedDepartment: IdentifiedArray(uniqueElements: NoticeProvider.departments) // TODO: Dependency
+                    addedDepartment: IdentifiedArray(uniqueElements: NoticeProvider.addedDepartments)
                 )
                 return .none
 
@@ -142,6 +143,10 @@ public struct NoticeListFeature {
                     return .none
                 }
                 state.provider = selectedDepartment
+                NoticeProvider.allNamesForPicker.updateValue(
+                    state.provider,
+                    forKey: "학과"
+                )
                 return .none
 
             case .changeDepartment(.dismiss):
@@ -167,7 +172,9 @@ public struct NoticeListFeature {
                             TaskResult {
                                 let notices = try await kuringLink.fetchNotices(
                                     retrievalInfo.loadLimit,
-                                    provider.category == .학과 ? "dep" : provider.hostPrefix, // TODO: korean name 도 쓸 거 고려해서 문자열 말고 좀 더 나은걸로
+                                    provider.category == .학과 
+                                    ? "dep" // TODO: korean name 도 쓸 거 고려해서 문자열 말고 좀 더 나은걸로
+                                    : provider.hostPrefix,
                                     department,
                                     retrievalInfo.page
                                 )
@@ -182,18 +189,18 @@ public struct NoticeListFeature {
                 .cancellable(id: CancelID.fetchNotices, cancelInFlight: true)
 
             case let .noticesResponse(.success(noticesResult)):
-                let noticeType = noticesResult.provider
+                let provider = noticesResult.provider
                 let notices = noticesResult.notices
-                if state.noticeDictionary[noticeType] == nil {
-                    state.noticeDictionary[noticeType] = State.NoticeInfo()
+                if state.noticeDictionary[provider] == nil {
+                    state.noticeDictionary[provider] = State.NoticeInfo()
                 }
-                guard var noticeInfo = state.noticeDictionary[noticeType] else { return .none }
+                guard var noticeInfo = state.noticeDictionary[provider] else { return .none }
 
                 noticeInfo.hasNextList = notices.count >= noticeInfo.loadLimit
                 noticeInfo.page += 1
                 noticeInfo.notices += notices
 
-                state.noticeDictionary[noticeType] = noticeInfo
+                state.noticeDictionary[provider] = noticeInfo
                 state.isLoading = false
                 return .none
 
@@ -215,7 +222,9 @@ public struct NoticeListFeature {
                 return .none
 
             case let .providerChanged(provider):
-                state.provider = provider
+                state.provider = provider.category == .학과
+                ? NoticeProvider.allNamesForPicker["학과"] ?? NoticeProvider.emptyDepartment
+                : provider
                 return .send(.fetchNotices)
 
             case .binding, .delegate, .changeDepartment:

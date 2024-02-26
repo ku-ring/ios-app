@@ -5,6 +5,7 @@
 
 import Foundation
 
+/// 서버로 전송하는 **대학공지** 구독 정보 값
 public struct UnivNoticeSubscription: Codable {
     public let categories: [String]
 
@@ -13,6 +14,7 @@ public struct UnivNoticeSubscription: Codable {
     }
 }
 
+/// 서버로 전송하는 **학과** 구독 정보 값
 public struct DepartmentSubscription: Codable {
     public let departments: [String]
 

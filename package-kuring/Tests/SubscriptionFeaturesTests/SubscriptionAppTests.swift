@@ -71,6 +71,17 @@ class SubscriptionAppTests: XCTestCase {
             $0.path[id: 0, case: /SubscriptionAppFeature.Path.State.departmentEditor]?.alert = nil
             $0.path[id: 0, case: /SubscriptionAppFeature.Path.State.departmentEditor]?.myDepartments = []
         }
+        
+        await store.receive(
+            .path(
+                .element(
+                    id: 0,
+                    action: .departmentEditor(
+                        .delegate(.addedDepartmentsUpdated)
+                    )
+                )
+            )
+        )
 
         await store.send(
             .path(
@@ -107,6 +118,17 @@ class SubscriptionAppTests: XCTestCase {
             $0.path[id: 0, case: /SubscriptionAppFeature.Path.State.departmentEditor]?.alert = nil
             $0.path[id: 0, case: /SubscriptionAppFeature.Path.State.departmentEditor]?.myDepartments = [체육교육과]
         }
+        
+        await store.receive(
+            .path(
+                .element(
+                    id: 0,
+                    action: .departmentEditor(
+                        .delegate(.addedDepartmentsUpdated)
+                    )
+                )
+            )
+        )
         
         await store.send(.path(.popFrom(id: 0))) {
             $0.path = .init()

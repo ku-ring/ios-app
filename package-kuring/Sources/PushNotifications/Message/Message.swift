@@ -5,8 +5,11 @@
 
 import Models
 
+/// 전달 받은 푸시 알림 메세지
 public enum Message {
+    /// 공지 알림
     case notice(Notice)
+    /// 커스텀 알림
     case custom(title: String, body: String, url: String?)
 }
 

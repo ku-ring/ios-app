@@ -3,6 +3,7 @@
 // See the 'License.txt' file for licensing information.
 //
 
+import Models
 import SwiftUI
 import DepartmentFeatures
 import SubscriptionFeatures
@@ -156,10 +157,7 @@ struct SubscriptionView: View {
                 /// 학과 추가/편집하기 버튼 - `DepartmentEditor` 로 이동
                 NavigationLink(
                     state: SubscriptionAppFeature.Path.State.departmentEditor(
-                        // TODO: init parameter 값 수정 (현재는 테스트용)
-                        DepartmentEditorFeature.State(
-                            myDepartments: store.myDepartments
-                        )
+                        DepartmentEditorFeature.State()
                     )
                 ) {
                     HStack(alignment: .center, spacing: 10) {

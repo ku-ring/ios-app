@@ -8,15 +8,16 @@ import SwiftUI
 import ComposableArchitecture
 
 public struct NoticeTypeColumn: View {
-    public let noticeType: NoticeType
-    public let selectedID: NoticeType.ID
+    public let title: String
+    public let provider: NoticeProvider
+    public let selectedID: NoticeProvider.ID
 
     public var body: some View {
         let itemSize = CGSize(width: 64, height: 48)
         let lineHeight: CGFloat = 3
 
-        Text(noticeType.rawValue)
-            .font(.system(size: 16, weight: noticeType.id == selectedID ? .semibold : .regular))
+        Text(title)
+            .font(.system(size: 16, weight: provider.id == selectedID ? .semibold : .regular))
             .padding(.vertical, 8)
             .frame(width: itemSize.width, height: itemSize.height)
             .overlay {
@@ -25,19 +26,21 @@ public struct NoticeTypeColumn: View {
 
                     RoundedRectangle(cornerRadius: lineHeight / 2)
                         .frame(width: itemSize.width, height: lineHeight)
-                        .opacity(noticeType.id == selectedID ? 1 : 0)
+                        .opacity(provider.id == selectedID ? 1 : 0)
                 }
             }
             .foregroundStyle(
-                noticeType.id == selectedID
+                provider.id == selectedID
                     ? Color.accentColor
                     : Color.black.opacity(0.3)
             )
-            .id(noticeType.id)
+            .id(provider.id)
     }
 
-    public init(noticeType: NoticeType, selectedID: NoticeType.ID) {
-        self.noticeType = noticeType
+    /// - Parameter key: 보여질 텍스트 값
+    public init(key: String, provider: NoticeProvider, selectedID: NoticeProvider.ID) {
+        self.title = key
+        self.provider = provider
         self.selectedID = selectedID
     }
 }

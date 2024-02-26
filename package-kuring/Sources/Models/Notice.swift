@@ -5,6 +5,7 @@
 
 import Foundation
 
+/// 공지
 public struct Notice: Codable, Hashable, Identifiable, Equatable {
     public var id: String { "\(category)_\(articleId)" }
     /// e.g., `"5b45b56"`
@@ -36,6 +37,14 @@ public struct Notice: Codable, Hashable, Identifiable, Equatable {
 
 // MARK: - Push Notification
 extension Notice {
+    /// 푸시 알림으로 부터 공지를 생성합니다
+    /// ```swift
+    /// let userInfo = resposne.notification.request.content.userInfo as? [String: Any]
+    /// guard let userInfo else { return }
+    /// guard userInfo["type"] == "notice" else { return }
+    ///
+    /// try Notice(userInfo: userInfo)
+    /// ```
     public init(userInfo: [String: Any]) throws {
         guard let articleID = userInfo["articleId"] as? String else {
             throw DecodingError.noArticleID
@@ -64,11 +73,18 @@ extension Notice {
         )
     }
     
+    /// 서버값으로 부터 공지 알림을 디코딩 하지 못했을 때 던지는 에러.
+    /// - Note: 현재는 푸시 알림 디코딩에만 사용되고 있습니다.
     public enum DecodingError: Error {
+        /// `articleId` 없음
         case noArticleID
+        /// `subject` 없음
         case noSubject
+        /// `category` 없음
         case noCategory
+        /// `postedDate`  없음
         case noPostedDate
+        /// URL 정보 없음
         case noURL
     }
 }
@@ -104,6 +120,8 @@ extension Notice {
     }
 }
 
+/// 검색된 공지
+/// - Note: 서버의 json 데이터의 depth 가 달라 추가된 모델
 public struct SearchedNotice: Codable, Hashable {
     public var id: String { baseUrl }
     /// e.g., `"5b45b56"`

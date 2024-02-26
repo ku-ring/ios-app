@@ -93,11 +93,7 @@ public struct NoticeAppFeature {
                     state.path.removeAll()
                     state.path.append(
                         Path.State.departmentEditor(
-                            // TODO: init parameter 수정 (현재는 테스트용)
-                            DepartmentEditorFeature.State(
-                                myDepartments: IdentifiedArray(uniqueElements: NoticeProvider.departments),
-                                results: IdentifiedArray(uniqueElements: NoticeProvider.departments)
-                            )
+                            DepartmentEditorFeature.State()
                         )
                     )
                     return .none
@@ -114,6 +110,13 @@ public struct NoticeAppFeature {
 
             case .changeSubscriptionButtonTapped:
                 state.changeSubscription = SubscriptionAppFeature.State()
+                return .none
+                
+            case let .path(.element(id: id, action: .departmentEditor(.delegate(.addedDepartmentsUpdated)))):
+                guard case let .departmentEditor(departmentEditorState) = state.path[id: id] else {
+                    return .none
+                }
+                state.noticeList.provider = departmentEditorState.myDepartments.first ?? .emptyDepartment
                 return .none
 
             case .path, .noticeList, .changeSubscription:

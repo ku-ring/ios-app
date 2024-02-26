@@ -5,13 +5,21 @@
 
 import Foundation
 
+/// 교직원
 public struct Staff: Codable, Hashable, Equatable {
+    /// 교직원 이름
     public let name: String
+    /// 교직원 소속 단과대학
     public let collegeName: String
+    /// 교직원 소속 학부
     public let deptName: String
+    /// 교직원 세부 전공
     public let major: String
+    /// 교직원 연구실 위치
     public let lab: String
+    /// 교직원 전화번호
     public let phone: String
+    /// 교직원 이메일주소
     public let email: String
 }
 

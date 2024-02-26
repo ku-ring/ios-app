@@ -9,27 +9,31 @@ import ComposableArchitecture
 
 public struct NoticeCategoryPicker: View {
     @Binding var selection: NoticeProvider
-
+    
     public var body: some View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 0) {
-                    ForEach(NoticeType.allCases, id: \.self) { category in
+                    ForEach(
+                        NoticeProvider.allNamesForPicker.compactMap({ $0.key }),
+                        id: \.self
+                    ) { key in
                         Button {
-                            selection = category.provider
+                            selection = NoticeProvider.allNamesForPicker[key] ?? .invalid
                         } label: {
                             NoticeTypeColumn(
-                                noticeType: category,
-                                selectedID: selection.category.id
+                                key: key,
+                                provider: NoticeProvider.allNamesForPicker[key] ?? .invalid,
+                                selectedID: selection.id
                             )
                         }
                         .buttonStyle(.plain)
                     }
                 }
                 .padding(.leading, 10)
-                .onChange(of: selection) { value in
+                .onChange(of: selection) { _, value in
                     withAnimation {
-                        proxy.scrollTo(value.category.id, anchor: .center)
+                        proxy.scrollTo(value.id, anchor: .center)
                     }
                 }
             }
