@@ -33,20 +33,32 @@ public struct BookmarkAppFeature {
         case path(StackAction<Path.State, Path.Action>)
     }
     
-    //TODO: bookmark 해지 작업
+    @Dependency(\.bookmarks) var bookmarks
 
     public var body: some ReducerOf<Self> {
         Scope(state: \.bookmarkList, action: \.bookmarkList) {
             BookmarkListFeature()
         }
 
-        Reduce { _, action in
+        Reduce { state, action in
             switch action {
-            case .path:
+            case let .path(.element(id: _, action: .detail(.delegate(action)))):
+                switch action {
+                case let .bookmarkUpdated(notice, isBookmarked):
+                    do {
+                        if isBookmarked {
+                            try bookmarks.add(notice)
+                        } else {
+                            try bookmarks.remove(notice.id)
+                        }
+                    } catch {
+                        print("북마크 업데이트에 실패했어요: \(error.localizedDescription)")
+                    }
+                    return .none
+                }
+                
+            case .path, .bookmarkList:
                 return .none
-
-            case .bookmarkList:
-                return .none  
             }
         }
         .forEach(\.path, action: \.path) {

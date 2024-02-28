@@ -112,6 +112,7 @@ public struct NoticeListFeature {
         case fetchNotices
     }
 
+    /// 쿠링 서버 네트워크
     @Dependency(\.kuringLink) public var kuringLink
 
     public var body: some ReducerOf<Self> {
