@@ -64,6 +64,16 @@ public struct NoticeAppFeature {
 
         Reduce { state, action in
             switch action {
+            case .noticeList(.onAppear):
+                // 북마크 상태 동기화
+                @Dependency(\.bookmarks) var bookmarks
+                do {
+                    state.noticeList.bookmarkIDs = Set(try bookmarks().map(\.id))
+                } catch {
+                    print("북마크 가져오기를 실패했어요: \(error.localizedDescription)")
+                }
+                return .none
+                
             case let .path(.element(id: _, action: .detail(.delegate(action)))):
                 switch action {
                 case let .bookmarkUpdated(notice, isBookmarked):

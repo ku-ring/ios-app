@@ -17,9 +17,18 @@ public struct NoticeDetailFeature {
         public var isBookmarked: Bool = false
         public var shareItem: ActivityItem? = nil
 
-        public init(notice: Notice, isBookmarked: Bool = false) {
+        public init(notice: Notice, isBookmarked: Bool? = nil) {
+            @Dependency(\.bookmarks) var bookmarks
             self.notice = notice
-            self.isBookmarked = isBookmarked
+            if let isBookmarked {
+                self.isBookmarked = isBookmarked
+                return
+            }
+            do {
+                self.isBookmarked = try bookmarks().contains { $0.id == notice.id }
+            } catch {
+                self.isBookmarked = false
+            }
         }
     }
 
