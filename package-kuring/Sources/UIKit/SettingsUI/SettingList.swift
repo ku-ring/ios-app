@@ -13,6 +13,7 @@ public struct SettingList: View {
     @Dependency(\.leLabo) var leLabo
     
     struct Constants {
+        static let TextCaption1: Color = Color(red: 0.53, green: 0.54, blue: 0.57)
         static let TextCaption2: Color = Color(red: 0.7, green: 0.71, blue: 0.74)
         static let TextBody: Color = Color(red: 0.21, green: 0.24, blue: 0.29)
     }
@@ -27,7 +28,10 @@ public struct SettingList: View {
                 }
 
                 HStack {
-                    itemView("icon_bell", "기타 알림 받기", true)
+                    itemView("icon_bell",
+                             "기타 알림 받기",
+                             "주요 공지사항, 앱 내 주요 사항",
+                             true)
 
                     Spacer()
 
@@ -43,7 +47,7 @@ public struct SettingList: View {
 
             Section {
                 HStack {
-                    itemView("icon_app_version", "앱 버전", true)
+                    itemView("icon_app_version", "앱 버전", nil, true)
 
                     Spacer()
 
@@ -85,7 +89,7 @@ public struct SettingList: View {
                         OpenSourceListFeature.State()
                     )
                 ) {
-                    itemView("icon_opensource", "오픈소스 라이센스", true)
+                    itemView("icon_opensource", "오픈소스 라이센스", nil, true)
                 }
                 
             } header: {
@@ -121,7 +125,7 @@ public struct SettingList: View {
                 headerView("쿠링 실험실")
             }
             .listRowSeparator(.hidden)
-
+            
             Section {
                 Button {
                     store.send(.delegate(.showInstagram))
@@ -169,22 +173,32 @@ public struct SettingList: View {
     private func itemView(
         _ imageName: String,
         _ title: String,
+        _ subTitle: String? = nil,
         _ isHiddenChevron: Bool = false
     ) -> some View {
-        HStack(alignment: .center,
-               spacing: 0) {
+        HStack(spacing: 0) {
             Image(imageName, bundle: Bundle.settings)
                 .resizable()
                 .frame(width: 24, height: 24)
+                .padding(.trailing, 10)
             
-            Text(title)
-                .font(
-                    Font.custom("Pretendard", size: 16)
-                        .weight(.medium)
-                )
-                .kerning(0.15)
-                .foregroundColor(Constants.TextBody)
-                .padding(.leading, 10)
+            VStack(alignment: .leading,
+                   spacing: 4) {
+                Text(title)
+                    .font(
+                        Font.custom("Pretendard", size: 16)
+                            .weight(.medium)
+                    )
+                    .kerning(0.15)
+                    .foregroundColor(Constants.TextBody)
+                
+                if let subTitle = subTitle {
+                    Text(subTitle)
+                        .font(Font.custom("Pretendard", size: 12))
+                        .kerning(0.15)
+                        .foregroundColor(Constants.TextCaption1)
+                }
+            }
             
             Spacer()
             
@@ -193,6 +207,14 @@ public struct SettingList: View {
             }
         }
                .padding(.vertical, 9)
+    }
+    
+    /// 섹션 구분선
+    private var divider: some View {
+        Divider()
+            .frame(height: 1)
+            .foregroundColor(Constants.TextBody)
+            .listRowSeparator(.hidden)
     }
 }
 
