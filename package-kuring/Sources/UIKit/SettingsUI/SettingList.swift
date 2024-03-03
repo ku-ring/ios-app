@@ -44,7 +44,7 @@ public struct SettingList: View {
             }
             .tint(.black)
             .listRowSeparator(.hidden)
-
+            
             Section {
                 HStack {
                     itemView("icon_app_version", "앱 버전", nil, true)
@@ -209,13 +209,6 @@ public struct SettingList: View {
                .padding(.vertical, 9)
     }
     
-    /// 섹션 구분선
-    private var divider: some View {
-        Divider()
-            .frame(height: 1)
-            .foregroundColor(Constants.TextBody)
-            .listRowSeparator(.hidden)
-    }
 }
 
 #Preview {
