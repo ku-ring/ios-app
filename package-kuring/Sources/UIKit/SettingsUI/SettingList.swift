@@ -57,7 +57,7 @@ public struct SettingList: View {
                 .foregroundColor(Constants.TextBody)
                 
                 Button {
-//                    store.send(.delegate(.showTeam))
+                    store.send(.delegate(.showWhatsNew))
                 } label: {
                     itemView("icon_new", "새로운 내용")
                 }
