@@ -23,12 +23,11 @@ public struct SettingList: View {
                 Button {
                     store.send(.delegate(.showSubscription))
                 } label: {
-                    itemView("bell", "공지 구독하기")
+                    itemView("icon_bell", "공지 구독하기")
                 }
-                .listRowSeparator(.hidden)
 
                 HStack {
-                    Label("기타 알림 받기", systemImage: "bell")
+                    itemView("icon_bell", "기타 알림 받기")
 
                     Spacer()
 
@@ -40,6 +39,7 @@ public struct SettingList: View {
                 headerView("공지 구독")
             }
             .tint(.black)
+            .listRowSeparator(.hidden)
 
             Section {
                 HStack {
@@ -49,23 +49,29 @@ public struct SettingList: View {
 
                     Text("2.0.0")
                 }
+                
+                Button {
+//                    store.send(.delegate(.showTeam))
+                } label: {
+                    itemView("icon_new", "새로운 내용")
+                }
 
                 Button {
                     store.send(.delegate(.showTeam))
                 } label: {
-                    Text("쿠링 팀")
+                    itemView("icon_team", "쿠링 팀")
                 }
 
                 Button {
                     store.send(.delegate(.showPrivacyPolicy))
                 } label: {
-                    Text("개인정보 처리방침")
+                    itemView("icon_private", "개인정보 처리방침")
                 }
 
                 Button {
                     store.send(.delegate(.showTermsOfService))
                 } label: {
-                    Text("서비스 이용약관")
+                    itemView("icon_service", "서비스 이용약관")
                 }
 
                 NavigationLink(
@@ -73,15 +79,17 @@ public struct SettingList: View {
                         OpenSourceListFeature.State()
                     )
                 ) {
-                    Text("오픈소스 라이센스")
+                    itemView("icon_opensource", "오픈소스 라이센스")
                 }
             } header: {
                 headerView("정보")
             } footer: {
                 Text("Designed by 이소영, 김예은.\nDeveloped by 이재성, 이건우, 박성수.\nManaged by 조병관, 채수빈")
+                    .font(.footnote)
             }
             .tint(.black)
-
+            .listRowSeparator(.hidden)
+            
             Section {
                 Button {
                     store.send(.delegate(.showLabs))
@@ -105,26 +113,27 @@ public struct SettingList: View {
             } header: {
                 headerView("쿠링 실험실")
             }
+            .listRowSeparator(.hidden)
 
             Section {
                 Button {
                     store.send(.delegate(.showInstagram))
                 } label: {
-                    Text("인스타그램")
+                    itemView("icon_instagram", "인스타그램")
                 }
 
             } header: {
                 headerView("SNS")
             }
             .tint(.black)
-
+            .listRowSeparator(.hidden)
+            
             Section {
                 Button {
                     store.send(.delegate(.showFeedback))
                 } label: {
-                    Label("피드백 보내기", systemImage: "bell")
+                    itemView("icon_feedback", "피드백 보내기")
                 }
-
             } header: {
                 headerView("피드백")
             }
@@ -153,7 +162,7 @@ public struct SettingList: View {
     private func itemView(_ imageName: String, _ title: String) -> some View {
         HStack(alignment: .center,
                spacing: 0) {
-            Image(imageName)
+            Image(imageName, bundle: Bundle.settings)
                 .resizable()
                 .frame(width: 24, height: 24)
             
