@@ -27,7 +27,7 @@ public struct SettingList: View {
                 }
 
                 HStack {
-                    itemView("icon_bell", "기타 알림 받기")
+                    itemView("icon_bell", "기타 알림 받기", true)
 
                     Spacer()
 
@@ -43,12 +43,18 @@ public struct SettingList: View {
 
             Section {
                 HStack {
-                    Text("앱 버전")
+                    itemView("icon_app_version", "앱 버전", true)
 
                     Spacer()
 
                     Text("2.0.0")
                 }
+                .font(
+                    Font.custom("Pretendard", size: 16)
+                        .weight(.medium)
+                )
+                .kerning(0.15)
+                .foregroundColor(Constants.TextBody)
                 
                 Button {
 //                    store.send(.delegate(.showTeam))
@@ -73,14 +79,15 @@ public struct SettingList: View {
                 } label: {
                     itemView("icon_service", "서비스 이용약관")
                 }
-
+                
                 NavigationLink(
                     state: SettingsAppFeature.Path.State.openSourceList(
                         OpenSourceListFeature.State()
                     )
                 ) {
-                    itemView("icon_opensource", "오픈소스 라이센스")
+                    itemView("icon_opensource", "오픈소스 라이센스", true)
                 }
+                
             } header: {
                 headerView("정보")
             } footer: {
@@ -159,7 +166,11 @@ public struct SettingList: View {
     }
     
     /// 섹션 아이템에 해당하는 뷰
-    private func itemView(_ imageName: String, _ title: String) -> some View {
+    private func itemView(
+        _ imageName: String,
+        _ title: String,
+        _ isHiddenChevron: Bool = false
+    ) -> some View {
         HStack(alignment: .center,
                spacing: 0) {
             Image(imageName, bundle: Bundle.settings)
@@ -177,7 +188,9 @@ public struct SettingList: View {
             
             Spacer()
             
-            Image(systemName: "chevron.right")
+            if !isHiddenChevron {
+                Image(systemName: "chevron.right")
+            }
         }
                .padding(.vertical, 9)
     }
