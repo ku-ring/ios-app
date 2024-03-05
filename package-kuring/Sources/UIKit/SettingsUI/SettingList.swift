@@ -12,11 +12,14 @@ public struct SettingList: View {
     @Bindable public var store: StoreOf<SettingListFeature>
     @Dependency(\.leLabo) var leLabo
     
+    // !!!: - movo to DS or Resources
     struct Constants {
-        static let TextCaption1: Color = Color(red: 0.53, green: 0.54, blue: 0.57)
-        static let TextCaption2: Color = Color(red: 0.7, green: 0.71, blue: 0.74)
-        static let TextBody: Color = Color(red: 0.21, green: 0.24, blue: 0.29)
+        static let textCaption1: Color = Color(red: 0.53, green: 0.54, blue: 0.57)
+        static let textCaption2: Color = Color(red: 0.7, green: 0.71, blue: 0.74)
+        static let textBody: Color = Color(red: 0.21, green: 0.24, blue: 0.29)
     }
+    
+    // !!!: - 이미지 및 컬러 공통관리 가능하게 별도의 package 폴더 생성
     
     public var body: some View {
         List {
@@ -58,7 +61,7 @@ public struct SettingList: View {
                         .weight(.medium)
                 )
                 .kerning(0.15)
-                .foregroundColor(Constants.TextBody)
+                .foregroundColor(Constants.textBody)
                 
                 Button {
                     store.send(.delegate(.showWhatsNew))
@@ -164,7 +167,7 @@ public struct SettingList: View {
     private func headerView(_ title: String) -> some View {
         Text(title)
             .font(Font.custom("Pretendard", size: 14))
-            .foregroundColor(Constants.TextCaption2)
+            .foregroundColor(Constants.textCaption2)
             .padding(.top, 12)
             .padding(.bottom, 8)
     }
@@ -198,13 +201,13 @@ public struct SettingList: View {
                             .weight(.medium)
                     )
                     .kerning(0.15)
-                    .foregroundColor(Constants.TextBody)
+                    .foregroundColor(Constants.textBody)
                 
                 if let subTitle = subTitle {
                     Text(subTitle)
                         .font(Font.custom("Pretendard", size: 12))
                         .kerning(0.15)
-                        .foregroundColor(Constants.TextCaption1)
+                        .foregroundColor(Constants.textCaption1)
                 }
             }
             
