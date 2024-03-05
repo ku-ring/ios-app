@@ -169,6 +169,14 @@ public struct SettingList: View {
             .padding(.bottom, 8)
     }
     
+    private func leadingItem() -> some View {
+        Text("")
+    }
+    
+    private func trailingItem() -> some View {
+        Text("")
+    }
+    
     /// 섹션 아이템에 해당하는 뷰
     private func itemView(
         _ imageName: String,
