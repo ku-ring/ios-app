@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 5.10
 
 import PackageDescription
 
@@ -20,6 +20,7 @@ let package = Package(
                 "SettingsUI",
                 "CampusUI",
                 "CommonUI",
+                "OnboardingUI",
                 "PushNotifications",
             ]
         ),
@@ -42,6 +43,7 @@ let package = Package(
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.50.4"),
         .package(url: "https://github.com/ku-ring/package-activityui", branch: "main"),
         .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "10.21.0"),
+        .package(url: "https://github.com/airbnb/lottie-spm.git", from: "4.4.1"),
     ],
     targets: [
         // MARK: App Library Dependencies
@@ -119,6 +121,17 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/UIKit/CommonUI"
+        ),
+        .target(
+            name: "OnboardingUI",
+            dependencies: [
+                "DepartmentUI",
+                "Networks",
+                "ColorSet",
+                .product(name: "Lottie", package: "lottie-spm"),
+            ],
+            path: "Sources/UIKit/OnboardingUI",
+            resources: [.process("Resources")]
         ),
         
         // MARK: Features
@@ -236,7 +249,10 @@ let package = Package(
         
         // MARK: Models
         .target(
-            name: "Models"
+            name: "Models",
+            dependencies: [
+                .product(name: "Collections", package: "swift-collections"),
+            ]
         ),
         
         // MARK: - Tests

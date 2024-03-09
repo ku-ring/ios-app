@@ -9,6 +9,7 @@ import Models
 import SwiftUI
 import CommonUI
 import NoticeUI
+import OnboardingUI
 import NoticeFeatures
 import PushNotifications
 import ComposableArchitecture
@@ -29,6 +30,9 @@ struct KuringApp: App {
                         print("onCompletion: \(result)")
                     }
                 )
+                .fullScreenCover(isPresented: .constant(true)) {
+                    OnboardingView()
+                }
                 // MARK: 앱 업데이트 알림
                 .versionUpdateAlert()
                 // MARK: 새 공지 보여주기 (알림 탭했을 때)
