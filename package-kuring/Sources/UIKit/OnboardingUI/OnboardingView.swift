@@ -7,47 +7,52 @@ import SwiftUI
 
 public struct OnboardingView: View {
     @State private var currentGuidance: Guidance.ID = .subscription
+    @State private var showsDepartmentSelector: Bool = false
     
     public var body: some View {
-        VStack(spacing: 0) {
-            HStack {
-                Text(StringSet.title.rawValue)
-                    .font(.system(size: 24, weight: .bold))
-                
-                Spacer()
-            }
-            .padding(.top, 56)
-            
-            TabView(selection: $currentGuidance) {
-                ForEach(Guidance.allCases) { guidance in
-                    GuidanceView(guidance: guidance)
-                        .tag(guidance.id)
+        if showsDepartmentSelector {
+            MyDepartmentSelector()
+        } else {
+            VStack(spacing: 0) {
+                HStack {
+                    Text(StringSet.title.rawValue)
+                        .font(.system(size: 24, weight: .bold))
+                    
+                    Spacer()
                 }
-            }
-            .tabViewStyle(.page(indexDisplayMode: .always))
-            
-            HStack(spacing: 8) {
-                ForEach(Guidance.allCases) { guidance in
-                    Circle()
-                        .frame(width: 8, height: 8)
-                        .foregroundStyle(
-                            currentGuidance == guidance
-                            ? Color.accentColor
-                            : Color(.systemGroupedBackground)
-                        )
-                }
-            }
-            .padding(8)
-            .padding(.vertical, 60)
-            
-            Button {
+                .padding(.top, 56)
                 
-            } label: {
-                Text(StringSet.button_goSubscrbing.rawValue)
+                TabView(selection: $currentGuidance) {
+                    ForEach(Guidance.allCases) { guidance in
+                        GuidanceView(guidance: guidance)
+                            .tag(guidance.id)
+                    }
+                }
+                .tabViewStyle(.page(indexDisplayMode: .always))
+                
+                HStack(spacing: 8) {
+                    ForEach(Guidance.allCases) { guidance in
+                        Circle()
+                            .frame(width: 8, height: 8)
+                            .foregroundStyle(
+                                currentGuidance == guidance
+                                ? Color.accentColor
+                                : Color(.systemGroupedBackground)
+                            )
+                    }
+                }
+                .padding(8)
+                .padding(.vertical, 60)
+                
+                Button {
+                    showsDepartmentSelector = true
+                } label: {
+                    Text(StringSet.button_goSubscrbing.rawValue)
+                }
+                .buttonStyle(.kuringStyle(enabled: currentGuidance == .search))
             }
-            .buttonStyle(.kuringStyle(enabled: currentGuidance == .search))
+            .padding(.horizontal, 20)
         }
-        .padding(.horizontal, 20)
     }
     
     public init() { }

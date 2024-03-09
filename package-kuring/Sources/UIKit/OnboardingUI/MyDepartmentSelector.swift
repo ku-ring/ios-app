@@ -32,8 +32,6 @@ struct MyDepartmentSelector: View {
             }
             .padding(.top, 56)
             
-            Spacer()
-            
             // 하단 버튼 영역
             if currentStep == .selectDepartment {
                 Button(StringSet.button_complete.rawValue) {
@@ -138,6 +136,11 @@ extension MyDepartmentSelector {
                         }
                     }
                 }
+                
+                Spacer()
+            }
+            .onChange(of: searchKeyword) { _, _ in
+                search()
             }
         }
         

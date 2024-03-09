@@ -20,6 +20,9 @@ struct KuringApp: App {
     @Environment(\.scenePhase) private var scenePhase
     @UIApplicationDelegateAdaptor(Notifications.self) var appDelegate
     
+    // TODO: 테스트용 변수
+    @State private var showsOnboarding: Bool = false
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -28,9 +31,10 @@ struct KuringApp: App {
                         print("onRequest")
                     }, onCompletion: { result in
                         print("onCompletion: \(result)")
+                        showsOnboarding = true
                     }
                 )
-                .fullScreenCover(isPresented: .constant(true)) {
+                .fullScreenCover(isPresented: $showsOnboarding) {
                     OnboardingView()
                 }
                 // MARK: 앱 업데이트 알림
