@@ -219,7 +219,37 @@ public struct SettingList: View {
         }
                .padding(.vertical, 9)
     }
+}
+
+struct SettingList {
+    /// 아이콘 이미지
+    private func iconImage(imageName: String) -> some View {
+        Image(imageName, bundle: Bundle.settings)
+            .resizable()
+            .frame(width: 24, height: 24)
+            .padding(.trailing, 10)
+    }
     
+    /// 타이틀 및 서브 타이틀
+    private func title(title: String, subTitle: String? = nil) -> some View {
+        VStack(alignment: .leading,
+               spacing: 4) {
+            Text(title)
+                .font(
+                    Font.custom("Pretendard", size: 16)
+                        .weight(.medium)
+                )
+                .kerning(0.15)
+                .foregroundColor(Constants.textBody)
+            
+            if let subTitle = subTitle {
+                Text(subTitle)
+                    .font(Font.custom("Pretendard", size: 12))
+                    .kerning(0.15)
+                    .foregroundColor(Constants.textCaption1)
+            }
+        }
+    }
 }
 
 #Preview {
