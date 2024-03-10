@@ -7,7 +7,7 @@ import SwiftUI
 
 // TODO: 디자인 시스템으로 이동
 struct KuringButtonStyle: ButtonStyle {
-    let onEnabled: Bool
+    fileprivate let onEnabled: Bool
     
     func makeBody(configuration: Configuration) -> some View {
         HStack(alignment: .center, spacing: 10) {
