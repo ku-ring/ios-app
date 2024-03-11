@@ -12,7 +12,7 @@ enum StringSet: String {
     
     case title_select = "전공학과를\n설정해주세요"
     case description_select = "학과 공지 알림을 받아볼 수 있도록\n전공 학과를 설정해 주세요"
-    case button_complete = "학과 설정 완료"
+    case button_complete = "학과 설정 완료하기"
     case button_again = "다시 설정하기"
     case button_start = "쿠링 시작하기"
     case title_confirm = "내 전공학과로 설정할까요?"
