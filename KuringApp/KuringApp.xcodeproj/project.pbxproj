@@ -11,6 +11,7 @@
 		A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA552AB1F04B0064F748 /* ContentView.swift */; };
 		A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA572AB1F04C0064F748 /* Assets.xcassets */; };
 		A9DAFA5B2AB1F04C0064F748 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */; };
+		CA22E6272B9F6DA7001E03A7 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22E6262B9F6DA7001E03A7 /* LaunchScreen.swift */; };
 		CACC2F4D2B7E63B0003142E2 /* PushNotifications in Frameworks */ = {isa = PBXBuildFile; productRef = CACC2F4C2B7E63B0003142E2 /* PushNotifications */; };
 		CAE658662B3992A800CD8A63 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = CAE658652B3992A800CD8A63 /* App */; };
 		CAE94A9A2B5EA3B000F73A7E /* App in Frameworks */ = {isa = PBXBuildFile; productRef = CAE94A992B5EA3B000F73A7E /* App */; };
@@ -37,6 +38,7 @@
 		A9DAFA552AB1F04B0064F748 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A9DAFA572AB1F04C0064F748 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9DAFA5A2AB1F04C0064F748 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CA22E6262B9F6DA7001E03A7 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		CA52DF2F2AD58DF2009B9272 /* KuringAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KuringAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CACC2F4B2B7E638C003142E2 /* KuringApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KuringApp.entitlements; sourceTree = "<group>"; };
 		DF062D4A2AC87B6D00FC48C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				DF062D4A2AC87B6D00FC48C0 /* Info.plist */,
 				DFE7AB132AC332D200230934 /* Setting */,
 				A9DAFA532AB1F04B0064F748 /* KuringApp.swift */,
+				CA22E6262B9F6DA7001E03A7 /* LaunchScreen.swift */,
 				A9DAFA552AB1F04B0064F748 /* ContentView.swift */,
 				A9DAFA572AB1F04C0064F748 /* Assets.xcassets */,
 				A9DAFA592AB1F04C0064F748 /* Preview Content */,
@@ -257,6 +260,7 @@
 			files = (
 				A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */,
 				A9DAFA542AB1F04B0064F748 /* KuringApp.swift in Sources */,
+				CA22E6272B9F6DA7001E03A7 /* LaunchScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
