@@ -17,7 +17,8 @@ extension OnboardingView {
                 )
                 
                 Text(guidance.message)
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(.system(size: 16, weight: .medium))
+                    .multilineTextAlignment(.center)
             }
         }
     }
