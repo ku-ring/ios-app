@@ -6,6 +6,7 @@
 import SwiftUI
 
 public struct OnboardingView: View {
+    @Environment(\.dismiss) private var dismiss
     @State private var currentGuidance: Guidance.ID = .subscription
     @State private var showsDepartmentSelector: Bool = false
     
@@ -28,7 +29,7 @@ public struct OnboardingView: View {
                             .tag(guidance.id)
                     }
                 }
-                .tabViewStyle(.page(indexDisplayMode: .always))
+                .tabViewStyle(.page(indexDisplayMode: .never))
                 
                 HStack(spacing: 8) {
                     ForEach(Guidance.allCases) { guidance in
@@ -50,6 +51,13 @@ public struct OnboardingView: View {
                     Text(StringSet.button_goSubscrbing.rawValue)
                 }
                 .buttonStyle(.kuringStyle(enabled: currentGuidance == .search))
+                
+                Button(StringSet.button_skip.rawValue) {
+                    dismiss()
+                }
+                .font(.system(size: 16, weight: .medium))
+                .foregroundStyle(Color.caption1.opacity(0.6))
+                .padding(.vertical, 20)
             }
             .padding(.horizontal, 20)
         }

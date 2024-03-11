@@ -207,11 +207,11 @@
 			};
 			buildConfigurationList = A9DAFA4B2AB1F04B0064F748 /* Build configuration list for PBXProject "KuringApp" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				ko,
 			);
 			mainGroup = A9DAFA472AB1F04B0064F748;
 			packageReferences = (
