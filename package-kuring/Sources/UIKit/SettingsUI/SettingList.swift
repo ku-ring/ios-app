@@ -31,10 +31,11 @@ public struct SettingList: View {
                 }
 
                 HStack {
-                    itemView("icon_bell",
-                             "기타 알림 받기",
-                             "주요 공지사항, 앱 내 주요 사항",
-                             true)
+                    Text("A")
+//                    itemView("icon_bell",
+//                             "기타 알림 받기",
+//                             "주요 공지사항, 앱 내 주요 사항",
+//                             true)
 
                     Spacer()
 
@@ -50,8 +51,8 @@ public struct SettingList: View {
             
             Section {
                 HStack {
-                    itemView("icon_app_version", "앱 버전", nil, true)
-
+//                    itemView("icon_app_version", "앱 버전", nil, true)
+                    Text("A")
                     Spacer()
 
                     Text("2.0.0")
@@ -92,7 +93,8 @@ public struct SettingList: View {
                         OpenSourceListFeature.State()
                     )
                 ) {
-                    itemView("icon_opensource", "오픈소스 라이센스", nil, true)
+                    Text("A")
+//                    itemView("icon_opensource", "오픈소스 라이센스", nil, true)
                 }
                 
             } header: {
@@ -172,47 +174,58 @@ public struct SettingList: View {
             .padding(.bottom, 8)
     }
     
-    private var row1()
-    
-    /// 섹션 아이템에 해당하는 뷰
-    private func itemView(
-        _ imageName: String,
-        _ title: String,
-        _ subTitle: String? = nil,
-        _ isHiddenChevron: Bool = false
-    ) -> some View {
+    /// 아이콘 - 타이틀 - chevron 으로 구성
+    private func itemView(_ imageName: String, _ title: String) -> some View {
         HStack(spacing: 0) {
-            Image(imageName, bundle: Bundle.settings)
-                .resizable()
-                .frame(width: 24, height: 24)
+            leadingIconImage(imageName: imageName)
                 .padding(.trailing, 10)
-            
-            VStack(alignment: .leading,
-                   spacing: 4) {
-                Text(title)
-                    .font(
-                        Font.custom("Pretendard", size: 16)
-                            .weight(.medium)
-                    )
-                    .kerning(0.15)
-                    .foregroundColor(Constants.textBody)
-                
-                if let subTitle = subTitle {
-                    Text(subTitle)
-                        .font(Font.custom("Pretendard", size: 12))
-                        .kerning(0.15)
-                        .foregroundColor(Constants.textCaption1)
-                }
-            }
-            
+            leadingTitle(title: title)
             Spacer()
             
-            if !isHiddenChevron {
-                Image(systemName: "chevron.right")
-            }
+            Image(systemName: "chevron.right")
         }
-               .padding(.vertical, 9)
+        .padding(.vertical, 9)
     }
+    
+//    /// 섹션 아이템에 해당하는 뷰
+//    private func itemView(
+//        _ imageName: String,
+//        _ title: String,
+//        _ subTitle: String? = nil,
+//        _ isHiddenChevron: Bool = false
+//    ) -> some View {
+//        HStack(spacing: 0) {
+//            Image(imageName, bundle: Bundle.settings)
+//                .resizable()
+//                .frame(width: 24, height: 24)
+//                .padding(.trailing, 10)
+//            
+//            VStack(alignment: .leading,
+//                   spacing: 4) {
+//                Text(title)
+//                    .font(
+//                        Font.custom("Pretendard", size: 16)
+//                            .weight(.medium)
+//                    )
+//                    .kerning(0.15)
+//                    .foregroundColor(Constants.textBody)
+//                
+//                if let subTitle = subTitle {
+//                    Text(subTitle)
+//                        .font(Font.custom("Pretendard", size: 12))
+//                        .kerning(0.15)
+//                        .foregroundColor(Constants.textCaption1)
+//                }
+//            }
+//            
+//            Spacer()
+//            
+//            if !isHiddenChevron {
+//                Image(systemName: "chevron.right")
+//            }
+//        }
+//               .padding(.vertical, 9)
+//    }
 }
 
 extension SettingList {
