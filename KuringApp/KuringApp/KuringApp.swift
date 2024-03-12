@@ -9,6 +9,7 @@ import Models
 import SwiftUI
 import CommonUI
 import NoticeUI
+import OnboardingUI
 import NoticeFeatures
 import PushNotifications
 import ComposableArchitecture
@@ -19,6 +20,9 @@ struct KuringApp: App {
     @Environment(\.scenePhase) private var scenePhase
     @UIApplicationDelegateAdaptor(Notifications.self) var appDelegate
     
+    // TODO: 테스트용 변수
+    @State private var showsOnboarding: Bool = false
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -27,8 +31,12 @@ struct KuringApp: App {
                         print("onRequest")
                     }, onCompletion: { result in
                         print("onCompletion: \(result)")
+                        showsOnboarding = true
                     }
                 )
+                .fullScreenCover(isPresented: $showsOnboarding) {
+                    OnboardingView()
+                }
                 // MARK: 앱 업데이트 알림
                 .versionUpdateAlert()
                 // MARK: 새 공지 보여주기 (알림 탭했을 때)

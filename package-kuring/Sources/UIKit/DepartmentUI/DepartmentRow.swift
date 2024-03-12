@@ -8,17 +8,17 @@ import SwiftUI
 import ColorSet
 import DepartmentFeatures
 
-struct DepartmentRow: View {
-    let department: NoticeProvider
-    let style: ButtonStyle
-    let action: () -> Void
+public struct DepartmentRow: View {
+    public let department: NoticeProvider
+    public let style: ButtonStyle
+    public let action: () -> Void
 
-    enum ButtonStyle {
+    public enum ButtonStyle {
         case delete
         case radio(Bool)
     }
 
-    var body: some View {
+    public var body: some View {
         HStack(alignment: .center) {
             Text(department.korName)
 
@@ -47,6 +47,12 @@ struct DepartmentRow: View {
         }
         .padding(.horizontal, 4)
         .padding(.vertical, 10)
+    }
+    
+    public init(department: NoticeProvider, style: ButtonStyle, action: @escaping () -> Void) {
+        self.department = department
+        self.style = style
+        self.action = action
     }
 }
 
