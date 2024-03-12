@@ -166,19 +166,13 @@ public struct SettingList: View {
     /// 섹션 헤더에 해당하는 뷰
     private func headerView(_ title: String) -> some View {
         Text(title)
-            .font(Font.custom("Pretendard", size: 14))
+            .font(.system(size: 14))
             .foregroundColor(Constants.textCaption2)
             .padding(.top, 12)
             .padding(.bottom, 8)
     }
     
-    private func leadingItem() -> some View {
-        Text("")
-    }
-    
-    private func trailingItem() -> some View {
-        Text("")
-    }
+    private var row1()
     
     /// 섹션 아이템에 해당하는 뷰
     private func itemView(
@@ -221,9 +215,9 @@ public struct SettingList: View {
     }
 }
 
-struct SettingList {
+extension SettingList {
     /// 아이콘 이미지
-    private func iconImage(imageName: String) -> some View {
+    private func leadingIconImage(imageName: String) -> some View {
         Image(imageName, bundle: Bundle.settings)
             .resizable()
             .frame(width: 24, height: 24)
@@ -231,24 +225,26 @@ struct SettingList {
     }
     
     /// 타이틀 및 서브 타이틀
-    private func title(title: String, subTitle: String? = nil) -> some View {
+    private func leadingTitle(title: String, subTitle: String? = nil) -> some View {
         VStack(alignment: .leading,
                spacing: 4) {
             Text(title)
-                .font(
-                    Font.custom("Pretendard", size: 16)
-                        .weight(.medium)
-                )
+                .font(.system(size: 16, weight: .medium))
                 .kerning(0.15)
                 .foregroundColor(Constants.textBody)
             
             if let subTitle = subTitle {
                 Text(subTitle)
-                    .font(Font.custom("Pretendard", size: 12))
+                    .font(.system(size: 12))
                     .kerning(0.15)
                     .foregroundColor(Constants.textCaption1)
             }
         }
+    }
+    
+    /// 우측 화살표 이미지
+    private var tailingChevronImage: some View {
+        Image(systemName: "chevron.right")
     }
 }
 
