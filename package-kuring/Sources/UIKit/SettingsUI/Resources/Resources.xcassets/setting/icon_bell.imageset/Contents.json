@@ -1,8 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "notice.pdf",
-      "idiom" : "universal"
+      "filename" : "icon_bell.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "notice@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "notice@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {
