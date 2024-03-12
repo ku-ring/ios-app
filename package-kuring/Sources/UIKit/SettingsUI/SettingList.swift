@@ -50,19 +50,14 @@ public struct SettingList: View {
             .listRowSeparator(.hidden)
             
             Section {
-                HStack {
-//                    itemView("icon_app_version", "앱 버전", nil, true)
-                    Text("A")
+                HStack(spacing: 0) {
+                    leadingItemView("icon_app_version", "앱 버전")
                     Spacer()
-
                     Text("2.0.0")
+                        .font(.system(size: 16, weight: .medium))
+                        .kerning(0.15)
+                        .foregroundColor(Constants.textBody)
                 }
-                .font(
-                    Font.custom("Pretendard", size: 16)
-                        .weight(.medium)
-                )
-                .kerning(0.15)
-                .foregroundColor(Constants.textBody)
                 
                 Button {
                     store.send(.delegate(.showWhatsNew))
@@ -88,13 +83,17 @@ public struct SettingList: View {
                     itemView("icon_service", "서비스 이용약관")
                 }
                 
-                NavigationLink(
-                    state: SettingsAppFeature.Path.State.openSourceList(
-                        OpenSourceListFeature.State()
-                    )
-                ) {
-                    Text("A")
-//                    itemView("icon_opensource", "오픈소스 라이센스", nil, true)
+                ZStack {
+                    NavigationLink(
+                        state: SettingsAppFeature.Path.State.openSourceList(
+                            OpenSourceListFeature.State()
+                        )
+                    ) {
+                        EmptyView()
+                    }
+                    .opacity(0)
+                    
+                    itemView("icon_opensource", "오픈소스 라이센스")
                 }
                 
             } header: {
@@ -177,14 +176,20 @@ public struct SettingList: View {
     /// 아이콘 - 타이틀 - chevron 으로 구성
     private func itemView(_ imageName: String, _ title: String) -> some View {
         HStack(spacing: 0) {
-            leadingIconImage(imageName: imageName)
-                .padding(.trailing, 10)
-            leadingTitle(title: title)
+            leadingItemView(imageName, title)
             Spacer()
-            
             Image(systemName: "chevron.right")
         }
         .padding(.vertical, 9)
+    }
+    
+    /// 아이콘 - 타이틀
+    private func leadingItemView(_ imageName: String, _ title: String) -> some View {
+        HStack(spacing: 0) {
+            leadingIconImage(imageName: imageName)
+                .padding(.trailing, 10)
+            leadingTitle(title: title)
+        }
     }
     
 //    /// 섹션 아이템에 해당하는 뷰
@@ -231,10 +236,9 @@ public struct SettingList: View {
 extension SettingList {
     /// 아이콘 이미지
     private func leadingIconImage(imageName: String) -> some View {
-        Image(imageName, bundle: Bundle.settings)
+        Image(imageName, bundle: .settings)
             .resizable()
             .frame(width: 24, height: 24)
-            .padding(.trailing, 10)
     }
     
     /// 타이틀 및 서브 타이틀
@@ -257,7 +261,9 @@ extension SettingList {
     
     /// 우측 화살표 이미지
     private var tailingChevronImage: some View {
-        Image(systemName: "chevron.right")
+        Image("chevron", bundle: .settings)
+            .resizable()
+            .frame(width: 20, height: 20)
     }
 }
 
