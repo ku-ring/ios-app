@@ -12,14 +12,12 @@ public struct SettingList: View {
     @Bindable public var store: StoreOf<SettingListFeature>
     @Dependency(\.leLabo) var leLabo
     
-    // !!!: - movo to DS or Resources
+    // !!!: - 이미지 및 컬러 공통관리 가능하게 별도의 package 폴더 생성
     struct Constants {
         static let textCaption1: Color = Color(red: 0.53, green: 0.54, blue: 0.57)
         static let textCaption2: Color = Color(red: 0.7, green: 0.71, blue: 0.74)
         static let textBody: Color = Color(red: 0.21, green: 0.24, blue: 0.29)
     }
-    
-    // !!!: - 이미지 및 컬러 공통관리 가능하게 별도의 package 폴더 생성
     
     public var body: some View {
         List {
@@ -31,14 +29,8 @@ public struct SettingList: View {
                 }
 
                 HStack {
-                    Text("A")
-//                    itemView("icon_bell",
-//                             "기타 알림 받기",
-//                             "주요 공지사항, 앱 내 주요 사항",
-//                             true)
-
+                    leadingItemView("icon_bell", "기타 알림 받기", "주요 공지사항, 앱 내 주요 사항")
                     Spacer()
-
                     Toggle("", isOn: $store.isCustomAlarmOn)
                         .labelsHidden()
                         .tint(Color.accentColor)
@@ -184,53 +176,18 @@ public struct SettingList: View {
     }
     
     /// 아이콘 - 타이틀
-    private func leadingItemView(_ imageName: String, _ title: String) -> some View {
+    /// - note: 서브 타이틀이 존재하는 경우 파라미터에 넣어주기
+    private func leadingItemView(
+        _ imageName: String,
+        _ title: String,
+        _ subTitle: String? = nil
+    ) -> some View {
         HStack(spacing: 0) {
             leadingIconImage(imageName: imageName)
                 .padding(.trailing, 10)
-            leadingTitle(title: title)
+            leadingTitle(title: title, subTitle: subTitle)
         }
     }
-    
-//    /// 섹션 아이템에 해당하는 뷰
-//    private func itemView(
-//        _ imageName: String,
-//        _ title: String,
-//        _ subTitle: String? = nil,
-//        _ isHiddenChevron: Bool = false
-//    ) -> some View {
-//        HStack(spacing: 0) {
-//            Image(imageName, bundle: Bundle.settings)
-//                .resizable()
-//                .frame(width: 24, height: 24)
-//                .padding(.trailing, 10)
-//            
-//            VStack(alignment: .leading,
-//                   spacing: 4) {
-//                Text(title)
-//                    .font(
-//                        Font.custom("Pretendard", size: 16)
-//                            .weight(.medium)
-//                    )
-//                    .kerning(0.15)
-//                    .foregroundColor(Constants.textBody)
-//                
-//                if let subTitle = subTitle {
-//                    Text(subTitle)
-//                        .font(Font.custom("Pretendard", size: 12))
-//                        .kerning(0.15)
-//                        .foregroundColor(Constants.textCaption1)
-//                }
-//            }
-//            
-//            Spacer()
-//            
-//            if !isHiddenChevron {
-//                Image(systemName: "chevron.right")
-//            }
-//        }
-//               .padding(.vertical, 9)
-//    }
 }
 
 extension SettingList {
@@ -264,6 +221,7 @@ extension SettingList {
         Image("chevron", bundle: .settings)
             .resizable()
             .frame(width: 20, height: 20)
+        // !!!: - 컬러 시스템 구축 후에 색상 넣기
     }
 }
 
