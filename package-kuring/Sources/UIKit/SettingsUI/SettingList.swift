@@ -51,7 +51,7 @@ public struct SettingList: View {
             
             Section {
                 HStack(spacing: 0) {
-                    leadingItemView("icon_app_version", "앱 버전")
+                    leadingItemView("icon_rocket", "앱 버전")
                     Spacer()
                     Text("2.0.0")
                         .font(.system(size: 16, weight: .medium))
@@ -62,7 +62,7 @@ public struct SettingList: View {
                 Button {
                     store.send(.delegate(.showWhatsNew))
                 } label: {
-                    itemView("icon_new", "새로운 내용")
+                    itemView("icon_star", "새로운 내용")
                 }
 
                 Button {
@@ -74,13 +74,13 @@ public struct SettingList: View {
                 Button {
                     store.send(.delegate(.showPrivacyPolicy))
                 } label: {
-                    itemView("icon_private", "개인정보 처리방침")
+                    itemView("icon_guard", "개인정보 처리방침")
                 }
 
                 Button {
                     store.send(.delegate(.showTermsOfService))
                 } label: {
-                    itemView("icon_service", "서비스 이용약관")
+                    itemView("icon_checkmark_circle", "서비스 이용약관")
                 }
                 
                 ZStack {
