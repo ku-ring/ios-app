@@ -44,9 +44,7 @@ public struct LabAppFeature {
                 return .none
             }
         }
-        .forEach(\.path, action: \.path) {
-            Path()
-        }
+        .forEach(\.path, action: \.path)
     }
 
     public init() { }
@@ -67,16 +65,14 @@ public struct LabApp: View {
             )
             .navigationTitle("🧪 쿠링 실험실")
         } destination: { store in
-            switch store.state {
-            /// - Important: 테스트를 위한 케이스 이므로 삭제하지 말 것
-            case .betaA:
-                if let store = store.scope(state: \.betaA, action: \.betaA) {
-                    BetaADetailView(store: store)
-                }
-            case .appIcon:
-                if let store = store.scope(state: \.appIcon, action: \.appIcon) {
-                    AppIconDetailView(store: store)
-                }
+            switch store.case {
+                /// - Important: 테스트를 위한 케이스 이므로 삭제하지 말 것
+            case let .betaA(store):
+                BetaADetailView(store: store)
+            case let .appIcon(store):
+                AppIconDetailView(store: store)
+            case let .userDefaults(store):
+                UserDefaultsDetailView(store: store)
             }
         }
     }

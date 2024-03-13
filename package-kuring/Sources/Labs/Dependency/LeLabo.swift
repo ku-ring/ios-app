@@ -17,6 +17,7 @@ public struct LeLabo {
         // 기능 추가
         case betaA = "beta-a"
         case appIcon = "appicon"
+        case userDefaults = "userdefaults"
 
         var key: String {
             let baseKey = "com.kuring.service.lelabo.experiments"
