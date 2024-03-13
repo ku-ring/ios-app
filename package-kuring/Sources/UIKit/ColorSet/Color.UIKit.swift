@@ -28,7 +28,6 @@ public struct ColorSet {
         light: ColorSet.from(hex: "535B5D"),
         dark: ColorSet.from(hex: "535B5D")
     )
-    
     public static let bg: Color = ColorSet.color(
         light: ColorSet.from(hex: "FFFFFF"),
         dark: ColorSet.from(hex: "292929")
