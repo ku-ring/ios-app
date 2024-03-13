@@ -6,6 +6,7 @@
 import SwiftUI
 import UIKit
 
+// !!!: - 다른 패키지에서 사용하고 있을수도 있어서, 색상 값 교체할 때 한번에 제거 예정
 extension Color {
     public static let caption1 = Color(red: 54 / 255, green: 61 / 255, blue: 74 / 255)
 }
@@ -15,35 +16,76 @@ public struct ColorSet {
     
     // MARK: - ETC
     
-    public static let warning: Color { ColorSet.color(light: "FF4848", dark: "DE4343") }
-    public static let borderLine: Color {
-        ColorSet.color(
-            light: ColorSet.from(hex: "000000", alpha: 0.08),
-            dark: "DE4343"
-        )
-    }
-    public static let kuringLogoText: Color { ColorSet.color(light: "535B5D", dark: "535B5D") }
-    public static let bg: Color { ColorSet.color(light: "FFFFFF", dark: "292929") }
+    public static let warning: Color = ColorSet.color(
+        light: ColorSet.from(hex: "FF4848"),
+        dark: ColorSet.from(hex: "DE4343", alpha: 0.08)
+    )
+    public static let borderLine: Color = ColorSet.color(
+        light: ColorSet.from(hex: "000000"),
+        dark: ColorSet.from(hex: "DE4343")
+    )
+    public static let kuringLogoText: Color = ColorSet.color(
+        light: ColorSet.from(hex: "535B5D"),
+        dark: ColorSet.from(hex: "535B5D")
+    )
+    
+    public static let bg: Color = ColorSet.color(
+        light: ColorSet.from(hex: "FFFFFF"),
+        dark: ColorSet.from(hex: "292929")
+    )
     
     // MARK: - Main
     
-    public static let primarySelected: Color { ColorSet.color(light: "EBF8F2", dark: "454D49") }
-    public static let primary: Color { ColorSet.color(light: "3DBD80", dark: "38B178") }
+    public static let primarySelected: Color = ColorSet.color(
+        light: ColorSet.from(hex: "EBF8F2"),
+        dark: ColorSet.from(hex: "454D49")
+    )
+    public static let primary: Color = ColorSet.color(
+        light: ColorSet.from(hex: "3DBD80"),
+        dark: ColorSet.from(hex: "38B178")
+    )
     
     // MARK: - Text
     
-    public static let caption1: Color { ColorSet.color(light: "868A92", dark: "878787") }
-    public static let caption2: Color { ColorSet.color(light: "B1B5BD", dark: "5E5E5E") }
-    public static let body: Color { ColorSet.color(light: "353C49", dark: "E0E0E0") }
-    public static let title: Color { ColorSet.color(light: "333333", dark: "F5F5F5") }
+    public static let caption1: Color = ColorSet.color(
+        light: ColorSet.from(hex: "868A92"),
+        dark: ColorSet.from(hex: "878787")
+    )
+    public static let caption2: Color = ColorSet.color(
+        light: ColorSet.from(hex: "B1B5BD"),
+        dark: ColorSet.from(hex: "5E5E5E")
+    )
+    public static let body: Color = ColorSet.color(
+        light: ColorSet.from(hex: "353C49"),
+        dark: ColorSet.from(hex: "E0E0E0")
+    )
+    public static let title: Color = ColorSet.color(
+        light: ColorSet.from(hex: "333333"),
+        dark: ColorSet.from(hex: "F5F5F5")
+    )
     
     // MARK: - GrayScale
     
-    public static let gray400: Color { ColorSet.color(light: "434343", dark: "B0B0B0") }
-    public static let gray600: Color { ColorSet.color(light: "262626", dark: "DFDFDF") }
-    public static let gray100: Color { ColorSet.color(light: "F2F3F5", dark: "3D3D3E") }
-    public static let gray300: Color { ColorSet.color(light: "999999", dark: "6B6B6B") }
-    public static let gray200: Color { ColorSet.color(light: "E5E5E5", dark: "4E4E4E") }
+    public static let gray400: Color = ColorSet.color(
+        light: ColorSet.from(hex: "434343"),
+        dark: ColorSet.from(hex: "B0B0B0")
+    )
+    public static let gray600: Color = ColorSet.color(
+        light: ColorSet.from(hex: "262626"),
+        dark: ColorSet.from(hex: "DFDFDF")
+    )
+    public static let gray100: Color = ColorSet.color(
+        light: ColorSet.from(hex: "F2F3F5"),
+        dark: ColorSet.from(hex: "3D3D3E")
+    )
+    public static let gray300: Color = ColorSet.color(
+        light: ColorSet.from(hex: "999999"),
+        dark: ColorSet.from(hex: "6B6B6B")
+    )
+    public static let gray200: Color = ColorSet.color(
+        light: ColorSet.from(hex: "E5E5E5"),
+        dark: ColorSet.from(hex: "4E4E4E")
+    )
     
 }
  
