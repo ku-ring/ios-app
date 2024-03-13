@@ -68,35 +68,37 @@ public struct UserDefaultsDetailView: View {
                     .tint(Color.accentColor)
             }
             
-            Section {
-                Toggle(
-                    "service.firstlaunch",
-                    isOn: $firstLaunch
-                )
-                
-                Toggle(
-                    "service.notification.custom",
-                    isOn: $isCustomNoticationEnabled
-                )
-                
-                HStack {
-                    Text("service.subscription.univ")
+            if store.isEnabled {
+                Section {
+                    Toggle(
+                        "service.firstlaunch",
+                        isOn: $firstLaunch
+                    )
                     
-                    Spacer()
+                    Toggle(
+                        "service.notification.custom",
+                        isOn: $isCustomNoticationEnabled
+                    )
                     
-                    TextField("", text: $subscribedUnivCategories)
+                    HStack {
+                        Text("service.subscription.univ")
+                        
+                        Spacer()
+                        
+                        TextField("", text: $subscribedUnivCategories)
+                    }
+                    
+                    HStack {
+                        Text("service.subscription.department")
+                        
+                        Spacer()
+                        
+                        TextField("", text: $subscribedDeptCategories)
+                    }
                 }
-                
-                HStack {
-                    Text("service.subscription.department")
-                    
-                    Spacer()
-                    
-                    TextField("", text: $subscribedDeptCategories)
-                }
+                .font(.footnote)
+                .tint(Color.accentColor)
             }
-            .font(.footnote)
-            .tint(Color.accentColor)
         }
         .navigationTitle(store.title)
     }
