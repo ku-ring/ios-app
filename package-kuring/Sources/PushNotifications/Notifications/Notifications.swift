@@ -17,10 +17,10 @@ import UserNotifications
 /// }
 /// ```
 public class Notifications: NSObject, UIApplicationDelegate {
-    @AppStorage("com.kuring.sdk.notification.custom")
+    @AppStorage(.customNotification, store: .appGroup)
     static var isCustomNotificationEnabled: Bool = true
     
-    @AppStorage("com.kuring.sdk.token.fcm")
+    @AppStorage(.fcmToken)
     var fcmToken: String = ""
     
     func onTapRemoteNotification(with userInfo: [String: Any]) throws {

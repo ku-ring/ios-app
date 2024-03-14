@@ -40,7 +40,7 @@ public struct KuringLink {
         return iosVersion
     }()
 
-    @AppStorage("com.kuring.sdk.token.fcm")
+    @AppStorage(.fcmToken, store: .appGroup)
     static var fcmToken: String = ""
     
     static var testableFCMToken: String = "cZSHjO4_bUjirvsrxWzig5:APA91bHPojABL5oEXi5AcjJ8v4Vcp3KpJfFUD_3b-HhfV8m23_R6czJa3PwqcVqBZSHBb2t7Z3odUeD0cFKaMSkMmrGxTqyjJPfEZVfTPvmewV-xiMTWbrk-QKuc4Nrxd_BhEArO7Svo"

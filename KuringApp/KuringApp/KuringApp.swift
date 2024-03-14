@@ -20,8 +20,18 @@ struct KuringApp: App {
     @Environment(\.scenePhase) private var scenePhase
     @UIApplicationDelegateAdaptor(Notifications.self) var appDelegate
     
-    // TODO: 테스트용 변수
+    /// ```swift
+    /// showsOnboarding = isFirstRun
+    /// ```
     @State private var showsOnboarding: Bool = false
+    
+    @AppStorage(String.runAt, store: .appGroup)
+    var runAt: Double = Date().timeIntervalSince1970
+    
+    @AppStorage(String.startedAt, store: .appGroup)
+    var startedAt: Double?
+    
+    var isFirstRun: Bool { self.startedAt == nil }
     
     var body: some Scene {
         WindowGroup {
@@ -31,7 +41,10 @@ struct KuringApp: App {
                         print("onRequest")
                     }, onCompletion: { result in
                         print("onCompletion: \(result)")
-                        showsOnboarding = true
+                        showsOnboarding = isFirstRun
+                        if isFirstRun {
+                            self.startedAt = self.runAt
+                        }
                     }
                 )
                 .fullScreenCover(isPresented: $showsOnboarding) {
