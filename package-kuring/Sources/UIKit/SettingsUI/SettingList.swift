@@ -95,7 +95,16 @@ public struct SettingList: View {
                 Button {
                     store.send(.delegate(.showLabs))
                 } label: {
-                    Label("쿠링 실험실", systemImage: "flask")
+                    HStack(spacing: 0) {
+                        Image(systemName: "flask")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundStyle(ColorSet.gray300)
+                            .padding(.trailing, 10)
+                        leadingTitle(title: "쿠링 실험실")
+                        Spacer()
+                        tailingChevronImage
+                    }
                 }
 
                 NavigationLink(
@@ -183,6 +192,13 @@ public struct SettingList: View {
 }
 
 extension SettingList {
+    /// 시스템 아이콘 이미지
+    private func leadingSystemIconImage(systemName: String) -> some View {
+        Image(systemName: systemName)
+            .resizable()
+            .frame(width: 24, height: 24)
+    }
+    
     /// 아이콘 이미지
     private func leadingIconImage(imageName: String) -> some View {
         Image(imageName, bundle: .settings)
