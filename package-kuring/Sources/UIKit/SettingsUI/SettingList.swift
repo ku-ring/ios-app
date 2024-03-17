@@ -87,6 +87,7 @@ public struct SettingList: View {
             } footer: {
                 Text("Designed by 이소영, 김예은.\nDeveloped by 이재성, 이건우, 박성수.\nManaged by 조병관, 채수빈")
                     .font(.footnote)
+                    .foregroundStyle(ColorSet.caption1)
             }
             .tint(.black)
             .listRowSeparator(.hidden)
