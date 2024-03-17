@@ -107,6 +107,7 @@ public struct SettingList: View {
                         tailingChevronImage
                     }
                 }
+                .padding(.vertical, 9)
 
                 ZStack {
                     NavigationLink(
@@ -127,6 +128,7 @@ public struct SettingList: View {
                     .kerning(0.15)
                     .foregroundStyle(ColorSet.body)
                 }
+                .padding(.vertical, 9)
                 
             } header: {
                 headerView("쿠링 실험실")
