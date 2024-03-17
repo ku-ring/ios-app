@@ -171,7 +171,7 @@ public struct SettingList: View {
         HStack(spacing: 0) {
             leadingItemView(imageName, title)
             Spacer()
-            Image(systemName: "chevron.right")
+            tailingChevronImage
         }
         .padding(.vertical, 9)
     }
@@ -222,7 +222,7 @@ extension SettingList {
         Image("chevron", bundle: .settings)
             .resizable()
             .frame(width: 20, height: 20)
-        // !!!: - 컬러 시스템 구축 후에 색상 넣기
+            .foregroundStyle(ColorSet.gray300)
     }
 }
 
