@@ -107,17 +107,26 @@ public struct SettingList: View {
                     }
                 }
 
-                NavigationLink(
-                    state: SettingsAppFeature.Path.State.appIconSelector(
-                        AppIconSelectorFeature.State()
-                    )
-                ) {
-                    HStack {
+                ZStack {
+                    NavigationLink(
+                        state: SettingsAppFeature.Path.State.appIconSelector(
+                            AppIconSelectorFeature.State()
+                        )
+                    ) {
+                        EmptyView()
+                    }
+                    .opacity(0)
+                    
+                    HStack(spacing: 0) {
                         Text("앱 아이콘 바꾸기")
                         Spacer()
                         Text(store.state.currentAppIcon?.korValue ?? KuringIcon.kuring_app.korValue)
                     }
+                    .font(.system(size: 16, weight: .medium))
+                    .kerning(0.15)
+                    .foregroundStyle(ColorSet.body)
                 }
+                
             } header: {
                 headerView("쿠링 실험실")
             }
