@@ -6,6 +6,7 @@
 import Caches
 import Models
 import SwiftUI
+import ColorSet
 import ComposableArchitecture
 
 public struct NoticeRow: View {
@@ -48,7 +49,7 @@ public struct NoticeRow: View {
         ZStack {
             switch rowType {
             case .important, .importantAndBookmark:
-                Color.accentColor.opacity(0.1)
+                ColorSet.primary.opacity(0.1)
                     .ignoresSafeArea()
             default:
                 Color.clear
@@ -115,13 +116,13 @@ public struct NoticeRow: View {
             .font(.system(size: 12, weight: .semibold))
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
-            .foregroundStyle(Color.accentColor)
-            .background(Color.white)
+            .foregroundStyle(ColorSet.primary)
+            .background(ColorSet.bg)
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .inset(by: 0.25)
-                    .stroke(Color.accentColor, lineWidth: 0.5)
+                    .stroke(ColorSet.primary, lineWidth: 0.5)
             )
     }
 
@@ -129,7 +130,7 @@ public struct NoticeRow: View {
     private var titleView: some View {
         Text(notice.subject)
             .font(.system(size: 15, weight: .medium))
-            .foregroundStyle(Color.caption1)
+            .foregroundStyle(ColorSet.body)
     }
 
     @ViewBuilder
@@ -137,12 +138,11 @@ public struct NoticeRow: View {
         // TODO: - 정보 재구성
         Text(notice.postedDate)
             .font(.system(size: 14))
-            .foregroundStyle(Color.caption1.opacity(0.6))
+            .foregroundStyle(ColorSet.caption1)
     }
 
     @ViewBuilder
     private var bookmarkView: some View {
-        // TODO: 디자인 시스템 분리 - 북마크
         ZStack {
             RoundedRectangle(cornerRadius: 2)
                 .compositingGroup()
