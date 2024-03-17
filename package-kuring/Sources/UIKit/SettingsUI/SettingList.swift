@@ -5,6 +5,7 @@
 
 import Caches
 import SwiftUI
+import ColorSet
 import SettingsFeatures
 import ComposableArchitecture
 
@@ -12,12 +13,12 @@ public struct SettingList: View {
     @Bindable public var store: StoreOf<SettingListFeature>
     @Dependency(\.leLabo) var leLabo
     
-    // !!!: - 이미지 및 컬러 공통관리 가능하게 별도의 package 폴더 생성
-    struct Constants {
-        static let textCaption1: Color = Color(red: 0.53, green: 0.54, blue: 0.57)
-        static let textCaption2: Color = Color(red: 0.7, green: 0.71, blue: 0.74)
-        static let textBody: Color = Color(red: 0.21, green: 0.24, blue: 0.29)
-    }
+//    // !!!: - 이미지 및 컬러 공통관리 가능하게 별도의 package 폴더 생성
+//    struct Constants {
+//        static let textCaption1: Color = Color(red: 0.53, green: 0.54, blue: 0.57)
+//        static let textCaption2: Color = Color(red: 0.7, green: 0.71, blue: 0.74)
+//        static let textBody: Color = Color(red: 0.21, green: 0.24, blue: 0.29)
+//    }
     
     public var body: some View {
         List {
@@ -48,7 +49,7 @@ public struct SettingList: View {
                     Text("2.0.0")
                         .font(.system(size: 16, weight: .medium))
                         .kerning(0.15)
-                        .foregroundColor(Constants.textBody)
+                        .foregroundStyle(ColorSet.body)
                 }
                 
                 Button {
@@ -160,7 +161,7 @@ public struct SettingList: View {
     private func headerView(_ title: String) -> some View {
         Text(title)
             .font(.system(size: 14))
-            .foregroundColor(Constants.textCaption2)
+            .foregroundStyle(ColorSet.caption2)
             .padding(.top, 12)
             .padding(.bottom, 8)
     }
@@ -205,13 +206,13 @@ extension SettingList {
             Text(title)
                 .font(.system(size: 16, weight: .medium))
                 .kerning(0.15)
-                .foregroundColor(Constants.textBody)
+                .foregroundStyle(ColorSet.body)
             
             if let subTitle = subTitle {
                 Text(subTitle)
                     .font(.system(size: 12))
                     .kerning(0.15)
-                    .foregroundColor(Constants.textCaption1)
+                    .foregroundStyle(ColorSet.caption1)
             }
         }
     }
