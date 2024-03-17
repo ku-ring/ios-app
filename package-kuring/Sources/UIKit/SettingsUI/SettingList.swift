@@ -13,13 +13,6 @@ public struct SettingList: View {
     @Bindable public var store: StoreOf<SettingListFeature>
     @Dependency(\.leLabo) var leLabo
     
-//    // !!!: - 이미지 및 컬러 공통관리 가능하게 별도의 package 폴더 생성
-//    struct Constants {
-//        static let textCaption1: Color = Color(red: 0.53, green: 0.54, blue: 0.57)
-//        static let textCaption2: Color = Color(red: 0.7, green: 0.71, blue: 0.74)
-//        static let textBody: Color = Color(red: 0.21, green: 0.24, blue: 0.29)
-//    }
-    
     public var body: some View {
         List {
             Section {
@@ -112,9 +105,7 @@ public struct SettingList: View {
                 ) {
                     HStack {
                         Text("앱 아이콘 바꾸기")
-
                         Spacer()
-
                         Text(store.state.currentAppIcon?.korValue ?? KuringIcon.kuring_app.korValue)
                     }
                 }
