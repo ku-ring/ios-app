@@ -5,6 +5,7 @@
 
 import Models
 import SwiftUI
+import ColorSet
 import ComposableArchitecture
 
 public struct NoticeTypeColumn: View {
@@ -17,7 +18,7 @@ public struct NoticeTypeColumn: View {
         let lineHeight: CGFloat = 3
 
         Text(title)
-            .font(.system(size: 16, weight: provider.id == selectedID ? .semibold : .regular))
+            .font(.system(size: 16, weight: provider.id == selectedID ? .semibold : .medium))
             .padding(.vertical, 8)
             .frame(width: itemSize.width, height: itemSize.height)
             .overlay {
@@ -31,8 +32,8 @@ public struct NoticeTypeColumn: View {
             }
             .foregroundStyle(
                 provider.id == selectedID
-                    ? Color.accentColor
-                    : Color.black.opacity(0.3)
+                ? ColorSet.primary
+                : ColorSet.caption1
             )
             .id(provider.id)
     }
