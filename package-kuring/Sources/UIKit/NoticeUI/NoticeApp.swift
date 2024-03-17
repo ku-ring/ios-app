@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import ColorSet
 import SearchUI
 import DepartmentUI
 import SubscriptionUI
@@ -16,12 +17,16 @@ public struct NoticeApp: View {
 
     public var body: some View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
-            NoticeContentView(
-                store: self.store.scope(
-                    state: \.noticeList,
-                    action: \.noticeList
+            ZStack {
+                ColorSet.bg.ignoresSafeArea()
+                
+                NoticeContentView(
+                    store: self.store.scope(
+                        state: \.noticeList,
+                        action: \.noticeList
+                    )
                 )
-            )
+            }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -37,7 +42,7 @@ public struct NoticeApp: View {
                         )
                     ) {
                         Image(systemName: "magnifyingglass")
-                            .foregroundStyle(Color.black)
+                            .foregroundStyle(ColorSet.gray400)
                     }
                 }
 
@@ -48,7 +53,7 @@ public struct NoticeApp: View {
                         store.send(.changeSubscriptionButtonTapped)
                     } label: {
                         Image(systemName: "bell")
-                            .foregroundStyle(.black)
+                            .foregroundStyle(ColorSet.gray400)
                     }
                 }
             }
