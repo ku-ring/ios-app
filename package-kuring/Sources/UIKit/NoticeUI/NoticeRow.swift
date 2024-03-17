@@ -49,6 +49,7 @@ public struct NoticeRow: View {
             switch rowType {
             case .important, .importantAndBookmark:
                 Color.accentColor.opacity(0.1)
+                    .ignoresSafeArea()
             default:
                 Color.clear
             }
@@ -70,10 +71,13 @@ public struct NoticeRow: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, 12)
             case .important:
-                VStack(alignment: .leading, spacing: 4) {
-                    importantTagView
-                    titleView
-                    dateView
+                HStack(alignment: .top, spacing: 0) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        importantTagView
+                        titleView
+                        dateView
+                    }
+                    Spacer()
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 12)
@@ -92,7 +96,7 @@ public struct NoticeRow: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, 12)
             case .none:
-                HStack {
+                HStack(alignment: .top, spacing: 0) {
                     VStack(alignment: .leading, spacing: 4) {
                         titleView
                         dateView
