@@ -37,7 +37,9 @@ public struct AppIconSelector: View {
                         .foregroundStyle(.tint)
                 }
             }
+            .listRowSeparator(.hidden)
         }
+        .listStyle(.plain)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
