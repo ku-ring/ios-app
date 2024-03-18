@@ -94,7 +94,7 @@ public struct DepartmentEditor: View {
                 Button("전체 삭제") {
                     store.send(.deleteAllMyDepartmentButtonTapped)
                 }
-                .tint(ColorSet.primary)
+                .tint(.accentColor)
                 .disabled(store.myDepartments.isEmpty)
             }
         }

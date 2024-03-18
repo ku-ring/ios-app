@@ -17,16 +17,13 @@ public struct NoticeApp: View {
 
     public var body: some View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
-            ZStack {
-                ColorSet.bg.ignoresSafeArea()
-                
-                NoticeContentView(
-                    store: self.store.scope(
-                        state: \.noticeList,
-                        action: \.noticeList
-                    )
+            NoticeContentView(
+                store: self.store.scope(
+                    state: \.noticeList,
+                    action: \.noticeList
                 )
-            }
+            )
+            .background(ColorSet.bg)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
