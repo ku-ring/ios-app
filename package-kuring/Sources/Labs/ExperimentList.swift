@@ -45,6 +45,14 @@ public struct ExperimentList: View {
             ) {
                 Text("앱 아이콘 변경하기")
             }
+            
+            NavigationLink(
+                state: LabAppFeature.Path.State.userDefaults(
+                    UserDefaultsDetailFeature.State()
+                )
+            ) {
+                Text("앱 설정 값 변경하기")
+            }
         }
     }
 
