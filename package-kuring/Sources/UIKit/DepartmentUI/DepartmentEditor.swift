@@ -5,6 +5,7 @@
 
 import Models
 import SwiftUI
+import ColorSet
 import DepartmentFeatures
 import ComposableArchitecture
 
@@ -17,24 +18,25 @@ public struct DepartmentEditor: View {
         VStack(alignment: .leading) {
             Text("학과를 추가하거나\n삭제할 수 있어요")
                 .font(.system(size: 24, weight: .bold))
-                .foregroundStyle(Color(red: 0.1, green: 0.12, blue: 0.15))
+                .foregroundStyle(ColorSet.title)
                 .padding(.top, 28)
                 .padding(.bottom, 24)
 
             HStack(alignment: .center, spacing: 12) {
                 Image(systemName: "magnifyingglass")
                     .frame(width: 16, height: 16)
-                    .foregroundStyle(Color.caption1.opacity(0.6))
+                    .foregroundStyle(ColorSet.gray400)
 
                 TextField("추가할 학과를 검색해 주세요", text: $store.searchText)
                     .focused($focus, equals: .search)
                     .autocorrectionDisabled()
                     .bind($store.focus, to: self.$focus)
+                    .background(ColorSet.gray300)
 
                 if !store.searchText.isEmpty {
                     Image(systemName: "xmark")
                         .frame(width: 16, height: 16)
-                        .foregroundStyle(Color.caption1.opacity(0.6))
+                        .foregroundStyle(ColorSet.gray400)
                         .onTapGesture {
                             store.send(.clearTextFieldButtonTapped)
                             focus = nil
@@ -49,7 +51,7 @@ public struct DepartmentEditor: View {
 
             Text(store.searchText.isEmpty ? "내 학과" : "검색 결과")
                 .font(.system(size: 14))
-                .foregroundStyle(Color.caption1.opacity(0.6))
+                .foregroundStyle(ColorSet.caption1)
                 .padding(.horizontal, 4)
                 .padding(.vertical, 10)
 
@@ -86,6 +88,7 @@ public struct DepartmentEditor: View {
             Spacer()
         }
         .padding(.horizontal, 20)
+        .background(ColorSet.bg)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("전체 삭제") {

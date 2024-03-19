@@ -6,6 +6,7 @@
 import Models
 import Combine
 import SwiftUI
+import ColorSet
 import DepartmentUI
 
 @Observable
@@ -69,7 +70,7 @@ struct DepartmentSelector: View {
             HStack(alignment: .center, spacing: 12) {
                 Image(systemName: "magnifyingglass")
                     .frame(width: 16, height: 16)
-                    .foregroundStyle(Color.caption1.opacity(0.6))
+                    .foregroundStyle(ColorSet.gray400)
                 
                 TextField("추가할 학과를 검색해 주세요", text: $finder.text)
                     .focused($focus)

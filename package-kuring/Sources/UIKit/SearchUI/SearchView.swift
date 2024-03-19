@@ -32,7 +32,7 @@ public struct SearchView: View {
                     /// 검색 아이콘
                     Image(systemName: "magnifyingglass")
                         .frame(width: 16, height: 16)
-                        .foregroundStyle(Color.caption1.opacity(0.6))
+                        .foregroundStyle(ColorSet.gray400)
 
                     TextField("검색어를 입력해주세요", text: $store.searchInfo.text)
                         .focused($focus, equals: .search)

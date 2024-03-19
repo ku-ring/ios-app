@@ -34,13 +34,13 @@ public struct DepartmentRow: View {
                 Button(action: action) {
                     Image(
                         systemName: isSelected
-                            ? "checkmark.circle.fill"
-                            : "plus.circle"
+                        ? "checkmark.circle.fill"
+                        : "plus.circle"
                     )
                     .foregroundStyle(
                         isSelected
-                            ? Color.accentColor
-                            : Color.black.opacity(0.1)
+                        ? ColorSet.primary
+                        : ColorSet.gray400
                     )
                 }
             }
