@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import ColorSet
 import NoticeUI
 import NoticeFeatures
 import BookmarkFeatures
@@ -13,9 +14,13 @@ public struct BookmarkList: View {
     @Bindable var store: StoreOf<BookmarkListFeature>
 
     public var body: some View {
-        ZStack(alignment: .bottom) {
+        ZStack(alignment: .center) {
+            ColorSet.bg.ignoresSafeArea()
+            
             if store.bookmarkedNotices.isEmpty {
                 Text("보관된 공지사항이 없습니다.")
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundStyle(ColorSet.body)
             } else {
                 List {
                     ForEach(self.store.bookmarkedNotices, id: \.id) { notice in
@@ -52,13 +57,13 @@ public struct BookmarkList: View {
                                 } label: {
                                     Image(
                                         systemName: store.selectedIDs.contains(notice.id)
-                                            ? "checkmark.circle.fill"
-                                            : "circle"
+                                        ? "checkmark.circle.fill"
+                                        : "circle"
                                     )
                                     .foregroundStyle(
                                         store.selectedIDs.contains(notice.id)
-                                            ? Color.accentColor
-                                            : Color.caption1.opacity(0.15)
+                                        ? ColorSet.primary
+                                        : ColorSet.body
                                     )
                                 }
                             }
