@@ -1,13 +1,11 @@
 //
-//  LaunchScreen.swift
-//  KuringApp
-//
-//  Created by 이재성 on 3/12/24.
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
 //
 
 import SwiftUI
 
-struct LaunchScreen: View {
+struct SplashScreen: View {
     var body: some View {
         Image("kuring.logo")
             .resizable()
@@ -18,5 +16,5 @@ struct LaunchScreen: View {
 }
 
 #Preview {
-    LaunchScreen()
+    SplashScreen()
 }

@@ -1,8 +1,6 @@
 //
-//  ContentView.swift
-//  KuringApp
-//
-//  Created by Jaesung Lee on 2023/09/13.
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
 //
 
 import SwiftUI

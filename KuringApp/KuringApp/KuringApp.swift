@@ -1,8 +1,6 @@
 //
-//  KuringAppApp.swift
-//  KuringApp
-//
-//  Created by Jaesung Lee on 2023/09/13.
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
 //
 
 import Models
@@ -100,7 +98,7 @@ struct KuringApp: App {
     //                #endif
             } else {
                 // MARK: LaunchScreen
-                LaunchScreen()
+                SplashScreen()
                     .kuringLink(
                         onRequest: {
                             print("onRequest")
