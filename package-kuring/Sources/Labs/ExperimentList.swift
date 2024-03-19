@@ -37,7 +37,9 @@ public struct ExperimentList: View {
             ) {
                 Text("베타 A")
             }
-
+            .padding(.vertical, 9)
+            .listRowSeparator(.hidden)
+            
             NavigationLink(
                 state: LabAppFeature.Path.State.appIcon(
                     AppIconDetailFeature.State()
@@ -45,7 +47,10 @@ public struct ExperimentList: View {
             ) {
                 Text("앱 아이콘 변경하기")
             }
+            .padding(.vertical, 9)
+            .listRowSeparator(.hidden)
         }
+        .listStyle(.plain)
     }
 
     public init(store: StoreOf<ExperimentListFeature>) {
