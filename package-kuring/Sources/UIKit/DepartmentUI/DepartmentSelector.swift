@@ -5,6 +5,7 @@
 
 import Models
 import SwiftUI
+import ColorSet
 import DepartmentFeatures
 import ComposableArchitecture
 

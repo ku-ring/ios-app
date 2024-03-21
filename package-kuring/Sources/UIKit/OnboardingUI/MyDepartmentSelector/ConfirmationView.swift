@@ -13,9 +13,11 @@ struct ConfirmationView: View {
     var body: some View {
         VStack {
             HStack(spacing: 0) {
+                Spacer()
+                
                 Text(department.korName)
                     .font(.system(size: 24, weight: .bold))
-                    .foregroundStyle(Color.accentColor)
+                    .foregroundStyle(ColorSet.primary)
                 
                 Text(
                     department.korName.last == "공"
@@ -23,22 +25,25 @@ struct ConfirmationView: View {
                     : "를"
                 )
                 .font(.system(size: 24, weight: .bold))
-                .foregroundStyle(.primary)
+                .foregroundStyle(ColorSet.primary)
+                
+                Spacer()
             }
             
             Text(StringSet.title_confirm.rawValue)
                 .font(.system(size: 24, weight: .bold))
-                .foregroundStyle(.primary)
+                .foregroundStyle(ColorSet.primary)
             
             Text(StringSet.description_confirm.rawValue)
                 .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(Color.caption1.opacity(0.6))
+                .foregroundStyle(ColorSet.caption1)
                 .multilineTextAlignment(.center)
                 .padding(.top, 12)
             
             Spacer()
         }
         .padding(.top, 124)
+        .background(ColorSet.bg)
     }
 }
 

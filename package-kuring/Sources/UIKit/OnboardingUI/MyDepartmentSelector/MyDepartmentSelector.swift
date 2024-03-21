@@ -44,7 +44,7 @@ struct MyDepartmentSelector: View {
                     selectedDepartment = nil
                 }
                 .font(.system(size: 16, weight: .medium))
-                .foregroundStyle(Color.caption1.opacity(0.6))
+                .foregroundStyle(ColorSet.caption1)
                 .padding(.vertical, 20)
             } else {
                 Button(StringSet.button_start.rawValue) {
@@ -54,6 +54,7 @@ struct MyDepartmentSelector: View {
             }
         }
         .padding(.horizontal, 20)
+        .background(ColorSet.bg)
         .onChange(of: selectedDepartment) { _, _ in
             guard selectedDepartment != nil else { return }
             currentStep = .selectDepartment.id

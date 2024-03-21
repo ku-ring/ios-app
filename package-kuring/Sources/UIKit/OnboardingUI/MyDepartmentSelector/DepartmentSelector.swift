@@ -46,7 +46,8 @@ class DepartmentFinder {
                 correctResults.append(department)
             }
         }
-        results = correctResults
+//        results = correctResults
+        results = [.emptyDepartment, .emptyDepartment]
     }
 }
 
@@ -61,11 +62,11 @@ struct DepartmentSelector: View {
         VStack(alignment: .leading, spacing: 16) {
             Text(StringSet.title_select.rawValue)
                 .font(.system(size: 24, weight: .bold))
-                .foregroundStyle(.primary)
+                .foregroundStyle(ColorSet.title)
             
             Text(StringSet.description_select.rawValue)
                 .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(Color.caption1.opacity(0.6))
+                .foregroundStyle(ColorSet.caption1)
             
             HStack(alignment: .center, spacing: 12) {
                 Image(systemName: "magnifyingglass")
@@ -88,7 +89,7 @@ struct DepartmentSelector: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 7)
-            .background(Color(red: 0.95, green: 0.95, blue: 0.96))
+            .background(ColorSet.gray100)
             .cornerRadius(20)
             .padding(.bottom, 16)
             
@@ -105,5 +106,6 @@ struct DepartmentSelector: View {
             
             Spacer()
         }
+        .background(ColorSet.bg)
     }
 }
