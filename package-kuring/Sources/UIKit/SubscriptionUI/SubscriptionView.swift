@@ -120,7 +120,7 @@ struct SubscriptionView: View {
                                     HStack {
                                         Text(department.korName)
                                             .font(.system(size: 16, weight: .semibold))
-                                            .foregroundStyle(.black)
+                                            .foregroundStyle(ColorSet.body)
 
                                         Spacer()
 
@@ -190,6 +190,7 @@ struct SubscriptionView: View {
             }
         }
         .padding(.horizontal, 20)
+        .background(ColorSet.bg)
         // TODO: TCA에 따라 외부에서 구현
         .navigationTitle("푸시 알림 설정")
         .navigationBarTitleDisplayMode(.inline)

@@ -29,7 +29,7 @@ public struct DepartmentSelector: View {
                     HStack {
                         Text(department.korName)
                             .font(.system(size: 16, weight: .medium))
-                            .foregroundStyle(.black)
+                            .foregroundStyle(ColorSet.body)
 
                         Spacer()
 
