@@ -144,23 +144,33 @@ public struct SearchView: View {
             case .notice:
                 if let notices = store.resultNotices, !notices.isEmpty {
                     List(notices, id: \.self) { notice in
-                        NavigationLink(
-                            state: NoticeAppFeature.Path.State.detail(
-                                NoticeDetailFeature.State(notice: notice)
-                            )
-                        ) {
+                        ZStack {
+                            NavigationLink(
+                                state: NoticeAppFeature.Path.State.detail(
+                                    NoticeDetailFeature.State(notice: notice)
+                                )
+                            ) {
+                                EmptyView()
+                            }
+                            .opacity(0)
+                            
                             VStack(alignment: .leading) {
                                 Text(notice.subject)
-
+                                
                                 HStack {
                                     Text(notice.postedDate)
-
+                                    
                                     Spacer()
                                 }
                             }
                         }
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 22)
+                        .listRowInsets(EdgeInsets())
+                        .background(ColorSet.bg)
                     }
                     .listStyle(.plain)
+                    .listRowBackground(ColorSet.bg)
                 } else {
                     beforePhaseView
                 }
@@ -171,10 +181,15 @@ public struct SearchView: View {
                             store.send(.staffRowSelected(staff))
                         } label: {
                             StaffRow(staff: staff)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 22)
                         }
                         .buttonStyle(.plain)
+                        .listRowInsets(EdgeInsets())
+                        .background(ColorSet.bg)
                     }
                     .listStyle(.plain)
+                    .listRowBackground(ColorSet.bg)
                 } else {
                     beforePhaseView
                 }
@@ -227,6 +242,7 @@ public struct SearchView: View {
 
     public init(store: StoreOf<SearchFeature>) {
         self.store = store
+//        UITableView
     }
 }
 
