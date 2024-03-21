@@ -51,6 +51,10 @@ public struct NoticeProvider: Identifiable, Equatable, Hashable, Decodable {
     /// - Note: 서버값으로 부터 디코딩을 하지 않는 값이므로 직접 세팅해줘야 합니다.
     public var category: NoticeType
     
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
     enum CodingKeys: String, CodingKey {
         case name
         case hostPrefix
