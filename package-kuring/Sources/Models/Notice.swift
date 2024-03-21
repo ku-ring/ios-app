@@ -7,7 +7,7 @@ import Foundation
 
 /// 공지
 public struct Notice: Codable, Hashable, Identifiable, Equatable {
-    public var id: String { "\(category)_\(articleId)" }
+    public var id: String { "\(category)_\(articleId)_\(important)" }
     /// e.g., `"5b45b56"`
     public let articleId: String
     /// e.g., `"post_date_1"`
@@ -22,7 +22,7 @@ public struct Notice: Codable, Hashable, Identifiable, Equatable {
     public let important: Bool
 
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(url)
+        hasher.combine(id)
     }
     
     public init(articleId: String, postedDate: String, subject: String, url: String, category: String, important: Bool) {
