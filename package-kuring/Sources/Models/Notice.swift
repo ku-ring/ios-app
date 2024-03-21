@@ -7,7 +7,7 @@ import Foundation
 
 /// 공지
 public struct Notice: Codable, Hashable, Identifiable, Equatable {
-    public var id: String { "\(category)_\(articleId)_\(important)" }
+    public var id: String { "\(category)_\(articleId)" }
     /// e.g., `"5b45b56"`
     public let articleId: String
     /// e.g., `"post_date_1"`
