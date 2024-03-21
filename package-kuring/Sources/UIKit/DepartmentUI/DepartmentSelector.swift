@@ -47,7 +47,7 @@ public struct DepartmentSelector: View {
                     }
                     .padding(.horizontal, 20)
                     .padding(.vertical, 12)
-                    .background(.white)
+                    .background(ColorSet.bg)
                     .onTapGesture {
                         store.send(.selectDepartment(id: department.id))
                     }
