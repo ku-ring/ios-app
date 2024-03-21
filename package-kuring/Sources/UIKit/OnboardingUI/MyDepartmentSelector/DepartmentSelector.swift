@@ -46,8 +46,7 @@ class DepartmentFinder {
                 correctResults.append(department)
             }
         }
-//        results = correctResults
-        results = [.emptyDepartment, .emptyDepartment]
+        results = correctResults
     }
 }
 

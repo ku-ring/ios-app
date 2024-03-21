@@ -10,10 +10,19 @@ import ComposableArchitecture
 
 struct NoticeList: View {
     @Bindable var store: StoreOf<NoticeListFeature>
-
+    
     var body: some View {
         ScrollView {
-            LazyVStack(spacing: 0) {
+            VStack(spacing: 0) {
+                if self.store.provider.category == .학과 {
+                    DepartmentSelectorLink(
+                        department: self.store.provider,
+                        isLoading: $store.isLoading.sending(\.loadingChanged)
+                    ) {
+                        self.store.send(.changeDepartmentButtonTapped)
+                    }
+                }
+                
                 ForEach(self.store.currentNotices, id: \.id) { notice in
                     ZStack {
                         NavigationLink(
@@ -29,7 +38,7 @@ struct NoticeList: View {
                         .opacity(0)
                         
                         Section {
-                            LazyVStack(spacing: 0) {
+                            VStack(spacing: 0) {
                                 NoticeRow(
                                     notice: notice,
                                     bookmarked: self.store.bookmarkIDs.contains(notice.id)
@@ -48,10 +57,11 @@ struct NoticeList: View {
                                     Button {
                                         self.store.send(.bookmarkTapped(notice))
                                     } label: {
-                                         Image(systemName: self.store.bookmarkIDs.contains(notice.id)
-                                               ? "bookmark.slash"
-                                               : "bookmark"
-                                         )
+                                        Image(
+                                            systemName: self.store.bookmarkIDs.contains(notice.id)
+                                            ? "bookmark.slash"
+                                            : "bookmark"
+                                        )
                                     }
                                     .tint(Color.accentColor)
                                 }
@@ -60,17 +70,6 @@ struct NoticeList: View {
                                     .frame(height: 1)
                             }
                             
-                        } header: {
-                            if self.store.provider.category == .학과 {
-                                DepartmentSelectorLink(
-                                    department: self.store.provider,
-                                    isLoading: $store.isLoading.sending(\.loadingChanged)
-                                ) {
-                                    self.store.send(.changeDepartmentButtonTapped)
-                                }
-                            } else {
-                                EmptyView()
-                            }
                         }
                         .navigationTitle("")
                         
