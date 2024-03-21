@@ -75,10 +75,10 @@ public struct FeedbackView: View {
                     "피드백 보내기",
                     fontColor: store.isSendable
                         ? .white
-                        : Color.accentColor.opacity(0.4),
+                        : ColorSet.primary.opacity(0.4),
                     backgroundColor: store.isSendable
-                        ? Color.accentColor
-                        : Color.accentColor.opacity(0.15)
+                        ? ColorSet.primary
+                        : ColorSet.primary.opacity(0.15)
                 )
             }
             .allowsHitTesting(store.isSendable)

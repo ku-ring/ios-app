@@ -79,7 +79,7 @@ struct DepartmentSelector: View {
                 if !finder.text.isEmpty {
                     Image(systemName: "xmark")
                         .frame(width: 16, height: 16)
-                        .foregroundStyle(Color.caption1.opacity(0.6))
+                        .foregroundStyle(ColorSet.caption1.opacity(0.6))
                         .onTapGesture {
                             finder.text = ""
                             focus = false

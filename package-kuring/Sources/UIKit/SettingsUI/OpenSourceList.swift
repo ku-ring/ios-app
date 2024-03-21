@@ -37,7 +37,7 @@ public struct OpenSourceList: View {
                             .frame(maxWidth: .infinity)
                         }
                         .buttonStyle(.bordered)
-                        .tint(Color.accentColor)
+                        .tint(ColorSet.primary)
                         
                         Text(opensource.license)
                             .font(.footnote)

@@ -125,7 +125,7 @@ struct SubscriptionView: View {
                                         Spacer()
 
                                         Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                                            .foregroundStyle(isSelected ? Color.accentColor : Color.black.opacity(0.1))
+                                            .foregroundStyle(isSelected ? ColorSet.primary : Color.black.opacity(0.1))
                                             .frame(width: 20, height: 20)
                                     }
                                     .padding(.horizontal, 21.5)

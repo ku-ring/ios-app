@@ -3,6 +3,7 @@
 // See the 'License.txt' file for licensing information.
 //
 
+import ColorSet
 import ComposableArchitecture
 
 @Reducer
@@ -60,7 +61,7 @@ public struct BetaADetailView: View {
                 Text(store.description)
 
                 Toggle("기능 활성화", isOn: $store.isEnabled)
-                    .tint(Color.accentColor)
+                    .tint(ColorSet.primary)
             }
         }
         .navigationTitle(store.title)

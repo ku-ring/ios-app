@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import ColorSet
 
 // TODO: 디자인 시스템으로 이동
 struct KuringButtonStyle: ButtonStyle {
@@ -18,7 +19,7 @@ struct KuringButtonStyle: ButtonStyle {
                 .foregroundStyle(
                     onEnabled
                     ? .white
-                    : Color.accentColor.opacity(0.4)
+                    : ColorSet.primary.opacity(0.4)
                 )
 
             Spacer()
@@ -28,8 +29,8 @@ struct KuringButtonStyle: ButtonStyle {
         .frame(height: 50, alignment: .center)
         .background(
             onEnabled
-            ? Color.accentColor
-            : Color.accentColor.opacity(0.15)
+            ? ColorSet.primary
+            : ColorSet.primary.opacity(0.15)
         )
         .cornerRadius(100)
     }

@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import ColorSet
 import DepartmentUI
 import NoticeFeatures
 import ComposableArchitecture
@@ -63,7 +64,7 @@ struct NoticeList: View {
                                             : "bookmark"
                                         )
                                     }
-                                    .tint(Color.accentColor)
+                                    .tint(ColorSet.primary)
                                 }
                                 
                                 Divider()
