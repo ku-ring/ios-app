@@ -5,6 +5,7 @@
 
 import Models
 import SwiftUI
+import ColorSet
 import DepartmentFeatures
 import SubscriptionFeatures
 import ComposableArchitecture
@@ -17,7 +18,7 @@ struct SubscriptionView: View {
             HStack {
                 Text("알림 받고 싶은 \n카테고리를 선택해주세요")
                     .font(.system(size: 24, weight: .bold))
-                    .foregroundStyle(Color(red: 0.1, green: 0.12, blue: 0.15))
+                    .foregroundStyle(ColorSet.title)
             }
             .padding(.top, 32)
             .padding(.bottom, 60)
@@ -59,13 +60,13 @@ struct SubscriptionView: View {
                                 RoundedRectangle(cornerRadius: 8)
                                     .inset(by: 1)
                                     .stroke(
-                                        isSelected ? Color.accentColor : Color.clear,
+                                        isSelected ? ColorSet.primary : Color.clear,
                                         lineWidth: isSelected ? 2 : 0
                                     )
                                     .fill(
                                         isSelected
-                                            ? Color.accentColor.opacity(0.1)
-                                            : Color.black.opacity(0.03)
+                                        ? ColorSet.primary.opacity(0.1)
+                                        : ColorSet.gray100
                                     )
 
                                 VStack {
@@ -75,8 +76,8 @@ struct SubscriptionView: View {
                                         .font(.system(size: 16, weight: .semibold))
                                         .foregroundStyle(
                                             isSelected
-                                                ? Color.accentColor
-                                                : Color(red: 0.32, green: 0.32, blue: 0.32)
+                                            ? ColorSet.primary
+                                            : ColorSet.body
                                         )
                                 }
                                 .padding()
@@ -101,7 +102,7 @@ struct SubscriptionView: View {
                             Text("아직 추가된 학과가 없어요.\n관심 학과를 추가하고 공지를 확인해 보세요!")
                                 .font(.system(size: 16, weight: .medium))
                                 .multilineTextAlignment(.center)
-                                .foregroundStyle(Color(red: 0.68, green: 0.69, blue: 0.71))
+                                .foregroundStyle(ColorSet.caption2)
 
                             Spacer()
                         }
@@ -172,11 +173,15 @@ struct SubscriptionView: View {
                     .padding(.horizontal, 50)
                     .padding(.vertical, 16)
                     .frame(height: 50, alignment: .center)
-                    .background(Color.accentColor)
+                    .background(ColorSet.primary)
                     .cornerRadius(100)
                     .background {
                         LinearGradient(
-                            gradient: Gradient(colors: [.white.opacity(0.1), .white]),
+                            gradient: Gradient(colors: [
+                                ColorSet.bg.opacity(0.1),
+                                ColorSet.bg.opacity(0.1),
+                                ColorSet.primary.opacity(0.1)
+                            ]),
                             startPoint: .top, endPoint: .bottom
                         )
                         .offset(x: 0, y: -32)
