@@ -7,7 +7,7 @@ import Models
 import Foundation
 import Dependencies
 
-struct Subscriptions {
+public struct KuringSubscriptions {
     /// 구독한 공지 추가
     public var add: (_ noticeProvider: NoticeProvider) -> Void
     /// 구독한 공지 제거
@@ -28,7 +28,7 @@ struct Subscriptions {
     static var isCustomNotification: Bool
 }
 
-extension Subscriptions {
+extension KuringSubscriptions {
     public static let `default` = Self(
         add: { noticeProvider in
             var subscriptions = Self.subscriptions
@@ -52,4 +52,15 @@ extension Subscriptions {
         }
     )
 
+}
+
+extension KuringSubscriptions: DependencyKey {
+    public static var liveValue: KuringSubscriptions = .default
+}
+
+extension DependencyValues {
+    public var subscriptions: KuringSubscriptions {
+        get { self[KuringSubscriptions.self] }
+        set { self[KuringSubscriptions.self] = newValue }
+    }
 }
