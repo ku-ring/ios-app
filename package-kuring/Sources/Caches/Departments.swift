@@ -7,8 +7,8 @@
 
 import UIKit
 import Models
+import SwiftUI
 import Dependencies
-import ComposableArchitecture
 
 public struct Departments {
     /// 학과 추가
@@ -20,7 +20,7 @@ public struct Departments {
     /// 사용자가 추가한 모든 학과 리스트
     public var getAll: () -> [NoticeProvider]
     /// 사용자가 구독한 모든 학과 리스트
-    public var getSubscribe: () -> [NoticeProvider]
+    public var getSubscribes: () -> [NoticeProvider]
     /// 사용자가 현재 선택한 학과
     public var getCurrent: () -> NoticeProvider?
     /// 사용자가 현재 선택한 학과 변경
@@ -45,26 +45,30 @@ public struct Departments {
         }
     }
     
+    /// 선택한 학과 리스트
+    @UserDefault(key: StringSet.selectedDepartments, defaultValue: [])
+    static var selections: [NoticeProvider]
+    
+    /// 선택한 학과 리스트 중 현재 공지에 보여줄 학과
+    @UserDefault(key: StringSet.currentDepartment, defaultValue: nil)
+    static var current: NoticeProvider?
 }
 
 extension Departments {
     public static let `default` = Self(
-        add: { department in
-            let dto = DepartmentDTO(id: department.id,
-                                    name: department.name,
-                                    hostPrefix: department.hostPrefix,
-                                    korName: department.korName)
-            var departments = UserDefaults.standard.object(
-                forKey: StringSet.selectedDepartments
-            ) as? [DepartmentDTO] ?? []
+        add: { noticeProvider in
+            var noticeProvider = noticeProvider
+            noticeProvider.category = .학과
             
+            var departments = Self.selections
+
             if departments.isEmpty {
-                // 학과 추가시 학과가 0개인 경우에는 current를 처음 학과로 설정
-                UserDefaults.standard.set(dto, forKey: StringSet.currentDepartment)
+//                 학과 추가시 학과가 0개인 경우에는 current를 처음 학과로 설정
+                current = departments.first
             }
             
-            departments.append(dto)
-            UserDefaults.standard.set(departments, forKey: StringSet.selectedDepartments)
+            departments.append(noticeProvider)
+            Self.selections = departments
             
         }, remove: { id in
             var departments = UserDefaults.standard.object(
@@ -84,7 +88,7 @@ extension Departments {
             UserDefaults.standard.removeObject(forKey: StringSet.selectedDepartments)
             UserDefaults.standard.removeObject(forKey: StringSet.currentDepartment)
             
-        } , getAll: {
+        }, getAll: {
             var departments = UserDefaults.standard.object(
                 forKey: StringSet.selectedDepartments
             ) as? [DepartmentDTO] ?? []
@@ -95,7 +99,7 @@ extension Departments {
             
             return domainModels
             
-        }, getSubscribe: {
+        }, getSubscribes: {
             var departments = UserDefaults.standard.object(
                 forKey: StringSet.selectedDepartments
             ) as? [DepartmentDTO]
@@ -170,4 +174,100 @@ class StringSet {
     
     static let selectedDepartments = "\(baseString).selected.departments"
     static let currentDepartment = "\(baseString).current.department"
+}
+
+@propertyWrapper
+struct UserDefault<T: Codable> {
+    let key: String
+    let defaultValue: T
+    let storage: UserDefaults
+
+    var wrappedValue: T {
+        get {
+            guard let data = self.storage.object(forKey: self.key) as? Data else { return defaultValue }
+            return (try? PropertyListDecoder().decode(T.self, from: data)) ?? self.defaultValue
+        }
+        set {
+            let encodedData = try? PropertyListEncoder().encode(newValue)
+            self.storage.set(encodedData, forKey: self.key)
+        }
+    }
+
+    init(key: String, defaultValue: T, storage: UserDefaults = .standard) {
+        self.key = key
+        self.defaultValue = defaultValue
+        self.storage = storage
+    }
+}
+//
+//class UserDefaultManager {
+//    static let appGroup = "group.com.kuring.service"
+//    
+//    @UserDefault(key: StringSet.selectedDepartments, defaultValue: [])
+//    var selectedDepartments: [Department]
+//    
+//    @UserDefault(key: StringSet.currentDepartment, defaultValue: nil)
+//    var currentDepartment: Department?
+//    
+//    var lastRunAt: Double = 0
+//    
+//    var isFirstRun: Bool = true
+//    
+//    init() {
+////        self.lastRunAt = self.runAt
+////        self.isFirstRun = self.startedAt == nil
+////
+//        self.runAt = Date().timeIntervalSince1970
+//        
+//        if self.startedAt == nil {
+//            self.startedAt = runAt
+//        }
+//    }
+//}
+//
+//struct MigrationManager {
+//    func migrate() {
+//        migrate(from: StringSet.inAppReviewCount, asType: Int.self)
+//        migrate(from: StringSet.lastRunAt, asType: Double.self)
+//        migrate(from: StringSet.lastReadNoticeID, asType: String.self)
+//        migrate(from: StringSet.subscribedCategories, asType: [String].self)
+//        migrate(from: StringSet.appVersion, asType: String.self)
+//        migrate(from: StringSet.customNotification, asType: Bool.self)
+//        migrate(from: StringSet.noticeBookmark, asType: [Notice].self)
+//        
+//        migrate(from: StringSet.subscribedCategories, asType: [String].self, appGroup: UserDefaultManager.appGroup)
+//    }
+//    
+//    private func migrate<T: Codable>(from key: String, asType type: T.Type) {
+//        guard let value = UserDefaults.standard.value(forKey: key) as? T else { return }
+//        guard let encodedData = try? PropertyListEncoder().encode(value) else { return }
+//        UserDefaults.standard.set(encodedData, forKey: key)
+//    }
+//    
+//    private func migrate<T: Codable>(from key: String, asType type: T.Type, appGroup: String) {
+//        guard let userDefault = UserDefaults(suiteName: UserDefaultManager.appGroup) else { return }
+//        guard let value = userDefault.value(forKey: key) as? T else { return }
+//        guard let encodedData = try? PropertyListEncoder().encode(value) else { return }
+//        UserDefaults.standard.set(encodedData, forKey: key)
+//    }
+//}
+
+extension Array: RawRepresentable where Element: Codable {
+    public init?(rawValue: String) {
+        guard let data = rawValue.data(using: .utf8),
+              let result = try? JSONDecoder().decode([Element].self, from: data)
+        else {
+            return nil
+        }
+        self = result
+    }
+
+    public var rawValue: String {
+        guard let data = try? JSONEncoder().encode(self),
+              let result = String(data: data, encoding: .utf8)
+        else {
+            return "[]"
+        }
+        return result
+    }
 }

@@ -35,7 +35,7 @@ public enum NoticeType: String, Hashable, CaseIterable, Identifiable, Equatable 
 /// 공지 제공자.
 /// 일반, 학사, 장학과 같은 대학 공지 카테고리, 전기전자공학부, 컴퓨터공학부, 산업디자인학과와 같은 학과들처럼 공지를 제공하는 주체.
 /// - Note: ``NoticeProvider/category`` 프로퍼티로 상위 카테고리를 관리합니다.
-public struct NoticeProvider: Identifiable, Equatable, Hashable, Decodable {
+public struct NoticeProvider: Identifiable, Equatable, Hashable, Codable {
     /// ``hostPrefix`` 를 식별자로 사용합니다.
     public var id: String { hostPrefix }
 
