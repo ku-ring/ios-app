@@ -40,7 +40,7 @@ extension Search: DependencyKey {
 }
 
 extension DependencyValues {
-    public var searches: Search {
+    public var search: Search {
         get { self[Search.self] }
         set { self[Search.self] = newValue }
     }
