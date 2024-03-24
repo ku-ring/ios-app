@@ -1,8 +1,6 @@
 //
-//  File.swift
-//  
-//
-//  Created by Geon Woo lee on 3/24/24.
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
 //
 
 import UIKit
@@ -24,25 +22,6 @@ public struct Departments {
     /// 사용자가 현재 선택한 학과 변경
     public var changeCurrent: (_ department: NoticeProvider) -> Void
     
-    struct DepartmentDTO: Identifiable, Codable {
-        var id: String
-        /// 학과 이름
-        var name: String
-        var hostPrefix: String
-        var korName: String
-        /// 해당 학과 공지 구독 여부
-        var isSubscribe: Bool = false
-        
-        func toDomain() -> NoticeProvider {
-            return .init(
-                name: self.name,
-                hostPrefix: self.hostPrefix,
-                korName: self.korName,
-                category: .학과
-            )
-        }
-    }
-    
     /// 선택한 학과 리스트
     @UserDefault(key: StringSet.selectedDepartments, defaultValue: [])
     static var selections: [NoticeProvider]
@@ -61,7 +40,7 @@ extension Departments {
             var departments = Self.selections
 
             if departments.isEmpty {
-//                 학과 추가시 학과가 0개인 경우에는 current를 처음 학과로 설정
+//                학과 추가시 학과가 0개인 경우에는 current를 처음 학과로 설정
                 current = departments.first
             }
             
@@ -75,7 +54,7 @@ extension Departments {
             
             if let current = departments.first,
                Self.current?.id == id  {
-                // 삭제한 학과가 현재 선택한 학과일 경우 새로운 학과 정보로 업데이트
+//                 삭제한 학과가 현재 선택한 학과일 경우 새로운 학과 정보로 업데이트
                 Self.current = current
             }
 
@@ -106,39 +85,4 @@ extension DependencyValues {
         get { self[Departments.self] }
         set { self[Departments.self] = newValue }
     }
-}
-
-class StringSet {
-    static let baseString = "com.kuring.sdk"
-    
-    static let appVersion = "\(baseString).version.app"
-    
-    static let userID = "\(baseString).user.id"
-    
-    static let startedAt = "\(baseString).date.start"
-    static let runAt = "\(baseString).date.run"
-    static let lastRunAt = "\(baseString).date.lastrun"
-    static let lastReadNoticeID = "\(baseString).notice.lastread"
-    static let inAppReviewCount = "\(baseString).review.count"
-    static let readNoticeIDs = "\(baseString).notice.readlist"
-    
-    static let notificationUserInfo = "\(baseString).notification.userinfo"
-    static let customNotification = "\(baseString).notification.custom"
-    
-    static let fcmToken = "\(baseString).token.fcm"
-    static let subscriptionToken = "\(baseString).subscription.token"
-    static let subscribedCategories = "\(baseString).subscription.categories"
-    
-    static let searcherConnectionQueue = "\(baseString).searcher.connection"
-    static let searcherCallbackQueue = "\(baseString).searcher.callback"
-    static let searcherOperationQueue = "\(baseString).searcher.operation"
-    static let searcherHeartbeatQueue = "\(baseString).searcher.heartbeat"
-    
-    static let feedbackPlaceholder = "피드백을 남겨주세요..."
-    static let feedbackGuideline = "피드백을 남겨서 앱이 성장하는데에\n큰 기여를 해주세요 🙂"
-    
-    static let noticeBookmark = "\(baseString).notice.bookmark"
-    
-    static let selectedDepartments = "\(baseString).selected.departments"
-    static let currentDepartment = "\(baseString).current.department"
 }
