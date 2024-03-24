@@ -71,33 +71,22 @@ extension Departments {
             Self.selections = departments
             
         }, remove: { id in
-            var departments = UserDefaults.standard.object(
-                forKey: StringSet.selectedDepartments
-            ) as? [DepartmentDTO] ?? []
+            var departments = Self.selections
             
-            departments.removeAll { $0.id == id }
+            Self.selections.removeAll { $0.id == id }
             
             if let current = departments.first,
-               let dto = UserDefaults.standard.object(forKey: StringSet.currentDepartment) as? DepartmentDTO,
-               dto.id == id  {
+               Self.current?.id == id  {
                 // 삭제한 학과가 현재 선택한 학과일 경우 새로운 학과 정보로 업데이트
-                UserDefaults.standard.set(current, forKey: StringSet.currentDepartment)
+                Self.current = current
             }
 
         }, removeAll: {
-            UserDefaults.standard.removeObject(forKey: StringSet.selectedDepartments)
-            UserDefaults.standard.removeObject(forKey: StringSet.currentDepartment)
+            Self.selections.removeAll()
+            Self.current = nil
             
         }, getAll: {
-            var departments = UserDefaults.standard.object(
-                forKey: StringSet.selectedDepartments
-            ) as? [DepartmentDTO] ?? []
-            
-            let domainModels: [NoticeProvider] = departments.compactMap { dto in
-                dto.toDomain()
-            }
-            
-            return domainModels
+            Self.selections
             
         }, getSubscribes: {
             var departments = UserDefaults.standard.object(
@@ -113,17 +102,10 @@ extension Departments {
             return domainModels
             
         }, getCurrent: {
-            let dto = UserDefaults.standard.object(forKey: StringSet.currentDepartment) as? DepartmentDTO
-            let modainModel = dto?.toDomain()
+            Self.current
             
-            return modainModel
-            
-        }, changeCurrent: { department in
-            let dto = DepartmentDTO(id: department.id,
-                                    name: department.name,
-                                    hostPrefix: department.hostPrefix,
-                                    korName: department.korName)
-            UserDefaults.standard.set(dto, forKey: StringSet.currentDepartment)
+        }, changeCurrent: { noticeProvider in
+            Self.current = noticeProvider
             
         }
     )
