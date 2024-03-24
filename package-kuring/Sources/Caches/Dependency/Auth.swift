@@ -14,7 +14,7 @@ public enum AuthTokenType: Codable {
 
 public struct Auth {
     /// 토큰 정보
-    public var getToken: (AuthTokenType) -> String?
+    public var getToken: (_ type: AuthTokenType) -> String?
     /// 토큰 정보 등록
     public var registerToken: (_ type: AuthTokenType, _ value: String) -> Void
     
@@ -24,7 +24,7 @@ public struct Auth {
 
 extension Auth {
     public static var `default` = Auth (
-        getToken: { tokenType in
+        getToken: { type in
             switch tokenType {
             case .fcm:
                 return tokenDictionary[.fcm]
