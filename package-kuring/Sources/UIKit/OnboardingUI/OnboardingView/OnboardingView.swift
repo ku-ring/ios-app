@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import ColorSet
 
 public struct OnboardingView: View {
     @Environment(\.dismiss) private var dismiss
@@ -13,6 +14,7 @@ public struct OnboardingView: View {
     public var body: some View {
         if showsDepartmentSelector {
             MyDepartmentSelector()
+                .background(ColorSet.bg)
         } else {
             VStack(spacing: 0) {
                 HStack {
@@ -37,7 +39,7 @@ public struct OnboardingView: View {
                             .frame(width: 8, height: 8)
                             .foregroundStyle(
                                 currentGuidance == guidance
-                                ? Color.accentColor
+                                ? ColorSet.primary
                                 : Color(.systemGroupedBackground)
                             )
                     }
@@ -56,14 +58,18 @@ public struct OnboardingView: View {
                     dismiss()
                 }
                 .font(.system(size: 16, weight: .medium))
-                .foregroundStyle(Color.caption1.opacity(0.6))
+                .foregroundStyle(ColorSet.caption1)
                 .padding(.vertical, 20)
             }
             .padding(.horizontal, 20)
+            .background(ColorSet.bg)
         }
     }
     
-    public init() { }
+    public init() {
+        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(ColorSet.primary)
+        UIPageControl.appearance().pageIndicatorTintColor = UIColor(ColorSet.gray200)
+    }
 }
 
 #Preview {

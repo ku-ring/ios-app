@@ -110,7 +110,6 @@ public struct NoticeRow: View {
         }
     }
 
-    @ViewBuilder
     private var importantTagView: some View {
         Text("중요")
             .font(.system(size: 12, weight: .semibold))
@@ -126,14 +125,12 @@ public struct NoticeRow: View {
             )
     }
 
-    @ViewBuilder
     private var titleView: some View {
         Text(notice.subject)
             .font(.system(size: 15, weight: .medium))
             .foregroundStyle(ColorSet.body)
     }
 
-    @ViewBuilder
     private var dateView: some View {
         // TODO: - 정보 재구성
         Text(notice.postedDate)
@@ -141,12 +138,11 @@ public struct NoticeRow: View {
             .foregroundStyle(ColorSet.caption1)
     }
 
-    @ViewBuilder
     private var bookmarkView: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 2)
                 .compositingGroup()
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(ColorSet.primary)
                 .frame(width: 16, height: 21)
 
             RoundedRectangle(cornerRadius: 2)

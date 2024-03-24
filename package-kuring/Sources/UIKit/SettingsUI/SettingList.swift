@@ -27,13 +27,13 @@ public struct SettingList: View {
                     Spacer()
                     Toggle("", isOn: $store.isCustomAlarmOn)
                         .labelsHidden()
-                        .tint(Color.accentColor)
+                        .tint(ColorSet.primary)
                 }
             } header: {
                 headerView("공지 구독")
             }
-            .tint(.black)
             .listRowSeparator(.hidden)
+            .listRowBackground(ColorSet.bg)
             
             Section {
                 HStack(spacing: 0) {
@@ -89,8 +89,8 @@ public struct SettingList: View {
                     .font(.footnote)
                     .foregroundStyle(ColorSet.caption1)
             }
-            .tint(.black)
             .listRowSeparator(.hidden)
+            .listRowBackground(ColorSet.bg)
             
             Section {
                 Button {
@@ -134,6 +134,7 @@ public struct SettingList: View {
                 headerView("쿠링 실험실")
             }
             .listRowSeparator(.hidden)
+            .listRowBackground(ColorSet.bg)
             
             Section {
                 Button {
@@ -141,12 +142,11 @@ public struct SettingList: View {
                 } label: {
                     itemView("icon_instagram", "인스타그램")
                 }
-
             } header: {
                 headerView("SNS")
             }
-            .tint(.black)
             .listRowSeparator(.hidden)
+            .listRowBackground(ColorSet.bg)
             
             Section {
                 Button {
@@ -157,10 +157,11 @@ public struct SettingList: View {
             } header: {
                 headerView("피드백")
             }
-            .tint(.black)
             .listRowSeparator(.hidden)
+            .listRowBackground(ColorSet.bg)
         }
         .listStyle(.plain)
+        .background(ColorSet.bg)
         .navigationTitle("더보기")
         .navigationBarTitleDisplayMode(.inline)
     }

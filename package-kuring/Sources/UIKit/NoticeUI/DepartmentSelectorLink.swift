@@ -5,6 +5,7 @@
 
 import Models
 import SwiftUI
+import ColorSet
 
 struct DepartmentSelectorLink: View {
     let department: NoticeProvider
@@ -15,7 +16,7 @@ struct DepartmentSelectorLink: View {
         HStack {
             Text(department.korName)
                 .font(.system(size: 18, weight: .semibold))
-                .foregroundStyle(Color.black.opacity(0.8))
+                .foregroundStyle(ColorSet.title)
 
             Spacer()
 

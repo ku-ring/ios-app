@@ -5,6 +5,7 @@
 
 import Models
 import SwiftUI
+import ColorSet
 import DepartmentFeatures
 import ComposableArchitecture
 
@@ -16,7 +17,7 @@ public struct DepartmentSelector: View {
             HStack(alignment: .center, spacing: 10) {
                 Text("대표 학과 선택")
                     .font(.system(size: 18, weight: .bold))
-                    .foregroundStyle(Color.black)
+                    .foregroundStyle(ColorSet.title)
             }
             .padding(.horizontal, 20)
             .padding(.top, 24)
@@ -28,7 +29,7 @@ public struct DepartmentSelector: View {
                     HStack {
                         Text(department.korName)
                             .font(.system(size: 16, weight: .medium))
-                            .foregroundStyle(.black)
+                            .foregroundStyle(ColorSet.body)
 
                         Spacer()
 
@@ -39,14 +40,13 @@ public struct DepartmentSelector: View {
                         )
                         .foregroundStyle(
                             department == store.currentDepartment
-                                ? Color.accentColor
-                                : Color.black.opacity(0.1)
+                            ? ColorSet.primary
+                            : ColorSet.gray200
                         )
                         .frame(width: 20, height: 20)
                     }
                     .padding(.horizontal, 20)
                     .padding(.vertical, 12)
-                    .background(.white)
                     .onTapGesture {
                         store.send(.selectDepartment(id: department.id))
                     }
@@ -58,8 +58,8 @@ public struct DepartmentSelector: View {
             } label: {
                 topBlurButton(
                     "내 학과 편집하기",
-                    fontColor: Color.accentColor,
-                    backgroundColor: Color.accentColor.opacity(0.15)
+                    fontColor: ColorSet.body,
+                    backgroundColor: ColorSet.primary
                 )
             }
             .padding(.horizontal, 20)
@@ -82,8 +82,15 @@ public struct DepartmentSelector: View {
         .background(backgroundColor)
         .cornerRadius(100)
         .background {
-            LinearGradient(gradient: Gradient(colors: [.white.opacity(0.1), .white]), startPoint: .top, endPoint: .bottom)
-                .offset(x: 0, y: -32)
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    ColorSet.bg.opacity(0.1),
+                    ColorSet.bg.opacity(0.1),
+                    ColorSet.primary.opacity(0.1)
+                ]),
+                startPoint: .top, endPoint: .bottom
+            )
+            .offset(x: 0, y: -32)
         }
     }
 

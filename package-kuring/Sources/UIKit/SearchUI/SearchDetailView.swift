@@ -16,6 +16,7 @@ public struct StaffDetailView: View {
             Text(store.staff.name)
                 .font(.system(size: 20, weight: .bold))
                 .listRowSeparator(.hidden)
+                .padding(.top, 22)
 
             Text("\(store.staff.deptName) · \(store.staff.collegeName)")
                 .foregroundStyle(.secondary)

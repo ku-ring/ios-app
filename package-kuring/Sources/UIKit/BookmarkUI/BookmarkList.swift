@@ -80,11 +80,11 @@ public struct BookmarkList: View {
                         topBlurButton(
                             "삭제하기",
                             fontColor: store.selectedIDs.isEmpty
-                                ? Color.accentColor.opacity(0.4)
-                                : .white,
+                            ? ColorSet.primary.opacity(0.4)
+                            : .white,
                             backgroundColor: store.selectedIDs.isEmpty
-                                ? Color.accentColor.opacity(0.15)
-                                : Color.accentColor
+                            ? ColorSet.primary.opacity(0.15)
+                            : ColorSet.primary
                         )
                     }
                     .padding(.horizontal, 20)
@@ -122,7 +122,7 @@ public struct BookmarkList: View {
                     )
                 }
                 .disabled(store.bookmarkedNotices.isEmpty)
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(ColorSet.primary)
             }
         }
     }
@@ -143,8 +143,15 @@ public struct BookmarkList: View {
         .background(backgroundColor)
         .cornerRadius(100)
         .background {
-            LinearGradient(gradient: Gradient(colors: [.white.opacity(0.1), .white]), startPoint: .top, endPoint: .bottom)
-                .offset(x: 0, y: -32)
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    ColorSet.bg.opacity(0.1),
+                    ColorSet.bg.opacity(0.1),
+                    ColorSet.primary.opacity(0.1)
+                ]),
+                startPoint: .top, endPoint: .bottom
+            )
+            .offset(x: 0, y: -32)
         }
     }
 }

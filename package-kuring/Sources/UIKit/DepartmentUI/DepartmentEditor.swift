@@ -31,7 +31,6 @@ public struct DepartmentEditor: View {
                     .focused($focus, equals: .search)
                     .autocorrectionDisabled()
                     .bind($store.focus, to: self.$focus)
-                    .background(ColorSet.gray300)
 
                 if !store.searchText.isEmpty {
                     Image(systemName: "xmark")
@@ -45,7 +44,7 @@ public struct DepartmentEditor: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 7)
-            .background(Color(red: 0.95, green: 0.95, blue: 0.96))
+            .background(ColorSet.gray100)
             .cornerRadius(20)
             .padding(.bottom, 16)
 
@@ -94,7 +93,7 @@ public struct DepartmentEditor: View {
                 Button("전체 삭제") {
                     store.send(.deleteAllMyDepartmentButtonTapped)
                 }
-                .tint(.accentColor)
+                .tint(ColorSet.primary)
                 .disabled(store.myDepartments.isEmpty)
             }
         }

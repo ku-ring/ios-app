@@ -3,6 +3,7 @@
 // See the 'License.txt' file for licensing information.
 //
 
+import ColorSet
 import ComposableArchitecture
 
 @Reducer
@@ -39,6 +40,7 @@ public struct ExperimentList: View {
             }
             .padding(.vertical, 9)
             .listRowSeparator(.hidden)
+            .listRowBackground(ColorSet.bg)
             
             NavigationLink(
                 state: LabAppFeature.Path.State.appIcon(
@@ -49,8 +51,11 @@ public struct ExperimentList: View {
             }
             .padding(.vertical, 9)
             .listRowSeparator(.hidden)
+            .listRowBackground(ColorSet.bg)
         }
         .listStyle(.plain)
+        .background(ColorSet.bg)
+        
     }
 
     public init(store: StoreOf<ExperimentListFeature>) {

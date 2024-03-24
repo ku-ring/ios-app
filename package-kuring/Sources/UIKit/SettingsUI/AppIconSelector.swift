@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import ColorSet
 import SettingsFeatures
 import ComposableArchitecture
 
@@ -26,7 +27,7 @@ public struct AppIconSelector: View {
                     store.send(.appIconSelected(icon))
                 } label: {
                     Text(icon.korValue)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(ColorSet.body)
                 }
 
                 if icon == store.state.selectedIcon {
@@ -38,7 +39,9 @@ public struct AppIconSelector: View {
                 }
             }
             .listRowSeparator(.hidden)
+            .listRowBackground(ColorSet.bg)
         }
+        .background(ColorSet.bg)
         .listStyle(.plain)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {

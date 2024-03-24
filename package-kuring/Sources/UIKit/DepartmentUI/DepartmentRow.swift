@@ -28,7 +28,7 @@ public struct DepartmentRow: View {
             case .delete:
                 Button(action: action) {
                     Text("삭제")
-                        .foregroundStyle(Color.caption1.opacity(0.6))
+                        .foregroundStyle(ColorSet.caption1)
                 }
             case let .radio(isSelected):
                 Button(action: action) {
