@@ -8,16 +8,24 @@ import Foundation
 import Dependencies
 
 struct Subscriptions {
+    /// 구독한 공지 추가
     public var add: (_ noticeProvider: NoticeProvider) -> Void
+    /// 구독한 공지 제거
     public var remove: (_ noticeProvider: NoticeProvider) -> Void
+    /// 구독한 모든 공지 카테고리
     public var getAll: () -> [NoticeProvider]
+    /// 커스텀 공지 구독 여부
+    public var isCustomNotification: () -> Bool
+    /// 커스텀 공지 구독 여부 변경
+    public var changeCustomNotification: (_ isSubscribe: Bool) -> Void
     
+    /// 구독한 공지 (대학 및 학괴)
     @UserDefault(key: StringSet.subscribedCategories, defaultValue: [])
     static var subscriptions: [NoticeProvider]
     
-    // TODO: - 마이그레이션 체크를 위한 키
-    @UserDefault(key: "subscriptions.v2.0.0", defaultValue: false)
-    static var isMigration: Bool
+    /// 커스텀 공지 구독 여부 (기본값 true)
+    @UserDefault(key: StringSet.customNotification, defaultValue: true)
+    static var isCustomNotification: Bool
 }
 
 extension Subscriptions {
@@ -35,6 +43,13 @@ extension Subscriptions {
         }, getAll: {
             Self.subscriptions
             
-        })
+        }, isCustomNotification: {
+            Self.isCustomNotification
+            
+        }, changeCustomNotification: { isSubscribe in
+            Self.isCustomNotification = isSubscribe
+            
+        }
+    )
 
 }
