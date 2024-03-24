@@ -14,6 +14,10 @@ struct Subscriptions {
     
     @UserDefault(key: StringSet.subscribedCategories, defaultValue: [])
     static var subscriptions: [NoticeProvider]
+    
+    // TODO: - 마이그레이션 체크를 위한 키
+    @UserDefault(key: "subscriptions.v2.0.0", defaultValue: false)
+    static var isMigration: Bool
 }
 
 extension Subscriptions {
