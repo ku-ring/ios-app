@@ -39,3 +39,14 @@ extension Auth {
     )
 
 }
+
+extension Auth: DependencyKey {
+    public static var liveValue: Auth = .default
+}
+
+extension DependencyValues {
+    public var auth: Auth {
+        get { self[Auth.self] }
+        set { self[Auth.self] = newValue }
+    }
+}
