@@ -31,7 +31,8 @@ extension Search {
             
         }, getAll: {
             Self.recentKeywords
-        })
+        }
+    )
 }
 
 extension Search: DependencyKey {
