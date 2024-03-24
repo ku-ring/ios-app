@@ -76,11 +76,13 @@ extension Commons {
 
 }
 
-extension Bundle {
-    static var appVersion: String {
-        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
-        let version = (appVersion as! String)
-        
-        return version
+extension Commons: DependencyKey {
+    public static var liveValue: Commons = .default
+}
+
+extension DependencyValues {
+    public var auth: Commons {
+        get { self[Commons.self] }
+        set { self[Commons.self] = newValue }
     }
 }
