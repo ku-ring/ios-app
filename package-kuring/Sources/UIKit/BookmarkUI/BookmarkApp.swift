@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 public struct BookmarkApp: View {
     @Bindable var store: StoreOf<BookmarkAppFeature>
-
+    
     public var body: some View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
             BookmarkList(
