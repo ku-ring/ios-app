@@ -19,8 +19,6 @@ public struct Departments {
     public var removeAll: () -> Void
     /// 사용자가 추가한 모든 학과 리스트
     public var getAll: () -> [NoticeProvider]
-    /// 사용자가 구독한 모든 학과 리스트
-    public var getSubscribes: () -> [NoticeProvider]
     /// 사용자가 현재 선택한 학과
     public var getCurrent: () -> NoticeProvider?
     /// 사용자가 현재 선택한 학과 변경
@@ -87,19 +85,6 @@ extension Departments {
             
         }, getAll: {
             Self.selections
-            
-        }, getSubscribes: {
-            var departments = UserDefaults.standard.object(
-                forKey: StringSet.selectedDepartments
-            ) as? [DepartmentDTO]
-            
-            // 구독한 학과
-            let subscriptions = departments?.filter { $0.isSubscribe }
-            let domainModels: [NoticeProvider] = subscriptions?.compactMap { dto in
-                dto.toDomain()
-            } ?? []
-            
-            return domainModels
             
         }, getCurrent: {
             Self.current
