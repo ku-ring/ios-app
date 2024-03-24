@@ -52,12 +52,12 @@ extension Departments {
             
             Self.selections.removeAll { $0.id == id }
             
-            if let current = departments.first,
-               Self.current?.id == id  {
-//                 삭제한 학과가 현재 선택한 학과일 경우 새로운 학과 정보로 업데이트
-                Self.current = current
+            if Self.current?.id == id {
+//                삭제한 학과가 현재 선택한 학과일 경우 새로운 학과 정보로 업데이트
+                Self.current = nil
+                Self.current = Self.selections.first
             }
-
+            
         }, removeAll: {
             Self.selections.removeAll()
             Self.current = nil
