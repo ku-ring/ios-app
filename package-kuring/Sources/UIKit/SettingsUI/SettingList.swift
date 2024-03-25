@@ -24,16 +24,21 @@ public struct SettingList: View {
 
                 HStack {
                     leadingItemView("icon_bell", "기타 알림 받기", "주요 공지사항, 앱 내 주요 사항")
+                    
                     Spacer()
+                    
                     Toggle("", isOn: $store.isCustomAlarmOn)
                         .labelsHidden()
-                        .tint(ColorSet.primary)
+                        .tint(Color.Kuring.primary)
                 }
+                
+                Divider()
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             } header: {
                 headerView("공지 구독")
             }
             .listRowSeparator(.hidden)
-            .listRowBackground(ColorSet.bg)
+            .listRowBackground(Color.Kuring.bg)
             
             Section {
                 HStack(spacing: 0) {
@@ -42,7 +47,7 @@ public struct SettingList: View {
                     Text("2.0.0")
                         .font(.system(size: 16, weight: .medium))
                         .kerning(0.15)
-                        .foregroundStyle(ColorSet.body)
+                        .foregroundStyle(Color.Kuring.body)
                 }
                 
                 Button {
@@ -82,15 +87,17 @@ public struct SettingList: View {
                     itemView("icon_opensource", "오픈소스 라이센스")
                 }
                 
+                Divider()
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             } header: {
                 headerView("정보")
             } footer: {
                 Text("Designed by 이소영, 김예은.\nDeveloped by 이재성, 이건우, 박성수.\nManaged by 조병관, 채수빈")
                     .font(.footnote)
-                    .foregroundStyle(ColorSet.caption1)
+                    .foregroundStyle(Color.Kuring.caption1)
             }
             .listRowSeparator(.hidden)
-            .listRowBackground(ColorSet.bg)
+            .listRowBackground(Color.Kuring.bg)
             
             Section {
                 Button {
@@ -100,7 +107,7 @@ public struct SettingList: View {
                         Image(systemName: "flask")
                             .resizable()
                             .frame(width: 20, height: 20)
-                            .foregroundStyle(ColorSet.gray300)
+                            .foregroundStyle(Color.Kuring.gray300)
                             .padding(.trailing, 10)
                         leadingTitle(title: "쿠링 실험실")
                         Spacer()
@@ -126,15 +133,17 @@ public struct SettingList: View {
                     }
                     .font(.system(size: 16, weight: .medium))
                     .kerning(0.15)
-                    .foregroundStyle(ColorSet.body)
+                    .foregroundStyle(Color.Kuring.body)
                 }
                 .padding(.vertical, 9)
                 
+                Divider()
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             } header: {
                 headerView("쿠링 실험실")
             }
             .listRowSeparator(.hidden)
-            .listRowBackground(ColorSet.bg)
+            .listRowBackground(Color.Kuring.bg)
             
             Section {
                 Button {
@@ -142,11 +151,14 @@ public struct SettingList: View {
                 } label: {
                     itemView("icon_instagram", "인스타그램")
                 }
+                
+                Divider()
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             } header: {
                 headerView("SNS")
             }
             .listRowSeparator(.hidden)
-            .listRowBackground(ColorSet.bg)
+            .listRowBackground(Color.Kuring.bg)
             
             Section {
                 Button {
@@ -154,14 +166,17 @@ public struct SettingList: View {
                 } label: {
                     itemView("icon_feedback", "피드백 보내기")
                 }
+                
+                Divider()
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             } header: {
                 headerView("피드백")
             }
             .listRowSeparator(.hidden)
-            .listRowBackground(ColorSet.bg)
+            .listRowBackground(Color.Kuring.bg)
         }
         .listStyle(.plain)
-        .background(ColorSet.bg)
+        .background(Color.Kuring.bg)
         .navigationTitle("더보기")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -174,8 +189,7 @@ public struct SettingList: View {
     private func headerView(_ title: String) -> some View {
         Text(title)
             .font(.system(size: 14))
-            .foregroundStyle(ColorSet.caption2)
-            .padding(.top, 12)
+            .foregroundStyle(Color.Kuring.caption2)
             .padding(.bottom, 8)
     }
     
@@ -199,6 +213,7 @@ public struct SettingList: View {
         HStack(spacing: 0) {
             leadingIconImage(imageName: imageName)
                 .padding(.trailing, 10)
+            
             leadingTitle(title: title, subTitle: subTitle)
         }
     }
@@ -226,13 +241,13 @@ extension SettingList {
             Text(title)
                 .font(.system(size: 16, weight: .medium))
                 .kerning(0.15)
-                .foregroundStyle(ColorSet.body)
+                .foregroundStyle(Color.Kuring.body)
             
             if let subTitle = subTitle {
                 Text(subTitle)
                     .font(.system(size: 12))
                     .kerning(0.15)
-                    .foregroundStyle(ColorSet.caption1)
+                    .foregroundStyle(Color.Kuring.caption1)
             }
         }
     }
@@ -242,7 +257,7 @@ extension SettingList {
         Image("chevron", bundle: .settings)
             .resizable()
             .frame(width: 20, height: 20)
-            .foregroundStyle(ColorSet.gray300)
+            .foregroundStyle(Color.Kuring.gray300)
     }
 }
 

@@ -1,4 +1,4 @@
-// swift-tools-version: 5.10
+// swift-tools-version: 5.9
 
 import PackageDescription
 
@@ -205,6 +205,7 @@ let package = Package(
         .target(
             name: "Labs",
             dependencies: [
+                "ColorSet",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ]
         ),

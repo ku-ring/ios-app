@@ -14,62 +14,70 @@ public struct BookmarkList: View {
     @Bindable var store: StoreOf<BookmarkListFeature>
 
     public var body: some View {
-        ZStack(alignment: .center) {
-            ColorSet.bg.ignoresSafeArea()
+        ZStack(alignment: .bottom) {
+            Color.Kuring.bg.ignoresSafeArea()
             
             if store.bookmarkedNotices.isEmpty {
                 Text("보관된 공지사항이 없습니다.")
                     .font(.system(size: 16, weight: .medium))
-                    .foregroundStyle(ColorSet.body)
+                    .foregroundStyle(Color.Kuring.body)
             } else {
                 List {
                     ForEach(self.store.bookmarkedNotices, id: \.id) { notice in
-                        HStack {
-                            NoticeRow(
-                                notice: notice,
-                                bookmarked: true,
-                                rowType: store.isEditing
+                        VStack(spacing: 0) {
+                            HStack(spacing: 0) {
+                                NoticeRow(
+                                    notice: notice,
+                                    bookmarked: true,
+                                    rowType: store.isEditing
                                     ? NoticeRow.NoticeRowType.none
                                     : nil
-                            )
-                            .background {
-                                NavigationLink(
-                                    state: BookmarkAppFeature.Path.State.detail(
-                                        NoticeDetailFeature.State(
-                                            notice: notice,
-                                            isBookmarked: true
+                                )
+                                .background {
+                                    NavigationLink(
+                                        state: BookmarkAppFeature.Path.State.detail(
+                                            NoticeDetailFeature.State(
+                                                notice: notice,
+                                                isBookmarked: true
+                                            )
                                         )
-                                    )
-                                ) {
-                                    EmptyView()
-                                }
-                                .opacity(0)
-                            }
-                            .disabled(store.editMode != .none)
-
-                            if store.isEditing {
-                                Button {
-                                    if store.selectedIDs.contains(notice.id) {
-                                        store.selectedIDs.remove(notice.id)
-                                    } else {
-                                        store.selectedIDs.insert(notice.id)
+                                    ) {
+                                        EmptyView()
                                     }
-                                } label: {
-                                    Image(
-                                        systemName: store.selectedIDs.contains(notice.id)
-                                        ? "checkmark.circle.fill"
-                                        : "circle"
-                                    )
-                                    .foregroundStyle(
-                                        store.selectedIDs.contains(notice.id)
-                                        ? ColorSet.primary
-                                        : ColorSet.body
-                                    )
+                                    .opacity(0)
+                                }
+                                .disabled(store.editMode != .none)
+                                
+                                if store.isEditing {
+                                    Button {
+                                        if store.selectedIDs.contains(notice.id) {
+                                            store.selectedIDs.remove(notice.id)
+                                        } else {
+                                            store.selectedIDs.insert(notice.id)
+                                        }
+                                    } label: {
+                                        Image(
+                                            systemName: store.selectedIDs.contains(notice.id)
+                                            ? "checkmark.circle.fill"
+                                            : "circle"
+                                        )
+                                        .foregroundStyle(
+                                            store.selectedIDs.contains(notice.id)
+                                            ? Color.Kuring.primary
+                                            : Color.Kuring.gray200
+                                        )
+                                    }
+                                    .padding(.trailing, 18)
                                 }
                             }
+                            
+                            Divider()
+                                .frame(height: 0.25)
                         }
                     }
                     .listRowSeparator(.hidden)
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    .background(Color.Kuring.bg)
                 }
                 .listStyle(.plain)
 
@@ -80,17 +88,16 @@ public struct BookmarkList: View {
                         topBlurButton(
                             "삭제하기",
                             fontColor: store.selectedIDs.isEmpty
-                            ? ColorSet.primary.opacity(0.4)
+                            ? Color.Kuring.caption1
                             : .white,
                             backgroundColor: store.selectedIDs.isEmpty
-                            ? ColorSet.primary.opacity(0.15)
-                            : ColorSet.primary
+                            ? Color.Kuring.gray200
+                            : Color.Kuring.primary
                         )
                     }
                     .padding(.horizontal, 20)
                 }
             }
-            
         }
         .onAppear { store.send(.onAppear) }
         .toolbar(
@@ -122,7 +129,7 @@ public struct BookmarkList: View {
                     )
                 }
                 .disabled(store.bookmarkedNotices.isEmpty)
-                .foregroundStyle(ColorSet.primary)
+                .foregroundStyle(Color.Kuring.primary)
             }
         }
     }
@@ -145,9 +152,8 @@ public struct BookmarkList: View {
         .background {
             LinearGradient(
                 gradient: Gradient(colors: [
-                    ColorSet.bg.opacity(0.1),
-                    ColorSet.bg.opacity(0.1),
-                    ColorSet.primary.opacity(0.1)
+                    Color.Kuring.bg.opacity(0.1),
+                    Color.Kuring.bg
                 ]),
                 startPoint: .top, endPoint: .bottom
             )

@@ -49,7 +49,7 @@ public struct NoticeRow: View {
         ZStack {
             switch rowType {
             case .important, .importantAndBookmark:
-                ColorSet.primary.opacity(0.1)
+                Color.Kuring.primary.opacity(0.1)
                     .ignoresSafeArea()
             default:
                 Color.clear
@@ -115,34 +115,34 @@ public struct NoticeRow: View {
             .font(.system(size: 12, weight: .semibold))
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
-            .foregroundStyle(ColorSet.primary)
-            .background(ColorSet.bg)
+            .foregroundStyle(Color.Kuring.primary)
+            .background(Color.Kuring.bg)
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .inset(by: 0.25)
-                    .stroke(ColorSet.primary, lineWidth: 0.5)
+                    .stroke(Color.Kuring.primary, lineWidth: 0.5)
             )
     }
 
     private var titleView: some View {
         Text(notice.subject)
             .font(.system(size: 15, weight: .medium))
-            .foregroundStyle(ColorSet.body)
+            .foregroundStyle(Color.Kuring.body)
     }
 
     private var dateView: some View {
         // TODO: - 정보 재구성
         Text(notice.postedDate)
             .font(.system(size: 14))
-            .foregroundStyle(ColorSet.caption1)
+            .foregroundStyle(Color.Kuring.caption1)
     }
 
     private var bookmarkView: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 2)
                 .compositingGroup()
-                .foregroundStyle(ColorSet.primary)
+                .foregroundStyle(Color.Kuring.primary)
                 .frame(width: 16, height: 21)
 
             RoundedRectangle(cornerRadius: 2)

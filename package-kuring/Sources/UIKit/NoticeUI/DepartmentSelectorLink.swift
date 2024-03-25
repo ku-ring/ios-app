@@ -16,7 +16,7 @@ struct DepartmentSelectorLink: View {
         HStack {
             Text(department.korName)
                 .font(.system(size: 18, weight: .semibold))
-                .foregroundStyle(ColorSet.title)
+                .foregroundStyle(Color.Kuring.title)
 
             Spacer()
 

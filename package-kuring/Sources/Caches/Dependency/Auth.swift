@@ -25,7 +25,7 @@ public struct Auth {
 extension Auth {
     public static var `default` = Auth (
         getToken: { type in
-            switch tokenType {
+            switch type {
             case .fcm:
                 return tokenDictionary[.fcm]
             }

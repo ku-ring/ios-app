@@ -14,7 +14,7 @@ public struct OnboardingView: View {
     public var body: some View {
         if showsDepartmentSelector {
             MyDepartmentSelector()
-                .background(ColorSet.bg)
+                .background(Color.Kuring.bg)
         } else {
             VStack(spacing: 0) {
                 HStack {
@@ -39,7 +39,7 @@ public struct OnboardingView: View {
                             .frame(width: 8, height: 8)
                             .foregroundStyle(
                                 currentGuidance == guidance
-                                ? ColorSet.primary
+                                ? Color.Kuring.primary
                                 : Color(.systemGroupedBackground)
                             )
                     }
@@ -58,17 +58,17 @@ public struct OnboardingView: View {
                     dismiss()
                 }
                 .font(.system(size: 16, weight: .medium))
-                .foregroundStyle(ColorSet.caption1)
+                .foregroundStyle(Color.Kuring.caption1)
                 .padding(.vertical, 20)
             }
             .padding(.horizontal, 20)
-            .background(ColorSet.bg)
+            .background(Color.Kuring.bg)
         }
     }
     
     public init() {
-        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(ColorSet.primary)
-        UIPageControl.appearance().pageIndicatorTintColor = UIColor(ColorSet.gray200)
+        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(Color.Kuring.primary)
+        UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color.Kuring.gray200)
     }
 }
 

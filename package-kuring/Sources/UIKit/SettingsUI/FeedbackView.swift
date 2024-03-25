@@ -30,8 +30,8 @@ public struct FeedbackView: View {
                 TextEditor(text: $store.text)
                     .foregroundStyle(
                         store.text == store.placeholder
-                            ? Color.caption1.opacity(0.6)
-                            : .primary
+                        ? Color.Kuring.caption1.opacity(0.6)
+                        : .primary
                     )
                     .focused($isFocused)
                     .padding(20)
@@ -39,22 +39,21 @@ public struct FeedbackView: View {
                     .background(
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(
-                                store.text == store.placeholder
-                                    ? Color.caption1.opacity(0.6)
-                                    : Color.accentColor,
+                                Color.Kuring.gray200,
                                 lineWidth: 1
                             )
                             .foregroundColor(.clear)
                     )
-
+                
                 HStack {
                     Spacer()
-
+                    
                     Text(store.guideline)
+                        .font(.system(size: 12))
                         .foregroundStyle(
                             store.isSendable
-                                ? Color.accentColor
-                                : Color.red // TODO: error color 적용
+                            ? Color.Kuring.caption2
+                            : Color.Kuring.warning
                         )
                         .padding(.trailing, 8)
                 }
@@ -74,11 +73,11 @@ public struct FeedbackView: View {
                 topBlurButton(
                     "피드백 보내기",
                     fontColor: store.isSendable
-                        ? .white
-                        : ColorSet.primary.opacity(0.4),
+                    ? .white
+                    : Color.Kuring.caption1,
                     backgroundColor: store.isSendable
-                        ? ColorSet.primary
-                        : ColorSet.primary.opacity(0.15)
+                    ? Color.Kuring.primary
+                    : Color.Kuring.gray200
                 )
             }
             .allowsHitTesting(store.isSendable)

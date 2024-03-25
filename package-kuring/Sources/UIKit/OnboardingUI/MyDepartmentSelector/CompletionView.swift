@@ -14,11 +14,11 @@ struct CompletionView: View {
             VStack(spacing: 12) {
                 Text(StringSet.title_complete.rawValue)
                     .font(.system(size: 24, weight: .bold))
-                    .foregroundStyle(ColorSet.primary)
+                    .foregroundStyle(Color.Kuring.primary)
                 
                 Text(StringSet.description_complete.rawValue)
                     .font(.system(size: 15, weight: .medium))
-                    .foregroundStyle(ColorSet.caption1)
+                    .foregroundStyle(Color.Kuring.caption1)
                     .multilineTextAlignment(.center)
                 
                 Spacer()
@@ -35,7 +35,7 @@ struct CompletionView: View {
             Spacer()
         }
         .padding(.top, 124)
-        .background(ColorSet.bg)
+        .background(Color.Kuring.bg)
     }
 }
 
