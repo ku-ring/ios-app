@@ -7,7 +7,7 @@ import Foundation
 import OrderedCollections
 
 /// 공지 제공자 카테고리
-public enum NoticeType: String, Hashable, CaseIterable, Identifiable, Equatable {
+public enum NoticeType: String, Codable, Hashable, CaseIterable, Identifiable, Equatable {
     case 학과, 대학, 세팅하지않음
 
     public var id: Self { self }
@@ -59,6 +59,7 @@ public struct NoticeProvider: Identifiable, Equatable, Hashable, Codable {
         case name
         case hostPrefix
         case korName
+        case category
     }
 
     public init(name: String, hostPrefix: String, korName: String, category: NoticeType) {
@@ -73,7 +74,8 @@ public struct NoticeProvider: Identifiable, Equatable, Hashable, Codable {
         self.name = try container.decode(String.self, forKey: .name)
         self.hostPrefix = try container.decode(String.self, forKey: .hostPrefix)
         self.korName = try container.decode(String.self, forKey: .korName)
-        self.category = .세팅하지않음
+        self.category = try container.decodeIfPresent(NoticeType.self, forKey: .category) ?? .세팅하지않음
+//        self.category = .세팅하지않음
     }
 }
 

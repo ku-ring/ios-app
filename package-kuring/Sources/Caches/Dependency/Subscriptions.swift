@@ -13,7 +13,7 @@ public struct KuringSubscriptions {
     /// 구독한 공지 제거
     public var remove: (_ noticeProvider: NoticeProvider) -> Void
     /// 구독한 모든 공지 카테고리
-    public var getAll: () -> [NoticeProvider]
+    public var getAll: () -> Set<NoticeProvider>
     /// 커스텀 공지 구독 여부
     public var isCustomNotification: () -> Bool
     /// 커스텀 공지 구독 여부 변경
@@ -21,7 +21,7 @@ public struct KuringSubscriptions {
     
     /// 구독한 공지 (대학 및 학괴)
     @UserDefault(key: StringSet.subscribedCategories, defaultValue: [])
-    static var subscriptions: [NoticeProvider]
+    static var subscriptions: Set<NoticeProvider>
     
     /// 커스텀 공지 구독 여부 (기본값 true)
     @UserDefault(key: StringSet.customNotification, defaultValue: true)
@@ -32,12 +32,12 @@ extension KuringSubscriptions {
     public static let `default` = Self(
         add: { noticeProvider in
             var subscriptions = Self.subscriptions
-            subscriptions.append(noticeProvider)
+            subscriptions.insert(noticeProvider)
             Self.subscriptions = subscriptions
             
         }, remove: { noticeProvider in
             var subscriptions = Self.subscriptions
-            subscriptions.removeAll { $0.id == noticeProvider.id }
+            subscriptions.remove(noticeProvider)
             Self.subscriptions = subscriptions
             
         }, getAll: {
