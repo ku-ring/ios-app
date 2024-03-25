@@ -75,7 +75,6 @@ public struct NoticeProvider: Identifiable, Equatable, Hashable, Codable {
         self.hostPrefix = try container.decode(String.self, forKey: .hostPrefix)
         self.korName = try container.decode(String.self, forKey: .korName)
         self.category = try container.decodeIfPresent(NoticeType.self, forKey: .category) ?? .세팅하지않음
-//        self.category = .세팅하지않음
     }
 }
 
