@@ -43,9 +43,16 @@ public struct SubscriptionFeature {
             selectedDepartment: IdentifiedArrayOf<NoticeProvider> = [],
             isWaitingResponse: Bool = false
         ) {
+            @Dependency(\.subscriptions) var subscriptions
+            let all = subscriptions.getAll()
+            
             self.subscriptionType = subscriptionType
-            self.selectedUnivNoticeType = selectedUnivNoticeType
-            self.myDepartments = myDepartments
+            self.selectedUnivNoticeType = IdentifiedArray(
+                uniqueElements: all.filter { $0.category == .대학 }
+            )
+            self.myDepartments =  IdentifiedArray(
+                uniqueElements: all.filter { $0.category == .학과 }
+            )
             self.selectedDepartment = selectedDepartment
             self.isWaitingResponse = isWaitingResponse
         }
@@ -64,8 +71,10 @@ public struct SubscriptionFeature {
         case subscriptionResponse(Bool)
     }
 
-    @Dependency(\.kuringLink) var kuringLink
+    
     @Dependency(\.dismiss) var dismiss
+    @Dependency(\.kuringLink) var kuringLink
+    @Dependency(\.subscriptions) var subscriptions
 
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
@@ -75,6 +84,8 @@ public struct SubscriptionFeature {
                 return .none
 
             case let .univNoticeTypeSelected(noticeProvider):
+                var noticeProvider = noticeProvider
+                noticeProvider.category = .대학
                 if state.selectedUnivNoticeType.contains(noticeProvider) {
                     state.selectedUnivNoticeType.remove(id: noticeProvider.id)
                 } else {
@@ -83,6 +94,8 @@ public struct SubscriptionFeature {
                 return .none
 
             case let .departmentSelected(department):
+                var department = department
+                department.category = .학과
                 if state.selectedDepartment.contains(department) {
                     state.selectedDepartment.remove(id: department.id)
                 } else {
@@ -110,6 +123,13 @@ public struct SubscriptionFeature {
             case let .subscriptionResponse(isSucceeded):
                 // TODO: UX 어떻게 할지 디자이너 분들과 논의 해야함 (알림을 띄울지 말지)
                 print(isSucceeded ? "구독 성공~" : "구독 실패")
+                if isSucceeded {
+                    let noticeProviders = state.selectedDepartment + state.selectedUnivNoticeType
+                    noticeProviders.forEach { noticeProvider in
+                        subscriptions.add(noticeProvider)
+                    }
+                }
+                
                 state.isWaitingResponse = false
                 return .run { _ in
                     await dismiss()
