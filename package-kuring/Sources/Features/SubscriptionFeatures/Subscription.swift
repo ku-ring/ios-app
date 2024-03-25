@@ -44,16 +44,20 @@ public struct SubscriptionFeature {
             isWaitingResponse: Bool = false
         ) {
             @Dependency(\.subscriptions) var subscriptions
+            @Dependency(\.departments) var departments
+            
             let all = subscriptions.getAll()
             
             self.subscriptionType = subscriptionType
             self.selectedUnivNoticeType = IdentifiedArray(
                 uniqueElements: all.filter { $0.category == .대학 }
             )
-            self.myDepartments =  IdentifiedArray(
+            self.myDepartments = IdentifiedArray(
+                uniqueElements: departments.getAll()
+            )
+            self.selectedDepartment = IdentifiedArray(
                 uniqueElements: all.filter { $0.category == .학과 }
             )
-            self.selectedDepartment = selectedDepartment
             self.isWaitingResponse = isWaitingResponse
         }
     }
@@ -121,13 +125,11 @@ public struct SubscriptionFeature {
                 }
 
             case let .subscriptionResponse(isSucceeded):
-                // TODO: UX 어떻게 할지 디자이너 분들과 논의 해야함 (알림을 띄울지 말지)
-                print(isSucceeded ? "구독 성공~" : "구독 실패")
-//                if isSucceeded {
-                let noticeProviders = state.selectedDepartment + state.selectedUnivNoticeType
-                subscriptions.update(Set(noticeProviders))
-                    
-//                }
+                // !!!: UX 어떻게 할지 디자이너 분들과 논의 해야함 (알림을 띄울지 말지)
+                if isSucceeded {
+                    let noticeProviders = state.selectedDepartment + state.selectedUnivNoticeType
+                    subscriptions.update(Set(noticeProviders))
+                }
                 
                 state.isWaitingResponse = false
                 return .run { _ in
