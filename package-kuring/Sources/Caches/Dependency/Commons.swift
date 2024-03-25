@@ -81,7 +81,7 @@ extension Commons: DependencyKey {
 }
 
 extension DependencyValues {
-    public var auth: Commons {
+    public var commons: Commons {
         get { self[Commons.self] }
         set { self[Commons.self] = newValue }
     }
