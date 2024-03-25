@@ -3,8 +3,10 @@
 // See the 'License.txt' file for licensing information.
 //
 
+import Caches
 import Models
 import Networks
+import Dependencies
 import ComposableArchitecture
 
 @Reducer
@@ -65,8 +67,10 @@ public struct SearchFeature {
             searchInfo: SearchInfo = .init(),
             focus: Field? = .search
         ) {
+            @Dependency(\.recentSearch) var recentSearch
+            
             self.staffDetail = staffDetail
-            self.recents = recents
+            self.recents = recentSearch.getAll()
             self.resultNotices = resultNotices
             self.resultStaffs = resultStaffs
             self.searchInfo = searchInfo
@@ -125,6 +129,7 @@ public struct SearchFeature {
     }
 
     @Dependency(\.kuringLink) var kuringLink
+    @Dependency(\.recentSearch) var recentSearch
 
     public var body: some ReducerOf<Self> {
         BindingReducer()
@@ -145,6 +150,8 @@ public struct SearchFeature {
 
             case .deleteAllRecentsButtonTapped:
                 state.recents.removeAll()
+                recentSearch.removeAll()
+                
                 return .none
 
             case .clearKeywordButtonTapped:
@@ -159,6 +166,8 @@ public struct SearchFeature {
                 // 최근 검색어 추가
                 if !state.recents.contains(state.searchInfo.text) { // 중복체크
                     state.recents.append(state.searchInfo.text)
+                    
+                    recentSearch.add(state.searchInfo.text)
                 }
 
                 state.searchInfo.searchPhase = .searching

@@ -10,6 +10,7 @@ import Dependencies
 public struct RecentSearch {
     public var add: (_ keyword: String) -> Void
     public var remove: (_ keyword: String) -> Void
+    public var removeAll: () -> Void
     public var getAll: () -> [String]
 
     /// 최근 검색어
@@ -29,8 +30,12 @@ extension RecentSearch {
             keywords.removeAll { $0 == keyword }
             Self.recentKeywords = keywords
             
+        }, removeAll: {
+            Self.recentKeywords = []
+            
         }, getAll: {
             Self.recentKeywords
+            
         }
     )
 }
