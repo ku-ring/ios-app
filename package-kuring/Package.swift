@@ -163,6 +163,7 @@ let package = Package(
             name: "DepartmentFeatures",
             dependencies: [
                 "Models",
+                "Caches",
                 "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],

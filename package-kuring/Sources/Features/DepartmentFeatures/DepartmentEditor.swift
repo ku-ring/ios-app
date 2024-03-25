@@ -4,6 +4,7 @@
 //
 
 import Models
+import Caches
 import ComposableArchitecture
 
 @Reducer
@@ -43,7 +44,9 @@ public struct DepartmentEditorFeature {
             displayOption: Display = .myDepartment,
             alert: AlertState<Action.Alert>? = nil
         ) {
-            self.myDepartments = myDepartments
+            @Dependency(\.departments) var departments
+            self.myDepartments = IdentifiedArrayOf(uniqueElements: departments.getAll())
+            
             self.results = results
             self.searchText = searchText
             self.focus = focus
@@ -86,6 +89,8 @@ public struct DepartmentEditorFeature {
         }
     }
 
+    @Dependency(\.departments) var departments
+    
     public var body: some ReducerOf<Self> {
         BindingReducer()
 
@@ -158,12 +163,15 @@ public struct DepartmentEditorFeature {
                 switch alertAction {
                 case let .confirmAdd(department: department):
                     state.myDepartments.append(department)
+                    departments.add(department)
                     
                 case let .confirmDelete(id: id):
                     state.myDepartments.remove(id: id)
+                    departments.remove(id)
                     
                 case .confirmDeleteAll:
                     state.myDepartments.removeAll()
+                    departments.removeAll()
                 }
                 NoticeProvider.addedDepartments = state.myDepartments.elements
                 return .none
