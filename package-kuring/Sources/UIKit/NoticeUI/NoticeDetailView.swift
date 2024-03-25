@@ -5,6 +5,7 @@
 
 import Models
 import SwiftUI
+import ColorSet
 import CommonUI
 import ActivityUI
 import NoticeFeatures
@@ -16,6 +17,7 @@ public struct NoticeDetailView: View {
     public var body: some View {
         WebView(urlString: store.notice.url)
             .activitySheet($store.shareItem)
+            .background(Color.Kuring.bg)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(store.notice.subject)
