@@ -124,10 +124,9 @@ public struct SubscriptionFeature {
                 // TODO: UX 어떻게 할지 디자이너 분들과 논의 해야함 (알림을 띄울지 말지)
                 print(isSucceeded ? "구독 성공~" : "구독 실패")
 //                if isSucceeded {
-                    let noticeProviders = state.selectedDepartment + state.selectedUnivNoticeType
-                    noticeProviders.forEach { noticeProvider in
-                        subscriptions.add(noticeProvider)
-                    }
+                let noticeProviders = state.selectedDepartment + state.selectedUnivNoticeType
+                subscriptions.update(Set(noticeProviders))
+                    
 //                }
                 
                 state.isWaitingResponse = false
