@@ -38,4 +38,6 @@ class StringSet {
     
     static let selectedDepartments = "\(baseString).selected.departments"
     static let currentDepartment = "\(baseString).current.department"
+    
+    static let recentSearch = "com.kuring.lite.recent.search"
 }
