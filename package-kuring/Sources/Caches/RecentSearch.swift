@@ -7,7 +7,7 @@
 import Models
 import Dependencies
 
-public struct Search {
+public struct RecentSearch {
     public var add: (_ keyword: String) -> Void
     public var remove: (_ keyword: String) -> Void
     public var getAll: () -> [String]
@@ -17,7 +17,7 @@ public struct Search {
     static var recentKeywords: [String]
 }
 
-extension Search {
+extension RecentSearch {
     public static let `default` = Self(
         add: { keyword in
             var keywords = Self.recentKeywords
@@ -35,13 +35,13 @@ extension Search {
     )
 }
 
-extension Search: DependencyKey {
-    public static let liveValue: Search = .default
+extension RecentSearch: DependencyKey {
+    public static let liveValue: RecentSearch = .default
 }
 
 extension DependencyValues {
-    public var search: Search {
-        get { self[Search.self] }
-        set { self[Search.self] = newValue }
+    public var recentSearch: RecentSearch {
+        get { self[RecentSearch.self] }
+        set { self[RecentSearch.self] = newValue }
     }
 }
