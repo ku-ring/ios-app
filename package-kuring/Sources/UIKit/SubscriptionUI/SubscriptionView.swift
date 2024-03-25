@@ -18,7 +18,7 @@ struct SubscriptionView: View {
             HStack {
                 Text("알림 받고 싶은 \n카테고리를 선택해주세요")
                     .font(.system(size: 24, weight: .bold))
-                    .foregroundStyle(ColorSet.title)
+                    .foregroundStyle(Color.Kuring.title)
             }
             .padding(.top, 32)
             .padding(.bottom, 60)
@@ -60,13 +60,13 @@ struct SubscriptionView: View {
                                 RoundedRectangle(cornerRadius: 8)
                                     .inset(by: 1)
                                     .stroke(
-                                        isSelected ? ColorSet.primary : Color.clear,
+                                        isSelected ? Color.Kuring.primary : Color.clear,
                                         lineWidth: isSelected ? 2 : 0
                                     )
                                     .fill(
                                         isSelected
-                                        ? ColorSet.primary.opacity(0.1)
-                                        : ColorSet.gray100
+                                        ? Color.Kuring.primary.opacity(0.1)
+                                        : Color.Kuring.gray100
                                     )
 
                                 VStack {
@@ -76,8 +76,8 @@ struct SubscriptionView: View {
                                         .font(.system(size: 16, weight: .semibold))
                                         .foregroundStyle(
                                             isSelected
-                                            ? ColorSet.primary
-                                            : ColorSet.body
+                                            ? Color.Kuring.primary
+                                            : Color.Kuring.body
                                         )
                                 }
                                 .padding()
@@ -102,7 +102,7 @@ struct SubscriptionView: View {
                             Text("아직 추가된 학과가 없어요.\n관심 학과를 추가하고 공지를 확인해 보세요!")
                                 .font(.system(size: 16, weight: .medium))
                                 .multilineTextAlignment(.center)
-                                .foregroundStyle(ColorSet.caption2)
+                                .foregroundStyle(Color.Kuring.caption2)
 
                             Spacer()
                         }
@@ -120,12 +120,12 @@ struct SubscriptionView: View {
                                     HStack {
                                         Text(department.korName)
                                             .font(.system(size: 16, weight: .semibold))
-                                            .foregroundStyle(ColorSet.body)
+                                            .foregroundStyle(Color.Kuring.body)
 
                                         Spacer()
 
                                         Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                                            .foregroundStyle(isSelected ? ColorSet.primary : Color.black.opacity(0.1))
+                                            .foregroundStyle(isSelected ? Color.Kuring.primary : Color.black.opacity(0.1))
                                             .frame(width: 20, height: 20)
                                     }
                                     .padding(.horizontal, 21.5)
@@ -173,14 +173,14 @@ struct SubscriptionView: View {
                     .padding(.horizontal, 50)
                     .padding(.vertical, 16)
                     .frame(height: 50, alignment: .center)
-                    .background(ColorSet.primary)
+                    .background(Color.Kuring.primary)
                     .cornerRadius(100)
                     .background {
                         LinearGradient(
                             gradient: Gradient(colors: [
-                                ColorSet.bg.opacity(0.1),
-                                ColorSet.bg.opacity(0.1),
-                                ColorSet.primary.opacity(0.1)
+                                Color.Kuring.bg.opacity(0.1),
+                                Color.Kuring.bg.opacity(0.1),
+                                Color.Kuring.primary.opacity(0.1)
                             ]),
                             startPoint: .top, endPoint: .bottom
                         )
@@ -190,7 +190,7 @@ struct SubscriptionView: View {
             }
         }
         .padding(.horizontal, 20)
-        .background(ColorSet.bg)
+        .background(Color.Kuring.bg)
         // TODO: TCA에 따라 외부에서 구현
         .navigationTitle("푸시 알림 설정")
         .navigationBarTitleDisplayMode(.inline)

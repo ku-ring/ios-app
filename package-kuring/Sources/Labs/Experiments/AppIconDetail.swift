@@ -62,7 +62,7 @@ public struct AppIconDetailView: View {
                 Text(store.description)
 
                 Toggle("기능 활성화", isOn: $store.isEnabled)
-                    .tint(ColorSet.primary)
+                    .tint(Color.Kuring.primary)
             }
         }
         .navigationTitle(store.title)

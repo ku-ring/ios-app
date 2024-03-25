@@ -13,71 +13,75 @@ struct NoticeList: View {
     @Bindable var store: StoreOf<NoticeListFeature>
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                if self.store.provider.category == .학과 {
+        Section {
+            List(self.store.currentNotices, id: \.id) { notice in
+                ZStack { // Indicator 표시 제거를 위함
+                    NavigationLink(
+                        state: NoticeAppFeature.Path.State.detail(
+                            NoticeDetailFeature.State(
+                                notice: notice,
+                                isBookmarked: self.store.bookmarkIDs.contains(notice.id)
+                            )
+                        )
+                    ) {
+                        EmptyView()
+                    }
+                    .opacity(0)
+                    
+                    VStack(spacing: 0) {
+                        NoticeRow(
+                            notice: notice,
+                            bookmarked: self.store.bookmarkIDs.contains(notice.id)
+                        )
+                        .onAppear {
+                            let type = self.store.provider
+                            let noticeInfo = self.store.noticeDictionary[type]
+                            
+                            /// 마지막 공지가 보이면 update
+                            if noticeInfo?.notices.last == notice {
+                                self.store.send(.fetchNotices)
+                            }
+                        }
+                        .swipeActions(edge: .leading) {
+                            Button {
+                                self.store.send(.bookmarkTapped(notice))
+                            } label: {
+                                Image(
+                                    systemName: self.store.bookmarkIDs.contains(notice.id)
+                                    ? "bookmark.slash"
+                                    : "bookmark"
+                                )
+                            }
+                            .tint(Color.Kuring.primary)
+                        }
+                        
+                        Divider()
+                            .frame(height: 0.25)
+                    }
+                }
+                .listRowSeparator(.hidden)
+                .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                .background(Color.Kuring.bg)
+            }
+            .listStyle(.plain)
+        } header: {
+            if self.store.provider.category == .학과 {
+                VStack(spacing: 0) {
                     DepartmentSelectorLink(
                         department: self.store.provider,
                         isLoading: $store.isLoading.sending(\.loadingChanged)
                     ) {
                         self.store.send(.changeDepartmentButtonTapped)
                     }
+                    
+                    Divider()
+                        .frame(height: 0.25)
                 }
-                
-                ForEach(self.store.currentNotices, id: \.id) { notice in
-                    ZStack {
-                        NavigationLink(
-                            state: NoticeAppFeature.Path.State.detail(
-                                NoticeDetailFeature.State(
-                                    notice: notice,
-                                    isBookmarked: self.store.bookmarkIDs.contains(notice.id)
-                                )
-                            )
-                        ) {
-                            EmptyView()
-                        }
-                        .opacity(0)
-                        
-                        Section {
-                            VStack(spacing: 0) {
-                                NoticeRow(
-                                    notice: notice,
-                                    bookmarked: self.store.bookmarkIDs.contains(notice.id)
-                                )
-                                .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-                                .onAppear {
-                                    let type = self.store.provider
-                                    let noticeInfo = self.store.noticeDictionary[type]
-                                    
-                                    /// 마지막 공지가 보이면 update
-                                    if noticeInfo?.notices.last == notice {
-                                        self.store.send(.fetchNotices)
-                                    }
-                                }
-                                .swipeActions(edge: .leading) {
-                                    Button {
-                                        self.store.send(.bookmarkTapped(notice))
-                                    } label: {
-                                        Image(
-                                            systemName: self.store.bookmarkIDs.contains(notice.id)
-                                            ? "bookmark.slash"
-                                            : "bookmark"
-                                        )
-                                    }
-                                    .tint(ColorSet.primary)
-                                }
-                                
-                                Divider()
-                                    .frame(height: 1)
-                            }
-                            
-                        }
-                        .navigationTitle("")
-                        
-                    }
-                }
+            } else {
+                EmptyView()
             }
         }
+        .navigationTitle("")
     }
 }
 

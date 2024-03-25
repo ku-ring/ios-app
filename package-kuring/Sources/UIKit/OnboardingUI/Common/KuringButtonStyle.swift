@@ -19,7 +19,7 @@ struct KuringButtonStyle: ButtonStyle {
                 .foregroundStyle(
                     onEnabled
                     ? .white
-                    : ColorSet.primary.opacity(0.4)
+                    : Color.Kuring.primary.opacity(0.4)
                 )
 
             Spacer()
@@ -29,8 +29,8 @@ struct KuringButtonStyle: ButtonStyle {
         .frame(height: 50, alignment: .center)
         .background(
             onEnabled
-            ? ColorSet.primary
-            : ColorSet.primary.opacity(0.15)
+            ? Color.Kuring.primary
+            : Color.Kuring.primary.opacity(0.15)
         )
         .cornerRadius(100)
     }

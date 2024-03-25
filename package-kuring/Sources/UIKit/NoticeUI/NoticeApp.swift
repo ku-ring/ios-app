@@ -23,7 +23,7 @@ public struct NoticeApp: View {
                     action: \.noticeList
                 )
             )
-            .background(ColorSet.bg)
+            .background(Color.Kuring.bg)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -39,7 +39,7 @@ public struct NoticeApp: View {
                         )
                     ) {
                         Image(systemName: "magnifyingglass")
-                            .foregroundStyle(ColorSet.gray400)
+                            .foregroundStyle(Color.Kuring.gray400)
                     }
                 }
 
@@ -50,7 +50,7 @@ public struct NoticeApp: View {
                         store.send(.changeSubscriptionButtonTapped)
                     } label: {
                         Image(systemName: "bell")
-                            .foregroundStyle(ColorSet.gray400)
+                            .foregroundStyle(Color.Kuring.gray400)
                     }
                 }
             }

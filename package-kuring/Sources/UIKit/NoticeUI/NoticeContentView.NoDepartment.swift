@@ -19,7 +19,7 @@ extension NoticeContentView {
             Text("아직 추가된 학과가 없어요.\n관심 학과를 추가하고 공지를 확인해 보세요!")
                 .font(.system(size: 15, weight: .medium))
                 .multilineTextAlignment(.center)
-                .foregroundStyle(ColorSet.caption2)
+                .foregroundStyle(Color.Kuring.caption2)
 
             NavigationLink(
                 state: NoticeAppFeature.Path.State.departmentEditor(
@@ -47,7 +47,7 @@ extension NoticeContentView {
         .foregroundStyle(Color.white)
         .padding(.horizontal, 36)
         .padding(.vertical, 16)
-        .background(ColorSet.primary)
+        .background(Color.Kuring.primary)
         .cornerRadius(100)
     }
 }

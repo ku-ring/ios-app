@@ -17,7 +17,7 @@ struct ConfirmationView: View {
                 
                 Text(department.korName)
                     .font(.system(size: 24, weight: .bold))
-                    .foregroundStyle(ColorSet.primary)
+                    .foregroundStyle(Color.Kuring.primary)
                 
                 Text(
                     department.korName.last == "공"
@@ -25,25 +25,25 @@ struct ConfirmationView: View {
                     : "를"
                 )
                 .font(.system(size: 24, weight: .bold))
-                .foregroundStyle(ColorSet.primary)
+                .foregroundStyle(Color.Kuring.primary)
                 
                 Spacer()
             }
             
             Text(StringSet.title_confirm.rawValue)
                 .font(.system(size: 24, weight: .bold))
-                .foregroundStyle(ColorSet.primary)
+                .foregroundStyle(Color.Kuring.primary)
             
             Text(StringSet.description_confirm.rawValue)
                 .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(ColorSet.caption1)
+                .foregroundStyle(Color.Kuring.caption1)
                 .multilineTextAlignment(.center)
                 .padding(.top, 12)
             
             Spacer()
         }
         .padding(.top, 124)
-        .background(ColorSet.bg)
+        .background(Color.Kuring.bg)
     }
 }
 

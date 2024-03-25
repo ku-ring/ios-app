@@ -3,98 +3,96 @@
 // See the 'License.txt' file for licensing information.
 //
 
-import SwiftUI
 import UIKit
+import SwiftUI
 
-// !!!: - 다른 패키지에서 사용하고 있을수도 있어서, 색상 값 교체할 때 한번에 제거 예정
 extension Color {
-    public static let caption1 = Color(red: 54 / 255, green: 61 / 255, blue: 74 / 255)
+    public struct Kuring { }
 }
-
 /// 디자인 시스템 컬러셋
-public struct ColorSet {
+extension Color.Kuring {
     
     // MARK: - ETC
     
-    public static let warning: Color = ColorSet.color(
-        light: ColorSet.from(hex: "FF4848"),
-        dark: ColorSet.from(hex: "DE4343", alpha: 0.08)
+    public static let warning: Color = Self.color(
+        light: Self.from(hex: "FF4848"),
+        dark: Self.from(hex: "DE4343", alpha: 0.08)
     )
-    public static let borderLine: Color = ColorSet.color(
-        light: ColorSet.from(hex: "000000"),
-        dark: ColorSet.from(hex: "DE4343")
+    public static let borderLine: Color = Self.color(
+        light: Self.from(hex: "000000"),
+        dark: Self.from(hex: "DE4343")
     )
-    public static let kuringLogoText: Color = ColorSet.color(
-        light: ColorSet.from(hex: "535B5D"),
-        dark: ColorSet.from(hex: "535B5D")
+    public static let kuringLogoText: Color = Self.color(
+        light: Self.from(hex: "535B5D"),
+        dark: Self.from(hex: "535B5D")
     )
-    public static let bg: Color = ColorSet.color(
-        light: ColorSet.from(hex: "FFFFFF"),
-        dark: ColorSet.from(hex: "292929")
+    public static let bg: Color = Self.color(
+        light: Self.from(hex: "FFFFFF"),
+        dark: Self.from(hex: "292929")
     )
     
     // MARK: - Main
     
-    public static let primarySelected: Color = ColorSet.color(
-        light: ColorSet.from(hex: "EBF8F2"),
-        dark: ColorSet.from(hex: "454D49")
+    public static let primarySelected: Color = Self.color(
+        light: Self.from(hex: "EBF8F2"),
+        dark: Self.from(hex: "454D49")
     )
-    public static let primary: Color = ColorSet.color(
-        light: ColorSet.from(hex: "3DBD80"),
-        dark: ColorSet.from(hex: "38B178")
+    public static let primary: Color = Self.color(
+        light: Self.from(hex: "3DBD80"),
+        dark: Self.from(hex: "38B178")
     )
     
     // MARK: - Text
     
-    public static let caption1: Color = ColorSet.color(
-        light: ColorSet.from(hex: "868A92"),
-        dark: ColorSet.from(hex: "878787")
+    public static let caption1: Color = Self.color(
+        light: Self.from(hex: "868A92"),
+        dark: Self.from(hex: "878787")
     )
-    public static let caption2: Color = ColorSet.color(
-        light: ColorSet.from(hex: "B1B5BD"),
-        dark: ColorSet.from(hex: "5E5E5E")
+    public static let caption2: Color = Self.color(
+        light: Self.from(hex: "B1B5BD"),
+        dark: Self.from(hex: "5E5E5E")
     )
-    public static let body: Color = ColorSet.color(
-        light: ColorSet.from(hex: "353C49"),
-        dark: ColorSet.from(hex: "E0E0E0")
+    public static let body: Color = Self.color(
+        light: Self.from(hex: "353C49"),
+        dark: Self.from(hex: "E0E0E0")
     )
-    public static let title: Color = ColorSet.color(
-        light: ColorSet.from(hex: "333333"),
-        dark: ColorSet.from(hex: "F5F5F5")
+    public static let title: Color = Self.color(
+        light: Self.from(hex: "333333"),
+        dark: Self.from(hex: "F5F5F5")
     )
     
     // MARK: - GrayScale
     
-    public static let gray400: Color = ColorSet.color(
-        light: ColorSet.from(hex: "434343"),
-        dark: ColorSet.from(hex: "B0B0B0")
+    public static let gray400: Color = Self.color(
+        light: Self.from(hex: "434343"),
+        dark: Self.from(hex: "B0B0B0")
     )
-    public static let gray600: Color = ColorSet.color(
-        light: ColorSet.from(hex: "262626"),
-        dark: ColorSet.from(hex: "DFDFDF")
+    public static let gray600: Color = Self.color(
+        light: Self.from(hex: "262626"),
+        dark: Self.from(hex: "DFDFDF")
     )
-    public static let gray100: Color = ColorSet.color(
-        light: ColorSet.from(hex: "F2F3F5"),
-        dark: ColorSet.from(hex: "3D3D3E")
+    public static let gray100: Color = Self.color(
+        light: Self.from(hex: "F2F3F5"),
+        dark: Self.from(hex: "3D3D3E")
     )
-    public static let gray300: Color = ColorSet.color(
-        light: ColorSet.from(hex: "999999"),
-        dark: ColorSet.from(hex: "6B6B6B")
+    public static let gray300: Color = Self.color(
+        light: Self.from(hex: "999999"),
+        dark: Self.from(hex: "6B6B6B")
     )
-    public static let gray200: Color = ColorSet.color(
-        light: ColorSet.from(hex: "E5E5E5"),
-        dark: ColorSet.from(hex: "4E4E4E")
+    public static let gray200: Color = Self.color(
+        light: Self.from(hex: "E5E5E5"),
+        dark: Self.from(hex: "4E4E4E")
     )
     
 }
 
 // MARK: - function
 
-extension ColorSet {
+extension Color.Kuring {
     
     /// SwiftUI Color
     static func color(light: UIColor, dark: UIColor) -> Color {
-        return Color(ColorSet.uiColor(light: light, dark: dark))
+        return Color(Color.Kuring.uiColor(light: light, dark: dark))
     }
     
     /// UIKit Color
