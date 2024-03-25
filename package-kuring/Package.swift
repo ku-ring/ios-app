@@ -205,6 +205,7 @@ let package = Package(
         .target(
             name: "Labs",
             dependencies: [
+                "ColorSet",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ]
         ),

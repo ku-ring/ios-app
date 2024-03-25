@@ -18,14 +18,14 @@ public struct DepartmentEditor: View {
         VStack(alignment: .leading) {
             Text("학과를 추가하거나\n삭제할 수 있어요")
                 .font(.system(size: 24, weight: .bold))
-                .foregroundStyle(ColorSet.title)
+                .foregroundStyle(Color.Kuring.title)
                 .padding(.top, 28)
                 .padding(.bottom, 24)
 
             HStack(alignment: .center, spacing: 12) {
                 Image(systemName: "magnifyingglass")
                     .frame(width: 16, height: 16)
-                    .foregroundStyle(ColorSet.gray400)
+                    .foregroundStyle(Color.Kuring.gray400)
 
                 TextField("추가할 학과를 검색해 주세요", text: $store.searchText)
                     .focused($focus, equals: .search)
@@ -35,7 +35,7 @@ public struct DepartmentEditor: View {
                 if !store.searchText.isEmpty {
                     Image(systemName: "xmark")
                         .frame(width: 16, height: 16)
-                        .foregroundStyle(ColorSet.gray400)
+                        .foregroundStyle(Color.Kuring.gray400)
                         .onTapGesture {
                             store.send(.clearTextFieldButtonTapped)
                             focus = nil
@@ -44,13 +44,13 @@ public struct DepartmentEditor: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 7)
-            .background(ColorSet.gray100)
+            .background(Color.Kuring.gray100)
             .cornerRadius(20)
             .padding(.bottom, 16)
 
             Text(store.searchText.isEmpty ? "내 학과" : "검색 결과")
                 .font(.system(size: 14))
-                .foregroundStyle(ColorSet.caption1)
+                .foregroundStyle(Color.Kuring.caption1)
                 .padding(.horizontal, 4)
                 .padding(.vertical, 10)
 
@@ -87,13 +87,13 @@ public struct DepartmentEditor: View {
             Spacer()
         }
         .padding(.horizontal, 20)
-        .background(ColorSet.bg)
+        .background(Color.Kuring.bg)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("전체 삭제") {
                     store.send(.deleteAllMyDepartmentButtonTapped)
                 }
-                .tint(ColorSet.primary)
+                .tint(Color.Kuring.primary)
                 .disabled(store.myDepartments.isEmpty)
             }
         }

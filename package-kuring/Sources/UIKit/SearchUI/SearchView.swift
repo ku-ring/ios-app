@@ -26,47 +26,46 @@ public struct SearchView: View {
 
     public var body: some View {
         VStack(spacing: 0) {
-            ZStack {
-                /// 검색창
-                HStack(alignment: .center, spacing: 12) {
-                    /// 검색 아이콘
-                    Image(systemName: "magnifyingglass")
-                        .frame(width: 16, height: 16)
-                        .foregroundStyle(ColorSet.gray400)
-
-                    TextField("검색어를 입력해주세요", text: $store.searchInfo.text)
-                        .focused($focus, equals: .search)
-                        .autocorrectionDisabled()
-                        .onSubmit { store.send(.search) }
-
-                    if store.searchInfo.searchPhase == .searching {
-                        /// 검색 중 로딩 인디케이터
-                        ProgressView()
-                    } else {
-                        if !store.searchInfo.text.isEmpty {
-                            /// 검색어 삭제 버튼
-                            Button {
-                                store.send(.clearKeywordButtonTapped)
-                            } label: {
-                                Image(systemName: "xmark")
-                                    .frame(width: 16, height: 16)
-                                    .foregroundStyle(ColorSet.gray400)
-                            }
+            /// 검색창
+            HStack(alignment: .center, spacing: 12) {
+                /// 검색 아이콘
+                Image(systemName: "magnifyingglass")
+                    .frame(width: 16, height: 16)
+                    .foregroundStyle(Color.Kuring.gray300)
+                
+                TextField("검색어를 입력해주세요", text: $store.searchInfo.text)
+                    .focused($focus, equals: .search)
+                    .autocorrectionDisabled()
+                    .onSubmit { store.send(.search) }
+                
+                if store.searchInfo.searchPhase == .searching {
+                    /// 검색 중 로딩 인디케이터
+                    ProgressView()
+                } else {
+                    if !store.searchInfo.text.isEmpty {
+                        /// 검색어 삭제 버튼
+                        Button {
+                            store.send(.clearKeywordButtonTapped)
+                        } label: {
+                            Image(systemName: "xmark")
+                                .frame(width: 16, height: 16)
+                                .foregroundStyle(Color.Kuring.gray300)
                         }
                     }
                 }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 7)
-                .background(ColorSet.gray100)
-                .cornerRadius(20)
             }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 7)
+            .background(Color.Kuring.gray100)
+            .cornerRadius(20)
+            .padding(.horizontal, 20)
 
             if !store.recents.isEmpty {
                 HStack {
                     /// 최근 검색어
                     Text("최근검색어")
                         .font(.system(size: 14, weight: .medium))
-                        .foregroundStyle(ColorSet.caption1)
+                        .foregroundStyle(Color.Kuring.caption1)
 
                     Spacer()
 
@@ -76,11 +75,12 @@ public struct SearchView: View {
                     } label: {
                         Text("전체삭제")
                             .font(.system(size: 12))
-                            .foregroundStyle(ColorSet.caption1)
+                            .foregroundStyle(Color.Kuring.caption1)
                     }
                 }
                 .padding(.top, 20)
                 .padding(.bottom, 12)
+                .padding(.horizontal, 20)
 
                 /// 최근 검색어 목록
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -92,10 +92,10 @@ public struct SearchView: View {
                                 } label: {
                                     Text(recent)
                                         .font(.system(size: 14))
-                                        .foregroundStyle(ColorSet.primary)
+                                        .foregroundStyle(Color.Kuring.primary)
                                         .padding(.horizontal, 12)
                                         .padding(.vertical, 4)
-                                        .background(ColorSet.primary.opacity(0.1))
+                                        .background(Color.Kuring.primary.opacity(0.1))
                                         .cornerRadius(20)
                                 }
                             }
@@ -103,24 +103,26 @@ public struct SearchView: View {
                     }
                 }
                 .frame(height: 30)
+                .padding(.horizontal, 20)
             }
 
             HStack {
                 Text("검색결과")
                     .font(.system(size: 14, weight: .medium))
-                    .foregroundStyle(ColorSet.caption1)
+                    .foregroundStyle(Color.Kuring.caption1)
                     .padding(.top, 20)
                     .padding(.bottom, 12)
 
                 Spacer()
             }
+            .padding(.horizontal, 20)
 
             /// 검색타입 세그먼트
             Rectangle()
                 .foregroundColor(.clear)
                 .frame(height: 50)
                 .padding(.horizontal, 20)
-                .background(ColorSet.gray100)
+                .background(Color.Kuring.gray100)
                 .cornerRadius(10)
                 .overlay {
                     HStack {
@@ -129,7 +131,7 @@ public struct SearchView: View {
                         } label: {
                             SegmentView("공지", isSelect: store.searchInfo.searchType == .notice)
                         }
-
+                        
                         Button {
                             store.send(.selectSearchType(.staff))
                         } label: {
@@ -138,65 +140,78 @@ public struct SearchView: View {
                     }
                     .padding(5)
                 }
+            
+                .padding(.horizontal, 20)
 
             /// 검색결과
             switch store.searchInfo.searchType {
             case .notice:
                 if let notices = store.resultNotices, !notices.isEmpty {
                     List(notices, id: \.self) { notice in
-                        ZStack {
-                            NavigationLink(
-                                state: NoticeAppFeature.Path.State.detail(
-                                    NoticeDetailFeature.State(notice: notice)
-                                )
-                            ) {
-                                EmptyView()
-                            }
-                            .opacity(0)
-                            
-                            VStack(alignment: .leading) {
-                                Text(notice.subject)
+                        VStack(spacing: 0) {
+                            ZStack {
+                                NavigationLink(
+                                    state: NoticeAppFeature.Path.State.detail(
+                                        NoticeDetailFeature.State(notice: notice)
+                                    )
+                                ) {
+                                    EmptyView()
+                                }
+                                .opacity(0)
                                 
-                                HStack {
-                                    Text(notice.postedDate)
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(notice.subject)
+                                        .font(.system(size: 15))
+                                        .foregroundStyle(Color.Kuring.title)
                                     
-                                    Spacer()
+                                    HStack {
+                                        Text(notice.postedDate)
+                                            .font(.system(size: 14))
+                                            .foregroundStyle(Color.Kuring.caption1)
+                                        
+                                        Spacer()
+                                    }
                                 }
                             }
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 22)
+                            
+                            Divider()
+                                .frame(height: 0.25)
                         }
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 22)
-                        .listRowInsets(EdgeInsets())
-                        .background(ColorSet.bg)
+                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        .background(Color.Kuring.bg)
                     }
                     .listStyle(.plain)
-                    .listRowBackground(ColorSet.bg)
+                    .listRowBackground(Color.Kuring.bg)
                 } else {
                     beforePhaseView
                 }
             case .staff:
                 if let staffs = store.resultStaffs, !staffs.isEmpty {
                     List(staffs, id: \.self) { staff in
-                        Button {
-                            store.send(.staffRowSelected(staff))
-                        } label: {
-                            StaffRow(staff: staff)
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 22)
+                        VStack(spacing: 0) {
+                            Button {
+                                store.send(.staffRowSelected(staff))
+                            } label: {
+                                StaffRow(staff: staff)
+                            }
+                            .buttonStyle(.plain)
+
+                            Divider()
+                                .frame(height: 0.25)
                         }
-                        .buttonStyle(.plain)
-                        .listRowInsets(EdgeInsets())
-                        .background(ColorSet.bg)
+                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        .background(Color.Kuring.bg)
                     }
                     .listStyle(.plain)
-                    .listRowBackground(ColorSet.bg)
+                    .listRowBackground(Color.Kuring.bg)
                 } else {
                     beforePhaseView
                 }
             }
         }
-        .padding(.horizontal, 20)
-        .background(ColorSet.bg)
+        .background(Color.Kuring.bg)
         .bind($store.focus, to: $focus)
         .sheet(
             item: $store.scope(
@@ -211,7 +226,7 @@ public struct SearchView: View {
 
     private func SegmentView(_ title: String, isSelect: Bool) -> some View {
         RoundedRectangle(cornerRadius: 10)
-            .foregroundStyle(isSelect ? ColorSet.bg : .clear)
+            .foregroundStyle(isSelect ? Color.Kuring.bg : .clear)
             .shadow(
                 color: .black.opacity(isSelect ? 0.1 : 0),
                 radius: 6, x: 0, y: 0
@@ -221,8 +236,8 @@ public struct SearchView: View {
                     .font(.system(size: 16, weight: isSelect ? .bold : .medium))
                     .foregroundStyle(
                         isSelect
-                        ? ColorSet.primary
-                        : ColorSet.caption1
+                        ? Color.Kuring.primary
+                        : Color.Kuring.caption1
                     )
             }
     }

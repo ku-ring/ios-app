@@ -40,7 +40,7 @@ public struct ExperimentList: View {
             }
             .padding(.vertical, 9)
             .listRowSeparator(.hidden)
-            .listRowBackground(ColorSet.bg)
+            .listRowBackground(Color.Kuring.bg)
             
             NavigationLink(
                 state: LabAppFeature.Path.State.appIcon(
@@ -51,10 +51,10 @@ public struct ExperimentList: View {
             }
             .padding(.vertical, 9)
             .listRowSeparator(.hidden)
-            .listRowBackground(ColorSet.bg)
+            .listRowBackground(Color.Kuring.bg)
         }
         .listStyle(.plain)
-        .background(ColorSet.bg)
+        .background { Color.Kuring.bg }
         
     }
 

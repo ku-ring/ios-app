@@ -19,6 +19,9 @@ struct NoticeContentView: View {
         VStack(spacing: 0) {
             NoticeCategoryPicker(selection: $store.provider.sending(\.providerChanged))
 
+            Divider()
+                .frame(height: 0.25)
+            
             if self.store.provider == .emptyDepartment {
                 NoDepartmentView()
             } else {

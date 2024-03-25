@@ -28,7 +28,7 @@ public struct DepartmentRow: View {
             case .delete:
                 Button(action: action) {
                     Text("삭제")
-                        .foregroundStyle(ColorSet.caption1)
+                        .foregroundStyle(Color.Kuring.caption1)
                 }
             case let .radio(isSelected):
                 Button(action: action) {
@@ -39,8 +39,8 @@ public struct DepartmentRow: View {
                     )
                     .foregroundStyle(
                         isSelected
-                        ? ColorSet.primary
-                        : ColorSet.gray400
+                        ? Color.Kuring.primary
+                        : Color.Kuring.gray400
                     )
                 }
             }

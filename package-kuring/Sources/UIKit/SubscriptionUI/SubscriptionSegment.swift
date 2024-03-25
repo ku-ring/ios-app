@@ -16,13 +16,13 @@ struct SubscriptionSegment: View {
                 .font(.system(size: 16, weight: .bold))
                 .foregroundStyle(
                     isSelected
-                    ? ColorSet.primary
-                    : ColorSet.caption1.opacity(0.3)
+                    ? Color.Kuring.primary
+                    : Color.Kuring.caption1.opacity(0.3)
                 )
             
             Rectangle()
                 .foregroundStyle(
-                    ColorSet.primary
+                    Color.Kuring.primary
                         .opacity(isSelected ? 1 : 0)
                 )
                 .frame(height: 1.5)

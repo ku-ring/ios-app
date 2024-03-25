@@ -61,16 +61,16 @@ struct DepartmentSelector: View {
         VStack(alignment: .leading, spacing: 16) {
             Text(StringSet.title_select.rawValue)
                 .font(.system(size: 24, weight: .bold))
-                .foregroundStyle(ColorSet.title)
+                .foregroundStyle(Color.Kuring.title)
             
             Text(StringSet.description_select.rawValue)
                 .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(ColorSet.caption1)
+                .foregroundStyle(Color.Kuring.caption1)
             
             HStack(alignment: .center, spacing: 12) {
                 Image(systemName: "magnifyingglass")
                     .frame(width: 16, height: 16)
-                    .foregroundStyle(ColorSet.gray400)
+                    .foregroundStyle(Color.Kuring.gray400)
                 
                 TextField("추가할 학과를 검색해 주세요", text: $finder.text)
                     .focused($focus)
@@ -79,7 +79,7 @@ struct DepartmentSelector: View {
                 if !finder.text.isEmpty {
                     Image(systemName: "xmark")
                         .frame(width: 16, height: 16)
-                        .foregroundStyle(ColorSet.caption1.opacity(0.6))
+                        .foregroundStyle(Color.Kuring.caption1.opacity(0.6))
                         .onTapGesture {
                             finder.text = ""
                             focus = false
@@ -88,7 +88,7 @@ struct DepartmentSelector: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 7)
-            .background(ColorSet.gray100)
+            .background(Color.Kuring.gray100)
             .cornerRadius(20)
             .padding(.bottom, 16)
             
@@ -105,6 +105,6 @@ struct DepartmentSelector: View {
             
             Spacer()
         }
-        .background(ColorSet.bg)
+        .background(Color.Kuring.bg)
     }
 }

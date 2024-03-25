@@ -17,7 +17,7 @@ public struct DepartmentSelector: View {
             HStack(alignment: .center, spacing: 10) {
                 Text("대표 학과 선택")
                     .font(.system(size: 18, weight: .bold))
-                    .foregroundStyle(ColorSet.title)
+                    .foregroundStyle(Color.Kuring.title)
             }
             .padding(.horizontal, 20)
             .padding(.top, 24)
@@ -29,7 +29,7 @@ public struct DepartmentSelector: View {
                     HStack {
                         Text(department.korName)
                             .font(.system(size: 16, weight: .medium))
-                            .foregroundStyle(ColorSet.body)
+                            .foregroundStyle(Color.Kuring.body)
 
                         Spacer()
 
@@ -40,8 +40,8 @@ public struct DepartmentSelector: View {
                         )
                         .foregroundStyle(
                             department == store.currentDepartment
-                            ? ColorSet.primary
-                            : ColorSet.gray200
+                            ? Color.Kuring.primary
+                            : Color.Kuring.gray200
                         )
                         .frame(width: 20, height: 20)
                     }
@@ -58,8 +58,8 @@ public struct DepartmentSelector: View {
             } label: {
                 topBlurButton(
                     "내 학과 편집하기",
-                    fontColor: ColorSet.body,
-                    backgroundColor: ColorSet.primary
+                    fontColor: Color.Kuring.bg,
+                    backgroundColor: Color.Kuring.primary
                 )
             }
             .padding(.horizontal, 20)
@@ -84,9 +84,9 @@ public struct DepartmentSelector: View {
         .background {
             LinearGradient(
                 gradient: Gradient(colors: [
-                    ColorSet.bg.opacity(0.1),
-                    ColorSet.bg.opacity(0.1),
-                    ColorSet.primary.opacity(0.1)
+                    Color.Kuring.bg.opacity(0.1),
+                    Color.Kuring.bg.opacity(0.1),
+                    Color.Kuring.primary.opacity(0.1)
                 ]),
                 startPoint: .top, endPoint: .bottom
             )

@@ -32,8 +32,8 @@ public struct NoticeTypeColumn: View {
             }
             .foregroundStyle(
                 provider.id == selectedID
-                ? ColorSet.primary
-                : ColorSet.caption1
+                ? Color.Kuring.primary
+                : Color.Kuring.caption1
             )
             .id(provider.id)
     }

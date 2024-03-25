@@ -12,16 +12,18 @@ struct StaffRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(staff.name)
-                .font(.subheadline)
+                .font(.system(size: 16))
+                .foregroundStyle(Color.Kuring.title)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .contentShape(Rectangle())
 
             Text("\(staff.deptName) · \(staff.collegeName)")
-                .font(.caption)
+                .font(.system(size: 14))
+                .foregroundStyle(Color.Kuring.caption1)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .contentShape(Rectangle())
         }
-        .padding(.vertical, 8)
+        .padding(.vertical, 12)
         .padding(.horizontal, 20)
     }
 }

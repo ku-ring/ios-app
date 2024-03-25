@@ -27,7 +27,7 @@ public struct AppIconSelector: View {
                     store.send(.appIconSelected(icon))
                 } label: {
                     Text(icon.korValue)
-                        .foregroundStyle(ColorSet.body)
+                        .foregroundStyle(Color.Kuring.body)
                 }
 
                 if icon == store.state.selectedIcon {
@@ -39,9 +39,9 @@ public struct AppIconSelector: View {
                 }
             }
             .listRowSeparator(.hidden)
-            .listRowBackground(ColorSet.bg)
+            .listRowBackground(Color.Kuring.bg)
         }
-        .background(ColorSet.bg)
+        .background(Color.Kuring.bg)
         .listStyle(.plain)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
