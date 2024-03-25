@@ -127,13 +127,13 @@ public struct SearchView: View {
                         Button {
                             store.send(.selectSearchType(.notice))
                         } label: {
-                            SegmentView("공지", isSelect: store.searchInfo.searchType == .notice)
+                            segmentView("공지", isSelect: store.searchInfo.searchType == .notice)
                         }
 
                         Button {
                             store.send(.selectSearchType(.staff))
                         } label: {
-                            SegmentView("교직원", isSelect: store.searchInfo.searchType == .staff)
+                            segmentView("교직원", isSelect: store.searchInfo.searchType == .staff)
                         }
                     }
                     .padding(5)
@@ -209,7 +209,7 @@ public struct SearchView: View {
         }
     }
 
-    private func SegmentView(_ title: String, isSelect: Bool) -> some View {
+    private func segmentView(_ title: String, isSelect: Bool) -> some View {
         RoundedRectangle(cornerRadius: 10)
             .foregroundStyle(isSelect ? ColorSet.bg : .clear)
             .shadow(
@@ -242,7 +242,6 @@ public struct SearchView: View {
 
     public init(store: StoreOf<SearchFeature>) {
         self.store = store
-//        UITableView
     }
 }
 
