@@ -26,6 +26,7 @@ public struct OpenSourceList: View {
                             OpenSourceDetailView(opensource: opensource) {
                                 store.send(.linkTapped(opensource.link))
                             }
+                            .navigationTitle(opensource.name)
                         } label: {
                             EmptyView()
                         }
@@ -40,6 +41,10 @@ public struct OpenSourceList: View {
                 )
             }
             .listStyle(.plain)
+        }
+        .background {
+            Color.Kuring.bg
+                .ignoresSafeArea()
         }
     }
 
@@ -70,6 +75,10 @@ public struct OpenSourceRow: View {
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 16)
+        .background {
+            Color.Kuring.bg
+                .ignoresSafeArea()
+        }
     }
 }
 
@@ -120,7 +129,10 @@ public struct OpenSourceDetailView: View {
             }
             .padding(.horizontal, 20)
         }
-        .navigationTitle(opensource.name)
+        .background {
+            Color.Kuring.bg
+                .ignoresSafeArea()
+        }
     }
 }
 
