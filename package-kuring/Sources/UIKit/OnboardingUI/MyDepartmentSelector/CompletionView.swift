@@ -25,6 +25,7 @@ struct CompletionView: View {
                 
                 LottieView(animation: .named("success.json", bundle: Bundle.onboarding))
                     .playing()
+                    .looping()
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 150, height: 150)
