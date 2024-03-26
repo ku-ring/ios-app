@@ -16,7 +16,7 @@ extension Color.Kuring {
     
     public static let warning: Color = Self.color(
         light: Self.from(hex: "FF4848"),
-        dark: Self.from(hex: "DE4343", alpha: 0.08)
+        dark: Self.from(hex: "DE4343")
     )
     public static let borderLine: Color = Self.color(
         light: Self.from(hex: "000000"),
