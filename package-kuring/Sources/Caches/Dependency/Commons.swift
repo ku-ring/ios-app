@@ -18,7 +18,7 @@ public struct Commons {
     /// 온보딩 화면이 필요한지 여부 변경
     public var changeOnboarding: (_ isOnboarding: Bool) -> Void
     
-    @UserDefault(key: StringSet.inAppReviewCount, defaultValue: false)
+    @UserDefault(key: StringSet.isOnboarding, defaultValue: false)
     static var isOnboarding: Bool
     
     // MARK: - 인앱 리뷰
