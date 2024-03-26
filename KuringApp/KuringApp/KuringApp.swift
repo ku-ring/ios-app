@@ -111,7 +111,6 @@ struct KuringApp: App {
                         }, onCompletion: { result in
                             print("onCompletion: \(result)")
                             completesLink = true
-//                            showsOnboarding = true
                         }
                     )
             }
