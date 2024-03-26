@@ -1,6 +1,6 @@
 [![appstore](https://img.shields.io/badge/쿠링-다운로드-000000.svg?style=for-the-badge)](https://apps.apple.com/kr/app/id1609873520) [![wip](https://img.shields.io/badge/멤버모집중-지원하기-F6C954.svg?style=for-the-badge)](https://github.com/ku-ring/swift-cinema)
 
-![test](https://github.com/ku-ring/ios-app/actions/workflows/TEST_PACKAGE_TARGET_iOS17.yml/badge.svg)
+![test](https://github.com/ku-ring/ios-app/actions/workflows/BUILD_PACKAGE.yml/badge.svg)
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/ku-ring/ios-app&count_bg=%23000000&title_bg=%23555555&icon=swift.svg&icon_color=%23FFFFFF&title=%EC%A1%B0%ED%9A%8C%EC%88%98&edge_flat=true)](https://hits.seeyoufarm.com)
 
 # ios-app
