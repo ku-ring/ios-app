@@ -32,14 +32,6 @@ public struct SettingsApp: View {
                     AppIconSelector(store: store)
                         .navigationTitle("앱 아이콘")
                 }
-            case .openSourceList:
-                if let store = store.scope(
-                    state: \.openSourceList,
-                    action: \.openSourceList
-                ) {
-                    OpenSourceList(store: store)
-                        .navigationTitle("오픈소스 라이센스")
-                }
             }
         }
         .sheet(
@@ -78,8 +70,27 @@ public struct SettingsApp: View {
         ) { store in
             InformationWebView(store: store)
         }
+        .sheet(
+            item: $store.scope(
+                state: \.destination?.opensourceList,
+                action: \.destination.opensourceList
+            )
+        ) { store in
+            NavigationStack {
+                OpenSourceList(store: store)
+                    .navigationTitle("") // 뒤로가기 버튼 label 제거용
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .principal) {
+                            Text("사용된 오픈소스")
+                                .fontWeight(.semibold)
+                        }
+                    }
+            }
+            .tint(Color.Kuring.title) // 뒤로가기 버튼 색상
+        }
     }
-
+    
     public init(store: StoreOf<SettingsAppFeature>) {
         self.store = store
     }

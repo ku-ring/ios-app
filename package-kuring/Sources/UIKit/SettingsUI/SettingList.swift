@@ -74,17 +74,10 @@ public struct SettingList: View {
                     itemView("icon_checkmark_circle", "서비스 이용약관")
                 }
                 
-                ZStack {
-                    NavigationLink(
-                        state: SettingsAppFeature.Path.State.openSourceList(
-                            OpenSourceListFeature.State()
-                        )
-                    ) {
-                        EmptyView()
-                    }
-                    .opacity(0)
-                    
-                    itemView("icon_opensource", "오픈소스 라이센스")
+                Button {
+                    store.send(.delegate(.showOpensourceList))
+                } label: {
+                    itemView("icon_opensource", "사용된 오픈소스")
                 }
                 
                 Divider()

@@ -16,6 +16,7 @@ extension SettingsAppFeature {
             case feedback(FeedbackFeature.State)
             case subscription(SubscriptionAppFeature.State)
             case informationWeb(InformationWebFeature.State)
+            case opensourceList(OpenSourceListFeature.State)
         }
 
         public enum Action: Equatable {
@@ -23,6 +24,7 @@ extension SettingsAppFeature {
             case feedback(FeedbackFeature.Action)
             case subscription(SubscriptionAppFeature.Action)
             case informationWeb(InformationWebFeature.Action)
+            case opensourceList(OpenSourceListFeature.Action)
         }
 
         public var body: some ReducerOf<Self> {
@@ -37,6 +39,9 @@ extension SettingsAppFeature {
             }
             Scope(state: \.informationWeb, action: \.informationWeb) {
                 InformationWebFeature()
+            }
+            Scope(state: \.opensourceList, action: \.opensourceList) {
+                OpenSourceListFeature()
             }
         }
 
