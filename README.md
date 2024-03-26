@@ -1,3 +1,5 @@
+![커버이미지](https://github.com/ku-ring/ios-app/assets/53814741/73aae511-c6eb-4160-b666-2fafc7514c8b)
+
 [![appstore](https://img.shields.io/badge/쿠링-다운로드-000000.svg?style=for-the-badge)](https://apps.apple.com/kr/app/id1609873520) [![wip](https://img.shields.io/badge/멤버모집중-지원하기-F6C954.svg?style=for-the-badge)](https://github.com/ku-ring/swift-cinema)
 
 ![test](https://github.com/ku-ring/ios-app/actions/workflows/BUILD_PACKAGE.yml/badge.svg)
@@ -5,7 +7,7 @@
 
 # ios-app
 
-쿠링 iOS 앱 v2 레포입니다. SwiftUI + TCA
+쿠링 iOS 앱 v2 레포입니다. SwiftUI + TCA (24년 4월 배포 예정)
 
 ## 개요
 
