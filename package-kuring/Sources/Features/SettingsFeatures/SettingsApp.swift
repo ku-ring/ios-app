@@ -92,6 +92,10 @@ public struct SettingsAppFeature {
                 case .showFeedback:
                     state.destination = .feedback(FeedbackFeature.State())
                     return .none
+                    
+                case .showOpensourceList:
+                    state.destination = .opensourceList(OpenSourceListFeature.State())
+                    return .none
                 }
 
             case let .path(.element(id: id, action: .appIconSelector(.delegate(.completeAppIconChange)))):

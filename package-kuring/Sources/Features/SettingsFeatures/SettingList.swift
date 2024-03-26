@@ -47,6 +47,7 @@ public struct SettingListFeature {
             case showTermsOfService
             case showInstagram
             case showFeedback
+            case showOpensourceList
         }
     }
 
