@@ -4,7 +4,7 @@
 //
 
 import Models
-import Foundation
+import SwiftUI
 import Dependencies
 
 public struct Commons {
@@ -14,12 +14,12 @@ public struct Commons {
     /// 현재 앱 버전
     public var appVersion: () -> String
     /// 온보딩 화면이 필요한지 여부
-    public var needsOnboarding: () -> Bool
+    public var showsOnboarding: () -> Bool
     /// 온보딩 화면이 필요한지 여부 변경
     public var changeOnboarding: (_ isOnboarding: Bool) -> Void
     
-    @UserDefault(key: StringSet.isOnboarding, defaultValue: false)
-    static var isOnboarding: Bool
+    @AppStorage(StringSet.isOnboarding)
+    static var isOnboarding: Bool = false
     
     // MARK: - 인앱 리뷰
     
@@ -49,7 +49,7 @@ extension Commons {
             let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
             return appVersion as? String ?? "0.0.0"
             
-        }, needsOnboarding: {
+        }, showsOnboarding: {
             Self.isOnboarding
             
         }, changeOnboarding: { isOnboarding in

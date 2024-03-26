@@ -5,11 +5,14 @@
 
 import SwiftUI
 import ColorSet
+import Dependencies
 
 public struct OnboardingView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var currentGuidance: Guidance.ID = .subscription
     @State private var showsDepartmentSelector: Bool = false
+    
+    @Dependency(\.commons) var commons
     
     public var body: some View {
         if showsDepartmentSelector {
@@ -48,6 +51,7 @@ public struct OnboardingView: View {
                 .padding(.vertical, 60)
                 
                 Button {
+                    commons.changeOnboarding(true)
                     showsDepartmentSelector = true
                 } label: {
                     Text(StringSet.button_goSubscrbing.rawValue)
@@ -55,6 +59,7 @@ public struct OnboardingView: View {
                 .buttonStyle(.kuringStyle(enabled: currentGuidance == .search))
                 
                 Button(StringSet.button_skip.rawValue) {
+                    commons.changeOnboarding(true)
                     dismiss()
                 }
                 .font(.system(size: 16, weight: .medium))

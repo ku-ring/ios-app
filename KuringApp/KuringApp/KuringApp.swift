@@ -20,7 +20,13 @@ struct KuringApp: App {
     @UIApplicationDelegateAdaptor(Notifications.self) var appDelegate
     
     // TODO: 테스트용 변수
-    @State private var showsOnboarding: Bool = false
+    @State private var showsOnboarding: Bool
+    
+    init() {
+        @Dependency(\.commons) var commons
+        
+        _showsOnboarding = .init(initialValue: !commons.showsOnboarding())
+    }
     
     var body: some Scene {
         WindowGroup {
@@ -105,7 +111,7 @@ struct KuringApp: App {
                         }, onCompletion: { result in
                             print("onCompletion: \(result)")
                             completesLink = true
-                            showsOnboarding = true
+//                            showsOnboarding = true
                         }
                     )
             }
