@@ -16,23 +16,7 @@ struct KuringLinkFetcher: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .task {
-                onRequest()
-                do {
-                    @Dependency(\.kuringLink) var kuringLink
-                    async let allUnivNoticeTypes = try kuringLink.getAllUnivNoticeType()
-                    async let allDepartments = try kuringLink.getAllDepartments()
-                    let _ = try await [allUnivNoticeTypes, allDepartments]
-                    
-                    async let subscribedDepartments = try kuringLink.getSubscribedDepartments()
-                    async let subscribedUnivNotices = try kuringLink.getSubscribedUnivNotices()
-                    let _ = try await [subscribedDepartments, subscribedUnivNotices]
-                    onCompletion(.success(()))
-                } catch {
-                    showsNetworkError = true
-                    onCompletion(.failure(error))
-                }
-            }
+            .task { await request() }
             .alert("앗! 인터넷 연결이 좋지 않아요!", isPresented: $showsNetworkError) {
                 // 무시
                 Button(role: .cancel) {
@@ -43,7 +27,24 @@ struct KuringLinkFetcher: ViewModifier {
             } message: {
                 Text("네트워크 연결이 좋지 않아서 서버 정보를 불러오는데에 실패했어요.")
             }
-        
+    }
+    
+    func request() async {
+        onRequest()
+        do {
+            @Dependency(\.kuringLink) var kuringLink
+            async let allUnivNoticeTypes = try kuringLink.getAllUnivNoticeType()
+            async let allDepartments = try kuringLink.getAllDepartments()
+            let _ = try await [allUnivNoticeTypes, allDepartments]
+            
+            async let subscribedDepartments = try kuringLink.getSubscribedDepartments()
+            async let subscribedUnivNotices = try kuringLink.getSubscribedUnivNotices()
+            let _ = try await [subscribedDepartments, subscribedUnivNotices]
+            onCompletion(.success(()))
+        } catch {
+            showsNetworkError = true
+            onCompletion(.failure(error))
+        }
     }
 }
 
