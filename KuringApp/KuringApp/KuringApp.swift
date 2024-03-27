@@ -29,9 +29,6 @@ struct KuringApp: App {
             if completesLink {
                 // MARK: ContentView
                 ContentView()
-                    .fullScreenCover(isPresented: $showsOnboarding) {
-                        OnboardingView()
-                    }
                     // MARK: 앱 업데이트 알림
                     .versionUpdateAlert()
                     // MARK: 새 공지 보여주기 (알림 탭했을 때)
@@ -102,14 +99,19 @@ struct KuringApp: App {
                 // MARK: LaunchScreen
                 SplashScreen()
                     .kuringLink(
-                        onRequest: {
-                            print("onRequest")
-                        }, onCompletion: { result in
-                            print("onCompletion: \(result)")
-                            completesLink = true
+                        onRequest: { },
+                        onCompletion: { result in
                             showsOnboarding = !commons.isCompleteOnboarding()
+                            if !showsOnboarding {
+                                completesLink = true
+                            }
                         }
                     )
+                    .fullScreenCover(isPresented: $showsOnboarding) {
+                        completesLink = true
+                    } content: {
+                        OnboardingView()
+                    }
             }
         }
     }

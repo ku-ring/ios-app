@@ -3,9 +3,11 @@
 // See the 'License.txt' file for licensing information.
 //
 
+import Caches
 import Models
 import SwiftUI
 import ColorSet
+import Dependencies
 
 struct MyDepartmentSelector: View {
     @Environment(\.dismiss) private var dismiss
@@ -33,7 +35,9 @@ struct MyDepartmentSelector: View {
             if currentStep == .selectDepartment {
                 Button(StringSet.button_complete.rawValue) {
                     if let selectedDepartment {
+                        @Dependency(\.departments) var departments
                         NoticeProvider.addedDepartments.append(selectedDepartment)
+                        departments.add(selectedDepartment)
                     }
                     currentStep = .addedDepartment.id
                 }
