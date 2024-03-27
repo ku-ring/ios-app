@@ -18,9 +18,13 @@ public struct BookmarkList: View {
             Color.Kuring.bg.ignoresSafeArea()
             
             if store.bookmarkedNotices.isEmpty {
-                Text("보관된 공지사항이 없습니다.")
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundStyle(Color.Kuring.body)
+                VStack {
+                    Spacer()
+                    Text("보관된 공지사항이 없습니다.")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundStyle(Color.Kuring.body)
+                    Spacer()
+                }
             } else {
                 List {
                     ForEach(self.store.bookmarkedNotices, id: \.id) { notice in
@@ -134,8 +138,6 @@ public struct BookmarkList: View {
         }
     }
 
-    // TODO: 디자인 시스템 분리 - 상단에 블러가 존재하는 버튼
-    @ViewBuilder
     private func topBlurButton(_ title: String, fontColor: Color, backgroundColor: Color) -> some View {
         HStack(alignment: .center, spacing: 10) {
             Spacer()
