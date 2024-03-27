@@ -18,13 +18,7 @@ public struct BookmarkList: View {
             Color.Kuring.bg.ignoresSafeArea()
             
             if store.bookmarkedNotices.isEmpty {
-                VStack {
-                    Spacer()
-                    Text("보관된 공지사항이 없습니다.")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundStyle(Color.Kuring.body)
-                    Spacer()
-                }
+                emptyBookmarkView
             } else {
                 List {
                     ForEach(self.store.bookmarkedNotices, id: \.id) { notice in
@@ -160,6 +154,16 @@ public struct BookmarkList: View {
                 startPoint: .top, endPoint: .bottom
             )
             .offset(x: 0, y: -32)
+        }
+    }
+    
+    private var emptyBookmarkView: some View {
+        VStack {
+            Spacer()
+            Text("보관된 공지사항이 없습니다.")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundStyle(Color.Kuring.body)
+            Spacer()
         }
     }
 }

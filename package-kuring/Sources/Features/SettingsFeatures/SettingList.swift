@@ -42,7 +42,6 @@ public struct SettingListFeature {
             case showSubscription
             case showWhatsNew
             case showTeam
-            case showLabs
             case showPrivacyPolicy
             case showTermsOfService
             case showInstagram

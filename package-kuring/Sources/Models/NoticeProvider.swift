@@ -5,6 +5,7 @@
 
 import Foundation
 import OrderedCollections
+import Dependencies
 
 /// 공지 제공자 카테고리
 public enum NoticeType: String, Codable, Hashable, CaseIterable, Identifiable, Equatable {
@@ -112,7 +113,7 @@ extension NoticeProvider {
     /// 앱 실행 시 모든 학과 정보를 가져와서 여기에 저장. 그 이후로 다음 앱 실행 전까지 로컬 값만 사용합니다.
     /// 네트워크 요청 실패시 로컬에 저장된 값을 default 값으로 사용합니다.
     public static var univNoticeTypes: [NoticeProvider] = [
-        .학사, .취창업, .도서관, .학생, .국제, .장학, .산학, .일반,
+        .학사, .취창업, .도서관, .학생, .국제, .장학, .산학, .일반
     ]
     
     // TODO: UserDefaults 저장

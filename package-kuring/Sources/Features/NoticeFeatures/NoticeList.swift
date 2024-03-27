@@ -52,7 +52,7 @@ public struct NoticeListFeature {
         /// - Important: ``bookmarkIDs`` 는 ``NoticeAppFeature/State`` 의 생성자에서 `@Dependency(\.bookmarks)`를 사용해 값 세팅
         public init(
             changeDepartment: DepartmentSelectorFeature.State? = nil,
-            provider: NoticeProvider = NoticeProvider.departments.first ?? NoticeProvider.학사,
+            provider: NoticeProvider = NoticeProvider.addedDepartments.first ?? NoticeProvider.학사,
             isLoading: Bool = false,
             noticeDictionary: [NoticeProvider: NoticeInfo] = [:],
             bookmarkIDs: Set<Notice.ID> = [] // 오직 테스트만을 위한 용도
@@ -60,7 +60,7 @@ public struct NoticeListFeature {
             @Dependency(\.departments) var departments
             
             self.changeDepartment = changeDepartment
-            self.provider = departments.getCurrent() ?? NoticeProvider.학사
+            self.provider = departments.getCurrent() ?? .학사
             self.isLoading = isLoading
             self.noticeDictionary = noticeDictionary
             self.bookmarkIDs = bookmarkIDs
@@ -225,8 +225,10 @@ public struct NoticeListFeature {
                 return .none
 
             case let .providerChanged(provider):
+                @Dependency(\.departments) var departments
+                
                 state.provider = provider.category == .학과
-                ? NoticeProvider.allNamesForPicker["학과"] ?? NoticeProvider.emptyDepartment
+                ? departments.getCurrent() ?? NoticeProvider.emptyDepartment
                 : provider
                 return .send(.fetchNotices)
 

@@ -67,10 +67,6 @@ public struct SettingsAppFeature {
                     )
                     return .none
 
-                case .showLabs:
-                    state.destination = .labs(LabAppFeature.State())
-                    return .none
-
                 case .showPrivacyPolicy:
                     state.destination = .informationWeb(
                         InformationWebFeature.State(url: URLLink.privacy.rawValue)

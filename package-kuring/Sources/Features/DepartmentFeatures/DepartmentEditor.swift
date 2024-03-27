@@ -45,8 +45,8 @@ public struct DepartmentEditorFeature {
             alert: AlertState<Action.Alert>? = nil
         ) {
             @Dependency(\.departments) var departments
-            self.myDepartments = IdentifiedArrayOf(uniqueElements: departments.getAll())
             
+            self.myDepartments = IdentifiedArrayOf(uniqueElements: departments.getAll())
             self.results = results
             self.searchText = searchText
             self.focus = focus
