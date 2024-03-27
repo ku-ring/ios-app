@@ -22,6 +22,8 @@ struct KuringApp: App {
     // TODO: 테스트용 변수
     @State private var showsOnboarding: Bool = false
     
+    @Dependency(\.commons) var commons
+    
     var body: some Scene {
         WindowGroup {
             if completesLink {
@@ -105,7 +107,7 @@ struct KuringApp: App {
                         }, onCompletion: { result in
                             print("onCompletion: \(result)")
                             completesLink = true
-                            showsOnboarding = true
+                            showsOnboarding = !commons.isCompleteOnboarding()
                         }
                     )
             }

@@ -4,7 +4,7 @@
 //
 
 import Models
-import Foundation
+import SwiftUI
 import Dependencies
 
 public struct Commons {
@@ -13,23 +13,23 @@ public struct Commons {
     
     /// 현재 앱 버전
     public var appVersion: () -> String
-    /// 온보딩 화면이 필요한지 여부
-    public var needsOnboarding: () -> Bool
-    /// 온보딩 화면이 필요한지 여부 변경
-    public var changeOnboarding: (_ isOnboarding: Bool) -> Void
+    /// 온보딩을 완료했는지 여부
+    public var isCompleteOnboarding: () -> Bool
+    /// 온보딩을 완료한 상태로 변경
+    public var completeOnboarding: () -> Void
     
-    @UserDefault(key: StringSet.inAppReviewCount, defaultValue: false)
-    static var isOnboarding: Bool
+    @AppStorage(StringSet.isOnboarding)
+    static var isOnboardingCompleted: Bool = false
     
     // MARK: - 인앱 리뷰
     
     /// 인앱 리뷰 카운트
-    public var getInAppReviewCount: () -> UInt
+    public var getInAppReviewCount: () -> Int
     /// 인앱 리뷰 카운트 증가
     public var increaseInAppReviewCount: () -> Void
     
-    @UserDefault(key: StringSet.inAppReviewCount, defaultValue: 0)
-    static var inAppReviewCount: UInt
+    @AppStorage(StringSet.inAppReviewCount)
+    static var inAppReviewCount: Int = 0
     
     // MARK: - 공지
     
@@ -49,11 +49,11 @@ extension Commons {
             let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
             return appVersion as? String ?? "0.0.0"
             
-        }, needsOnboarding: {
-            Self.isOnboarding
+        }, isCompleteOnboarding: {
+            Self.isOnboardingCompleted
             
-        }, changeOnboarding: { isOnboarding in
-            Self.isOnboarding = isOnboarding
+        }, completeOnboarding: {
+            Self.isOnboardingCompleted = true
             
         }, getInAppReviewCount: {
             Self.inAppReviewCount
