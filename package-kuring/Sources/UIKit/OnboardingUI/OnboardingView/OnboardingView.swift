@@ -51,7 +51,7 @@ public struct OnboardingView: View {
                 .padding(.vertical, 60)
                 
                 Button {
-                    commons.changeOnboarding(true)
+                    commons.completeOnboarding()
                     showsDepartmentSelector = true
                 } label: {
                     Text(StringSet.button_goSubscrbing.rawValue)
@@ -59,7 +59,7 @@ public struct OnboardingView: View {
                 .buttonStyle(.kuringStyle(enabled: currentGuidance == .search))
                 
                 Button(StringSet.button_skip.rawValue) {
-                    commons.changeOnboarding(true)
+                    commons.completeOnboarding()
                     dismiss()
                 }
                 .font(.system(size: 16, weight: .medium))

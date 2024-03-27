@@ -107,10 +107,7 @@ struct KuringApp: App {
                         }, onCompletion: { result in
                             print("onCompletion: \(result)")
                             completesLink = true
-                            if !commons.showsOnboarding() {
-                                showsOnboarding = true
-                            }
-                            
+                            showsOnboarding = commons.needsOnboarding()
                         }
                     )
             }
