@@ -57,8 +57,10 @@ public struct NoticeListFeature {
             noticeDictionary: [NoticeProvider: NoticeInfo] = [:],
             bookmarkIDs: Set<Notice.ID> = [] // 오직 테스트만을 위한 용도
         ) {
+            @Dependency(\.departments) var departments
+            
             self.changeDepartment = changeDepartment
-            self.provider = provider
+            self.provider = departments.getCurrent() ?? NoticeProvider.학사
             self.isLoading = isLoading
             self.noticeDictionary = noticeDictionary
             self.bookmarkIDs = bookmarkIDs
