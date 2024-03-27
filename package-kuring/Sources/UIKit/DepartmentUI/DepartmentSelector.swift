@@ -66,8 +66,6 @@ public struct DepartmentSelector: View {
         }
     }
 
-    // TODO: 디자인 시스템 분리 - 상단에 블러가 존재하는 버튼
-    @ViewBuilder
     private func topBlurButton(_ title: String, fontColor: Color, backgroundColor: Color) -> some View {
         HStack(alignment: .center, spacing: 10) {
             Spacer()

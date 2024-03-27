@@ -24,7 +24,7 @@ public struct NoticeCategoryPicker: View {
                             NoticeTypeColumn(
                                 key: key,
                                 provider: NoticeProvider.allNamesForPicker[key] ?? .invalid,
-                                selectedID: selection.id
+                                selection: selection
                             )
                         }
                         .buttonStyle(.plain)

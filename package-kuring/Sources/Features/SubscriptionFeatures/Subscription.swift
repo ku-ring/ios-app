@@ -15,7 +15,8 @@ public struct SubscriptionFeature {
 
         /// 대학 공지 리스트
         public let univNoticeTypes: IdentifiedArrayOf<NoticeProvider> = IdentifiedArray(
-            uniqueElements: NoticeProvider.univNoticeTypes
+            // TODO: - univNoticeTypes에서 학과 제거하기
+            uniqueElements: NoticeProvider.univNoticeTypes.filter { $0.korName != "학과" }
         )
         /// 대학 공지 리스트 중 내가 구독한 공지
         public var selectedUnivNoticeType: IdentifiedArrayOf<NoticeProvider>

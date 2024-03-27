@@ -93,22 +93,6 @@ public struct SettingList: View {
             .listRowBackground(Color.Kuring.bg)
             
             Section {
-                Button {
-                    store.send(.delegate(.showLabs))
-                } label: {
-                    HStack(spacing: 0) {
-                        Image(systemName: "flask")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundStyle(Color.Kuring.gray300)
-                            .padding(.trailing, 10)
-                        leadingTitle(title: "쿠링 실험실")
-                        Spacer()
-                        tailingChevronImage
-                    }
-                }
-                .padding(.vertical, 9)
-
                 ZStack {
                     NavigationLink(
                         state: SettingsAppFeature.Path.State.appIconSelector(
