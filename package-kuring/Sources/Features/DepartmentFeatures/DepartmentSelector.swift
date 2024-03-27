@@ -5,6 +5,7 @@
 
 import Models
 import SwiftUI
+import Dependencies
 import ComposableArchitecture
 
 @Reducer
@@ -15,11 +16,13 @@ public struct DepartmentSelectorFeature {
         public var addedDepartment: IdentifiedArrayOf<NoticeProvider>
 
         public init(currentDepartment: NoticeProvider? = nil, addedDepartment: IdentifiedArrayOf<NoticeProvider>) {
-            self.currentDepartment = currentDepartment
-            self.addedDepartment = addedDepartment
+            @Dependency(\.departments) var departments
+            
+            self.currentDepartment = departments.getCurrent()
+            self.addedDepartment = IdentifiedArrayOf(departments.getAll().filter { $0.category == .학과 })
         }
     }
-
+    
     public enum Action: Equatable {
         // TODO: String -> Department
         case selectDepartment(id: NoticeProvider.ID)
@@ -30,6 +33,8 @@ public struct DepartmentSelectorFeature {
             case editDepartment
         }
     }
+    
+    @Dependency(\.departments) var departments
 
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
@@ -39,6 +44,8 @@ public struct DepartmentSelectorFeature {
                     return .none
                 }
                 state.currentDepartment = department
+                departments.changeCurrent(department)
+                
                 return .none
 
             case .editDepartmentsButtonTapped:

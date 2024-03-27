@@ -56,6 +56,7 @@ public struct NoticeAppFeature {
     }
 
     @Dependency(\.bookmarks) var bookmarks
+    @Dependency(\.departments) var departments
     
     public var body: some ReducerOf<Self> {
         Scope(state: \.noticeList, action: \.noticeList) {
