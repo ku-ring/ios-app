@@ -29,7 +29,6 @@ public struct SubscriptionApp: View {
                     action: \.departmentEditor
                 ) {
                     DepartmentEditor(store: store)
-                        .navigationTitle("Department Editor")
                 }
             }
         }

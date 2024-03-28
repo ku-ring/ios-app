@@ -129,6 +129,5 @@ public struct DepartmentEditor: View {
                 reducer: { DepartmentEditorFeature() }
             )
         )
-        .navigationTitle("Department Editor")
     }
 }
