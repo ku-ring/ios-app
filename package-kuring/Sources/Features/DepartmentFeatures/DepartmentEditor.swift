@@ -100,7 +100,7 @@ public struct DepartmentEditorFeature {
     @Dependency(\.departments) var departments
     private enum CancelID { case location }
     
-    private var engine: DepartmentSearchEngine = DepartmentSearchEngine()
+    private var engine: DepartmentSearchEngine = DepartmentSearchEngineImpl()
     
     public var body: some ReducerOf<Self> {
         BindingReducer()
@@ -190,10 +190,11 @@ public struct DepartmentEditorFeature {
             case let .searchQueryChanged(query):
                 state.searchText = query
 
-                guard state.searchText.isEmpty else {
-                    state.searchResults = engine.search(query, allDepartments: state.allDepartments)
-                    
-                    return .cancel(id: CancelID.location)
+                if !state.searchText.isEmpty {
+                    state.searchResults = engine.search(
+                        keyword: query,
+                        allDepartments: state.allDepartments
+                    )
                 }
                 return .none
 
@@ -215,80 +216,4 @@ public struct DepartmentEditorFeature {
     }
 
     public init() { }
-}
-
-struct DepartmentSearchEngine {
-    /// 한글
-    private var hangeul = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"]
-    
-    func search(_ text: String, allDepartments: IdentifiedArrayOf<NoticeProvider>) -> IdentifiedArrayOf<NoticeProvider> {
-        var filteredDepartments: IdentifiedArrayOf<NoticeProvider>
-        
-        if isChosung(text) {
-            let results = allDepartments.filter { department in
-                department.korName.contains(text) || searchChosung(department.korName).contains(text)
-            }
-            
-            filteredDepartments = results
-        } else {
-            var correctResults = allDepartments
-                .filter { $0.korName.contains(text) }
-                .compactMap { $0 }
-                .sorted { $0.korName < $1.korName }
-               
-            allDepartments.forEach { department in
-                var count = 0
-                var textChecker = Array(repeating: 0, count: text.count)
-                for alpha in department.korName {
-                    for (idx, value) in text.enumerated() {
-                        if value == alpha && textChecker[idx] == 0 {
-                            textChecker[idx] = 1
-                            count += 1
-                            break
-                        }
-                    }
-                    
-                }
-                if count == text.count && !correctResults.contains(department) {
-                    correctResults.append(department)
-                }
-            }
-            filteredDepartments = IdentifiedArray(correctResults)
-        }
-        
-        return filteredDepartments
-    }
-    
-    /// 해당 keyword가 초성문자인지 검사
-    private func isChosung(_ keyword: String) -> Bool {
-        var result = false
-        
-        for char in keyword {
-            if 0 < hangeul.filter({ $0.contains(char) }).count {
-                result = true
-            } else {
-                result = false
-                break
-            }
-        }
-        
-        return result
-    }
-    
-    /// 초성 검색
-    private func searchChosung(_ keyword: String) -> String {
-        var result = ""
-        
-        for char in keyword {
-            // unicodeScalars: 유니코드 스칼라 값의 모음으로 표현되는 문자열 값
-            let octal = char.unicodeScalars[char.unicodeScalars.startIndex].value
-            
-            // ~=: 왼쪽에서 정의한 범위 값 안에 오른쪽의 값이 속하면 true, 아니면 false 반환
-            if 44032...55203 ~= octal {
-                let index = (octal - 0xac00) / 28 / 21
-                result = result + hangeul[Int(index)]
-            }
-        }
-        return result
-    }
 }
