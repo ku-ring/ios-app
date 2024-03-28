@@ -16,7 +16,6 @@ public struct NoticeDetailView: View {
     
     public var body: some View {
         WebView(urlString: store.notice.url)
-            .activitySheet($store.shareItem)
             .background(Color.Kuring.bg)
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -35,9 +34,9 @@ public struct NoticeDetailView: View {
                         )
                     }
                     
-                    Button {
-                        self.store.send(.shareButtonTapped)
-                    } label: {
+                    ShareLink(
+                        item: store.notice.url
+                    ) {
                         Image(systemName: "square.and.arrow.up")
                     }
                 }

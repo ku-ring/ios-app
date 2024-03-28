@@ -15,7 +15,6 @@ public struct NoticeDetailFeature {
     public struct State: Equatable {
         public var notice: Notice
         public var isBookmarked: Bool = false
-        public var shareItem: ActivityItem? = nil
 
         public init(notice: Notice, isBookmarked: Bool? = nil) {
             @Dependency(\.bookmarks) var bookmarks
@@ -34,7 +33,6 @@ public struct NoticeDetailFeature {
 
     public enum Action: BindableAction, Equatable {
         case bookmarkButtonTapped
-        case shareButtonTapped
         
         case binding(BindingAction<State>)
 
@@ -53,12 +51,6 @@ public struct NoticeDetailFeature {
                 
             case .bookmarkButtonTapped:
                 state.isBookmarked.toggle()
-                return .none
-                
-            case .shareButtonTapped:
-                state.shareItem = ActivityItem(
-                    items: state.notice.url
-                )
                 return .none
                 
             case .delegate:

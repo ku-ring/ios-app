@@ -78,7 +78,6 @@ public struct NoticeApp: View {
             case .departmentEditor:
                 if let store = store.scope(state: \.departmentEditor, action: \.departmentEditor) {
                     DepartmentEditor(store: store)
-                        .navigationTitle("Department Editor")
                 }
             }
         }
