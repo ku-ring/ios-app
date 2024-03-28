@@ -128,7 +128,9 @@ let package = Package(
                 "DepartmentUI",
                 "Networks",
                 "ColorSet",
+                "Caches",
                 .product(name: "Lottie", package: "lottie-spm"),
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ],
             path: "Sources/UIKit/OnboardingUI",
             resources: [.process("Resources")]

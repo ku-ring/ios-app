@@ -5,7 +5,6 @@
 
 import Foundation
 import OrderedCollections
-import Dependencies
 
 /// 공지 제공자 카테고리
 public enum NoticeType: String, Codable, Hashable, CaseIterable, Identifiable, Equatable {

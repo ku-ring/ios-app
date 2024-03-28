@@ -66,7 +66,7 @@ extension Departments {
             Self.selections
             
         }, getCurrent: {
-            Self.current
+            Self.current ?? Self.selections.first
             
         }, changeCurrent: { noticeProvider in
             Self.current = noticeProvider
