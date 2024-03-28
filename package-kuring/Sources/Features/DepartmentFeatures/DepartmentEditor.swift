@@ -51,7 +51,7 @@ public struct DepartmentEditorFeature {
             @Dependency(\.departments) var departments
             
             self.myDepartments = IdentifiedArrayOf(uniqueElements: departments.getAll())
-            self.searchResults = results
+            self.searchResults = []
             self.allDepartments = results
             self.searchText = searchText
             self.focus = focus
