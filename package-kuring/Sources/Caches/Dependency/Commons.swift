@@ -14,7 +14,7 @@ public struct Commons {
     /// 현재 앱 버전
     public var appVersion: () -> String
     /// 온보딩을 완료했는지 여부
-    public var isCompleteOnboarding: () -> Bool
+    public var isOnboardingCompleted: () -> Bool
     /// 온보딩을 완료한 상태로 변경
     public var completeOnboarding: () -> Void
     
@@ -49,7 +49,7 @@ extension Commons {
             let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
             return appVersion as? String ?? "0.0.0"
             
-        }, isCompleteOnboarding: {
+        }, isOnboardingCompleted: {
             Self.isOnboardingCompleted
             
         }, completeOnboarding: {
