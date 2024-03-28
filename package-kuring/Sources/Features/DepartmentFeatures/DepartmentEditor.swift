@@ -98,7 +98,6 @@ public struct DepartmentEditorFeature {
     }
 
     @Dependency(\.departments) var departments
-    private enum CancelID { case location }
     
     private var engine: DepartmentSearchEngine = DepartmentSearchEngineImpl()
     
