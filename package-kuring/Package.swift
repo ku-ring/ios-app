@@ -109,6 +109,7 @@ let package = Package(
         .target(
             name: "CampusUI",
             dependencies: [
+                "ColorSet",
                 .product(name: "KuringMapsUI", package: "ios-maps")
             ],
             path: "Sources/UIKit/CampusUI",
