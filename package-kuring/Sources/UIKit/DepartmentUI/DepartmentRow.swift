@@ -40,7 +40,7 @@ public struct DepartmentRow: View {
                     .foregroundStyle(
                         isSelected
                         ? Color.Kuring.primary
-                        : Color.Kuring.gray400
+                        : Color.Kuring.gray200
                     )
                 }
             }
