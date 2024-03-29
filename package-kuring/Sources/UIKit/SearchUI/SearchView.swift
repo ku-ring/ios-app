@@ -33,7 +33,7 @@ public struct SearchView: View {
                     .frame(width: 16, height: 16)
                     .foregroundStyle(Color.Kuring.gray300)
                 
-                TextField("검색어를 입력해주세요", text: $store.searchInfo.text)
+                TextField("공지 제목 또는 교수명을 입력해주세요.", text: $store.searchInfo.text)
                     .focused($focus, equals: .search)
                     .autocorrectionDisabled()
                     .onSubmit { store.send(.search) }

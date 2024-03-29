@@ -11,9 +11,13 @@ import ComposableArchitecture
 public struct DepartmentEditorFeature {
     @ObservableState
     public struct State: Equatable {
+        /// 내가 선택한 학과
         public var myDepartments: IdentifiedArrayOf<NoticeProvider>
-        public var results: IdentifiedArrayOf<NoticeProvider>
-
+        /// 모든학과
+        public var allDepartments: IdentifiedArrayOf<NoticeProvider>
+        /// 검색결과
+        public var searchResults: IdentifiedArrayOf<NoticeProvider>
+        
         public var searchText: String
         public var focus: Field?
 
@@ -47,7 +51,8 @@ public struct DepartmentEditorFeature {
             @Dependency(\.departments) var departments
             
             self.myDepartments = IdentifiedArrayOf(uniqueElements: departments.getAll())
-            self.results = results
+            self.searchResults = []
+            self.allDepartments = results
             self.searchText = searchText
             self.focus = focus
             self.displayOption = displayOption
@@ -68,6 +73,9 @@ public struct DepartmentEditorFeature {
         case deleteAllMyDepartmentButtonTapped
         /// 텍스트 필드의 xmark를 눌렀을 때
         case clearTextFieldButtonTapped
+        
+        /// 검색 문자열 변경
+        case searchQueryChanged(String)
 
         /// 알림 관련 액션
         case alert(PresentationAction<Alert>)
@@ -91,6 +99,8 @@ public struct DepartmentEditorFeature {
 
     @Dependency(\.departments) var departments
     
+    private var engine: DepartmentSearchEngine = DepartmentSearchEngineImpl()
+    
     public var body: some ReducerOf<Self> {
         BindingReducer()
 
@@ -100,7 +110,7 @@ public struct DepartmentEditorFeature {
                 return .none
 
             case let .addDepartmentButtonTapped(id: id):
-                guard let department = state.results.first(where: { $0.id == id }) else {
+                guard let department = state.searchResults.first(where: { $0.id == id }) else {
                     return .none
                 }
                 guard !state.myDepartments.contains(department) else {
@@ -174,6 +184,17 @@ public struct DepartmentEditorFeature {
                     departments.removeAll()
                 }
                 NoticeProvider.addedDepartments = state.myDepartments.elements
+                return .none
+                
+            case let .searchQueryChanged(query):
+                state.searchText = query
+
+                if !state.searchText.isEmpty {
+                    state.searchResults = engine.search(
+                        keyword: query,
+                        allDepartments: state.allDepartments
+                    )
+                }
                 return .none
 
             case .alert(.dismiss):

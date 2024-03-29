@@ -27,10 +27,13 @@ public struct DepartmentEditor: View {
                     .frame(width: 16, height: 16)
                     .foregroundStyle(Color.Kuring.gray400)
 
-                TextField("추가할 학과를 검색해 주세요", text: $store.searchText)
-                    .focused($focus, equals: .search)
-                    .autocorrectionDisabled()
-                    .bind($store.focus, to: self.$focus)
+                TextField(
+                    "추가할 학과를 검색해 주세요",
+                    text: $store.searchText.sending(\.searchQueryChanged)
+                )
+                .focused($focus, equals: .search)
+                .autocorrectionDisabled()
+                .bind($store.focus, to: self.$focus)
 
                 if !store.searchText.isEmpty {
                     Image(systemName: "xmark")
@@ -69,7 +72,7 @@ public struct DepartmentEditor: View {
             } else {
                 // 검색결과
                 ScrollView {
-                    ForEach(store.results) { result in
+                    ForEach(store.searchResults) { result in
                         DepartmentRow(
                             department: result,
                             style: .radio(store.myDepartments.contains(result))
@@ -129,6 +132,5 @@ public struct DepartmentEditor: View {
                 reducer: { DepartmentEditorFeature() }
             )
         )
-        .navigationTitle("Department Editor")
     }
 }
