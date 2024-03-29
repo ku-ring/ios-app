@@ -11,12 +11,24 @@ struct KuringLinkFetcher: ViewModifier {
     @State private var showsNetworkError: Bool = false
     @Dependency(\.kuringLink) private var kuringLink
     
+    @AppStorage("com.kuring.sdk.token.fcm")
+    var fcmToken: String = ""
+    
     let onRequest: () -> Void
     let onCompletion: (Result<Void, Error>) -> Void
     
     func body(content: Content) -> some View {
         content
-            .task { await request() }
+            .task {
+                guard !fcmToken.isEmpty else { return }
+                await request()
+            }
+            .onChange(of: fcmToken) { oldValue, newValue in
+                // 앱 설치 초기에 뒤늦게 FCM 토큰을 발급 받는 경우
+                guard oldValue.isEmpty else { return }
+                guard !newValue.isEmpty else { return }
+                Task { await request() }
+            }
             .alert("앗! 인터넷 연결이 좋지 않아요!", isPresented: $showsNetworkError) {
                 // 무시
                 Button(role: .cancel) {
@@ -39,11 +51,11 @@ struct KuringLinkFetcher: ViewModifier {
             
             async let subscribedDepartments = try kuringLink.getSubscribedDepartments()
             async let subscribedUnivNotices = try kuringLink.getSubscribedUnivNotices()
-            let _ = try await [subscribedDepartments, subscribedUnivNotices]
+            let _ = try? await [subscribedDepartments, subscribedUnivNotices]
             onCompletion(.success(()))
         } catch {
-            showsNetworkError = true
             onCompletion(.failure(error))
+            showsNetworkError = true
         }
     }
 }
