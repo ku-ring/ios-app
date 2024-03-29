@@ -101,7 +101,7 @@ struct KuringApp: App {
                     .kuringLink(
                         onRequest: { },
                         onCompletion: { result in
-                            showsOnboarding = !commons.isCompleteOnboarding()
+                            showsOnboarding = !commons.isOnboardingCompleted()
                             if !showsOnboarding {
                                 completesLink = true
                             }
