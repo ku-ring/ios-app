@@ -4,10 +4,23 @@
 //
 
 import SwiftUI
+import ColorSet
 import KuringMapsUI
 
 public struct CampusApp: View {
-    private let appearance = Appearance()
+    private let appearance = Appearance(
+        tint: Color.Kuring.primary,
+        primary: Color.Kuring.body,
+        secondary: Color.Kuring.caption1,
+        background: Color.Kuring.bg,
+        secondaryBackground: Color.Kuring.gray100,
+        link: Color.Kuring.primary,
+        body: .system(size: 16),
+        title: .system(size: 20),
+        subtitle: .system(size: 16),
+        footnote: .system(size: 14),
+        caption: .system(size: 12)
+    )
     
     private var linkHost: String {
         guard let plistURL = Bundle.module.url(forResource: "KuringMaps-Info", withExtension: "plist") else {
