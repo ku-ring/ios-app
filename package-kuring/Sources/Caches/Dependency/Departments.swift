@@ -44,6 +44,9 @@ extension Departments {
                 current = departments.first
             }
             
+            @Dependency(\.subscriptions) var subscriptions
+            subscriptions.add(noticeProvider)
+            
             departments.append(noticeProvider)
             Self.selections = departments
             
@@ -51,6 +54,8 @@ extension Departments {
             var departments = Self.selections
             
             Self.selections.removeAll { $0.id == id }
+            @Dependency(\.subscriptions) var subscriptions
+            subscriptions.remove(id)
             
             if Self.current?.id == id {
 //                삭제한 학과가 현재 선택한 학과일 경우 새로운 학과 정보로 업데이트

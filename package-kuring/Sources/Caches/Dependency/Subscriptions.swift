@@ -8,6 +8,10 @@ import Foundation
 import Dependencies
 
 public struct KuringSubscriptions {
+    /// 구독한 공지 리스트에 추가
+    public var add: (_ noticeProvider: NoticeProvider) -> Void
+    /// 구독한 공지 리스트에서 삭제
+    public var remove: (_ id: String) -> Void
     /// 구독한 공지 리스트 업데이트
     public var update: (_ noticeProvider: Set<NoticeProvider>) -> Void
     /// 구독한 모든 공지 카테고리
@@ -28,7 +32,12 @@ public struct KuringSubscriptions {
 
 extension KuringSubscriptions {
     public static let `default` = Self(
-        update: { noticeProviders in
+        add: { noticeProvider in
+            var subscriptions = Self.subscriptions
+            subscriptions.insert(noticeProvider)
+            Self.subscriptions = subscriptions
+            
+        }, update: { noticeProviders in
             Self.subscriptions = noticeProviders
             
         }, getAll: {
