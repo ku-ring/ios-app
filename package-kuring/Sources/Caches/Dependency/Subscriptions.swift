@@ -37,6 +37,8 @@ extension KuringSubscriptions {
             subscriptions.insert(noticeProvider)
             Self.subscriptions = subscriptions
             
+        }, remove: { _ in
+           // !!!: - 구현 방식에 대한 고민
         }, update: { noticeProviders in
             Self.subscriptions = noticeProviders
             
