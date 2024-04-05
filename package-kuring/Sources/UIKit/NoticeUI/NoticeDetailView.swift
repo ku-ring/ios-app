@@ -14,13 +14,18 @@ import ComposableArchitecture
 public struct NoticeDetailView: View {
     @Bindable var store: StoreOf<NoticeDetailFeature>
     
+    var noticeProvider: NoticeProvider? {
+        NoticeProvider.univNoticeTypes.first { $0.name == store.notice.category }
+        ?? NoticeProvider.departments.first { $0.name == store.notice.category }
+    }
+    
     public var body: some View {
         WebView(urlString: store.notice.url)
             .background(Color.Kuring.bg)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(store.notice.subject)
-                        .font(.system(size: 12))
+                    Text(noticeProvider?.korName ?? "")
                 }
                 
                 ToolbarItemGroup(placement: .topBarTrailing) {
@@ -56,6 +61,5 @@ public struct NoticeDetailView: View {
                 reducer: { NoticeDetailFeature() }
             )
         )
-        .navigationTitle("Notice Detail View")
     }
 }
