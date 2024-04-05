@@ -110,11 +110,11 @@ extension Notice.DecodingError: LocalizedError {
 extension Notice {
     public static var random: Notice {
         Notice(
-            articleId: "5b4924e",
-            postedDate: "20211109",
-            subject: "교내 출입문 3곳(상허문, 일감문, 건국문) 차량 통제 안내 - 2022학년도 수시모집 논술고사일 - ",
-            url: "https://www.konkuk.ac.kr/do/MessageBoard/ArticleRead.do?id=5b4924e",
-            category: "normal",
+            articleId: "5389",
+            postedDate: "2024-02-21",
+            subject: "2024학년도 신입생 입학식 개최 안내",
+            url: "https://www.konkuk.ac.kr/bbs/konkuk/234/5389/artclView.do",
+            category: "bachelor",
             important: false
         )
     }
