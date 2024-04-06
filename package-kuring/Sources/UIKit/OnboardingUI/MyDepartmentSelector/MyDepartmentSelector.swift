@@ -7,12 +7,17 @@ import Caches
 import Models
 import SwiftUI
 import ColorSet
+import Networks
 import Dependencies
 
 struct MyDepartmentSelector: View {
     @Environment(\.dismiss) private var dismiss
     @State private var currentStep: Step.ID = .searchDepartment.id
     @State private var selectedDepartment: NoticeProvider? = nil
+    
+    @Dependency(\.kuringLink) var kuringLink
+    @Dependency(\.departments) var departments
+    @Dependency(\.subscriptions) var subscriptions
     
     var body: some View {
         VStack {
@@ -35,10 +40,19 @@ struct MyDepartmentSelector: View {
             if currentStep == .selectDepartment {
                 Button(StringSet.button_complete.rawValue) {
                     if let selectedDepartment {
-                        @Dependency(\.departments) var departments
+                        // 로컬 저장소에 학과 추가
                         NoticeProvider.addedDepartments.append(selectedDepartment)
                         departments.add(selectedDepartment)
+                        
+                        Task(priority: .background) {
+                            // 추가한 학과 구독, 단 api 성공시에만 구독정보 저장
+                            do {
+                                try await kuringLink.subscribeDepartments([selectedDepartment.hostPrefix])
+                                subscriptions.add(selectedDepartment)
+                            }
+                        }
                     }
+                    
                     currentStep = .addedDepartment.id
                 }
                 .buttonStyle(.kuringStyle())
