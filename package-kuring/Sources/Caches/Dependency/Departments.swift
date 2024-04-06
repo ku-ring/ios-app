@@ -43,10 +43,6 @@ extension Departments {
                 // 학과 추가시 학과가 0개인 경우에는 current를 처음 학과로 설정
                 current = departments.first
             }
-            
-            @Dependency(\.subscriptions) var subscriptions
-            subscriptions.add(noticeProvider)
-            
             departments.append(noticeProvider)
             Self.selections = departments
             
