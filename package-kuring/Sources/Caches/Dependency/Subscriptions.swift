@@ -8,10 +8,8 @@ import Foundation
 import Dependencies
 
 public struct KuringSubscriptions {
-    /// 구독한 공지 리스트에 추가
+    /// 구독한 공지 리스트에 단일 객체 추가
     public var add: (_ noticeProvider: NoticeProvider) -> Void
-    /// 구독한 공지 리스트에서 삭제
-    public var remove: (_ id: String) -> Void
     /// 구독한 공지 리스트 업데이트
     public var update: (_ noticeProvider: Set<NoticeProvider>) -> Void
     /// 구독한 모든 공지 카테고리
@@ -37,8 +35,6 @@ extension KuringSubscriptions {
             subscriptions.insert(noticeProvider)
             Self.subscriptions = subscriptions
             
-        }, remove: { _ in
-           // !!!: - 구현 방식에 대한 고민
         }, update: { noticeProviders in
             Self.subscriptions = noticeProviders
             
