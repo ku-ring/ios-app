@@ -40,10 +40,9 @@ extension Departments {
             var departments = Self.selections
 
             if departments.isEmpty {
-//                학과 추가시 학과가 0개인 경우에는 current를 처음 학과로 설정
+                // 학과 추가시 학과가 0개인 경우에는 current를 처음 학과로 설정
                 current = departments.first
             }
-            
             departments.append(noticeProvider)
             Self.selections = departments
             
@@ -51,9 +50,9 @@ extension Departments {
             var departments = Self.selections
             
             Self.selections.removeAll { $0.id == id }
-            
+
             if Self.current?.id == id {
-//                삭제한 학과가 현재 선택한 학과일 경우 새로운 학과 정보로 업데이트
+                // 삭제한 학과가 현재 선택한 학과일 경우 새로운 학과 정보로 업데이트
                 Self.current = nil
                 Self.current = Self.selections.first
             }
