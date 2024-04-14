@@ -57,6 +57,7 @@ struct NoticeList: View {
                         
                         Divider()
                             .frame(height: 0.25)
+                            .padding(.horizontal, 20)
                     }
                 }
                 .listRowSeparator(.hidden)
