@@ -6,6 +6,7 @@
 import Models
 import SwiftUI
 import ColorSet
+import Dependencies
 import DepartmentFeatures
 
 public struct DepartmentRow: View {
@@ -17,10 +18,16 @@ public struct DepartmentRow: View {
         case delete
         case radio(Bool)
     }
+    
+    @Dependency(\.departments) var departments
 
     public var body: some View {
         HStack(alignment: .center) {
             Text(department.korName)
+            
+            if departments.getCurrent()?.id == department.id {
+                representChip
+            }
 
             Spacer()
 
@@ -53,6 +60,17 @@ public struct DepartmentRow: View {
         self.department = department
         self.style = style
         self.action = action
+    }
+    
+    /// 대표 학과 여부를 나타내는 칩
+    private var representChip: some View {
+        Text("대표")
+            .font(.system(size: 12, weight: .semibold))
+            .foregroundStyle(Color.Kuring.primary)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 2)
+            .background(Color.Kuring.primarySelected)
+            .clipShape(Capsule())
     }
 }
 
