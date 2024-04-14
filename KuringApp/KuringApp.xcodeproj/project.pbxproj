@@ -81,7 +81,6 @@
 		A9DAFA472AB1F04B0064F748 = {
 			isa = PBXGroup;
 			children = (
-				1A0C8B412BCA5BB400B314C7 /* PrivacyInfo.xcprivacy */,
 				A9DAFA522AB1F04B0064F748 /* KuringApp */,
 				CA52DF302AD58DF2009B9272 /* KuringAppTests */,
 				A9DAFA512AB1F04B0064F748 /* Products */,
@@ -101,6 +100,7 @@
 		A9DAFA522AB1F04B0064F748 /* KuringApp */ = {
 			isa = PBXGroup;
 			children = (
+				1A0C8B412BCA5BB400B314C7 /* PrivacyInfo.xcprivacy */,
 				CACC2F4B2B7E638C003142E2 /* KuringApp.entitlements */,
 				DF062D4A2AC87B6D00FC48C0 /* Info.plist */,
 				DFE7AB132AC332D200230934 /* Setting */,
