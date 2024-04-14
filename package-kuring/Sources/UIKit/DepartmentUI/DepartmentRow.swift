@@ -26,7 +26,7 @@ public struct DepartmentRow: View {
             Text(department.korName)
             
             if departments.getCurrent()?.id == department.id {
-                RepresentDepartmentMark
+                RepresentativeDepartmentChip
             }
 
             Spacer()
@@ -63,7 +63,7 @@ public struct DepartmentRow: View {
     }
     
     /// 대표 학과 여부를 나타내는 칩
-    private var RepresentDepartmentMark: some View {
+    private var RepresentativeDepartmentChip: some View {
         Text("대표")
             .font(.system(size: 12, weight: .semibold))
             .foregroundStyle(Color.Kuring.primary)
