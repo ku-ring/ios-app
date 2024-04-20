@@ -5,7 +5,7 @@
 
 import Foundation
 
-/// 계정 정보
+/// 계정 정보 요청 Request 모델
 public struct AuthRequest: Encodable {
     public let token: String
 
