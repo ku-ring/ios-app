@@ -35,7 +35,12 @@ struct MyDepartmentSelector: View {
                     .tag(Step.addedDepartment.id)
             }
             .padding(.top, 56)
-            
+            .onAppear {
+                Task {
+                    let result = try? await kuringLink.registerAuthorization()
+                    print("☺️ result \(result)")
+                }
+            }
             // 하단 버튼 영역
             if currentStep == .selectDepartment {
                 Button(StringSet.button_complete.rawValue) {

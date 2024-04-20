@@ -16,6 +16,7 @@ enum Path {
     case searchNotices
     case searchStaffs
     case sendFeedback
+    case registerAuthorization
 
     var path: String {
         switch self {
@@ -39,6 +40,8 @@ enum Path {
             return "api/v2/staffs/search"
         case .sendFeedback:
             return "api/v2/users/feedbacks"
+        case .registerAuthorization:
+            return "api/v2/users"
         }
     }
 }

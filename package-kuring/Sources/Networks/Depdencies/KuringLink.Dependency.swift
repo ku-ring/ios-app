@@ -204,6 +204,18 @@ extension KuringLink: DependencyKey {
                     )
                 }
             return NoticeProvider.departments
+        }, registerAuthorization: {
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.registerAuthorization.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                    ],
+                    httpBody: Auth(fcmToken: fcmToken)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
         }
     )
 }
@@ -289,6 +301,8 @@ extension KuringLink {
                     category: .학과
                 )
             ]
+        }, registerAuthorization: {
+            return true
         }
     )
 }
