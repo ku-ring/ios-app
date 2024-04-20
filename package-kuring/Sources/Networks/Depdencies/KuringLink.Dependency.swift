@@ -212,7 +212,7 @@ extension KuringLink: DependencyKey {
                     httpHeaders: [
                         "Content-Type": "application/json",
                     ],
-                    httpBody: AuthRequest(fcmToken: fcmToken)
+                    httpBody: AuthRequest(token: fcmToken)
                 )
             let isSucceed = (200 ..< 300) ~= response.code
             return isSucceed

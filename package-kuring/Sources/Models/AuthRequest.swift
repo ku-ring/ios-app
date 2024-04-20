@@ -9,7 +9,7 @@ import Foundation
 public struct AuthRequest: Encodable {
     public let token: String
 
-    public init(fcmToken: String) {
-        self.token = fcmToken
+    public init(token: String) {
+        self.token = token
     }
 }
