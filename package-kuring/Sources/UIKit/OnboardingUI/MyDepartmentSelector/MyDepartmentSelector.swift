@@ -37,7 +37,7 @@ struct MyDepartmentSelector: View {
             .padding(.top, 56)
             .onAppear {
                 Task {
-                    let result = try? await kuringLink.registerAuthorization()
+                    try? await kuringLink.registerAuthorization()
                 }
             }
             // 하단 버튼 영역
