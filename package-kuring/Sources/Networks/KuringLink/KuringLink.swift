@@ -73,4 +73,6 @@ public struct KuringLink {
     public var getAllUnivNoticeType: () async throws -> [NoticeProvider]
     /// 모든 학과 공지 카테고리 가져오기
     public var getAllDepartments: () async throws -> [NoticeProvider]
+    /// 계정 정보 등록
+    public var registerAuthorization: () async throws -> Bool
 }
