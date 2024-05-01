@@ -219,8 +219,8 @@ let package = Package(
             dependencies: [
                 "Models",
                 "Networks",
-                "Dependencies",
-                .product(name: "FirebaseMessaging", package: "firebase-ios-sdk")
+                .product(name: "FirebaseMessaging", package: "firebase-ios-sdk"),
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]
         ),
         
