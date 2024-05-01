@@ -218,6 +218,8 @@ let package = Package(
             name: "PushNotifications",
             dependencies: [
                 "Models",
+                "Networks",
+                "Dependencies",
                 .product(name: "FirebaseMessaging", package: "firebase-ios-sdk")
             ]
         ),
