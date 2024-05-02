@@ -8,10 +8,10 @@ import Dependencies
 
 public enum KuringIcon: String, CaseIterable, Identifiable, Equatable {
     public var id: String { rawValue }
-    case kuring_app
-    case kuring_app_classic
-    case kuring_app_blueprint
-    case kuring_app_sketch
+    case kuring_app = "AppIcon-kuring-app"
+    case kuring_app_classic = "AppIcon-kuring-app-classic"
+    case kuring_app_blueprint = "AppIcon-kuring-app-blueprint"
+    case kuring_app_sketch = "AppIcon-kuring-app-sketch"
 
     public var korValue: String {
         switch self {
