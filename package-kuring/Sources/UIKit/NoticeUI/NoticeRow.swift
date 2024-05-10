@@ -133,7 +133,7 @@ public struct NoticeRow: View {
 
     private var dateView: some View {
         // TODO: - 정보 재구성
-        Text(notice.postedDate)
+        Text(separateWithDot(notice.postedDate))
             .font(.system(size: 14))
             .foregroundStyle(Color.Kuring.caption1)
     }
@@ -153,6 +153,10 @@ public struct NoticeRow: View {
                 .blendMode(.destinationOut)
         }
         .compositingGroup()
+    }
+    
+    private func separateWithDot(_ value: String) -> String {
+        return value.replacingOccurrences(of: "-", with: ".")
     }
 }
 
