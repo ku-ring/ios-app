@@ -57,20 +57,27 @@ public struct NoticeRow: View {
 
             switch rowType {
             case .importantAndBookmark:
-                VStack(alignment: .leading, spacing: 4) {
-                    HStack(alignment: .top) {
-                        VStack {
+                ZStack {
+                    HStack(alignment: .top, spacing: 0) {
+                        VStack(alignment: .leading, spacing: 4) {
                             importantTagView
-                                .padding(.top, 12)
+                            titleView
+                            dateView
                         }
                         Spacer()
-                        bookmarkView
                     }
-                    titleView
-                    dateView
+                    .padding(.top, 13)
+                    
+                    VStack {
+                        HStack {
+                            Spacer()
+                            bookmarkView
+                        }
+                        Spacer()
+                    }
                 }
                 .padding(.horizontal, 20)
-                .padding(.bottom, 12)
+                .padding(.bottom, 16)
             case .important:
                 HStack(alignment: .top, spacing: 0) {
                     VStack(alignment: .leading, spacing: 4) {
@@ -81,21 +88,29 @@ public struct NoticeRow: View {
                     Spacer()
                 }
                 .padding(.horizontal, 20)
-                .padding(.vertical, 12)
+                .padding(.top, 13)
+                .padding(.bottom, 16)
             case .bookmark:
-                VStack(alignment: .leading, spacing: 4) {
+                ZStack {
                     HStack(alignment: .top, spacing: 0) {
-                        VStack {
+                        VStack(alignment: .leading, spacing: 4) {
                             titleView
-                                .padding(.top, 12)
+                            dateView
                         }
                         Spacer()
-                        bookmarkView
                     }
-                    dateView
+                    .padding(.top, 16)
+                    
+                    VStack {
+                        HStack {
+                            Spacer()
+                            bookmarkView
+                        }
+                        Spacer()
+                    }
                 }
                 .padding(.horizontal, 20)
-                .padding(.bottom, 12)
+                .padding(.bottom, 16)
             case .none:
                 HStack(alignment: .top, spacing: 0) {
                     VStack(alignment: .leading, spacing: 4) {
@@ -105,7 +120,7 @@ public struct NoticeRow: View {
                     Spacer()
                 }
                 .padding(.horizontal, 20)
-                .padding(.vertical, 12)
+                .padding(.vertical, 16)
             }
         }
     }
@@ -114,7 +129,8 @@ public struct NoticeRow: View {
         Text("중요")
             .font(.system(size: 12, weight: .semibold))
             .padding(.horizontal, 8)
-            .padding(.vertical, 4)
+            .padding(.top, 4)
+            .padding(.bottom, 6)
             .foregroundStyle(Color.Kuring.primary)
             .background(.clear)
             .cornerRadius(16)
@@ -129,6 +145,7 @@ public struct NoticeRow: View {
         Text(notice.subject)
             .font(.system(size: 15, weight: .medium))
             .foregroundStyle(Color.Kuring.body)
+            .lineSpacing(7)
     }
 
     private var dateView: some View {
@@ -136,6 +153,7 @@ public struct NoticeRow: View {
         Text(separateWithDot(notice.postedDate))
             .font(.system(size: 14))
             .foregroundStyle(Color.Kuring.caption1)
+            .padding(.top, 4)
     }
 
     private var bookmarkView: some View {
@@ -162,13 +180,13 @@ public struct NoticeRow: View {
 
 #Preview {
     List {
-        NoticeRow(notice: .random)
-            .listRowInsets(EdgeInsets())
         NoticeRow(notice: .random, rowType: .important)
             .listRowInsets(EdgeInsets())
-        NoticeRow(notice: .random)
+        NoticeRow(notice: .random, bookmarked: true, rowType: .importantAndBookmark)
             .listRowInsets(EdgeInsets())
         NoticeRow(notice: .random)
+            .listRowInsets(EdgeInsets())
+        NoticeRow(notice: .random, bookmarked: true)
             .listRowInsets(EdgeInsets())
     }
     .listStyle(.plain)
