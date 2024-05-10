@@ -116,7 +116,7 @@ public struct NoticeRow: View {
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
             .foregroundStyle(Color.Kuring.primary)
-            .background(Color.Kuring.bg)
+            .background(.clear)
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
@@ -160,7 +160,7 @@ public struct NoticeRow: View {
     List {
         NoticeRow(notice: .random)
             .listRowInsets(EdgeInsets())
-        NoticeRow(notice: .random)
+        NoticeRow(notice: .random, rowType: .important)
             .listRowInsets(EdgeInsets())
         NoticeRow(notice: .random)
             .listRowInsets(EdgeInsets())
