@@ -33,6 +33,7 @@ struct ContentView: View {
                     reducer: { NoticeAppFeature()._printChanges() }
                 )
             )
+            .tag(TabBarItem.notice)
             .tabItem {
                 Image(selection == .notice ? .listFill : .list)
                 
@@ -47,6 +48,7 @@ struct ContentView: View {
                     reducer: { BookmarkAppFeature() }
                 )
             )
+            .tag(TabBarItem.archive)
             .tabItem {
                 Image(selection == .archive ? .archiveFill : .archive)
                 
@@ -54,6 +56,7 @@ struct ContentView: View {
             }
             
             CampusApp()
+                .tag(TabBarItem.campusMap)
                 .tabItem {
                     Image(selection == .campusMap ? .mapPinFill : .mapPin)
                     
@@ -66,6 +69,7 @@ struct ContentView: View {
                     reducer: { SettingsAppFeature() }
                 )
             )
+            .tag(TabBarItem.settings)
             .tabItem {
                 Image(selection == .settings ? .moreHorizontalFill : .moreHorizontal)
                 
@@ -73,10 +77,6 @@ struct ContentView: View {
             }
         }
         .tint(Color.black)
-        .onChange(of: selection) { _ , newValue in
-            print("🌱 newValue \(newValue)")
-            selection = newValue
-        }
     }
 }
 
