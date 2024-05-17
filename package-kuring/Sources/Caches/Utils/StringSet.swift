@@ -6,7 +6,7 @@
 import Foundation
 
 class StringSet {
-    static let baseString = "com.kuring.sdk"
+    static let baseString = "com.kuring.sdk.v2"
     
     static let appVersion = "\(baseString).version.app"
     

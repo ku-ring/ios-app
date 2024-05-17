@@ -16,10 +16,6 @@
 		CAE658662B3992A800CD8A63 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = CAE658652B3992A800CD8A63 /* App */; };
 		CAE94A9A2B5EA3B000F73A7E /* App in Frameworks */ = {isa = PBXBuildFile; productRef = CAE94A992B5EA3B000F73A7E /* App */; };
 		CAE94A9C2B5EA3B000F73A7E /* Labs in Frameworks */ = {isa = PBXBuildFile; productRef = CAE94A9B2B5EA3B000F73A7E /* Labs */; };
-		DF331DAB2AC917E100D0BB08 /* kuring_app.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA72AC917E000D0BB08 /* kuring_app.png */; };
-		DF331DAC2AC917E100D0BB08 /* kuring_app_classic.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */; };
-		DF331DAD2AC917E100D0BB08 /* kuring_app_sketch.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DA92AC917E000D0BB08 /* kuring_app_sketch.png */; };
-		DF331DAE2AC917E100D0BB08 /* kuring_app_blueprint.png in Resources */ = {isa = PBXBuildFile; fileRef = DF331DAA2AC917E000D0BB08 /* kuring_app_blueprint.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,10 +39,6 @@
 		CA52DF2F2AD58DF2009B9272 /* KuringAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KuringAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CACC2F4B2B7E638C003142E2 /* KuringApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KuringApp.entitlements; sourceTree = "<group>"; };
 		DF062D4A2AC87B6D00FC48C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		DF331DA72AC917E000D0BB08 /* kuring_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app.png; sourceTree = "<group>"; };
-		DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app_classic.png; sourceTree = "<group>"; };
-		DF331DA92AC917E000D0BB08 /* kuring_app_sketch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app_sketch.png; sourceTree = "<group>"; };
-		DF331DAA2AC917E000D0BB08 /* kuring_app_blueprint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuring_app_blueprint.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,21 +120,9 @@
 			path = KuringAppTests;
 			sourceTree = "<group>";
 		};
-		DF062D4B2AC8800000FC48C0 /* AppIcons */ = {
-			isa = PBXGroup;
-			children = (
-				DF331DAA2AC917E000D0BB08 /* kuring_app_blueprint.png */,
-				DF331DA82AC917E000D0BB08 /* kuring_app_classic.png */,
-				DF331DA92AC917E000D0BB08 /* kuring_app_sketch.png */,
-				DF331DA72AC917E000D0BB08 /* kuring_app.png */,
-			);
-			path = AppIcons;
-			sourceTree = "<group>";
-		};
 		DFE7AB132AC332D200230934 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				DF062D4B2AC8800000FC48C0 /* AppIcons */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -199,7 +179,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					A9DAFA4F2AB1F04B0064F748 = {
 						CreatedOnToolsVersion = 15.0;
@@ -237,11 +217,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF331DAD2AC917E100D0BB08 /* kuring_app_sketch.png in Resources */,
-				DF331DAE2AC917E100D0BB08 /* kuring_app_blueprint.png in Resources */,
 				A9DAFA5B2AB1F04C0064F748 /* Preview Assets.xcassets in Resources */,
-				DF331DAB2AC917E100D0BB08 /* kuring_app.png in Resources */,
-				DF331DAC2AC917E100D0BB08 /* kuring_app_classic.png in Resources */,
 				A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,6 +264,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon-kuring-app AppIcon-kuring-app-sketch AppIcon-kuring-app-classic AppIcon-kuring-app-blueprint";
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -351,6 +328,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon-kuring-app AppIcon-kuring-app-sketch AppIcon-kuring-app-classic AppIcon-kuring-app-blueprint";
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -406,13 +384,15 @@
 		A9DAFA5F2AB1F04C0064F748 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon-kuring-app.jpg AppIcon-kuring-app-classic AppIcon-kuring-app-sketch AppIcon-kuring-app-blueprint";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = KuringApp/KuringApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 202405151220;
 				DEVELOPMENT_ASSET_PATHS = "\"KuringApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 38PD5AHVVF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KuringApp/Info.plist;
@@ -439,13 +419,15 @@
 		A9DAFA602AB1F04C0064F748 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon-kuring-app.jpg AppIcon-kuring-app-classic AppIcon-kuring-app-sketch AppIcon-kuring-app-blueprint";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = KuringApp/KuringApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 202405151220;
 				DEVELOPMENT_ASSET_PATHS = "\"KuringApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 38PD5AHVVF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KuringApp/Info.plist;
@@ -475,6 +457,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -497,6 +480,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;

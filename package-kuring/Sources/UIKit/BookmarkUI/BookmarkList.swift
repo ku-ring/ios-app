@@ -21,57 +21,58 @@ public struct BookmarkList: View {
                 emptyBookmarkView
             } else {
                 List {
-                    ForEach(self.store.bookmarkedNotices, id: \.id) { notice in
-                        VStack(spacing: 0) {
-                            HStack(spacing: 0) {
-                                NoticeRow(
-                                    notice: notice,
-                                    bookmarked: true,
-                                    rowType: store.isEditing
-                                    ? NoticeRow.NoticeRowType.none
-                                    : nil
+                  ForEach(Array(self.store.bookmarkedNotices.enumerated()), id: \.element.id) { index, notice in
+                      VStack(spacing: 0) {
+                        HStack(spacing: 0) {
+                          NoticeRow(
+                            notice: notice,
+                            bookmarked: true,
+                            rowType: NoticeRow.NoticeRowType.none
+                          )
+                          .background {
+                            NavigationLink(
+                              state: BookmarkAppFeature.Path.State.detail(
+                                NoticeDetailFeature.State(
+                                  notice: notice,
+                                  isBookmarked: true
                                 )
-                                .background {
-                                    NavigationLink(
-                                        state: BookmarkAppFeature.Path.State.detail(
-                                            NoticeDetailFeature.State(
-                                                notice: notice,
-                                                isBookmarked: true
-                                            )
-                                        )
-                                    ) {
-                                        EmptyView()
-                                    }
-                                    .opacity(0)
-                                }
-                                .disabled(store.editMode != .none)
-                                
-                                if store.isEditing {
-                                    Button {
-                                        if store.selectedIDs.contains(notice.id) {
-                                            store.selectedIDs.remove(notice.id)
-                                        } else {
-                                            store.selectedIDs.insert(notice.id)
-                                        }
-                                    } label: {
-                                        Image(
-                                            systemName: store.selectedIDs.contains(notice.id)
-                                            ? "checkmark.circle.fill"
-                                            : "circle"
-                                        )
-                                        .foregroundStyle(
-                                            store.selectedIDs.contains(notice.id)
-                                            ? Color.Kuring.primary
-                                            : Color.Kuring.gray200
-                                        )
-                                    }
-                                    .padding(.trailing, 18)
-                                }
+                              )
+                            ) {
+                              EmptyView()
                             }
-                            
-                            Divider()
-                                .frame(height: 0.25)
+                            .opacity(0)
+                          }
+                          .disabled(store.editMode != .none)
+                          
+                          if store.isEditing {
+                            Button {
+                              if store.selectedIDs.contains(notice.id) {
+                                store.selectedIDs.remove(notice.id)
+                              } else {
+                                store.selectedIDs.insert(notice.id)
+                              }
+                            } label: {
+                              Image(
+                                systemName: store.selectedIDs.contains(notice.id)
+                                ? "checkmark.circle.fill"
+                                : "circle"
+                              )
+                              .foregroundStyle(
+                                store.selectedIDs.contains(notice.id)
+                                ? Color.Kuring.primary
+                                : Color.Kuring.gray200
+                              )
+                            }
+                            .padding(.trailing, 18)
+                          }
                         }
+                        if index < self.store.bookmarkedNotices.count - 1 {
+                          Divider()
+                            .frame(height: 0.20)
+                            .opacity(0.5)
+                            .padding(.horizontal, 20)
+                        }
+                      }
                     }
                     .listRowSeparator(.hidden)
                     .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))

@@ -218,7 +218,9 @@ let package = Package(
             name: "PushNotifications",
             dependencies: [
                 "Models",
-                .product(name: "FirebaseMessaging", package: "firebase-ios-sdk")
+                "Networks",
+                .product(name: "FirebaseMessaging", package: "firebase-ios-sdk"),
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]
         ),
         
