@@ -29,9 +29,12 @@ struct KuringLinkFetcher: ViewModifier {
                 Task { await request() }
                 
                 // 토큰 값이 다른 경우에만 해당 API 호출
-                Task(priority: .background) {
-                    try? await kuringLink.registerAuthorization()
+                if oldValue != newValue {
+                    Task(priority: .background) {
+                        try? await kuringLink.registerAuthorization()
+                    }
                 }
+                
             }
             .alert("앗! 인터넷 연결이 좋지 않아요!", isPresented: $showsNetworkError) {
                 // 무시
