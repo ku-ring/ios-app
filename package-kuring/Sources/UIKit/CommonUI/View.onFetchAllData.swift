@@ -11,7 +11,7 @@ struct KuringLinkFetcher: ViewModifier {
     @State private var showsNetworkError: Bool = false
     @Dependency(\.kuringLink) private var kuringLink
     
-    @AppStorage("com.kuring.sdk.token.fcm")
+    @AppStorage("com.kuring.sdk.token.fcm.v2")
     var fcmToken: String = ""
     
     let onRequest: () -> Void
@@ -25,9 +25,13 @@ struct KuringLinkFetcher: ViewModifier {
             }
             .onChange(of: fcmToken) { oldValue, newValue in
                 // 앱 설치 초기에 뒤늦게 FCM 토큰을 발급 받는 경우
-                guard oldValue.isEmpty else { return }
                 guard !newValue.isEmpty else { return }
                 Task { await request() }
+                
+                // 토큰 값이 다른 경우에만 해당 API 호출
+                Task(priority: .background) {
+                    try? await kuringLink.registerAuthorization()
+                }
             }
             .alert("앗! 인터넷 연결이 좋지 않아요!", isPresented: $showsNetworkError) {
                 // 무시

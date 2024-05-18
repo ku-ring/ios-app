@@ -19,12 +19,6 @@ extension Notifications: MessagingDelegate {
         
         if self.fcmToken != fcmToken {
             self.fcmToken = fcmToken
-            
-            // 토큰 값이 다른 경우에만 해당 API 호출
-            @Dependency(\.kuringLink) var kuringLink
-            Task(priority: .background) {
-                try? await kuringLink.registerAuthorization()
-            }
         }
     }
 }
