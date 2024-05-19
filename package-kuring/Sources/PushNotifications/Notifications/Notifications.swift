@@ -20,7 +20,7 @@ public class Notifications: NSObject, UIApplicationDelegate {
     @AppStorage("com.kuring.sdk.notification.custom")
     static var isCustomNotificationEnabled: Bool = true
     
-    @AppStorage("com.kuring.sdk.token.fcm")
+    @AppStorage("com.kuring.sdk.token.fcm.v2")
     var fcmToken: String = ""
     
     func onTapRemoteNotification(with userInfo: [String: Any]) throws {
