@@ -3,6 +3,16 @@
     {
       "filename" : "list-fill.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Exclude.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

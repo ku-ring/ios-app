@@ -3,6 +3,16 @@
     {
       "filename" : "map-pin-fill.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "map-pin-fill 1.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

@@ -3,6 +3,16 @@
     {
       "filename" : "more-horizontal.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "more-horizontal 1.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

@@ -3,6 +3,16 @@
     {
       "filename" : "archive-fill.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "archive-fill 1.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

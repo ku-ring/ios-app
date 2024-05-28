@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import ColorSet
 import CampusUI
 import NoticeUI
 import BookmarkUI
@@ -21,6 +22,10 @@ struct ContentView: View {
         case archive
         case campusMap
         case settings
+    }
+    
+    init() {
+        UITabBar.appearance().barTintColor = UIColor.init(Color.Kuring.bg)
     }
     
     var body: some View {
@@ -76,7 +81,7 @@ struct ContentView: View {
                 Text("더보기")
             }
         }
-        .tint(Color.black)
+        .tint(Color.Kuring.gray600)
     }
 }
 
