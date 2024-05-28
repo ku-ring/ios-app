@@ -12,7 +12,7 @@ import ComposableArchitecture
 public struct FeedbackFeature {
     @ObservableState
     public struct State: Equatable {
-        public let minLimit: Int = 4
+        public let minLimit: Int = 5
         public let maxLimit: Int = 256
         /// TextEditor 의 placeholder
         public let placeholder: String = "피드백을 남겨주세요."

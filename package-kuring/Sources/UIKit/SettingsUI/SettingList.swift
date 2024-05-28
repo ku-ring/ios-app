@@ -44,7 +44,7 @@ public struct SettingList: View {
                 HStack(spacing: 0) {
                     leadingItemView("icon_rocket", "앱 버전")
                     Spacer()
-                    Text("2.0.0")
+                    Text("2.0.3")
                         .font(.system(size: 16, weight: .medium))
                         .kerning(0.15)
                         .foregroundStyle(Color.Kuring.body)
@@ -85,7 +85,7 @@ public struct SettingList: View {
             } header: {
                 headerView("정보")
             } footer: {
-                Text("Designed by 이소영, 김예은.\nDeveloped by 이재성, 이건우, 박성수.\nManaged by 조병관, 채수빈")
+                Text("Designed by 김예은, 이소영.\nDeveloped by 박성수, 이건우, 최효원.\nManaged by 김병진, 조병관, 채수빈")
                     .font(.footnote)
                     .foregroundStyle(Color.Kuring.caption1)
             }
