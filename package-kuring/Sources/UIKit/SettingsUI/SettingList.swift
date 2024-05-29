@@ -39,6 +39,21 @@ public struct SettingList: View {
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Color.Kuring.bg)
+          
+          Section {
+              Button {
+                  store.send(.delegate(.showFeedback))
+              } label: {
+                  itemView("icon_feedback", "피드백 보내기")
+              }
+              
+              Divider()
+                  .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+          } header: {
+              headerView("피드백")
+          }
+          .listRowSeparator(.hidden)
+          .listRowBackground(Color.Kuring.bg)
             
             Section {
                 HStack(spacing: 0) {
@@ -137,20 +152,6 @@ public struct SettingList: View {
             .listRowSeparator(.hidden)
             .listRowBackground(Color.Kuring.bg)
             
-            Section {
-                Button {
-                    store.send(.delegate(.showFeedback))
-                } label: {
-                    itemView("icon_feedback", "피드백 보내기")
-                }
-                
-                Divider()
-                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-            } header: {
-                headerView("피드백")
-            }
-            .listRowSeparator(.hidden)
-            .listRowBackground(Color.Kuring.bg)
         }
         .listStyle(.plain)
         .background(Color.Kuring.bg)
