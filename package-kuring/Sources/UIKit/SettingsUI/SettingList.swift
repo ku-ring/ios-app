@@ -59,7 +59,8 @@ public struct SettingList: View {
                 HStack(spacing: 0) {
                     leadingItemView("icon_rocket", "앱 버전")
                     Spacer()
-                    Text("2.0.3")
+                    
+                    Text("2.0.5")
                         .font(.system(size: 16, weight: .medium))
                         .kerning(0.15)
                         .foregroundStyle(Color.Kuring.body)
