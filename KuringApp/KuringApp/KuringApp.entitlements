@@ -4,5 +4,9 @@
 <dict>
 	<key>aps-environment</key>
 	<string>production</string>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.kuring.service</string>
+	</array>
 </dict>
 </plist>
