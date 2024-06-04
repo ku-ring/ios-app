@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A61DE0B2C0F678A00E8E95E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A61DE0A2C0F678900E8E95E /* WidgetKit.framework */; };
+		1A61DE0D2C0F678A00E8E95E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A61DE0C2C0F678A00E8E95E /* SwiftUI.framework */; };
+		1A61DE102C0F678A00E8E95E /* KuringWidgetAppBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61DE0F2C0F678A00E8E95E /* KuringWidgetAppBundle.swift */; };
+		1A61DE122C0F678A00E8E95E /* KuringWidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61DE112C0F678A00E8E95E /* KuringWidgetApp.swift */; };
+		1A61DE142C0F678A00E8E95E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A61DE132C0F678A00E8E95E /* Assets.xcassets */; };
+		1A61DE182C0F678A00E8E95E /* KuringWidgetAppExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1A61DE092C0F678900E8E95E /* KuringWidgetAppExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A9DAFA542AB1F04B0064F748 /* KuringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA532AB1F04B0064F748 /* KuringApp.swift */; };
 		A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA552AB1F04B0064F748 /* ContentView.swift */; };
 		A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA572AB1F04C0064F748 /* Assets.xcassets */; };
@@ -19,6 +25,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1A61DE162C0F678A00E8E95E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9DAFA482AB1F04B0064F748 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1A61DE082C0F678900E8E95E;
+			remoteInfo = KuringWidgetAppExtension;
+		};
 		CA52DF332AD58DF2009B9272 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A9DAFA482AB1F04B0064F748 /* Project object */;
@@ -28,8 +41,29 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1A61DE192C0F678A00E8E95E /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				1A61DE182C0F678A00E8E95E /* KuringWidgetAppExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1A0C8B412BCA5BB400B314C7 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		1A61DE092C0F678900E8E95E /* KuringWidgetAppExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = KuringWidgetAppExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A61DE0A2C0F678900E8E95E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		1A61DE0C2C0F678A00E8E95E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		1A61DE0F2C0F678A00E8E95E /* KuringWidgetAppBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringWidgetAppBundle.swift; sourceTree = "<group>"; };
+		1A61DE112C0F678A00E8E95E /* KuringWidgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringWidgetApp.swift; sourceTree = "<group>"; };
+		1A61DE132C0F678A00E8E95E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1A61DE152C0F678A00E8E95E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9DAFA502AB1F04B0064F748 /* KuringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KuringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DAFA532AB1F04B0064F748 /* KuringApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringApp.swift; sourceTree = "<group>"; };
 		A9DAFA552AB1F04B0064F748 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -42,6 +76,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1A61DE062C0F678900E8E95E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A61DE0D2C0F678A00E8E95E /* SwiftUI.framework in Frameworks */,
+				1A61DE0B2C0F678A00E8E95E /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A9DAFA4D2AB1F04B0064F748 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -63,9 +106,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A61DE0E2C0F678A00E8E95E /* KuringWidgetApp */ = {
+			isa = PBXGroup;
+			children = (
+				1A61DE0F2C0F678A00E8E95E /* KuringWidgetAppBundle.swift */,
+				1A61DE112C0F678A00E8E95E /* KuringWidgetApp.swift */,
+				1A61DE132C0F678A00E8E95E /* Assets.xcassets */,
+				1A61DE152C0F678A00E8E95E /* Info.plist */,
+			);
+			path = KuringWidgetApp;
+			sourceTree = "<group>";
+		};
 		A947DCBA2AB47BA300A6D614 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A61DE0A2C0F678900E8E95E /* WidgetKit.framework */,
+				1A61DE0C2C0F678A00E8E95E /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -75,6 +131,7 @@
 			children = (
 				A9DAFA522AB1F04B0064F748 /* KuringApp */,
 				CA52DF302AD58DF2009B9272 /* KuringAppTests */,
+				1A61DE0E2C0F678A00E8E95E /* KuringWidgetApp */,
 				A9DAFA512AB1F04B0064F748 /* Products */,
 				A947DCBA2AB47BA300A6D614 /* Frameworks */,
 			);
@@ -85,6 +142,7 @@
 			children = (
 				A9DAFA502AB1F04B0064F748 /* KuringApp.app */,
 				CA52DF2F2AD58DF2009B9272 /* KuringAppTests.xctest */,
+				1A61DE092C0F678900E8E95E /* KuringWidgetAppExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,6 +188,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1A61DE082C0F678900E8E95E /* KuringWidgetAppExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1A61DE1C2C0F678A00E8E95E /* Build configuration list for PBXNativeTarget "KuringWidgetAppExtension" */;
+			buildPhases = (
+				1A61DE052C0F678900E8E95E /* Sources */,
+				1A61DE062C0F678900E8E95E /* Frameworks */,
+				1A61DE072C0F678900E8E95E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KuringWidgetAppExtension;
+			productName = KuringWidgetAppExtension;
+			productReference = 1A61DE092C0F678900E8E95E /* KuringWidgetAppExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		A9DAFA4F2AB1F04B0064F748 /* KuringApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A9DAFA5E2AB1F04C0064F748 /* Build configuration list for PBXNativeTarget "KuringApp" */;
@@ -137,10 +212,12 @@
 				A9DAFA4C2AB1F04B0064F748 /* Sources */,
 				A9DAFA4D2AB1F04B0064F748 /* Frameworks */,
 				A9DAFA4E2AB1F04B0064F748 /* Resources */,
+				1A61DE192C0F678A00E8E95E /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1A61DE172C0F678A00E8E95E /* PBXTargetDependency */,
 			);
 			name = KuringApp;
 			packageProductDependencies = (
@@ -178,9 +255,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
+					1A61DE082C0F678900E8E95E = {
+						CreatedOnToolsVersion = 15.3;
+					};
 					A9DAFA4F2AB1F04B0064F748 = {
 						CreatedOnToolsVersion = 15.0;
 					};
@@ -208,11 +288,20 @@
 			targets = (
 				A9DAFA4F2AB1F04B0064F748 /* KuringApp */,
 				CA52DF2E2AD58DF2009B9272 /* KuringAppTests */,
+				1A61DE082C0F678900E8E95E /* KuringWidgetAppExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1A61DE072C0F678900E8E95E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A61DE142C0F678A00E8E95E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A9DAFA4E2AB1F04B0064F748 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -232,6 +321,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1A61DE052C0F678900E8E95E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A61DE102C0F678A00E8E95E /* KuringWidgetAppBundle.swift in Sources */,
+				1A61DE122C0F678A00E8E95E /* KuringWidgetApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A9DAFA4C2AB1F04B0064F748 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -252,6 +350,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1A61DE172C0F678A00E8E95E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1A61DE082C0F678900E8E95E /* KuringWidgetAppExtension */;
+			targetProxy = 1A61DE162C0F678A00E8E95E /* PBXContainerItemProxy */;
+		};
 		CA52DF342AD58DF2009B9272 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A9DAFA4F2AB1F04B0064F748 /* KuringApp */;
@@ -260,6 +363,62 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		1A61DE1A2C0F678A00E8E95E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 38PD5AHVVF;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KuringWidgetApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = KuringWidgetApp;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1A61DE1B2C0F678A00E8E95E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 38PD5AHVVF;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KuringWidgetApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = KuringWidgetApp;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		A9DAFA5C2AB1F04C0064F748 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -384,6 +543,7 @@
 		A9DAFA5F2AB1F04C0064F748 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon-kuring-app.jpg AppIcon-kuring-app-classic AppIcon-kuring-app-sketch AppIcon-kuring-app-blueprint";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -419,6 +579,7 @@
 		A9DAFA602AB1F04C0064F748 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon-kuring-app.jpg AppIcon-kuring-app-classic AppIcon-kuring-app-sketch AppIcon-kuring-app-blueprint";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -500,6 +661,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1A61DE1C2C0F678A00E8E95E /* Build configuration list for PBXNativeTarget "KuringWidgetAppExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A61DE1A2C0F678A00E8E95E /* Debug */,
+				1A61DE1B2C0F678A00E8E95E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A9DAFA4B2AB1F04B0064F748 /* Build configuration list for PBXProject "KuringApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
