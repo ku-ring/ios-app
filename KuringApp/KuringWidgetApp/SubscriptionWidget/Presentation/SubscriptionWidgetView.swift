@@ -7,6 +7,8 @@
 
 import SwiftUI
 import ColorSet
+import Dependencies
+import Caches
 
 struct SubscriptionWidgetView: View {
     
@@ -21,6 +23,7 @@ struct SubscriptionWidgetView: View {
     /// 칼럼 수
     private let columns: [GridItem] = [.init(), .init(), .init(), .init()]
     
+    
     var body: some View {
         VStack {
             HStack {
@@ -33,8 +36,8 @@ struct SubscriptionWidgetView: View {
             .padding(.bottom, 10)
             
             LazyVGrid(columns: columns) {
-                ForEach(entry.noticeTypes, id: \.self) { noticeType in
-                    Button(intent: SubscriptionWidgetAppIntent(selection: noticeType)) {
+                ForEach(entry.noticeTypes, id: \.self) { noticeProvider in
+                    Button(intent: SubscriptionWidgetAppIntent(selection: noticeProvider.korName)) {
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(
                                 Color.green,
@@ -43,16 +46,16 @@ struct SubscriptionWidgetView: View {
                             .frame(height: 32)
                             .background {
                                 RoundedRectangle(cornerRadius: 8)
-//                                    .fill(
-//                                        noticeType.isSubscribed
-//                                        ? Color.green
-//                                        : colorScheme == .light
-//                                        ? .white
-//                                        : .black
-//                                    )
+                                    .fill(
+                                        entry.subscriptions.contains(noticeProvider)
+                                        ? Color.green
+                                        : colorScheme == .light
+                                        ? .white
+                                        : .black
+                                    )
                             }
                             .overlay(
-                                Text(noticeType)
+                                Text(noticeProvider.korName)
                                     .foregroundColor(Color.green)
                             )
                     }
@@ -62,5 +65,10 @@ struct SubscriptionWidgetView: View {
             Spacer()
         }
         .padding(.horizontal, 10)
+    }
+    
+    func d() {
+//        Bookmarks.
+        
     }
 }
