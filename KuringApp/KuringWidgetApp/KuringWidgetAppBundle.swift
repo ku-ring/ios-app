@@ -11,6 +11,6 @@ import SwiftUI
 @main
 struct KuringWidgetAppBundle: WidgetBundle {
     var body: some Widget {
-        KuringWidgetApp()
+        SubscriptionWidget()
     }
 }

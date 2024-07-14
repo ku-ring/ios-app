@@ -10,9 +10,13 @@
 		1A61DE0B2C0F678A00E8E95E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A61DE0A2C0F678900E8E95E /* WidgetKit.framework */; };
 		1A61DE0D2C0F678A00E8E95E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A61DE0C2C0F678A00E8E95E /* SwiftUI.framework */; };
 		1A61DE102C0F678A00E8E95E /* KuringWidgetAppBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61DE0F2C0F678A00E8E95E /* KuringWidgetAppBundle.swift */; };
-		1A61DE122C0F678A00E8E95E /* KuringWidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61DE112C0F678A00E8E95E /* KuringWidgetApp.swift */; };
 		1A61DE142C0F678A00E8E95E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A61DE132C0F678A00E8E95E /* Assets.xcassets */; };
 		1A61DE182C0F678A00E8E95E /* KuringWidgetAppExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1A61DE092C0F678900E8E95E /* KuringWidgetAppExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1AFC6D552C3EBFFD00696DE6 /* SubscriptionWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFC6D4D2C3EBFFD00696DE6 /* SubscriptionWidgetView.swift */; };
+		1AFC6D562C3EBFFD00696DE6 /* SubscriptionWidgetAppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFC6D4F2C3EBFFD00696DE6 /* SubscriptionWidgetAppIntent.swift */; };
+		1AFC6D572C3EBFFD00696DE6 /* SubscriptionWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFC6D502C3EBFFD00696DE6 /* SubscriptionWidgetProvider.swift */; };
+		1AFC6D582C3EBFFD00696DE6 /* SubscriptionWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFC6D512C3EBFFD00696DE6 /* SubscriptionWidgetViewModel.swift */; };
+		1AFC6D592C3EBFFD00696DE6 /* SubscriptionWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFC6D532C3EBFFD00696DE6 /* SubscriptionWidget.swift */; };
 		A9DAFA542AB1F04B0064F748 /* KuringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA532AB1F04B0064F748 /* KuringApp.swift */; };
 		A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA552AB1F04B0064F748 /* ContentView.swift */; };
 		A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA572AB1F04C0064F748 /* Assets.xcassets */; };
@@ -61,9 +65,13 @@
 		1A61DE0A2C0F678900E8E95E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		1A61DE0C2C0F678A00E8E95E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		1A61DE0F2C0F678A00E8E95E /* KuringWidgetAppBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringWidgetAppBundle.swift; sourceTree = "<group>"; };
-		1A61DE112C0F678A00E8E95E /* KuringWidgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringWidgetApp.swift; sourceTree = "<group>"; };
 		1A61DE132C0F678A00E8E95E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A61DE152C0F678A00E8E95E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1AFC6D4D2C3EBFFD00696DE6 /* SubscriptionWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidgetView.swift; sourceTree = "<group>"; };
+		1AFC6D4F2C3EBFFD00696DE6 /* SubscriptionWidgetAppIntent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidgetAppIntent.swift; sourceTree = "<group>"; };
+		1AFC6D502C3EBFFD00696DE6 /* SubscriptionWidgetProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidgetProvider.swift; sourceTree = "<group>"; };
+		1AFC6D512C3EBFFD00696DE6 /* SubscriptionWidgetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidgetViewModel.swift; sourceTree = "<group>"; };
+		1AFC6D532C3EBFFD00696DE6 /* SubscriptionWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidget.swift; sourceTree = "<group>"; };
 		A9DAFA502AB1F04B0064F748 /* KuringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KuringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DAFA532AB1F04B0064F748 /* KuringApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringApp.swift; sourceTree = "<group>"; };
 		A9DAFA552AB1F04B0064F748 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -109,12 +117,40 @@
 		1A61DE0E2C0F678A00E8E95E /* KuringWidgetApp */ = {
 			isa = PBXGroup;
 			children = (
+				1AFC6D542C3EBFFD00696DE6 /* SubscriptionWidget */,
 				1A61DE0F2C0F678A00E8E95E /* KuringWidgetAppBundle.swift */,
-				1A61DE112C0F678A00E8E95E /* KuringWidgetApp.swift */,
 				1A61DE132C0F678A00E8E95E /* Assets.xcassets */,
 				1A61DE152C0F678A00E8E95E /* Info.plist */,
 			);
 			path = KuringWidgetApp;
+			sourceTree = "<group>";
+		};
+		1AFC6D4E2C3EBFFD00696DE6 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				1AFC6D4D2C3EBFFD00696DE6 /* SubscriptionWidgetView.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		1AFC6D522C3EBFFD00696DE6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1AFC6D4F2C3EBFFD00696DE6 /* SubscriptionWidgetAppIntent.swift */,
+				1AFC6D502C3EBFFD00696DE6 /* SubscriptionWidgetProvider.swift */,
+				1AFC6D512C3EBFFD00696DE6 /* SubscriptionWidgetViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1AFC6D542C3EBFFD00696DE6 /* SubscriptionWidget */ = {
+			isa = PBXGroup;
+			children = (
+				1AFC6D4E2C3EBFFD00696DE6 /* Presentation */,
+				1AFC6D522C3EBFFD00696DE6 /* ViewModel */,
+				1AFC6D532C3EBFFD00696DE6 /* SubscriptionWidget.swift */,
+			);
+			path = SubscriptionWidget;
 			sourceTree = "<group>";
 		};
 		A947DCBA2AB47BA300A6D614 /* Frameworks */ = {
@@ -325,8 +361,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AFC6D562C3EBFFD00696DE6 /* SubscriptionWidgetAppIntent.swift in Sources */,
 				1A61DE102C0F678A00E8E95E /* KuringWidgetAppBundle.swift in Sources */,
-				1A61DE122C0F678A00E8E95E /* KuringWidgetApp.swift in Sources */,
+				1AFC6D552C3EBFFD00696DE6 /* SubscriptionWidgetView.swift in Sources */,
+				1AFC6D592C3EBFFD00696DE6 /* SubscriptionWidget.swift in Sources */,
+				1AFC6D572C3EBFFD00696DE6 /* SubscriptionWidgetProvider.swift in Sources */,
+				1AFC6D582C3EBFFD00696DE6 /* SubscriptionWidgetViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
