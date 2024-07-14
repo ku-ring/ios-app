@@ -42,4 +42,7 @@ class StringSet {
     static let isOnboarding = "\(baseString).onboarding"
     
     static let recentSearch = "com.kuring.lite.recent.search"
+    
+    /// 앱 그룹
+    static let appGroup = "group.kuring.serivces"
 }

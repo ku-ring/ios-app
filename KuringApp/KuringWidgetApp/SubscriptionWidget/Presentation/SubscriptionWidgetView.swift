@@ -66,9 +66,4 @@ struct SubscriptionWidgetView: View {
         }
         .padding(.horizontal, 10)
     }
-    
-    func d() {
-//        Bookmarks.
-        
-    }
 }
