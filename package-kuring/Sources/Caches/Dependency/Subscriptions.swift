@@ -13,20 +13,14 @@ public struct KuringSubscriptions {
     public var add: (_ noticeProvider: NoticeProvider) -> Void
     /// 구독한 공지 리스트 업데이트
     public var update: (_ noticeProvider: Set<NoticeProvider>) -> Void
+    /// 구독한 공지 리스트에 단일 객체 삭제
+    public var remove: (_ noticeProvider: NoticeProvider) -> Void
     /// 구독한 모든 공지 카테고리
     public var getAll: () -> Set<NoticeProvider>
     /// 커스텀 공지 구독 여부
     public var isCustomNotification: () -> Bool
     /// 커스텀 공지 구독 여부 변경
     public var changeCustomNotification: (_ isSubscribe: Bool) -> Void
-    
-//    /// 구독한 공지 (대학 및 학과)
-//    @UserDefault(key: StringSet.subscribedCategories, defaultValue: [])
-//    static var subscriptions: Set<NoticeProvider>
-//    
-//    /// 구독한 공지 (대학 및 학과)
-//    @AppStorage(StringSet.subscribedCategories, store: .init(suiteName: StringSet.appGroup))
-//    static var subscriptions: DataStorageManager.subscriptions
     
     /// 커스텀 공지 구독 여부 (기본값 true)
     @UserDefault(key: StringSet.customNotification, defaultValue: true)
@@ -43,9 +37,13 @@ extension KuringSubscriptions {
         }, update: { noticeProviders in
             DataStorageManager.shared.subscriptions = noticeProviders
             
+        }, remove: { noticeProvider in
+            var subscriptions = DataStorageManager.shared.subscriptions
+            subscriptions.remove(noticeProvider)
+            DataStorageManager.shared.subscriptions = subscriptions
+            
         }, getAll: {
-            print("❄️ 데이터 들어있어요 \(DataStorageManager.shared.subscriptions)")
-            return DataStorageManager.shared.subscriptions
+            DataStorageManager.shared.subscriptions
             
         }, isCustomNotification: {
             Self.isCustomNotification
@@ -74,8 +72,7 @@ public struct DataStorageManager {
 
     /// 구독한 공지 (대학 및 학과)
     @AppStorage(StringSet.subscribedCategories, store: .init(suiteName: StringSet.appGroup))
-//    @AppStorage(StringSet.subscribedCategories)
-    public var subscriptions: Set<NoticeProvider> = [.일반]
+    public var subscriptions: Set<NoticeProvider> = []
     
     
     init() {
