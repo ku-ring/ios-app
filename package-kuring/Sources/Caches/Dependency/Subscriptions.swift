@@ -75,7 +75,7 @@ public struct DataStorageManager {
     /// 구독한 공지 (대학 및 학과)
     @AppStorage(StringSet.subscribedCategories, store: .init(suiteName: StringSet.appGroup))
 //    @AppStorage(StringSet.subscribedCategories)
-    public var subscriptions: Set<NoticeProvider> = []
+    public var subscriptions: Set<NoticeProvider> = [.일반]
     
     
     init() {

@@ -44,5 +44,5 @@ class StringSet {
     static let recentSearch = "com.kuring.lite.recent.search"
     
     /// 앱 그룹
-    static let appGroup = "group.kuring.serivces"
+    static let appGroup = "group.kuring.service"
 }

@@ -5,10 +5,10 @@
 //  Created by Geon Woo lee on 2/9/24.
 //
 
+import Caches
 import SwiftUI
 import ColorSet
 import Dependencies
-import Caches
 
 struct SubscriptionWidgetView: View {
     
@@ -40,7 +40,7 @@ struct SubscriptionWidgetView: View {
                     Button(intent: SubscriptionWidgetAppIntent(selection: noticeProvider.korName)) {
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(
-                                Color.green,
+                                Color.Kuring.primary,
                                 lineWidth: 1
                             )
                             .frame(height: 32)
@@ -48,7 +48,7 @@ struct SubscriptionWidgetView: View {
                                 RoundedRectangle(cornerRadius: 8)
                                     .fill(
                                         entry.subscriptions.contains(noticeProvider)
-                                        ? Color.green
+                                        ? Color.Kuring.primary
                                         : colorScheme == .light
                                         ? .white
                                         : .black
@@ -56,7 +56,11 @@ struct SubscriptionWidgetView: View {
                             }
                             .overlay(
                                 Text(noticeProvider.korName)
-                                    .foregroundColor(Color.green)
+                                    .foregroundColor(
+                                        entry.subscriptions.contains(noticeProvider)
+                                        ? .white
+                                        : Color.Kuring.primary
+                                    )
                             )
                     }
                     .buttonStyle(.plain)

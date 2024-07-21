@@ -7,17 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A61DE0B2C0F678A00E8E95E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A61DE0A2C0F678900E8E95E /* WidgetKit.framework */; };
-		1A61DE0D2C0F678A00E8E95E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A61DE0C2C0F678A00E8E95E /* SwiftUI.framework */; };
-		1A61DE102C0F678A00E8E95E /* KuringWidgetAppBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A61DE0F2C0F678A00E8E95E /* KuringWidgetAppBundle.swift */; };
-		1A61DE142C0F678A00E8E95E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A61DE132C0F678A00E8E95E /* Assets.xcassets */; };
-		1A61DE182C0F678A00E8E95E /* KuringWidgetAppExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1A61DE092C0F678900E8E95E /* KuringWidgetAppExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		1AFC6D552C3EBFFD00696DE6 /* SubscriptionWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFC6D4D2C3EBFFD00696DE6 /* SubscriptionWidgetView.swift */; };
-		1AFC6D562C3EBFFD00696DE6 /* SubscriptionWidgetAppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFC6D4F2C3EBFFD00696DE6 /* SubscriptionWidgetAppIntent.swift */; };
-		1AFC6D572C3EBFFD00696DE6 /* SubscriptionWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFC6D502C3EBFFD00696DE6 /* SubscriptionWidgetProvider.swift */; };
-		1AFC6D582C3EBFFD00696DE6 /* SubscriptionWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFC6D512C3EBFFD00696DE6 /* SubscriptionWidgetViewModel.swift */; };
-		1AFC6D592C3EBFFD00696DE6 /* SubscriptionWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFC6D532C3EBFFD00696DE6 /* SubscriptionWidget.swift */; };
-		1AFC6D5D2C43B64900696DE6 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 1AFC6D5C2C43B64900696DE6 /* App */; };
+		1A6A0E942C4CDA0100C450FC /* SubscriptionWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A0E872C4CD9E200C450FC /* SubscriptionWidgetView.swift */; };
+		1A6A0E952C4CDA0C00C450FC /* SubscriptionWidgetAppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A0E892C4CD9E200C450FC /* SubscriptionWidgetAppIntent.swift */; };
+		1A6A0E962C4CDA0E00C450FC /* SubscriptionWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A0E8A2C4CD9E200C450FC /* SubscriptionWidgetProvider.swift */; };
+		1A6A0E972C4CDA1100C450FC /* SubscriptionWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A0E8B2C4CD9E200C450FC /* SubscriptionWidgetViewModel.swift */; };
+		1A6A0E982C4CDAE700C450FC /* SubscriptionWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A0E8D2C4CD9E200C450FC /* SubscriptionWidget.swift */; };
+		1AFC6D782C43D6D200696DE6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AFC6D772C43D6D200696DE6 /* GoogleService-Info.plist */; };
+		1AFC6D822C43EF7A00696DE6 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A61DE0A2C0F678900E8E95E /* WidgetKit.framework */; };
+		1AFC6D832C43EF7A00696DE6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A61DE0C2C0F678A00E8E95E /* SwiftUI.framework */; };
+		1AFC6D862C43EF7A00696DE6 /* KuringWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFC6D852C43EF7A00696DE6 /* KuringWidgetBundle.swift */; };
+		1AFC6D882C43EF7A00696DE6 /* KuringWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFC6D872C43EF7A00696DE6 /* KuringWidget.swift */; };
+		1AFC6D8A2C43EF7B00696DE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AFC6D892C43EF7B00696DE6 /* Assets.xcassets */; };
+		1AFC6D8E2C43EF7B00696DE6 /* KuringWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1AFC6D812C43EF7A00696DE6 /* KuringWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1AFC6D932C43EFAF00696DE6 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 1AFC6D922C43EFAF00696DE6 /* App */; };
+		1AFC6D952C43EFAF00696DE6 /* Labs in Frameworks */ = {isa = PBXBuildFile; productRef = 1AFC6D942C43EFAF00696DE6 /* Labs */; };
+		1AFC6D972C43EFAF00696DE6 /* PushNotifications in Frameworks */ = {isa = PBXBuildFile; productRef = 1AFC6D962C43EFAF00696DE6 /* PushNotifications */; };
 		A9DAFA542AB1F04B0064F748 /* KuringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA532AB1F04B0064F748 /* KuringApp.swift */; };
 		A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA552AB1F04B0064F748 /* ContentView.swift */; };
 		A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DAFA572AB1F04C0064F748 /* Assets.xcassets */; };
@@ -29,12 +33,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1A61DE162C0F678A00E8E95E /* PBXContainerItemProxy */ = {
+		1AFC6D8C2C43EF7B00696DE6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A9DAFA482AB1F04B0064F748 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 1A61DE082C0F678900E8E95E;
-			remoteInfo = KuringWidgetAppExtension;
+			remoteGlobalIDString = 1AFC6D802C43EF7A00696DE6;
+			remoteInfo = KuringWidgetExtension;
 		};
 		CA52DF332AD58DF2009B9272 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,7 +56,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				1A61DE182C0F678A00E8E95E /* KuringWidgetAppExtension.appex in Embed Foundation Extensions */,
+				1AFC6D8E2C43EF7B00696DE6 /* KuringWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,17 +65,20 @@
 
 /* Begin PBXFileReference section */
 		1A0C8B412BCA5BB400B314C7 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		1A61DE092C0F678900E8E95E /* KuringWidgetAppExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = KuringWidgetAppExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A61DE0A2C0F678900E8E95E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		1A61DE0C2C0F678A00E8E95E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		1A61DE0F2C0F678A00E8E95E /* KuringWidgetAppBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringWidgetAppBundle.swift; sourceTree = "<group>"; };
-		1A61DE132C0F678A00E8E95E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1A61DE152C0F678A00E8E95E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1AFC6D4D2C3EBFFD00696DE6 /* SubscriptionWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidgetView.swift; sourceTree = "<group>"; };
-		1AFC6D4F2C3EBFFD00696DE6 /* SubscriptionWidgetAppIntent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidgetAppIntent.swift; sourceTree = "<group>"; };
-		1AFC6D502C3EBFFD00696DE6 /* SubscriptionWidgetProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidgetProvider.swift; sourceTree = "<group>"; };
-		1AFC6D512C3EBFFD00696DE6 /* SubscriptionWidgetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidgetViewModel.swift; sourceTree = "<group>"; };
-		1AFC6D532C3EBFFD00696DE6 /* SubscriptionWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidget.swift; sourceTree = "<group>"; };
+		1A6A0E872C4CD9E200C450FC /* SubscriptionWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidgetView.swift; sourceTree = "<group>"; };
+		1A6A0E892C4CD9E200C450FC /* SubscriptionWidgetAppIntent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidgetAppIntent.swift; sourceTree = "<group>"; };
+		1A6A0E8A2C4CD9E200C450FC /* SubscriptionWidgetProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidgetProvider.swift; sourceTree = "<group>"; };
+		1A6A0E8B2C4CD9E200C450FC /* SubscriptionWidgetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidgetViewModel.swift; sourceTree = "<group>"; };
+		1A6A0E8D2C4CD9E200C450FC /* SubscriptionWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidget.swift; sourceTree = "<group>"; };
+		1AFC6D772C43D6D200696DE6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1AFC6D812C43EF7A00696DE6 /* KuringWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = KuringWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AFC6D852C43EF7A00696DE6 /* KuringWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringWidgetBundle.swift; sourceTree = "<group>"; };
+		1AFC6D872C43EF7A00696DE6 /* KuringWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringWidget.swift; sourceTree = "<group>"; };
+		1AFC6D892C43EF7B00696DE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1AFC6D8B2C43EF7B00696DE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1AFC6DCB2C43F38000696DE6 /* KuringWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KuringWidgetExtension.entitlements; sourceTree = "<group>"; };
 		A9DAFA502AB1F04B0064F748 /* KuringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KuringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DAFA532AB1F04B0064F748 /* KuringApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringApp.swift; sourceTree = "<group>"; };
 		A9DAFA552AB1F04B0064F748 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -84,13 +91,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1A61DE062C0F678900E8E95E /* Frameworks */ = {
+		1AFC6D7E2C43EF7A00696DE6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AFC6D5D2C43B64900696DE6 /* App in Frameworks */,
-				1A61DE0D2C0F678A00E8E95E /* SwiftUI.framework in Frameworks */,
-				1A61DE0B2C0F678A00E8E95E /* WidgetKit.framework in Frameworks */,
+				1AFC6D932C43EFAF00696DE6 /* App in Frameworks */,
+				1AFC6D972C43EFAF00696DE6 /* PushNotifications in Frameworks */,
+				1AFC6D832C43EF7A00696DE6 /* SwiftUI.framework in Frameworks */,
+				1AFC6D952C43EFAF00696DE6 /* Labs in Frameworks */,
+				1AFC6D822C43EF7A00696DE6 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,43 +123,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1A61DE0E2C0F678A00E8E95E /* KuringWidgetApp */ = {
+		1A6A0E882C4CD9E200C450FC /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				1AFC6D542C3EBFFD00696DE6 /* SubscriptionWidget */,
-				1A61DE0F2C0F678A00E8E95E /* KuringWidgetAppBundle.swift */,
-				1A61DE132C0F678A00E8E95E /* Assets.xcassets */,
-				1A61DE152C0F678A00E8E95E /* Info.plist */,
-			);
-			path = KuringWidgetApp;
-			sourceTree = "<group>";
-		};
-		1AFC6D4E2C3EBFFD00696DE6 /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				1AFC6D4D2C3EBFFD00696DE6 /* SubscriptionWidgetView.swift */,
+				1A6A0E872C4CD9E200C450FC /* SubscriptionWidgetView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		1AFC6D522C3EBFFD00696DE6 /* ViewModel */ = {
+		1A6A0E8C2C4CD9E200C450FC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				1AFC6D4F2C3EBFFD00696DE6 /* SubscriptionWidgetAppIntent.swift */,
-				1AFC6D502C3EBFFD00696DE6 /* SubscriptionWidgetProvider.swift */,
-				1AFC6D512C3EBFFD00696DE6 /* SubscriptionWidgetViewModel.swift */,
+				1A6A0E892C4CD9E200C450FC /* SubscriptionWidgetAppIntent.swift */,
+				1A6A0E8A2C4CD9E200C450FC /* SubscriptionWidgetProvider.swift */,
+				1A6A0E8B2C4CD9E200C450FC /* SubscriptionWidgetViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		1AFC6D542C3EBFFD00696DE6 /* SubscriptionWidget */ = {
+		1A6A0E8E2C4CD9E200C450FC /* SubscriptionWidget */ = {
 			isa = PBXGroup;
 			children = (
-				1AFC6D4E2C3EBFFD00696DE6 /* Presentation */,
-				1AFC6D522C3EBFFD00696DE6 /* ViewModel */,
-				1AFC6D532C3EBFFD00696DE6 /* SubscriptionWidget.swift */,
+				1A6A0E882C4CD9E200C450FC /* Presentation */,
+				1A6A0E8C2C4CD9E200C450FC /* ViewModel */,
+				1A6A0E8D2C4CD9E200C450FC /* SubscriptionWidget.swift */,
 			);
 			path = SubscriptionWidget;
+			sourceTree = "<group>";
+		};
+		1AFC6D842C43EF7A00696DE6 /* KuringWidget */ = {
+			isa = PBXGroup;
+			children = (
+				1A6A0E8E2C4CD9E200C450FC /* SubscriptionWidget */,
+				1AFC6D852C43EF7A00696DE6 /* KuringWidgetBundle.swift */,
+				1AFC6D872C43EF7A00696DE6 /* KuringWidget.swift */,
+				1AFC6D892C43EF7B00696DE6 /* Assets.xcassets */,
+				1AFC6D8B2C43EF7B00696DE6 /* Info.plist */,
+			);
+			path = KuringWidget;
 			sourceTree = "<group>";
 		};
 		A947DCBA2AB47BA300A6D614 /* Frameworks */ = {
@@ -165,9 +175,10 @@
 		A9DAFA472AB1F04B0064F748 = {
 			isa = PBXGroup;
 			children = (
+				1AFC6DCB2C43F38000696DE6 /* KuringWidgetExtension.entitlements */,
 				A9DAFA522AB1F04B0064F748 /* KuringApp */,
 				CA52DF302AD58DF2009B9272 /* KuringAppTests */,
-				1A61DE0E2C0F678A00E8E95E /* KuringWidgetApp */,
+				1AFC6D842C43EF7A00696DE6 /* KuringWidget */,
 				A9DAFA512AB1F04B0064F748 /* Products */,
 				A947DCBA2AB47BA300A6D614 /* Frameworks */,
 			);
@@ -178,7 +189,7 @@
 			children = (
 				A9DAFA502AB1F04B0064F748 /* KuringApp.app */,
 				CA52DF2F2AD58DF2009B9272 /* KuringAppTests.xctest */,
-				1A61DE092C0F678900E8E95E /* KuringWidgetAppExtension.appex */,
+				1AFC6D812C43EF7A00696DE6 /* KuringWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,8 +197,9 @@
 		A9DAFA522AB1F04B0064F748 /* KuringApp */ = {
 			isa = PBXGroup;
 			children = (
-				1A0C8B412BCA5BB400B314C7 /* PrivacyInfo.xcprivacy */,
 				CACC2F4B2B7E638C003142E2 /* KuringApp.entitlements */,
+				1AFC6D772C43D6D200696DE6 /* GoogleService-Info.plist */,
+				1A0C8B412BCA5BB400B314C7 /* PrivacyInfo.xcprivacy */,
 				DF062D4A2AC87B6D00FC48C0 /* Info.plist */,
 				DFE7AB132AC332D200230934 /* Setting */,
 				A9DAFA532AB1F04B0064F748 /* KuringApp.swift */,
@@ -224,24 +236,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1A61DE082C0F678900E8E95E /* KuringWidgetAppExtension */ = {
+		1AFC6D802C43EF7A00696DE6 /* KuringWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1A61DE1C2C0F678A00E8E95E /* Build configuration list for PBXNativeTarget "KuringWidgetAppExtension" */;
+			buildConfigurationList = 1AFC6D912C43EF7B00696DE6 /* Build configuration list for PBXNativeTarget "KuringWidgetExtension" */;
 			buildPhases = (
-				1A61DE052C0F678900E8E95E /* Sources */,
-				1A61DE062C0F678900E8E95E /* Frameworks */,
-				1A61DE072C0F678900E8E95E /* Resources */,
+				1AFC6D7D2C43EF7A00696DE6 /* Sources */,
+				1AFC6D7E2C43EF7A00696DE6 /* Frameworks */,
+				1AFC6D7F2C43EF7A00696DE6 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = KuringWidgetAppExtension;
+			name = KuringWidgetExtension;
 			packageProductDependencies = (
-				1AFC6D5C2C43B64900696DE6 /* App */,
+				1AFC6D922C43EFAF00696DE6 /* App */,
+				1AFC6D942C43EFAF00696DE6 /* Labs */,
+				1AFC6D962C43EFAF00696DE6 /* PushNotifications */,
 			);
-			productName = KuringWidgetAppExtension;
-			productReference = 1A61DE092C0F678900E8E95E /* KuringWidgetAppExtension.appex */;
+			productName = KuringWidgetExtension;
+			productReference = 1AFC6D812C43EF7A00696DE6 /* KuringWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		A9DAFA4F2AB1F04B0064F748 /* KuringApp */ = {
@@ -256,7 +270,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				1A61DE172C0F678A00E8E95E /* PBXTargetDependency */,
+				1AFC6D8D2C43EF7B00696DE6 /* PBXTargetDependency */,
 			);
 			name = KuringApp;
 			packageProductDependencies = (
@@ -296,7 +310,7 @@
 				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
-					1A61DE082C0F678900E8E95E = {
+					1AFC6D802C43EF7A00696DE6 = {
 						CreatedOnToolsVersion = 15.3;
 					};
 					A9DAFA4F2AB1F04B0064F748 = {
@@ -326,17 +340,17 @@
 			targets = (
 				A9DAFA4F2AB1F04B0064F748 /* KuringApp */,
 				CA52DF2E2AD58DF2009B9272 /* KuringAppTests */,
-				1A61DE082C0F678900E8E95E /* KuringWidgetAppExtension */,
+				1AFC6D802C43EF7A00696DE6 /* KuringWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1A61DE072C0F678900E8E95E /* Resources */ = {
+		1AFC6D7F2C43EF7A00696DE6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A61DE142C0F678A00E8E95E /* Assets.xcassets in Resources */,
+				1AFC6D8A2C43EF7B00696DE6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +360,7 @@
 			files = (
 				A9DAFA5B2AB1F04C0064F748 /* Preview Assets.xcassets in Resources */,
 				A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */,
+				1AFC6D782C43D6D200696DE6 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,16 +374,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1A61DE052C0F678900E8E95E /* Sources */ = {
+		1AFC6D7D2C43EF7A00696DE6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AFC6D562C3EBFFD00696DE6 /* SubscriptionWidgetAppIntent.swift in Sources */,
-				1A61DE102C0F678A00E8E95E /* KuringWidgetAppBundle.swift in Sources */,
-				1AFC6D552C3EBFFD00696DE6 /* SubscriptionWidgetView.swift in Sources */,
-				1AFC6D592C3EBFFD00696DE6 /* SubscriptionWidget.swift in Sources */,
-				1AFC6D572C3EBFFD00696DE6 /* SubscriptionWidgetProvider.swift in Sources */,
-				1AFC6D582C3EBFFD00696DE6 /* SubscriptionWidgetViewModel.swift in Sources */,
+				1A6A0E952C4CDA0C00C450FC /* SubscriptionWidgetAppIntent.swift in Sources */,
+				1AFC6D862C43EF7A00696DE6 /* KuringWidgetBundle.swift in Sources */,
+				1A6A0E942C4CDA0100C450FC /* SubscriptionWidgetView.swift in Sources */,
+				1AFC6D882C43EF7A00696DE6 /* KuringWidget.swift in Sources */,
+				1A6A0E982C4CDAE700C450FC /* SubscriptionWidget.swift in Sources */,
+				1A6A0E962C4CDA0E00C450FC /* SubscriptionWidgetProvider.swift in Sources */,
+				1A6A0E972C4CDA1100C450FC /* SubscriptionWidgetViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,10 +408,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1A61DE172C0F678A00E8E95E /* PBXTargetDependency */ = {
+		1AFC6D8D2C43EF7B00696DE6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1A61DE082C0F678900E8E95E /* KuringWidgetAppExtension */;
-			targetProxy = 1A61DE162C0F678A00E8E95E /* PBXContainerItemProxy */;
+			target = 1AFC6D802C43EF7A00696DE6 /* KuringWidgetExtension */;
+			targetProxy = 1AFC6D8C2C43EF7B00696DE6 /* PBXContainerItemProxy */;
 		};
 		CA52DF342AD58DF2009B9272 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -405,17 +421,19 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1A61DE1A2C0F678A00E8E95E /* Debug */ = {
+		1AFC6D8F2C43EF7B00696DE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = KuringWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 38PD5AHVVF;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = KuringWidgetApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = KuringWidgetApp;
+				INFOPLIST_FILE = KuringWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = KuringWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -424,7 +442,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service.widget.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -433,17 +451,20 @@
 			};
 			name = Debug;
 		};
-		1A61DE1B2C0F678A00E8E95E /* Release */ = {
+		1AFC6D902C43EF7B00696DE6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = KuringWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 38PD5AHVVF;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = KuringWidgetApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = KuringWidgetApp;
+				INFOPLIST_FILE = KuringWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = KuringWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -452,7 +473,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service.widget.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -591,6 +612,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = KuringApp/KuringApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 202406011840;
 				DEVELOPMENT_ASSET_PATHS = "\"KuringApp/Preview Content\"";
@@ -612,6 +634,7 @@
 				MARKETING_VERSION = 2.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -627,10 +650,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = KuringApp/KuringApp.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 202406011840;
 				DEVELOPMENT_ASSET_PATHS = "\"KuringApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 38PD5AHVVF;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 38PD5AHVVF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KuringApp/Info.plist;
@@ -648,6 +674,8 @@
 				MARKETING_VERSION = 2.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = kuring_dev_24_07_14;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -658,7 +686,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
@@ -668,6 +696,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service.KuringAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -681,7 +710,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
@@ -691,6 +720,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service.KuringAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -703,11 +733,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1A61DE1C2C0F678A00E8E95E /* Build configuration list for PBXNativeTarget "KuringWidgetAppExtension" */ = {
+		1AFC6D912C43EF7B00696DE6 /* Build configuration list for PBXNativeTarget "KuringWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1A61DE1A2C0F678A00E8E95E /* Debug */,
-				1A61DE1B2C0F678A00E8E95E /* Release */,
+				1AFC6D8F2C43EF7B00696DE6 /* Debug */,
+				1AFC6D902C43EF7B00696DE6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -749,10 +779,20 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1AFC6D5C2C43B64900696DE6 /* App */ = {
+		1AFC6D922C43EFAF00696DE6 /* App */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1AFC6D5A2C43B3AC00696DE6 /* XCLocalSwiftPackageReference "../package-kuring" */;
 			productName = App;
+		};
+		1AFC6D942C43EFAF00696DE6 /* Labs */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1AFC6D5A2C43B3AC00696DE6 /* XCLocalSwiftPackageReference "../package-kuring" */;
+			productName = Labs;
+		};
+		1AFC6D962C43EFAF00696DE6 /* PushNotifications */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1AFC6D5A2C43B3AC00696DE6 /* XCLocalSwiftPackageReference "../package-kuring" */;
+			productName = PushNotifications;
 		};
 		CAE658652B3992A800CD8A63 /* App */ = {
 			isa = XCSwiftPackageProductDependency;
