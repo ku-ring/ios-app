@@ -17,8 +17,8 @@ struct SubscriptionWidget: Widget {
             SubscriptionWidgetView(entry: entry)
                 .containerBackground(.clear, for: .widget)
         }
-        .configurationDisplayName("구독-ku")
-        .description("구독하세요~ ku-ku")
+        .configurationDisplayName("쿠링")
+        .description("쿠링 구독 대화형 위젯")
         .supportedFamilies([.systemMedium])
         .contentMarginsDisabled()
     }
