@@ -74,9 +74,11 @@ public struct DataStorageManager {
     @AppStorage(StringSet.subscribedCategories, store: .init(suiteName: StringSet.appGroup))
     public var subscriptions: Set<NoticeProvider> = []
     
+    /// 파이어베이스 토큰
+    @AppStorage(StringSet.fcmToken)
+    static var fcmToken: String = ""
     
     init() {
-        print("🥹 마잉그레이션 1번")
         MigrationManager().migrate()
     }
 }
