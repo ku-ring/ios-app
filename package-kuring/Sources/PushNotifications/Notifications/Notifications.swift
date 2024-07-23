@@ -5,6 +5,7 @@
 
 import UIKit
 import Models
+import Caches
 import SwiftUI
 import UserNotifications
 
@@ -20,8 +21,8 @@ public class Notifications: NSObject, UIApplicationDelegate {
     @AppStorage("com.kuring.sdk.notification.custom")
     static var isCustomNotificationEnabled: Bool = true
     
-    @AppStorage("com.kuring.sdk.v2.token.fcm")
-    var fcmToken: String = ""
+//    @AppStorage("com.kuring.sdk.v2.token.fcm")
+    var fcmToken: String = DataStorageManager.shared.fcmToken
     
     func onTapRemoteNotification(with userInfo: [String: Any]) throws {
         let message = try Message(userInfo: userInfo)

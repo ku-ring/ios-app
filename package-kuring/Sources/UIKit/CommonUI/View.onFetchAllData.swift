@@ -3,6 +3,7 @@
 // See the 'License.txt' file for licensing information.
 //
 
+import Caches
 import SwiftUI
 import Networks
 import Dependencies
@@ -11,8 +12,8 @@ struct KuringLinkFetcher: ViewModifier {
     @State private var showsNetworkError: Bool = false
     @Dependency(\.kuringLink) private var kuringLink
     
-    @AppStorage("com.kuring.sdk.v2.token.fcm")
-    var fcmToken: String = ""
+//    @AppStorage("com.kuring.sdk.v2.token.fcm")
+    var fcmToken: String = DataStorageManager.shared.fcmToken
     
     let onRequest: () -> Void
     let onCompletion: (Result<Void, Error>) -> Void

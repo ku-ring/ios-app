@@ -66,39 +66,3 @@ extension DependencyValues {
         set { self[KuringSubscriptions.self] = newValue }
     }
 }
-
-public struct DataStorageManager {
-    public static let shared = DataStorageManager()
-
-    /// 구독한 공지 (대학 및 학과)
-    @AppStorage(StringSet.subscribedCategories, store: .init(suiteName: StringSet.appGroup))
-    public var subscriptions: Set<NoticeProvider> = []
-    
-    /// 파이어베이스 토큰
-    @AppStorage(StringSet.fcmToken)
-    static var fcmToken: String = ""
-    
-    init() {
-        MigrationManager().migrate()
-    }
-}
-
-struct MigrationManager {
-    func migrate() {
-        migrate(from: StringSet.subscribedCategories, asType: Set<NoticeProvider>.self, appGroup: StringSet.appGroup)
-
-    }
-    
-    private func migrate<T: Codable>(from key: String, asType type: T.Type) {
-        guard let value = UserDefaults.standard.value(forKey: key) as? T else { return }
-        guard let encodedData = try? PropertyListEncoder().encode(value) else { return }
-        UserDefaults.standard.set(encodedData, forKey: key)
-    }
-    
-    private func migrate<T: Codable>(from key: String, asType type: T.Type, appGroup: String) {
-        guard let userDefault = UserDefaults(suiteName: StringSet.appGroup) else { return }
-        guard let value = userDefault.value(forKey: key) as? T else { return }
-        guard let encodedData = try? PropertyListEncoder().encode(value) else { return }
-        UserDefaults.standard.set(encodedData, forKey: key)
-    }
-}

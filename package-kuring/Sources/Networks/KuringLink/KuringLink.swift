@@ -7,6 +7,7 @@ import Models
 import SwiftUI
 import Satellite
 import Foundation
+import Caches
 
 // TODO: 네이밍 통일: NoticeType vs NoticeProvider vs UnivNoticeProvider
 public typealias NoticeCount = Int
@@ -40,7 +41,7 @@ public struct KuringLink {
         return iosVersion
     }()
 
-    @AppStorage("com.kuring.sdk.v2.token.fcm")
+    @AppStorage("com.kuring.sdk.v2.token.fcm", store: UserDefaults(suiteName: "group.kuring.service"))
     static var fcmToken: String = ""
     
     static var testableFCMToken: String = "cZSHjO4_bUjirvsrxWzig5:APA91bHPojABL5oEXi5AcjJ8v4Vcp3KpJfFUD_3b-HhfV8m23_R6czJa3PwqcVqBZSHBb2t7Z3odUeD0cFKaMSkMmrGxTqyjJPfEZVfTPvmewV-xiMTWbrk-QKuc4Nrxd_BhEArO7Svo"
