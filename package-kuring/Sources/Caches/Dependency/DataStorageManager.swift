@@ -3,7 +3,8 @@
 // See the 'License.txt' file for licensing information.
 //
 
-import Foundation
+import Models
+import SwiftUI
 
 public struct DataStorageManager {
     public static let shared = DataStorageManager()
