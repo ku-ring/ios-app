@@ -12,6 +12,8 @@
 		1A6A0E962C4CDA0E00C450FC /* SubscriptionWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A0E8A2C4CD9E200C450FC /* SubscriptionWidgetProvider.swift */; };
 		1A6A0E972C4CDA1100C450FC /* SubscriptionWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A0E8B2C4CD9E200C450FC /* SubscriptionWidgetViewModel.swift */; };
 		1A6A0E982C4CDAE700C450FC /* SubscriptionWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A0E8D2C4CD9E200C450FC /* SubscriptionWidget.swift */; };
+		1A6A0EA72C515AC400C450FC /* SubscriontionRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A0EA52C515A4800C450FC /* SubscriontionRepositoryImpl.swift */; };
+		1A6A0EAB2C515AEF00C450FC /* WidgetSubscriponProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A0EAA2C515AEF00C450FC /* WidgetSubscriponProvider.swift */; };
 		1AFC6D782C43D6D200696DE6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AFC6D772C43D6D200696DE6 /* GoogleService-Info.plist */; };
 		1AFC6D822C43EF7A00696DE6 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A61DE0A2C0F678900E8E95E /* WidgetKit.framework */; };
 		1AFC6D832C43EF7A00696DE6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A61DE0C2C0F678A00E8E95E /* SwiftUI.framework */; };
@@ -71,6 +73,8 @@
 		1A6A0E8A2C4CD9E200C450FC /* SubscriptionWidgetProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidgetProvider.swift; sourceTree = "<group>"; };
 		1A6A0E8B2C4CD9E200C450FC /* SubscriptionWidgetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidgetViewModel.swift; sourceTree = "<group>"; };
 		1A6A0E8D2C4CD9E200C450FC /* SubscriptionWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionWidget.swift; sourceTree = "<group>"; };
+		1A6A0EA52C515A4800C450FC /* SubscriontionRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriontionRepositoryImpl.swift; sourceTree = "<group>"; };
+		1A6A0EAA2C515AEF00C450FC /* WidgetSubscriponProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSubscriponProvider.swift; sourceTree = "<group>"; };
 		1AFC6D772C43D6D200696DE6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1AFC6D812C43EF7A00696DE6 /* KuringWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = KuringWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AFC6D852C43EF7A00696DE6 /* KuringWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringWidgetBundle.swift; sourceTree = "<group>"; };
@@ -142,11 +146,37 @@
 		1A6A0E8E2C4CD9E200C450FC /* SubscriptionWidget */ = {
 			isa = PBXGroup;
 			children = (
+				1A6A0EA92C515ADB00C450FC /* Domain */,
+				1A6A0EA82C515AD400C450FC /* Data */,
 				1A6A0E882C4CD9E200C450FC /* Presentation */,
 				1A6A0E8C2C4CD9E200C450FC /* ViewModel */,
 				1A6A0E8D2C4CD9E200C450FC /* SubscriptionWidget.swift */,
 			);
 			path = SubscriptionWidget;
+			sourceTree = "<group>";
+		};
+		1A6A0EA42C515A3A00C450FC /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				1A6A0EA52C515A4800C450FC /* SubscriontionRepositoryImpl.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		1A6A0EA82C515AD400C450FC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				1A6A0EA42C515A3A00C450FC /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		1A6A0EA92C515ADB00C450FC /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				1A6A0EAA2C515AEF00C450FC /* WidgetSubscriponProvider.swift */,
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 		1AFC6D842C43EF7A00696DE6 /* KuringWidget */ = {
@@ -375,8 +405,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A6A0EAB2C515AEF00C450FC /* WidgetSubscriponProvider.swift in Sources */,
 				1A6A0E952C4CDA0C00C450FC /* SubscriptionWidgetAppIntent.swift in Sources */,
 				1AFC6D862C43EF7A00696DE6 /* KuringWidgetBundle.swift in Sources */,
+				1A6A0EA72C515AC400C450FC /* SubscriontionRepositoryImpl.swift in Sources */,
 				1A6A0E942C4CDA0100C450FC /* SubscriptionWidgetView.swift in Sources */,
 				1A6A0E982C4CDAE700C450FC /* SubscriptionWidget.swift in Sources */,
 				1A6A0E962C4CDA0E00C450FC /* SubscriptionWidgetProvider.swift in Sources */,
