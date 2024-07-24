@@ -23,9 +23,6 @@ struct SubscriptionWidgetViewModel: TimelineEntry {
         let subscribed = subscriptions.getAll()
         
         self.subscriptions = subscribed
-        
-//        print("❄️",self.subscriptions, DataStorageManager.shared.subscriptions)
-        DataStorageManager.shared.subscriptions
     }
     
     static func defaultEntry() -> SubscriptionWidgetViewModel {
