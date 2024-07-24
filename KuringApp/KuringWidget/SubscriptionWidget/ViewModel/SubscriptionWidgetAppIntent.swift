@@ -33,8 +33,6 @@ struct SubscriptionWidgetAppIntent: AppIntent {
    
     @MainActor
     func perform() async throws -> some IntentResult {
-        var subscriptions = DataStorageManager.shared.subscriptions
-        
         /// 선택된 프로바이더
         let selectedProvider = NoticeProvider.allNamesForPicker
             .filter { $0.key == selection }
