@@ -149,7 +149,6 @@
 				1A6A0E8D2C4CD9E200C450FC /* SubscriptionWidget.swift */,
 				1A6A0E882C4CD9E200C450FC /* Presentation */,
 				1A6A0E8C2C4CD9E200C450FC /* ViewModel */,
-				1A6A0EAD2C515BEE00C450FC /* New Group */,
 			);
 			path = SubscriptionWidget;
 			sourceTree = "<group>";
@@ -187,19 +186,12 @@
 			path = Feature;
 			sourceTree = "<group>";
 		};
-		1A6A0EAD2C515BEE00C450FC /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		1AFC6D842C43EF7A00696DE6 /* KuringWidget */ = {
 			isa = PBXGroup;
 			children = (
+				1AFC6D852C43EF7A00696DE6 /* KuringWidgetBundle.swift */,
 				1A6A0EAC2C515BE000C450FC /* Feature */,
 				1A6A0E8E2C4CD9E200C450FC /* SubscriptionWidget */,
-				1AFC6D852C43EF7A00696DE6 /* KuringWidgetBundle.swift */,
 				1AFC6D892C43EF7B00696DE6 /* Assets.xcassets */,
 				1AFC6D8B2C43EF7B00696DE6 /* Info.plist */,
 			);

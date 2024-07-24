@@ -23,7 +23,6 @@ struct SubscriptionWidgetView: View {
     /// 칼럼 수
     private let columns: [GridItem] = [.init(), .init(), .init(), .init()]
     
-    
     var body: some View {
         VStack {
             HStack {
