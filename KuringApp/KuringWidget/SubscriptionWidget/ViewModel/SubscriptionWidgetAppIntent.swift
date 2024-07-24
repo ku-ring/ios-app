@@ -21,8 +21,8 @@ struct SubscriptionWidgetAppIntent: AppIntent {
     @Parameter(title: "selection")
     var selection: String
     
-//    /// 공지 구독 레포지토리
-//    /// - note: `Dependecy`가 `Apple`과 `TCA`네이밍이 겹쳐서 외부로 분리
+    /// 공지 구독 레포지토리
+    /// - note: `Dependecy`가 `Apple`과 `TCA`네이밍이 겹쳐서 외부로 분리
     private let subscriptionProvider = WidgetSubscriponProvider()
     
     init() {}
