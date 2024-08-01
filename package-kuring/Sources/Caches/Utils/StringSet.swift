@@ -22,7 +22,6 @@ class StringSet {
     static let notificationUserInfo = "\(baseString).notification.userinfo"
     static let customNotification = "\(baseString).notification.custom"
     
-    static let fcmToken = "\(baseString).token.fcm"
     static let subscriptionToken = "\(baseString).subscription.token"
     static let subscribedCategories = "\(baseString).subscription.categories"
     
@@ -42,4 +41,9 @@ class StringSet {
     static let isOnboarding = "\(baseString).onboarding"
     
     static let recentSearch = "com.kuring.lite.recent.search"
+    
+    /// 앱 그룹
+    static let appGroup = "group.kuring.service"
+    /// 파이어베이스 토큰
+    static let fcmToken = "com.kuring.sdk.v2.token.fcm"
 }

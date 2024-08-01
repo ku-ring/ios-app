@@ -5,6 +5,7 @@
 
 import Models
 import Networks
+import WidgetKit
 import ComposableArchitecture
 
 @Reducer
@@ -120,6 +121,7 @@ public struct SubscriptionFeature {
                     do {
                         let results = try await [univSubscription, deptSubscription]
                         await send(.subscriptionResponse(!results.contains(false)))
+                        WidgetCenter.shared.reloadAllTimelines()
                     } catch {
                         await send(.subscriptionResponse(false))
                     }
