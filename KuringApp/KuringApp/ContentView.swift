@@ -83,11 +83,6 @@ struct ContentView: View {
         }
       }
       .tint(Color.Kuring.gray600)
-      
-      /// 팝업 추가
-      if PopupView.checkShowPopup() {
-        PopupView()
-      }
     }
   }
 }

@@ -12,33 +12,41 @@ import ComposableArchitecture
 public struct BotFeature {
     @ObservableState
     public struct State: Equatable {
-        public var chatInfo: ChatInfo = .init()  // 현재 입력 중인 질문과 그 답변의 상태를 저장하는 구조체
-        public var chatHistory: [ChatInfo] = []  // 이전의 질문과 답변을 저장하는 배열
+        public var chatInfo: ChatInfo = .init()
+        public var chatHistory: [ChatInfo] = []
         public var focus: Field? = .question
 
-
-        // 개별 채팅 정보를 나타내는 구조체
         public struct ChatInfo: Equatable {
-            public var question: String = ""      
-            public var answer: String = ""
+            public var limit: Int = 2
+            public var text: String = ""
+            public var messageType: MessageType = .question
             public var chatStatus: ChatStatus = .before
-
-            // 채팅 상태를 나타내는 열거형
-            public enum ChatStatus {
-                case before      // 질문 전 상태
-                case waiting     // 질문을 보내고 응답을 기다리는 상태
-                case complete    // 응답을 성공적으로 받은 상태
-                case failure     // 응답을 받지 못한 상태 (오류 발생)
+            
+            public enum MessageType: String, Equatable {
+                case question
+                case answer
             }
-
-            // 기본 초기화 함수
+            
+            public enum ChatStatus {
+                /// 질문 보내기 전
+                case before
+                /// 질문 보낸 후
+                case waiting
+                /// 답변 완료
+                case complete
+                /// 답변 실패
+                case failure
+            }
+            
             public init(
-                question: String = "",
-                answer: String = "",
+                limit: Int = 2,
+                text: String = "",
+                messageType: MessageType = .question,
                 chatStatus: ChatStatus = .before
             ) {
-                self.question = question
-                self.answer = answer
+                self.limit = limit
+                self.text = text
+                self.messageType = messageType
                 self.chatStatus = chatStatus
             }
         }
@@ -46,34 +54,27 @@ public struct BotFeature {
         public enum Field {
             case question
         }
-
-        // 기본 초기화 함수
+        
         public init(
             chatInfo: ChatInfo = .init(),
             chatHistory: [ChatInfo] = [],
             focus: Field? = .question
-
         ) {
             self.chatInfo = chatInfo
             self.chatHistory = chatHistory
             self.focus = focus
-
         }
     }
     
-   
-
-    // 사용자 동작을 정의하는 열거형
     public enum Action: BindableAction, Equatable {
-        case sendMessage  // 질문을 보내는 액션
-        case messageResponse(Result<String, ChatError>)  // 서버 응답을 받는 액션
-        case updateQuestion(String)  // 사용자가 질문을 입력할 때 상태를 업데이트하는 액션
-        case binding(BindingAction<State>)  // 상태 변경을 처리하는 액션
-
-        // 서버 오류를 정의하는 열거형
+        case sendMessage
+        case messageResponse(Result<String, ChatError>)
+        case updateQuestion(String)
+        case binding(BindingAction<State>)
+        
         public enum ChatError: Error, Equatable {
-            case serverError(Error)  // 서버 오류
-
+            case serverError(Error)
+            
             public static func == (lhs: ChatError, rhs: ChatError) -> Bool {
                 switch (lhs, rhs) {
                 case let (.serverError(lhsError), .serverError(rhsError)):
@@ -82,52 +83,47 @@ public struct BotFeature {
             }
         }
     }
-
-    // 종속성 (Dependencies)
-    //@Dependency(\.chatService) var chatService   질문을 서버로 보내고 응답을 받는 서비스
-
-    // 리듀서 본문
+    
     public var body: some ReducerOf<Self> {
-        BindingReducer()  // 상태 바인딩을 처리
-
+        BindingReducer()
+        
         Reduce { state, action in
             switch action {
             case .binding:
                 return .none
-
+                
             case .sendMessage:
-                guard !state.chatInfo.question.isEmpty else { return .none }  // 질문이 비어있지 않은지 확인
+                guard !state.chatInfo.text.isEmpty else { return .none }
                 state.focus = nil
-                state.chatInfo.chatStatus = .waiting  // 질문을 보내고 상태를 waiting으로 변경
-                return .run { [question = state.chatInfo.question] send in
+                state.chatInfo.chatStatus = .waiting
+                return .run { [question = state.chatInfo.text] send in
                     do {
-                       // let answer = try await chatService.sendQuestion(question)  // 질문을 보내고 응답을 기다림
-                        await send(.messageResponse(.success(question)))  // 응답을 성공적으로 받은 경우
+                        // let answer = try await chatService.sendQuestion(question)
+                        /// 임시 응답
+                        await send(.messageResponse(.success(question)))
                     } catch {
-                        await send(.messageResponse(.failure(.serverError(error))))  // 오류가 발생한 경우
+                        await send(.messageResponse(.failure(.serverError(error))))
                     }
                 }
-
+                
             case let .messageResponse(.success(answer)):
-                state.chatInfo.answer = answer  // 받은 답변을 상태에 저장
-                state.chatInfo.chatStatus = .complete  // 상태를 complete로 변경
-                state.chatHistory.append(state.chatInfo)  // 현재 채팅 정보를 히스토리에 추가
-                state.chatInfo = .init()  // 현재 채팅 정보를 초기화
+                state.chatInfo.text = answer
+                state.chatInfo.chatStatus = .complete
+                state.chatHistory.append(state.chatInfo)
+                state.chatInfo = .init()
                 return .none
-
+                
             case let .messageResponse(.failure(error)):
-                state.chatInfo.chatStatus = .failure  // 상태를 failure로 변경
-                print(error.localizedDescription)  // 오류 메시지 출력
+                state.chatInfo.chatStatus = .failure
+                print(error.localizedDescription)
                 return .none
-
+                
             case let .updateQuestion(question):
-                state.chatInfo.question = question  // 사용자가 입력한 질문을 상태에 저장
+                state.chatInfo.text = question
                 return .none
             }
         }
     }
-
+    
     public init() { }
 }
-
-    
