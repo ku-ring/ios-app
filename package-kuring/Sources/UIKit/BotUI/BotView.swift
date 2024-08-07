@@ -9,7 +9,6 @@ import SwiftUI
 import ComposableArchitecture
 import ColorSet
 import BotFeatures
-import TipKit
 
 public struct BotView: View {
     @Bindable var store: StoreOf<BotFeature>
@@ -152,13 +151,6 @@ public struct BotView: View {
     
     public init(store: StoreOf<BotFeature>) {
         self.store = store
-    }
-}
-
-struct InfoTip: Tip {
-    var title: Text {
-        Text(" ・ 쿠링봇은 2024년 6월 이후의 공지사항 내용을 기준으로 답변할 수 있어요.\n")
-        + Text(" ・ 테스트 기간인 관계로 한 달에 2회까지만 질문 가능해요.")
     }
 }
 
