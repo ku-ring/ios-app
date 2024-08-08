@@ -6,10 +6,19 @@
 import SwiftUI
 import ComposableArchitecture
 import ColorSet
+import Networks
+import Dependencies
 
 struct SendPopup: View {
     @Binding var isVisible: Bool
     var onSendAction: () -> Void
+    @Dependency(\.kuringLink) private var kuringLink
+    
+    var fcmToken: String = ""
+    
+    @StateObject private var sseClient = SSEClient(content: "교내,외 장학금 및 학자금 대출 관련 전화번호들을 안내를 해줘", temp: 0.7)
+
+    
     
     var body: some View {
         ZStack {
@@ -63,6 +72,12 @@ struct SendPopup: View {
         Button {
             isVisible = false
             onSendAction()
+            sseClient.start()
+            
+            if let error = sseClient.error {
+                           print("Error: \(error.localizedDescription)")
+                       }
+            
         } label: {
             Text("전송하기")
                 .foregroundStyle(Color.Kuring.primary)

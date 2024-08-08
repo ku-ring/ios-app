@@ -103,7 +103,7 @@ public struct BotView: View {
     
     private var inputView: some View {
         HStack(alignment: .bottom, spacing: 12) {
-            TextField("질문을 입력해주세요", text: $store.chatInfo.question.limit(to: 300), axis: .vertical)
+            TextField("질문을 입력해주세요", text: $store.chatInfo.text.limit(to: 300), axis: .vertical)
                 .lineLimit(5)
                 .focused($isInputFocused)
                 .padding(.horizontal)
@@ -141,10 +141,10 @@ public struct BotView: View {
         SendPopup(isVisible: $isSendPopupVisible) {
             if messageCountRemaining > 0 {
                 messageCountRemaining -= 1
-                let userMessage = Message(text: store.chatInfo.question, type: .question, sendCount: messageCountRemaining)
+                let userMessage = Message(text: store.chatInfo.text, type: .question, sendCount: messageCountRemaining)
                 let botResponse = Message(text: "자동 응답입니다.", type: .answer, sendCount: messageCountRemaining)
                 chatMessages.append(contentsOf: [userMessage, botResponse])
-                store.chatInfo.question = ""
+                store.chatInfo.text = ""
             }
         }
     }

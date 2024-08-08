@@ -204,7 +204,8 @@ extension KuringLink: DependencyKey {
                     )
                 }
             return NoticeProvider.departments
-        }, registerAuthorization: {
+        }, 
+        registerAuthorization: {
             let response: EmptyResponse = try await satellite
                 .response(
                     for: Path.registerAuthorization.path,
@@ -216,6 +217,21 @@ extension KuringLink: DependencyKey {
                 )
             let isSucceed = (200 ..< 300) ~= response.code
             return isSucceed
+        },
+        getBotMessage: { question , accessToken in
+            let url = URL(string: "https://kuring.herokuapp.com/api/v2/ai/messages")!
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.setValue("text/event-stream", forHTTPHeaderField: "Accept")
+            request.setValue(accessToken, forHTTPHeaderField: "User-Token")
+            request.setValue(question, forHTTPHeaderField: "question")
+
+            let (data, _) = try await URLSession.shared.data(for: request)
+            let messages = String(data: data, encoding: .utf8)?
+                .map(String.init)
+                ?? []
+
+            return messages
         }
     )
 }
@@ -301,8 +317,12 @@ extension KuringLink {
                     category: .학과
                 )
             ]
-        }, registerAuthorization: {
+        }, 
+        registerAuthorization: {
             return true
-        }
+    },  
+        getBotMessage: { _, _ in
+        ["test message 1", "test message 2"]
+    }
     )
 }
