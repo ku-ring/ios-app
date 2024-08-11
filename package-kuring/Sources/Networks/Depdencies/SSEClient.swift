@@ -1,55 +1,69 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
 import Foundation
+import Models
 import SwiftUI
 import Combine
 
 public class SSEClient: NSObject, ObservableObject, URLSessionDataDelegate {
-    @Published public var messages: [String] = []
+    @Published public var botMessage: String = ""
     @Published public var error: Error?
-    
-    private var content: String
-    private var temp: Double
-    
-    public var url: URL
-    public var session: URLSession?
+    public var sendMessage: ((String) -> Void)?
+    private var url: URL
+    private var session: URLSession?
     public var task: URLSessionDataTask?
-    private var testableFCMToken: String = "cZSHjO4_bUjirvsrxWzig5:APA91bHPojABL5oEXi5AcjJ8v4Vcp3KpJfFUD_3b--xiMTWbrk-QKuc4Nrxd_BhEArO7Svo"
-
-    public init(content: String, temp: Double) {
-        self.content = content
-        self.temp = temp
+    private var testableFCMToken: String = Date().description
+    
+    public override init() {
         
-        let encodedContent = content.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        self.url = URL(string: "https://kuring.herokuapp.com/api/v2/ai/messages?question=\(encodedContent)")!
+        let plistURL = Bundle.module.url(forResource: "KuringLink-Info", withExtension: "plist")!
+        let dict = try! NSDictionary(contentsOf: plistURL, error: ())
         
+        let apiHost = dict["API_HOST"] as? String ?? ""
+        let usingHttps = (dict["USING_HTTPS"] as? Bool) ?? true
+        let scheme = usingHttps ? "https" : "http"
+        
+        let urlString = "\(scheme)://\(apiHost)/api/v2/ai/messages"
+        
+        guard let url = URL(string: urlString) else {
+            fatalError("Invalid URL string: \(urlString)")
+        }
+        
+        self.url = url
         super.init()
     }
     
-    public func start() {
-        print("SSEClient: Starting SSE connection with URL: \(url)")
+    public func sessionStart(question: String) {
+        let encodedQuestion = question.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let queryURL = URL(string: "\(url.absoluteString)?question=\(encodedQuestion)")!
         
         let sessionConfiguration = URLSessionConfiguration.default
-        sessionConfiguration.timeoutIntervalForRequest = 60
-        
         session = URLSession(configuration: sessionConfiguration, delegate: self, delegateQueue: nil)
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: queryURL)
+        
         request.httpMethod = "GET"
         request.setValue("text/event-stream", forHTTPHeaderField: "Accept")
         request.setValue(testableFCMToken, forHTTPHeaderField: "User-Token")
-        
-        print("SSEClient: URLRequest - Headers: \(request.allHTTPHeaderFields ?? [:]), Method: \(request.httpMethod ?? "")")
+        request.setValue("no-cache", forHTTPHeaderField: "Cache-Control")
         
         task = session?.dataTask(with: request)
         task?.resume()
     }
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        self.botMessage = ""
         if let message = String(data: data, encoding: .utf8) {
-            DispatchQueue.main.async {
-                self.messages.append(message)
+            let processedMessage = message
+                .components(separatedBy: .newlines)
+                .map { $0.replacingOccurrences(of: "data:", with: "") }
+                .joined()
+            
+            DispatchQueue.main.sync {
+                self.sendMessage?(processedMessage)
             }
-            print("SSEClient: Received SSE message:\n\(message)")
-        } else {
-            print("SSEClient: Received data could not be converted to String.")
         }
     }
     

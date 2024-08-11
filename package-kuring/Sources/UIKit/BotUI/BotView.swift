@@ -1,13 +1,12 @@
 //
-//  SwiftUIView.swift
-//
-//
-//  Created by 최효원 on 8/5/24.
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
 //
 
 import SwiftUI
 import ComposableArchitecture
 import ColorSet
+import Networks
 import BotFeatures
 
 public struct BotView: View {
@@ -15,8 +14,6 @@ public struct BotView: View {
     @FocusState private var isInputFocused: Bool
     @State private var isPopoverVisible = false
     @State private var isSendPopupVisible = false
-    @State private var messageCountRemaining = 2
-    @State private var chatMessages: [Message] = []
     
     public var body: some View {
         ZStack {
@@ -94,8 +91,8 @@ public struct BotView: View {
     }
     
     private var chatView: some View {
-        if !chatMessages.isEmpty {
-            AnyView(ChatView(messages: chatMessages))
+        if !store.state.chatHistory.isEmpty {
+            AnyView(ChatView(store: self.store))
         } else {
             AnyView(ChatEmptyView())
         }
@@ -109,12 +106,11 @@ public struct BotView: View {
                 .padding(.horizontal)
                 .padding(.vertical, 12)
                 .overlay(RoundedRectangle(cornerRadius: 20).strokeBorder(Color.Kuring.gray200, style: StrokeStyle(lineWidth: 1.0)))
-                .disabled(messageCountRemaining == 0)
             
             sendButton
         }
         .padding(.horizontal, 20)
-        .disabled(messageCountRemaining == 0)
+        .disabled($store.chatInfo.limit.wrappedValue == 0)
     }
     
     private var sendButton: some View {
@@ -139,12 +135,10 @@ public struct BotView: View {
     
     private var sendPopup: some View {
         SendPopup(isVisible: $isSendPopupVisible) {
-            if messageCountRemaining > 0 {
-                messageCountRemaining -= 1
-                let userMessage = Message(text: store.chatInfo.text, type: .question, sendCount: messageCountRemaining)
-                let botResponse = Message(text: "자동 응답입니다.", type: .answer, sendCount: messageCountRemaining)
-                chatMessages.append(contentsOf: [userMessage, botResponse])
-                store.chatInfo.text = ""
+            store.send(.addQuestion(store.state.chatInfo.text))
+            DispatchQueue.main.async {
+                store.send(.sendMessage)
+                
             }
         }
     }
@@ -164,14 +158,4 @@ extension Binding where Value == String {
         }
         return self
     }
-}
-
-
-#Preview {
-    BotView(
-        store: Store(
-            initialState: BotFeature.State(),
-            reducer: { BotFeature() }
-        )
-    )
 }

@@ -76,8 +76,4 @@ public struct KuringLink {
     /// 계정 정보 등록
     public var registerAuthorization: () async throws -> Bool
     
-    // MARK: - Bot
-    
-    /// 쿠링봇 AI 답변 가져오기
-    public var getBotMessage: (String, String) async throws -> [String]
 }
