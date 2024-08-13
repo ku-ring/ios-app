@@ -9,8 +9,6 @@ import Networks
 
 @Reducer
 public struct BotFeature {
-    private var sseClient = SSEClient()
-    
     @ObservableState
     public struct State: Equatable {
         public var chatInfo: ChatInfo = .init()
@@ -97,7 +95,7 @@ public struct BotFeature {
                 state.chatInfo.chatStatus = .waiting
                 return .run { [question = state.chatInfo.text] send in
                     do {
-                        sseClient.sessionStart(question: question)
+                        SSEClient.shared.sessionStart(question: question)
                         
                         /// 작업이 취소되거나 완료되기 전까지 send가 호출되지 않도록 보장
                         await withTaskCancellationHandler {
@@ -105,7 +103,7 @@ public struct BotFeature {
                             
                             ///서버로부터 받은 메시지들을 비동기 스트림으로 처리
                             let stream = AsyncStream<String> { continuation in
-                                sseClient.sendMessage = { message in
+                                SSEClient.shared.sendMessage = { message in
                                     continuation.yield(message)
                                 }
                             }
@@ -115,7 +113,7 @@ public struct BotFeature {
                             }
                             
                         } onCancel: {
-                            sseClient.task?.cancel()
+                            SSEClient.shared.task?.cancel()
                         }
                         
                     } catch {
@@ -124,7 +122,7 @@ public struct BotFeature {
                 }
                 
             case let .messageResponse(.success(message)):
-                if let lastMessage = state.chatHistory.last, lastMessage.type == .answer{
+                if let lastMessage = state.chatHistory.last, lastMessage.type == .answer {
                     state.chatHistory[state.chatHistory.count - 1].text += message
                 } else {
                     state.chatInfo.text = message

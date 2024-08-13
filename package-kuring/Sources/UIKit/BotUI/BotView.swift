@@ -90,11 +90,12 @@ public struct BotView: View {
         .presentationCompactAdaptation(.popover)
     }
     
+    @ViewBuilder
     private var chatView: some View {
         if !store.state.chatHistory.isEmpty {
-            AnyView(ChatView(store: self.store))
+            ChatView(store: self.store)
         } else {
-            AnyView(ChatEmptyView())
+            ChatEmptyView()
         }
     }
     
@@ -136,10 +137,7 @@ public struct BotView: View {
     private var sendPopup: some View {
         SendPopup(isVisible: $isSendPopupVisible) {
             store.send(.addQuestion(store.state.chatInfo.text))
-            DispatchQueue.main.async {
-                store.send(.sendMessage)
-                
-            }
+            store.send(.sendMessage)
         }
     }
     

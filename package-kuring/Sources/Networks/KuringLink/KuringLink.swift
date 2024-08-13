@@ -75,5 +75,4 @@ public struct KuringLink {
     public var getAllDepartments: () async throws -> [NoticeProvider]
     /// 계정 정보 등록
     public var registerAuthorization: () async throws -> Bool
-    
 }

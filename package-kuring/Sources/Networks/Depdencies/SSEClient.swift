@@ -7,18 +7,20 @@ import Foundation
 import Models
 import SwiftUI
 import Combine
+import os.log
 
 public class SSEClient: NSObject, ObservableObject, URLSessionDataDelegate {
     @Published public var botMessage: String = ""
     @Published public var error: Error?
     public var sendMessage: ((String) -> Void)?
+    public static let shared = SSEClient()
+    public var task: URLSessionDataTask?
     private var url: URL
     private var session: URLSession?
-    public var task: URLSessionDataTask?
     private var testableFCMToken: String = Date().description
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "SSEClient")
     
-    public override init() {
-        
+    public override init(){
         let plistURL = Bundle.module.url(forResource: "KuringLink-Info", withExtension: "plist")!
         let dict = try! NSDictionary(contentsOf: plistURL, error: ())
         
@@ -28,9 +30,7 @@ public class SSEClient: NSObject, ObservableObject, URLSessionDataDelegate {
         
         let urlString = "\(scheme)://\(apiHost)/api/v2/ai/messages"
         
-        guard let url = URL(string: urlString) else {
-            fatalError("Invalid URL string: \(urlString)")
-        }
+        let url = URL(string: urlString)!
         
         self.url = url
         super.init()
@@ -69,13 +69,10 @@ public class SSEClient: NSObject, ObservableObject, URLSessionDataDelegate {
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let error = error {
-            print("SSEClient: SSE connection error: \(error.localizedDescription)")
-            DispatchQueue.main.async {
+            Task { @MainActor in
                 self.error = error
+                logger.error("SSEClient: SSE connection error: \(error.localizedDescription)")
             }
-        } else {
-            print("SSEClient: SSE connection completed without error.")
         }
     }
 }
-
