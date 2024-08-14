@@ -3,7 +3,6 @@
 // See the 'License.txt' file for licensing information.
 //
 
-import Foundation
 import ComposableArchitecture
 import Networks
 import SwiftData
@@ -18,15 +17,18 @@ public struct BotFeature {
         public var chatInfo: ChatInfo = .init()
         public var chatHistory: [ChatInfo] = []
         public var focus: Field? = .question
+        public var isLoading: Bool = false
         
         public init(
             chatInfo: ChatInfo = .init(),
             chatHistory: [ChatInfo] = [],
-            focus: Field? = .question
+            focus: Field? = .question,
+            isLoading: Bool = false
         ){
             self.chatInfo = chatInfo
             self.chatHistory = chatHistory
             self.focus = focus
+            self.isLoading = isLoading
         }
         
         var fetchDescriptor: FetchDescriptor<ChatInfo> {
@@ -46,10 +48,10 @@ public struct BotFeature {
     }
     
     public enum Action: BindableAction, Equatable {
-        case sendMessage
-        case addQuestion(String)
-        case messageResponse(Result<String, ChatError>)
         case binding(BindingAction<State>)
+        case sendMessage
+        case messageResponse(Result<String, ChatError>)
+        case addQuestion(String)
         case queryChanged([ChatInfo])
         case onAppear
         
@@ -76,8 +78,7 @@ public struct BotFeature {
                 
             case .sendMessage:
                 state.focus = nil
-                state.chatInfo.chatStatus = .waiting
-                
+                state.isLoading = true
                 return .run { [question = state.chatInfo.text] send in
                     do {
                         SSEClient.shared.sessionStart(question: question)
@@ -107,34 +108,38 @@ public struct BotFeature {
                 }
                 
             case let .messageResponse(.success(message)):
+                state.isLoading = false
                 if let lastMessage = state.chatHistory.last, lastMessage.type == .answer {
                     state.chatHistory[state.chatHistory.count - 1].text += message
-                } else {
-                    let newResponse = ChatInfo(
-                        index: state.chatHistory.count + 1,
-                        text: message,
-                        type: .answer,
-                        chatStatus: .complete
-                    )
-                    state.chatHistory.append(newResponse)
-                    do { try context.add(newResponse) } catch {}
+                    state.chatHistory[state.chatHistory.count - 1].chatStatus = .complete
                 }
                 return .none
                 
             case let .messageResponse(.failure(error)):
-                state.chatInfo.chatStatus = .failure
                 print(error.localizedDescription)
                 return .none
                 
             case let .addQuestion(question):
                 let newQuestion = ChatInfo(
-                    index: state.chatHistory.count + 1,
+                    index: state.chatHistory.count,
                     text: question,
                     type: .question,
                     chatStatus: .complete
                 )
-                do { try context.add(newQuestion) } catch {}
+                
                 state.chatHistory.append(newQuestion)
+                do { try context.add(newQuestion) } catch {}
+                
+                let newResponse = ChatInfo(
+                    index: state.chatHistory.count,
+                    text: "",
+                    type: .answer,
+                    chatStatus: .waiting
+                )
+                
+                state.chatHistory.append(newResponse)
+                do { try context.add(newResponse) } catch {}
+    
                 return .none
                 
             case .queryChanged(let newMessage):

@@ -7,16 +7,15 @@ import SwiftData
 import Dependencies
 import Models
 import SwiftUI
-import Foundation
 
 public struct BotDataBase {
     public var fetch: @Sendable (FetchDescriptor<ChatInfo>) throws -> [ChatInfo]
     public var add: @Sendable (ChatInfo) throws -> Void
-    public var update: @Sendable (ChatInfo) throws -> Void
+    public var delete: @Sendable (ChatInfo) throws -> Void
     
     public enum BotError: Error {
         case add
-        case update
+        case delete
     }
 }
 
@@ -28,21 +27,24 @@ extension BotDataBase: DependencyKey {
             return try botContext.fetch(descriptor)
         },
         add: { model in
-            @Dependency(\.swiftData.context) var modelContext
-            let botContext = try modelContext()
-            botContext.insert(model)
-            try botContext.save()
-        },
-        update: { model in
-            @Dependency(\.swiftData.context) var modelContext
-            let botContext = try modelContext()
-            let modelID = model.index
-            /// index 일치 확인
-            if let existing = try botContext.fetch(FetchDescriptor<ChatInfo>(predicate: #Predicate<ChatInfo> { $0.index == modelID })).first {
-                existing.text = model.text
+            do {
+                @Dependency(\.swiftData.context) var modelContext
+                let botContext = try modelContext()
+                botContext.insert(model)
                 try botContext.save()
-            } else {
-                throw BotError.update
+            } catch {
+                throw BotError.add
+            }
+        },
+        delete: { model in
+            do {
+                @Dependency(\.swiftData.context) var modelContext
+                let botContext = try modelContext()
+                
+                let modelToBeDelete = model
+                botContext.delete(modelToBeDelete)
+            } catch {
+                throw BotError.delete
             }
         }
     )
@@ -54,13 +56,13 @@ extension BotDataBase: TestDependencyKey {
     public static let testValue = Self(
         fetch: unimplemented("\(Self.self).fetchDescriptor"),
         add: unimplemented("\(Self.self).add"),
-        update: unimplemented("\(Self.self).update")
+        delete: unimplemented("\(Self.self).delete")
     )
     
     public static let noop = Self(
         fetch: { _ in [] },
         add: { _ in },
-        update: { _ in }
+        delete: { _ in }
     )
 }
 

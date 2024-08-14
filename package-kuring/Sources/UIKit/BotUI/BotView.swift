@@ -7,9 +7,7 @@ import SwiftUI
 import ComposableArchitecture
 import ColorSet
 import Networks
-import Models
 import SwiftData
-import Caches
 import BotFeatures
 
 public struct BotView: View {
@@ -18,6 +16,7 @@ public struct BotView: View {
     @State private var isPopoverVisible = false
     @State private var isSendPopupVisible = false
     @State private var tempInputText: String = ""
+    @State private var isLoading = false
     
     public var body: some View {
         ZStack {
@@ -118,7 +117,7 @@ public struct BotView: View {
             sendButton
         }
         .padding(.horizontal, 20)
-        .disabled(store.chatHistory.count == 4)
+//        .disabled(store.chatHistory.count >= 4)
     }
     
     private var sendButton: some View {
@@ -132,7 +131,7 @@ public struct BotView: View {
                 .scaledToFit()
                 .frame(width: 40, height: 40)
         }
-        .disabled(store.chatHistory.count == 4)
+//        .disabled(store.chatHistory.count >= 4)
     }
     
     private var infoText: some View {
@@ -144,9 +143,11 @@ public struct BotView: View {
     
     private var sendPopup: some View {
         SendPopup(isVisible: $isSendPopupVisible) {
+            isLoading = true
             store.send(.addQuestion(tempInputText))
             tempInputText = ""
             store.send(.sendMessage)
+            isLoading = false
         }
     }
     

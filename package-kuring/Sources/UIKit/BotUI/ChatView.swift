@@ -9,7 +9,6 @@ import ComposableArchitecture
 import Lottie
 import BotFeatures
 import Models
-import Caches
 import SwiftData
 
 struct ChatView: View {
@@ -20,42 +19,43 @@ struct ChatView: View {
         ScrollView {
             VStack(alignment: .center, spacing: 16) {
                 ForEach(store.chatHistory) { chat in
-                    HStack(alignment: .top) {
-                        if chat.type == .question {
-                            Spacer()
-                            messageBubble(for: chat)
-                            userImage(for: chat.type)
-                        } else {
-                            userImage(for: chat.type)
-                            chatStatusView(for: chat)
-                            Spacer()
-                        }
-                    }
-                    .padding(chat.type == .question ? .trailing : .leading, 16)
+                    chatRow(for: chat)
                     if chat.type == .answer {
-                        possibleCountText(for: 2 - (chat.index / 2))
+                        /// 질문 가능 횟수
+                        possibleCountText(for: 2 - (chat.index / 2) + 1)
                     }
                 }
                 Spacer()
             }
             .padding(.bottom, 5)
-            
         }
-        /// query 변경 감지
-        .onChange(of: self.chatQuery, initial: true) {_, newValue in
+        .onChange(of: self.chatQuery, initial: true) { _, newValue in
             store.send(.queryChanged(newValue))
         }
     }
-    
+
     @ViewBuilder
-    private func chatStatusView(for message: ChatInfo) -> some View {
-        switch message.chatStatus {
-        case .waiting:
+    private func chatRow(for chat: ChatInfo) -> some View {
+        HStack(alignment: .top) {
+            if chat.type == .question {
+                Spacer()
+                messageBubble(for: chat)
+                userImage(for: chat.type)
+            } else {
+                userImage(for: chat.type)
+                responseContentView(for: chat)
+                Spacer()
+            }
+        }
+        .padding(chat.type == .question ? .trailing : .leading, 16)
+    }
+
+    @ViewBuilder
+    private func responseContentView(for chat: ChatInfo) -> some View {
+        if chat.index == store.chatHistory.count - 1, store.state.isLoading {
             lottieView
-        case .complete:
-            messageBubble(for: message)
-        default:
-            lottieView
+        } else {
+            messageBubble(for: chat)
         }
     }
     
@@ -63,8 +63,7 @@ struct ChatView: View {
         LottieView(animation: .named("animation_loading.json", bundle: Bundle.bots))
             .playing()
             .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 100, height: 100)
+            .frame(width: 70, alignment: .leading)
     }
     
     private func messageBubble(for message: ChatInfo) -> some View {
@@ -93,13 +92,13 @@ struct ChatView: View {
     }
     
     private func possibleCountText(for sendCount: Int) -> some View {
-        let currentDate = formattedCurrentDate()
+        let currentDate = formattedCurrentDate
         return Text("질문 가능 횟수 \(sendCount)회 (\(currentDate) 기준)")
             .font(.system(size: 12, weight: .medium))
             .foregroundStyle(sendCount == 0 ? Color.Kuring.warning : Color.Kuring.caption1)
     }
     
-    private func formattedCurrentDate() -> String {
+    private var formattedCurrentDate: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         return dateFormatter.string(from: Date())
