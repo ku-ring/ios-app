@@ -13,10 +13,10 @@ import BotFeatures
 public struct BotView: View {
     @Bindable var store: StoreOf<BotFeature>
     @FocusState private var isInputFocused: Bool
+    @Environment(\.dismiss) private var dismiss
     @State private var isPopoverVisible = false
     @State private var isSendPopupVisible = false
     @State private var tempInputText: String = ""
-    @State private var isLoading = false
     
     public var body: some View {
         ZStack {
@@ -43,6 +43,7 @@ public struct BotView: View {
         .onAppear {
             store.send(.onAppear)
         }
+        .navigationBarBackButtonHidden()
     }
     
     private var headerView: some View {
@@ -58,12 +59,12 @@ public struct BotView: View {
     
     private var backButton: some View {
         Button {
-            // 뒤로 가기 버튼 동작 구현
+            dismiss()
         } label: {
             Image(systemName: "chevron.backward")
                 .padding()
-                .frame(width: 20, height: 11)
-                .foregroundStyle(Color.black)
+                .frame(width: 30, height: 20)
+                .foregroundStyle(Color.Kuring.gray400)
         }
     }
     
@@ -117,7 +118,7 @@ public struct BotView: View {
             sendButton
         }
         .padding(.horizontal, 20)
-//        .disabled(store.chatHistory.count >= 4)
+        .disabled(store.chatHistory.count >= 4)
     }
     
     private var sendButton: some View {
@@ -131,7 +132,7 @@ public struct BotView: View {
                 .scaledToFit()
                 .frame(width: 40, height: 40)
         }
-//        .disabled(store.chatHistory.count >= 4)
+        .disabled(store.chatHistory.count >= 4)
     }
     
     private var infoText: some View {
@@ -143,11 +144,9 @@ public struct BotView: View {
     
     private var sendPopup: some View {
         SendPopup(isVisible: $isSendPopupVisible) {
-            isLoading = true
             store.send(.addQuestion(tempInputText))
             tempInputText = ""
             store.send(.sendMessage)
-            isLoading = false
         }
     }
     

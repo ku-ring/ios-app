@@ -14,6 +14,7 @@ import SwiftData
 struct ChatView: View {
     @Bindable var store: StoreOf<BotFeature>
     @Query(FetchDescriptor<ChatInfo>()) var chatQuery: [ChatInfo]
+    @State private var limit = 2
     
     var body: some View {
         ScrollView {
@@ -22,7 +23,7 @@ struct ChatView: View {
                     chatRow(for: chat)
                     if chat.type == .answer {
                         /// 질문 가능 횟수
-                        possibleCountText(for: 2 - (chat.index / 2) + 1)
+                        possibleCountText(for: calculateSendCount(for: chat.index))
                     }
                 }
                 Spacer()
@@ -33,7 +34,7 @@ struct ChatView: View {
             store.send(.queryChanged(newValue))
         }
     }
-
+    
     @ViewBuilder
     private func chatRow(for chat: ChatInfo) -> some View {
         HStack(alignment: .top) {
@@ -49,7 +50,7 @@ struct ChatView: View {
         }
         .padding(chat.type == .question ? .trailing : .leading, 16)
     }
-
+    
     @ViewBuilder
     private func responseContentView(for chat: ChatInfo) -> some View {
         if chat.index == store.chatHistory.count - 1, store.state.isLoading {
@@ -91,11 +92,15 @@ struct ChatView: View {
             .overlay(Circle().stroke(Color.Kuring.gray300, lineWidth: 0.1))
     }
     
-    private func possibleCountText(for sendCount: Int) -> some View {
+    private func possibleCountText(for limit: Int) -> some View {
         let currentDate = formattedCurrentDate
-        return Text("질문 가능 횟수 \(sendCount)회 (\(currentDate) 기준)")
+        return Text("질문 가능 횟수 \(limit)회 (\(currentDate) 기준)")
             .font(.system(size: 12, weight: .medium))
-            .foregroundStyle(sendCount == 0 ? Color.Kuring.warning : Color.Kuring.caption1)
+            .foregroundStyle(limit == 0 ? Color.Kuring.warning : Color.Kuring.caption1)
+    }
+    
+    private func calculateSendCount(for index: Int) -> Int {
+        return index == 3 ? 0 : index == 1 ? 1 : 0
     }
     
     private var formattedCurrentDate: String {
