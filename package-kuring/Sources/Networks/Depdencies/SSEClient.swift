@@ -17,8 +17,8 @@ public class SSEClient: NSObject, ObservableObject, URLSessionDataDelegate {
     private var url: URL
     private var session: URLSession?
     private var testableFCMToken: String = Date().description
-    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "SSEClient")
-    
+    private let logger = Logger(subsystem: "Network", category: "SSEClient")
+
     public override init() {
         let plistURL = Bundle.module.url(forResource: "KuringLink-Info", withExtension: "plist")!
         let dict = try! NSDictionary(contentsOf: plistURL, error: ())
@@ -70,7 +70,7 @@ public class SSEClient: NSObject, ObservableObject, URLSessionDataDelegate {
         if let error = error {
             Task { @MainActor in
                 self.error = error
-                private let logger = Logger(subsystem: "Network", category: "SSEClient")
+                logger.error("SSEClient: SSE connection error: \(error.localizedDescription)")
             }
         }
     }
