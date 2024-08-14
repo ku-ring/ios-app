@@ -3,11 +3,10 @@
 // See the 'License.txt' file for licensing information.
 //
 
-import Foundation
 import Models
 import SwiftUI
 import Combine
-import os.log
+import OSLog
 
 public class SSEClient: NSObject, ObservableObject, URLSessionDataDelegate {
     @Published public var botMessage: String = ""
@@ -20,7 +19,7 @@ public class SSEClient: NSObject, ObservableObject, URLSessionDataDelegate {
     private var testableFCMToken: String = Date().description
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "SSEClient")
     
-    public override init(){
+    public override init() {
         let plistURL = Bundle.module.url(forResource: "KuringLink-Info", withExtension: "plist")!
         let dict = try! NSDictionary(contentsOf: plistURL, error: ())
         
@@ -71,7 +70,7 @@ public class SSEClient: NSObject, ObservableObject, URLSessionDataDelegate {
         if let error = error {
             Task { @MainActor in
                 self.error = error
-                logger.error("SSEClient: SSE connection error: \(error.localizedDescription)")
+                private let logger = Logger(subsystem: "Network", category: "SSEClient")
             }
         }
     }
