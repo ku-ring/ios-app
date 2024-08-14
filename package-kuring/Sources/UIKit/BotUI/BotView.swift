@@ -7,6 +7,9 @@ import SwiftUI
 import ComposableArchitecture
 import ColorSet
 import Networks
+import Models
+import SwiftData
+import Caches
 import BotFeatures
 
 public struct BotView: View {
@@ -14,6 +17,7 @@ public struct BotView: View {
     @FocusState private var isInputFocused: Bool
     @State private var isPopoverVisible = false
     @State private var isSendPopupVisible = false
+    @State private var tempInputText: String = ""
     
     public var body: some View {
         ZStack {
@@ -36,6 +40,9 @@ public struct BotView: View {
                     .transition(.opacity)
                     .zIndex(1)
             }
+        }
+        .onAppear {
+            store.send(.onAppear)
         }
     }
     
@@ -101,7 +108,7 @@ public struct BotView: View {
     
     private var inputView: some View {
         HStack(alignment: .bottom, spacing: 12) {
-            TextField("질문을 입력해주세요", text: $store.chatInfo.text.limit(to: 300), axis: .vertical)
+            TextField("질문을 입력해주세요", text: $tempInputText.limit(to: 300), axis: .vertical)
                 .lineLimit(5)
                 .focused($isInputFocused)
                 .padding(.horizontal)
@@ -111,7 +118,7 @@ public struct BotView: View {
             sendButton
         }
         .padding(.horizontal, 20)
-        .disabled($store.chatInfo.limit.wrappedValue == 0)
+        .disabled(store.chatHistory.count == 4)
     }
     
     private var sendButton: some View {
@@ -125,6 +132,7 @@ public struct BotView: View {
                 .scaledToFit()
                 .frame(width: 40, height: 40)
         }
+        .disabled(store.chatHistory.count == 4)
     }
     
     private var infoText: some View {
@@ -136,7 +144,8 @@ public struct BotView: View {
     
     private var sendPopup: some View {
         SendPopup(isVisible: $isSendPopupVisible) {
-            store.send(.addQuestion(store.state.chatInfo.text))
+            store.send(.addQuestion(tempInputText))
+            tempInputText = ""
             store.send(.sendMessage)
         }
     }

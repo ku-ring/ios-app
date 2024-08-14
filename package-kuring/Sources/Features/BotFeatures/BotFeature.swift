@@ -6,6 +6,10 @@
 import Foundation
 import ComposableArchitecture
 import Networks
+import SwiftData
+import Models
+import Dependencies
+import Caches
 
 @Reducer
 public struct BotFeature {
@@ -15,54 +19,30 @@ public struct BotFeature {
         public var chatHistory: [ChatInfo] = []
         public var focus: Field? = .question
         
-        public struct ChatInfo: Equatable, Hashable {
-            public var limit: Int = 2
-            public var text: String = ""
-            public var type: MessageType = .question
-            public var chatStatus: ChatStatus = .before
-            
-            public enum MessageType: String, Equatable {
-                case question
-                case answer
-            }
-            
-            public enum ChatStatus {
-                /// 질문 보내기 전
-                case before
-                /// 질문 보낸 후
-                case waiting
-                /// 답변 완료
-                case complete
-                /// 답변 실패
-                case failure
-            }
-            
-            public init(
-                limit: Int = 2,
-                text: String = "",
-                type: MessageType = .question,
-                chatStatus: ChatStatus = .before
-            ) {
-                self.limit = limit
-                self.text = text
-                self.type = type
-                self.chatStatus = chatStatus
-            }
-        }
-        
-        public enum Field {
-            case question
-        }
-        
         public init(
             chatInfo: ChatInfo = .init(),
             chatHistory: [ChatInfo] = [],
             focus: Field? = .question
-        ) {
+        ){
             self.chatInfo = chatInfo
             self.chatHistory = chatHistory
             self.focus = focus
         }
+        
+        var fetchDescriptor: FetchDescriptor<ChatInfo> {
+            return .init()
+        }
+        
+        mutating func refetchChat() {
+            @Dependency(\.bots) var context
+            do {
+                self.chatHistory = try context.fetch(self.fetchDescriptor)
+            } catch {}
+        }
+    }
+    
+    public enum Field {
+        case question
     }
     
     public enum Action: BindableAction, Equatable {
@@ -70,6 +50,8 @@ public struct BotFeature {
         case addQuestion(String)
         case messageResponse(Result<String, ChatError>)
         case binding(BindingAction<State>)
+        case queryChanged([ChatInfo])
+        case onAppear
         
         public enum ChatError: Error, Equatable {
             case serverError(Error)
@@ -83,6 +65,8 @@ public struct BotFeature {
         }
     }
     
+    @Dependency(\.bots) public var context
+    
     public var body: some ReducerOf<Self> {
         BindingReducer()
         Reduce { state, action in
@@ -93,6 +77,7 @@ public struct BotFeature {
             case .sendMessage:
                 state.focus = nil
                 state.chatInfo.chatStatus = .waiting
+                
                 return .run { [question = state.chatInfo.text] send in
                     do {
                         SSEClient.shared.sessionStart(question: question)
@@ -125,11 +110,14 @@ public struct BotFeature {
                 if let lastMessage = state.chatHistory.last, lastMessage.type == .answer {
                     state.chatHistory[state.chatHistory.count - 1].text += message
                 } else {
-                    state.chatInfo.text = message
-                    state.chatInfo.type = .answer
-                    state.chatInfo.chatStatus = .complete
-                    state.chatHistory.append(state.chatInfo)
-                    state.chatInfo.text = ""
+                    let newResponse = ChatInfo(
+                        index: state.chatHistory.count + 1,
+                        text: message,
+                        type: .answer,
+                        chatStatus: .complete
+                    )
+                    state.chatHistory.append(newResponse)
+                    do { try context.add(newResponse) } catch {}
                 }
                 return .none
                 
@@ -138,21 +126,28 @@ public struct BotFeature {
                 print(error.localizedDescription)
                 return .none
                 
-                
             case let .addQuestion(question):
-                let newQuestion = State.ChatInfo(
+                let newQuestion = ChatInfo(
+                    index: state.chatHistory.count + 1,
                     text: question,
                     type: .question,
                     chatStatus: .complete
                 )
+                do { try context.add(newQuestion) } catch {}
                 state.chatHistory.append(newQuestion)
                 return .none
                 
+            case .queryChanged(let newMessage):
+                state.chatHistory = newMessage
+                return .none
                 
-                
+            case .onAppear:
+                state.refetchChat()
+                return .none
             }
         }
     }
     
-    public init() { }
+    public init() {}
 }
+

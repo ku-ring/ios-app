@@ -8,50 +8,57 @@ import ColorSet
 import ComposableArchitecture
 import Lottie
 import BotFeatures
+import Models
+import Caches
+import SwiftData
 
 struct ChatView: View {
     @Bindable var store: StoreOf<BotFeature>
+    @Query(FetchDescriptor<ChatInfo>()) var chatQuery: [ChatInfo]
     
     var body: some View {
         ScrollView {
             VStack(alignment: .center, spacing: 16) {
-                ForEach(Array(store.chatHistory.enumerated()), id: \.offset) { _, chatMessage in
-                    
+                ForEach(store.chatHistory) { chat in
                     HStack(alignment: .top) {
-                        if chatMessage.type == .question {
+                        if chat.type == .question {
                             Spacer()
-                            messageBubble(for: chatMessage)
-                            userImage(for: chatMessage.type)
+                            messageBubble(for: chat)
+                            userImage(for: chat.type)
                         } else {
-                            userImage(for: chatMessage.type)
-                            chatStatusView(for: chatMessage)
+                            userImage(for: chat.type)
+                            chatStatusView(for: chat)
                             Spacer()
                         }
                     }
-                    .padding(chatMessage.type == .question ? .trailing : .leading, 16)
-                    
-                    if chatMessage.type == .answer {
-                        possibleCountText(for: chatMessage.limit)
+                    .padding(chat.type == .question ? .trailing : .leading, 16)
+                    if chat.type == .answer {
+                        possibleCountText(for: 2 - (chat.index / 2))
                     }
                 }
                 Spacer()
             }
-            
             .padding(.bottom, 5)
+            
+        }
+        /// query 변경 감지
+        .onChange(of: self.chatQuery, initial: true) {_, newValue in
+            store.send(.queryChanged(newValue))
         }
     }
     
-    private func chatStatusView(for message: BotFeature.State.ChatInfo) -> some View {
+    @ViewBuilder
+    private func chatStatusView(for message: ChatInfo) -> some View {
         switch message.chatStatus {
         case .waiting:
-            return AnyView(lottieView)
+            lottieView
         case .complete:
-            return AnyView(messageBubble(for: message))
+            messageBubble(for: message)
         default:
-            return AnyView(lottieView)
+            lottieView
         }
     }
-
+    
     private var lottieView: some View {
         LottieView(animation: .named("animation_loading.json", bundle: Bundle.bots))
             .playing()
@@ -59,8 +66,8 @@ struct ChatView: View {
             .aspectRatio(contentMode: .fit)
             .frame(width: 100, height: 100)
     }
-
-    private func messageBubble(for message: BotFeature.State.ChatInfo) -> some View {
+    
+    private func messageBubble(for message: ChatInfo) -> some View {
         let maxWidth = UIScreen.main.bounds.width * 0.7
         
         return Text(message.text)
@@ -72,8 +79,8 @@ struct ChatView: View {
             .fixedSize(horizontal: false, vertical: true)
     }
     
-    private func userImage(for messageType: BotFeature.State.ChatInfo.MessageType) -> some View {
-        let image: Image = messageType == .question 
+    private func userImage(for messageType: ChatInfo.MessageType) -> some View {
+        let image: Image = messageType == .question
         ? Image(systemName: "person.circle.fill") : Image("kuring_app_circle", bundle: Bundle.bots)
         
         return image
