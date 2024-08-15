@@ -43,10 +43,7 @@ struct NoticeContentView: View {
                 }
                 .presentationDetents([.medium])
             }
-            if self.store.provider.korName == "학사" {
-                BotFloatButton()
-            }
-            
+            BotFloatButton()
         }
     }
 }
