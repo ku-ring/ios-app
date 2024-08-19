@@ -83,11 +83,7 @@ public struct BotFeature {
                     do {
                         SSEClient.shared.sessionStart(question: question)
                         
-                        /// 작업이 취소되거나 완료되기 전까지 send가 호출되지 않도록 보장
-                        await withTaskCancellationHandler {
                             let continuation = AsyncStream<String>.Continuation.self
-                            
-                            ///서버로부터 받은 메시지들을 비동기 스트림으로 처리
                             let stream = AsyncStream<String> { continuation in
                                 SSEClient.shared.sendMessage = { message in
                                     continuation.yield(message)
@@ -97,10 +93,6 @@ public struct BotFeature {
                             for await message in stream {
                                 await send(.messageResponse(.success(message)))
                             }
-                            
-                        } onCancel: {
-                            SSEClient.shared.task?.cancel()
-                        }
                         
                     } catch {
                         await send(.messageResponse(.failure(.serverError(error))))
@@ -120,6 +112,8 @@ public struct BotFeature {
                 return .none
                 
             case let .addQuestion(question):
+                state.chatInfo.text = question
+                
                 let newQuestion = ChatInfo(
                     index: state.chatHistory.count,
                     text: question,
@@ -140,8 +134,8 @@ public struct BotFeature {
                 state.chatHistory.append(newResponse)
                 do { try context.add(newResponse) } catch {}
     
-                return .none
-                
+                return .send(.sendMessage)
+
             case .queryChanged(let newMessage):
                 state.chatHistory = newMessage
                 return .none

@@ -21,26 +21,26 @@ public struct BotFloatButton: View {
                 )
                 .toolbar(.hidden, for: .tabBar)
         ) {
-                    ZStack {
-                        Circle()
-                            .fill(Color.Kuring.primary)
-                            .frame(width: 64, height: 64)
-                            .shadow(radius: 5)
-                        
-                        VStack(alignment: .center) {
-                            Image("kuring_app_white", bundle: Bundle.bots)
-                                .font(.system(size: 24))
-                                .foregroundColor(.white)
-                            Text("쿠링봇")
-                                .font(.system(size: 10, weight: .medium))
-                                .foregroundColor(.white)
-                        }
-                        .padding(.top, 5)
-                    }
-                    .padding(.bottom, 20)
-                    .padding(.trailing, 16)
+            ZStack {
+                Circle()
+                    .fill(Color.Kuring.primary)
+                    .frame(width: 64, height: 64)
+                    .shadow(radius: 5)
+                
+                VStack(alignment: .center) {
+                    Image("kuring_app_white", bundle: Bundle.bots)
+                        .font(.system(size: 24))
+                        .foregroundColor(.white)
+                    Text("쿠링봇")
+                        .font(.system(size: 10, weight: .medium))
+                        .foregroundColor(.white)
                 }
-
+                .padding(.top, 5)
+            }
+            .padding(.bottom, 20)
+            .padding(.trailing, 16)
+        }
+        
     }
 }
 

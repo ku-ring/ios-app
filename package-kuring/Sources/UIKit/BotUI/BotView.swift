@@ -4,11 +4,11 @@
 //
 
 import SwiftUI
-import ComposableArchitecture
-import ColorSet
 import Networks
+import ColorSet
 import SwiftData
 import BotFeatures
+import ComposableArchitecture
 
 public struct BotView: View {
     @Bindable var store: StoreOf<BotFeature>
@@ -22,13 +22,15 @@ public struct BotView: View {
         ZStack {
             Color.Kuring.bg
                 .ignoresSafeArea()
+            
+            VStack(alignment: .center) {
+                Group {
+                    headerView
+                    chatView
+                }
                 .onTapGesture {
                     isInputFocused = false
                 }
-            
-            VStack(alignment: .center) {
-                headerView
-                chatView
                 inputView
                 infoText
             }
@@ -87,11 +89,12 @@ public struct BotView: View {
     
     private var popoverContent: some View {
         VStack(spacing: 10) {
-            Text("• 쿠링봇은 2024년 6월 이후의 공지\n  사항 내용을 기준으로 답변할 수 있\n  어요.")
-            Text("• 테스트 기간인 관계로 한 달에 2회\n  까지만 질문 가능해요.")
+            Text("• 쿠링봇은 2024년 6월 이후의 공지사항 내용을 기준으로 답변할 수 있어요.")
+            Text("• 테스트 기간인 관계로 한 달에 2회까지만 질문 가능해요.")
         }
         .lineSpacing(5)
         .font(.system(size: 15, weight: .medium))
+        .frame(width: 250)
         .padding(20)
         .presentationBackground(Color.Kuring.gray100)
         .presentationCompactAdaptation(.popover)
@@ -108,17 +111,23 @@ public struct BotView: View {
     
     private var inputView: some View {
         HStack(alignment: .bottom, spacing: 12) {
-            TextField("질문을 입력해주세요", text: $tempInputText.limit(to: 300), axis: .vertical)
+            TextField("질문을 입력해주세요", text: $tempInputText, axis: .vertical)
                 .lineLimit(5)
                 .focused($isInputFocused)
                 .padding(.horizontal)
                 .padding(.vertical, 12)
-                .overlay(RoundedRectangle(cornerRadius: 20).strokeBorder(Color.Kuring.gray200, style: StrokeStyle(lineWidth: 1.0)))
-            
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .strokeBorder(Color.Kuring.gray200, style: StrokeStyle(lineWidth: 1.0))
+                )
+                .onChange(of: tempInputText) { _, newValue in
+                    if newValue.count > 300 {
+                        tempInputText = String(newValue.prefix(300))
+                    }
+                }
             sendButton
         }
         .padding(.horizontal, 20)
-        .disabled(store.chatHistory.count >= 4)
     }
     
     private var sendButton: some View {
@@ -132,7 +141,6 @@ public struct BotView: View {
                 .scaledToFit()
                 .frame(width: 40, height: 40)
         }
-        .disabled(store.chatHistory.count >= 4)
     }
     
     private var infoText: some View {
@@ -146,7 +154,6 @@ public struct BotView: View {
         SendPopup(isVisible: $isSendPopupVisible) {
             store.send(.addQuestion(tempInputText))
             tempInputText = ""
-            store.send(.sendMessage)
         }
     }
     
@@ -155,14 +162,3 @@ public struct BotView: View {
     }
 }
 
-/// 글자 수 max 판단
-extension Binding where Value == String {
-    func limit(to maxLength: Int) -> Self {
-        if self.wrappedValue.count > maxLength {
-            DispatchQueue.main.async {
-                self.wrappedValue = String(self.wrappedValue.prefix(maxLength))
-            }
-        }
-        return self
-    }
-}

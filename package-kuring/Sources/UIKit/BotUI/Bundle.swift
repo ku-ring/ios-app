@@ -1,8 +1,6 @@
 //
-//  File.swift
-//  
-//
-//  Created by 최효원 on 8/5/24.
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
 //
 
 import Foundation

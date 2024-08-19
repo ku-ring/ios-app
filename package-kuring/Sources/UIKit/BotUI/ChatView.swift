@@ -14,7 +14,6 @@ import SwiftData
 struct ChatView: View {
     @Bindable var store: StoreOf<BotFeature>
     @Query(FetchDescriptor<ChatInfo>()) var chatQuery: [ChatInfo]
-    @State private var limit = 2
     
     var body: some View {
         ScrollView {
@@ -62,7 +61,7 @@ struct ChatView: View {
     
     private var lottieView: some View {
         LottieView(animation: .named("animation_loading.json", bundle: Bundle.bots))
-            .playing()
+            .looping()
             .resizable()
             .frame(width: 70, alignment: .leading)
     }
