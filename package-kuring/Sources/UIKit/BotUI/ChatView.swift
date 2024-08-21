@@ -70,6 +70,7 @@ struct ChatView: View {
         let maxWidth = UIScreen.main.bounds.width * 0.7
         
         return Text(message.text)
+            .font(.system(size: 15, weight: .medium))
             .padding()
             .background(message.type == .question
                         ? Color.Kuring.gray100 : Color.Kuring.primarySelected)
