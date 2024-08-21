@@ -16,18 +16,26 @@ struct ChatView: View {
     @Query(FetchDescriptor<ChatInfo>()) var chatQuery: [ChatInfo]
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .center, spacing: 16) {
-                ForEach(store.chatHistory) { chat in
-                    chatRow(for: chat)
-                    if chat.type == .answer {
-                        /// 질문 가능 횟수
-                        possibleCountText(for: calculateSendCount(for: chat.index))
+        ScrollViewReader { proxy in
+            ScrollView {
+                LazyVStack(alignment: .center, spacing: 16) {
+                    ForEach(store.chatHistory) { chat in
+                        chatRow(for: chat)
+                        if chat.type == .answer {
+                            possibleCountText(for: calculateSendCount(for: chat.index))
+                                .id(chat.index)
+                        }
                     }
+                    Spacer()
                 }
-                Spacer()
+                .padding(.bottom, 5)
             }
-            .padding(.bottom, 5)
+            .onChange(of: store.chatHistory) { _, value in
+                withAnimation {
+                    proxy.scrollTo(value.last?.index, anchor: .center)
+                    
+                }
+            }
         }
         .onChange(of: self.chatQuery, initial: true) { _, newValue in
             store.send(.queryChanged(newValue))
