@@ -71,6 +71,7 @@ struct ChatView: View {
         
         return Text(message.text)
             .font(.system(size: 15, weight: .medium))
+            .textSelection(.enabled)
             .padding()
             .background(message.type == .question
                         ? Color.Kuring.gray100 : Color.Kuring.primarySelected)
