@@ -14,6 +14,8 @@ public struct CampusApp: View {
         secondary: Color.Kuring.caption1,
         background: Color.Kuring.bg,
         secondaryBackground: Color.Kuring.gray100,
+        gray100: Color.Kuring.gray100,
+        bg: Color.Kuring.bg,
         link: Color.Kuring.primary,
         body: .system(size: 16),
         title: .system(size: 20),
