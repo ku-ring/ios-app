@@ -21,7 +21,7 @@ public struct SettingList: View {
                 } label: {
                     itemView("icon_bell", "공지 구독하기")
                 }
-
+                
                 HStack {
                     leadingItemView("icon_bell", "기타 알림 받기", "주요 공지사항, 앱 내 주요 사항")
                     
@@ -39,71 +39,18 @@ public struct SettingList: View {
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Color.Kuring.bg)
-          
-          Section {
-              Button {
-                  store.send(.delegate(.showFeedback))
-              } label: {
-                  itemView("icon_feedback", "피드백 보내기")
-              }
-              
-              Divider()
-                  .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-          } header: {
-              headerView("피드백")
-          }
-          .listRowSeparator(.hidden)
-          .listRowBackground(Color.Kuring.bg)
             
             Section {
-                HStack(spacing: 0) {
-                    leadingItemView("icon_rocket", "앱 버전")
-                    Spacer()
-                    
-                    Text("2.0.5")
-                        .font(.system(size: 16, weight: .medium))
-                        .kerning(0.15)
-                        .foregroundStyle(Color.Kuring.body)
-                }
-                
                 Button {
-                    store.send(.delegate(.showWhatsNew))
+                    store.send(.delegate(.showFeedback))
                 } label: {
-                    itemView("icon_star", "새로운 내용")
-                }
-
-                Button {
-                    store.send(.delegate(.showTeam))
-                } label: {
-                    itemView("icon_team", "쿠링 팀")
-                }
-
-                Button {
-                    store.send(.delegate(.showPrivacyPolicy))
-                } label: {
-                    itemView("icon_guard", "개인정보 처리방침")
-                }
-
-                Button {
-                    store.send(.delegate(.showTermsOfService))
-                } label: {
-                    itemView("icon_checkmark_circle", "서비스 이용약관")
-                }
-                
-                Button {
-                    store.send(.delegate(.showOpensourceList))
-                } label: {
-                    itemView("icon_opensource", "사용된 오픈소스")
+                    itemView("icon_feedback", "피드백 보내기")
                 }
                 
                 Divider()
                     .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             } header: {
-                headerView("정보")
-            } footer: {
-                Text("Designed by 김예은, 이소영.\nDeveloped by 박성수, 이건우, 최효원.\nManaged by 김병진, 조병관, 채수빈")
-                    .font(.footnote)
-                    .foregroundStyle(Color.Kuring.caption1)
+                headerView("피드백")
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Color.Kuring.bg)
@@ -138,6 +85,60 @@ public struct SettingList: View {
             .listRowSeparator(.hidden)
             .listRowBackground(Color.Kuring.bg)
             
+            
+            Section {
+                HStack(spacing: 0) {
+                    leadingItemView("icon_rocket", "앱 버전")
+                    Spacer()
+                    
+                    Text("2.1.1")
+                        .font(.system(size: 16, weight: .medium))
+                        .kerning(0.15)
+                        .foregroundStyle(Color.Kuring.body)
+                }
+                
+                Button {
+                    store.send(.delegate(.showWhatsNew))
+                } label: {
+                    itemView("icon_star", "새로운 내용")
+                }
+                
+                Button {
+                    store.send(.delegate(.showTeam))
+                } label: {
+                    itemView("icon_team", "쿠링 팀")
+                }
+                
+                Button {
+                    store.send(.delegate(.showPrivacyPolicy))
+                } label: {
+                    itemView("icon_guard", "개인정보 처리방침")
+                }
+                
+                Button {
+                    store.send(.delegate(.showTermsOfService))
+                } label: {
+                    itemView("icon_checkmark_circle", "서비스 이용약관")
+                }
+                
+                Button {
+                    store.send(.delegate(.showOpensourceList))
+                } label: {
+                    itemView("icon_opensource", "사용된 오픈소스")
+                }
+                
+                Divider()
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+            } header: {
+                headerView("정보")
+            } footer: {
+                Text("Designed by 김예은, 이소영.\nDeveloped by 박성수, 이건우, 최효원.\nManaged by 채수빈")
+                    .font(.footnote)
+                    .foregroundStyle(Color.Kuring.caption1)
+            }
+            .listRowSeparator(.hidden)
+            .listRowBackground(Color.Kuring.bg)
+            
             Section {
                 Button {
                     store.send(.delegate(.showInstagram))
@@ -159,7 +160,7 @@ public struct SettingList: View {
         .navigationTitle("더보기")
         .navigationBarTitleDisplayMode(.inline)
     }
-
+    
     public init(store: StoreOf<SettingListFeature>) {
         self.store = store
     }

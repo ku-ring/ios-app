@@ -1,13 +1,13 @@
 ![커버이미지](https://github.com/ku-ring/ios-app/assets/53814741/73aae511-c6eb-4160-b666-2fafc7514c8b)
 
-[![appstore](https://img.shields.io/badge/쿠링-다운로드-000000.svg?style=for-the-badge)](https://apps.apple.com/kr/app/id1609873520) [![wip](https://img.shields.io/badge/멤버모집중-지원하기-F6C954.svg?style=for-the-badge)](https://docs.google.com/forms/d/e/1FAIpQLSeyTfJUPZhCHY7lpVn9vNllcK-2JbZl3lY7xUNuCQOYYsRfEQ/viewform)
+[![appstore](https://img.shields.io/badge/쿠링-다운로드-000000.svg?style=for-the-badge)](https://apps.apple.com/kr/app/id1609873520)
 
 ![test](https://github.com/ku-ring/ios-app/actions/workflows/BUILD_PACKAGE.yml/badge.svg)
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/ku-ring/ios-app&count_bg=%23000000&title_bg=%23555555&icon=swift.svg&icon_color=%23FFFFFF&title=%EC%A1%B0%ED%9A%8C%EC%88%98&edge_flat=true)](https://hits.seeyoufarm.com)
 
 # ios-app
 
-쿠링 iOS 앱 v2 레포입니다. SwiftUI + TCA (24년 4월 배포 예정)
+쿠링 iOS 앱 v2 레포입니다. SwiftUI + TCA
 
 ## 개요
 
@@ -117,6 +117,7 @@ https://www.notion.so/kuring/v2-55977b79a8014c2883ad4c89085e1464?pvs=4
 | --- | --- | --- |
 | <img src="https://github.com/lgvv.png" alt="img" width="60"/> | [lgvv](https://github.com/lgvv) | 스마트ICT융합공학과 |
 | <img src="https://github.com/sunshiningsoo.png" alt="img" width="60"/> | [sunshiningsoo](https://github.com/sunshiningsoo) | 컴퓨터공학부 |
+| <img src="https://github.com/wonniiii.png" alt="img" width="60"/> | [wonniiii](https://github.com/wonniiii) | 컴퓨터공학부 |
 
 ## 문의
 
