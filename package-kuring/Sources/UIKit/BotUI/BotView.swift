@@ -81,6 +81,8 @@ public struct BotView: View {
             isPopoverVisible.toggle()
         } label: {
             Image("icon_info_circle", bundle: Bundle.bots)
+                .renderingMode(.template)
+                .foregroundStyle(Color.Kuring.gray200)
         }
         .popover(isPresented: $isPopoverVisible, arrowEdge: .top) {
             popoverContent
@@ -112,6 +114,7 @@ public struct BotView: View {
     private var inputView: some View {
         HStack(alignment: .bottom, spacing: 12) {
             TextField("질문을 입력해주세요", text: $tempInputText, axis: .vertical)
+                .font(.system(size: 15, weight: .medium))
                 .lineLimit(5)
                 .focused($isInputFocused)
                 .padding(.horizontal)
