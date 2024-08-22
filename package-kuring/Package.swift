@@ -12,6 +12,7 @@ let package = Package(
                 /// ```swift
                 /// import NoticeUI
                 /// ```
+                "BotUI",
                 "NoticeUI",
                 "SubscriptionUI",
                 "DepartmentUI",
@@ -47,6 +48,15 @@ let package = Package(
     ],
     targets: [
         // MARK: App Library Dependencies
+        .target(
+            name: "BotUI",
+            dependencies: [
+                "ColorSet", "BotFeatures",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+            ],
+            path: "Sources/UIKit/BotUI",
+            resources: [.process("Resources")]
+        ),
         .target(
             name: "NoticeUI",
             dependencies: [
@@ -138,6 +148,14 @@ let package = Package(
         ),
         
         // MARK: Features
+        .target(
+            name: "BotFeatures",
+            dependencies: [
+                "Networks",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+            ],
+            path: "Sources/Features/BotFeatures"
+        ),
         .target(
             name: "NoticeFeatures",
             dependencies: [
