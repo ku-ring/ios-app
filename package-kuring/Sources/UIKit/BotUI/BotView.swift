@@ -4,28 +4,33 @@
 //
 
 import SwiftUI
-import ComposableArchitecture
-import ColorSet
 import Networks
+import ColorSet
+import SwiftData
 import BotFeatures
+import ComposableArchitecture
 
 public struct BotView: View {
     @Bindable var store: StoreOf<BotFeature>
     @FocusState private var isInputFocused: Bool
+    @Environment(\.dismiss) private var dismiss
     @State private var isPopoverVisible = false
     @State private var isSendPopupVisible = false
+    @State private var tempInputText: String = ""
     
     public var body: some View {
         ZStack {
             Color.Kuring.bg
                 .ignoresSafeArea()
+            
+            VStack(alignment: .center) {
+                Group {
+                    headerView
+                    chatView
+                }
                 .onTapGesture {
                     isInputFocused = false
                 }
-            
-            VStack(alignment: .center) {
-                headerView
-                chatView
                 inputView
                 infoText
             }
@@ -37,6 +42,10 @@ public struct BotView: View {
                     .zIndex(1)
             }
         }
+        .onAppear {
+            store.send(.onAppear)
+        }
+        .navigationBarBackButtonHidden()
     }
     
     private var headerView: some View {
@@ -52,12 +61,12 @@ public struct BotView: View {
     
     private var backButton: some View {
         Button {
-            // 뒤로 가기 버튼 동작 구현
+            dismiss()
         } label: {
             Image(systemName: "chevron.backward")
                 .padding()
-                .frame(width: 20, height: 11)
-                .foregroundStyle(Color.black)
+                .frame(width: 30, height: 20)
+                .foregroundStyle(Color.Kuring.gray400)
         }
     }
     
@@ -80,11 +89,12 @@ public struct BotView: View {
     
     private var popoverContent: some View {
         VStack(spacing: 10) {
-            Text("• 쿠링봇은 2024년 6월 이후의 공지\n  사항 내용을 기준으로 답변할 수 있\n  어요.")
-            Text("• 테스트 기간인 관계로 한 달에 2회\n  까지만 질문 가능해요.")
+            Text("• 쿠링봇은 2024년 6월 이후의 공지사항 내용을 기준으로 답변할 수 있어요.")
+            Text("• 테스트 기간인 관계로 한 달에 2회까지만 질문 가능해요.")
         }
         .lineSpacing(5)
         .font(.system(size: 15, weight: .medium))
+        .frame(width: 250)
         .padding(20)
         .presentationBackground(Color.Kuring.gray100)
         .presentationCompactAdaptation(.popover)
@@ -101,17 +111,23 @@ public struct BotView: View {
     
     private var inputView: some View {
         HStack(alignment: .bottom, spacing: 12) {
-            TextField("질문을 입력해주세요", text: $store.chatInfo.text.limit(to: 300), axis: .vertical)
+            TextField("질문을 입력해주세요", text: $tempInputText, axis: .vertical)
                 .lineLimit(5)
                 .focused($isInputFocused)
                 .padding(.horizontal)
                 .padding(.vertical, 12)
-                .overlay(RoundedRectangle(cornerRadius: 20).strokeBorder(Color.Kuring.gray200, style: StrokeStyle(lineWidth: 1.0)))
-            
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .strokeBorder(Color.Kuring.gray200, style: StrokeStyle(lineWidth: 1.0))
+                )
+                .onChange(of: tempInputText) { _, newValue in
+                    if newValue.count > 300 {
+                        tempInputText = String(newValue.prefix(300))
+                    }
+                }
             sendButton
         }
         .padding(.horizontal, 20)
-        .disabled($store.chatInfo.limit.wrappedValue == 0)
     }
     
     private var sendButton: some View {
@@ -136,8 +152,8 @@ public struct BotView: View {
     
     private var sendPopup: some View {
         SendPopup(isVisible: $isSendPopupVisible) {
-            store.send(.addQuestion(store.state.chatInfo.text))
-            store.send(.sendMessage)
+            store.send(.addQuestion(tempInputText))
+            tempInputText = ""
         }
     }
     
@@ -146,14 +162,3 @@ public struct BotView: View {
     }
 }
 
-/// 글자 수 max 판단
-extension Binding where Value == String {
-    func limit(to maxLength: Int) -> Self {
-        if self.wrappedValue.count > maxLength {
-            DispatchQueue.main.async {
-                self.wrappedValue = String(self.wrappedValue.prefix(maxLength))
-            }
-        }
-        return self
-    }
-}

@@ -3,9 +3,12 @@
 // See the 'License.txt' file for licensing information.
 //
 
-import Foundation
 import ComposableArchitecture
 import Networks
+import SwiftData
+import Models
+import Dependencies
+import Caches
 
 @Reducer
 public struct BotFeature {
@@ -14,62 +17,43 @@ public struct BotFeature {
         public var chatInfo: ChatInfo = .init()
         public var chatHistory: [ChatInfo] = []
         public var focus: Field? = .question
-        
-        public struct ChatInfo: Equatable, Hashable {
-            public var limit: Int = 2
-            public var text: String = ""
-            public var type: MessageType = .question
-            public var chatStatus: ChatStatus = .before
-            
-            public enum MessageType: String, Equatable {
-                case question
-                case answer
-            }
-            
-            public enum ChatStatus {
-                /// 질문 보내기 전
-                case before
-                /// 질문 보낸 후
-                case waiting
-                /// 답변 완료
-                case complete
-                /// 답변 실패
-                case failure
-            }
-            
-            public init(
-                limit: Int = 2,
-                text: String = "",
-                type: MessageType = .question,
-                chatStatus: ChatStatus = .before
-            ) {
-                self.limit = limit
-                self.text = text
-                self.type = type
-                self.chatStatus = chatStatus
-            }
-        }
-        
-        public enum Field {
-            case question
-        }
+        public var isLoading: Bool = false
         
         public init(
             chatInfo: ChatInfo = .init(),
             chatHistory: [ChatInfo] = [],
-            focus: Field? = .question
-        ) {
+            focus: Field? = .question,
+            isLoading: Bool = false
+        ){
             self.chatInfo = chatInfo
             self.chatHistory = chatHistory
             self.focus = focus
+            self.isLoading = isLoading
+        }
+        
+        var fetchDescriptor: FetchDescriptor<ChatInfo> {
+            return .init()
+        }
+        
+        mutating func refetchChat() {
+            @Dependency(\.bots) var context
+            do {
+                self.chatHistory = try context.fetch(self.fetchDescriptor)
+            } catch {}
         }
     }
     
+    public enum Field {
+        case question
+    }
+    
     public enum Action: BindableAction, Equatable {
-        case sendMessage
-        case addQuestion(String)
-        case messageResponse(Result<String, ChatError>)
         case binding(BindingAction<State>)
+        case sendMessage
+        case messageResponse(Result<String, ChatError>)
+        case addQuestion(String)
+        case queryChanged([ChatInfo])
+        case onAppear
         
         public enum ChatError: Error, Equatable {
             case serverError(Error)
@@ -83,6 +67,8 @@ public struct BotFeature {
         }
     }
     
+    @Dependency(\.bots) public var context
+    
     public var body: some ReducerOf<Self> {
         BindingReducer()
         Reduce { state, action in
@@ -92,16 +78,12 @@ public struct BotFeature {
                 
             case .sendMessage:
                 state.focus = nil
-                state.chatInfo.chatStatus = .waiting
+                state.isLoading = true
                 return .run { [question = state.chatInfo.text] send in
                     do {
                         SSEClient.shared.sessionStart(question: question)
                         
-                        /// 작업이 취소되거나 완료되기 전까지 send가 호출되지 않도록 보장
-                        await withTaskCancellationHandler {
                             let continuation = AsyncStream<String>.Continuation.self
-                            
-                            ///서버로부터 받은 메시지들을 비동기 스트림으로 처리
                             let stream = AsyncStream<String> { continuation in
                                 SSEClient.shared.sendMessage = { message in
                                     continuation.yield(message)
@@ -111,10 +93,6 @@ public struct BotFeature {
                             for await message in stream {
                                 await send(.messageResponse(.success(message)))
                             }
-                            
-                        } onCancel: {
-                            SSEClient.shared.task?.cancel()
-                        }
                         
                     } catch {
                         await send(.messageResponse(.failure(.serverError(error))))
@@ -122,37 +100,53 @@ public struct BotFeature {
                 }
                 
             case let .messageResponse(.success(message)):
+                state.isLoading = false
                 if let lastMessage = state.chatHistory.last, lastMessage.type == .answer {
                     state.chatHistory[state.chatHistory.count - 1].text += message
-                } else {
-                    state.chatInfo.text = message
-                    state.chatInfo.type = .answer
-                    state.chatInfo.chatStatus = .complete
-                    state.chatHistory.append(state.chatInfo)
-                    state.chatInfo.text = ""
+                    state.chatHistory[state.chatHistory.count - 1].chatStatus = .complete
                 }
                 return .none
                 
             case let .messageResponse(.failure(error)):
-                state.chatInfo.chatStatus = .failure
                 print(error.localizedDescription)
                 return .none
                 
-                
             case let .addQuestion(question):
-                let newQuestion = State.ChatInfo(
+                state.chatInfo.text = question
+                
+                let newQuestion = ChatInfo(
+                    index: state.chatHistory.count,
                     text: question,
                     type: .question,
                     chatStatus: .complete
                 )
+                
                 state.chatHistory.append(newQuestion)
+                do { try context.add(newQuestion) } catch {}
+                
+                let newResponse = ChatInfo(
+                    index: state.chatHistory.count,
+                    text: "",
+                    type: .answer,
+                    chatStatus: .waiting
+                )
+                
+                state.chatHistory.append(newResponse)
+                do { try context.add(newResponse) } catch {}
+    
+                return .send(.sendMessage)
+
+            case .queryChanged(let newMessage):
+                state.chatHistory = newMessage
                 return .none
                 
-                
-                
+            case .onAppear:
+                state.refetchChat()
+                return .none
             }
         }
     }
     
-    public init() { }
+    public init() {}
 }
+

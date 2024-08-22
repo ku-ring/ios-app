@@ -36,8 +36,8 @@ struct SendPopup: View {
         Text("전송하시면 횟수 차감이 인정돼요.\n전송할까요?")
             .foregroundStyle(Color.Kuring.body)
             .multilineTextAlignment(.center)
-            .padding(40)
-            .padding(.bottom, 0)
+            .padding([.horizontal, .bottom], 30)
+            .padding(.top, 43)
     }
     
     private var actionButtons: some View {

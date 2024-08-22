@@ -3,24 +3,23 @@
 // See the 'License.txt' file for licensing information.
 //
 
-import Foundation
 import Models
 import SwiftUI
 import Combine
-import os.log
+import OSLog
 
 public class SSEClient: NSObject, ObservableObject, URLSessionDataDelegate {
-    @Published public var botMessage: String = ""
     @Published public var error: Error?
     public var sendMessage: ((String) -> Void)?
     public static let shared = SSEClient()
     public var task: URLSessionDataTask?
     private var url: URL
     private var session: URLSession?
-    private var testableFCMToken: String = Date().description
-    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "SSEClient")
-    
-    public override init(){
+    @AppStorage("com.kuring.sdk.v2.token.fcm")
+    private var fcmToken: String = ""
+    private let logger = Logger(subsystem: "Network", category: "SSEClient")
+
+    public override init() {
         let plistURL = Bundle.module.url(forResource: "KuringLink-Info", withExtension: "plist")!
         let dict = try! NSDictionary(contentsOf: plistURL, error: ())
         
@@ -46,7 +45,7 @@ public class SSEClient: NSObject, ObservableObject, URLSessionDataDelegate {
         
         request.httpMethod = "GET"
         request.setValue("text/event-stream", forHTTPHeaderField: "Accept")
-        request.setValue(testableFCMToken, forHTTPHeaderField: "User-Token")
+        request.setValue(fcmToken, forHTTPHeaderField: "User-Token")
         request.setValue("no-cache", forHTTPHeaderField: "Cache-Control")
         
         task = session?.dataTask(with: request)
@@ -54,16 +53,12 @@ public class SSEClient: NSObject, ObservableObject, URLSessionDataDelegate {
     }
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-        self.botMessage = ""
         if let message = String(data: data, encoding: .utf8) {
             let processedMessage = message
                 .components(separatedBy: .newlines)
                 .map { $0.replacingOccurrences(of: "data:", with: "") }
                 .joined()
-            
-            DispatchQueue.main.sync {
-                self.sendMessage?(processedMessage)
-            }
+            self.sendMessage?(processedMessage)
         }
     }
     

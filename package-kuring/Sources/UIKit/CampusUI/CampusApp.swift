@@ -8,6 +8,7 @@ import ColorSet
 import KuringMapsUI
 
 public struct CampusApp: View {
+    
     private let appearance = Appearance(
         tint: Color.Kuring.primary,
         primary: Color.Kuring.body,

@@ -8,59 +8,65 @@ import ColorSet
 import ComposableArchitecture
 import Lottie
 import BotFeatures
+import Models
+import SwiftData
 
 struct ChatView: View {
     @Bindable var store: StoreOf<BotFeature>
+    @Query(FetchDescriptor<ChatInfo>()) var chatQuery: [ChatInfo]
     
     var body: some View {
         ScrollView {
             VStack(alignment: .center, spacing: 16) {
-                ForEach(Array(store.chatHistory.enumerated()), id: \.offset) { _, chatMessage in
-                    
-                    HStack(alignment: .top) {
-                        if chatMessage.type == .question {
-                            Spacer()
-                            messageBubble(for: chatMessage)
-                            userImage(for: chatMessage.type)
-                        } else {
-                            userImage(for: chatMessage.type)
-                            chatStatusView(for: chatMessage)
-                            Spacer()
-                        }
-                    }
-                    .padding(chatMessage.type == .question ? .trailing : .leading, 16)
-                    
-                    if chatMessage.type == .answer {
-                        possibleCountText(for: chatMessage.limit)
+                ForEach(store.chatHistory) { chat in
+                    chatRow(for: chat)
+                    if chat.type == .answer {
+                        /// 질문 가능 횟수
+                        possibleCountText(for: calculateSendCount(for: chat.index))
                     }
                 }
                 Spacer()
             }
-            
             .padding(.bottom, 5)
+        }
+        .onChange(of: self.chatQuery, initial: true) { _, newValue in
+            store.send(.queryChanged(newValue))
         }
     }
     
-    private func chatStatusView(for message: BotFeature.State.ChatInfo) -> some View {
-        switch message.chatStatus {
-        case .waiting:
-            return AnyView(lottieView)
-        case .complete:
-            return AnyView(messageBubble(for: message))
-        default:
-            return AnyView(lottieView)
+    @ViewBuilder
+    private func chatRow(for chat: ChatInfo) -> some View {
+        HStack(alignment: .top) {
+            if chat.type == .question {
+                Spacer()
+                messageBubble(for: chat)
+                userImage(for: chat.type)
+            } else {
+                userImage(for: chat.type)
+                responseContentView(for: chat)
+                Spacer()
+            }
+        }
+        .padding(chat.type == .question ? .trailing : .leading, 16)
+    }
+    
+    @ViewBuilder
+    private func responseContentView(for chat: ChatInfo) -> some View {
+        if chat.index == store.chatHistory.count - 1, store.state.isLoading {
+            lottieView
+        } else {
+            messageBubble(for: chat)
         }
     }
-
+    
     private var lottieView: some View {
         LottieView(animation: .named("animation_loading.json", bundle: Bundle.bots))
-            .playing()
+            .looping()
             .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 100, height: 100)
+            .frame(width: 70, alignment: .leading)
     }
-
-    private func messageBubble(for message: BotFeature.State.ChatInfo) -> some View {
+    
+    private func messageBubble(for message: ChatInfo) -> some View {
         let maxWidth = UIScreen.main.bounds.width * 0.7
         
         return Text(message.text)
@@ -72,8 +78,8 @@ struct ChatView: View {
             .fixedSize(horizontal: false, vertical: true)
     }
     
-    private func userImage(for messageType: BotFeature.State.ChatInfo.MessageType) -> some View {
-        let image: Image = messageType == .question 
+    private func userImage(for messageType: ChatInfo.MessageType) -> some View {
+        let image: Image = messageType == .question
         ? Image(systemName: "person.circle.fill") : Image("kuring_app_circle", bundle: Bundle.bots)
         
         return image
@@ -85,14 +91,18 @@ struct ChatView: View {
             .overlay(Circle().stroke(Color.Kuring.gray300, lineWidth: 0.1))
     }
     
-    private func possibleCountText(for sendCount: Int) -> some View {
-        let currentDate = formattedCurrentDate()
-        return Text("질문 가능 횟수 \(sendCount)회 (\(currentDate) 기준)")
+    private func possibleCountText(for limit: Int) -> some View {
+        let currentDate = formattedCurrentDate
+        return Text("질문 가능 횟수 \(limit)회 (\(currentDate) 기준)")
             .font(.system(size: 12, weight: .medium))
-            .foregroundStyle(sendCount == 0 ? Color.Kuring.warning : Color.Kuring.caption1)
+            .foregroundStyle(limit == 0 ? Color.Kuring.warning : Color.Kuring.caption1)
     }
     
-    private func formattedCurrentDate() -> String {
+    private func calculateSendCount(for index: Int) -> Int {
+        return index == 3 ? 0 : index == 1 ? 1 : 0
+    }
+    
+    private var formattedCurrentDate: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         return dateFormatter.string(from: Date())

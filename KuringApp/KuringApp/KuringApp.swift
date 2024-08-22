@@ -11,6 +11,7 @@ import OnboardingUI
 import NoticeFeatures
 import PushNotifications
 import ComposableArchitecture
+import SwiftData
 
 @main
 struct KuringApp: App {
@@ -23,6 +24,14 @@ struct KuringApp: App {
     @State private var showsOnboarding: Bool = false
     
     @Dependency(\.commons) var commons
+    
+    @Dependency(\.swiftData) var swiftDataService
+        var modelContext: ModelContext {
+            guard let modelContext = try? self.swiftDataService.context() else {
+                fatalError("Could not find modelcontext")
+            }
+            return modelContext
+        }
     
     var body: some Scene {
         WindowGroup {
@@ -114,5 +123,6 @@ struct KuringApp: App {
                     }
             }
         }
+        .modelContext(self.modelContext)
     }
 }
