@@ -141,7 +141,7 @@ extension KuringLink: DependencyKey {
             NoticeProvider.subscribedDepartments = response.data
                 .compactMap {
                     NoticeProvider(
-                        name: $0.name, 
+                        name: $0.name,
                         hostPrefix: $0.hostPrefix,
                         korName: $0.korName,
                         category: .학과
@@ -204,7 +204,8 @@ extension KuringLink: DependencyKey {
                     )
                 }
             return NoticeProvider.departments
-        }, registerAuthorization: {
+        },
+        registerAuthorization: {
             let response: EmptyResponse = try await satellite
                 .response(
                     for: Path.registerAuthorization.path,
@@ -219,6 +220,7 @@ extension KuringLink: DependencyKey {
         }
     )
 }
+
 
 extension KuringLink {
     public static let testValue: KuringLink = .init(
@@ -301,7 +303,8 @@ extension KuringLink {
                     category: .학과
                 )
             ]
-        }, registerAuthorization: {
+        },
+        registerAuthorization: {
             return true
         }
     )
