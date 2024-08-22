@@ -91,7 +91,7 @@ public struct SettingList: View {
                     leadingItemView("icon_rocket", "앱 버전")
                     Spacer()
                     
-                    Text("2.1.1")
+                    Text(appVersion())
                         .font(.system(size: 16, weight: .medium))
                         .kerning(0.15)
                         .foregroundStyle(Color.Kuring.body)
@@ -196,6 +196,12 @@ public struct SettingList: View {
             
             leadingTitle(title: title, subTitle: subTitle)
         }
+    }
+    
+    /// 앱버전
+    private func appVersion() -> String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        return version ?? "Unknown Version"
     }
 }
 
