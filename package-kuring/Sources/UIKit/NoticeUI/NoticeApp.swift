@@ -38,7 +38,7 @@ public struct NoticeApp: View {
                             SearchFeature.State()
                         )
                     ) {
-                        Image(systemName: "magnifyingglass")
+                        Image("magnifyingglass", bundle: Bundle.notices)
                             .foregroundStyle(Color.Kuring.gray400)
                     }
                 }
@@ -49,7 +49,7 @@ public struct NoticeApp: View {
                     Button {
                         store.send(.changeSubscriptionButtonTapped)
                     } label: {
-                        Image(systemName: "bell")
+                        Image("bell", bundle: Bundle.notices)
                             .foregroundStyle(Color.Kuring.gray400)
                     }
                 }

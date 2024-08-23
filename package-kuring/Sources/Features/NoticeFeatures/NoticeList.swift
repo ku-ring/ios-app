@@ -156,7 +156,7 @@ public struct NoticeListFeature {
                 return .send(.fetchNotices)
 
             case .fetchNotices:
-                if state.provider == .emptyDepartment {
+                if state.provider == .emptyDepartment || state.provider.hostPrefix == "ccd" {
                     return .none
                 }
                 state.isLoading = true

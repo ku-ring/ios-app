@@ -94,12 +94,14 @@ struct DepartmentSelector: View {
             
             ScrollView {
                 ForEach(finder.results) { result in
-                    DepartmentRow(
-                        department: result,
-                        style: .radio(false)
-                    ) {
+                    Button(action: {
                         selectedDepartment = result
-                    }
+                    }, label: {
+                        DepartmentRow(
+                            department: result,
+                            style: .radio(false)
+                        )
+                    })
                 }
             }
             

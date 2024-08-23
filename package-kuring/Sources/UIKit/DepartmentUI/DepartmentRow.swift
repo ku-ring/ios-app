@@ -12,7 +12,6 @@ import DepartmentFeatures
 public struct DepartmentRow: View {
     public let department: NoticeProvider
     public let style: ButtonStyle
-    public let action: () -> Void
 
     public enum ButtonStyle {
         case delete
@@ -33,33 +32,28 @@ public struct DepartmentRow: View {
 
             switch style {
             case .delete:
-                Button(action: action) {
-                    Text("삭제")
-                        .foregroundStyle(Color.Kuring.caption1)
-                }
+                Text("삭제")
+                    .foregroundStyle(Color.Kuring.caption1)
             case let .radio(isSelected):
-                Button(action: action) {
-                    Image(
-                        systemName: isSelected
-                        ? "checkmark.circle.fill"
-                        : "plus.circle"
-                    )
-                    .foregroundStyle(
-                        isSelected
-                        ? Color.Kuring.primary
-                        : Color.Kuring.gray200
-                    )
-                }
+                Image(
+                    systemName: isSelected
+                    ? "checkmark.circle.fill"
+                    : "plus.circle"
+                )
+                .foregroundStyle(
+                    isSelected
+                    ? Color.Kuring.primary
+                    : Color.Kuring.gray200
+                )
             }
         }
         .padding(.horizontal, 4)
         .padding(.vertical, 10)
     }
     
-    public init(department: NoticeProvider, style: ButtonStyle, action: @escaping () -> Void) {
+    public init(department: NoticeProvider, style: ButtonStyle) {
         self.department = department
         self.style = style
-        self.action = action
     }
     
     /// 대표 학과 여부를 나타내는 칩
@@ -76,10 +70,10 @@ public struct DepartmentRow: View {
 
 #Preview {
     Group {
-        DepartmentRow(department: .국제, style: .delete) { }
+        DepartmentRow(department: .국제, style: .delete)
 
-        DepartmentRow(department: .국제, style: .radio(true)) { }
+        DepartmentRow(department: .국제, style: .radio(true))
 
-        DepartmentRow(department: .국제, style: .radio(false)) { }
+        DepartmentRow(department: .국제, style: .radio(false))
     }
 }

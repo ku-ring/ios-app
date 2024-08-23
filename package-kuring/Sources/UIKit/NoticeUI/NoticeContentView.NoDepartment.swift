@@ -33,6 +33,20 @@ extension NoticeContentView {
             Spacer()
         }
     }
+    
+    @ViewBuilder
+    func CannotFetchDepartmentView() -> some View {
+        VStack(spacing: 32) {
+            Spacer()
+            
+            Text("홈페이지 사정 상,\n공지를 불러올 수 없는 학과예요.")
+                .font(.system(size: 15, weight: .medium))
+                .multilineTextAlignment(.center)
+                .foregroundStyle(Color.Kuring.caption2)
+            
+            Spacer()
+        }
+    }
 
     // TODO: 디자인 시스템 분리
     /// 상단에 블러가 존재하는 버튼
