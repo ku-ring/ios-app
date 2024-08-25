@@ -32,17 +32,16 @@ public struct NoticeDetailView: View {
                     Button {
                         self.store.send(.bookmarkButtonTapped)
                     } label: {
-                        Image(
-                            systemName: self.store.isBookmarked
-                            ? "bookmark.fill"
-                            : "bookmark"
+                        Image(self.store.isBookmarked
+                              ? "bookmark-fill"
+                              : "bookmark", bundle: Bundle.notices
                         )
                     }
                     
                     ShareLink(
                         item: store.notice.url
                     ) {
-                        Image(systemName: "square.and.arrow.up")
+                        Image("share", bundle: Bundle.notices)
                     }
                 }
             }

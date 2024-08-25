@@ -61,28 +61,32 @@ public struct DepartmentEditor: View {
                 // 내학과
                 ScrollView {
                     ForEach(store.myDepartments) { myDepartment in
-                        DepartmentRow(
-                            department: myDepartment,
-                            style: .delete
-                        ) {
+                        Button(action: {
                             store.send(.deleteMyDepartmentButtonTapped(id: myDepartment.id))
-                        }
+                        }, label: {
+                            DepartmentRow(
+                                department: myDepartment,
+                                style: .delete
+                            )
+                        })
                     }
                 }
             } else {
                 // 검색결과
                 ScrollView {
                     ForEach(store.searchResults) { result in
-                        DepartmentRow(
-                            department: result,
-                            style: .radio(store.myDepartments.contains(result))
-                        ) {
+                        Button(action: {
                             if store.myDepartments.contains(result) {
                                 store.send(.cancelAdditionButtonTapped(id: result.id))
                             } else {
                                 store.send(.addDepartmentButtonTapped(id: result.id))
                             }
-                        }
+                        }, label: {
+                            DepartmentRow(
+                                department: result,
+                                style: .radio(store.myDepartments.contains(result))
+                            )
+                        })
                     }
                 }
             }

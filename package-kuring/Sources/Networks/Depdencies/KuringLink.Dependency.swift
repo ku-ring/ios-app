@@ -203,6 +203,14 @@ extension KuringLink: DependencyKey {
                         category: .학과
                     )
                 }
+            NoticeProvider.departments.append(
+                NoticeProvider(
+                    name: "communication_design",
+                    hostPrefix: "ccd",
+                    korName: "커뮤니케이션디자인학과",
+                    category: .학과
+                )
+            )
             return NoticeProvider.departments
         },
         registerAuthorization: {

@@ -25,6 +25,24 @@ struct NoticeContentView: View {
                 
                 if self.store.provider == .emptyDepartment {
                     NoDepartmentView()
+                }
+                // MARK: 커뮤니케이션디자인학과의 경우에만 예외로 다른 화면을 넣어줘야 함
+                else if self.store.provider.hostPrefix == "ccd" {
+                    Section {
+                        CannotFetchDepartmentView()
+                    } header: {
+                        VStack(spacing: 0) {
+                            DepartmentSelectorLink(
+                                department: self.store.provider,
+                                isLoading: $store.isLoading.sending(\.loadingChanged)
+                            ) {
+                                self.store.send(.changeDepartmentButtonTapped)
+                            }
+                            
+                            Divider()
+                                .frame(height: 0.25)
+                        }
+                    }
                 } else {
                     NoticeList(store: self.store)
                 }
