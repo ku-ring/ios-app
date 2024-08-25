@@ -80,7 +80,9 @@ struct ChatView: View {
         return Text(message.text)
             .font(.system(size: 15, weight: .medium))
             .textSelection(.enabled)
-            .padding()
+            .padding(.horizontal, 16)
+            .padding(.vertical, 13)
+            .lineSpacing(7)
             .background(message.type == .question
                         ? Color.Kuring.gray100 : Color.Kuring.primarySelected)
             .cornerRadius(16)
