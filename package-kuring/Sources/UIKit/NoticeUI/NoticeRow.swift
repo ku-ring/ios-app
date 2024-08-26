@@ -12,6 +12,9 @@ import ComposableArchitecture
 public struct NoticeRow: View {
     var rowType: NoticeRowType
     let notice: Notice
+    
+    /// 번역 노출 여부
+    @State var showTranslation: Bool = false
 
     public init(
         notice: Notice,
@@ -65,6 +68,8 @@ public struct NoticeRow: View {
                             dateView
                         }
                         Spacer()
+                        
+                        translationButton
                     }
                     .padding(.top, 13)
                     
@@ -78,6 +83,7 @@ public struct NoticeRow: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 16)
+                
             case .important:
                 HStack(alignment: .top, spacing: 0) {
                     VStack(alignment: .leading, spacing: 4) {
@@ -86,10 +92,13 @@ public struct NoticeRow: View {
                         dateView
                     }
                     Spacer()
+                    
+                    translationButton
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 13)
                 .padding(.bottom, 16)
+                
             case .bookmark:
                 ZStack {
                     HStack(alignment: .top, spacing: 0) {
@@ -98,6 +107,8 @@ public struct NoticeRow: View {
                             dateView
                         }
                         Spacer()
+                        
+                        translationButton
                     }
                     .padding(.top, 16)
                     
@@ -111,6 +122,7 @@ public struct NoticeRow: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 16)
+                
             case .none:
                 HStack(alignment: .top, spacing: 0) {
                     VStack(alignment: .leading, spacing: 4) {
@@ -118,6 +130,8 @@ public struct NoticeRow: View {
                         dateView
                     }
                     Spacer()
+                    
+                    translationButton
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)
@@ -173,9 +187,31 @@ public struct NoticeRow: View {
         .compositingGroup()
     }
     
+    @ViewBuilder
+    private var translationButton: some View {
+        VStack {
+            Spacer()
+            if #available(iOS 17.4, *) {
+                Image(systemName: "translate")
+                    .frame(width: 24)
+                    .onTapGesture {
+                        showTranslation.toggle()
+                    }
+                    .translationPresentation(
+                        isPresented: $showTranslation,
+                        text: notice.subject
+                    )
+            } else {
+                EmptyView()
+            }
+            Spacer()
+        }
+    }
+    
     private func separateWithDot(_ value: String) -> String {
         return value.replacingOccurrences(of: "-", with: ".")
     }
+    
 }
 
 #Preview {
