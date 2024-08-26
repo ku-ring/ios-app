@@ -7,14 +7,15 @@ import Caches
 import Models
 import SwiftUI
 import ColorSet
+import Translation
 import ComposableArchitecture
 
 public struct NoticeRow: View {
-    var rowType: NoticeRowType
+    let rowType: NoticeRowType
     let notice: Notice
     
     /// 번역 노출 여부
-    @State var showTranslation: Bool = false
+    @State var showsTranslation: Bool = false
 
     public init(
         notice: Notice,
@@ -195,10 +196,10 @@ public struct NoticeRow: View {
                 Image(systemName: "translate")
                     .frame(width: 24)
                     .onTapGesture {
-                        showTranslation.toggle()
+                        showsTranslation.toggle()
                     }
                     .translationPresentation(
-                        isPresented: $showTranslation,
+                        isPresented: $showsTranslation,
                         text: notice.subject
                     )
             } else {
