@@ -90,7 +90,11 @@ public struct SettingList: View {
                     HStack(spacing: 0) {
                         Text("번역")
                         Spacer()
-                        Text(store.state.currentAppIcon?.korValue ?? KuringIcon.kuring_app.korValue)
+                        Text(
+                            leLabo.getTranslationStatus()
+                            ? "켜기"
+                            : "끄기"
+                        )
                     }
                     .font(.system(size: 16, weight: .medium))
                     .kerning(0.15)
