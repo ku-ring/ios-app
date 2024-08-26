@@ -77,6 +77,27 @@ public struct SettingList: View {
                 }
                 .padding(.vertical, 9)
                 
+                ZStack {
+                    NavigationLink(
+                        state: SettingsAppFeature.Path.State.appIconSelector(
+                            AppIconSelectorFeature.State()
+                        )
+                    ) {
+                        EmptyView()
+                    }
+                    .opacity(0)
+                    
+                    HStack(spacing: 0) {
+                        Text("번역")
+                        Spacer()
+                        Text(store.state.currentAppIcon?.korValue ?? KuringIcon.kuring_app.korValue)
+                    }
+                    .font(.system(size: 16, weight: .medium))
+                    .kerning(0.15)
+                    .foregroundStyle(Color.Kuring.body)
+                }
+                .padding(.vertical, 9)
+                
                 Divider()
                     .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             } header: {
@@ -132,7 +153,7 @@ public struct SettingList: View {
             } header: {
                 headerView("정보")
             } footer: {
-                Text("Designed by 김예은, 이소영.\nDeveloped by 박성수, 이건우, 최효원.\nManaged by 채수빈".)
+                Text("Designed by 김예은, 이소영.\nDeveloped by 박성수, 이건우, 최효원.\nManaged by 채수빈.")
                     .font(.footnote)
                     .foregroundStyle(Color.Kuring.caption1)
             }
