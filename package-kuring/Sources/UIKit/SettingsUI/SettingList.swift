@@ -56,24 +56,24 @@ public struct SettingList: View {
             .listRowBackground(Color.Kuring.bg)
             
             Section {
+                
                 ZStack {
-                    NavigationLink(
-                        state: SettingsAppFeature.Path.State.appIconSelector(
-                            AppIconSelectorFeature.State()
-                        )
-                    ) {
-                        EmptyView()
-                    }
-                    .opacity(0)
-                    
                     HStack(spacing: 0) {
-                        Text("앱 아이콘 바꾸기")
+                        Text("번역")
                         Spacer()
-                        Text(store.state.currentAppIcon?.korValue ?? KuringIcon.kuring_app.korValue)
+                        Text(
+                            store.isActiveTranslationStatus
+                            ? "켜기"
+                            : "끄기"
+                        )
                     }
                     .font(.system(size: 16, weight: .medium))
                     .kerning(0.15)
                     .foregroundStyle(Color.Kuring.body)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        store.send(.transltationRowTapped)
+                    }
                 }
                 .padding(.vertical, 9)
                 
@@ -88,13 +88,9 @@ public struct SettingList: View {
                     .opacity(0)
                     
                     HStack(spacing: 0) {
-                        Text("번역")
+                        Text("앱 아이콘 바꾸기")
                         Spacer()
-                        Text(
-                            leLabo.getTranslationStatus()
-                            ? "켜기"
-                            : "끄기"
-                        )
+                        Text(store.state.currentAppIcon?.korValue ?? KuringIcon.kuring_app.korValue)
                     }
                     .font(.system(size: 16, weight: .medium))
                     .kerning(0.15)
