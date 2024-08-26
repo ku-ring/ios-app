@@ -192,7 +192,8 @@ public struct NoticeRow: View {
     private var translationButton: some View {
         VStack {
             Spacer()
-            if #available(iOS 17.4, *) {
+            if #available(iOS 17.4, *),
+               UserDefaults.standard.bool(forKey: "com.kuring.service.lelabo.transltation") {
                 Image(systemName: "translate")
                     .frame(width: 24)
                     .onTapGesture {
