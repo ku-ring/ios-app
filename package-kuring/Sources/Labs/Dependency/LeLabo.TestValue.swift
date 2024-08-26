@@ -18,6 +18,10 @@ extension LeLabo {
             },
             set: { newValue, _ in
                 status.isBetaAEnabled = newValue
+            }, getTranslationStatus: {
+                return true
+            },
+            setTranslationStatus: { isActive in
             }
         )
     }()
