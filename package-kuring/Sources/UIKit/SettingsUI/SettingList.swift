@@ -56,26 +56,27 @@ public struct SettingList: View {
             .listRowBackground(Color.Kuring.bg)
             
             Section {
-                
-                ZStack {
-                    HStack(spacing: 0) {
-                        Text("번역")
-                        Spacer()
-                        Text(
-                            store.isActiveTranslationStatus
-                            ? "켜기"
-                            : "끄기"
-                        )
+                if #available(iOS 17.4, *) {
+                    ZStack {
+                        HStack(spacing: 0) {
+                            Text("번역")
+                            Spacer()
+                            Text(
+                                store.isActiveTranslationStatus
+                                ? "켜기"
+                                : "끄기"
+                            )
+                        }
+                        .font(.system(size: 16, weight: .medium))
+                        .kerning(0.15)
+                        .foregroundStyle(Color.Kuring.body)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            store.send(.transltationRowTapped)
+                        }
                     }
-                    .font(.system(size: 16, weight: .medium))
-                    .kerning(0.15)
-                    .foregroundStyle(Color.Kuring.body)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        store.send(.transltationRowTapped)
-                    }
+                    .padding(.vertical, 9)
                 }
-                .padding(.vertical, 9)
                 
                 ZStack {
                     NavigationLink(
