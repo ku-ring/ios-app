@@ -16,7 +16,8 @@ public struct NoticeRow: View {
     
     /// 번역 노출 여부
     @State var showsTranslation: Bool = false
-
+    @AppStorage("com.kuring.service.lelabo.transltation") private var transltationValue: Bool = false
+    
     public init(
         notice: Notice,
         bookmarked: Bool = false,
@@ -193,7 +194,7 @@ public struct NoticeRow: View {
         VStack {
             Spacer()
             if #available(iOS 17.4, *),
-               UserDefaults.standard.bool(forKey: "com.kuring.service.lelabo.transltation") {
+               transltationValue {
                 Image(systemName: "translate")
                     .frame(width: 24)
                     .onTapGesture {
