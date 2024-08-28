@@ -41,11 +41,11 @@ extension LeLabo {
             UserDefaults.standard.set(newValue, forKey: experiment.key)
         },
         getTranslationStatus: {
-            let key = "com.kuring.service.lelabo.transltation"
+            let key = "com.kuring.service.lelabo.translation"
             return UserDefaults.standard.bool(forKey: key)
         },
         setTranslationStatus: { isActive in
-            let key = "com.kuring.service.lelabo.transltation"
+            let key = "com.kuring.service.lelabo.translation"
             UserDefaults.standard.set(isActive, forKey: key)
         }
     )

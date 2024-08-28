@@ -16,7 +16,7 @@ public struct NoticeRow: View {
     
     /// 번역 노출 여부
     @State var showsTranslation: Bool = false
-    @AppStorage("com.kuring.service.lelabo.transltation") private var transltationValue: Bool = false
+    @AppStorage("com.kuring.service.lelabo.translation") private var transltationValue: Bool = false
     
     public init(
         notice: Notice,
