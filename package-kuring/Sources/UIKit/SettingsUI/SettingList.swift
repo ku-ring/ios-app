@@ -63,8 +63,8 @@ public struct SettingList: View {
                             Spacer()
                             Text(
                                 store.isActiveTranslationStatus
-                                ? "켜기"
-                                : "끄기"
+                                ? "끄기"
+                                : "켜기"
                             )
                         }
                         .font(.system(size: 16, weight: .medium))
