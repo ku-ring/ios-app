@@ -165,8 +165,12 @@ public struct SearchFeature {
 
                 // 최근 검색어 추가
                 if !state.recents.contains(state.searchInfo.text) { // 중복체크
-                    state.recents.append(state.searchInfo.text)
-                    
+                    state.recents.insert(state.searchInfo.text, at: 0)
+                    recentSearch.add(state.searchInfo.text)
+                } else if let idx = state.recents.firstIndex(where: {$0 == state.searchInfo.text}) {
+                    state.recents.remove(at: idx)
+                    state.recents.insert(state.searchInfo.text, at: 0)
+                    recentSearch.remove(state.searchInfo.text)
                     recentSearch.add(state.searchInfo.text)
                 }
 

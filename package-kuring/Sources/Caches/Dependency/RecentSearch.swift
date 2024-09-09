@@ -22,7 +22,7 @@ extension RecentSearch {
     public static let `default` = Self(
         add: { keyword in
             var keywords = Self.recentKeywords
-            keywords.append(keyword)
+            keywords.insert(keyword, at: 0)
             Self.recentKeywords = keywords
             
         }, remove: { keyword in
