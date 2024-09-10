@@ -85,7 +85,7 @@ public struct SearchView: View {
                 /// 최근 검색어 목록
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack {
-                        ForEach(store.recents, id: \.self) { recent in
+                        ForEach(store.recents.reversed(), id: \.self) { recent in
                             HStack(alignment: .center, spacing: 6) {
                                 Button {
                                     store.send(.recentSearchKeywordTapped(recent))
