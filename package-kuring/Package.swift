@@ -51,7 +51,7 @@ let package = Package(
             name: "BotUI",
             dependencies: [
                 .product(name: "Lottie", package: "lottie-spm"),
-                "ColorSet", "BotFeatures",
+                "ColorSet", "BotFeatures", "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ],
             path: "Sources/UIKit/BotUI",
