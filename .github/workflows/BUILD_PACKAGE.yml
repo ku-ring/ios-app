@@ -37,7 +37,7 @@ jobs:
       - name: Setup Xcode version
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '15.0'
+          xcode-version: '15.2'
 
       # package-kuring 패키지를 빌드합니다. (최소 버전)
       - name: package-kuring 의 App 스킴 빌드
