@@ -68,6 +68,8 @@ let package = Package(
                 "CommonUI",
                 "ColorSet",
                 "Caches",
+                "BotUI",
+                "BotFeatures",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "ActivityUI", package: "package-activityui"),
             ],
