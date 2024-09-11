@@ -7,7 +7,9 @@ import Caches
 import Models
 import SwiftUI
 import ColorSet
+#if canImport(Translation)
 import Translation
+#endif
 import ComposableArchitecture
 
 public struct NoticeRow: View {

@@ -70,6 +70,7 @@ let package = Package(
                 "Caches",
                 "BotUI",
                 "BotFeatures",
+                "DepartmentFeatures",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "ActivityUI", package: "package-activityui"),
             ],
