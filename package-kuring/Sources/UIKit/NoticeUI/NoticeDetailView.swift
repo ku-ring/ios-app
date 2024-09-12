@@ -7,9 +7,11 @@ import Models
 import SwiftUI
 import ColorSet
 import CommonUI
+import EKEventUI
 import ActivityUI
 import NoticeFeatures
 import ComposableArchitecture
+import EventKit
 
 public struct NoticeDetailView: View {
     @Bindable var store: StoreOf<NoticeDetailFeature>
@@ -19,16 +21,30 @@ public struct NoticeDetailView: View {
         ?? NoticeProvider.departments.first { $0.name == store.notice.category }
     }
     
+    @State var showAddEventModal = false
+    let eventStore = EKEventStore()
+    
     public var body: some View {
         WebView(urlString: store.notice.url)
             .background(Color.Kuring.bg)
             .navigationBarTitleDisplayMode(.inline)
+            .sheet(isPresented: $showAddEventModal) {
+                EKEventView(
+                    eventStore: eventStore,
+                    event: make(eventStore: eventStore)
+                )
+            }
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(noticeProvider?.korName ?? "")
                 }
                 
                 ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button {
+                        showAddEventModal = true
+                    } label: {
+                        Image(systemName: "calendar")
+                    }
                     Button {
                         self.store.send(.bookmarkButtonTapped)
                     } label: {
@@ -52,6 +68,20 @@ public struct NoticeDetailView: View {
     public init(store: StoreOf<NoticeDetailFeature>) {
         self.store = store
     }
+    
+    func make(eventStore: EKEventStore) -> EKEvent {
+        let event = EKEvent(eventStore: eventStore)
+        event.title = "당근"
+        let structuredLocation = EKStructuredLocation(title: "Starbucks")
+        structuredLocation.geoLocation = CLLocation(latitude: 37.7749, longitude: -122.4194)
+        event.structuredLocation = structuredLocation
+        event.url = URL(string: "www.naver.com")
+        event.isAllDay = true
+        let alarm = EKAlarm(relativeOffset: -86400)
+        event.notes = "자동작성된 이벤트"
+        event.alarms = [alarm]
+        return event
+    }
 }
 
 #Preview {
@@ -64,3 +94,9 @@ public struct NoticeDetailView: View {
         )
     }
 }
+//let eventStore = EKEventStore()
+//let event = make(eventStore: eventStore)
+//EKEventView(
+//    eventStore: eventStore,
+//    event: event
+//)
