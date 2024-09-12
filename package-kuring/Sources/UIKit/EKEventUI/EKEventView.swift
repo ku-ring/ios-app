@@ -10,6 +10,11 @@ public struct EKEventView: UIViewControllerRepresentable {
     public let eventStore: EKEventStore
     public let event: EKEvent
     
+    public init(eventStore: EKEventStore, event: EKEvent) {
+        self.eventStore = eventStore
+        self.event = event
+    }
+    
     public func makeUIViewController(context: Context) -> some UIViewController {
         let eventEditViewController = EKEventEditViewController()
         eventEditViewController.editViewDelegate = context.coordinator
