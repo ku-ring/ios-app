@@ -6,6 +6,7 @@
 import Caches
 import Models
 import SwiftUI
+import EventKit
 import ActivityUI
 import ComposableArchitecture
 
@@ -15,6 +16,9 @@ public struct NoticeDetailFeature {
     public struct State: Equatable {
         public var notice: Notice
         public var isBookmarked: Bool = false
+        public var isPresentedEventView: Bool = false
+        public var eventStore: EKEventStore?
+        public var event: EKEvent?
 
         public init(notice: Notice, isBookmarked: Bool? = nil) {
             @Dependency(\.bookmarks) var bookmarks
@@ -33,6 +37,7 @@ public struct NoticeDetailFeature {
 
     public enum Action: BindableAction, Equatable {
         case bookmarkButtonTapped
+        case calenarButtonTapped
         
         case binding(BindingAction<State>)
 
@@ -51,6 +56,24 @@ public struct NoticeDetailFeature {
                 
             case .bookmarkButtonTapped:
                 state.isBookmarked.toggle()
+                return .none
+                
+            case .calenarButtonTapped:
+                let eventStore = EKEventStore()
+                let event = EKEvent(eventStore: eventStore)
+                event.title = state.notice.subject
+                let structuredLocation = EKStructuredLocation(title: "건국대학교 05029 대한민국 서울특별시 광진구 능동로 120")
+                structuredLocation.geoLocation = CLLocation(latitude: 37.54360, longitude: 127.07747)
+                event.url = URL(string: state.notice.url)
+                event.isAllDay = true
+                let alarm = EKAlarm(relativeOffset: -86400)
+                event.notes = "쿠링에서 \(Date.now)에 등록된 일정입니다."
+                event.alarms = [alarm]
+                
+                state.eventStore = eventStore
+                state.event = event
+                state.isPresentedEventView.toggle()
+                
                 return .none
                 
             case .delegate:

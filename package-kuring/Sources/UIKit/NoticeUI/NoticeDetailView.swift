@@ -21,17 +21,18 @@ public struct NoticeDetailView: View {
         ?? NoticeProvider.departments.first { $0.name == store.notice.category }
     }
     
-    @State var showAddEventModal = false
-    let eventStore = EKEventStore()
-    
     public var body: some View {
         WebView(urlString: store.notice.url)
             .background(Color.Kuring.bg)
             .navigationBarTitleDisplayMode(.inline)
-            .sheet(isPresented: $showAddEventModal) {
+            .sheet(isPresented: $store.isPresentedEventView) {
+//                guard let eventStore = ,
+//                      let event = store.state.event else {
+//                    EmptyView()
+//                }
                 EKEventView(
-                    eventStore: eventStore,
-                    event: make(eventStore: eventStore)
+                    eventStore: store.state.eventStore!,
+                    event: store.state.event!
                 )
             }
             .toolbar {
@@ -41,9 +42,9 @@ public struct NoticeDetailView: View {
                 
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button {
-                        showAddEventModal = true
+                        self.store.send(.calenarButtonTapped)
                     } label: {
-                        Image(systemName: "calendar")
+                        Image(systemName: "calendar.badge.plus")
                     }
                     Button {
                         self.store.send(.bookmarkButtonTapped)
