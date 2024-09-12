@@ -26,14 +26,14 @@ public struct NoticeDetailView: View {
             .background(Color.Kuring.bg)
             .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $store.isPresentedEventView) {
-//                guard let eventStore = ,
-//                      let event = store.state.event else {
-//                    EmptyView()
-//                }
-                EKEventView(
-                    eventStore: store.state.eventStore!,
-                    event: store.state.event!
-                )
+                if let eventStore = store.state.eventStore, let event = store.state.event {
+                    EKEventView(
+                        eventStore: eventStore,
+                        event: event
+                    )
+                } else {
+                    EmptyView()
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -69,20 +69,6 @@ public struct NoticeDetailView: View {
     public init(store: StoreOf<NoticeDetailFeature>) {
         self.store = store
     }
-    
-    func make(eventStore: EKEventStore) -> EKEvent {
-        let event = EKEvent(eventStore: eventStore)
-        event.title = "당근"
-        let structuredLocation = EKStructuredLocation(title: "Starbucks")
-        structuredLocation.geoLocation = CLLocation(latitude: 37.7749, longitude: -122.4194)
-        event.structuredLocation = structuredLocation
-        event.url = URL(string: "www.naver.com")
-        event.isAllDay = true
-        let alarm = EKAlarm(relativeOffset: -86400)
-        event.notes = "자동작성된 이벤트"
-        event.alarms = [alarm]
-        return event
-    }
 }
 
 #Preview {
@@ -95,9 +81,3 @@ public struct NoticeDetailView: View {
         )
     }
 }
-//let eventStore = EKEventStore()
-//let event = make(eventStore: eventStore)
-//EKEventView(
-//    eventStore: eventStore,
-//    event: event
-//)
