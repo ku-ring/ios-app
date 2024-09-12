@@ -26,6 +26,9 @@ public struct LeLabo {
 
     public var status: (Experiment) -> Bool
     public var set: (NewValue, Experiment) -> Void
+    
+    public var getTranslationStatus: () -> Bool
+    public var setTranslationStatus: (Bool) -> Void
 }
 
 extension LeLabo {
@@ -36,6 +39,14 @@ extension LeLabo {
         },
         set: { newValue, experiment in
             UserDefaults.standard.set(newValue, forKey: experiment.key)
+        },
+        getTranslationStatus: {
+            let key = "com.kuring.service.lelabo.translation"
+            return UserDefaults.standard.bool(forKey: key)
+        },
+        setTranslationStatus: { isActive in
+            let key = "com.kuring.service.lelabo.translation"
+            UserDefaults.standard.set(isActive, forKey: key)
         }
     )
 }

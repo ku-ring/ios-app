@@ -56,6 +56,28 @@ public struct SettingList: View {
             .listRowBackground(Color.Kuring.bg)
             
             Section {
+                if #available(iOS 17.4, *) {
+                    ZStack {
+                        HStack(spacing: 0) {
+                            Text("번역")
+                            Spacer()
+                            Text(
+                                store.isActiveTranslationStatus
+                                ? "끄기"
+                                : "켜기"
+                            )
+                        }
+                        .font(.system(size: 16, weight: .medium))
+                        .kerning(0.15)
+                        .foregroundStyle(Color.Kuring.body)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            store.send(.transltationRowTapped)
+                        }
+                    }
+                    .padding(.vertical, 9)
+                }
+                
                 ZStack {
                     NavigationLink(
                         state: SettingsAppFeature.Path.State.appIconSelector(
@@ -132,7 +154,7 @@ public struct SettingList: View {
             } header: {
                 headerView("정보")
             } footer: {
-                Text("Designed by 김예은, 이소영.\nDeveloped by 박성수, 이건우, 최효원.\nManaged by 채수빈")
+                Text("Designed by 김예은, 이소영.\nDeveloped by 박성수, 이건우, 최효원.\nManaged by 채수빈.")
                     .font(.footnote)
                     .foregroundStyle(Color.Kuring.caption1)
             }
