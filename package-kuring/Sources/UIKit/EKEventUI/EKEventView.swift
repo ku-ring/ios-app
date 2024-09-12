@@ -10,7 +10,7 @@ public struct EKEventView: UIViewControllerRepresentable {
     public let eventStore: EKEventStore
     public let event: EKEvent
     
-    func makeUIViewController(context: Context) -> some UIViewController {
+    public func makeUIViewController(context: Context) -> some UIViewController {
         let eventEditViewController = EKEventEditViewController()
         eventEditViewController.editViewDelegate = context.coordinator
         eventEditViewController.eventStore = eventStore
@@ -19,20 +19,20 @@ public struct EKEventView: UIViewControllerRepresentable {
         return eventEditViewController
     }
     
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
+    public func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
     
-    func makeCoordinator() -> Coordinator {
+    public func makeCoordinator() -> Coordinator {
         return Coordinator(self)
     }
     
-    class Coordinator: NSObject, EKEventEditViewDelegate {
+    public class Coordinator: NSObject, EKEventEditViewDelegate {
         let parent: EKEventView
         
         init(_ parent: EKEventView) {
             self.parent = parent
         }
         
-        func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+        public func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
             parent.dismiss()
         }
     }
