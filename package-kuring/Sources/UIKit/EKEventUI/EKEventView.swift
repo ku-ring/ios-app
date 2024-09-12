@@ -3,12 +3,12 @@ import EventKit
 import EventKitUI
 import SwiftUI
 
-struct EKEventView: UIViewControllerRepresentable {
+public struct EKEventView: UIViewControllerRepresentable {
     
     @Environment(\.dismiss) var dismiss
     
-    let eventStore: EKEventStore
-    let event: EKEvent
+    public let eventStore: EKEventStore
+    public let event: EKEvent
     
     func makeUIViewController(context: Context) -> some UIViewController {
         let eventEditViewController = EKEventEditViewController()
