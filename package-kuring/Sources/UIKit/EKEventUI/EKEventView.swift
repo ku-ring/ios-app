@@ -10,7 +10,10 @@ public struct EKEventView: UIViewControllerRepresentable {
     public let eventStore: EKEventStore
     public let event: EKEvent
     
-    public init(eventStore: EKEventStore, event: EKEvent) {
+    public init(
+        eventStore: EKEventStore,
+        event: EKEvent
+    ) {
         self.eventStore = eventStore
         self.event = event
     }
