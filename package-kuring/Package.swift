@@ -48,6 +48,11 @@ let package = Package(
     targets: [
         // MARK: App Library Dependencies
         .target(
+            name: "EKEventUI",
+            dependencies: [],
+            path: "Sources/UIKit/EKEventUI"
+        ),
+        .target(
             name: "BotUI",
             dependencies: [
                 .product(name: "Lottie", package: "lottie-spm"),
@@ -71,6 +76,7 @@ let package = Package(
                 "BotUI",
                 "BotFeatures",
                 "DepartmentFeatures",
+                "EKEventUI",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "ActivityUI", package: "package-activityui"),
             ],
