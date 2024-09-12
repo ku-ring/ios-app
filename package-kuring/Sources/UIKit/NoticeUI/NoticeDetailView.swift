@@ -11,7 +11,6 @@ import EKEventUI
 import ActivityUI
 import NoticeFeatures
 import ComposableArchitecture
-import EventKit
 
 public struct NoticeDetailView: View {
     @Bindable var store: StoreOf<NoticeDetailFeature>
