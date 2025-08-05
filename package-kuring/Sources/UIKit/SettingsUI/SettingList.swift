@@ -154,7 +154,7 @@ public struct SettingList: View {
             } header: {
                 headerView("정보")
             } footer: {
-                Text("Designed by 김예은, 이소영.\nDeveloped by 박성수, 이건우, 최효원.\nManaged by 채수빈.")
+                Text("Designed by 조혜준.\nDeveloped by 박정환.\nManaged by 채수빈, 이혜빈.")
                     .font(.footnote)
                     .foregroundStyle(Color.Kuring.caption1)
             }
