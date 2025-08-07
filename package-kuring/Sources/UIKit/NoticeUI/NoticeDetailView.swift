@@ -32,11 +32,9 @@ public struct NoticeDetailView: View {
                     Button {
                         self.store.send(.bookmarkButtonTapped)
                     } label: {
-                        Image(
-                            self.store.isBookmarked
-                            ? "bookmark-fill"
-                            : "bookmark",
-                            bundle: Bundle.notices
+                        Image(self.store.isBookmarked
+                              ? "bookmark-fill"
+                              : "bookmark", bundle: Bundle.notices
                         )
                     }
                     

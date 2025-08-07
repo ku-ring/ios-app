@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import Networks
 import ColorSet
 import SwiftData
 import BotFeatures
