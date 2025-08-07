@@ -29,8 +29,9 @@
 | name | URL | branch | description |
 | ---- | ---- | ------ | ----- |
 | The Satellite | https://github.com/ku-ring/the-satellite | main | iOS API 통신모듈  |
-| Swift Collections | https://github.com/apple/swift-collections | main | OrderedSet |  
-| Composable Architecture | https://github.com/pointfreeco/swift-composable-architecture | main | TCA 구조를 위한 스위프트 패키지 |
+| Swift Collections | https://github.com/apple/swift-collections | 1.1.0 | OrderedSet |  
+| Composable Architecture | https://github.com/pointfreeco/swift-composable-architecture | 1.12.1 | TCA 구조를 위한 스위프트 패키지 |
+| swift-dependencies | https://github.com/pointfreeco/swift-dependencies | 1.9.3 | 디펜던시 관리 라이브러리 |
 | SwiftFormat | https://github.com/nicklockwood/SwiftFormat | 0.50.4 | 코드 스타일 관리 |
 
 ## 기여
