@@ -39,10 +39,6 @@ struct ContentView: View {
         case settings
     }
     
-    init() {
-        UITabBar.appearance().barTintColor = UIColor.init(Color.Kuring.bg)
-    }
-    
     var body: some View {
         TabView(selection: $selection) {
             NoticeApp(
@@ -84,7 +80,6 @@ struct ContentView: View {
             }
         }
         .tint(Color.Kuring.gray600)
-        
     }
 }
 
