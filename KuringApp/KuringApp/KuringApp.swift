@@ -26,12 +26,13 @@ struct KuringApp: App {
     @Dependency(\.commons) var commons
     
     @Dependency(\.swiftData) var swiftDataService
-        var modelContext: ModelContext {
-            guard let modelContext = try? self.swiftDataService.context() else {
-                fatalError("Could not find modelcontext")
-            }
-            return modelContext
+    
+    var modelContext: ModelContext {
+        guard let modelContext = try? self.swiftDataService.context() else {
+            fatalError("Could not find modelcontext")
         }
+        return modelContext
+    }
     
     var body: some Scene {
         WindowGroup {

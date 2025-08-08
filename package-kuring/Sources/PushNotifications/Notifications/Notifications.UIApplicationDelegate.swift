@@ -4,6 +4,8 @@
 //
 
 import UIKit
+import SwiftUI
+import ColorSet
 import Firebase
 
 extension Notifications {
@@ -12,6 +14,7 @@ extension Notifications {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
+        UITabBar.appearance().barTintColor = UIColor(Color.Kuring.bg)
         configureFirebase()
         registerRemoteNotification(for: application)
         return true
