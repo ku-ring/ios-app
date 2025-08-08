@@ -15,7 +15,7 @@ public struct AppIconSelector: View {
         List(store.appIcons) { icon in
             HStack {
                 VStack {
-                    Image(uiImage: UIImage(named: icon.rawValue) ?? UIImage())
+                    Image(uiImage: UIImage(named: icon.id, in: .module, with: nil) ?? UIImage())
                         .resizable()
                         .frame(width: 70, height: 70)
                         .cornerRadius(10)

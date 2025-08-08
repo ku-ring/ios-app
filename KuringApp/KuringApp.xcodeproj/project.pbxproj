@@ -98,7 +98,6 @@
 				1A9539D52E44F9640026A9EE /* GoogleService-Info.plist */,
 				CACC2F4B2B7E638C003142E2 /* KuringApp.entitlements */,
 				DF062D4A2AC87B6D00FC48C0 /* Info.plist */,
-				DFE7AB132AC332D200230934 /* Setting */,
 				A9DAFA532AB1F04B0064F748 /* KuringApp.swift */,
 				CA22E6262B9F6DA7001E03A7 /* LaunchScreen.swift */,
 				A9DAFA552AB1F04B0064F748 /* ContentView.swift */,
@@ -121,13 +120,6 @@
 			children = (
 			);
 			path = KuringAppTests;
-			sourceTree = "<group>";
-		};
-		DFE7AB132AC332D200230934 /* Setting */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Setting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
