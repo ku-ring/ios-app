@@ -80,6 +80,7 @@ struct ContentView: View {
             }
         }
         .tint(Color.Kuring.gray600)
+        .environment(\.horizontalSizeClass, .compact)
     }
 }
 
