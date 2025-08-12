@@ -21,7 +21,6 @@ public struct BookmarkApp: View {
             )
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("보관함")
-
         } destination: { store in
             switch store.state {
             case .detail:

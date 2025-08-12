@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "kuring_app_sketch.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -22,8 +22,6 @@ public struct SettingListFeature {
         // TODO: 나중에 디펜던시로
         public var currentAppIcon: KuringIcon?
         public var isCustomAlarmOn: Bool = false
-        
-        public var isActiveTranslationStatus: Bool
 
         public init(
             isCustomAlarmOn: Bool = true,
@@ -33,9 +31,6 @@ public struct SettingListFeature {
 
             @Dependency(\.appIcons) var appIcons
             self.currentAppIcon = appIcon ?? appIcons.currentAppIcon
-            
-            @Dependency(\.leLabo) var leLabo
-            isActiveTranslationStatus = leLabo.getTranslationStatus()
         }
     }
 
@@ -53,24 +48,14 @@ public struct SettingListFeature {
             case showFeedback
             case showOpensourceList
         }
-        
-        case transltationRowTapped
     }
 
-    @Dependency(\.leLabo) var leLabo
-    
     public var body: some ReducerOf<Self> {
         BindingReducer()
 
-        Reduce { state, action in
+        Reduce { _, action in
             switch action {
             case .binding, .delegate:
-                return .none
-            
-            case .transltationRowTapped:
-                state.isActiveTranslationStatus.toggle()
-                leLabo.setTranslationStatus(state.isActiveTranslationStatus)
-                
                 return .none
             }
         }

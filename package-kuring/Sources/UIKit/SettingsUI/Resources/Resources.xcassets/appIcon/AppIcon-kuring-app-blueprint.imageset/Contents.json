@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "kuring_app_blueprint.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
