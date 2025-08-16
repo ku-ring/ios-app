@@ -11,14 +11,14 @@ import Dependencies
 
 public struct NoticeEKEventStore {
     /// 전달받은 공지사항으로 EKEvent를 생성
-    public var makeEvent: (_ notice: Notice) -> Void
+    public var makeEvent: (_ notice: Notice) async -> Void
     /// 생성된 EKEvent 가져오기
     public var getEvent: () -> EKEvent?
     
     static var event: EKEvent?
     
     public init(
-        makeEvent: @escaping (_: Notice) -> Void,
+        makeEvent: @escaping (_: Notice) async -> Void,
         getEvent: @escaping () -> EKEvent?
     ) {
         self.makeEvent = makeEvent
@@ -29,20 +29,23 @@ public struct NoticeEKEventStore {
 extension NoticeEKEventStore {
     public static let `default` = NoticeEKEventStore(
         makeEvent: { notice in
-            let eventStore = EKEventStore()
-            let event = EKEvent(eventStore: eventStore)
-            let defaults = Self.Default()
-            let structuredLocation = EKStructuredLocation(title: defaults.locationTitle)
-            structuredLocation.geoLocation = defaults.geoLocation
-            
-            event.title = notice.subject
-            event.url = URL(string: notice.url)
-            event.isAllDay = true
-            event.notes = defaults.notes
-            event.alarms = [defaults.alarm]
-            event.structuredLocation = structuredLocation
-            
-            Self.event = event
+            return await withCheckedContinuation { continuation in
+                let eventStore = EKEventStore()
+                let event = EKEvent(eventStore: eventStore)
+                let defaults = Self.Default()
+                let structuredLocation = EKStructuredLocation(title: defaults.locationTitle)
+                structuredLocation.geoLocation = defaults.geoLocation
+                
+                event.title = notice.subject
+                event.url = URL(string: notice.url)
+                event.isAllDay = true
+                event.notes = defaults.notes
+                event.alarms = [defaults.alarm]
+                event.structuredLocation = structuredLocation
+                
+                Self.event = event
+                continuation.resume()
+            }
         }, getEvent: {
             return Self.event
         })
