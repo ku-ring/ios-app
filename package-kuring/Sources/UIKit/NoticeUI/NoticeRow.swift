@@ -53,6 +53,7 @@ public struct NoticeRow: View {
                     .ignoresSafeArea()
             default:
                 Color.clear
+                    .contentShape(Rectangle())
             }
 
             switch rowType {

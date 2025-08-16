@@ -112,8 +112,17 @@ public struct NoticeAppFeature {
                 case let .bookmarkUpdated(notice):
                     let isBookmarked = state.noticeList.bookmarkIDs.contains(notice.id)
                     return.send(.updateBookmarks(notice, isBookmarked))
+                case .showNoticeDetail(let notice):
+                    state.path.append(
+                        Path.State.detail(
+                            NoticeDetailFeature.State(
+                                notice: notice,
+                                isBookmarked: state.noticeList.bookmarkIDs.contains(notice.id)
+                            )
+                        )
+                    )
+                    return .none
                 }
-
             case .changeSubscription(.presented(.subscriptionView(.subscriptionResponse))):
                 /// ``SubscriptionAppFeature`` 액션
                 state.changeSubscription = nil

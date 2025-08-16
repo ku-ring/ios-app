@@ -16,23 +16,14 @@ struct NoticeList: View {
         Section {
             List(self.store.currentNotices, id: \.id) { notice in
                 ZStack { // Indicator 표시 제거를 위함
-                    NavigationLink(
-                        state: NoticeAppFeature.Path.State.detail(
-                            NoticeDetailFeature.State(
-                                notice: notice,
-                                isBookmarked: self.store.bookmarkIDs.contains(notice.id)
-                            )
-                        )
-                    ) {
-                        EmptyView()
-                    }
-                    .opacity(0)
-                    
                     VStack(spacing: 0) {
                         NoticeRow(
                             notice: notice,
                             bookmarked: self.store.bookmarkIDs.contains(notice.id)
                         )
+                        .onTapGesture {
+                            self.store.send(.delegate(.showNoticeDetail(notice)))
+                        }
                         .onAppear {
                             let type = self.store.provider
                             let noticeInfo = self.store.noticeDictionary[type]
