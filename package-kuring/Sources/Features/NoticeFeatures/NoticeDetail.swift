@@ -6,6 +6,7 @@
 import Caches
 import Models
 import SwiftUI
+import EventKit
 import ActivityUI
 import ComposableArchitecture
 
@@ -15,10 +16,12 @@ public struct NoticeDetailFeature {
     public struct State: Equatable {
         public var notice: Notice
         public var isBookmarked: Bool = false
+        public var isPresentedEventView: Bool = false
 
         public init(notice: Notice, isBookmarked: Bool? = nil) {
             @Dependency(\.bookmarks) var bookmarks
             self.notice = notice
+            
             if let isBookmarked {
                 self.isBookmarked = isBookmarked
                 return
@@ -33,6 +36,8 @@ public struct NoticeDetailFeature {
 
     public enum Action: BindableAction, Equatable {
         case bookmarkButtonTapped
+        case calendarButtonTapped
+        case presentEventView
         
         case binding(BindingAction<State>)
 
@@ -44,16 +49,25 @@ public struct NoticeDetailFeature {
     }
     
     public var body: some ReducerOf<Self> {
+        BindingReducer()
         Reduce { state, action in
             switch action {
             case .binding:
                 return .none
-                
             case .bookmarkButtonTapped:
                 state.isBookmarked.toggle()
                 return .none
+            case .calendarButtonTapped:
+                @Dependency(\.noticeEKEventStore) var noticeEKEventStore
                 
+                return .run(operation: { [notice = state.notice] send in
+                    await noticeEKEventStore.makeEvent(notice)
+                    await send(.presentEventView)
+                })
             case .delegate:
+                return .none
+            case .presentEventView:
+                state.isPresentedEventView = true
                 return .none
             }
         }
