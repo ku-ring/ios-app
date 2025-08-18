@@ -111,7 +111,7 @@ public struct NoticeAppFeature {
                 
                 case let .bookmarkUpdated(notice):
                     let isBookmarked = state.noticeList.bookmarkIDs.contains(notice.id)
-                    return.send(.updateBookmarks(notice, isBookmarked))
+                    return .send(.updateBookmarks(notice, isBookmarked))
                 case .showNoticeDetail(let notice):
                     state.path.append(
                         Path.State.detail(

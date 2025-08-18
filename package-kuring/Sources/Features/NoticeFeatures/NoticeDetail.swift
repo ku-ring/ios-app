@@ -44,7 +44,7 @@ public struct NoticeDetailFeature {
         case delegate(Delegate)
 
         public enum Delegate: Equatable {
-            case bookmarkUpdated(_ notice: Notice, _ isBookmarkd: Bool)
+            case bookmarkUpdated(_ notice: Notice, _ isBookmarked: Bool)
         }
     }
     

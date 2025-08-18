@@ -22,14 +22,12 @@ public struct EKEventView: UIViewControllerRepresentable {
 
     public func makeUIViewController(context: Context) -> some UIViewController {
         let eventEditViewController = EKEventEditViewController()
-        guard let ekEvent = noticeEKEventStore.getEvent() else {
-            return eventEditViewController
-        }
+        let getEvent = noticeEKEventStore.getEvent()
         
+        eventEditViewController.eventStore = getEvent.store
+        eventEditViewController.event = getEvent.event
         eventEditViewController.editViewDelegate = context.coordinator
-        eventEditViewController.eventStore = EKEventStore()
-        eventEditViewController.event = ekEvent
-
+        
         return eventEditViewController
     }
 

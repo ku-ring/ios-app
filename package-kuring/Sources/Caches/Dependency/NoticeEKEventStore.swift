@@ -7,19 +7,22 @@
 
 import Models
 import EventKit
+import CoreLocation
 import Dependencies
 
 public struct NoticeEKEventStore {
+    public typealias NoticeEKEvent = (store: EKEventStore, event: EKEvent)
     /// 전달받은 공지사항으로 EKEvent를 생성
     public var makeEvent: (_ notice: Notice) async -> Void
     /// 생성된 EKEvent 가져오기
-    public var getEvent: () -> EKEvent?
+    public var getEvent: () -> NoticeEKEvent
     
-    static var event: EKEvent?
+    static var event: EKEvent = .init()
+    static var eventStore: EKEventStore = .init()
     
     public init(
         makeEvent: @escaping (_: Notice) async -> Void,
-        getEvent: @escaping () -> EKEvent?
+        getEvent: @escaping () -> NoticeEKEvent
     ) {
         self.makeEvent = makeEvent
         self.getEvent = getEvent
@@ -30,8 +33,8 @@ extension NoticeEKEventStore {
     public static let `default` = NoticeEKEventStore(
         makeEvent: { notice in
             return await withCheckedContinuation { continuation in
-                let eventStore = EKEventStore()
-                let event = EKEvent(eventStore: eventStore)
+                Self.eventStore = EKEventStore()
+                let event = EKEvent(eventStore: Self.eventStore)
                 let defaults = Self.Default()
                 let structuredLocation = EKStructuredLocation(title: defaults.locationTitle)
                 structuredLocation.geoLocation = defaults.geoLocation
@@ -47,7 +50,7 @@ extension NoticeEKEventStore {
                 continuation.resume()
             }
         }, getEvent: {
-            return Self.event
+            return (store: Self.eventStore, event: Self.event)
         })
 }
 
