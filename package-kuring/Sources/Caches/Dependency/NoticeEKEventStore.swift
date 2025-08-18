@@ -11,14 +11,14 @@ import CoreLocation
 import Dependencies
 
 public struct NoticeEKEventStore {
-    public typealias NoticeEKEvent = (store: EKEventStore, event: EKEvent)
+    public typealias NoticeEKEvent = (store: EKEventStore, event: EKEvent?)
     
     /// 전달받은 공지사항으로 EKEvent를 생성
     public var makeEvent: (_ notice: Notice) async -> Void
     /// 생성된 EKEvent 가져오기
     public var getEvent: () -> NoticeEKEvent
     
-    static var noticeEKEvent: NoticeEKEvent = (store: .init(), event: .init())
+    static var noticeEKEvent: NoticeEKEvent = (store: .init(), event: nil)
     
     public init(
         makeEvent: @escaping (_: Notice) async -> Void,
