@@ -26,7 +26,7 @@ public struct EKEventView: UIViewControllerRepresentable {
         
         if let ekEvent = getEvent.event {
             eventEditViewController.eventStore = getEvent.store
-            eventEditViewController.event = getEvent.event
+            eventEditViewController.event = ekEvent
         }
         eventEditViewController.editViewDelegate = context.coordinator
         
