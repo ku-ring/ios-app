@@ -12,13 +12,13 @@ import Dependencies
 
 public struct NoticeEKEventStore {
     public typealias NoticeEKEvent = (store: EKEventStore, event: EKEvent)
+    
     /// 전달받은 공지사항으로 EKEvent를 생성
     public var makeEvent: (_ notice: Notice) async -> Void
     /// 생성된 EKEvent 가져오기
     public var getEvent: () -> NoticeEKEvent
     
-    static var event: EKEvent = .init()
-    static var eventStore: EKEventStore = .init()
+    static var noticeEKEvent: NoticeEKEvent = (store: .init(), event: .init())
     
     public init(
         makeEvent: @escaping (_: Notice) async -> Void,
@@ -33,8 +33,8 @@ extension NoticeEKEventStore {
     public static let `default` = NoticeEKEventStore(
         makeEvent: { notice in
             return await withCheckedContinuation { continuation in
-                Self.eventStore = EKEventStore()
-                let event = EKEvent(eventStore: Self.eventStore)
+                let store = EKEventStore()
+                let event = EKEvent(eventStore: store)
                 let defaults = Self.Default()
                 let structuredLocation = EKStructuredLocation(title: defaults.locationTitle)
                 structuredLocation.geoLocation = defaults.geoLocation
@@ -46,11 +46,11 @@ extension NoticeEKEventStore {
                 event.alarms = [defaults.alarm]
                 event.structuredLocation = structuredLocation
                 
-                Self.event = event
+                Self.noticeEKEvent = (store: store, event: event)
                 continuation.resume()
             }
         }, getEvent: {
-            return (store: Self.eventStore, event: Self.event)
+            return Self.noticeEKEvent
         })
 }
 
