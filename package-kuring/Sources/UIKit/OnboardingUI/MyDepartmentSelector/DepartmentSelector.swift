@@ -59,7 +59,7 @@ struct DepartmentSelector: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 16) {
+            Group {
                 Text(StringSet.title_select.rawValue)
                     .font(.system(size: 24, weight: .bold))
                     .foregroundStyle(Color.Kuring.title)
