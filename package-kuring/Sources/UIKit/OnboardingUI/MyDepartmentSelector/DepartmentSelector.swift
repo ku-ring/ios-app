@@ -59,13 +59,18 @@ struct DepartmentSelector: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text(StringSet.title_select.rawValue)
-                .font(.system(size: 24, weight: .bold))
-                .foregroundStyle(Color.Kuring.title)
-            
-            Text(StringSet.description_select.rawValue)
-                .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(Color.Kuring.caption1)
+            VStack(alignment: .leading, spacing: 16) {
+                Text(StringSet.title_select.rawValue)
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundStyle(Color.Kuring.title)
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                Text(StringSet.description_select.rawValue)
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(Color.Kuring.caption1)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .ignoresSafeArea(.keyboard)
             
             HStack(alignment: .center, spacing: 12) {
                 Image(systemName: "magnifyingglass")
