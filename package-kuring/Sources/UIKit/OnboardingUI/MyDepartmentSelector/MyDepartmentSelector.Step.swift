@@ -6,11 +6,9 @@
 import Foundation
 
 extension MyDepartmentSelector {
-    enum Step: Identifiable {
+    enum Step: Int {
         case searchDepartment
         case selectDepartment
         case addedDepartment
-        
-        var id: Self { self }
     }
 }
