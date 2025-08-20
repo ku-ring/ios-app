@@ -102,6 +102,8 @@ public struct NoticeListFeature {
             case editDepartment
             /// 북마크 업데이트 발생한 경우
             case bookmarkUpdated(Notice)
+            /// 공지를 눌렀을 경우
+            case showNoticeDetail(Notice)
         }
         
         public struct NoticesResult: Equatable {
