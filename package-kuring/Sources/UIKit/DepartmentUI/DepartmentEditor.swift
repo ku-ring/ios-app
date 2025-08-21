@@ -93,6 +93,7 @@ public struct DepartmentEditor: View {
 
             Spacer()
         }
+        .ignoresSafeArea(.keyboard)
         .padding(.horizontal, 20)
         .background(Color.Kuring.bg)
         .toolbar {

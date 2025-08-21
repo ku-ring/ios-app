@@ -7,6 +7,7 @@ import Models
 import SwiftUI
 import ColorSet
 import CommonUI
+import NoticeEKEventUI
 import ActivityUI
 import NoticeFeatures
 import ComposableArchitecture
@@ -23,12 +24,20 @@ public struct NoticeDetailView: View {
         WebView(urlString: store.notice.url)
             .background(Color.Kuring.bg)
             .navigationBarTitleDisplayMode(.inline)
+            .sheet(isPresented: $store.isPresentedEventView) {
+                EKEventView()
+            }
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(noticeProvider?.korName ?? "")
                 }
                 
                 ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button {
+                        self.store.send(.calendarButtonTapped)
+                    } label: {
+                        Image(systemName: "calendar.badge.plus")
+                    }
                     Button {
                         self.store.send(.bookmarkButtonTapped)
                     } label: {

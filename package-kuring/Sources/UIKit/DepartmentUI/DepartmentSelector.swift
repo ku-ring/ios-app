@@ -75,21 +75,10 @@ public struct DepartmentSelector: View {
             Spacer()
         }
         .padding(.horizontal, 50)
-        .padding(.vertical, 16)
         .frame(height: 50, alignment: .center)
         .background(backgroundColor)
         .cornerRadius(100)
-        .background {
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color.Kuring.bg.opacity(0.1),
-                    Color.Kuring.bg.opacity(0.1),
-                    Color.Kuring.primary.opacity(0.1)
-                ]),
-                startPoint: .top, endPoint: .bottom
-            )
-            .offset(x: 0, y: -32)
-        }
+        .padding(.vertical, 16)
     }
 
     public init(store: StoreOf<DepartmentSelectorFeature>) {

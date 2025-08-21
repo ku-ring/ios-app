@@ -48,6 +48,13 @@ let package = Package(
     targets: [
         // MARK: App Library Dependencies
         .target(
+            name: "NoticeEKEventUI",
+            dependencies: [
+                "Caches"
+            ],
+            path: "Sources/UIKit/NoticeEKEventUI"
+        ),
+        .target(
             name: "BotUI",
             dependencies: [
                 .product(name: "Lottie", package: "lottie-spm"),
@@ -71,6 +78,7 @@ let package = Package(
                 "BotUI",
                 "BotFeatures",
                 "DepartmentFeatures",
+                "NoticeEKEventUI",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "ActivityUI", package: "package-activityui"),
             ],
@@ -293,7 +301,10 @@ let package = Package(
         .testTarget(
             name: "NoticeFeaturesTests",
             dependencies: [
-                "NoticeFeatures", "SearchFeatures", "Models", "Caches",
+                "NoticeFeatures",
+                "SearchFeatures",
+                "Models",
+                "Caches",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "ActivityUI", package: "package-activityui"),
             ]
@@ -308,7 +319,9 @@ let package = Package(
         .testTarget(
             name: "BookmarkFeaturesTests",
             dependencies: [
-                "BookmarkFeatures", "Caches", "Models",
+                "BookmarkFeatures",
+                "Caches",
+                "Models",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]
         ),
