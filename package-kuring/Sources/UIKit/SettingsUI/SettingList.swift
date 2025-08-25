@@ -15,6 +15,20 @@ public struct SettingList: View {
     
     public var body: some View {
         List {
+            Group {
+                Button {
+                    store.send(.delegate(.showLogin))
+                } label: {
+                    itemView("user", "로그인하기")
+                }
+                
+                Divider()
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+            }
+            .padding(.top, 16)
+            .listRowSeparator(.hidden)
+            .listRowBackground(Color.Kuring.bg)
+            
             Section {
                 Button {
                     store.send(.delegate(.showSubscription))
