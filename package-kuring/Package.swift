@@ -105,6 +105,15 @@ let package = Package(
             path: "Sources/UIKit/DepartmentUI"
         ),
         .target(
+            name: "LoginUI",
+            dependencies: [
+                "LoginFeatures",
+                "ColorSet",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/UIKit/LoginUI"
+        ),
+        .target(
             name: "SearchUI",
             dependencies: [
                 "SearchFeatures", "NoticeFeatures",
@@ -206,6 +215,15 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Features/DepartmentFeatures"
+        ),
+        .target(
+            name: "LoginFeatures",
+            dependencies: [
+                "Models",
+                "Caches",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/Features/LoginFeatures"
         ),
         .target(
             name: "SearchFeatures",
