@@ -51,6 +51,9 @@ public struct SettingsAppFeature {
             switch action {
             case let .settingList(.delegate(action)):
                 switch action {
+                case .showLogin:
+//                    state.destination = .login(LoginAppFeature.State())
+                    return .none
                 case .showSubscription:
                     state.destination = .subscription(SubscriptionAppFeature.State())
                     return .none
