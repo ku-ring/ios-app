@@ -21,11 +21,11 @@ public struct SettingList: View {
                 } label: {
                     itemView("user", "로그인하기")
                 }
+                .padding(.top, 16)
                 
                 Divider()
                     .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             }
-            .padding(.top, 16)
             .listRowSeparator(.hidden)
             .listRowBackground(Color.Kuring.bg)
             
