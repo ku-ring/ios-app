@@ -20,7 +20,7 @@ struct DeleteAccount: View {
             
             deleteButton
         }
-        .padding(.horizontal, 20)
+        .padding(20)
         .background(Color.Kuring.bg)
     }
     
