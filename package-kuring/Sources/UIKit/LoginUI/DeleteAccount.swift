@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Caches
 import ColorSet
 
 struct DeleteAccount: View {
