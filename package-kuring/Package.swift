@@ -22,6 +22,7 @@ let package = Package(
                 "CampusUI",
                 "CommonUI",
                 "OnboardingUI",
+                "LoginUI",
                 "PushNotifications",
             ]
         ),
@@ -111,7 +112,8 @@ let package = Package(
                 "ColorSet",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
-            path: "Sources/UIKit/LoginUI"
+            path: "Sources/UIKit/LoginUI",
+            resources: [.process("Resources")]
         ),
         .target(
             name: "SearchUI",
