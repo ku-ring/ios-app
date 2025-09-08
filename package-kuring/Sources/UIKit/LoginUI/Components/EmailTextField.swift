@@ -16,12 +16,12 @@ struct EmailTextField: View {
         TextField(
             "",
             text: $email,
-            prompt: Text("\(placeholder)").foregroundStyle(Color.Kuring.caption1)
+            prompt: Text(placeholder).foregroundStyle(Color.Kuring.caption1)
         )
         .keyboardType(.emailAddress)
         .textContentType(.emailAddress)
         .autocorrectionDisabled()
-        .textCase(.lowercase)
+        .textInputAutocapitalization(.never)
         .frame(height: 50)
         .padding(.horizontal)
     }

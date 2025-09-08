@@ -32,7 +32,7 @@ struct PasswordTextField: View {
             }
             .textContentType(.password)
             .autocorrectionDisabled()
-            .textCase(.lowercase)
+            .textInputAutocapitalization(.never)
             .font(.system(size: 16, weight: .medium))
             
             Button(action: {

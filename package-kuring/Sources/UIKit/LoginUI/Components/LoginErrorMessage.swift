@@ -12,7 +12,7 @@ struct LoginErrorMessage: View {
     let message: String
     
     var body: some View {
-        Text("\(message)")
+        Text(message)
             .font(.caption2.weight(.medium))
             .foregroundStyle(Color.Kuring.warning)
             .frame(maxWidth: .infinity, alignment: .leading)

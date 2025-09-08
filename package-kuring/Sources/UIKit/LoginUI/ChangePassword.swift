@@ -49,7 +49,7 @@ struct ChangePassword: View {
             
             ActionButton(
                 title: "확인",
-                isActive: !reEnterPassword.isEmpty && isValidReEnterPassword
+                isActive: isValidPassword && !reEnterPassword.isEmpty && isValidReEnterPassword
             ) {
                 
             }
@@ -60,7 +60,7 @@ struct ChangePassword: View {
     }
 }
 
-//MARK: - View Components
+// MARK: - View Components
 extension ChangePassword {
     private var enterPasswordTextField: some View {
         VStack {
@@ -77,6 +77,8 @@ extension ChangePassword {
                         lineWidth: password.isEmpty ? 0 : 1
                     )
             )
+            .focused($focusedField, equals: .password)
+            .submitLabel(.next)
             .onSubmit {
                 focusedField = .reEnterPassword
             }
@@ -103,6 +105,8 @@ extension ChangePassword {
                         lineWidth: reEnterPassword.isEmpty ? 0 : 1
                     )
             )
+            .focused($focusedField, equals: .reEnterPassword)
+            .submitLabel(.done)
             .onSubmit {
                 focusedField = nil
             }

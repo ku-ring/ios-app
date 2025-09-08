@@ -39,7 +39,7 @@ struct LoginView: View {
     }
 }
 
-//MARK: - View Components
+// MARK: - View Components
 extension LoginView {
     /// 로그인 텍스트필드 영역 (이메일, 비밀번호 입력)
     private var loginForm: some View {

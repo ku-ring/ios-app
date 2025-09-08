@@ -133,7 +133,7 @@ extension FindPassword {
                 .fill(Color.Kuring.gray100)
                 .stroke(Color.Kuring.warning, lineWidth: isValidEmail ? 0 : 1)
         )
-        .onChange(of: email) { _, newValue in
+        .onChange(of: email) { _ in
             updateButtonState()
         }
     }
@@ -152,6 +152,7 @@ extension FindPassword {
                         .stroke(verificationState.borderColor, lineWidth: 1)
                 )
         }
+        .disabled(!verificationState.isEnabled)
     }
     
     /// 인증번호
@@ -204,7 +205,7 @@ extension FindPassword {
     private func updateButtonState() {
         if email.isEmpty || !isValidEmail {
             verificationState = .disabled
-        } else if email == "Resend" {
+        } else if timer != nil  {
             verificationState = .resend
         } else if isValidEmail {
             verificationState = .send
@@ -217,6 +218,7 @@ extension FindPassword {
             break
         case .send:
             startTimer()
+            verificationState = .resend
             // send verification code
             break
         case .resend:

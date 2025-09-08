@@ -11,14 +11,14 @@ import ColorSet
 struct ActionButton: View {
     let title: String
     var isActive: Bool
-    var activeColor: Color = .Kuring.primary
+    let activeColor: Color = .Kuring.primary
     let action: () -> Void
     
     var body: some View {
         Button {
             action()
         } label: {
-            Text("\(title)")
+            Text(title)
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundStyle(isActive ? Color.Kuring.bg : Color.Kuring.caption1)
                 .frame(height: 56)
