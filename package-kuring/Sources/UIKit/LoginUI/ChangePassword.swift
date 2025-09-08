@@ -24,6 +24,8 @@ struct ChangePassword: View {
     @FocusState private var focusedField: FocusedField?
     @State private var password: String = ""
     @State private var reEnterPassword: String = ""
+    @State private var showPassword = false
+    @State private var showReEnterPassword = false
     
     private var isValidPassword: Bool {
         PasswordValidator.isValidPassword(password)
@@ -32,9 +34,6 @@ struct ChangePassword: View {
     private var isValidReEnterPassword: Bool {
         password == reEnterPassword
     }
-    
-    @State private var showPassword = false
-    @State private var showReEnterPassword = false
     
     var body: some View {
         VStack {
@@ -48,12 +47,21 @@ struct ChangePassword: View {
             
             Spacer()
             
-            confirmButton
+            ActionButton(
+                title: "확인",
+                isActive: !reEnterPassword.isEmpty && isValidReEnterPassword
+            ) {
+                
+            }
+            .padding(.top, 16)
         }
         .padding(20)
         .background(Color.Kuring.bg)
     }
-    
+}
+
+//MARK: - View Components
+extension ChangePassword {
     private var enterPasswordTextField: some View {
         VStack {
             PasswordTextField(
@@ -74,7 +82,7 @@ struct ChangePassword: View {
             }
             
             if !password.isEmpty && !isValidPassword {
-                errorMessage("6~20자 영문 소문자, 숫자를 조합하여 입력해주세요.")
+                LoginErrorMessage(message: "6~20자 영문 소문자, 숫자를 조합하여 입력해주세요.")
             }
         }
         .padding(.top, 45)
@@ -100,35 +108,9 @@ struct ChangePassword: View {
             }
             
             if !reEnterPassword.isEmpty && !isValidReEnterPassword {
-                errorMessage("비밀번호가 일치하지 않아요.")
+                LoginErrorMessage(message: "비밀번호가 일치하지 않아요.")
             }
         }
-    }
-    
-    /// 확인 버튼
-    private var confirmButton: some View {
-        Button {
-            
-        } label: {
-            Text("확인")
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundStyle(!reEnterPassword.isEmpty && isValidReEnterPassword ? Color.Kuring.bg : Color.Kuring.caption1)
-                .frame(height: 56)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .background(
-                    Capsule()
-                        .fill(!reEnterPassword.isEmpty && isValidReEnterPassword ? Color.Kuring.primary : Color.Kuring.gray200)
-                )
-        }
-        .padding(.top, 16)
-    }
-    
-    private func errorMessage(_ text: String) -> some View {
-        Text(text)
-            .font(.caption2.weight(.medium))
-            .foregroundStyle(Color.Kuring.warning)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 16)
     }
 }
 

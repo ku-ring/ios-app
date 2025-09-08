@@ -26,19 +26,8 @@ struct DeleteAccountConfirmation: View {
             
             Spacer()
             
-            Button {
+            ActionButton(title: "확인", isActive: true) {
                 
-            } label: {
-                Text("확인")
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(Color.Kuring.bg)
-                    .frame(height: 56)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .background(
-                        Capsule()
-                            .fill(Color.Kuring.primary)
-                    )
-                    .padding(.bottom, 20)
             }
         }
         .padding(20)

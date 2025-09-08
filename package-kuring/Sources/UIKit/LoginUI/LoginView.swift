@@ -26,7 +26,10 @@ struct LoginView: View {
             )
             
             loginForm
-            loginButton
+            ActionButton(title: "로그인", isActive: true) {
+                
+            }
+            .padding(.top, 33)
             footer
             
             Spacer()
@@ -66,24 +69,6 @@ extension LoginView {
             }
         }
         .padding(.top, 45)
-    }
-    
-    /// 로그인 버튼
-    private var loginButton: some View {
-        Button {
-            
-        } label: {
-            Text("로그인")
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundStyle(Color.Kuring.bg)
-                .frame(height: 56)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .background(
-                    Capsule()
-                        .fill(Color.Kuring.primary)
-                )
-        }
-        .padding(.top, 33)
     }
     
     /// 푸터 영역 (비밀번호 찾기 / 회원가입하기)

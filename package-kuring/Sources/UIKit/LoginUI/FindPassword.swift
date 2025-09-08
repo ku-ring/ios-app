@@ -94,7 +94,10 @@ struct FindPassword: View {
             Spacer()
             
             goToEmail
-            nextButton
+            ActionButton(title: "다음", isActive: canProceed) {
+                
+            }
+            .padding(.top, 16)
         }
         .padding(20)
         .background(Color.Kuring.bg)
@@ -114,7 +117,7 @@ extension FindPassword {
             }
             
             if !isValidEmail {
-                errorMessage("등록되지 않은 이메일이에요.")
+                LoginErrorMessage(message: "등록되지 않은 이메일이에요.")
             }
         }
         .padding(.top, 45)
@@ -157,7 +160,7 @@ extension FindPassword {
             verificationTextField
             
             if !verificationCode.isEmpty && !isValidVerificationCode {
-                errorMessage("올바르지 않은 인증번호에요.")
+                LoginErrorMessage(message: "올바르지 않은 인증번호에요.")
             }
         }
     }
@@ -193,32 +196,6 @@ extension FindPassword {
             .onTapGesture {
                 // do something
             }
-    }
-    
-    /// 다음 버튼
-    private var nextButton: some View {
-        Button {
-            
-        } label: {
-            Text("다음")
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundStyle(canProceed ? Color.Kuring.bg : Color.Kuring.caption1)
-                .frame(height: 56)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .background(
-                    Capsule()
-                        .fill(canProceed ? Color.Kuring.primary : Color.Kuring.gray200)
-                )
-        }
-        .padding(.top, 16)
-    }
-    
-    private func errorMessage(_ text: String) -> some View {
-        Text(text)
-            .font(.caption2.weight(.medium))
-            .foregroundStyle(Color.Kuring.warning)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 16)
     }
 }
 
