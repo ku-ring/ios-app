@@ -9,7 +9,6 @@ import SwiftUI
 import ColorSet
 
 struct LoginView: View {
-    
     enum FocusedField: Hashable {
         case username, password
     }
@@ -22,11 +21,8 @@ struct LoginView: View {
     var body: some View {
         VStack {
             header
-            
             loginForm
-            
             loginButton
-            
             footer
             
             Spacer()
