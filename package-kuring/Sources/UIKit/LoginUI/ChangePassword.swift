@@ -56,43 +56,11 @@ struct ChangePassword: View {
     
     private var enterPasswordTextField: some View {
         VStack {
-            HStack {
-                Group {
-                    if showPassword {
-                        TextField(
-                            "",
-                            text: $password,
-                            prompt: Text("비밀번호").foregroundStyle(Color.Kuring.caption1)
-                        )
-                    } else {
-                        SecureField(
-                            "",
-                            text: $password,
-                            prompt: Text("비밀번호").foregroundStyle(Color.Kuring.caption1)
-                        )
-                    }
-                }
-                .focused($focusedField, equals: .password)
-                .textContentType(.password)
-                .autocorrectionDisabled()
-                .textCase(.lowercase)
-                .font(.system(size: 16, weight: .medium))
-                .onSubmit {
-                    focusedField = .reEnterPassword
-                }
-                
-                Button(action: {
-                    self.showPassword.toggle()
-                }, label: {
-                    Image(
-                        self.showPassword ? "preview_open" : "preview_close",
-                        bundle: .module
-                    )
-                    .foregroundColor(.secondary)
-                })
-            }
-            .frame(height: 50)
-            .padding(.horizontal)
+            PasswordTextField(
+                showInput: $showPassword,
+                input: $password,
+                placeholder: "비밀번호"
+            )
             .background(
                 RoundedRectangle(cornerRadius: 8)
                     .fill(Color.Kuring.gray100)
@@ -101,6 +69,9 @@ struct ChangePassword: View {
                         lineWidth: password.isEmpty ? 0 : 1
                     )
             )
+            .onSubmit {
+                focusedField = .reEnterPassword
+            }
             
             if !password.isEmpty && !isValidPassword {
                 errorMessage("6~20자 영문 소문자, 숫자를 조합하여 입력해주세요.")
@@ -111,43 +82,11 @@ struct ChangePassword: View {
     
     private var reEnterPasswordTextField: some View {
         VStack {
-            HStack {
-                Group {
-                    if showReEnterPassword {
-                        TextField(
-                            "",
-                            text: $reEnterPassword,
-                            prompt: Text("비밀번호 재확인").foregroundStyle(Color.Kuring.caption1)
-                        )
-                    } else {
-                        SecureField(
-                            "",
-                            text: $reEnterPassword,
-                            prompt: Text("비밀번호 재확인").foregroundStyle(Color.Kuring.caption1)
-                        )
-                    }
-                }
-                .focused($focusedField, equals: .password)
-                .textContentType(.password)
-                .autocorrectionDisabled()
-                .textCase(.lowercase)
-                .font(.system(size: 16, weight: .medium))
-                .onSubmit {
-                    focusedField = nil
-                }
-                
-                Button(action: {
-                    self.showReEnterPassword.toggle()
-                }, label: {
-                    Image(
-                        self.showReEnterPassword ? "preview_open" : "preview_close",
-                        bundle: .module
-                    )
-                    .foregroundColor(.secondary)
-                })
-            }
-            .frame(height: 50)
-            .padding(.horizontal)
+            PasswordTextField(
+                showInput: $showReEnterPassword,
+                input: $reEnterPassword,
+                placeholder: "비밀번호 재확인"
+            )
             .background(
                 RoundedRectangle(cornerRadius: 8)
                     .fill(Color.Kuring.gray100)
@@ -156,6 +95,9 @@ struct ChangePassword: View {
                         lineWidth: reEnterPassword.isEmpty ? 0 : 1
                     )
             )
+            .onSubmit {
+                focusedField = nil
+            }
             
             if !reEnterPassword.isEmpty && !isValidReEnterPassword {
                 errorMessage("비밀번호가 일치하지 않아요.")

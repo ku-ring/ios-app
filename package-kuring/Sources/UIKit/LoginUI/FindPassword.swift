@@ -121,17 +121,10 @@ extension FindPassword {
     }
     
     private var emailTextField: some View {
-        TextField(
-            "",
-            text: $email,
-            prompt: Text("학교 이메일 주소").foregroundStyle(Color.Kuring.caption1)
+        EmailTextField(
+            email: $email,
+            placeholder: "학교 이메일 주소"
         )
-        .keyboardType(.emailAddress)
-        .textContentType(.emailAddress)
-        .autocorrectionDisabled()
-        .textCase(.lowercase)
-        .frame(height: 50)
-        .padding(.horizontal)
         .background(
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.Kuring.gray100)

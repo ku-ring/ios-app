@@ -36,84 +36,38 @@ struct LoginView: View {
     }
 }
 
+//MARK: - View Components
 extension LoginView {
     /// 로그인 텍스트필드 영역 (이메일, 비밀번호 입력)
     private var loginForm: some View {
         VStack(spacing: 8) {
-            emailTextField
-            passwordTextField
+            EmailTextField(email: $email, placeholder: "학교 이메일 주소")
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.Kuring.gray100)
+                )
+                .focused($focusedField, equals: .username)
+                .onSubmit {
+                    focusedField = .password
+                }
+            
+            PasswordTextField(
+                showInput: $showPassword,
+                input: $password,
+                placeholder: "6~20자 영문 소문자+숫자"
+            )
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color.Kuring.gray100)
+            )
+            .focused($focusedField, equals: .password)
+            .onSubmit {
+                focusedField = nil
+            }
         }
         .padding(.top, 45)
     }
     
-    private var emailTextField: some View {
-        TextField(
-            "",
-            text: $email,
-            prompt: Text("학교 이메일 주소").foregroundStyle(Color.Kuring.caption1)
-        )
-        .focused($focusedField, equals: .username)
-        .keyboardType(.emailAddress)
-        .textContentType(.emailAddress)
-        .autocorrectionDisabled()
-        .textCase(.lowercase)
-        .frame(height: 50)
-        .padding(.horizontal)
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Color.Kuring.gray100)
-        )
-        .onSubmit {
-            focusedField = .password
-        }
-    }
-    
-    private var passwordTextField: some View {
-        HStack {
-            Group {
-                if showPassword {
-                    TextField(
-                        "",
-                        text: $password,
-                        prompt: Text("6~20자 영문 소문자+숫자").foregroundStyle(Color.Kuring.caption1)
-                    )
-                } else {
-                    SecureField(
-                        "",
-                        text: $password,
-                        prompt: Text("6~20자 영문 소문자+숫자").foregroundStyle(Color.Kuring.caption1)
-                    )
-                }
-            }
-            .focused($focusedField, equals: .password)
-            .textContentType(.password)
-            .autocorrectionDisabled()
-            .textCase(.lowercase)
-            .font(.system(size: 16, weight: .medium))
-            .onSubmit {
-                focusedField = nil
-            }
-            
-            Button(action: {
-                self.showPassword.toggle()
-            }, label: {
-                Image(
-                    self.showPassword ? "preview_open" : "preview_close",
-                    bundle: .module
-                )
-                .foregroundColor(.secondary)
-            })
-        }
-        .frame(height: 50)
-        .padding(.horizontal)
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Color.Kuring.gray100)
-        )
-    }
-}
-
-extension LoginView {
     /// 로그인 버튼
     private var loginButton: some View {
         Button {
@@ -131,9 +85,7 @@ extension LoginView {
         }
         .padding(.top, 33)
     }
-}
-
-extension LoginView {
+    
     /// 푸터 영역 (비밀번호 찾기 / 회원가입하기)
     private var footer: some View {
         VStack(alignment: .center) {
