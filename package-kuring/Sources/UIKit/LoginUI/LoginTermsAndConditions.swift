@@ -14,28 +14,25 @@ struct LoginTermsAndConditions: View {
     
     var body: some View {
         VStack {
-            header
+            HeaderView(
+                title: "개인정보 수집/이용 동의",
+                subtitle: "회원 가입 전 하단 유의사항을 확인하고,\n개인정보 수집 및 이용에 동의해주세요."
+            )
+            
             termsAndConditions
             AgreementButton(didAgreeToTerms: $didAgreeToTerms)
+            
             Spacer(minLength: 63)
-            nextButton
+            
+            ActionButton(
+                title: "다음",
+                isActive: (didAgreeToTerms ?? false)
+            ) {
+                
+            }
         }
         .padding(20)
         .background(Color.Kuring.bg)
-    }
-    
-    private var header: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("개인정보 수집/이용 동의")
-                .font(.system(size: 24, weight: .bold))
-                .foregroundStyle(Color.Kuring.title)
-            
-            Text("회원 가입 전 하단 유의사항을 확인하고,\n개인정보 수집 및 이용에 동의해주세요.")
-                .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(Color.Kuring.caption1)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     private var termsAndConditions: some View {
@@ -49,26 +46,6 @@ struct LoginTermsAndConditions: View {
                 .stroke(Color.Kuring.gray100, lineWidth: 2)
         )
         .padding(.top, 45)
-    }
-    
-    private var nextButton: some View {
-        Button {
-            
-        } label: {
-            Text("다음")
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundStyle(
-                    (didAgreeToTerms ?? false) ? Color.Kuring.bg : Color.Kuring.caption1
-                )
-                .frame(height: 56)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .background(
-                    Capsule()
-                        .fill(
-                            (didAgreeToTerms ?? false) ? Color.Kuring.primary : Color.Kuring.gray200
-                        )
-                )
-        }
     }
 }
 

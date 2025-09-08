@@ -11,47 +11,25 @@ import ColorSet
 struct DeleteAccount: View {
     var body: some View {
         VStack {
-            header
+            HeaderView(
+                title: "탈퇴하기",
+                subtitle: "쿠링을 탈퇴하기 전에\n하단 정보를 확인해주세요."
+            )
 
             disclaimer
             
             Spacer()
             
-            deleteButton
+            ActionButton(
+                title: "탈퇴하기",
+                isActive: true,
+                activeColor: Color.Kuring.warning
+            ) {
+                
+            }
         }
         .padding(20)
         .background(Color.Kuring.bg)
-    }
-    
-    private var header: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("탈퇴하기")
-                .font(.system(size: 24, weight: .bold))
-                .foregroundStyle(Color.Kuring.title)
-            
-            Text("쿠링을 탈퇴하기 전에\n하단 정보를 확인해주세요.")
-                .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(Color.Kuring.caption1)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-    
-    @ViewBuilder
-    private func disclaimerView(title: String, subtitle: String) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(title)
-                .font(.body.bold())
-                .foregroundStyle(Color.Kuring.title)
-            
-            Text(subtitle)
-                .font(.system(size: 14))
-                .foregroundStyle(Color.Kuring.caption1)
-                .lineSpacing(4)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.vertical, 16)
-        .padding(.horizontal, 16)
-        .background(Color.Kuring.gray100, in: RoundedRectangle(cornerRadius: 8))
     }
     
     private var disclaimer: some View {
@@ -72,20 +50,21 @@ struct DeleteAccount: View {
         .padding(.top, 45)
     }
     
-    private var deleteButton: some View {
-        Button {
+    @ViewBuilder
+    private func disclaimerView(title: String, subtitle: String) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.body.bold())
+                .foregroundStyle(Color.Kuring.title)
             
-        } label: {
-            Text("탈퇴하기")
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundStyle(Color.Kuring.bg)
-                .frame(height: 56)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .background(
-                    Capsule()
-                        .fill(Color.Kuring.warning)
-                )
-                .padding(.bottom, 20)
+            Text(subtitle)
+                .font(.system(size: 14))
+                .foregroundStyle(Color.Kuring.caption1)
+                .lineSpacing(4)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, 16)
+        .padding(.horizontal, 16)
+        .background(Color.Kuring.gray100, in: RoundedRectangle(cornerRadius: 8))
     }
 }
