@@ -11,7 +11,10 @@ import ColorSet
 struct DeleteAccount: View {
     var body: some View {
         VStack {
-            header
+            HeaderView(
+                title: "탈퇴하기",
+                subtitle: "쿠링을 탈퇴하기 전에\n하단 정보를 확인해주세요."
+            )
 
             disclaimer
             
@@ -21,19 +24,6 @@ struct DeleteAccount: View {
         }
         .padding(20)
         .background(Color.Kuring.bg)
-    }
-    
-    private var header: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("탈퇴하기")
-                .font(.system(size: 24, weight: .bold))
-                .foregroundStyle(Color.Kuring.title)
-            
-            Text("쿠링을 탈퇴하기 전에\n하단 정보를 확인해주세요.")
-                .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(Color.Kuring.caption1)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     @ViewBuilder

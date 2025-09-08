@@ -20,7 +20,11 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
-            header
+            HeaderView(
+                title: "로그인",
+                subtitle: "로그인 후 쿠링과 함께\n다채로운 캠퍼스 생활을 즐겨보세요 :)"
+            )
+            
             loginForm
             loginButton
             footer
@@ -29,22 +33,6 @@ struct LoginView: View {
         }
         .padding(20)
         .background(Color.Kuring.bg)
-    }
-}
-
-extension LoginView {
-    /// 헤더 영역
-    private var header: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("로그인")
-                .font(.system(size: 24, weight: .bold))
-                .foregroundStyle(Color.Kuring.title)
-            
-            Text("로그인 후 쿠링과 함께\n다채로운 캠퍼스 생활을 즐겨보세요 :)")
-                .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(Color.Kuring.caption1)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
@@ -81,7 +69,7 @@ extension LoginView {
     }
     
     private var passwordTextField: some View {
-        ZStack(alignment: .trailing) {
+        HStack {
             Group {
                 if showPassword {
                     TextField(
@@ -101,13 +89,7 @@ extension LoginView {
             .textContentType(.password)
             .autocorrectionDisabled()
             .textCase(.lowercase)
-            .frame(height: 50)
             .font(.system(size: 16, weight: .medium))
-            .padding(.horizontal)
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.Kuring.gray100)
-            )
             .onSubmit {
                 focusedField = nil
             }
@@ -120,9 +102,14 @@ extension LoginView {
                     bundle: .module
                 )
                 .foregroundColor(.secondary)
-                .padding()
             })
         }
+        .frame(height: 50)
+        .padding(.horizontal)
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .fill(Color.Kuring.gray100)
+        )
     }
 }
 

@@ -84,7 +84,10 @@ struct FindPassword: View {
     
     var body: some View {
         VStack(spacing: 8) {
-            header
+            HeaderView(
+                title: "비밀번호 찾기",
+                subtitle: "학교 이메일 주소를 입력하여 본인인증 해주세요."
+            )
             emailInputSection
             verificationInputSection
             
@@ -101,19 +104,6 @@ struct FindPassword: View {
 
 //MARK: - View Components
 extension FindPassword {
-    /// 헤더 영역
-    private var header: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("비밀번호 찾기")
-                .font(.system(size: 24, weight: .bold))
-                .foregroundStyle(Color.Kuring.title)
-            
-            Text("학교 이메일 주소를 입력하여 본인인증 해주세요.")
-                .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(Color.Kuring.caption1)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
     
     /// 이메일 입력 영역
     private var emailInputSection: some View {

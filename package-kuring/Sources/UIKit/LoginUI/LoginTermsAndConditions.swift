@@ -14,7 +14,11 @@ struct LoginTermsAndConditions: View {
     
     var body: some View {
         VStack {
-            header
+            HeaderView(
+                title: "개인정보 수집/이용 동의",
+                subtitle: "회원 가입 전 하단 유의사항을 확인하고,\n개인정보 수집 및 이용에 동의해주세요."
+            )
+            
             termsAndConditions
             AgreementButton(didAgreeToTerms: $didAgreeToTerms)
             Spacer(minLength: 63)
@@ -22,20 +26,6 @@ struct LoginTermsAndConditions: View {
         }
         .padding(20)
         .background(Color.Kuring.bg)
-    }
-    
-    private var header: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("개인정보 수집/이용 동의")
-                .font(.system(size: 24, weight: .bold))
-                .foregroundStyle(Color.Kuring.title)
-            
-            Text("회원 가입 전 하단 유의사항을 확인하고,\n개인정보 수집 및 이용에 동의해주세요.")
-                .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(Color.Kuring.caption1)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     private var termsAndConditions: some View {
