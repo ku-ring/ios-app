@@ -202,7 +202,7 @@ extension FindPassword {
 //MARK: - 임시 로직
 extension FindPassword {
     private func updateButtonState() {
-        if email.isEmpty {
+        if email.isEmpty || !isValidEmail {
             verificationState = .disabled
         } else if email == "Resend" {
             verificationState = .resend
