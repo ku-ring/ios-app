@@ -8,7 +8,7 @@
 import SwiftUI
 import ColorSet
 
-struct LoginTermsAndConditions: View {
+struct LoginTermsAndConditionsView: View {
     
     @State private var didAgreeToTerms: Bool?
     
@@ -118,5 +118,5 @@ private enum TermsAndConditions {
 }
 
 #Preview {
-    LoginTermsAndConditions()
+    LoginTermsAndConditionsView()
 }

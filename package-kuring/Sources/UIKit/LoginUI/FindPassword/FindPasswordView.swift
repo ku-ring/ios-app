@@ -8,7 +8,7 @@
 import SwiftUI
 import ColorSet
 
-struct FindPassword: View {
+struct FindPasswordView: View {
     @State private var canProceed: Bool = false
     
     var body: some View {
@@ -23,7 +23,7 @@ struct FindPassword: View {
             Spacer()
             
             goToEmail
-            ActionButton(title: "다음", isActive: $canProceed) {
+            ActionButton(title: "본인인증 완료", isActive: $canProceed) {
                 
             }
             .padding(.top, 16)
@@ -45,5 +45,5 @@ struct FindPassword: View {
 }
 
 #Preview {
-    FindPassword()
+    FindPasswordView()
 }

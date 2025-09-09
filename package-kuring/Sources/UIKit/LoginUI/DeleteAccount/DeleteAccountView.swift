@@ -8,7 +8,7 @@
 import SwiftUI
 import ColorSet
 
-struct DeleteAccount: View {
+struct DeleteAccountView: View {
     var body: some View {
         VStack {
             HeaderView(

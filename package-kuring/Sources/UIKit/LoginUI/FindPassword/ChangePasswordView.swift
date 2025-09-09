@@ -8,7 +8,7 @@
 import SwiftUI
 import ColorSet
 
-struct ChangePassword: View {
+struct ChangePasswordView: View {
     @State private var canProceed: Bool = false
     
     var body: some View {
@@ -36,5 +36,5 @@ struct ChangePassword: View {
 }
 
 #Preview {
-    ChangePassword()
+    ChangePasswordView()
 }
