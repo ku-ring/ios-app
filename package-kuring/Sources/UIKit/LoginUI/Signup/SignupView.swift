@@ -34,13 +34,14 @@ struct SignupView: View {
     
     /// 학교 이메일 바로가기
     private var goToEmail: some View {
-        Text("학교 메일 바로가기 >")
-            .font(.subheadline.weight(.medium))
-            .foregroundStyle(Color.Kuring.caption1)
-            .frame(maxWidth: .infinity, alignment: .center)
-            .onTapGesture {
-                // do something
-            }
+        Button {
+            // do something
+        } label: {
+            Text("학교 메일 바로가기 >")
+                .font(.subheadline.weight(.medium))
+                .foregroundStyle(Color.Kuring.caption1)
+                .frame(maxWidth: .infinity, alignment: .center)
+        }
     }
 }
 
