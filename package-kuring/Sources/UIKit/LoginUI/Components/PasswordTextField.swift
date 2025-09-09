@@ -8,6 +8,18 @@
 import SwiftUI
 import ColorSet
 
+/// 비밀번호 입력 텍스트 필드
+/// ```swift
+///    PasswordTextField(
+///       showInput: $showPassword,
+///       input: $password,
+///       placeholder: "비밀번호"
+///    )
+/// ```
+///  - Parameters:
+///    - showInput: 비밀번호 숨김/노출 여부를 나타내는 부울값
+///    - input: 텍스트필드 입력값
+///    - placeholder: 입력값이 없을때 나타나는 placeholder 문자열
 struct PasswordTextField: View {
     @Binding var showInput: Bool
     @Binding var input: String

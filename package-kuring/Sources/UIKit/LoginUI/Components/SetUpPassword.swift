@@ -1,8 +1,8 @@
 //
-//  ChangePassword.swift
+//  SetUpPassword.swift
 //  package-kuring
 //
-//  Created by Jung Hwan Park on 9/8/25.
+//  Created by Jung Hwan Park on 9/9/25.
 //
 
 import SwiftUI
@@ -16,12 +16,19 @@ struct PasswordValidator {
     }
 }
 
-struct ChangePassword: View {
+/// 비밀번호 입력/재입력을 통해 비밀번호를 설정하거나 재설정할때 사용되는 뷰
+/// ```swift
+///     SetUpPassword(canProceed: $canProceed)
+/// ```
+///  - Parameters:
+///    - canProceed: 다음 단계로 넘어갈수 있을지 나타내는 부울값
+struct SetUpPassword: View {
     enum FocusedField: Hashable {
         case password, reEnterPassword
     }
     
     @FocusState private var focusedField: FocusedField?
+    @Binding var canProceed: Bool
     @State private var password: String = ""
     @State private var reEnterPassword: String = ""
     @State private var showPassword = false
@@ -32,36 +39,22 @@ struct ChangePassword: View {
     }
     
     private var isValidReEnterPassword: Bool {
-        password == reEnterPassword
+        isValidPassword && !reEnterPassword.isEmpty && password == reEnterPassword
     }
     
     var body: some View {
-        VStack {
-            HeaderView(
-                title: "비밀번호 재설정하기",
-                subtitle: "6~20자 영문 소문자, 숫자를 조합하여 비밀번호를 생성해주세요 :)"
-            )
-            
+        VStack(spacing: 8) {
             enterPasswordTextField
             reEnterPasswordTextField
-            
-            Spacer()
-            
-            ActionButton(
-                title: "확인",
-                isActive: isValidPassword && !reEnterPassword.isEmpty && isValidReEnterPassword
-            ) {
-                
-            }
-            .padding(.top, 16)
         }
-        .padding(20)
-        .background(Color.Kuring.bg)
+        .onChange(of: password) { _ in
+            canProceed = isValidReEnterPassword
+        }
+        .onChange(of: reEnterPassword) { _ in
+            canProceed = isValidReEnterPassword
+        }
     }
-}
-
-// MARK: - View Components
-extension ChangePassword {
+    
     private var enterPasswordTextField: some View {
         VStack {
             PasswordTextField(
@@ -119,5 +112,6 @@ extension ChangePassword {
 }
 
 #Preview {
-    ChangePassword()
+    @Previewable @State var canProceed: Bool = false
+    SetUpPassword(canProceed: $canProceed)
 }

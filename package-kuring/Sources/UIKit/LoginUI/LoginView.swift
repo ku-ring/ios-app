@@ -26,7 +26,7 @@ struct LoginView: View {
             )
             
             loginForm
-            ActionButton(title: "로그인", isActive: true) {
+            ActionButton(title: "로그인", isActive: .constant(true)) {
                 
             }
             .padding(.top, 33)

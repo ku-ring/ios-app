@@ -8,7 +8,7 @@
 import SwiftUI
 import ColorSet
 
-struct DeleteAccount: View {
+struct DeleteAccountView: View {
     var body: some View {
         VStack {
             HeaderView(
@@ -22,7 +22,7 @@ struct DeleteAccount: View {
             
             ActionButton(
                 title: "탈퇴하기",
-                isActive: true,
+                isActive: .constant(true),
                 activeColor: Color.Kuring.warning
             ) {
                 

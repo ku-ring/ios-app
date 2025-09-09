@@ -8,7 +8,7 @@
 import SwiftUI
 import ColorSet
 
-struct DeleteAccountConfirmation: View {
+struct DeleteAccountConfirmationView: View {
     var body: some View {
         VStack {
             HeaderView(
@@ -26,7 +26,7 @@ struct DeleteAccountConfirmation: View {
             
             Spacer()
             
-            ActionButton(title: "확인", isActive: true) {
+            ActionButton(title: "확인", isActive: .constant(true)) {
                 
             }
         }

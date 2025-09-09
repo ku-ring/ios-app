@@ -1,8 +1,8 @@
 //
-//  FindPassword.swift
+//  EmailVerification.swift
 //  package-kuring
 //
-//  Created by Jung Hwan Park on 9/7/25.
+//  Created by Jung Hwan Park on 9/9/25.
 //
 
 import SwiftUI
@@ -59,7 +59,14 @@ private enum VerificationButtonState {
     }
 }
 
-struct FindPassword: View {
+/// 비밀번호 찾기/회원가입에서 사용되는 이메일 인증
+/// ```swift
+///   EmailVerification(canProceed: $canProceed)
+/// ```
+///  - Parameters:
+///    - canProceed: 인증이 완료되어서 다음 화면으로 넘어갈수 있을지 나타내는 부울값
+struct EmailVerification: View {
+    @Binding var canProceed: Bool
     @State private var email: String = ""
     @State private var verificationCode: String = ""
     @State private var verificationState: VerificationButtonState = .disabled
@@ -78,49 +85,31 @@ struct FindPassword: View {
         verificationCode.isEmpty ? .clear : (isValidVerificationCode ? Color.Kuring.primary : Color.Kuring.warning)
     }
     
-    private var canProceed: Bool {
-        isValidVerificationCode
-    }
-    
     var body: some View {
         VStack(spacing: 8) {
-            HeaderView(
-                title: "비밀번호 찾기",
-                subtitle: "학교 이메일 주소를 입력하여 본인인증 해주세요."
-            )
-            emailInputSection
-            verificationInputSection
-            
-            Spacer()
-            
-            goToEmail
-            ActionButton(title: "다음", isActive: canProceed) {
+            VStack(spacing: 4) {
+                HStack {
+                    emailTextField
+                    verificationButton
+                }
                 
-            }
-            .padding(.top, 16)
-        }
-        .padding(20)
-        .background(Color.Kuring.bg)
-        .onDisappear { stopTimer() }
-    }
-}
-
-//MARK: - View Components
-extension FindPassword {
-    
-    /// 이메일 입력 영역
-    private var emailInputSection: some View {
-        VStack(spacing: 4) {
-            HStack {
-                emailTextField
-                verificationButton
+                if !isValidEmail {
+                    LoginErrorMessage(message: "등록되지 않은 이메일이에요.")
+                }
             }
             
-            if !isValidEmail {
-                LoginErrorMessage(message: "등록되지 않은 이메일이에요.")
+            VStack(spacing: 4) {
+                verificationTextField
+                
+                if !verificationCode.isEmpty && !isValidVerificationCode {
+                    LoginErrorMessage(message: "올바르지 않은 인증번호에요.")
+                }
             }
         }
-        .padding(.top, 45)
+        .onDisappear { stopTimer() }
+        .onChange(of: verificationCode) { _ in
+            canProceed = isValidVerificationCode
+        }
     }
     
     private var emailTextField: some View {
@@ -155,17 +144,6 @@ extension FindPassword {
         .disabled(!verificationState.isEnabled)
     }
     
-    /// 인증번호
-    private var verificationInputSection: some View {
-        VStack(spacing: 4) {
-            verificationTextField
-            
-            if !verificationCode.isEmpty && !isValidVerificationCode {
-                LoginErrorMessage(message: "올바르지 않은 인증번호에요.")
-            }
-        }
-    }
-    
     private var verificationTextField: some View {
         HStack {
             TextField(
@@ -187,21 +165,10 @@ extension FindPassword {
                 .stroke(verificationCodeBorderColor, lineWidth: verificationCode.isEmpty ? 0 : 1)
         )
     }
-    
-    /// 학교 이메일 바로가기
-    private var goToEmail: some View {
-        Text("학교 메일 바로가기 >")
-            .font(.subheadline.weight(.medium))
-            .foregroundStyle(Color.Kuring.caption1)
-            .frame(maxWidth: .infinity, alignment: .center)
-            .onTapGesture {
-                // do something
-            }
-    }
 }
 
-//MARK: - 임시 로직
-extension FindPassword {
+// MARK: - 임시 로직
+extension EmailVerification {
     private func updateButtonState() {
         if email.isEmpty || !isValidEmail {
             verificationState = .disabled
@@ -255,5 +222,6 @@ extension FindPassword {
 }
 
 #Preview {
-    FindPassword()
+    @Previewable @State var canProceed: Bool = false
+    EmailVerification(canProceed: $canProceed)
 }
