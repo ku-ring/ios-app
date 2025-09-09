@@ -10,8 +10,8 @@ import ColorSet
 
 struct ActionButton: View {
     let title: String
-    var isActive: Bool
-    let activeColor: Color = .Kuring.primary
+    @Binding var isActive: Bool
+    var activeColor: Color = .Kuring.primary
     let action: () -> Void
     
     var body: some View {

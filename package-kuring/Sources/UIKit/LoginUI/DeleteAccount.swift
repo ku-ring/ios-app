@@ -22,7 +22,7 @@ struct DeleteAccount: View {
             
             ActionButton(
                 title: "탈퇴하기",
-                isActive: true,
+                isActive: .constant(true),
                 activeColor: Color.Kuring.warning
             ) {
                 

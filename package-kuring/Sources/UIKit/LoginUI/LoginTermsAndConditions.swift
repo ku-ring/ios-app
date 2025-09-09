@@ -26,7 +26,7 @@ struct LoginTermsAndConditions: View {
             
             ActionButton(
                 title: "다음",
-                isActive: (didAgreeToTerms ?? false)
+                isActive: .constant((didAgreeToTerms ?? false))
             ) {
                 
             }

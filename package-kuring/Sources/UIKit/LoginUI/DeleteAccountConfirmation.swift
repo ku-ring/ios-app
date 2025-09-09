@@ -26,7 +26,7 @@ struct DeleteAccountConfirmation: View {
             
             Spacer()
             
-            ActionButton(title: "확인", isActive: true) {
+            ActionButton(title: "확인", isActive: .constant(true)) {
                 
             }
         }
