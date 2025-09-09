@@ -59,6 +59,12 @@ private enum VerificationButtonState {
     }
 }
 
+/// 비밀번호 찾기/회원가입에서 사용되는 이메일 인증
+/// ```swift
+///   EmailVerification(canProceed: $canProceed)
+/// ```
+///  - Parameters:
+///    - canProceed: 인증이 완료되어서 다음 화면으로 넘어갈수 있을지 나타내는 부울값
 struct EmailVerification: View {
     @Binding var canProceed: Bool
     @State private var email: String = ""
@@ -161,6 +167,7 @@ struct EmailVerification: View {
     }
 }
 
+// MARK: - 임시 로직
 extension EmailVerification {
     private func updateButtonState() {
         if email.isEmpty || !isValidEmail {

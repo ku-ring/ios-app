@@ -16,6 +16,12 @@ struct PasswordValidator {
     }
 }
 
+/// 비밀번호 입력/재입력을 통해 비밀번호를 설정하거나 재설정할때 사용되는 뷰
+/// ```swift
+///     SetUpPassword(canProceed: $canProceed)
+/// ```
+///  - Parameters:
+///    - canProceed: 다음 단계로 넘어갈수 있을지 나타내는 부울값
 struct SetUpPassword: View {
     enum FocusedField: Hashable {
         case password, reEnterPassword

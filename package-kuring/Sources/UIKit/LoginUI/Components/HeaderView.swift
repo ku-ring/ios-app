@@ -8,6 +8,16 @@
 import SwiftUI
 import ColorSet
 
+/// 헤더 뷰
+/// ```swift
+///    HeaderView(
+///       title: "탈퇴가 완료되었어요.",
+///       subtitle: "쿠링이 필요할 때 또 만나요!"
+///    )
+/// ```
+///  - Parameters:
+///    - title: 제목
+///    - subtitle: 부제목
 struct HeaderView: View {
     let title: String
     let subtitle: String
