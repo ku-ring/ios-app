@@ -225,6 +225,133 @@ extension KuringLink: DependencyKey {
                 )
             let isSucceed = (200 ..< 300) ~= response.code
             return isSucceed
+        },
+        sendVerificationCodeOnSignup: { email in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.sendVerificationCodeOnSignup.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json"
+                    ],
+                    httpBody: Email(email: email)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        sendVerificationCodeOnPasswordReset: { email in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.sendVerificationCodeOnPasswordReset.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ],
+                    httpBody: Email(email: email)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        verifyVerificationCode: { email, code in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.verifyVerificationCode.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ],
+                    httpBody: EmailVerification(email: email, code: code)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        signUp: { email, password in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.signUp.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken,
+                    ],
+                    httpBody: EmailPassword(email: email, password: password)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        login: { email, password in
+            let response: Response<AccessToken> = try await satellite
+                .response(
+                    for: Path.login.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken,
+                    ],
+                    httpBody: EmailPassword(email: email, password: password)
+                )
+            accessToken = response.data.accessToken
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        logout: {
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.logout.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken,
+                        "Authorization": "Bearer \(accessToken)"
+                    ]
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        getUserInfo: {
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.getUserInfo.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ]
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        resetPassword: { email, password in
+            var header = [
+                "Content-Type": "application/json",
+                "User-Token": fcmToken
+            ]
+            if accessToken != "" {
+                header["Authorization"] = "Bearer \(accessToken)"
+            }
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.resetPassword.path,
+                    httpMethod: .post,
+                    httpHeaders: header
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        withdrawAccount: {
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.getUserInfo.path,
+                    httpMethod: .delete,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ]
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
         }
     )
 }
@@ -313,6 +440,33 @@ extension KuringLink {
             ]
         },
         registerAuthorization: {
+            return true
+        },
+        sendVerificationCodeOnSignup: { _ in
+            return true
+        },
+        sendVerificationCodeOnPasswordReset: { _ in
+            return true
+        },
+        verifyVerificationCode: { _,_ in
+            return true
+        },
+        signUp: { _,_ in
+            return true
+        },
+        login: { _,_ in
+            return true
+        },
+        logout: { 
+            return true
+        },
+        getUserInfo: {
+            return true
+        },
+        resetPassword: { _,_ in
+            return true
+        },
+        withdrawAccount: {
             return true
         }
     )

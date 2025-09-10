@@ -42,6 +42,7 @@ public struct KuringLink {
 
     @AppStorage("com.kuring.sdk.v2.token.fcm")
     static var fcmToken: String = ""
+    static var accessToken: String = ""
     
     static var testableFCMToken: String = "cZSHjO4_bUjirvsrxWzig5:APA91bHPojABL5oEXi5AcjJ8v4Vcp3KpJfFUD_3b-HhfV8m23_R6czJa3PwqcVqBZSHBb2t7Z3odUeD0cFKaMSkMmrGxTqyjJPfEZVfTPvmewV-xiMTWbrk-QKuc4Nrxd_BhEArO7Svo"
 
@@ -78,7 +79,7 @@ public struct KuringLink {
     /// 인증번호 발송 (회원가입 시)
     public var sendVerificationCodeOnSignup: (_ email: String) async throws -> Bool
     /// 인증번호 발송 (비밀번호 초기화 시)
-    public var sendVerificationCodeOnPasswordReset: () async throws -> Bool
+    public var sendVerificationCodeOnPasswordReset: (_ email: String) async throws -> Bool
     /// 인증번호 인증
     public var verifyVerificationCode: (_ email: String, _ code: String) async throws -> Bool
     /// 회원가입
