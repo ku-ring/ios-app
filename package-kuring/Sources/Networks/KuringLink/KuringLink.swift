@@ -75,4 +75,22 @@ public struct KuringLink {
     public var getAllDepartments: () async throws -> [NoticeProvider]
     /// 계정 정보 등록
     public var registerAuthorization: () async throws -> Bool
+    /// 인증번호 발송 (회원가입 시)
+    public var sendVerificationCodeOnSignup: (_ email: String) async throws -> Bool
+    /// 인증번호 발송 (비밀번호 초기화 시)
+    public var sendVerificationCodeOnPasswordReset: () async throws -> Bool
+    /// 인증번호 인증
+    public var verifyVerificationCode: (_ email: String, _ code: String) async throws -> Bool
+    /// 회원가입
+    public var signUp: (_ email: String, _ password: String) async throws -> Bool
+    /// 로그인
+    public var login: (_ email: String, _ password: String) async throws -> Bool
+    /// 로그아웃
+    public var logout: () async throws -> Bool
+    /// 사용자 정보 조회
+    public var getUserInfo: () async throws -> Bool
+    /// 비밀번호 초기화
+    public var resetPassword: (_ email: String, _ password: String) async throws -> Bool
+    /// 회원 탈퇴
+    public var withdrawAccount: () async throws -> Bool
 }

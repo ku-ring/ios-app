@@ -17,6 +17,15 @@ enum Path {
     case searchStaffs
     case sendFeedback
     case registerAuthorization
+    case sendVerificationCodeOnSignup
+    case sendVerificationCodeOnPasswordReset
+    case verifyVerificationCode
+    case signUp
+    case login
+    case logout
+    case getUserInfo
+    case resetPassword
+    case withdrawAccount
 
     var path: String {
         switch self {
@@ -42,6 +51,24 @@ enum Path {
             return "api/v2/users/feedbacks"
         case .registerAuthorization:
             return "api/v2/users"
+        case .sendVerificationCodeOnSignup:
+            return "/api/v2/verification-code/signup"
+        case .sendVerificationCodeOnPasswordReset:
+            return "/api/v2/verification-code/password-reset"
+        case .verifyVerificationCode:
+            return "/api/v2/verification-code/verify"
+        case .signUp:
+            return "/api/v2/users/signup"
+        case .login:
+            return "/api/v2/users/login"
+        case .logout:
+            return "/api/v2/users/logout"
+        case .getUserInfo:
+            return "/api/v2/users/user-me"
+        case .resetPassword:
+            return "/api/v2/users/password"
+        case .withdrawAccount:
+            return "/api/v2/users/witdraw"
         }
     }
 }
