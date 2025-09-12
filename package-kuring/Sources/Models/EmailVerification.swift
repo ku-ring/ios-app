@@ -8,7 +8,7 @@
 import Foundation
 
 /// 서버로 전송하는  **이메일 + 인증코드** 값
-public struct EmailVerification: Codable {
+public struct EmailVerification: Encodable {
     public let email: String
     public let code: String
 

@@ -8,7 +8,7 @@
 import Foundation
 
 /// 서버로 전송하는 사용자 **이메일** 값
-public struct Email: Codable {
+public struct Email: Encodable {
     public let email: String
 
     public init(email: String) {
