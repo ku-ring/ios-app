@@ -52,23 +52,23 @@ enum Path {
         case .registerAuthorization:
             return "api/v2/users"
         case .sendVerificationCodeOnSignup:
-            return "/api/v2/verification-code/signup"
+            return "api/v2/verification-code/signup"
         case .sendVerificationCodeOnPasswordReset:
-            return "/api/v2/verification-code/password-reset"
+            return "api/v2/verification-code/password-reset"
         case .verifyVerificationCode:
-            return "/api/v2/verification-code/verify"
+            return "api/v2/verification-code/verify"
         case .signUp:
-            return "/api/v2/users/signup"
+            return "api/v2/users/signup"
         case .login:
-            return "/api/v2/users/login"
+            return "api/v2/users/login"
         case .logout:
-            return "/api/v2/users/logout"
+            return "api/v2/users/logout"
         case .getUserInfo:
-            return "/api/v2/users/user-me"
+            return "api/v2/users/user-me"
         case .resetPassword:
-            return "/api/v2/users/password"
+            return "api/v2/users/password"
         case .withdrawAccount:
-            return "/api/v2/users/witdraw"
+            return "api/v2/users/witdraw"
         }
     }
 }
