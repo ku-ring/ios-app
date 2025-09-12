@@ -32,7 +32,7 @@ public struct KuringLink {
     }
 
     // TODO: 세팅 방식 개선
-    public static let appVersion = "2.0.0" // NEXT_VERSION
+    public static let appVersion = "2.3.2" // NEXT_VERSION
     
     static let iosVersion = {
         let osVersion = ProcessInfo.processInfo.operatingSystemVersion
@@ -42,6 +42,7 @@ public struct KuringLink {
 
     @AppStorage("com.kuring.sdk.v2.token.fcm")
     static var fcmToken: String = ""
+    @AppStorage("com.kuring.sdk.v2.token.accessToken")
     static var accessToken: String = ""
     
     static var testableFCMToken: String = "cZSHjO4_bUjirvsrxWzig5:APA91bHPojABL5oEXi5AcjJ8v4Vcp3KpJfFUD_3b-HhfV8m23_R6czJa3PwqcVqBZSHBb2t7Z3odUeD0cFKaMSkMmrGxTqyjJPfEZVfTPvmewV-xiMTWbrk-QKuc4Nrxd_BhEArO7Svo"

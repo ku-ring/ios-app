@@ -258,10 +258,6 @@ extension KuringLink: DependencyKey {
                 .response(
                     for: Path.verifyVerificationCode.path,
                     httpMethod: .post,
-                    httpHeaders: [
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer \(accessToken)"
-                    ],
                     httpBody: EmailVerification(email: email, code: code)
                 )
             let isSucceed = (200 ..< 300) ~= response.code
@@ -328,7 +324,7 @@ extension KuringLink: DependencyKey {
                 "Content-Type": "application/json",
                 "User-Token": fcmToken
             ]
-            if accessToken != "" {
+            if !accessToken.isEmpty {
                 header["Authorization"] = "Bearer \(accessToken)"
             }
             let response: EmptyResponse = try await satellite
