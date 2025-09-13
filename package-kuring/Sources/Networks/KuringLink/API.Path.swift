@@ -68,7 +68,7 @@ enum Path {
         case .resetPassword:
             return "api/v2/users/password"
         case .withdrawAccount:
-            return "api/v2/users/witdraw"
+            return "api/v2/users/withdraw"
         }
     }
 }

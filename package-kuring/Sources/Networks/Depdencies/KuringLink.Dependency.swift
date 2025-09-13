@@ -285,8 +285,11 @@ extension KuringLink: DependencyKey {
                     ],
                     httpBody: EmailPassword(email: email, password: password)
                 )
-            accessToken = response.data.accessToken
+            
             let isSucceed = (200 ..< 300) ~= response.code
+            if isSucceed {
+                accessToken = response.data.accessToken
+            }
             return isSucceed
         },
         logout: {
@@ -301,6 +304,9 @@ extension KuringLink: DependencyKey {
                     ]
                 )
             let isSucceed = (200 ..< 300) ~= response.code
+            if isSucceed {
+                accessToken = ""
+            }
             return isSucceed
         },
         getUserInfo: {
@@ -313,8 +319,7 @@ extension KuringLink: DependencyKey {
                         "Authorization": "Bearer \(accessToken)"
                     ]
                 )
-            let isSucceed = (200 ..< 300) ~= response.code
-            return isSucceed
+            return response.data
         },
         resetPassword: { email, password in
             var header = [
@@ -336,7 +341,7 @@ extension KuringLink: DependencyKey {
         withdrawAccount: {
             let response: EmptyResponse = try await satellite
                 .response(
-                    for: Path.getUserInfo.path,
+                    for: Path.withdrawAccount.path,
                     httpMethod: .delete,
                     httpHeaders: [
                         "Content-Type": "application/json",

@@ -90,7 +90,7 @@ public struct KuringLink {
     /// 로그아웃
     public var logout: () async throws -> Bool
     /// 사용자 정보 조회
-    public var getUserInfo: () async throws -> Bool
+    public var getUserInfo: () async throws -> UserInfo
     /// 비밀번호 초기화
     public var resetPassword: (_ email: String, _ password: String) async throws -> Bool
     /// 회원 탈퇴
