@@ -32,7 +32,7 @@ public struct KuringLink {
     }
 
     // TODO: 세팅 방식 개선
-    public static let appVersion = "2.0.0" // NEXT_VERSION
+    public static let appVersion = "2.3.2" // NEXT_VERSION
     
     static let iosVersion = {
         let osVersion = ProcessInfo.processInfo.operatingSystemVersion
@@ -42,6 +42,8 @@ public struct KuringLink {
 
     @AppStorage("com.kuring.sdk.v2.token.fcm")
     static var fcmToken: String = ""
+    @AppStorage("com.kuring.sdk.v2.token.accessToken")
+    static var accessToken: String = ""
     
     static var testableFCMToken: String = "cZSHjO4_bUjirvsrxWzig5:APA91bHPojABL5oEXi5AcjJ8v4Vcp3KpJfFUD_3b-HhfV8m23_R6czJa3PwqcVqBZSHBb2t7Z3odUeD0cFKaMSkMmrGxTqyjJPfEZVfTPvmewV-xiMTWbrk-QKuc4Nrxd_BhEArO7Svo"
 
@@ -75,4 +77,22 @@ public struct KuringLink {
     public var getAllDepartments: () async throws -> [NoticeProvider]
     /// 계정 정보 등록
     public var registerAuthorization: () async throws -> Bool
+    /// 인증번호 발송 (회원가입 시)
+    public var sendVerificationCodeOnSignup: (_ email: String) async throws -> Bool
+    /// 인증번호 발송 (비밀번호 초기화 시)
+    public var sendVerificationCodeOnPasswordReset: (_ email: String) async throws -> Bool
+    /// 인증번호 인증
+    public var verifyVerificationCode: (_ email: String, _ code: String) async throws -> Bool
+    /// 회원가입
+    public var signUp: (_ email: String, _ password: String) async throws -> Bool
+    /// 로그인
+    public var login: (_ email: String, _ password: String) async throws -> Bool
+    /// 로그아웃
+    public var logout: () async throws -> Bool
+    /// 사용자 정보 조회
+    public var getUserInfo: () async throws -> UserInfo
+    /// 비밀번호 초기화
+    public var resetPassword: (_ email: String, _ password: String) async throws -> Bool
+    /// 회원 탈퇴
+    public var withdrawAccount: () async throws -> Bool
 }
