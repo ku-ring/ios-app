@@ -231,9 +231,6 @@ extension KuringLink: DependencyKey {
                 .response(
                     for: Path.sendVerificationCodeOnSignup.path,
                     httpMethod: .post,
-                    httpHeaders: [
-                        "Content-Type": "application/json"
-                    ],
                     httpBody: Email(email: email)
                 )
             let isSucceed = (200 ..< 300) ~= response.code
