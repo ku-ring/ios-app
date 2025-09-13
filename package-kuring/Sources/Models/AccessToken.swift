@@ -8,7 +8,7 @@
 import Foundation
 
 /// 엑세스 토큰
-public struct AccessToken: Codable {
+public struct AccessToken: Decodable {
     public let accessToken: String
 
     public init(accessToken: String) {

@@ -307,7 +307,7 @@ extension KuringLink: DependencyKey {
             return isSucceed
         },
         getUserInfo: {
-            let response: EmptyResponse = try await satellite
+            let response: Response<UserInfo> = try await satellite
                 .response(
                     for: Path.getUserInfo.path,
                     httpMethod: .get,
