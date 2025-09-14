@@ -135,7 +135,11 @@ let package = Package(
         .target(
             name: "SettingsUI",
             dependencies: [
-                "SettingsFeatures", "SubscriptionFeatures", "SubscriptionUI",
+                "SettingsFeatures",
+                "SubscriptionFeatures",
+                "SubscriptionUI",
+                "LoginFeatures",
+                "LoginUI",
                 "Caches",
                 "Labs",
                 "ColorSet",
@@ -252,6 +256,7 @@ let package = Package(
                 "Models",
                 "Caches",
                 "SubscriptionFeatures",
+                "LoginFeatures",
                 "Labs",
                 "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")

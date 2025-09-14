@@ -7,6 +7,7 @@ import Labs
 import SwiftUI
 import SubscriptionUI
 import SettingsFeatures
+import LoginUI
 import ComposableArchitecture
 
 public struct SettingsApp: View {
@@ -31,6 +32,13 @@ public struct SettingsApp: View {
                 ) {
                     AppIconSelector(store: store)
                         .navigationTitle("앱 아이콘")
+                }
+            case .login:
+                if let store = store.scope(
+                    state: \.login,
+                    action: \.login
+                ) {
+                    LoginView(store: store)
                 }
             }
         }

@@ -7,8 +7,10 @@
 
 import SwiftUI
 import ColorSet
+import ComposableArchitecture
+import LoginFeatures
 
-struct LoginView: View {
+public struct LoginView: View {
     enum FocusedField: Hashable {
         case username, password
     }
@@ -18,7 +20,9 @@ struct LoginView: View {
     @State private var password: String = ""
     @State private var showPassword = false
     
-    var body: some View {
+    @Bindable var store: StoreOf<LoginAppFeature>
+    
+    public var body: some View {
         VStack {
             HeaderView(
                 title: "로그인",
@@ -36,6 +40,10 @@ struct LoginView: View {
         }
         .padding(20)
         .background(Color.Kuring.bg)
+    }
+    
+    public init(store: StoreOf<LoginAppFeature>) {
+        self.store = store
     }
 }
 
@@ -100,8 +108,4 @@ extension LoginView {
                 .foregroundStyle(Color.Kuring.caption1)
         }
     }
-}
-
-#Preview {
-    LoginView()
 }

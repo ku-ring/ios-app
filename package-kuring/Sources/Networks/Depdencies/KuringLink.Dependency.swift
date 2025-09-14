@@ -459,7 +459,7 @@ extension KuringLink {
             return true
         },
         getUserInfo: {
-            return true
+            return UserInfo(email: "hwan333@konkuk.ac.kr", nickname: "swagati")
         },
         resetPassword: { _,_ in
             return true
