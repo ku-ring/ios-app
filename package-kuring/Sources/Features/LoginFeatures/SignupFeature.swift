@@ -30,6 +30,9 @@ public struct SignupFeature {
         Reduce { state, action in
             return .none
         }
+        .forEach(\.path, action: \.path) {
+            Path()
+        }
     }
 
     public init() { }
@@ -41,15 +44,17 @@ extension SignupFeature {
     public struct Path {
         @ObservableState
         public enum State: Equatable {
-            case setNetPassword(SetPasswordFeature.State)
+            case setPassword(SetPasswordFeature.State)
         }
-
+        
         public enum Action: Equatable {
-            case setNetPassword(SetPasswordFeature.Action)
+            case setPassword(SetPasswordFeature.Action)
         }
-
+        
         public var body: some ReducerOf<Self> {
-            
+            Scope(state: \.setPassword, action: \.setPassword) {
+                SetPasswordFeature()
+            }
         }
     }
 }

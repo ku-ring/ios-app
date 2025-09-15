@@ -88,7 +88,7 @@ struct BottomTabView: View {
             
             Text(tabItem.title)
                 .font(.system(size: 10, weight: .medium))
-                .foregroundStyle(activeTab == .campusMap ? tabForegroundColor : .gray)
+                .foregroundStyle(activeTab == tabItem ? tabForegroundColor : .gray)
         }
         .frame(maxWidth: .infinity)
     }
