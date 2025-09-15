@@ -6,18 +6,20 @@
 //
 
 import Caches
-import Foundation
+import Networks
 import ComposableArchitecture
 
 @Reducer
 public struct LoginAppFeature {
+    @Dependency(\.kuringLink) private var kuringLink
+    
     @ObservableState
     public struct State: Equatable {
         public var email: String = ""
         public var password: String = ""
         public var isLoading: Bool = false
-        public var showError: Bool = false
         public var isPasswordVisible: Bool = false
+        @Presents public var alert: AlertState<Action.Alert>?
         
         public init() {}
     }
@@ -25,8 +27,14 @@ public struct LoginAppFeature {
     public enum Action: BindableAction, Equatable {
         /// 바인딩
         case binding(BindingAction<State>)
+        /// 로그인 버튼 눌렀을때
         case loginButtonTapped
+        /// 로그인 API 태울때
         case loginResponse(Result<Bool, LoginError>)
+        /// 알림 관련 액션
+        case alert(PresentationAction<Alert>)
+        /// 알림
+        public enum Alert: Equatable {}
         
         public enum LoginError: Error, Equatable {
             case error(String)
@@ -51,8 +59,8 @@ public struct LoginAppFeature {
                     do {
                         try await performLogin(email: email, password: password)
                         await send(.loginResponse(.success((true))))
-                    } catch let error as LoginAppFeature.Action.LoginError {
-                        await send(.loginResponse(.failure(error)))
+                    } catch {
+                        await send(.loginResponse(.failure(.error(error.localizedDescription))))
                     }
                 }
             case let .loginResponse(result):
@@ -61,17 +69,24 @@ public struct LoginAppFeature {
                 case .success:
                     return .none
                 case let .failure(error):
-                    state.showError = true
+                    state.alert = AlertState {
+                        TextState("잘못된 로그인 정보에요.\n다시 입력해주세요.")
+                    } actions: {
+                        ButtonState(role: .cancel) {
+                            TextState("확인")
+                        }
+                    }
                     return .none
                 }
             default:
                 return .none
             }
         }
+        .ifLet(\.$alert, action: \.alert)
     }
     
     private func performLogin(email: String, password: String) async throws {
-        throw LoginAppFeature.Action.LoginError.error("asda")
+        try await kuringLink.login(email, password)
     }
 
     public init() { }

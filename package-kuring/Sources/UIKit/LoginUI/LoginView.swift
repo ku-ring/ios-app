@@ -28,7 +28,7 @@ public struct LoginView: View {
             
             loginForm
             ActionButton(title: "로그인", isActive: .constant(true)) {
-                
+                store.send(.loginButtonTapped)
             }
             .padding(.top, 33)
             footer
@@ -37,6 +37,12 @@ public struct LoginView: View {
         }
         .padding(20)
         .background(Color.Kuring.bg)
+        .alert(
+            store: store.scope(
+                state: \.$alert,
+                action: \.alert
+            )
+        )
     }
     
     public init(store: StoreOf<LoginAppFeature>) {
