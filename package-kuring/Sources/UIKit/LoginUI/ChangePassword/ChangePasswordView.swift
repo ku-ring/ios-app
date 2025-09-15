@@ -7,11 +7,14 @@
 
 import SwiftUI
 import ColorSet
+import LoginFeatures
+import ComposableArchitecture
 
-struct ChangePasswordView: View {
+public struct ChangePasswordView: View {
+    @Bindable var store: StoreOf<ChangePasswordFeature>
     @State private var canProceed: Bool = false
     
-    var body: some View {
+    public var body: some View {
         VStack(spacing: 8) {
             HeaderView(
                 title: "비밀번호 재설정하기",
@@ -33,8 +36,8 @@ struct ChangePasswordView: View {
         .padding(20)
         .background(Color.Kuring.bg)
     }
-}
-
-#Preview {
-    ChangePasswordView()
+    
+    public init(store: StoreOf<ChangePasswordFeature>) {
+        self.store = store
+    }
 }

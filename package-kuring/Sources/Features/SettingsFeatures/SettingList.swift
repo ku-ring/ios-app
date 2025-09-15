@@ -39,7 +39,6 @@ public struct SettingListFeature {
         case delegate(Delegate)
 
         public enum Delegate: Equatable {
-            case showLogin
             case showSubscription
             case showWhatsNew
             case showTeam

@@ -7,11 +7,14 @@
 
 import SwiftUI
 import ColorSet
+import LoginFeatures
+import ComposableArchitecture
 
-struct SignupView: View {
+public struct SignupView: View {
+    @Bindable var store: StoreOf<SignupFeature>
     @State private var canProceed: Bool = false
     
-    var body: some View {
+    public var body: some View {
         VStack(spacing: 8) {
             HeaderView(
                 title: "재학생 인증 및 아이디 생성",
@@ -43,8 +46,9 @@ struct SignupView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
         }
     }
+    
+    public init(store: StoreOf<SignupFeature>) {
+        self.store = store
+    }
 }
 
-#Preview {
-    SignupView()
-}

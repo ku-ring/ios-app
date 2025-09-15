@@ -6,6 +6,7 @@
 import Caches
 import SwiftUI
 import ColorSet
+import LoginFeatures
 import SettingsFeatures
 import ComposableArchitecture
 
@@ -16,12 +17,19 @@ public struct SettingList: View {
     public var body: some View {
         List {
             Group {
-                Button {
-                    store.send(.delegate(.showLogin))
-                } label: {
+                ZStack {
+                    NavigationLink(
+                        state: SettingsAppFeature.Path.State.login(
+                            LoginAppFeature.State()
+                        )
+                    ) {
+                        EmptyView()
+                    }
+                    .opacity(0)
+                    
                     itemView("user", "로그인하기")
                 }
-                .padding(.top, 16)
+                .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                 
                 Divider()
                     .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))

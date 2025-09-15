@@ -7,11 +7,14 @@
 
 import SwiftUI
 import ColorSet
+import LoginFeatures
+import ComposableArchitecture
 
-struct FindPasswordView: View {
+public struct FindPasswordView: View {
+    @Bindable var store: StoreOf<FindPasswordFeature>
     @State private var canProceed: Bool = false
     
-    var body: some View {
+    public var body: some View {
         VStack(spacing: 8) {
             HeaderView(
                 title: "비밀번호 찾기",
@@ -43,8 +46,8 @@ struct FindPasswordView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
         }
     }
-}
-
-#Preview {
-    FindPasswordView()
+    
+    public init(store: StoreOf<FindPasswordFeature>) {
+        self.store = store
+    }
 }
