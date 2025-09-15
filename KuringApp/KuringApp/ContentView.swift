@@ -15,7 +15,7 @@ import SettingsFeatures
 import ComposableArchitecture
 
 struct ContentView: View {
-    @State private var selection: TabBarItem = .notice
+    @State var activeTab: TabBarItem = .notice
     
     @State private var noticeStore = Store(
       initialState: NoticeAppFeature.State(noticeList: NoticeListFeature.State()),
@@ -31,60 +31,30 @@ struct ContentView: View {
       initialState: SettingsAppFeature.State(),
       reducer: { SettingsAppFeature() }
     )
-     
-    enum TabBarItem: Hashable {
-        case notice
-        case archive
-        case campusMap
-        case settings
-    }
     
     var body: some View {
-        TabView(selection: $selection) {
-            NoticeApp(
-                store: noticeStore
-            )
-            .tag(TabBarItem.notice)
-            .tabItem {
-                Image(selection == .notice ? .listFill : .list)
-                
-                Text("공지사항")
-            }
-            
-            BookmarkApp(
-                store: bookmarkStore
-            )
-            .tag(TabBarItem.archive)
-            .tabItem {
-                Image(selection == .archive ? .archiveFill : .archive)
-                
-                Text("공지보관함")
-            }
-            
-            CampusApp()
-                .tag(TabBarItem.campusMap)
-                .tabItem {
-                    Image(selection == .campusMap ? .mapPinFill : .mapPin)
-                    
-                    Text("캠퍼스맵")
+        VStack(spacing: 0) {
+            Group {
+                switch activeTab {
+                case .notice:
+                    NoticeApp(store: noticeStore)
+                case .archive:
+                    BookmarkApp(store: bookmarkStore)
+                case .campusMap:
+                    CampusApp()
+                case .settings:
+                    SettingsApp(store: settingsStore)
                 }
-            
-            SettingsApp(
-                store: settingsStore
-            )
-            .tag(TabBarItem.settings)
-            .tabItem {
-                Image(selection == .settings ? .moreHorizontalFill : .moreHorizontal)
-                
-                Text("더보기")
             }
+            .tint(Color.Kuring.gray600)
+            .background(Color.Kuring.bg)
+            .animation(.default, value: activeTab)
+            .environment(\.horizontalSizeClass, .compact)
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            
+            BottomTabView(activeTab: $activeTab)
         }
-        .tint(Color.Kuring.gray600)
-        .environment(\.horizontalSizeClass, .compact)
     }
 }
 
-#Preview {
-    ContentView()
-}
 
