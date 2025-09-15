@@ -7,11 +7,12 @@
 
 import SwiftUI
 import ColorSet
+import SettingsFeatures
 
-struct LoginTermsAndConditionsView: View {
+public struct LoginTermsAndConditionsView: View {
     @State private var didAgreeToTerms: Bool?
     
-    var body: some View {
+    public var body: some View {
         VStack {
             HeaderView(
                 title: "개인정보 수집/이용 동의",
@@ -23,11 +24,12 @@ struct LoginTermsAndConditionsView: View {
             
             Spacer(minLength: 63)
             
-            ActionButton(
-                title: "다음",
-                isActive: .constant((didAgreeToTerms ?? false))
-            ) {
-                
+            NavigationLink(state: SettingsAppFeature.Path.State.signup) {
+                ActionButton(
+                    title: "다음",
+                    isActive: .constant((didAgreeToTerms ?? false))
+                )
+                .disabled(true)
             }
         }
         .padding(20)
@@ -37,6 +39,7 @@ struct LoginTermsAndConditionsView: View {
     private var termsAndConditions: some View {
         ScrollView {
             Text(TermsAndConditions.fullText)
+                .font(.system(size: 15, weight: .medium))
                 .foregroundStyle(Color.Kuring.caption1)
                 .padding(18)
         }
@@ -46,6 +49,8 @@ struct LoginTermsAndConditionsView: View {
         )
         .padding(.top, 45)
     }
+    
+    public init() {}
 }
 
 private struct AgreementButton: View {

@@ -20,8 +20,20 @@ import ColorSet
 struct ActionButton: View {
     let title: String
     @Binding var isActive: Bool
-    var activeColor: Color = .Kuring.primary
+    var activeColor: Color
     let action: () -> Void
+    
+    init(
+        title: String,
+        isActive: Binding<Bool>,
+        activeColor: Color = .Kuring.primary,
+        action: @escaping () -> Void = {}
+    ) {
+        self.title = title
+        self._isActive = isActive
+        self.activeColor = activeColor
+        self.action = action
+    }
     
     var body: some View {
         Button {

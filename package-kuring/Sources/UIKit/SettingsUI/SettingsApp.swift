@@ -41,12 +41,7 @@ public struct SettingsApp: View {
                     LoginView(store: store)
                 }
             case .findPassword:
-                if let store = store.scope(
-                    state: \.findPassword,
-                    action: \.findPassword
-                ) {
-                    FindPasswordView(store: store)
-                }
+                FindPasswordView()
             case .changePassword:
                 if let store = store.scope(
                     state: \.changePassword,
@@ -55,12 +50,9 @@ public struct SettingsApp: View {
                     ChangePasswordView(store: store)
                 }
             case .signup:
-                if let store = store.scope(
-                    state: \.signup,
-                    action: \.signup
-                ) {
-                    SignupView(store: store)
-                }
+                SignupView()
+            case .signupTerms:
+                LoginTermsAndConditionsView()
             case .setPassword:
                 if let store = store.scope(
                     state: \.setPassword,
