@@ -9,7 +9,6 @@ import SwiftUI
 import ColorSet
 
 struct LoginTermsAndConditionsView: View {
-    
     @State private var didAgreeToTerms: Bool?
     
     var body: some View {

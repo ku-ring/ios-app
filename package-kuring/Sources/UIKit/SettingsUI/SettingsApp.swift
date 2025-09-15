@@ -4,10 +4,10 @@
 //
 
 import Labs
+import LoginUI
 import SwiftUI
 import SubscriptionUI
 import SettingsFeatures
-import LoginUI
 import ComposableArchitecture
 
 public struct SettingsApp: View {
@@ -39,6 +39,34 @@ public struct SettingsApp: View {
                     action: \.login
                 ) {
                     LoginView(store: store)
+                }
+            case .findPassword:
+                if let store = store.scope(
+                    state: \.findPassword,
+                    action: \.findPassword
+                ) {
+                    FindPasswordView(store: store)
+                }
+            case .changePassword:
+                if let store = store.scope(
+                    state: \.changePassword,
+                    action: \.changePassword
+                ) {
+                    ChangePasswordView(store: store)
+                }
+            case .signup:
+                if let store = store.scope(
+                    state: \.signup,
+                    action: \.signup
+                ) {
+                    SignupView(store: store)
+                }
+            case .setPassword:
+                if let store = store.scope(
+                    state: \.setPassword,
+                    action: \.setPassword
+                ) {
+                    SetPasswordView(store: store)
                 }
             }
         }
