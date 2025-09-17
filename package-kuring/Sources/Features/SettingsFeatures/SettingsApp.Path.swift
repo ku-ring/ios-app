@@ -13,10 +13,11 @@ extension SettingsAppFeature {
         public enum State: Equatable {
             case login(LoginAppFeature.State)
             case findPassword(EmailVerificationFeature.State)
-            case changePassword(ChangePasswordFeature.State)
+            case changePassword(SetPasswordFeature.State)
             case signup(EmailVerificationFeature.State)
             case signupTerms
             case setPassword(SetPasswordFeature.State)
+            case signupComplete(SignupCompleteFeature.State)
             
             case appIconSelector(AppIconSelectorFeature.State)
         }
@@ -24,10 +25,11 @@ extension SettingsAppFeature {
         public enum Action: Equatable {
             case login(LoginAppFeature.Action)
             case findPassword(EmailVerificationFeature.Action)
-            case changePassword(ChangePasswordFeature.Action)
+            case changePassword(SetPasswordFeature.Action)
             case signup(EmailVerificationFeature.Action)
             case signupTerms
             case setPassword(SetPasswordFeature.Action)
+            case signupComplete(SignupCompleteFeature.Action)
             
             case appIconSelector(AppIconSelectorFeature.Action)
         }
@@ -37,7 +39,7 @@ extension SettingsAppFeature {
                 LoginAppFeature()
             }
             Scope(state: \.changePassword, action: \.changePassword) {
-                ChangePasswordFeature()
+                SetPasswordFeature()
             }
             Scope(state: \.findPassword, action: \.findPassword) {
                 EmailVerificationFeature()
@@ -47,6 +49,9 @@ extension SettingsAppFeature {
             }
             Scope(state: \.setPassword, action: \.setPassword) {
                 SetPasswordFeature()
+            }
+            Scope(state: \.signupComplete, action: \.signupComplete) {
+                SignupCompleteFeature()
             }
             Scope(state: \.appIconSelector, action: \.appIconSelector) {
                 AppIconSelectorFeature()

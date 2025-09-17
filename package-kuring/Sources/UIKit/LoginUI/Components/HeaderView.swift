@@ -14,6 +14,7 @@ import ColorSet
 ///       title: "탈퇴가 완료되었어요.",
 ///       subtitle: "쿠링이 필요할 때 또 만나요!"
 ///    )
+///    .frame(maxWidth: .infinity, alignment: .leading)
 /// ```
 ///  - Parameters:
 ///    - title: 제목
@@ -32,6 +33,5 @@ struct HeaderView: View {
                 .font(.system(size: 15, weight: .medium))
                 .foregroundStyle(Color.Kuring.caption1)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }

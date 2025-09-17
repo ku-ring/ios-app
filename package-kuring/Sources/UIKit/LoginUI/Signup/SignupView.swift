@@ -21,6 +21,7 @@ public struct SignupView: View {
                 title: "재학생 인증 및 아이디 생성",
                 subtitle: "학교 이메일 계정으로 본교 학생임을 인증해주세요.\n이메일 주소는 아이디로 사용될 예정이에요."
             )
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             EmailVerification(store: store)
                 .padding(.top, 45)

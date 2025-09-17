@@ -19,6 +19,8 @@ public struct FindPasswordView: View {
                 title: "비밀번호 찾기",
                 subtitle: "학교 이메일 주소를 입력하여 본인인증 해주세요."
             )
+            .frame(maxWidth: .infinity, alignment: .leading)
+            
             EmailVerification(store: store)
             .padding(.top, 45)
             

@@ -15,6 +15,7 @@ struct DeleteAccountView: View {
                 title: "탈퇴하기",
                 subtitle: "쿠링을 탈퇴하기 전에\n하단 정보를 확인해주세요."
             )
+            .frame(maxWidth: .infinity, alignment: .leading)
 
             disclaimer
             

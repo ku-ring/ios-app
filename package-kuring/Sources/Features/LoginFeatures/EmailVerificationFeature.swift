@@ -94,11 +94,11 @@ public struct EmailVerificationFeature {
         /// 인증번호 버튼을 눌렀음
         case verificationButtonTapped(VerificationType)
         /// 인증번호 API 응답
-        case verificationCodeResponse(Result<Bool, VerificationError>)
+        case verificationCodeResponse(Result<Bool, LoginKuringError>)
         /// "확인" 버튼 눌렀을때
         case actionButtonPressed
         /// 인증번호 인증 API 응답
-        case verifyCodeResponse(Result<Bool, VerificationError>)
+        case verifyCodeResponse(Result<Bool, LoginKuringError>)
         /// 타이머 시작
         case timerTick
         /// 타이머 종료
@@ -106,23 +106,12 @@ public struct EmailVerificationFeature {
         case delegate(Delegate)
         
         public enum Delegate: Equatable {
-            case verificationSucceeded
+            case verificationSucceeded(String)
         }
         
         public enum VerificationType {
             case signup
             case findPassword
-        }
-        
-        public enum VerificationError: Error, Equatable {
-            case error(String)
-            
-            public static func == (lhs: VerificationError, rhs: VerificationError) -> Bool {
-                switch (lhs, rhs) {
-                case let (.error(lmsg), .error(rmsg)):
-                    return lmsg == rmsg
-                }
-            }
         }
     }
     
@@ -194,7 +183,7 @@ public struct EmailVerificationFeature {
                 switch result {
                 case .success:
                     state.verificationState = .active(timer: false)
-                    return .send(.delegate(.verificationSucceeded))
+                    return .send(.delegate(.verificationSucceeded(state.email)))
                 case let .failure(error):
                     state.verificationState = .invalid
                     return .none

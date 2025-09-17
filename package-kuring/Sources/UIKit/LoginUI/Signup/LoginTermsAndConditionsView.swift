@@ -19,6 +19,7 @@ public struct LoginTermsAndConditionsView: View {
                 title: "개인정보 수집/이용 동의",
                 subtitle: "회원 가입 전 하단 유의사항을 확인하고,\n개인정보 수집 및 이용에 동의해주세요."
             )
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             termsAndConditions
             AgreementButton(didAgreeToTerms: $didAgreeToTerms)

@@ -70,6 +70,13 @@ public struct SettingsApp: View {
                 ) {
                     SetPasswordView(store: store)
                 }
+            case .signupComplete:
+                if let store = store.scope(
+                    state: \.signupComplete,
+                    action: \.signupComplete
+                ) {
+                    SignupCompleteView(store: store)
+                }
             }
         }
         .sheet(

@@ -25,6 +25,7 @@ public struct LoginView: View {
                 title: "로그인",
                 subtitle: "로그인 후 쿠링과 함께\n다채로운 캠퍼스 생활을 즐겨보세요 :)"
             )
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             loginForm
             ActionButton(title: "로그인", isActive: .constant(true)) {

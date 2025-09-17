@@ -108,8 +108,22 @@ public struct SettingsAppFeature {
                 state.settingList.currentAppIcon = appIconSelectorState.selectedIcon
                 state.path.pop(from: id)
                 return .none
-            case let .path(.element(id: _, action: .signup(.delegate(.verificationSucceeded)))):
-                state.path.append(.setPassword(SetPasswordFeature.State()))
+            case let .path(.element(id: id, action: .setPassword(.delegate(.pushToSignupComplete)))):
+                state.path.append(
+                    Path.State.signupComplete(
+                        SignupCompleteFeature.State()
+                    )
+                )
+                return .none
+            case let .path(.element(id: id, action: .signupComplete(.delegate(.popToRoot)))):
+                state.path.removeAll()
+                return .none
+            case let .path(.element(id: _, action: .signup(.delegate(.verificationSucceeded(email))))):
+                state.path.append(
+                    Path.State.setPassword(
+                        SetPasswordFeature.State(email: email)
+                    )
+                )
                 return .none
             case .binding:
                 return .none

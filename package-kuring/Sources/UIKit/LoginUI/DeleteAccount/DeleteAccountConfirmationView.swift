@@ -15,6 +15,7 @@ struct DeleteAccountConfirmationView: View {
                 title: "탈퇴가 완료되었어요.",
                 subtitle: "쿠링이 필요할 때 또 만나요!"
             )
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             Spacer()
             
