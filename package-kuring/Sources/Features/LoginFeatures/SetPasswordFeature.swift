@@ -47,13 +47,18 @@ public struct SetPasswordFeature {
         /// 바인딩
         case binding(BindingAction<State>)
         /// 확인 버튼을 눌렀음
-        case actionButtonTapped
-        /// 비밀번호 변경
-        case changePasswordResponse(Result<Bool, LoginKuringError>)
+        case actionButtonTapped(SetPasswordType)
+        /// 비밀번호 변경/회원가입 응답
+        case response(Result<Bool, LoginKuringError>)
         case delegate(Delegate)
         
         public enum Delegate: Equatable {
             case pushToSignupComplete
+        }
+        
+        public enum SetPasswordType {
+            case signup
+            case changePassword
         }
     }
 
@@ -62,16 +67,20 @@ public struct SetPasswordFeature {
         
         Reduce { state, action in
             switch action {
-            case .actionButtonTapped:
+            case .actionButtonTapped(let type):
                 return .run { [email = state.email, password = state.reEnterPassword] send in
                     do {
-                        try await kuringLink.resetPassword(email, password)
-                        await send(.changePasswordResponse(.success(true)))
+                        if type == .signup {
+                            try await kuringLink.signUp(email, password)
+                        } else {
+                            try await kuringLink.resetPassword(email, password)
+                        }
+                        await send(.response(.success(true)))
                     } catch {
-                        await send(.changePasswordResponse(.failure(.error(error.localizedDescription))))
+                        await send(.response(.failure(.error(error.localizedDescription))))
                     }
                 }
-            case let .changePasswordResponse(result):
+            case let .response(result):
                 switch result {
                 case .success:
                     return .none

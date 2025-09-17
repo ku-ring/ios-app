@@ -12,7 +12,6 @@ import ComposableArchitecture
 
 public struct ChangePasswordView: View {
     @Bindable var store: StoreOf<SetPasswordFeature>
-    @State private var canProceed: Bool = false
     
     public var body: some View {
         VStack(spacing: 8) {
@@ -28,9 +27,9 @@ public struct ChangePasswordView: View {
             
             ActionButton(
                 title: "확인",
-                isActive: $canProceed
+                isActive: .init(get: { store.isValidReEnterPassword }, set: {_ in })
             ) {
-                
+                store.send(.actionButtonTapped(.changePassword))
             }
             .padding(.top, 16)
         }
