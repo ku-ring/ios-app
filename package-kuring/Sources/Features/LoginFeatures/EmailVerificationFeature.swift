@@ -96,9 +96,9 @@ public struct EmailVerificationFeature {
         /// 인증번호 API 응답
         case verificationCodeResponse(Result<Bool, LoginKuringError>)
         /// "확인" 버튼 눌렀을때
-        case actionButtonPressed
+        case actionButtonPressed(VerificationType)
         /// 인증번호 인증 API 응답
-        case verifyCodeResponse(Result<Bool, LoginKuringError>)
+        case verifyCodeResponse(Result<Bool, LoginKuringError>, VerificationType)
         /// 타이머 시작
         case timerTick
         /// 타이머 종료
@@ -106,7 +106,8 @@ public struct EmailVerificationFeature {
         case delegate(Delegate)
         
         public enum Delegate: Equatable {
-            case verificationSucceeded(String)
+            case pushToSignupPassword(String)
+            case pushToChangePassword(String)
         }
         
         public enum VerificationType {
@@ -170,22 +171,26 @@ public struct EmailVerificationFeature {
                     state.verificationState = .hidden
                     return .none
                 }
-            case .actionButtonPressed:
+            case .actionButtonPressed(let type):
                 return .run { [email = state.email, code = state.verificationCode] send in
                     do {
                         try await kuringLink.verifyVerificationCode(email, code)
-                        await send(.verifyCodeResponse(.success(true)))
+                        await send(.verifyCodeResponse(.success(true), type))
                     } catch {
-                        await send(.verifyCodeResponse(.failure(.error(error.localizedDescription))))
+                        await send(.verifyCodeResponse(.failure(.error(error.localizedDescription)), type))
                     }
                 }
-            case let .verifyCodeResponse(result):
+            case let .verifyCodeResponse(result, type):
                 switch result {
                 case .success:
                     state.verificationState = .active(timer: false)
-                    return .send(.delegate(.verificationSucceeded(state.email)))
+                    if type == .signup {
+                        return .send(.delegate(.pushToSignupPassword(state.email)))
+                    }
+                    return .send(.delegate(.pushToChangePassword(state.email)))
                 case let .failure(error):
                     state.verificationState = .invalid
+                    print(error)
                     return .none
                 }
             case .timerTick:

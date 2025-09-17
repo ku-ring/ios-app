@@ -34,7 +34,7 @@ public struct SignupView: View {
                 title: "다음",
                 isActive: $store.canVerifyCode,
                 action: {
-                    store.send(.actionButtonPressed)
+                    store.send(.actionButtonPressed(.signup))
                 }
             )
             .padding(.top, 16)

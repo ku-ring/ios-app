@@ -49,11 +49,12 @@ public struct SetPasswordFeature {
         /// 확인 버튼을 눌렀음
         case actionButtonTapped(SetPasswordType)
         /// 비밀번호 변경/회원가입 응답
-        case response(Result<Bool, LoginKuringError>)
+        case response(Result<Bool, LoginKuringError>, SetPasswordType)
         case delegate(Delegate)
         
         public enum Delegate: Equatable {
             case pushToSignupComplete
+            case popToRoot
         }
         
         public enum SetPasswordType {
@@ -75,16 +76,20 @@ public struct SetPasswordFeature {
                         } else {
                             try await kuringLink.resetPassword(email, password)
                         }
-                        await send(.response(.success(true)))
+                        await send(.response(.success(true), type))
                     } catch {
-                        await send(.response(.failure(.error(error.localizedDescription))))
+                        await send(.response(.failure(.error(error.localizedDescription)), type))
                     }
                 }
-            case let .response(result):
+            case let .response(result, type):
                 switch result {
                 case .success:
-                    return .none
+                    if type == .signup {
+                        return .send(.delegate(.pushToSignupComplete))
+                    }
+                    return .send(.delegate(.popToRoot))
                 case let .failure(error):
+                    print(error)
                     return .none
                 }
             default:

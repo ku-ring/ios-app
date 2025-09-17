@@ -27,13 +27,27 @@ public struct FindPasswordView: View {
             Spacer()
             
             goToEmail
-            ActionButton(title: "본인인증 완료", isActive: .constant(true)) {
-                
-            }
+            ActionButton(
+                title: "본인인증 완료",
+                isActive: $store.canVerifyCode,
+                action: {
+                    store.send(.actionButtonPressed(.findPassword))
+                }
+            )
             .padding(.top, 16)
         }
         .padding(20)
         .background(Color.Kuring.bg)
+        .sheet(
+            item: $store.scope(
+                state: \.destination?.schoolEmail,
+                action: \.destination.schoolEmail
+            )
+        ) { store in
+            LoginWebView(store: store)
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+        }
     }
     
     /// 학교 이메일 바로가기
