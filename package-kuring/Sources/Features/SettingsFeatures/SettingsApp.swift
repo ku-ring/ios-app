@@ -18,6 +18,7 @@ public struct SettingsAppFeature {
         public var path = StackState<Path.State>()
         /// Root
         public var settingList = SettingListFeature.State()
+        public var signup = EmailVerificationFeature.State()
 
         public init(
             destination: Destination.State? = nil,
@@ -35,6 +36,8 @@ public struct SettingsAppFeature {
         case binding(BindingAction<State>)
         /// Root
         case settingList(SettingListFeature.Action)
+        /// 이메일 인증 네비게이션
+        case signup(EmailVerificationFeature.Action)
         /// 스택 기반 네비게이션 Path
         case path(StackAction<Path.State, Path.Action>)
         /// 트리기반 네비게이션 Destination
@@ -46,6 +49,10 @@ public struct SettingsAppFeature {
 
         Scope(state: \.settingList, action: \.settingList) {
             SettingListFeature()
+        }
+        
+        Scope(state: \.signup, action: \.signup) {
+            EmailVerificationFeature()
         }
 
         Reduce { state, action in
@@ -94,7 +101,6 @@ public struct SettingsAppFeature {
                     state.destination = .opensourceList(OpenSourceListFeature.State())
                     return .none
                 }
-
             case let .path(.element(id: id, action: .appIconSelector(.delegate(.completeAppIconChange)))):
                 guard case let .appIconSelector(appIconSelectorState) = state.path[id: id] else {
                     return .none
@@ -102,11 +108,13 @@ public struct SettingsAppFeature {
                 state.settingList.currentAppIcon = appIconSelectorState.selectedIcon
                 state.path.pop(from: id)
                 return .none
-
+            case let .path(.element(id: _, action: .signup(.delegate(.verificationSucceeded)))):
+                state.path.append(.setPassword(SetPasswordFeature.State()))
+                return .none
             case .binding:
                 return .none
 
-            case .destination, .path:
+            case .destination, .path, .signup:
                 return .none
 
             case .settingList:

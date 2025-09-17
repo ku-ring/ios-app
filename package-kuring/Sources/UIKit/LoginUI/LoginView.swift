@@ -31,6 +31,8 @@ public struct LoginView: View {
                 store.send(.loginButtonTapped)
             }
             .padding(.top, 33)
+            .disabled(store.isLoading)
+            
             footer
             
             Spacer()
@@ -86,7 +88,7 @@ extension LoginView {
     private var footer: some View {
         VStack(alignment: .center) {
             HStack(spacing: 50) {
-                NavigationLink(state: SettingsAppFeature.Path.State.findPassword) {
+                NavigationLink(state: SettingsAppFeature.Path.State.findPassword(EmailVerificationFeature.State())) {
                     Text("비밀번호 찾기")
                         .font(.system(size: 13, weight: .light))
                         .foregroundStyle(Color.Kuring.caption1)

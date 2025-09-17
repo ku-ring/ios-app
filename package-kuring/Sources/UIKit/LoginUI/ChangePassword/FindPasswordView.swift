@@ -11,9 +11,7 @@ import LoginFeatures
 import ComposableArchitecture
 
 public struct FindPasswordView: View {
-    @State private var store: StoreOf<EmailVerificationFeature> = .init(initialState: EmailVerificationFeature.State(verificationType: .findPassword), reducer: {
-        EmailVerificationFeature()
-    })
+    @Bindable var store: StoreOf<EmailVerificationFeature>
     
     public var body: some View {
         VStack(spacing: 8) {
@@ -27,7 +25,7 @@ public struct FindPasswordView: View {
             Spacer()
             
             goToEmail
-            ActionButton(title: "본인인증 완료", isActive: $store.canProceed) {
+            ActionButton(title: "본인인증 완료", isActive: .constant(true)) {
                 
             }
             .padding(.top, 16)
@@ -48,5 +46,7 @@ public struct FindPasswordView: View {
         }
     }
     
-    public init() {}
+    public init(store: StoreOf<EmailVerificationFeature>) {
+        self.store = store
+    }
 }

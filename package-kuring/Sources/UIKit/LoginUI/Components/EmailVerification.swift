@@ -18,7 +18,7 @@ import ComposableArchitecture
 ///    - canProceed: 인증이 완료되어서 다음 화면으로 넘어갈수 있을지 나타내는 부울값
 struct EmailVerification: View {
     @Bindable var store: StoreOf<EmailVerificationFeature>
-    
+
     var body: some View {
         VStack(spacing: 8) {
             VStack(spacing: 4) {
@@ -27,17 +27,24 @@ struct EmailVerification: View {
                     verificationButton
                 }
                 
-                if !store.isValidEmail {
+                if case .invalid = store.emailState {
                     LoginErrorMessage(message: "등록되지 않은 이메일이에요.")
                 }
             }
             
             VStack(spacing: 4) {
-                verificationTextField
+                if store.shouldShowVerificationField {
+                    verificationTextField
+                }
                 
-                if !store.verificationCode.isEmpty && !store.isValidVerificationCode {
+                if case .invalid = store.verificationState {
                     LoginErrorMessage(message: "올바르지 않은 인증번호에요.")
                 }
+            }
+        }
+        .onChange(of: store.email) { oldValue, newValue in
+            if oldValue != newValue {
+                store.send(.emailChanged)
             }
         }
         .onDisappear {
@@ -53,25 +60,25 @@ struct EmailVerification: View {
         .background(
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.Kuring.gray100)
-                .stroke(Color.Kuring.warning, lineWidth: store.isValidEmail ? 0 : 1)
+                .stroke(emailBorderColor, lineWidth: shouldShowEmailError ? 1 : 0)
         )
     }
     
     private var verificationButton: some View {
         Button {
-            store.send(.verificationButtonTapped)
+            store.send(.verificationButtonTapped(.signup))
         } label: {
-            Text(store.verificationState.buttonText)
-                .foregroundStyle(store.verificationState.textColor)
+            Text(store.verificationButtonState.buttonText)
+                .foregroundStyle(store.verificationButtonState.textColor)
                 .font(.system(size: 16, weight: .medium))
                 .frame(width: 114, height: 50)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(store.verificationState.backgroundColor)
-                        .stroke(store.verificationState.borderColor, lineWidth: 1)
+                        .fill(store.verificationButtonState.backgroundColor)
+                        .stroke(store.verificationButtonState.borderColor, lineWidth: 1)
                 )
         }
-        .disabled(!store.verificationState.isEnabled)
+        .disabled(!store.verificationButtonState.isEnabled)
     }
     
     private var verificationTextField: some View {
@@ -81,7 +88,8 @@ struct EmailVerification: View {
                 text: $store.verificationCode,
                 prompt: Text("인증번호 입력").foregroundStyle(Color.Kuring.caption1)
             )
-            .keyboardType(.numberPad)
+            .keyboardType(.numbersAndPunctuation)
+            .submitLabel(.done)
             
             Text("\(timeString(from: store.timeRemaining))")
                 .font(.system(size: 14, weight: .semibold))
@@ -93,17 +101,40 @@ struct EmailVerification: View {
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.Kuring.gray100)
                 .stroke(
-                    store.verificationCodeBorderColor,
+                    verificationFieldBorderColor,
                     lineWidth: store.verificationCode.isEmpty ? 0 : 1
                 )
         )
     }
 }
 
+// MARK: - Helper properties & function
 extension EmailVerification {
+    private var shouldShowEmailError: Bool {
+        return store.emailState == .invalid
+    }
+    
+    private var emailBorderColor: Color {
+        if case .invalid = store.emailState {
+            return Color.Kuring.warning
+        }
+        return Color.clear
+    }
+    
+    private var verificationFieldBorderColor: Color {
+        switch store.verificationState {
+        case .invalid:
+            return Color.Kuring.warning
+        case .active:
+            return Color.Kuring.primary
+        case .hidden:
+            return Color.clear
+        }
+    }
+    
     private func timeString(from seconds: Int) -> String {
         let minutes = seconds / 60
         let seconds = seconds % 60
-        return String(format: "%d:%02d", minutes, seconds)
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 }

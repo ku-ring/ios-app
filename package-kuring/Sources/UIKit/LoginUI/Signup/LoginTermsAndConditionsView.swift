@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ColorSet
+import LoginFeatures
 import SettingsFeatures
 
 public struct LoginTermsAndConditionsView: View {
@@ -24,13 +25,14 @@ public struct LoginTermsAndConditionsView: View {
             
             Spacer(minLength: 63)
             
-            NavigationLink(state: SettingsAppFeature.Path.State.signup) {
+            NavigationLink(state: SettingsAppFeature.Path.State.signup(EmailVerificationFeature.State())) {
                 ActionButton(
                     title: "다음",
                     isActive: .constant((didAgreeToTerms ?? false))
                 )
-                .disabled(true)
+                .allowsHitTesting(false)
             }
+            .allowsHitTesting((didAgreeToTerms ?? false))
         }
         .padding(20)
         .background(Color.Kuring.bg)

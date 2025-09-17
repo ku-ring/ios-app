@@ -12,9 +12,9 @@ extension SettingsAppFeature {
         @ObservableState
         public enum State: Equatable {
             case login(LoginAppFeature.State)
-            case findPassword
+            case findPassword(EmailVerificationFeature.State)
             case changePassword(ChangePasswordFeature.State)
-            case signup
+            case signup(EmailVerificationFeature.State)
             case signupTerms
             case setPassword(SetPasswordFeature.State)
             
@@ -23,9 +23,9 @@ extension SettingsAppFeature {
 
         public enum Action: Equatable {
             case login(LoginAppFeature.Action)
-            case findPassword
+            case findPassword(EmailVerificationFeature.Action)
             case changePassword(ChangePasswordFeature.Action)
-            case signup
+            case signup(EmailVerificationFeature.Action)
             case signupTerms
             case setPassword(SetPasswordFeature.Action)
             
@@ -38,6 +38,12 @@ extension SettingsAppFeature {
             }
             Scope(state: \.changePassword, action: \.changePassword) {
                 ChangePasswordFeature()
+            }
+            Scope(state: \.findPassword, action: \.findPassword) {
+                EmailVerificationFeature()
+            }
+            Scope(state: \.signup, action: \.signup) {
+                EmailVerificationFeature()
             }
             Scope(state: \.setPassword, action: \.setPassword) {
                 SetPasswordFeature()
