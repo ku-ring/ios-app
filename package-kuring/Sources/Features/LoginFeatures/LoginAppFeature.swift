@@ -30,22 +30,11 @@ public struct LoginAppFeature {
         /// 로그인 버튼 눌렀을때
         case loginButtonTapped
         /// 로그인 API 태울때
-        case loginResponse(Result<Bool, LoginError>)
+        case loginResponse(Result<Bool, LoginKuringError>)
         /// 알림 관련 액션
         case alert(PresentationAction<Alert>)
         /// 알림
         public enum Alert: Equatable {}
-        
-        public enum LoginError: Error, Equatable {
-            case error(String)
-            
-            public static func == (lhs: LoginError, rhs: LoginError) -> Bool {
-                switch (lhs, rhs) {
-                case let (.error(lmsg), .error(rmsg)):
-                    return lmsg == rmsg
-                }
-            }
-        }
     }
 
     public var body: some ReducerOf<Self> {

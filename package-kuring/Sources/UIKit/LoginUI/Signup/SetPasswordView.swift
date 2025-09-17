@@ -8,6 +8,7 @@
 import SwiftUI
 import ColorSet
 import LoginFeatures
+import SettingsFeatures
 import ComposableArchitecture
 
 public struct SetPasswordView: View {
@@ -20,16 +21,17 @@ public struct SetPasswordView: View {
                 title: "비밀번호 설정하기",
                 subtitle: "6~20자 영문 소문자, 숫자를 조합하여 비밀번호를 생성해주세요 :)"
             )
+            .frame(maxWidth: .infinity, alignment: .leading)
             
-            SetUpPassword(canProceed: $canProceed)
+            SetUpPassword(store: store)
             
             Spacer()
             
             ActionButton(
                 title: "확인",
-                isActive: $canProceed
+                isActive: .init(get: { store.isValidReEnterPassword }, set: {_ in })
             ) {
-                
+                store.send(.actionButtonTapped)
             }
             .padding(.top, 16)
         }
