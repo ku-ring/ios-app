@@ -1,5 +1,5 @@
 //
-//  DeleteAccountConfirmation.swift
+//  DeleteAccountCompleteView.swift
 //  package-kuring
 //
 //  Created by Jung Hwan Park on 8/26/25.
@@ -10,7 +10,7 @@ import ColorSet
 import LoginFeatures
 import ComposableArchitecture
 
-public struct DeleteAccountConfirmationView: View {
+public struct DeleteAccountCompleteView: View {
     @Bindable var store: StoreOf<DeleteAccountFeature>
     
     public var body: some View {

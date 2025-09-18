@@ -19,7 +19,7 @@ extension SettingsAppFeature {
             case setPassword(SetPasswordFeature.State)
             case signupComplete(SignupCompleteFeature.State)
             case deleteAccount(DeleteAccountFeature.State)
-            case deleteAccountConfirmation(DeleteAccountFeature.State)
+            case deleteAccountComplete(DeleteAccountFeature.State)
             
             case appIconSelector(AppIconSelectorFeature.State)
         }
@@ -33,7 +33,7 @@ extension SettingsAppFeature {
             case setPassword(SetPasswordFeature.Action)
             case signupComplete(SignupCompleteFeature.Action)
             case deleteAccount(DeleteAccountFeature.Action)
-            case deleteAccountConfirmation(DeleteAccountFeature.Action)
+            case deleteAccountComplete(DeleteAccountFeature.Action)
             
             case appIconSelector(AppIconSelectorFeature.Action)
         }
@@ -60,7 +60,7 @@ extension SettingsAppFeature {
             Scope(state: \.deleteAccount, action: \.deleteAccount) {
                 DeleteAccountFeature()
             }
-            Scope(state: \.deleteAccountConfirmation, action: \.deleteAccountConfirmation) {
+            Scope(state: \.deleteAccountComplete, action: \.deleteAccountComplete) {
                 DeleteAccountFeature()
             }
             Scope(state: \.appIconSelector, action: \.appIconSelector) {

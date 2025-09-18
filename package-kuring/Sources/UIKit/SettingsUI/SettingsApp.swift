@@ -84,12 +84,12 @@ public struct SettingsApp: View {
                 ) {
                     DeleteAccountView(store: store)
                 }
-            case .deleteAccountConfirmation:
+            case .deleteAccountComplete:
                 if let store = store.scope(
-                    state: \.deleteAccountConfirmation,
-                    action: \.deleteAccountConfirmation
+                    state: \.deleteAccountComplete,
+                    action: \.deleteAccountComplete
                 ) {
-                    DeleteAccountConfirmationView(store: store)
+                    DeleteAccountCompleteView(store: store)
                 }
             }
         }

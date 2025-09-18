@@ -26,17 +26,13 @@ public struct DeleteAccountView: View {
             
             Spacer()
             
-            NavigationLink(state: SettingsAppFeature.Path.State.deleteAccountConfirmation(store.state)) {
-                ActionButton(
-                    title: "탈퇴하기",
-                    isActive: .constant(true),
-                    activeColor: Color.Kuring.warning
-                ) {
-                    
-                }
-                .allowsHitTesting(false)
+            ActionButton(
+                title: "탈퇴하기",
+                isActive: .constant(true),
+                activeColor: Color.Kuring.warning
+            ) {
+                store.send(.onDeleteAccountButtonTapped)
             }
-            .allowsHitTesting(true)
         }
         .padding(20)
         .background(Color.Kuring.bg)
