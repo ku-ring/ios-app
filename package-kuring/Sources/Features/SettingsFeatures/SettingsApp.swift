@@ -119,6 +119,9 @@ public struct SettingsAppFeature {
                 state.path.removeAll()
                 return .none
             case let .path(.element(id: id, action: .signupComplete(.delegate(.popToRoot)))):
+                state.path.removeSubrange(1...)
+                return .none
+            case let .path(.element(id: id, action: .deleteAccountConfirmation(.delegate(.popToRoot)))):
                 state.path.removeAll()
                 return .none
             case let .path(.element(id: _, action: .signup(.delegate(.pushToSignupPassword(email))))):

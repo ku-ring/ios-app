@@ -7,9 +7,14 @@
 
 import SwiftUI
 import ColorSet
+import LoginFeatures
+import SettingsFeatures
+import ComposableArchitecture
 
-struct DeleteAccountView: View {
-    var body: some View {
+public struct DeleteAccountView: View {
+    @Bindable var store: StoreOf<DeleteAccountFeature>
+    
+    public var body: some View {
         VStack {
             HeaderView(
                 title: "탈퇴하기",
@@ -21,13 +26,17 @@ struct DeleteAccountView: View {
             
             Spacer()
             
-            ActionButton(
-                title: "탈퇴하기",
-                isActive: .constant(true),
-                activeColor: Color.Kuring.warning
-            ) {
-                
+            NavigationLink(state: SettingsAppFeature.Path.State.deleteAccountConfirmation(store.state)) {
+                ActionButton(
+                    title: "탈퇴하기",
+                    isActive: .constant(true),
+                    activeColor: Color.Kuring.warning
+                ) {
+                    
+                }
+                .allowsHitTesting(false)
             }
+            .allowsHitTesting(true)
         }
         .padding(20)
         .background(Color.Kuring.bg)
@@ -67,5 +76,9 @@ struct DeleteAccountView: View {
         .padding(.vertical, 16)
         .padding(.horizontal, 16)
         .background(Color.Kuring.gray100, in: RoundedRectangle(cornerRadius: 8))
+    }
+    
+    public init(store: StoreOf<DeleteAccountFeature>) {
+        self.store = store
     }
 }
