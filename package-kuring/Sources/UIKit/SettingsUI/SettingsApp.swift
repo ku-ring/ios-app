@@ -77,6 +77,20 @@ public struct SettingsApp: View {
                 ) {
                     SignupCompleteView(store: store)
                 }
+            case .deleteAccount:
+                if let store = store.scope(
+                    state: \.deleteAccount,
+                    action: \.deleteAccount
+                ) {
+                    DeleteAccountView(store: store)
+                }
+            case .deleteAccountConfirmation:
+                if let store = store.scope(
+                    state: \.deleteAccountConfirmation,
+                    action: \.deleteAccountConfirmation
+                ) {
+                    DeleteAccountConfirmationView(store: store)
+                }
             }
         }
         .sheet(
