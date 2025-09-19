@@ -296,7 +296,7 @@ extension KuringLink: DependencyKey {
             let response: EmptyResponse = try await satellite
                 .response(
                     for: Path.logout.path,
-                    httpMethod: .get,
+                    httpMethod: .post,
                     httpHeaders: [
                         "Content-Type": "application/json",
                         "User-Token": fcmToken,
@@ -349,6 +349,9 @@ extension KuringLink: DependencyKey {
                     ]
                 )
             let isSucceed = (200 ..< 300) ~= response.code
+            if isSucceed {
+                accessToken = ""
+            }
             return isSucceed
         }
     )

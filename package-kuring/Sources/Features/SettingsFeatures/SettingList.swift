@@ -4,8 +4,10 @@
 //
 
 import Caches
+import Models
 import Networks
 import Foundation
+import LoginFeatures
 import ComposableArchitecture
 
 public enum URLLink: String {
@@ -23,6 +25,8 @@ public struct SettingListFeature {
         // TODO: 나중에 디펜던시로
         public var currentAppIcon: KuringIcon?
         public var isCustomAlarmOn: Bool = false
+        public var email: String = "kuring@konkuk.ac.kr"
+        public var nickname: String = "쿠링님"
         @Presents public var alert: AlertState<Action.Alert>?
 
         public init(
@@ -39,9 +43,13 @@ public struct SettingListFeature {
     public enum Action: Equatable, BindableAction {
         case binding(BindingAction<State>)
         case delegate(Delegate)
+        case onAppear
         case onLogoutTapped
+        case clearUserInfo
         /// 알림 관련 액션
         case alert(PresentationAction<Alert>)
+        case getUserInfoResponse(Result<UserInfo, LoginKuringError>)
+        
         /// 알림
         public enum Alert: Equatable {
             /// 로그아웃 진행
@@ -67,6 +75,30 @@ public struct SettingListFeature {
             switch action {
             case .binding, .delegate:
                 return .none
+            case .onAppear:
+                @Dependency(\.kuringLink) var kuringLink
+                return .run { send in
+                    do {
+                        let result = try await kuringLink.getUserInfo()
+                        await send(.getUserInfoResponse(.success(result)))
+                    } catch {
+                        await send(.getUserInfoResponse(.failure(.error(error.localizedDescription))))
+                    }
+                }
+            case let .getUserInfoResponse(result):
+                switch result {
+                case let .success(userInfo):
+                    state.email = userInfo.email
+                    state.nickname = userInfo.nickname
+                    return .none
+                case let .failure(error):
+                    print(error)
+                    return .none
+                }
+            case .clearUserInfo:
+                state.email = "kuring@konkuk.ac.kr"
+                state.nickname = "쿠링님"
+                return .none
             case .onLogoutTapped:
                 state.alert = AlertState {
                     TextState("정말 로그아웃 하시겠어요?")
@@ -79,7 +111,7 @@ public struct SettingListFeature {
                         role: .destructive,
                         action: .logout
                     ) {
-                        TextState("취소하기")
+                        TextState("로그아웃")
                     }
                 }
                 return .none
@@ -90,6 +122,8 @@ public struct SettingListFeature {
                     return .run { send in
                         do {
                             try await kuringLink.logout()
+                            await send(.clearUserInfo)
+                            await send(.onAppear)
                         } catch {
                             print(error)
                         }

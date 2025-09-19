@@ -122,6 +122,9 @@ public struct SettingsAppFeature {
                     )
                 )
                 return .none
+            case let .path(.element(id: id, action: .login(.delegate(.popToRoot)))):
+                state.path.removeAll()
+                return .none
             case let .path(.element(id: id, action: .changePassword(.delegate(.popToRoot)))):
                 state.path.removeAll()
                 return .none
@@ -130,7 +133,7 @@ public struct SettingsAppFeature {
                 return .none
             case let .path(.element(id: id, action: .deleteAccountComplete(.delegate(.popToRoot)))):
                 state.path.removeAll()
-                return .none
+                return .send(.settingList(.clearUserInfo))
             case let .path(.element(id: _, action: .signup(.delegate(.pushToSignupPassword(email))))):
                 state.path.append(
                     Path.State.setPassword(

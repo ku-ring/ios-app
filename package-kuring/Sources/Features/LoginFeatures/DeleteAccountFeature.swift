@@ -40,7 +40,6 @@ public struct DeleteAccountFeature {
             case .delegate:
                 return .none
             case .onDeleteAccountButtonTapped:
-                return .send(.delegate(.pushToDeleteAccountComplete))
                 return .run { send in
                     do {
                         try await kuringLink.withdrawAccount()

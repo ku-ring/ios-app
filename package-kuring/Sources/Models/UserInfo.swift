@@ -8,7 +8,7 @@
 import Foundation
 
 /// 사용자 정보 (이메일, 닉네임)
-public struct UserInfo: Decodable {
+public struct UserInfo: Decodable, Equatable {
     public let email: String
     public let nickname: String
     

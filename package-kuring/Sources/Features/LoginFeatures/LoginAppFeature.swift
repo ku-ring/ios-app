@@ -35,6 +35,12 @@ public struct LoginAppFeature {
         case alert(PresentationAction<Alert>)
         /// 알림
         public enum Alert: Equatable {}
+        
+        case delegate(Delegate)
+        
+        public enum Delegate: Equatable {
+            case popToRoot
+        }
     }
 
     public var body: some ReducerOf<Self> {
@@ -56,7 +62,7 @@ public struct LoginAppFeature {
                 state.isLoading = false
                 switch result {
                 case .success:
-                    return .none
+                    return .send(.delegate(.popToRoot))
                 case let .failure(error):
                     state.alert = AlertState {
                         TextState("잘못된 로그인 정보에요.\n다시 입력해주세요.")
