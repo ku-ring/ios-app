@@ -53,7 +53,7 @@ public struct FindPasswordView: View {
     /// 학교 이메일 바로가기
     private var goToEmail: some View {
         Button {
-            // do something
+            store.send(.showSchoolEmailButtonTapped)
         } label: {
             Text("학교 메일 바로가기 >")
                 .font(.subheadline.weight(.medium))

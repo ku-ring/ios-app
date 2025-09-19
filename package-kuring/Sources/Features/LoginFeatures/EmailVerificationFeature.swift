@@ -95,7 +95,7 @@ public struct EmailVerificationFeature {
         case verificationButtonTapped(VerificationType)
         /// 인증번호 API 응답
         case verificationCodeResponse(Result<Bool, LoginKuringError>)
-        /// "확인" 버튼 눌렀을때
+        /// "확인", "다음" 따위의 버튼을 눌렀을때
         case actionButtonPressed(VerificationType)
         /// 인증번호 인증 API 응답
         case verifyCodeResponse(Result<Bool, LoginKuringError>, VerificationType)

@@ -18,13 +18,16 @@ public struct DeleteAccountFeature {
     }
 
     public enum Action: Equatable {
-        case popToRoot
         case delegate(Delegate)
+        /// 회원 탈퇴를 눌렀음
         case onDeleteAccountButtonTapped
+        /// 회원탈퇴 api 응답
         case deleteAccountResponse(Result<Bool, LoginKuringError>)
         
         public enum Delegate: Equatable {
+            /// 회원 탈퇴 완료 화면으로 이동
             case pushToDeleteAccountComplete
+            /// 루트로 pop~
             case popToRoot
         }
     }
@@ -34,8 +37,6 @@ public struct DeleteAccountFeature {
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case .popToRoot:
-                return .send(.delegate(.popToRoot))
             case .delegate:
                 return .none
             case .onDeleteAccountButtonTapped:

@@ -29,7 +29,7 @@ public struct LoginAppFeature {
         case binding(BindingAction<State>)
         /// 로그인 버튼 눌렀을때
         case loginButtonTapped
-        /// 로그인 API 태울때
+        /// 로그인 API 응답
         case loginResponse(Result<Bool, LoginKuringError>)
         /// 알림 관련 액션
         case alert(PresentationAction<Alert>)

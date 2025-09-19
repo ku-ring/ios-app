@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 
+// MARK: - 웹뷰 Destination
 extension EmailVerificationFeature {
     @Reducer
     public struct Destination {
