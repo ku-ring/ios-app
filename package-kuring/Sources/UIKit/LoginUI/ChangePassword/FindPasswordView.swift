@@ -21,8 +21,8 @@ public struct FindPasswordView: View {
             )
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            EmailVerification(store: store)
-            .padding(.top, 45)
+            EmailVerification(store: store, type: .findPassword)
+                .padding(.top, 45)
             
             Spacer()
             

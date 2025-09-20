@@ -23,7 +23,7 @@ public struct SignupView: View {
             )
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            EmailVerification(store: store)
+            EmailVerification(store: store, type: .signup)
                 .padding(.top, 45)
             
             Spacer()

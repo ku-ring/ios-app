@@ -12,12 +12,15 @@ import ComposableArchitecture
 
 /// 비밀번호 찾기/회원가입에서 사용되는 이메일 인증
 /// ```swift
-///   EmailVerification(canProceed: $canProceed)
+///   EmailVerification(store: store, type: .signup)
+///   or
+///   EmailVerification(store: store, type: .findPassword)
 /// ```
 ///  - Parameters:
 ///    - canProceed: 인증이 완료되어서 다음 화면으로 넘어갈수 있을지 나타내는 부울값
 struct EmailVerification: View {
     @Bindable var store: StoreOf<EmailVerificationFeature>
+    let type: EmailVerificationFeature.VerificationType
 
     var body: some View {
         VStack(spacing: 8) {
@@ -66,7 +69,7 @@ struct EmailVerification: View {
     
     private var verificationButton: some View {
         Button {
-            store.send(.verificationButtonTapped(.signup))
+            store.send(.verificationButtonTapped(type))
         } label: {
             Text(store.verificationButtonState.buttonText)
                 .foregroundStyle(store.verificationButtonState.textColor)

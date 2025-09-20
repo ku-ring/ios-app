@@ -239,7 +239,7 @@ public struct SettingList: View {
         .navigationTitle("더보기")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            if accessToken != "" && store.email == "kuring@konkuk.ac.kr" {
+            if !accessToken.isEmpty && store.email == "kuring@konkuk.ac.kr" {
                 store.send(.onAppear)
             }
         }

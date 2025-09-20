@@ -109,11 +109,11 @@ public struct EmailVerificationFeature {
             case pushToSignupPassword(String)
             case pushToChangePassword(String)
         }
-        
-        public enum VerificationType {
-            case signup
-            case findPassword
-        }
+    }
+    
+    public enum VerificationType {
+        case signup
+        case findPassword
     }
     
     @Dependency(\.continuousClock) var clock
