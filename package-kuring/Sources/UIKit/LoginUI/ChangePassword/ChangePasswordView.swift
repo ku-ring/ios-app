@@ -34,6 +34,7 @@ public struct ChangePasswordView: View {
             .padding(.top, 16)
         }
         .padding(20)
+        .ignoresSafeArea(.keyboard)
         .background(Color.Kuring.bg)
     }
     

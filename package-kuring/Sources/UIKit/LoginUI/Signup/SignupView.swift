@@ -40,6 +40,7 @@ public struct SignupView: View {
             .padding(.top, 16)
         }
         .padding(20)
+        .ignoresSafeArea(.keyboard)
         .background(Color.Kuring.bg)
         .sheet(
             item: $store.scope(

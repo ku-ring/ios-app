@@ -20,32 +20,35 @@ public struct LoginView: View {
     @Bindable var store: StoreOf<LoginAppFeature>
     
     public var body: some View {
-        VStack {
-            HeaderView(
-                title: "로그인",
-                subtitle: "로그인 후 쿠링과 함께\n다채로운 캠퍼스 생활을 즐겨보세요 :)"
-            )
-            .frame(maxWidth: .infinity, alignment: .leading)
-            
-            loginForm
-            ActionButton(title: "로그인", isActive: .constant(true)) {
-                store.send(.loginButtonTapped)
+        GeometryReader { _ in
+            VStack {
+                HeaderView(
+                    title: "로그인",
+                    subtitle: "로그인 후 쿠링과 함께\n다채로운 캠퍼스 생활을 즐겨보세요 :)"
+                )
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
+                loginForm
+                ActionButton(title: "로그인", isActive: .constant(true)) {
+                    store.send(.loginButtonTapped)
+                }
+                .padding(.top, 33)
+                .disabled(store.isLoading)
+                
+                footer
+                
+                Spacer()
             }
-            .padding(.top, 33)
-            .disabled(store.isLoading)
-            
-            footer
-            
-            Spacer()
-        }
-        .padding(20)
-        .background(Color.Kuring.bg)
-        .alert(
-            store: store.scope(
-                state: \.$alert,
-                action: \.alert
+            .padding(20)
+            .background(Color.Kuring.bg)
+            .alert(
+                store: store.scope(
+                    state: \.$alert,
+                    action: \.alert
+                )
             )
-        )
+        }
+        .ignoresSafeArea(.keyboard)
     }
     
     public init(store: StoreOf<LoginAppFeature>) {
