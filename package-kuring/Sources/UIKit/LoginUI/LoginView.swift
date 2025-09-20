@@ -25,18 +25,27 @@ public struct LoginView: View {
                 title: "로그인",
                 subtitle: "로그인 후 쿠링과 함께\n다채로운 캠퍼스 생활을 즐겨보세요 :)"
             )
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             loginForm
             ActionButton(title: "로그인", isActive: .constant(true)) {
-                
+                store.send(.loginButtonTapped)
             }
             .padding(.top, 33)
+            .disabled(store.isLoading)
+            
             footer
             
             Spacer()
         }
         .padding(20)
         .background(Color.Kuring.bg)
+        .alert(
+            store: store.scope(
+                state: \.$alert,
+                action: \.alert
+            )
+        )
     }
     
     public init(store: StoreOf<LoginAppFeature>) {
@@ -80,7 +89,7 @@ extension LoginView {
     private var footer: some View {
         VStack(alignment: .center) {
             HStack(spacing: 50) {
-                NavigationLink(state: SettingsAppFeature.Path.State.findPassword(FindPasswordFeature.State())) {
+                NavigationLink(state: SettingsAppFeature.Path.State.findPassword(EmailVerificationFeature.State())) {
                     Text("비밀번호 찾기")
                         .font(.system(size: 13, weight: .light))
                         .foregroundStyle(Color.Kuring.caption1)
@@ -90,7 +99,7 @@ extension LoginView {
                     .frame(width: 1)
                     .frame(maxHeight: 24)
                 
-                NavigationLink(state: SettingsAppFeature.Path.State.signup(SignupFeature.State())) {
+                NavigationLink(state: SettingsAppFeature.Path.State.signupTerms) {
                     Text("회원가입하기")
                         .font(.system(size: 13, weight: .light))
                         .foregroundStyle(Color.Kuring.caption1)

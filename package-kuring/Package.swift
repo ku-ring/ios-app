@@ -110,6 +110,7 @@ let package = Package(
             dependencies: [
                 "LoginFeatures",
                 "ColorSet",
+                .product(name: "Lottie", package: "lottie-spm"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/UIKit/LoginUI",

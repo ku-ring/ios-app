@@ -48,7 +48,6 @@ struct ContentView: View {
             }
             .tint(Color.Kuring.gray600)
             .background(Color.Kuring.bg)
-            .animation(.default, value: activeTab)
             .environment(\.horizontalSizeClass, .compact)
             .tabViewStyle(.page(indexDisplayMode: .never))
             

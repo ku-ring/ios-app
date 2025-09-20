@@ -4,6 +4,7 @@
 //
 
 import Models
+import Satellite
 import Foundation
 import OrderedCollections
 import ComposableArchitecture
@@ -237,14 +238,17 @@ extension KuringLink: DependencyKey {
             return isSucceed
         },
         sendVerificationCodeOnPasswordReset: { email in
+            var header: [String: String] = [
+                "Content-Type": "application/json",
+            ]
+            if !accessToken.isEmpty {
+                header["Authorization"] = "Bearer \(accessToken)"
+            }
             let response: EmptyResponse = try await satellite
                 .response(
                     for: Path.sendVerificationCodeOnPasswordReset.path,
                     httpMethod: .post,
-                    httpHeaders: [
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer \(accessToken)"
-                    ],
+                    httpHeaders: header,
                     httpBody: Email(email: email)
                 )
             let isSucceed = (200 ..< 300) ~= response.code
@@ -296,7 +300,7 @@ extension KuringLink: DependencyKey {
             let response: EmptyResponse = try await satellite
                 .response(
                     for: Path.logout.path,
-                    httpMethod: .get,
+                    httpMethod: .post,
                     httpHeaders: [
                         "Content-Type": "application/json",
                         "User-Token": fcmToken,
@@ -332,8 +336,9 @@ extension KuringLink: DependencyKey {
             let response: EmptyResponse = try await satellite
                 .response(
                     for: Path.resetPassword.path,
-                    httpMethod: .post,
-                    httpHeaders: header
+                    httpMethod: Satellite.patch,
+                    httpHeaders: header,
+                    httpBody: EmailPassword(email: email, password: password)
                 )
             let isSucceed = (200 ..< 300) ~= response.code
             return isSucceed
@@ -349,6 +354,9 @@ extension KuringLink: DependencyKey {
                     ]
                 )
             let isSucceed = (200 ..< 300) ~= response.code
+            if isSucceed {
+                accessToken = ""
+            }
             return isSucceed
         }
     )

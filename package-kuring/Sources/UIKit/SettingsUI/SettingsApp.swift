@@ -61,12 +61,35 @@ public struct SettingsApp: View {
                 ) {
                     SignupView(store: store)
                 }
+            case .signupTerms:
+                LoginTermsAndConditionsView()
             case .setPassword:
                 if let store = store.scope(
                     state: \.setPassword,
                     action: \.setPassword
                 ) {
                     SetPasswordView(store: store)
+                }
+            case .signupComplete:
+                if let store = store.scope(
+                    state: \.signupComplete,
+                    action: \.signupComplete
+                ) {
+                    SignupCompleteView(store: store)
+                }
+            case .deleteAccount:
+                if let store = store.scope(
+                    state: \.deleteAccount,
+                    action: \.deleteAccount
+                ) {
+                    DeleteAccountView(store: store)
+                }
+            case .deleteAccountComplete:
+                if let store = store.scope(
+                    state: \.deleteAccountComplete,
+                    action: \.deleteAccountComplete
+                ) {
+                    DeleteAccountCompleteView(store: store)
                 }
             }
         }

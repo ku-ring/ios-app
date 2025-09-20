@@ -11,8 +11,7 @@ import LoginFeatures
 import ComposableArchitecture
 
 public struct ChangePasswordView: View {
-    @Bindable var store: StoreOf<ChangePasswordFeature>
-    @State private var canProceed: Bool = false
+    @Bindable var store: StoreOf<SetPasswordFeature>
     
     public var body: some View {
         VStack(spacing: 8) {
@@ -20,16 +19,17 @@ public struct ChangePasswordView: View {
                 title: "비밀번호 재설정하기",
                 subtitle: "6~20자 영문 소문자, 숫자를 조합하여 비밀번호를 생성해주세요 :)"
             )
+            .frame(maxWidth: .infinity, alignment: .leading)
             
-            SetUpPassword(canProceed: $canProceed)
+            SetUpPassword(store: store)
             
             Spacer()
             
             ActionButton(
                 title: "확인",
-                isActive: $canProceed
+                isActive: .init(get: { store.isValidReEnterPassword }, set: {_ in })
             ) {
-                
+                store.send(.actionButtonTapped(.changePassword))
             }
             .padding(.top, 16)
         }
@@ -37,7 +37,7 @@ public struct ChangePasswordView: View {
         .background(Color.Kuring.bg)
     }
     
-    public init(store: StoreOf<ChangePasswordFeature>) {
+    public init(store: StoreOf<SetPasswordFeature>) {
         self.store = store
     }
 }
