@@ -18,7 +18,7 @@ extension DependencyValues {
 
 extension KuringLink: DependencyKey {
     public static let liveValue = KuringLink(
-        fetchNotices: { count, type, department, page in
+        fetchNotices: { count, type, department, page, graduted in
             let response: Response<[Notice]> = try await satellite
                 .response(
                     for: Path.getNotices.path,
@@ -28,6 +28,7 @@ extension KuringLink: DependencyKey {
                         .init(name: "department", value: department),
                         .init(name: "page", value: String(page)),
                         .init(name: "size", value: String(count)),
+                        .init(name: "graduated", value: String(graduted)),
                     ]
                 )
             return response.data
@@ -365,7 +366,7 @@ extension KuringLink: DependencyKey {
 
 extension KuringLink {
     public static let testValue: KuringLink = .init(
-        fetchNotices: { _, _, _, _ in
+        fetchNotices: { _, _, _, _, _ in
             [Notice.random]
         },
         sendFeedback: { _ in

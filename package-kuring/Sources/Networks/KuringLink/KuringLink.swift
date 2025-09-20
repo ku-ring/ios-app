@@ -27,7 +27,7 @@ public struct KuringLink {
             host: (dict["API_HOST"] as? String) ?? "",
             scheme: (dict["USING_HTTPS"] as? Bool) ?? true ? .https : .http
         )
-        //        satellite._startGPS()
+        satellite._startGPS()
         return satellite
     }
 
@@ -49,7 +49,7 @@ public struct KuringLink {
 
     // MARK: - Notices
     /// 특정 카테고리에 대한 공지를 가져옵니다.
-    public var fetchNotices: (NoticeCount, NoticeType, Department?, Page) async throws -> [Notice]
+    public var fetchNotices: (NoticeCount, NoticeType, Department?, Page, Bool) async throws -> [Notice]
     
     // MARK: - Feedback
     /// 피드백 전송
