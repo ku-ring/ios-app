@@ -27,7 +27,7 @@ public struct KuringLink {
             host: (dict["API_HOST"] as? String) ?? "",
             scheme: (dict["USING_HTTPS"] as? Bool) ?? true ? .https : .http
         )
-        satellite._startGPS()
+//        satellite._startGPS()
         return satellite
     }
 
