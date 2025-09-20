@@ -1,5 +1,5 @@
 //
-//  DeleteAccount.swift
+//  DeleteAccountView.swift
 //  package-kuring
 //
 //  Created by Jung Hwan Park on 8/25/25.
@@ -8,7 +8,6 @@
 import SwiftUI
 import ColorSet
 import LoginFeatures
-import SettingsFeatures
 import ComposableArchitecture
 
 public struct DeleteAccountView: View {

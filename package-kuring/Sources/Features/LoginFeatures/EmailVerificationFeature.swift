@@ -145,27 +145,28 @@ public struct EmailVerificationFeature {
                     state.emailState = .invalid
                     return .none
                 }
-                return .concatenate([
-                    .run { [email = state.email] send in
-                        do {
-                            if type == .signup {
-                                try await kuringLink.sendVerificationCodeOnSignup(email)
-                            } else {
-                                try await kuringLink.sendVerificationCodeOnPasswordReset(email)
-                            }
-                            await send(.verificationCodeResponse(.success(true)))
-                        } catch {
-                            await send(.verificationCodeResponse(.failure(.error(error.localizedDescription))))
+                return .run { [email = state.email] send in
+                    do {
+                        if type == .signup {
+                            try await kuringLink.sendVerificationCodeOnSignup(email)
+                        } else {
+                            try await kuringLink.sendVerificationCodeOnPasswordReset(email)
                         }
+                        await send(.verificationCodeResponse(.success(true)))
+                    } catch {
+                        await send(.verificationCodeResponse(.failure(.error(error.localizedDescription))))
                     }
-                ])
+                }
             case let .verificationCodeResponse(result):
                 switch result {
                 case .success:
                     state.emailState = .codeSent
                     state.verificationState = .active(timer: true)
                     state.timeRemaining = 300
-                    return startTimer()
+                    return .concatenate([
+                        .cancel(id: CancelID.timer),
+                        startTimer()
+                    ])
                 case let .failure(error):
                     state.emailState = .invalid
                     state.verificationState = .hidden

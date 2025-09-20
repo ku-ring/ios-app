@@ -336,7 +336,7 @@ extension KuringLink: DependencyKey {
             let response: EmptyResponse = try await satellite
                 .response(
                     for: Path.resetPassword.path,
-                    httpMethod: "PATCH",
+                    httpMethod: Satellite.patch,
                     httpHeaders: header,
                     httpBody: EmailPassword(email: email, password: password)
                 )

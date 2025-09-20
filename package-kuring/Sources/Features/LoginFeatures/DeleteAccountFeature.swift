@@ -79,7 +79,7 @@ public struct DeleteAccountFeature {
             case .deleteAccountResponse(let result):
                 switch result {
                 case .success:
-                    state.alert = nil
+                    return .send(.alert(.dismiss))
                     return .send(.delegate(.pushToDeleteAccountComplete))
                 case .failure(let error):
                     print("Error: \(error)")

@@ -17,7 +17,7 @@ import ComposableArchitecture
 ///   EmailVerification(store: store, type: .findPassword)
 /// ```
 ///  - Parameters:
-///    - canProceed: 인증이 완료되어서 다음 화면으로 넘어갈수 있을지 나타내는 부울값
+///    - type: 이메일 인증은 비밀번호 찾기, 회원가입에서 사용됨. 어디서 사용되는지 명시할것.
 struct EmailVerification: View {
     @Bindable var store: StoreOf<EmailVerificationFeature>
     let type: EmailVerificationFeature.VerificationType

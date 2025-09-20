@@ -9,6 +9,8 @@ import Satellite
 import Foundation
 
 extension Satellite {
+    static let patch = "PATCH"
+    
     public func response<ResponseType: Decodable>(
         for path: String,
         httpMethod: String,

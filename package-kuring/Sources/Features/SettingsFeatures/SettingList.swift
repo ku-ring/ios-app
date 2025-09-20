@@ -128,7 +128,6 @@ public struct SettingListFeature {
                             print(error)
                         }
                     }
-                    return .none
                 }
             default:
                 return .none
