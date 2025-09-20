@@ -22,6 +22,7 @@ let package = Package(
                 "CampusUI",
                 "CommonUI",
                 "OnboardingUI",
+                "LoginUI",
                 "PushNotifications",
             ]
         ),
@@ -105,6 +106,17 @@ let package = Package(
             path: "Sources/UIKit/DepartmentUI"
         ),
         .target(
+            name: "LoginUI",
+            dependencies: [
+                "LoginFeatures",
+                "ColorSet",
+                .product(name: "Lottie", package: "lottie-spm"),
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/UIKit/LoginUI",
+            resources: [.process("Resources")]
+        ),
+        .target(
             name: "SearchUI",
             dependencies: [
                 "SearchFeatures", "NoticeFeatures",
@@ -124,7 +136,11 @@ let package = Package(
         .target(
             name: "SettingsUI",
             dependencies: [
-                "SettingsFeatures", "SubscriptionFeatures", "SubscriptionUI",
+                "SettingsFeatures",
+                "SubscriptionFeatures",
+                "SubscriptionUI",
+                "LoginFeatures",
+                "LoginUI",
                 "Caches",
                 "Labs",
                 "ColorSet",
@@ -208,6 +224,15 @@ let package = Package(
             path: "Sources/Features/DepartmentFeatures"
         ),
         .target(
+            name: "LoginFeatures",
+            dependencies: [
+                "Models",
+                "Caches",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/Features/LoginFeatures"
+        ),
+        .target(
             name: "SearchFeatures",
             dependencies: [
                 "Models",
@@ -232,6 +257,7 @@ let package = Package(
                 "Models",
                 "Caches",
                 "SubscriptionFeatures",
+                "LoginFeatures",
                 "Labs",
                 "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")

@@ -94,7 +94,7 @@ public struct BookmarkList: View {
                             : Color.Kuring.primary
                         )
                     }
-                    .padding(.horizontal, 20)
+                    .padding(20)
                 }
             }
         }

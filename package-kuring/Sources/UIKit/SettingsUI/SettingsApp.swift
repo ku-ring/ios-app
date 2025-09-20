@@ -4,6 +4,7 @@
 //
 
 import Labs
+import LoginUI
 import SwiftUI
 import SubscriptionUI
 import SettingsFeatures
@@ -31,6 +32,64 @@ public struct SettingsApp: View {
                 ) {
                     AppIconSelector(store: store)
                         .navigationTitle("앱 아이콘")
+                }
+            case .login:
+                if let store = store.scope(
+                    state: \.login,
+                    action: \.login
+                ) {
+                    LoginView(store: store)
+                }
+            case .findPassword:
+                if let store = store.scope(
+                    state: \.findPassword,
+                    action: \.findPassword
+                ) {
+                    FindPasswordView(store: store)
+                }
+            case .changePassword:
+                if let store = store.scope(
+                    state: \.changePassword,
+                    action: \.changePassword
+                ) {
+                    ChangePasswordView(store: store)
+                }
+            case .signup:
+                if let store = store.scope(
+                    state: \.signup,
+                    action: \.signup
+                ) {
+                    SignupView(store: store)
+                }
+            case .signupTerms:
+                LoginTermsAndConditionsView()
+            case .setPassword:
+                if let store = store.scope(
+                    state: \.setPassword,
+                    action: \.setPassword
+                ) {
+                    SetPasswordView(store: store)
+                }
+            case .signupComplete:
+                if let store = store.scope(
+                    state: \.signupComplete,
+                    action: \.signupComplete
+                ) {
+                    SignupCompleteView(store: store)
+                }
+            case .deleteAccount:
+                if let store = store.scope(
+                    state: \.deleteAccount,
+                    action: \.deleteAccount
+                ) {
+                    DeleteAccountView(store: store)
+                }
+            case .deleteAccountComplete:
+                if let store = store.scope(
+                    state: \.deleteAccountComplete,
+                    action: \.deleteAccountComplete
+                ) {
+                    DeleteAccountCompleteView(store: store)
                 }
             }
         }
