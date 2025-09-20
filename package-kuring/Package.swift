@@ -109,6 +109,7 @@ let package = Package(
             name: "LoginUI",
             dependencies: [
                 "LoginFeatures",
+                "SettingsFeatures",
                 "ColorSet",
                 .product(name: "Lottie", package: "lottie-spm"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
@@ -228,6 +229,7 @@ let package = Package(
             dependencies: [
                 "Models",
                 "Caches",
+                "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Features/LoginFeatures"
