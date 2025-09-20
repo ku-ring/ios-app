@@ -181,7 +181,8 @@ public struct NoticeListFeature {
                                     ? "dep" // TODO: korean name 도 쓸 거 고려해서 문자열 말고 좀 더 나은걸로
                                     : provider.hostPrefix,
                                     department,
-                                    retrievalInfo.page
+                                    retrievalInfo.page,
+                                    false
                                 )
                                 return Action.NoticesResult(
                                     provider: provider,
