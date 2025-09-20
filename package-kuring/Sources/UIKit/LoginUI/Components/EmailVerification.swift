@@ -7,84 +7,21 @@
 
 import SwiftUI
 import ColorSet
-
-private enum VerificationButtonState {
-    case disabled
-    case send
-    case resend
-    
-    var buttonText: String {
-        switch self {
-        case .disabled, .send:
-            return "인증번호"
-        case .resend:
-            return "재전송"
-        }
-    }
-    
-    var isEnabled: Bool {
-        switch self {
-        case .disabled:
-            return false
-        case .send, .resend:
-            return true
-        }
-    }
-    
-    var textColor: Color {
-        switch self {
-        case .disabled:
-            return Color.Kuring.caption1
-        case .send, .resend:
-            return Color.Kuring.primary
-        }
-    }
-    
-    var backgroundColor: Color {
-        switch self {
-        case .disabled:
-            return Color.Kuring.gray100
-        case .send, .resend:
-            return Color.Kuring.primarySelected
-        }
-    }
-    
-    var borderColor: Color {
-        switch self {
-        case .disabled:
-            return Color.Kuring.caption2
-        case .send, .resend:
-            return Color.Kuring.primary
-        }
-    }
-}
+import LoginFeatures
+import ComposableArchitecture
 
 /// 비밀번호 찾기/회원가입에서 사용되는 이메일 인증
 /// ```swift
-///   EmailVerification(canProceed: $canProceed)
+///   EmailVerification(store: store, type: .signup)
+///   or
+///   EmailVerification(store: store, type: .findPassword)
 /// ```
 ///  - Parameters:
-///    - canProceed: 인증이 완료되어서 다음 화면으로 넘어갈수 있을지 나타내는 부울값
+///    - type: 이메일 인증은 비밀번호 찾기, 회원가입에서 사용됨. 어디서 사용되는지 명시할것.
 struct EmailVerification: View {
-    @Binding var canProceed: Bool
-    @State private var email: String = ""
-    @State private var verificationCode: String = ""
-    @State private var verificationState: VerificationButtonState = .disabled
-    @State private var timer: Timer?
-    @State private var timeRemaining = 180
-    
-    private var isValidEmail: Bool {
-        email.isEmpty || email.hasSuffix("@konkuk.ac.kr")
-    }
-    
-    private var isValidVerificationCode: Bool {
-        verificationCode == "1234" // 임시
-    }
-    
-    private var verificationCodeBorderColor: Color {
-        verificationCode.isEmpty ? .clear : (isValidVerificationCode ? Color.Kuring.primary : Color.Kuring.warning)
-    }
-    
+    @Bindable var store: StoreOf<EmailVerificationFeature>
+    let type: EmailVerificationFeature.VerificationType
+
     var body: some View {
         VStack(spacing: 8) {
             VStack(spacing: 4) {
@@ -93,67 +30,71 @@ struct EmailVerification: View {
                     verificationButton
                 }
                 
-                if !isValidEmail {
+                if case .invalid = store.emailState {
                     LoginErrorMessage(message: "등록되지 않은 이메일이에요.")
                 }
             }
             
             VStack(spacing: 4) {
-                verificationTextField
+                if store.shouldShowVerificationField {
+                    verificationTextField
+                }
                 
-                if !verificationCode.isEmpty && !isValidVerificationCode {
+                if case .invalid = store.verificationState {
                     LoginErrorMessage(message: "올바르지 않은 인증번호에요.")
                 }
             }
         }
-        .onDisappear { stopTimer() }
-        .onChange(of: verificationCode) { _ in
-            canProceed = isValidVerificationCode
+        .onChange(of: store.email) { oldValue, newValue in
+            if oldValue != newValue {
+                store.send(.emailChanged)
+            }
+        }
+        .onDisappear {
+            store.send(.stopTimer)
         }
     }
     
     private var emailTextField: some View {
         EmailTextField(
-            email: $email,
+            email: $store.email,
             placeholder: "학교 이메일 주소"
         )
         .background(
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.Kuring.gray100)
-                .stroke(Color.Kuring.warning, lineWidth: isValidEmail ? 0 : 1)
+                .stroke(emailBorderColor, lineWidth: shouldShowEmailError ? 1 : 0)
         )
-        .onChange(of: email) { _ in
-            updateButtonState()
-        }
     }
     
     private var verificationButton: some View {
         Button {
-            handleVerificationAction()
+            store.send(.verificationButtonTapped(type))
         } label: {
-            Text(verificationState.buttonText)
-                .foregroundStyle(verificationState.textColor)
+            Text(store.verificationButtonState.buttonText)
+                .foregroundStyle(store.verificationButtonState.textColor)
                 .font(.system(size: 16, weight: .medium))
                 .frame(width: 114, height: 50)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(verificationState.backgroundColor)
-                        .stroke(verificationState.borderColor, lineWidth: 1)
+                        .fill(store.verificationButtonState.backgroundColor)
+                        .stroke(store.verificationButtonState.borderColor, lineWidth: 1)
                 )
         }
-        .disabled(!verificationState.isEnabled)
+        .disabled(!store.verificationButtonState.isEnabled)
     }
     
     private var verificationTextField: some View {
         HStack {
             TextField(
                 "",
-                text: $verificationCode,
+                text: $store.verificationCode,
                 prompt: Text("인증번호 입력").foregroundStyle(Color.Kuring.caption1)
             )
-            .keyboardType(.numberPad)
+            .keyboardType(.numbersAndPunctuation)
+            .submitLabel(.done)
             
-            Text("\(timeString(from: timeRemaining))")
+            Text("\(timeString(from: store.timeRemaining))")
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundStyle(Color.Kuring.warning)
         }
@@ -162,66 +103,41 @@ struct EmailVerification: View {
         .background(
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.Kuring.gray100)
-                .stroke(verificationCodeBorderColor, lineWidth: verificationCode.isEmpty ? 0 : 1)
+                .stroke(
+                    verificationFieldBorderColor,
+                    lineWidth: store.verificationCode.isEmpty ? 0 : 1
+                )
         )
     }
 }
 
-// MARK: - 임시 로직
+// MARK: - Helper properties & function
 extension EmailVerification {
-    private func updateButtonState() {
-        if email.isEmpty || !isValidEmail {
-            verificationState = .disabled
-        } else if timer != nil  {
-            verificationState = .resend
-        } else if isValidEmail {
-            verificationState = .send
-        }
+    private var shouldShowEmailError: Bool {
+        return store.emailState == .invalid
     }
     
-    private func handleVerificationAction() {
-        switch verificationState {
-        case .disabled:
-            break
-        case .send:
-            startTimer()
-            verificationState = .resend
-            // send verification code
-            break
-        case .resend:
-            // resend verification code
-            break
+    private var emailBorderColor: Color {
+        if case .invalid = store.emailState {
+            return Color.Kuring.warning
         }
+        return Color.clear
     }
     
-    private func startTimer() {
-        timeRemaining = 180
-        
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            if timeRemaining > 0 {
-                timeRemaining -= 1
-            } else {
-                stopTimer()
-                print("Verification timer expired")
-            }
+    private var verificationFieldBorderColor: Color {
+        switch store.verificationState {
+        case .invalid:
+            return Color.Kuring.warning
+        case .active:
+            return Color.Kuring.primary
+        case .hidden:
+            return Color.clear
         }
-    }
-    
-    private func stopTimer() {
-        timer?.invalidate()
-        timer = nil
-        timeRemaining = 0
     }
     
     private func timeString(from seconds: Int) -> String {
         let minutes = seconds / 60
         let seconds = seconds % 60
-        return String(format: "%d:%02d", minutes, seconds)
+        return String(format: "%02d:%02d", minutes, seconds)
     }
-}
-
-#Preview {
-    @Previewable @State var canProceed: Bool = false
-    EmailVerification(canProceed: $canProceed)
 }

@@ -1,40 +1,37 @@
 //
-//  SignupView.swift
+//  FindPassword.swift
 //  package-kuring
 //
-//  Created by Jung Hwan Park on 9/9/25.
+//  Created by Jung Hwan Park on 9/7/25.
 //
 
 import SwiftUI
-import CommonUI
 import ColorSet
 import LoginFeatures
-import SettingsFeatures
 import ComposableArchitecture
 
-public struct SignupView: View {
+public struct FindPasswordView: View {
     @Bindable var store: StoreOf<EmailVerificationFeature>
     
     public var body: some View {
         VStack(spacing: 8) {
             HeaderView(
-                title: "재학생 인증 및 아이디 생성",
-                subtitle: "학교 이메일 계정으로 본교 학생임을 인증해주세요.\n이메일 주소는 아이디로 사용될 예정이에요."
+                title: "비밀번호 찾기",
+                subtitle: "학교 이메일 주소를 입력하여 본인인증 해주세요."
             )
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            EmailVerification(store: store, type: .signup)
+            EmailVerification(store: store, type: .findPassword)
                 .padding(.top, 45)
             
             Spacer()
             
             goToEmail
-            
             ActionButton(
-                title: "다음",
+                title: "본인인증 완료",
                 isActive: $store.canVerifyCode,
                 action: {
-                    store.send(.actionButtonPressed(.signup))
+                    store.send(.actionButtonPressed(.findPassword))
                 }
             )
             .padding(.top, 16)
@@ -69,4 +66,3 @@ public struct SignupView: View {
         self.store = store
     }
 }
-

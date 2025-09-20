@@ -13,7 +13,6 @@ extension SettingsAppFeature {
         @ObservableState
         public enum State: Equatable {
             case labs(LabAppFeature.State)
-//            case login(LoginAppFeature.State)
             case feedback(FeedbackFeature.State)
             case subscription(SubscriptionAppFeature.State)
             case informationWeb(InformationWebFeature.State)
@@ -22,7 +21,6 @@ extension SettingsAppFeature {
 
         public enum Action: Equatable {
             case labs(LabAppFeature.Action)
-//            case login(LoginAppFeature.Action)
             case feedback(FeedbackFeature.Action)
             case subscription(SubscriptionAppFeature.Action)
             case informationWeb(InformationWebFeature.Action)
@@ -33,9 +31,6 @@ extension SettingsAppFeature {
             Scope(state: \.labs, action: \.labs) {
                 LabAppFeature()
             }
-//            Scope(state: \.labs, action: \.labs) {
-//                LoginAppFeature()
-//            }
             Scope(state: \.feedback, action: \.feedback) {
                 FeedbackFeature()
             }

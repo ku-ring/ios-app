@@ -110,6 +110,7 @@ let package = Package(
             dependencies: [
                 "LoginFeatures",
                 "ColorSet",
+                .product(name: "Lottie", package: "lottie-spm"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/UIKit/LoginUI",
@@ -135,7 +136,11 @@ let package = Package(
         .target(
             name: "SettingsUI",
             dependencies: [
-                "SettingsFeatures", "SubscriptionFeatures", "SubscriptionUI",
+                "SettingsFeatures",
+                "SubscriptionFeatures",
+                "SubscriptionUI",
+                "LoginFeatures",
+                "LoginUI",
                 "Caches",
                 "Labs",
                 "ColorSet",
@@ -252,6 +257,7 @@ let package = Package(
                 "Models",
                 "Caches",
                 "SubscriptionFeatures",
+                "LoginFeatures",
                 "Labs",
                 "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")

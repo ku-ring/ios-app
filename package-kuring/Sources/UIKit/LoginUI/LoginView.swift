@@ -7,35 +7,49 @@
 
 import SwiftUI
 import ColorSet
+import LoginFeatures
+import SettingsFeatures
+import ComposableArchitecture
 
-struct LoginView: View {
+public struct LoginView: View {
     enum FocusedField: Hashable {
         case username, password
     }
     
     @FocusState private var focusedField: FocusedField?
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var showPassword = false
+    @Bindable var store: StoreOf<LoginAppFeature>
     
-    var body: some View {
+    public var body: some View {
         VStack {
             HeaderView(
                 title: "로그인",
                 subtitle: "로그인 후 쿠링과 함께\n다채로운 캠퍼스 생활을 즐겨보세요 :)"
             )
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             loginForm
             ActionButton(title: "로그인", isActive: .constant(true)) {
-                
+                store.send(.loginButtonTapped)
             }
             .padding(.top, 33)
+            .disabled(store.isLoading)
+            
             footer
             
             Spacer()
         }
         .padding(20)
         .background(Color.Kuring.bg)
+        .alert(
+            store: store.scope(
+                state: \.$alert,
+                action: \.alert
+            )
+        )
+    }
+    
+    public init(store: StoreOf<LoginAppFeature>) {
+        self.store = store
     }
 }
 
@@ -44,7 +58,7 @@ extension LoginView {
     /// 로그인 텍스트필드 영역 (이메일, 비밀번호 입력)
     private var loginForm: some View {
         VStack(spacing: 8) {
-            EmailTextField(email: $email, placeholder: "학교 이메일 주소")
+            EmailTextField(email: $store.email, placeholder: "학교 이메일 주소")
                 .background(
                     RoundedRectangle(cornerRadius: 8)
                         .fill(Color.Kuring.gray100)
@@ -55,8 +69,8 @@ extension LoginView {
                 }
             
             PasswordTextField(
-                showInput: $showPassword,
-                input: $password,
+                showInput: $store.isPasswordVisible,
+                input: $store.password,
                 placeholder: "6~20자 영문 소문자+숫자"
             )
             .background(
@@ -75,33 +89,24 @@ extension LoginView {
     private var footer: some View {
         VStack(alignment: .center) {
             HStack(spacing: 50) {
-                footerButton(title: "비밀번호 찾기") {
-                    // action
+                NavigationLink(state: SettingsAppFeature.Path.State.findPassword(EmailVerificationFeature.State())) {
+                    Text("비밀번호 찾기")
+                        .font(.system(size: 13, weight: .light))
+                        .foregroundStyle(Color.Kuring.caption1)
                 }
                 
                 Divider()
                     .frame(width: 1)
                     .frame(maxHeight: 24)
                 
-                footerButton(title: "회원가입하기") {
-                    // action
+                NavigationLink(state: SettingsAppFeature.Path.State.signupTerms) {
+                    Text("회원가입하기")
+                        .font(.system(size: 13, weight: .light))
+                        .foregroundStyle(Color.Kuring.caption1)
                 }
             }
             .padding(.vertical, 10)
         }
         .padding(.top, 20)
     }
-    
-    @ViewBuilder
-    private func footerButton(title: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Text(title)
-                .font(.system(size: 13, weight: .light))
-                .foregroundStyle(Color.Kuring.caption1)
-        }
-    }
-}
-
-#Preview {
-    LoginView()
 }

@@ -1,5 +1,5 @@
 //
-//  DeleteAccount.swift
+//  DeleteAccountView.swift
 //  package-kuring
 //
 //  Created by Jung Hwan Park on 8/25/25.
@@ -7,14 +7,19 @@
 
 import SwiftUI
 import ColorSet
+import LoginFeatures
+import ComposableArchitecture
 
-struct DeleteAccountView: View {
-    var body: some View {
+public struct DeleteAccountView: View {
+    @Bindable var store: StoreOf<DeleteAccountFeature>
+    
+    public var body: some View {
         VStack {
             HeaderView(
                 title: "탈퇴하기",
                 subtitle: "쿠링을 탈퇴하기 전에\n하단 정보를 확인해주세요."
             )
+            .frame(maxWidth: .infinity, alignment: .leading)
 
             disclaimer
             
@@ -25,11 +30,17 @@ struct DeleteAccountView: View {
                 isActive: .constant(true),
                 activeColor: Color.Kuring.warning
             ) {
-                
+                store.send(.onDeleteAccountButtonTapped)
             }
         }
         .padding(20)
         .background(Color.Kuring.bg)
+        .alert(
+            store: store.scope(
+                state: \.$alert,
+                action: \.alert
+            )
+        )
     }
     
     private var disclaimer: some View {
@@ -66,5 +77,9 @@ struct DeleteAccountView: View {
         .padding(.vertical, 16)
         .padding(.horizontal, 16)
         .background(Color.Kuring.gray100, in: RoundedRectangle(cornerRadius: 8))
+    }
+    
+    public init(store: StoreOf<DeleteAccountFeature>) {
+        self.store = store
     }
 }
