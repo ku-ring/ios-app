@@ -36,6 +36,12 @@ public struct DeleteAccountView: View {
         }
         .padding(20)
         .background(Color.Kuring.bg)
+        .alert(
+            store: store.scope(
+                state: \.$alert,
+                action: \.alert
+            )
+        )
     }
     
     private var disclaimer: some View {
