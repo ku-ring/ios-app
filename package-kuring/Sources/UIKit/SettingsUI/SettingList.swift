@@ -5,7 +5,9 @@
 
 import Caches
 import SwiftUI
+import Networks
 import ColorSet
+import LoginFeatures
 import SettingsFeatures
 import ComposableArchitecture
 
@@ -13,8 +15,35 @@ public struct SettingList: View {
     @Bindable public var store: StoreOf<SettingListFeature>
     @Dependency(\.leLabo) var leLabo
     
+    @AppStorage("com.kuring.sdk.v2.token.accessToken") var accessToken: String = ""
+    
     public var body: some View {
         List {
+            Group {
+                ZStack {
+                    if accessToken != "" {
+                        leadingItemView("user", "\(store.nickname)", "\(store.email)")
+                    } else {
+                        NavigationLink(
+                            state: SettingsAppFeature.Path.State.login(
+                                LoginAppFeature.State()
+                            )
+                        ) {
+                            EmptyView()
+                        }
+                        .opacity(0)
+                        
+                        itemView("user", "로그인하기")
+                    }
+                }
+                .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                
+                Divider()
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+            }
+            .listRowSeparator(.hidden)
+            .listRowBackground(Color.Kuring.bg)
+            
             Section {
                 Button {
                     store.send(.delegate(.showSubscription))
@@ -131,16 +160,6 @@ public struct SettingList: View {
                     .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             } header: {
                 headerView("정보")
-            } footer: {
-                Text(
-                    """
-                    Designed by 조혜준.
-                    Developed by 박정환.
-                    Managed by 채수빈, 이혜빈. 
-                    """
-                )
-                .font(.footnote)
-                .foregroundStyle(Color.Kuring.caption1)
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Color.Kuring.bg)
@@ -160,11 +179,70 @@ public struct SettingList: View {
             .listRowSeparator(.hidden)
             .listRowBackground(Color.Kuring.bg)
             
+            if accessToken != "" {
+                Group {
+                    itemView("user-x", "로그아웃하기")
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            store.send(.onLogoutTapped)
+                        }
+                        .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                }
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.Kuring.bg)
+                .alert(
+                    store: store.scope(
+                        state: \.$alert,
+                        action: \.alert
+                    )
+                )
+                
+                Group {
+                    ZStack {
+                        NavigationLink(
+                            state: SettingsAppFeature.Path.State.deleteAccount(DeleteAccountFeature.State())
+                        ) {
+                            EmptyView()
+                        }
+                        .opacity(0)
+                        
+                        itemView("trash-2", "탈퇴하기")
+                    }
+                    .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                    
+                    Divider()
+                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                }
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.Kuring.bg)
+            }
+            
+            Group {
+                Text(
+                    """
+                    Designed by 조혜준.
+                    Developed by 박정환.
+                    Managed by 채수빈, 이혜빈.   
+                    """
+                )
+                .font(.footnote)
+                .foregroundStyle(Color.Kuring.caption1)
+                
+                Divider()
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+            }
+            .listRowSeparator(.hidden)
+            .listRowBackground(Color.Kuring.bg)
         }
         .listStyle(.plain)
         .background(Color.Kuring.bg)
         .navigationTitle("더보기")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            if !accessToken.isEmpty && store.email == "kuring@konkuk.ac.kr" {
+                store.send(.onAppear)
+            }
+        }
     }
     
     public init(store: StoreOf<SettingListFeature>) {

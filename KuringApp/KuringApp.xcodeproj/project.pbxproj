@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A7EAAB62E77DCA700FDEB5E /* BottomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7EAAB52E77DCA700FDEB5E /* BottomTabView.swift */; };
 		1A9539D62E44F9650026A9EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A9539D52E44F9640026A9EE /* GoogleService-Info.plist */; };
 		A9DAFA542AB1F04B0064F748 /* KuringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA532AB1F04B0064F748 /* KuringApp.swift */; };
 		A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA552AB1F04B0064F748 /* ContentView.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		1A0C8B412BCA5BB400B314C7 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		1A7EAAB52E77DCA700FDEB5E /* BottomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabView.swift; sourceTree = "<group>"; };
 		1A9539D52E44F9640026A9EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A9DAFA502AB1F04B0064F748 /* KuringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KuringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9DAFA532AB1F04B0064F748 /* KuringApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KuringApp.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				A9DAFA552AB1F04B0064F748 /* ContentView.swift */,
 				A9DAFA572AB1F04C0064F748 /* Assets.xcassets */,
 				A9DAFA592AB1F04C0064F748 /* Preview Content */,
+				1A7EAAB52E77DCA700FDEB5E /* BottomTabView.swift */,
 			);
 			path = KuringApp;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9DAFA562AB1F04B0064F748 /* ContentView.swift in Sources */,
+				1A7EAAB62E77DCA700FDEB5E /* BottomTabView.swift in Sources */,
 				A9DAFA542AB1F04B0064F748 /* KuringApp.swift in Sources */,
 				CA22E6272B9F6DA7001E03A7 /* LaunchScreen.swift in Sources */,
 			);
@@ -387,7 +391,7 @@
 				CODE_SIGN_ENTITLEMENTS = KuringApp/KuringApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2025080211700;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"KuringApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 6DXT245L5T;
 				ENABLE_PREVIEWS = YES;
@@ -404,7 +408,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -424,7 +428,7 @@
 				CODE_SIGN_ENTITLEMENTS = KuringApp/KuringApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2025080211700;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"KuringApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 6DXT245L5T;
 				ENABLE_PREVIEWS = YES;
@@ -441,7 +445,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kuring.service;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

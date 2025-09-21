@@ -4,6 +4,7 @@
 //
 
 import Models
+import Satellite
 import Foundation
 import OrderedCollections
 import ComposableArchitecture
@@ -17,7 +18,7 @@ extension DependencyValues {
 
 extension KuringLink: DependencyKey {
     public static let liveValue = KuringLink(
-        fetchNotices: { count, type, department, page in
+        fetchNotices: { count, type, department, page, graduted in
             let response: Response<[Notice]> = try await satellite
                 .response(
                     for: Path.getNotices.path,
@@ -27,6 +28,7 @@ extension KuringLink: DependencyKey {
                         .init(name: "department", value: department),
                         .init(name: "page", value: String(page)),
                         .init(name: "size", value: String(count)),
+                        .init(name: "graduated", value: String(graduted)),
                     ]
                 )
             return response.data
@@ -225,6 +227,138 @@ extension KuringLink: DependencyKey {
                 )
             let isSucceed = (200 ..< 300) ~= response.code
             return isSucceed
+        },
+        sendVerificationCodeOnSignup: { email in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.sendVerificationCodeOnSignup.path,
+                    httpMethod: .post,
+                    httpBody: Email(email: email)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        sendVerificationCodeOnPasswordReset: { email in
+            var header: [String: String] = [
+                "Content-Type": "application/json",
+            ]
+            if !accessToken.isEmpty {
+                header["Authorization"] = "Bearer \(accessToken)"
+            }
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.sendVerificationCodeOnPasswordReset.path,
+                    httpMethod: .post,
+                    httpHeaders: header,
+                    httpBody: Email(email: email)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        verifyVerificationCode: { email, code in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.verifyVerificationCode.path,
+                    httpMethod: .post,
+                    httpBody: EmailVerification(email: email, code: code)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        signUp: { email, password in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.signUp.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken,
+                    ],
+                    httpBody: EmailPassword(email: email, password: password)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        login: { email, password in
+            let response: Response<AccessToken> = try await satellite
+                .response(
+                    for: Path.login.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken,
+                    ],
+                    httpBody: EmailPassword(email: email, password: password)
+                )
+            
+            let isSucceed = (200 ..< 300) ~= response.code
+            if isSucceed {
+                accessToken = response.data.accessToken
+            }
+            return isSucceed
+        },
+        logout: {
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.logout.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken,
+                        "Authorization": "Bearer \(accessToken)"
+                    ]
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            if isSucceed {
+                accessToken = ""
+            }
+            return isSucceed
+        },
+        getUserInfo: {
+            let response: Response<UserInfo> = try await satellite
+                .response(
+                    for: Path.getUserInfo.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ]
+                )
+            return response.data
+        },
+        resetPassword: { email, password in
+            var header = [
+                "Content-Type": "application/json",
+                "User-Token": fcmToken
+            ]
+            if !accessToken.isEmpty {
+                header["Authorization"] = "Bearer \(accessToken)"
+            }
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.resetPassword.path,
+                    httpMethod: Satellite.patch,
+                    httpHeaders: header,
+                    httpBody: EmailPassword(email: email, password: password)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        withdrawAccount: {
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.withdrawAccount.path,
+                    httpMethod: .delete,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ]
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            if isSucceed {
+                accessToken = ""
+            }
+            return isSucceed
         }
     )
 }
@@ -232,7 +366,7 @@ extension KuringLink: DependencyKey {
 
 extension KuringLink {
     public static let testValue: KuringLink = .init(
-        fetchNotices: { _, _, _, _ in
+        fetchNotices: { _, _, _, _, _ in
             [Notice.random]
         },
         sendFeedback: { _ in
@@ -313,6 +447,33 @@ extension KuringLink {
             ]
         },
         registerAuthorization: {
+            return true
+        },
+        sendVerificationCodeOnSignup: { _ in
+            return true
+        },
+        sendVerificationCodeOnPasswordReset: { _ in
+            return true
+        },
+        verifyVerificationCode: { _,_ in
+            return true
+        },
+        signUp: { _,_ in
+            return true
+        },
+        login: { _,_ in
+            return true
+        },
+        logout: { 
+            return true
+        },
+        getUserInfo: {
+            return UserInfo(email: "hwan333@konkuk.ac.kr", nickname: "swagati")
+        },
+        resetPassword: { _,_ in
+            return true
+        },
+        withdrawAccount: {
             return true
         }
     )
