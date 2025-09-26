@@ -26,6 +26,11 @@ enum Path {
     case getUserInfo
     case resetPassword
     case withdrawAccount
+    case getComments(id: Int)
+    case addComment(id: Int)
+    case editComment(noticeId: Int, commentId: Int)
+    case deleteComment(noticeId: Int, commentId: Int)
+    case reportComment
 
     var path: String {
         switch self {
@@ -69,6 +74,12 @@ enum Path {
             return "api/v2/users/password"
         case .withdrawAccount:
             return "api/v2/users/withdraw"
+        case .getComments(let id), .addComment(let id):
+            return "api/v2/notices/\(id)/comments"
+        case .editComment(let noticeId, let commentId), .deleteComment(let noticeId, let commentId):
+            return "api/v2/notices/\(noticeId)/comments/\(commentId)"
+        case .reportComment:
+            return "api/v2/reports"
         }
     }
 }
