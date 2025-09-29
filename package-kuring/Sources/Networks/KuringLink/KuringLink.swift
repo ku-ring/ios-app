@@ -95,4 +95,14 @@ public struct KuringLink {
     public var resetPassword: (_ email: String, _ password: String) async throws -> Bool
     /// 회원 탈퇴
     public var withdrawAccount: () async throws -> Bool
+    /// 댓글 조회
+    public var getComments: (_ noticeId: Int, _ cursor: String?, _ size: Int32?) async throws -> CommentData
+    /// 댓글 추가
+    public var addComment: (_ noticeId: Int, _ content: String, _ parentId: Int?) async throws -> Bool
+    /// 댓글 수정
+    public var editComment: (_ noticeId: Int, _ content: String, _ commentId: Int) async throws -> Bool
+    /// 댓글 삭제
+    public var deleteComment: (_ noticeId: Int, _ commentId: Int) async throws -> Bool
+    /// 댓글 신고
+    public var reportComment: (_ commentId: Int, _ content: String) async throws -> Bool
 }
