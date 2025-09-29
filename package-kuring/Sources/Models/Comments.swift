@@ -9,7 +9,7 @@ import Foundation
 
 public struct CommentData: Codable {
     public let comments: [CommentResult]
-    public let endCursor: String
+    public let endCursor: String?
     public let hasNext: Bool
     
     public init(comments: [CommentResult], endCursor: String, hasNext: Bool) {

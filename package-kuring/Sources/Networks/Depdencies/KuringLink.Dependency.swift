@@ -372,7 +372,11 @@ extension KuringLink: DependencyKey {
                 .response(
                     for: Path.getComments(id: noticeId).path,
                     httpMethod: .get,
-                    queryItems: queryItems
+                    queryItems: queryItems,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ]
                 )
             
             let isSucceed = (200 ..< 300) ~= response.code
