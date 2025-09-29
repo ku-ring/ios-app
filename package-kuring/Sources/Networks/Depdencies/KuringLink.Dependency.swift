@@ -379,8 +379,7 @@ extension KuringLink: DependencyKey {
                     ]
                 )
             
-            let isSucceed = (200 ..< 300) ~= response.code
-            return isSucceed ? response.data : .init(comments: [], endCursor: "", hasNext: false)
+            return response.data
         },
         addComment: { noticeId, content, parentId in
             let response: EmptyResponse = try await satellite
@@ -553,7 +552,7 @@ extension KuringLink {
         withdrawAccount: {
             return true
         },
-        getComments: { _, _, size in
+        getComments: { _, _, _ in
             return .init(comments: [], endCursor: "", hasNext: false)
         },
         addComment: { _, _, _ in

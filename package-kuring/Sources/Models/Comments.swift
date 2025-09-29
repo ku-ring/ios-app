@@ -12,7 +12,7 @@ public struct CommentData: Codable {
     public let endCursor: String?
     public let hasNext: Bool
     
-    public init(comments: [CommentResult], endCursor: String, hasNext: Bool) {
+    public init(comments: [CommentResult], endCursor: String?, hasNext: Bool) {
         self.comments = comments
         self.endCursor = endCursor
         self.hasNext = hasNext
