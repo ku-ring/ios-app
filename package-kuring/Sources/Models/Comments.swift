@@ -25,12 +25,14 @@ public struct CommentResult: Codable {
 }
 
 public struct Comment: Codable {
-    public let id, parentId, userId: Int
+    public let parentId: Int?
+    public let id, userId: Int
     public let nickName: String
     public let noticeId: Int
     public let content: String
     public let isMine: Bool
-    public let destroyedAt, createdAt, updatedAt: String
+    public let destroyedAt: String?
+    public let createdAt, updatedAt: String
 }
 
 /// 댓글 추가, 수정할때 서버로 보내는 댓글 정보
