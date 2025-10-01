@@ -14,6 +14,7 @@ import ComposableArchitecture
 
 public struct NoticeDetailView: View {
     @Bindable var store: StoreOf<NoticeDetailFeature>
+    @State private var showCommentSection: Bool = false
     
     var noticeProvider: NoticeProvider? {
         NoticeProvider.univNoticeTypes.first { $0.name == store.notice.category }
@@ -21,39 +22,54 @@ public struct NoticeDetailView: View {
     }
     
     public var body: some View {
-        WebView(urlString: store.notice.url)
-            .background(Color.Kuring.bg)
-            .navigationBarTitleDisplayMode(.inline)
-            .sheet(isPresented: $store.isPresentedEventView) {
-                EKEventView()
-            }
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(noticeProvider?.korName ?? "")
+        ZStack(alignment: .bottomTrailing) {
+            WebView(urlString: store.notice.url)
+                .background(Color.Kuring.bg)
+                .navigationBarTitleDisplayMode(.inline)
+                .sheet(isPresented: $showCommentSection) {
+                    CommentView()
+                        .presentationDetents([.medium, .large])
+                        .presentationDragIndicator(.visible)
                 }
-                
-                ToolbarItemGroup(placement: .topBarTrailing) {
-                    Button {
-                        self.store.send(.calendarButtonTapped)
-                    } label: {
-                        Image(systemName: "calendar.badge.plus")
-                    }
-                    Button {
-                        self.store.send(.bookmarkButtonTapped)
-                    } label: {
-                        Image(self.store.isBookmarked
-                              ? "bookmark-fill"
-                              : "bookmark", bundle: Bundle.notices
-                        )
+                .sheet(isPresented: $store.isPresentedEventView) {
+                    EKEventView()
+                }
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text(noticeProvider?.korName ?? "")
                     }
                     
-                    ShareLink(
-                        item: store.notice.url
-                    ) {
-                        Image("share", bundle: Bundle.notices)
+                    ToolbarItemGroup(placement: .topBarTrailing) {
+                        Button {
+                            self.store.send(.calendarButtonTapped)
+                        } label: {
+                            Image(systemName: "calendar.badge.plus")
+                        }
+                        Button {
+                            self.store.send(.bookmarkButtonTapped)
+                        } label: {
+                            Image(self.store.isBookmarked
+                                  ? "bookmark-fill"
+                                  : "bookmark", bundle: Bundle.notices
+                            )
+                        }
+                        
+                        ShareLink(
+                            item: store.notice.url
+                        ) {
+                            Image("share", bundle: Bundle.notices)
+                        }
                     }
                 }
-            }
+            
+            Image("comment_button", bundle: .module)
+                .resizable()
+                .frame(width: 72, height: 72)
+                .padding(20)
+                .onTapGesture {
+                    showCommentSection = true
+                }
+        }
     }
     
     public init(store: StoreOf<NoticeDetailFeature>) {
