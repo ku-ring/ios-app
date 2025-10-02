@@ -1,10 +1,11 @@
 //
-//  File.swift
+//  Comment+Extension.swift
 //  package-kuring
 //
 //  Created by Jung Hwan Park on 10/2/25.
 //
 
+import Models
 import Foundation
 
 extension Comment {
