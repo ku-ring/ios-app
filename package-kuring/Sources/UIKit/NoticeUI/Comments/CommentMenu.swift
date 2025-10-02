@@ -7,6 +7,18 @@
 
 import SwiftUI
 
+/// 하나의 댓글의 우측 상단에 위치한 메뉴 버튼
+/// ```swift
+/// CommentMenu(
+///    isOwner: comment.isMine,
+///    onDelete: { onDelete(comment) },
+///    onReport: { onReport(comment) }
+/// )
+/// ```
+///  - Parameters:
+///    - isOwner: 댓글이 내꺼라면 삭제 가능. 내꺼인지는 Comment 객체의 isMine 프로퍼티로 판별
+///    - onDelete: 삭제시 이뤄질 액션(API)
+///    - onReport: 신고시 이뤄질 액션(API)
 struct CommentMenu: View {
     let isOwner: Bool
     let onDelete: () -> Void

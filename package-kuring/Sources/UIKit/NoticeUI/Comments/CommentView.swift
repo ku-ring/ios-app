@@ -11,8 +11,24 @@ import ColorSet
 
 /// 댓글 전체 영역, sheet 형식으로 띄워줌
 /// ```swift
-///  CommentView()
+/// CommentView(
+///     comments: CommentData.mock,
+///     onSendComment: { comment in
+///         store.send(.addComment(comment))
+///     },
+///     onDeleteComment: { comment in
+///         store.send(.deleteComment(comment.id))
+///     },
+///     onReportComment: { comment in
+///         store.send(.reportComment(comment.id))
+///     }
+/// )
 /// ```
+///  - Parameters:
+///    - commentResult: 하나의 공지에 달린 모든 댓글(메인 댓글과 대댓글로 달린 댓글들)을 나타내는 배열
+///    - onSendComment: 댓글 작성시 이뤄질 액션(API)
+///    - onDelete: 삭제시 이뤄질 액션(API)
+///    - onReport: 신고시 이뤄질 액션(API)
 struct CommentView: View {
     @State var commentText: String = ""
     @State private var textFieldHeight: CGFloat = 40

@@ -8,6 +8,19 @@
 import Models
 import SwiftUI
 
+/// 하나의 댓글 영역에 대한 뷰
+/// ```swift
+///    CommentContent(
+///         comment: comment,
+///         onDelete: onDelete,
+///         onReport: onReport
+///     )
+/// ```
+///  - Parameters:
+///    - comment: 댓글 객체
+///    - showReplyIcon: 대댓글 아이콘을 보여줄지 정하는 값, 메인 댓글만 대댓글 아이콘
+///    - onDelete: 삭제시 이뤄질 액션(API), Comment.isMine == true여야 삭제 가능
+///    - onReport: 신고시 이뤄질 액션(API)
 struct CommentContent: View {
     let comment: Comment
     let showReplyIcon: Bool
