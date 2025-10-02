@@ -21,62 +21,6 @@ public struct NoticeDetailView: View {
         ?? NoticeProvider.departments.first { $0.name == store.notice.category }
     }
     
-    let comments: [CommentResult] = [
-        .init(
-            comment: .init(
-                parentId: nil,
-                id: 1,
-                userId: 123,
-                nickName: "쿠링님",
-                noticeId: 67,
-                content: "쿠링 댓글 예시용\n쿠링 댓글 예시용\n쿠링 댓글 예시용",
-                isMine: true,
-                destroyedAt: nil,
-                createdAt: "2025-03-09T17:21:54.861844",
-                updatedAt: "2025-03-10T11:42:36.60882"
-            ),
-            subComments: [
-                .init(
-                    parentId: 1,
-                    id: 3,
-                    userId: 234,
-                    nickName: "건덕이",
-                    noticeId: 67,
-                    content: "쿠링 댓글 예시용22\n쿠링 댓글 예시용22\n쿠링 댓글 예시용22",
-                    isMine: true,
-                    destroyedAt: nil,
-                    createdAt: "2025-03-09T17:27:54.861844",
-                    updatedAt: "2025-03-10T11:42:36.60882"
-                ),
-                .init(
-                    parentId: 1,
-                    id: 4,
-                    userId: 234,
-                    nickName: "건덕이",
-                    noticeId: 67,
-                    content: "쿠링 댓글 예시용33\n쿠링 댓글 예시용33\n쿠링 댓글 예시용33",
-                    isMine: true,
-                    destroyedAt: nil,
-                    createdAt: "2025-03-09T17:44:54.861844",
-                    updatedAt: "2025-03-10T11:52:36.60882"
-                )
-            ]
-        ),
-        .init(
-            comment: .init(
-                parentId: nil,
-                id: 2,
-                userId: 123,
-                nickName: "쿠링님",
-                noticeId: 67,
-                content: "쿠링 댓글 예시용44\n쿠링 댓글 예시용44\n쿠링 댓글 예시용44",
-                isMine: true,
-                destroyedAt: nil,
-                createdAt: "2025-03-09T17:07:54.861844",
-                updatedAt: "2025-03-10T11:17:36.60882"
-            ), subComments: [])
-    ]
-    
     public var body: some View {
         ZStack(alignment: .bottomTrailing) {
             WebView(urlString: store.notice.url)
@@ -84,7 +28,7 @@ public struct NoticeDetailView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .sheet(isPresented: $showCommentSection) {
                     CommentView(
-                        comments: comments,
+                        comments: CommentData.mock,
                         onSendComment: { comment in
                             
                         },
