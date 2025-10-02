@@ -159,7 +159,11 @@ public struct NoticeRow: View {
             Spacer()
             
             HStack (spacing: 2) {
-                Image("comment_icon", bundle: .module)
+                Image("comment_circle", bundle: .module)
+                    .renderingMode(.template)
+                    .resizable()
+                    .frame(width: 16, height: 16)
+                    .foregroundStyle(Color.Kuring.caption2)
                 
                 Text(notice.commentCount > 99 ? "99+" : "\(notice.commentCount)")
                     .font(.system(size: 14))

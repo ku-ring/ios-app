@@ -31,6 +31,7 @@ struct CommentTextField: UIViewRepresentable {
         textView.isScrollEnabled = true
         textView.layer.cornerRadius = 20
         textView.layer.borderWidth = 1
+        textView.backgroundColor = UIColor(Color.Kuring.bg)
         textView.layer.borderColor = UIColor(Color.Kuring.gray200).cgColor
         textView.text = "댓글 추가..."
         textView.textColor = UIColor(Color.Kuring.caption2)

@@ -32,6 +32,7 @@ import ColorSet
 struct CommentView: View {
     @State var commentText: String = ""
     @State private var textFieldHeight: CGFloat = 40
+    @FocusState private var isTextFieldFocused: Bool?
     
     let comments: [CommentResult]
     let onSendComment: (String) -> Void
@@ -46,10 +47,19 @@ struct CommentView: View {
                     commentsListView
                 }
             }
+            
+            if isTextFieldFocused ?? false {
+                Color.black.opacity(0.2)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        isTextFieldFocused = nil
+                    }
+            }
             commentInputBar
         }
         .padding(.top, 20)
         .padding(.bottom, 14)
+        .background(Color.Kuring.bg)
     }
     
     private var headerView: some View {
@@ -72,9 +82,10 @@ struct CommentView: View {
     }
     
     private var commentInputBar: some View {
-        HStack(spacing: 12) {
+        HStack(alignment: .bottom, spacing: 12) {
             CommentTextField(text: $commentText, calculatedHeight: $textFieldHeight)
                 .frame(height: textFieldHeight)
+                .focused($isTextFieldFocused, equals: true)
             
             sendButton
         }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ColorSet
 
 /// 하나의 댓글의 우측 상단에 위치한 메뉴 버튼
 /// ```swift
@@ -45,8 +46,10 @@ struct CommentMenu: View {
             }
         } label: {
             Image("more_vertical", bundle: .module)
+                .renderingMode(.template)
                 .resizable()
                 .frame(width: 24, height: 24)
+                .foregroundStyle(Color.Kuring.gray400)
         }
         .menuStyle(.borderlessButton)
     }

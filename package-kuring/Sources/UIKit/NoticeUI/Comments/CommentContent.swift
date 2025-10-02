@@ -71,8 +71,10 @@ struct CommentContent: View {
         HStack(spacing: 8) {
             if showReplyIcon {
                 Image("comment_circle", bundle: .module)
+                    .renderingMode(.template)
                     .resizable()
                     .frame(width: 24, height: 24)
+                    .foregroundStyle(Color.Kuring.gray400)
             }
             
             CommentMenu(

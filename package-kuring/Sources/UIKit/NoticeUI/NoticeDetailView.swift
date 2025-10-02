@@ -73,10 +73,17 @@ public struct NoticeDetailView: View {
                     }
                 }
             
-            Image("comment_button", bundle: .module)
-                .resizable()
+            Circle()
+                .fill(Color.Kuring.primary)
                 .frame(width: 72, height: 72)
-                .padding(20)
+                .overlay(alignment: .center) {
+                    Image("comment_circle", bundle: .module)
+                        .renderingMode(.template)
+                        .resizable()
+                        .frame(width: 57, height: 57)
+                        .foregroundStyle(.white)
+                }
+                .padding(16)
                 .onTapGesture {
                     showCommentSection = true
                 }
