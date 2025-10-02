@@ -19,12 +19,17 @@ public struct CommentData: Codable {
     }
 }
 
-public struct CommentResult: Codable {
+public struct CommentResult: Codable, Equatable, Hashable {
     public let comment: Comment
     public let subComments: [Comment]
+    
+    public init(comment: Comment, subComments: [Comment]) {
+        self.comment = comment
+        self.subComments = subComments
+    }
 }
 
-public struct Comment: Codable {
+public struct Comment: Codable, Equatable, Hashable {
     public let parentId: Int?
     public let id, userId: Int
     public let nickName: String
@@ -33,6 +38,19 @@ public struct Comment: Codable {
     public let isMine: Bool
     public let destroyedAt: String?
     public let createdAt, updatedAt: String
+    
+    public init(parentId: Int?, id: Int, userId: Int, nickName: String, noticeId: Int, content: String, isMine: Bool, destroyedAt: String?, createdAt: String, updatedAt: String) {
+        self.parentId = parentId
+        self.id = id
+        self.userId = userId
+        self.nickName = nickName
+        self.noticeId = noticeId
+        self.content = content
+        self.isMine = isMine
+        self.destroyedAt = destroyedAt
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+    }
 }
 
 /// 댓글 추가, 수정할때 서버로 보내는 댓글 정보

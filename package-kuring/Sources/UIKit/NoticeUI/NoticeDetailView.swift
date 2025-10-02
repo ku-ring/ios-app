@@ -27,7 +27,7 @@ public struct NoticeDetailView: View {
                 .background(Color.Kuring.bg)
                 .navigationBarTitleDisplayMode(.inline)
                 .sheet(isPresented: $showCommentSection) {
-                    CommentView()
+                    CommentView(comments: comments)
                         .presentationDetents([.medium, .large])
                         .presentationDragIndicator(.visible)
                 }
