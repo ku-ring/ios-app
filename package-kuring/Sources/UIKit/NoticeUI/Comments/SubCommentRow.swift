@@ -52,3 +52,11 @@ struct SubCommentRow: View {
             .padding(.top, 11)
     }
 }
+
+#Preview {
+    SubCommentRow(
+        comment: CommentData.mock.first!.comment,
+        onDelete: { _ in },
+        onReport: { _ in }
+    )
+}

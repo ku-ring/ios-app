@@ -51,3 +51,11 @@ struct CommentMenu: View {
         .menuStyle(.borderlessButton)
     }
 }
+
+#Preview {
+    CommentMenu(
+        isOwner: false,
+        onDelete: { },
+        onReport: { }
+    )
+}

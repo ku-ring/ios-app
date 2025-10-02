@@ -95,3 +95,13 @@ struct CommentContent: View {
             .foregroundStyle(Color.Kuring.caption1)
     }
 }
+
+#Preview {
+    CommentContent(
+        comment: CommentData.mock.first!.comment,
+        showReplyIcon: true,
+        onDelete: { _ in },
+        onReport: { _ in }
+    )
+    .padding(20)
+}

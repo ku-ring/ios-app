@@ -56,3 +56,11 @@ struct CommentRow: View {
         }
     }
 }
+
+#Preview {
+    CommentRow(
+        commentResult: CommentData.mock.first!,
+        onDelete: { _ in },
+        onReport: { _ in }
+    )
+}
