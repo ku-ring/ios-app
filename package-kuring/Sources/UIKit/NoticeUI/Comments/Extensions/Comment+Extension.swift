@@ -85,8 +85,8 @@ extension CommentData {
                     content: "내 사업 모델은 비틀즈야",
                     isMine: false,
                     destroyedAt: nil,
-                    createdAt: "2025-03-012T17:44:54.861844",
-                    updatedAt: "2025-03-012T17:55:54.861844"
+                    createdAt: "2025-03-12T17:44:54.861844",
+                    updatedAt: "2025-03-12T17:55:54.861844"
                 )
             ]
         )

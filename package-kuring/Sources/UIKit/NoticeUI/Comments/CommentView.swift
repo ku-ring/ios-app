@@ -45,6 +45,8 @@ struct CommentView: View {
                 VStack {
                     headerView
                     commentsListView
+                    Spacer()
+                        .frame(height: 60)
                 }
             }
             

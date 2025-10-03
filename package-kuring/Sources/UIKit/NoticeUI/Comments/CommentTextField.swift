@@ -18,7 +18,6 @@ import ColorSet
 struct CommentTextField: UIViewRepresentable {
     @Binding var text: String
     @Binding var calculatedHeight: CGFloat
-    @State private var lineHeight: CGFloat = 0.0
     
     // 최대 줄 수
     let maxLines: Int = 5
@@ -42,18 +41,19 @@ struct CommentTextField: UIViewRepresentable {
         
         textView.textContainerInset = .init(top: verticalPadding, left: 20, bottom: verticalPadding, right: 20)
         
-        DispatchQueue.main.async {
-            self.lineHeight = size.height
+        Task { @MainActor in
+            context.coordinator.lineHeight = size.height
         }
         
         return textView
     }
 
     func updateUIView(_ uiView: UITextView, context: Context) {
-        DispatchQueue.main.async {
+        Task { @MainActor in
             let fittingSize = uiView.sizeThatFits(CGSize(width: uiView.frame.width, height: CGFloat.infinity))
             
-            let maxHeight = self.lineHeight * CGFloat(self.maxLines) + self.verticalPadding
+            let totalVerticalPadding = self.verticalPadding * 2
+            let maxHeight = context.coordinator.lineHeight * CGFloat(self.maxLines) + totalVerticalPadding
             
             if !(fittingSize.height >= maxHeight) {
                 self.calculatedHeight = fittingSize.height
@@ -67,6 +67,7 @@ struct CommentTextField: UIViewRepresentable {
 
     class Coordinator: NSObject, UITextViewDelegate {
         var parent: CommentTextField
+        var lineHeight: CGFloat = 0.0
 
         init(_ parent: CommentTextField) {
             self.parent = parent
@@ -92,13 +93,13 @@ struct CommentTextField: UIViewRepresentable {
         }
         
         func recalculateHeight(for textView: UITextView) {
-            guard self.parent.lineHeight > 0 else { return }
+            guard self.lineHeight > 0 else { return }
             
             DispatchQueue.main.async {
                 let fittingSize = textView.sizeThatFits(CGSize(width: textView.frame.width, height: CGFloat.infinity))
                 
                 let totalVerticalPadding = self.parent.verticalPadding * 2
-                let maxHeight = self.parent.lineHeight * CGFloat(self.parent.maxLines) + totalVerticalPadding
+                let maxHeight = self.lineHeight * CGFloat(self.parent.maxLines) + totalVerticalPadding
                 
                 // 5줄이 넘어가면 더이상 높이를 늘리지 않음
                 if !(fittingSize.height >= maxHeight) {
