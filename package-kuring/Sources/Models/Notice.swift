@@ -21,6 +21,7 @@ public struct Notice: Codable, Identifiable, Hashable, Equatable {
     public let category: String
     /// e.g., `true`
     public let important: Bool
+    /// e.g., `67`
     public let commentCount: Int
 
     public func hash(into hasher: inout Hasher) {

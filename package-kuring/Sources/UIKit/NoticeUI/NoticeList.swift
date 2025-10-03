@@ -30,7 +30,7 @@ struct NoticeList: View {
                             
                             /// 마지막 공지가 보이면 update
                             if noticeInfo?.notices.last == notice {
-                                self.store.send(.fetchNotices)
+                                self.store.send(.fetchNextPageOfNotices)
                             }
                         }
                         .swipeActions(edge: .leading) {

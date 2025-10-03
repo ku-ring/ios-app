@@ -14,6 +14,7 @@ import ComposableArchitecture
 
 public struct NoticeDetailView: View {
     @Bindable var store: StoreOf<NoticeDetailFeature>
+    @State private var showCommentSection: Bool = false
     
     var noticeProvider: NoticeProvider? {
         NoticeProvider.univNoticeTypes.first { $0.name == store.notice.category }
@@ -21,39 +22,72 @@ public struct NoticeDetailView: View {
     }
     
     public var body: some View {
-        WebView(urlString: store.notice.url)
-            .background(Color.Kuring.bg)
-            .navigationBarTitleDisplayMode(.inline)
-            .sheet(isPresented: $store.isPresentedEventView) {
-                EKEventView()
-            }
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(noticeProvider?.korName ?? "")
+        ZStack(alignment: .bottomTrailing) {
+            WebView(urlString: store.notice.url)
+                .background(Color.Kuring.bg)
+                .navigationBarTitleDisplayMode(.inline)
+                .sheet(isPresented: $showCommentSection) {
+                    CommentView(
+                        comments: CommentData.mock,
+                        onSendComment: { comment in
+                            
+                        },
+                        onDeleteComment: { comment in
+                            
+                        },
+                        onReportComment: { comment in
+                            
+                        }
+                    )
+                    .presentationDetents([.medium, .large])
+                    .presentationDragIndicator(.visible)
                 }
-                
-                ToolbarItemGroup(placement: .topBarTrailing) {
-                    Button {
-                        self.store.send(.calendarButtonTapped)
-                    } label: {
-                        Image(systemName: "calendar.badge.plus")
-                    }
-                    Button {
-                        self.store.send(.bookmarkButtonTapped)
-                    } label: {
-                        Image(self.store.isBookmarked
-                              ? "bookmark-fill"
-                              : "bookmark", bundle: Bundle.notices
-                        )
+                .sheet(isPresented: $store.isPresentedEventView) {
+                    EKEventView()
+                }
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text(noticeProvider?.korName ?? "")
                     }
                     
-                    ShareLink(
-                        item: store.notice.url
-                    ) {
-                        Image("share", bundle: Bundle.notices)
+                    ToolbarItemGroup(placement: .topBarTrailing) {
+                        Button {
+                            self.store.send(.calendarButtonTapped)
+                        } label: {
+                            Image(systemName: "calendar.badge.plus")
+                        }
+                        Button {
+                            self.store.send(.bookmarkButtonTapped)
+                        } label: {
+                            Image(self.store.isBookmarked
+                                  ? "bookmark-fill"
+                                  : "bookmark", bundle: Bundle.notices
+                            )
+                        }
+                        
+                        ShareLink(
+                            item: store.notice.url
+                        ) {
+                            Image("share", bundle: Bundle.notices)
+                        }
                     }
                 }
-            }
+            
+            Circle()
+                .fill(Color.Kuring.primary)
+                .frame(width: 72, height: 72)
+                .overlay(alignment: .center) {
+                    Image("comment_circle", bundle: .module)
+                        .renderingMode(.template)
+                        .resizable()
+                        .frame(width: 57, height: 57)
+                        .foregroundStyle(.white)
+                }
+                .padding(16)
+                .onTapGesture {
+                    showCommentSection = true
+                }
+        }
     }
     
     public init(store: StoreOf<NoticeDetailFeature>) {

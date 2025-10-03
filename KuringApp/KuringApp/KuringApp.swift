@@ -22,6 +22,7 @@ struct KuringApp: App {
     
     // TODO: 테스트용 변수
     @State private var showsOnboarding: Bool = false
+    @State private var didAppear: Bool = false
     
     @Dependency(\.commons) var commons
     
@@ -39,7 +40,7 @@ struct KuringApp: App {
             if completesLink {
                 // MARK: ContentView
                 NavigationStack {
-                    ContentView()
+                    ContentView(didAppear: $didAppear)
                 }
                 // MARK: 앱 업데이트 알림
                 .versionUpdateAlert()
