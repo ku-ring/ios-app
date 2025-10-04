@@ -31,11 +31,12 @@ import ColorSet
 ///    - onReport: 신고시 이뤄질 액션(API)
 struct CommentView: View {
     @State var commentText: String = ""
+    @State var parentId: Int?
     @State private var textFieldHeight: CGFloat = 40
     @FocusState private var isTextFieldFocused: Bool?
     
     let comments: [CommentResult]
-    let onSendComment: (String) -> Void
+    let onSendComment: (_ content: String, _ parentId: Int?) -> Void
     let onDeleteComment: (Comment) -> Void
     let onReportComment: (Comment) -> Void
     
@@ -75,6 +76,7 @@ struct CommentView: View {
         VStack(spacing: 0) {
             ForEach(comments, id: \.self) { commentResult in
                 CommentRow(
+                    parentId: $parentId,
                     commentResult: commentResult,
                     onDelete: onDeleteComment,
                     onReport: onReportComment
@@ -101,7 +103,7 @@ struct CommentView: View {
             guard !commentText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
                 return
             }
-            onSendComment(commentText)
+            onSendComment(commentText, parentId)
             commentText = ""
         } label: {
             Circle()
@@ -119,7 +121,7 @@ struct CommentView: View {
 #Preview {
     CommentView(
         comments: CommentData.mock,
-        onSendComment: { comment in
+        onSendComment: { comment, parentId in
             
         },
         onDeleteComment: { comment in

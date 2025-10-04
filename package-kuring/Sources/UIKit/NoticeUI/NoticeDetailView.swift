@@ -28,15 +28,15 @@ public struct NoticeDetailView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .sheet(isPresented: $showCommentSection) {
                     CommentView(
-                        comments: CommentData.mock,
-                        onSendComment: { comment in
-                            
+                        comments: store.comments?.comments ?? [],
+                        onSendComment: { comment, parentId in
+                            store.send(.addComment(content: comment, parentId: parentId))
                         },
                         onDeleteComment: { comment in
-                            
+                            store.send(.deleteComment(noticeId: store.notice.id, commentId: comment.id))
                         },
                         onReportComment: { comment in
-                            
+                            store.send(.reportComment(commentId: comment.id, content: comment.content))
                         }
                     )
                     .presentationDetents([.medium, .large])
@@ -71,6 +71,9 @@ public struct NoticeDetailView: View {
                             Image("share", bundle: Bundle.notices)
                         }
                     }
+                }
+                .onAppear {
+                    store.send(.onAppear)
                 }
             
             Circle()

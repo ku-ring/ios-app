@@ -17,10 +17,12 @@ import SwiftUI
 /// )
 /// ```
 ///  - Parameters:
+///    - parentId: 메인 댓글의 아이디(대댓글을 위한), 메인 댓글만 해당 값에 바인딩이 필요하다. 대댓글은 .constant(nil)과 같이 사용
 ///    - commentResult: 하나의 댓글 영역 (메인 댓글과 대댓글로 달린 댓글들)을 나타내는 객체
 ///    - onDelete: 삭제시 이뤄질 액션(API)
 ///    - onReport: 신고시 이뤄질 액션(API)
 struct CommentRow: View {
+    @Binding var parentId: Int?
     let commentResult: CommentResult
     let onDelete: (Comment) -> Void
     let onReport: (Comment) -> Void
@@ -37,6 +39,7 @@ struct CommentRow: View {
     
     private var mainCommentView: some View {
         CommentContent(
+            parentId: $parentId,
             comment: commentResult.comment,
             showReplyIcon: true,
             onDelete: onDelete,
@@ -58,7 +61,9 @@ struct CommentRow: View {
 }
 
 #Preview {
+    @Previewable @State var parentId: Int?
     CommentRow(
+        parentId: $parentId,
         commentResult: CommentData.mock.first!,
         onDelete: { _ in },
         onReport: { _ in }
