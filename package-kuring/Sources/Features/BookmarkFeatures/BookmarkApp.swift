@@ -3,6 +3,7 @@
 // See the 'License.txt' file for licensing information.
 //
 
+import NoticeFeatures
 import ComposableArchitecture
 
 @Reducer
@@ -55,8 +56,20 @@ public struct BookmarkAppFeature {
                         print("북마크 업데이트에 실패했어요: \(error.localizedDescription)")
                     }
                     return .none
+                case .pushToReportContent(let commentId, let content):
+                    state.path.append(
+                        Path.State.reportComment(
+                            NoticeReportCommentFeature.State(
+                                commentId: commentId,
+                                content: content
+                            )
+                        )
+                    )
+                    return .none
                 }
-                
+            case let .path(.element(id: _, action: .reportComment(.delegate(.pop)))):
+                state.path.removeLast()
+                return .none
             case .path, .bookmarkList:
                 return .none
             }

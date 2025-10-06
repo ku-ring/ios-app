@@ -14,7 +14,6 @@ import ComposableArchitecture
 
 public struct NoticeDetailView: View {
     @Bindable var store: StoreOf<NoticeDetailFeature>
-    @State private var showCommentSection: Bool = false
     
     var noticeProvider: NoticeProvider? {
         NoticeProvider.univNoticeTypes.first { $0.name == store.notice.category }
@@ -26,7 +25,7 @@ public struct NoticeDetailView: View {
             WebView(urlString: store.notice.url)
                 .background(Color.Kuring.bg)
                 .navigationBarTitleDisplayMode(.inline)
-                .sheet(isPresented: $showCommentSection) {
+                .sheet(isPresented: $store.showCommentSection) {
                     CommentView(
                         comments: store.comments?.comments ?? [],
                         onSendComment: { comment, parentId in
@@ -36,7 +35,7 @@ public struct NoticeDetailView: View {
                             store.send(.deleteComment(noticeId: store.notice.id, commentId: comment.id))
                         },
                         onReportComment: { comment in
-                            store.send(.reportComment(commentId: comment.id, content: comment.content))
+                            store.send(.pushToReportComment(commentId: comment.id, content: comment.content))
                         }
                     )
                     .presentationDetents([.medium, .large])
@@ -88,7 +87,7 @@ public struct NoticeDetailView: View {
                 }
                 .padding(16)
                 .onTapGesture {
-                    showCommentSection = true
+                    store.send(.showCommentSection)
                 }
         }
     }

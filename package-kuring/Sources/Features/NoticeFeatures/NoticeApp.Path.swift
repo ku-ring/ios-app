@@ -16,12 +16,14 @@ extension NoticeAppFeature {
             case detail(NoticeDetailFeature.State)
             case search(SearchFeature.State)
             case departmentEditor(DepartmentEditorFeature.State)
+            case reportComment(NoticeReportCommentFeature.State)
         }
 
         public enum Action: Equatable {
             case detail(NoticeDetailFeature.Action)
             case search(SearchFeature.Action)
             case departmentEditor(DepartmentEditorFeature.Action)
+            case reportComment(NoticeReportCommentFeature.Action)
         }
 
         public var body: some ReducerOf<Self> {
@@ -35,6 +37,10 @@ extension NoticeAppFeature {
 
             Scope(state: \.departmentEditor, action: \.departmentEditor) {
                 DepartmentEditorFeature()
+            }
+            
+            Scope(state: \.reportComment, action: \.reportComment) {
+                NoticeReportCommentFeature()
             }
         }
     }

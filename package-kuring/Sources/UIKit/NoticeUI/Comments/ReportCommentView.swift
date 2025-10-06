@@ -7,12 +7,25 @@
 
 import SwiftUI
 import ColorSet
+import NoticeFeatures
+import ComposableArchitecture
 
-struct ReportCommentView: View {
-    @State private var reportText: String = ""
-    @FocusState private var isTextFieldFocused: Bool
+/// 댓글 신고 화면
+/// ```swift
+/// ReportCommentView(store: store)
+/// ```
+///  - Parameters:
+///    - store: NoticeReportCommentFeature 리듀서
+public struct ReportCommentView: View {
+    @Bindable var store: StoreOf<NoticeReportCommentFeature>
+    @Environment(\.dismiss) var dismiss
     
+    @State private var reportText: String = ""
+    @FocusState private var isTextFieldFocused: Bool?
+    
+    /// 최대 글자수
     private let maxLength = 256
+    /// 최소 글자수
     private let minLength = 4
     
     private var isEmpty: Bool {
@@ -23,7 +36,11 @@ struct ReportCommentView: View {
         reportText.trimmingCharacters(in: .whitespacesAndNewlines).count >= minLength
     }
     
-    var body: some View {
+    public init(store: StoreOf<NoticeReportCommentFeature>) {
+        self.store = store
+    }
+    
+    public var body: some View {
         VStack {
             Image("report_icon", bundle: .module)
                 .resizable()
@@ -45,12 +62,15 @@ struct ReportCommentView: View {
         }
         .padding(20)
         .background(Color.Kuring.bg)
+        .onTapGesture {
+            isTextFieldFocused = nil
+        }
     }
     
     private var textFieldView: some View {
         ZStack(alignment: .bottomTrailing) {
             TextEditor(text: $reportText)
-                .focused($isTextFieldFocused)
+                .focused($isTextFieldFocused, equals: true)
                 .font(.system(size: 15))
                 .scrollContentBackground(.hidden)
                 .padding(.horizontal, 16)
@@ -95,7 +115,7 @@ struct ReportCommentView: View {
 
     private var submitButton: some View {
         Button {
-            
+            store.send(.reportComment)
         } label: {
             Text("신고하기")
                 .font(.system(size: 16, weight: .semibold))
@@ -112,5 +132,9 @@ struct ReportCommentView: View {
 }
 
 #Preview {
-    ReportCommentView()
+    @Previewable @State var store: StoreOf<NoticeReportCommentFeature> = .init(
+        initialState: NoticeReportCommentFeature.State(commentId: 1, content: "테스트용임다")) {
+            NoticeReportCommentFeature()
+        }
+    ReportCommentView(store: store)
 }

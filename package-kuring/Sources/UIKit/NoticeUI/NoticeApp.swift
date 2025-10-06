@@ -78,6 +78,10 @@ public struct NoticeApp: View {
                 if let store = store.scope(state: \.departmentEditor, action: \.departmentEditor) {
                     DepartmentEditor(store: store)
                 }
+            case .reportComment:
+                if let store = store.scope(state: \.reportComment, action: \.reportComment) {
+                    ReportCommentView(store: store)
+                }
             }
         }
     }

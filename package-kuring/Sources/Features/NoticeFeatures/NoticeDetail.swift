@@ -18,6 +18,7 @@ public struct NoticeDetailFeature {
         public var comments: CommentData?
         public var isBookmarked: Bool = false
         public var isPresentedEventView: Bool = false
+        public var showCommentSection: Bool = false
 
         public init(notice: Notice, isBookmarked: Bool? = nil) {
             @Dependency(\.bookmarks) var bookmarks
@@ -37,6 +38,7 @@ public struct NoticeDetailFeature {
 
     public enum Action: BindableAction, Equatable {
         case onAppear
+        case showCommentSection
         /// 댓글 GET~
         case getComments
         case getCommentsResponse(Result<CommentData, CommentsError>)
@@ -46,9 +48,8 @@ public struct NoticeDetailFeature {
         /// 댓글 삭제
         case deleteComment(noticeId: Int, commentId: Int)
         case deleteCommentResponse(Result<Bool, CommentsError>)
-        /// 댓글 신고
-        case reportComment(commentId: Int, content: String)
-        case reportCommentResponse(Result<Bool, CommentsError>)
+        /// 댓글 신고화면으로 이동
+        case pushToReportComment(commentId: Int, content: String)
         
         case bookmarkButtonTapped
         case calendarButtonTapped
@@ -60,6 +61,7 @@ public struct NoticeDetailFeature {
 
         public enum Delegate: Equatable {
             case bookmarkUpdated(_ notice: Notice, _ isBookmarked: Bool)
+            case pushToReportContent(_ commentId: Int, _ content: String)
         }
         
         public enum CommentsError: Error, Equatable {
@@ -75,6 +77,7 @@ public struct NoticeDetailFeature {
     }
     
     @Dependency(\.kuringLink) private var kuringLink
+    @Dependency(\.continuousClock) var clock
     
     public var body: some ReducerOf<Self> {
         BindingReducer()
@@ -84,6 +87,9 @@ public struct NoticeDetailFeature {
                 return .none
             case .onAppear:
                 return .send(.getComments)
+            case .showCommentSection:
+                state.showCommentSection.toggle()
+                return .none
             case .getComments:
                 return .run { [notice = state.notice] send in
                     do {
@@ -136,23 +142,14 @@ public struct NoticeDetailFeature {
                     print("Delete comment response error: \(error)")
                     return .none
                 }
-            case .reportComment(let commentId, let content):
-                return .run { send in
-                    do {
-                        try await kuringLink.reportComment(commentId, content)
-                        await send(.reportCommentResponse(.success(true)))
-                    } catch {
-                        await send(.reportCommentResponse(.failure(.error(error.localizedDescription))))
-                    }
-                }
-            case let .reportCommentResponse(result):
-                switch result {
-                case .success:
-                    return .send(.getComments)
-                case let .failure(error):
-                    print("Report comment response error: \(error)")
-                    return .none
-                }
+            case .pushToReportComment(let commentId, let content):
+                return .concatenate([
+                    .send(.showCommentSection),
+                    .run { _ in
+                        try await clock.sleep(for: .milliseconds(200))
+                    },
+                    .send(.delegate(.pushToReportContent(commentId, content)))
+                ])
             case .bookmarkButtonTapped:
                 state.isBookmarked.toggle()
                 return .none

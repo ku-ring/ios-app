@@ -27,6 +27,10 @@ public struct BookmarkApp: View {
                 if let store = store.scope(state: \.detail, action: \.detail) {
                     NoticeDetailView(store: store)
                 }
+            case .reportComment:
+                if let store = store.scope(state: \.reportComment, action: \.reportComment) {
+                    ReportCommentView(store: store)
+                }
             }
         }
     }

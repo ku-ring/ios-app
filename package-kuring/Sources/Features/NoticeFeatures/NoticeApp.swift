@@ -84,7 +84,20 @@ public struct NoticeAppFeature {
                         state.noticeList.bookmarkIDs.remove(notice.id)
                     }
                     return .send(.updateBookmarks(notice, isBookmarked))
+                case .pushToReportContent(let commentId, let content):
+                    state.path.append(
+                        Path.State.reportComment(
+                            NoticeReportCommentFeature.State(
+                                commentId: commentId,
+                                content: content
+                            )
+                        )
+                    )
+                    return .none
                 }
+            case let .path(.element(id: _, action: .reportComment(.delegate(.pop)))):
+                state.path.removeLast()
+                return .none
                   
             case let .updateBookmarks(notice, isBookmarked):
                 do {
