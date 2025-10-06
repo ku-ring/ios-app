@@ -17,6 +17,7 @@ import ColorSet
 ///    - calculatedHeight: 텍스트필드 높이값, 사용처에서 frame(height: $calculatedHeight)와 같이 선언
 struct CommentTextField: UIViewRepresentable {
     @Binding var text: String
+    @Binding var isReply: Bool
     @Binding var calculatedHeight: CGFloat
     
     // 최대 줄 수
@@ -50,6 +51,13 @@ struct CommentTextField: UIViewRepresentable {
 
     func updateUIView(_ uiView: UITextView, context: Context) {
         Task { @MainActor in
+            if uiView.textColor == UIColor(Color.Kuring.caption2) {
+                let newPlaceholder = isReply ? "대댓글 추가..." : "댓글 추가..."
+                if uiView.text != newPlaceholder {
+                    uiView.text = newPlaceholder
+                }
+            }
+            
             let fittingSize = uiView.sizeThatFits(CGSize(width: uiView.frame.width, height: CGFloat.infinity))
             
             let totalVerticalPadding = self.verticalPadding * 2
@@ -87,7 +95,7 @@ struct CommentTextField: UIViewRepresentable {
         
         func textViewDidEndEditing(_ textView: UITextView) {
             if textView.text.isEmpty {
-                textView.text = "댓글 추가..."
+                textView.text = parent.isReply ? "댓글 추가..." : "대댓글 추가..."
                 textView.textColor = UIColor(Color.Kuring.caption2)
             }
         }
@@ -112,8 +120,9 @@ struct CommentTextField: UIViewRepresentable {
 
 #Preview {
     @Previewable @State var text: String = ""
+    @Previewable @State var isReply: Bool = false
     @Previewable @State var textViewHeight: CGFloat = 40
     
-    CommentTextField(text: $text, calculatedHeight: $textViewHeight)
+    CommentTextField(text: $text, isReply: $isReply, calculatedHeight: $textViewHeight)
         .frame(height: textViewHeight)
 }

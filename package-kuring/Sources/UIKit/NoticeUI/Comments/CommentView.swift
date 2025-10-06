@@ -87,9 +87,16 @@ struct CommentView: View {
     
     private var commentInputBar: some View {
         HStack(alignment: .bottom, spacing: 12) {
-            CommentTextField(text: $commentText, calculatedHeight: $textFieldHeight)
-                .frame(height: textFieldHeight)
-                .focused($isTextFieldFocused, equals: true)
+            CommentTextField(
+                text: $commentText,
+                isReply: .init(
+                    get: { parentId != nil },
+                    set: { _ in }
+                ),
+                calculatedHeight: $textFieldHeight
+            )
+            .frame(height: textFieldHeight)
+            .focused($isTextFieldFocused, equals: true)
             
             sendButton
         }
@@ -105,6 +112,7 @@ struct CommentView: View {
             }
             onSendComment(commentText, parentId)
             commentText = ""
+            parentId = nil
         } label: {
             Circle()
                 .fill(Color.black.opacity(0.8))

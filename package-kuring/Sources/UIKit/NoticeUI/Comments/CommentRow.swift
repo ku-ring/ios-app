@@ -47,6 +47,9 @@ struct CommentRow: View {
         )
         .padding(.vertical, 15)
         .padding(.horizontal, 20)
+        .background(
+            parentId == commentResult.comment.id ? Color.Kuring.primarySelected : Color.Kuring.bg
+        )
     }
     
     private var subCommentsView: some View {
