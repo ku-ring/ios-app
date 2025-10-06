@@ -34,6 +34,7 @@ struct CommentView: View {
     @State var parentId: Int?
     @State private var textFieldHeight: CGFloat = 40
     @FocusState private var isTextFieldFocused: Bool?
+    @AppStorage("com.kuring.sdk.v2.token.accessToken") var accessToken: String = ""
     
     let comments: [CommentResult]
     let onSendComment: (_ content: String, _ parentId: Int?) -> Void
@@ -107,7 +108,8 @@ struct CommentView: View {
      
     private var sendButton: some View {
         Button {
-            guard !commentText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            guard !commentText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                  accessToken != "" else {
                 return
             }
             onSendComment(commentText, parentId)
@@ -115,7 +117,9 @@ struct CommentView: View {
             parentId = nil
         } label: {
             Circle()
-                .fill(Color.black.opacity(0.8))
+                .fill(
+                    accessToken == "" ? Color.Kuring.gray300 : Color.Kuring.gray400
+                )
                 .frame(width: 40, height: 40)
                 .overlay {
                     Image("arrow_up", bundle: .module)

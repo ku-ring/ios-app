@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ColorSet
+import Networks
 
 /// 댓글을 작성하는 텍스트필드 영역 뷰
 /// ```swift
@@ -19,6 +20,7 @@ struct CommentTextField: UIViewRepresentable {
     @Binding var text: String
     @Binding var isReply: Bool
     @Binding var calculatedHeight: CGFloat
+    @AppStorage("com.kuring.sdk.v2.token.accessToken") var accessToken: String = ""
     
     // 최대 줄 수
     let maxLines: Int = 5
@@ -51,8 +53,8 @@ struct CommentTextField: UIViewRepresentable {
 
     func updateUIView(_ uiView: UITextView, context: Context) {
         Task { @MainActor in
+            var newPlaceholder = accessToken == "" ? "로그인 후 댓글을 추가해보세요!" : (isReply ? "대댓글 추가..." : "댓글 추가...")
             if uiView.textColor == UIColor(Color.Kuring.caption2) {
-                let newPlaceholder = isReply ? "대댓글 추가..." : "댓글 추가..."
                 if uiView.text != newPlaceholder {
                     uiView.text = newPlaceholder
                 }
