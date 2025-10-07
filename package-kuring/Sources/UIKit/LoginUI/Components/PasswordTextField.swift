@@ -54,7 +54,8 @@ struct PasswordTextField: View {
                     showInput ? "preview_open" : "preview_close",
                     bundle: .module
                 )
-                .foregroundColor(.secondary)
+                .renderingMode(.template)
+                .foregroundStyle(Color.Kuring.body)
             })
         }
         .frame(height: 50)
