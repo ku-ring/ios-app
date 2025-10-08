@@ -103,10 +103,6 @@ public struct NoticeDetailFeature {
                     TextState("로그인이 필요한 서비스에요")
                 } actions: {
                     ButtonState(role: .cancel) {
-                        TextState("취소")
-                    }
-                    
-                    ButtonState(role: .cancel) {
                         TextState("로그인하기")
                     }
                 }
