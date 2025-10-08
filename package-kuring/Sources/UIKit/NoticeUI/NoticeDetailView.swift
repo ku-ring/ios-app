@@ -14,6 +14,7 @@ import ComposableArchitecture
 
 public struct NoticeDetailView: View {
     @Bindable var store: StoreOf<NoticeDetailFeature>
+    @AppStorage("com.kuring.sdk.v2.token.accessToken") private var accessToken: String = ""
     
     var noticeProvider: NoticeProvider? {
         NoticeProvider.univNoticeTypes.first { $0.name == store.notice.category }
@@ -32,7 +33,7 @@ public struct NoticeDetailView: View {
                             store.send(.addComment(content: comment, parentId: parentId))
                         },
                         onDeleteComment: { comment in
-                            store.send(.deleteComment(noticeId: store.notice.id, commentId: comment.id))
+                            store.send(.deleteCommentTapped(noticeId: store.notice.id, commentId: comment.id))
                         },
                         onReportComment: { comment in
                             store.send(.pushToReportComment(commentId: comment.id, content: comment.content))
@@ -71,8 +72,17 @@ public struct NoticeDetailView: View {
                         }
                     }
                 }
+                .alert(
+                    store: store.scope(
+                        state: \.$alert,
+                        action: \.alert
+                    )
+                )
                 .onAppear {
-                    store.send(.onAppear)
+                    guard accessToken != "" else {
+                        return
+                    }
+                    store.send(.getComments)
                 }
             
             Circle()
@@ -87,7 +97,11 @@ public struct NoticeDetailView: View {
                 }
                 .padding(16)
                 .onTapGesture {
-                    store.send(.showCommentSection)
+                    if accessToken == "" {
+                        store.send(.showNeedsLoginAlert)
+                    } else {
+                        store.send(.toggleCommentSection)
+                    }
                 }
         }
     }
