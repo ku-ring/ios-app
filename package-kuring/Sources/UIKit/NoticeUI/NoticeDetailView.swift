@@ -85,24 +85,31 @@ public struct NoticeDetailView: View {
                     store.send(.getComments)
                 }
             
-            Circle()
-                .fill(Color.Kuring.primary)
-                .frame(width: 72, height: 72)
-                .overlay(alignment: .center) {
-                    Image("comment_circle", bundle: .module)
-                        .renderingMode(.template)
-                        .resizable()
-                        .frame(width: 57, height: 57)
-                        .foregroundStyle(.white)
+            ZStack {
+                Circle()
+                    .fill(Color.Kuring.primary)
+                    .frame(width: 64, height: 64)
+                    .shadow(radius: 5)
+                
+                VStack(alignment: .center) {
+                    Image("comment_icon", bundle: .module)
+                        .font(.system(size: 24))
+                        .foregroundColor(.white)
+                    Text("댓글")
+                        .font(.system(size: 10, weight: .medium))
+                        .foregroundColor(.white)
                 }
-                .padding(16)
-                .onTapGesture {
-                    if accessToken == "" {
-                        store.send(.showNeedsLoginAlert)
-                    } else {
-                        store.send(.toggleCommentSection)
-                    }
+                .padding(.top, 5)
+            }
+            .padding(.bottom, 20)
+            .padding(.trailing, 16)
+            .onTapGesture {
+                if accessToken == "" {
+                    store.send(.showNeedsLoginAlert)
+                } else {
+                    store.send(.toggleCommentSection)
                 }
+            }
         }
     }
     

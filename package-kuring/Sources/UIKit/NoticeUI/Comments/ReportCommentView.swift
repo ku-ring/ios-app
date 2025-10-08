@@ -62,6 +62,7 @@ public struct ReportCommentView: View {
         }
         .padding(20)
         .background(Color.Kuring.bg)
+        .navigationTitle("신고하기")
         .onTapGesture {
             isTextFieldFocused = nil
         }
