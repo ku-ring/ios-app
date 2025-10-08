@@ -40,7 +40,7 @@ public struct NoticeDetailFeature {
 
     public enum Action: BindableAction, Equatable {
         case toggleCommentSection
-        case showCommentSectionTapped
+        case showNeedsLoginAlert
         /// 댓글 GET~
         case getComments
         case getCommentsResponse(Result<CommentData, CommentsError>)
@@ -98,7 +98,7 @@ public struct NoticeDetailFeature {
             case .toggleCommentSection:
                 state.showCommentSection.toggle()
                 return .none
-            case .showCommentSectionTapped:
+            case .showNeedsLoginAlert:
                 state.alert = AlertState {
                     TextState("로그인이 필요한 서비스에요")
                 } actions: {
