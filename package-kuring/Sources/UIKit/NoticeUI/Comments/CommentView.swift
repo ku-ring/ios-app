@@ -43,12 +43,28 @@ struct CommentView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            ScrollView(.vertical) {
-                VStack {
-                    headerView
-                    commentsListView
-                    Spacer()
-                        .frame(height: 60)
+            if comments.isEmpty {
+                VStack(alignment: .center) {
+                    Image("comment_icon", bundle: .module)
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundStyle(Color.Kuring.gray200)
+                        .frame(width: 68, height: 68)
+                    
+                    Text("공지 댓글이\n존재하지 않아요")
+                        .multilineTextAlignment(.center)
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundStyle(Color.Kuring.caption1)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                ScrollView(.vertical) {
+                    VStack {
+                        headerView
+                        commentsListView
+                        Spacer()
+                            .frame(height: 60)
+                    }
                 }
             }
             

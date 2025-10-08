@@ -20,7 +20,6 @@ struct CommentTextField: UIViewRepresentable {
     @Binding var text: String
     @Binding var isReply: Bool
     @Binding var calculatedHeight: CGFloat
-    @AppStorage("com.kuring.sdk.v2.token.accessToken") var accessToken: String = ""
     
     // 최대 줄 수
     let maxLines: Int = 5
@@ -53,7 +52,7 @@ struct CommentTextField: UIViewRepresentable {
 
     func updateUIView(_ uiView: UITextView, context: Context) {
         Task { @MainActor in
-            var newPlaceholder = accessToken == "" ? "로그인 후 댓글을 추가해보세요!" : (isReply ? "대댓글 추가..." : "댓글 추가...")
+            var newPlaceholder = isReply ? "대댓글 추가..." : "댓글 추가..."
             if uiView.textColor == UIColor(Color.Kuring.caption2) {
                 if uiView.text != newPlaceholder {
                     uiView.text = newPlaceholder
@@ -105,7 +104,7 @@ struct CommentTextField: UIViewRepresentable {
         func recalculateHeight(for textView: UITextView) {
             guard self.lineHeight > 0 else { return }
             
-            DispatchQueue.main.async {
+            Task { @MainActor in
                 let fittingSize = textView.sizeThatFits(CGSize(width: textView.frame.width, height: CGFloat.infinity))
                 
                 let totalVerticalPadding = self.parent.verticalPadding * 2

@@ -104,7 +104,7 @@ public struct NoticeDetailView: View {
             .padding(.bottom, 20)
             .padding(.trailing, 16)
             .onTapGesture {
-                if accessToken == "" {
+                if accessToken.isEmpty {
                     store.send(.showNeedsLoginAlert)
                 } else {
                     store.send(.toggleCommentSection)
