@@ -42,30 +42,34 @@ public struct ReportCommentView: View {
     
     public var body: some View {
         VStack {
-            Image("report_icon", bundle: .module)
-                .resizable()
-                .frame(width: 100, height: 100)
-            
-            Text("해당 댓글의\n신고 사유를 작성해주세요.")
-                .font(.system(size: 16, weight: .medium))
-                .multilineTextAlignment(.center)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.top, 12)
-            
-            textFieldView
-                .frame(maxHeight: 268)
-                .padding(.top, 38)
-            
-            Spacer()
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack {
+                    Image("report_icon", bundle: .module)
+                        .resizable()
+                        .frame(width: 100, height: 100)
+
+                    Text("해당 댓글의\n신고 사유를 작성해주세요.")
+                        .font(.system(size: 16, weight: .medium))
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.top, 12)
+                        
+                    textFieldView
+                        .frame(height: 268)
+                        .padding(.top, 38)
+                }
+                .padding(20)
+            }
+            .background(Color.Kuring.bg)
+            .navigationTitle("신고하기")
+            .onTapGesture {
+                isTextFieldFocused = nil
+            }
             
             submitButton
+                .padding([.horizontal, .bottom], 20)
         }
-        .padding(20)
         .background(Color.Kuring.bg)
-        .navigationTitle("신고하기")
-        .onTapGesture {
-            isTextFieldFocused = nil
-        }
     }
     
     private var textFieldView: some View {
