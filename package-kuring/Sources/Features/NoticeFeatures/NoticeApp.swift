@@ -4,6 +4,7 @@
 //
 
 import Models
+import LoginFeatures
 import DepartmentFeatures
 import SubscriptionFeatures
 import ComposableArchitecture
@@ -18,6 +19,7 @@ public struct NoticeAppFeature {
         public var noticeList = NoticeListFeature.State()
         /// 스택 네비게이션
         public var path = StackState<Path.State>()
+        public var signup = EmailVerificationFeature.State()
         /// 트리 네비게이션 - ``SubscriptionAppFeature``
         @Presents public var changeSubscription: SubscriptionAppFeature.State?
 
@@ -45,6 +47,8 @@ public struct NoticeAppFeature {
 
         /// 스택 네비게이션 액션 (``NoticeAppFeature/Path``)
         case path(StackAction<Path.State, Path.Action>)
+        /// 이메일 인증 네비게이션
+        case signup(EmailVerificationFeature.Action)
 
         /// 구독 변경 버튼을 탭한 경우
         case changeSubscriptionButtonTapped
@@ -63,6 +67,10 @@ public struct NoticeAppFeature {
             NoticeListFeature()
         }
 
+        Scope(state: \.signup, action: \.signup) {
+            EmailVerificationFeature()
+        }
+        
         Reduce { state, action in
             switch action {
             case .noticeList(.onAppear):
@@ -91,6 +99,13 @@ public struct NoticeAppFeature {
                                 commentId: commentId,
                                 content: content
                             )
+                        )
+                    )
+                    return .none
+                case .pushToLogin:
+                    state.path.append(
+                        Path.State.login(
+                            LoginAppFeature.State()
                         )
                     )
                     return .none
@@ -151,8 +166,58 @@ public struct NoticeAppFeature {
                 }
                 state.noticeList.provider = departmentEditorState.myDepartments.first ?? .emptyDepartment
                 return .none
-
-            case .path, .noticeList, .changeSubscription:
+            case let .path(.element(id: id, action: .setPassword(.delegate(.pushToSignupComplete)))):
+                state.path.append(
+                    Path.State.signupComplete(
+                        SignupCompleteFeature.State()
+                    )
+                )
+                return .none
+            case let .path(.element(id: id, action: .login(.delegate(.popToRoot)))):
+                state.path.removeAll()
+                return .none
+            case let .path(.element(id: id, action: .login(.delegate(.pushToTerms)))):
+                state.path.append(
+                    Path.State.signupTerms(
+                        LoginAppFeature.State()
+                    )
+                )
+                return .none
+            case let .path(.element(id: id, action: .login(.delegate(.pushToFindPassword)))):
+                state.path.append(
+                    Path.State.findPassword(
+                        EmailVerificationFeature.State()
+                    )
+                )
+                return .none
+            case let .path(.element(id: id, action: .signupTerms(.delegate(.pushToSignup)))):
+                state.path.append(
+                    Path.State.signup(
+                        EmailVerificationFeature.State()
+                    )
+                )
+                return .none
+            case let .path(.element(id: id, action: .changePassword(.delegate(.popToRoot)))):
+                state.path.removeAll()
+                return .none
+            case let .path(.element(id: id, action: .signupComplete(.delegate(.popToRoot)))):
+                state.path.removeSubrange(1...)
+                return .none
+            case let .path(.element(id: _, action: .signup(.delegate(.pushToSignupPassword(email))))):
+                state.path.append(
+                    Path.State.setPassword(
+                        SetPasswordFeature.State(email: email)
+                    )
+                )
+                return .none
+            case let .path(.element(id: _, action: .findPassword(.delegate(.pushToChangePassword(email))))):
+                state.path.append(
+                    Path.State.changePassword(
+                        SetPasswordFeature.State(email: email)
+                    )
+                )
+                return .none
+            case .path, .noticeList, .changeSubscription, .signup:
                 return .none
             }
         }

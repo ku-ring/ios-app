@@ -66,12 +66,14 @@ public struct NoticeDetailFeature {
         public enum Delegate: Equatable {
             case bookmarkUpdated(_ notice: Notice, _ isBookmarked: Bool)
             case pushToReportContent(_ commentId: Int, _ content: String)
+            case pushToLogin
         }
         
         /// 알림
         public enum Alert: Equatable {
             /// 댓글 삭제 진행
             case deleteComment(noticeId: Int, commentId: Int)
+            case pushToLogin
         }
         
         public enum CommentsError: Error, Equatable {
@@ -102,7 +104,10 @@ public struct NoticeDetailFeature {
                 state.alert = AlertState {
                     TextState("로그인이 필요한 서비스에요")
                 } actions: {
-                    ButtonState(role: .cancel) {
+                    ButtonState(
+                        role: .destructive,
+                        action: .pushToLogin
+                    ) {
                         TextState("로그인하기")
                     }
                 }
@@ -197,6 +202,8 @@ public struct NoticeDetailFeature {
                             await send(.deleteCommentResponse(.failure(.error(error.localizedDescription))))
                         }
                     }
+                case .pushToLogin:
+                    return .send(.delegate(.pushToLogin))
                 }
             case .presentEventView:
                 state.isPresentedEventView = true
