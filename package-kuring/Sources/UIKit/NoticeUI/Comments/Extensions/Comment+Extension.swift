@@ -10,7 +10,7 @@ import Foundation
 
 extension Comment {
     var parsedDate: Date? {
-        DateFormatter.isoDateFormatter.date(from: self.createdAt)
+        DateFormatter.serverDateFormatter.date(from: self.createdAt)
     }
     
     var formattedDate: String {

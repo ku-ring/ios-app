@@ -14,7 +14,7 @@ import ComposableArchitecture
 
 public struct NoticeDetailView: View {
     @Bindable var store: StoreOf<NoticeDetailFeature>
-    @State private var showCommentSection: Bool = false
+    @AppStorage("com.kuring.sdk.v2.token.accessToken") private var accessToken: String = ""
     
     var noticeProvider: NoticeProvider? {
         NoticeProvider.univNoticeTypes.first { $0.name == store.notice.category }
@@ -26,17 +26,17 @@ public struct NoticeDetailView: View {
             WebView(urlString: store.notice.url)
                 .background(Color.Kuring.bg)
                 .navigationBarTitleDisplayMode(.inline)
-                .sheet(isPresented: $showCommentSection) {
+                .sheet(isPresented: $store.showCommentSection) {
                     CommentView(
-                        comments: CommentData.mock,
-                        onSendComment: { comment in
-                            
+                        comments: store.comments?.comments ?? [],
+                        onSendComment: { comment, parentId in
+                            store.send(.addComment(content: comment, parentId: parentId))
                         },
                         onDeleteComment: { comment in
-                            
+                            store.send(.deleteCommentTapped(noticeId: store.notice.id, commentId: comment.id))
                         },
                         onReportComment: { comment in
-                            
+                            store.send(.pushToReportComment(commentId: comment.id, content: comment.content))
                         }
                     )
                     .presentationDetents([.medium, .large])
@@ -72,21 +72,44 @@ public struct NoticeDetailView: View {
                         }
                     }
                 }
+                .alert(
+                    store: store.scope(
+                        state: \.$alert,
+                        action: \.alert
+                    )
+                )
+                .onAppear {
+                    guard !accessToken.isEmpty else {
+                        return
+                    }
+                    store.send(.getComments)
+                }
             
-            Circle()
-                .fill(Color.Kuring.primary)
-                .frame(width: 72, height: 72)
-                .overlay(alignment: .center) {
-                    Image("comment_circle", bundle: .module)
-                        .renderingMode(.template)
-                        .resizable()
-                        .frame(width: 57, height: 57)
-                        .foregroundStyle(.white)
+            ZStack {
+                Circle()
+                    .fill(Color.Kuring.primary)
+                    .frame(width: 64, height: 64)
+                    .shadow(radius: 5)
+                
+                VStack(alignment: .center) {
+                    Image("comment_icon", bundle: .module)
+                        .font(.system(size: 24))
+                        .foregroundColor(.white)
+                    Text("댓글")
+                        .font(.system(size: 10, weight: .medium))
+                        .foregroundColor(.white)
                 }
-                .padding(16)
-                .onTapGesture {
-                    showCommentSection = true
+                .padding(.top, 5)
+            }
+            .padding(.bottom, 20)
+            .padding(.trailing, 16)
+            .onTapGesture {
+                if accessToken.isEmpty {
+                    store.send(.showNeedsLoginAlert)
+                } else {
+                    store.send(.toggleCommentSection)
                 }
+            }
         }
     }
     

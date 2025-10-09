@@ -30,6 +30,7 @@ struct SubCommentRow: View {
             replyIcon
             
             CommentContent(
+                parentId: .constant(nil),
                 comment: comment,
                 onDelete: onDelete,
                 onReport: onReport

@@ -34,6 +34,8 @@ struct CommentMenu: View {
                     Text("신고하기")
                 } icon: {
                     Image("siren", bundle: .module)
+                        .renderingMode(.template)
+                        .foregroundStyle(Color.Kuring.body)
                 }
             }
             

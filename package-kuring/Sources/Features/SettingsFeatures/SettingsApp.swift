@@ -125,6 +125,27 @@ public struct SettingsAppFeature {
             case let .path(.element(id: id, action: .login(.delegate(.popToRoot)))):
                 state.path.removeAll()
                 return .none
+            case let .path(.element(id: id, action: .login(.delegate(.pushToTerms)))):
+                state.path.append(
+                    Path.State.signupTerms(
+                        LoginAppFeature.State()
+                    )
+                )
+                return .none
+            case let .path(.element(id: id, action: .login(.delegate(.pushToFindPassword)))):
+                state.path.append(
+                    Path.State.findPassword(
+                        EmailVerificationFeature.State()
+                    )
+                )
+                return .none
+            case let .path(.element(id: id, action: .signupTerms(.delegate(.pushToSignup)))):
+                state.path.append(
+                    Path.State.signup(
+                        EmailVerificationFeature.State()
+                    )
+                )
+                return .none
             case let .path(.element(id: id, action: .changePassword(.delegate(.popToRoot)))):
                 state.path.removeAll()
                 return .none

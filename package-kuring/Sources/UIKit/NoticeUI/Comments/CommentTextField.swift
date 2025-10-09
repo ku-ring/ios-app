@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ColorSet
+import Networks
 
 /// 댓글을 작성하는 텍스트필드 영역 뷰
 /// ```swift
@@ -17,6 +18,7 @@ import ColorSet
 ///    - calculatedHeight: 텍스트필드 높이값, 사용처에서 frame(height: $calculatedHeight)와 같이 선언
 struct CommentTextField: UIViewRepresentable {
     @Binding var text: String
+    @Binding var isReply: Bool
     @Binding var calculatedHeight: CGFloat
     
     // 최대 줄 수
@@ -50,6 +52,13 @@ struct CommentTextField: UIViewRepresentable {
 
     func updateUIView(_ uiView: UITextView, context: Context) {
         Task { @MainActor in
+            var newPlaceholder = isReply ? "대댓글 추가..." : "댓글 추가..."
+            if uiView.textColor == UIColor(Color.Kuring.caption2) {
+                if uiView.text != newPlaceholder {
+                    uiView.text = newPlaceholder
+                }
+            }
+            
             let fittingSize = uiView.sizeThatFits(CGSize(width: uiView.frame.width, height: CGFloat.infinity))
             
             let totalVerticalPadding = self.verticalPadding * 2
@@ -87,7 +96,7 @@ struct CommentTextField: UIViewRepresentable {
         
         func textViewDidEndEditing(_ textView: UITextView) {
             if textView.text.isEmpty {
-                textView.text = "댓글 추가..."
+                textView.text = parent.isReply ? "대댓글 추가..." : "댓글 추가..."
                 textView.textColor = UIColor(Color.Kuring.caption2)
             }
         }
@@ -95,7 +104,7 @@ struct CommentTextField: UIViewRepresentable {
         func recalculateHeight(for textView: UITextView) {
             guard self.lineHeight > 0 else { return }
             
-            DispatchQueue.main.async {
+            Task { @MainActor in
                 let fittingSize = textView.sizeThatFits(CGSize(width: textView.frame.width, height: CGFloat.infinity))
                 
                 let totalVerticalPadding = self.parent.verticalPadding * 2
@@ -112,8 +121,9 @@ struct CommentTextField: UIViewRepresentable {
 
 #Preview {
     @Previewable @State var text: String = ""
+    @Previewable @State var isReply: Bool = false
     @Previewable @State var textViewHeight: CGFloat = 40
     
-    CommentTextField(text: $text, calculatedHeight: $textViewHeight)
+    CommentTextField(text: $text, isReply: $isReply, calculatedHeight: $textViewHeight)
         .frame(height: textViewHeight)
 }

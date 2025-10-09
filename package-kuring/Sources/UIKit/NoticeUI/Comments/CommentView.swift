@@ -31,22 +31,40 @@ import ColorSet
 ///    - onReport: 신고시 이뤄질 액션(API)
 struct CommentView: View {
     @State var commentText: String = ""
+    @State var parentId: Int?
     @State private var textFieldHeight: CGFloat = 40
     @FocusState private var isTextFieldFocused: Bool?
+    @AppStorage("com.kuring.sdk.v2.token.accessToken") var accessToken: String = ""
     
     let comments: [CommentResult]
-    let onSendComment: (String) -> Void
+    let onSendComment: (_ content: String, _ parentId: Int?) -> Void
     let onDeleteComment: (Comment) -> Void
     let onReportComment: (Comment) -> Void
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            ScrollView(.vertical) {
-                VStack {
-                    headerView
-                    commentsListView
-                    Spacer()
-                        .frame(height: 60)
+            if comments.isEmpty {
+                VStack(alignment: .center) {
+                    Image("comment_icon", bundle: .module)
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundStyle(Color.Kuring.gray200)
+                        .frame(width: 68, height: 68)
+                    
+                    Text("공지 댓글이\n존재하지 않아요")
+                        .multilineTextAlignment(.center)
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundStyle(Color.Kuring.caption1)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                ScrollView(.vertical) {
+                    VStack {
+                        headerView
+                        commentsListView
+                        Spacer()
+                            .frame(height: 60)
+                    }
                 }
             }
             
@@ -75,6 +93,7 @@ struct CommentView: View {
         VStack(spacing: 0) {
             ForEach(comments, id: \.self) { commentResult in
                 CommentRow(
+                    parentId: $parentId,
                     commentResult: commentResult,
                     onDelete: onDeleteComment,
                     onReport: onReportComment
@@ -85,9 +104,16 @@ struct CommentView: View {
     
     private var commentInputBar: some View {
         HStack(alignment: .bottom, spacing: 12) {
-            CommentTextField(text: $commentText, calculatedHeight: $textFieldHeight)
-                .frame(height: textFieldHeight)
-                .focused($isTextFieldFocused, equals: true)
+            CommentTextField(
+                text: $commentText,
+                isReply: .init(
+                    get: { parentId != nil },
+                    set: { _ in }
+                ),
+                calculatedHeight: $textFieldHeight
+            )
+            .frame(height: textFieldHeight)
+            .focused($isTextFieldFocused, equals: true)
             
             sendButton
         }
@@ -98,14 +124,18 @@ struct CommentView: View {
      
     private var sendButton: some View {
         Button {
-            guard !commentText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            guard !commentText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                  accessToken != "" else {
                 return
             }
-            onSendComment(commentText)
+            onSendComment(commentText, parentId)
             commentText = ""
+            parentId = nil
         } label: {
             Circle()
-                .fill(Color.black.opacity(0.8))
+                .fill(
+                    accessToken == "" ? Color.Kuring.gray300 : Color.Kuring.gray400
+                )
                 .frame(width: 40, height: 40)
                 .overlay {
                     Image("arrow_up", bundle: .module)
@@ -119,7 +149,7 @@ struct CommentView: View {
 #Preview {
     CommentView(
         comments: CommentData.mock,
-        onSendComment: { comment in
+        onSendComment: { comment, parentId in
             
         },
         onDeleteComment: { comment in

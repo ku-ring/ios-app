@@ -17,22 +17,26 @@ import SwiftUI
 ///     )
 /// ```
 ///  - Parameters:
+///    - parentId: 메인 댓글의 아이디 (대댓글을 위한)
 ///    - comment: 댓글 객체
 ///    - showReplyIcon: 대댓글 아이콘을 보여줄지 정하는 값, 메인 댓글만 대댓글 아이콘
 ///    - onDelete: 삭제시 이뤄질 액션(API), Comment.isMine == true여야 삭제 가능
 ///    - onReport: 신고시 이뤄질 액션(API)
 struct CommentContent: View {
+    @Binding var parentId: Int?
     let comment: Comment
     let showReplyIcon: Bool
     let onDelete: (Comment) -> Void
     let onReport: (Comment) -> Void
     
     init(
+        parentId: Binding<Int?>,
         comment: Comment,
         showReplyIcon: Bool = false,
         onDelete: @escaping (Comment) -> Void,
         onReport: @escaping (Comment) -> Void
     ) {
+        self._parentId = parentId
         self.comment = comment
         self.showReplyIcon = showReplyIcon
         self.onDelete = onDelete
@@ -75,6 +79,9 @@ struct CommentContent: View {
                     .resizable()
                     .frame(width: 24, height: 24)
                     .foregroundStyle(Color.Kuring.gray400)
+                    .onTapGesture {
+                        parentId = parentId == nil ? comment.id : nil
+                    }
             }
             
             CommentMenu(
@@ -99,7 +106,10 @@ struct CommentContent: View {
 }
 
 #Preview {
+    @Previewable @State var parentId: Int?
+    
     CommentContent(
+        parentId: $parentId,
         comment: CommentData.mock.first!.comment,
         showReplyIcon: true,
         onDelete: { _ in },

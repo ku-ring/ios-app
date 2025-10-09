@@ -62,7 +62,12 @@ public struct SettingsApp: View {
                     SignupView(store: store)
                 }
             case .signupTerms:
-                LoginTermsAndConditionsView()
+                if let store = store.scope(
+                    state: \.signupTerms,
+                    action: \.signupTerms
+                ) {
+                    LoginTermsAndConditionsView(store: store)
+                }
             case .setPassword:
                 if let store = store.scope(
                     state: \.setPassword,

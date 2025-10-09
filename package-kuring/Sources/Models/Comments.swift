@@ -7,12 +7,16 @@
 
 import Foundation
 
-public struct CommentData: Codable {
+public struct CommentData: Codable, Equatable, Hashable {
     public let comments: [CommentResult]
     public let endCursor: String?
     public let hasNext: Bool
     
-    public init(comments: [CommentResult], endCursor: String?, hasNext: Bool) {
+    public init(
+        comments: [CommentResult],
+        endCursor: String?,
+        hasNext: Bool
+    ) {
         self.comments = comments
         self.endCursor = endCursor
         self.hasNext = hasNext
@@ -23,7 +27,10 @@ public struct CommentResult: Codable, Equatable, Hashable {
     public let comment: Comment
     public let subComments: [Comment]
     
-    public init(comment: Comment, subComments: [Comment]) {
+    public init(
+        comment: Comment,
+        subComments: [Comment]
+    ) {
         self.comment = comment
         self.subComments = subComments
     }
@@ -39,7 +46,18 @@ public struct Comment: Codable, Equatable, Hashable {
     public let destroyedAt: String?
     public let createdAt, updatedAt: String
     
-    public init(parentId: Int?, id: Int, userId: Int, nickName: String, noticeId: Int, content: String, isMine: Bool, destroyedAt: String?, createdAt: String, updatedAt: String) {
+    public init(
+        parentId: Int?,
+        id: Int,
+        userId: Int,
+        nickName: String,
+        noticeId: Int,
+        content: String,
+        isMine: Bool,
+        destroyedAt: String?,
+        createdAt: String,
+        updatedAt: String
+    ) {
         self.parentId = parentId
         self.id = id
         self.userId = userId
@@ -72,7 +90,10 @@ public struct CommentRequest: Encodable {
         case content, parentId
     }
     
-    public init(content: String, parentId: Int?) {
+    public init(
+        content: String,
+        parentId: Int?
+    ) {
         self.content = content
         self.parentId = parentId
     }
@@ -88,7 +109,11 @@ public struct ReportCommentRequest: Encodable {
         case COMMENT
     }
     
-    public init(targetId: Int, reportType: ReportType, content: String) {
+    public init(
+        targetId: Int,
+        reportType: ReportType,
+        content: String
+    ) {
         self.targetId = targetId
         self.reportType = reportType
         self.content = content

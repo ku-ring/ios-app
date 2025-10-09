@@ -18,7 +18,7 @@ extension SettingsAppFeature {
             case changePassword(SetPasswordFeature.State)
             /// 회원가입
             case signup(EmailVerificationFeature.State)
-            case signupTerms
+            case signupTerms(LoginAppFeature.State)
             case setPassword(SetPasswordFeature.State)
             case signupComplete(SignupCompleteFeature.State)
             /// 회원 탈퇴
@@ -36,7 +36,7 @@ extension SettingsAppFeature {
             case changePassword(SetPasswordFeature.Action)
             /// 회원가입
             case signup(EmailVerificationFeature.Action)
-            case signupTerms
+            case signupTerms(LoginAppFeature.Action)
             case setPassword(SetPasswordFeature.Action)
             case signupComplete(SignupCompleteFeature.Action)
             /// 회원 탈퇴
@@ -58,6 +58,9 @@ extension SettingsAppFeature {
             }
             Scope(state: \.signup, action: \.signup) {
                 EmailVerificationFeature()
+            }
+            Scope(state: \.signupTerms, action: \.signupTerms) {
+                LoginAppFeature()
             }
             Scope(state: \.setPassword, action: \.setPassword) {
                 SetPasswordFeature()
