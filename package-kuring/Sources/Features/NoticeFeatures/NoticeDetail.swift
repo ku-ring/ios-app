@@ -69,7 +69,7 @@ public struct NoticeDetailFeature {
             case pushToLogin
         }
         
-        /// 알림
+        /// 알러트
         public enum Alert: Equatable {
             /// 댓글 삭제 진행
             case deleteComment(noticeId: Int, commentId: Int)

@@ -96,7 +96,7 @@ struct CommentTextField: UIViewRepresentable {
         
         func textViewDidEndEditing(_ textView: UITextView) {
             if textView.text.isEmpty {
-                textView.text = parent.isReply ? "댓글 추가..." : "대댓글 추가..."
+                textView.text = parent.isReply ? "대댓글 추가..." : "댓글 추가..."
                 textView.textColor = UIColor(Color.Kuring.caption2)
             }
         }

@@ -16,6 +16,7 @@ public struct NoticeReportCommentFeature {
     public struct State: Equatable {
         public var commentId: Int
         public var content: String
+        @Presents public var alert: AlertState<Action.Alert>?
         
         public init(commentId: Int, content: String) {
             self.commentId = commentId
@@ -25,14 +26,18 @@ public struct NoticeReportCommentFeature {
     
     public enum Action: Equatable {
         /// 댓글 신고
-        case reportComment
+        case reportComment(_ content: String)
         case reportCommentResponse(Result<Bool, CommentsError>)
         case delegate(Delegate)
+        case alert(PresentationAction<Alert>)
         
         /// 신고 완료시 뒤로가기 위함
         public enum Delegate {
             case pop
         }
+        
+        /// 알러트
+        public enum Alert: Equatable { }
         
         public enum CommentsError: Error, Equatable {
             case error(String)
@@ -51,8 +56,8 @@ public struct NoticeReportCommentFeature {
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case .reportComment:
-                return .run { [commentId = state.commentId, content = state.content] send in
+            case .reportComment(let content):
+                return .run { [commentId = state.commentId] send in
                     do {
                         try await kuringLink.reportComment(commentId, content)
                         await send(.reportCommentResponse(.success(true)))
@@ -65,13 +70,18 @@ public struct NoticeReportCommentFeature {
                 case .success:
                     return .send(.delegate(.pop))
                 case let .failure(error):
-                    print("Report comment response error: \(error)")
+                    state.alert = AlertState {
+                        TextState("댓글 신고에 실패했어요.")
+                    }
                     return .none
                 }
             case .delegate:
                 return .none
+            case .alert:
+                return .none
             }
         }
+        .ifLet(\.$alert, action: \.alert)
     }
     
     public init() { }

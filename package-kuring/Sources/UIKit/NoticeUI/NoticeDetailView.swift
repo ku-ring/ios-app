@@ -79,7 +79,7 @@ public struct NoticeDetailView: View {
                     )
                 )
                 .onAppear {
-                    guard accessToken != "" else {
+                    guard !accessToken.isEmpty else {
                         return
                     }
                     store.send(.getComments)

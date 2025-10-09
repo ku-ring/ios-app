@@ -70,6 +70,12 @@ public struct ReportCommentView: View {
                 .padding([.horizontal, .bottom], 20)
         }
         .background(Color.Kuring.bg)
+        .alert(
+            store: store.scope(
+                state: \.$alert,
+                action: \.alert
+            )
+        )
     }
     
     private var textFieldView: some View {
@@ -120,7 +126,7 @@ public struct ReportCommentView: View {
 
     private var submitButton: some View {
         Button {
-            store.send(.reportComment)
+            store.send(.reportComment(reportText))
         } label: {
             Text("신고하기")
                 .font(.system(size: 16, weight: .semibold))
