@@ -82,8 +82,11 @@ public struct NoticeListFeature {
         /// ``NoticeAppFeature`` 으로 액션을 전달하기 위한 델리게이트
         case delegate(Delegate)
 
-        /// 공지를 가져오기 위한 네트워크 요청을 하는 경우
-        case fetchNotices
+        /// 공지를 새로고침하기 위한 네트워크 요청을 하는 경우
+        case reloadNotices
+        
+        /// 다음 페이지의 공지를 가져오기 위한 네트워크 요청을 하는 경우
+        case fetchNextPageOfNotices
 
         /// 네트워크 요청에 대한 응답을 받은 경우
         case noticesResponse(TaskResult<NoticesResult>)
@@ -113,7 +116,8 @@ public struct NoticeListFeature {
     }
 
     public enum CancelID {
-        case fetchNotices
+        case reloadNotices
+        case fetchNextPageOfNotices
     }
 
     /// 쿠링 서버 네트워크
@@ -124,9 +128,8 @@ public struct NoticeListFeature {
 
         Reduce { state, action in
             switch action {
-                // TODO: 이니셜라이저로
             case .onAppear:
-                return .send(.fetchNotices)
+                return .none
 
             case .changeDepartmentButtonTapped:
                 state.changeDepartment = DepartmentSelectorFeature.State(
@@ -155,45 +158,22 @@ public struct NoticeListFeature {
                 return .none
 
             case .changeDepartment(.dismiss):
-                return .send(.fetchNotices)
-
-            case .fetchNotices:
-                if state.provider == .emptyDepartment || state.provider.hostPrefix == "ccd" {
-                    return .none
+                return .send(.reloadNotices)
+            case .reloadNotices:
+                if state.provider != .emptyDepartment && state.provider.hostPrefix != "ccd" {
+                    state.noticeDictionary[state.provider] = State.NoticeInfo()
                 }
-                state.isLoading = true
-
-                return .run { [provider = state.provider, noticeDictionary = state.noticeDictionary] send in
-                    // TODO: 공지 데이터 저장 관련 로직은 전부 디펜던시로 옮기기
-                    let retrievalInfo = noticeDictionary[provider] ?? State.NoticeInfo()
-
-                    let department: String? = if provider.category == .학과 {
-                        provider.hostPrefix
-                    } else {
-                        nil
-                    }
-                    await send(
-                        .noticesResponse(
-                            TaskResult {
-                                let notices = try await kuringLink.fetchNotices(
-                                    retrievalInfo.loadLimit,
-                                    provider.category == .학과 
-                                    ? "dep" // TODO: korean name 도 쓸 거 고려해서 문자열 말고 좀 더 나은걸로
-                                    : provider.hostPrefix,
-                                    department,
-                                    retrievalInfo.page,
-                                    false
-                                )
-                                return Action.NoticesResult(
-                                    provider: provider,
-                                    notices: notices
-                                )
-                            }
-                        )
-                    )
-                }
-                .cancellable(id: CancelID.fetchNotices, cancelInFlight: true)
-
+                return fetchNotices(
+                    state: &state,
+                    retrievalInfo: State.NoticeInfo(),
+                    cancelID: CancelID.reloadNotices
+                )
+            case .fetchNextPageOfNotices:
+                return fetchNotices(
+                    state: &state,
+                    retrievalInfo: state.noticeDictionary[state.provider] ?? State.NoticeInfo(),
+                    cancelID: CancelID.fetchNextPageOfNotices
+                )
             case let .noticesResponse(.success(noticesResult)):
                 let provider = noticesResult.provider
                 let notices = noticesResult.notices
@@ -208,7 +188,14 @@ public struct NoticeListFeature {
 
                 state.noticeDictionary[provider] = noticeInfo
                 state.isLoading = false
-                return .none
+                
+                let effects = noticeInfo.notices
+                    .filter { state.bookmarkIDs.contains($0.id) }
+                    .map { notice in
+                        Effect<Action>.send(.delegate(.bookmarkUpdated(notice)))
+                    }
+
+                return .merge(effects)
 
             case let .noticesResponse(.failure(error)):
                 print(error.localizedDescription)
@@ -233,8 +220,7 @@ public struct NoticeListFeature {
                 state.provider = provider.category == .학과
                 ? departments.getCurrent() ?? NoticeProvider.emptyDepartment
                 : provider
-                return .send(.fetchNotices)
-
+                return .send(.reloadNotices)
             case .binding, .delegate, .changeDepartment:
                 return .none
             }
@@ -245,4 +231,44 @@ public struct NoticeListFeature {
     }
 
     public init() { }
+    
+    // MARK: - Helper function
+    private func fetchNotices(
+        state: inout State,
+        retrievalInfo: State.NoticeInfo,
+        cancelID: CancelID
+    ) -> Effect<Action> {
+        if state.provider == .emptyDepartment || state.provider.hostPrefix == "ccd" {
+            return .none
+        }
+        
+        state.isLoading = true
+        
+        return .run { [provider = state.provider] send in
+            let department: String? = if provider.category == .학과 {
+                provider.hostPrefix
+            } else {
+                nil
+            }
+            
+            await send(
+                .noticesResponse(
+                    TaskResult {
+                        let notices = try await kuringLink.fetchNotices(
+                            retrievalInfo.loadLimit,
+                            provider.category == .학과 ? "dep" : provider.hostPrefix,
+                            department,
+                            retrievalInfo.page,
+                            false
+                        )
+                        return Action.NoticesResult(
+                            provider: provider,
+                            notices: notices
+                        )
+                    }
+                )
+            )
+        }
+        .cancellable(id: cancelID, cancelInFlight: true)
+    }
 }

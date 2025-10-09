@@ -16,6 +16,8 @@ import ComposableArchitecture
 
 struct ContentView: View {
     @State var activeTab: TabBarItem = .notice
+    // 앱 최초 구동 시점에 1회 공지를 가져오기 위함
+    @Binding var didAppear: Bool
     
     @State private var noticeStore = Store(
       initialState: NoticeAppFeature.State(noticeList: NoticeListFeature.State()),
@@ -31,6 +33,10 @@ struct ContentView: View {
       initialState: SettingsAppFeature.State(),
       reducer: { SettingsAppFeature() }
     )
+
+    init(didAppear: Binding<Bool>) {
+        self._didAppear = didAppear
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -50,6 +56,17 @@ struct ContentView: View {
             .background(Color.Kuring.bg)
             .environment(\.horizontalSizeClass, .compact)
             .tabViewStyle(.page(indexDisplayMode: .never))
+            .onChange(of: activeTab) { oldValue, newValue in
+                if oldValue != newValue && newValue == .notice {
+                    noticeStore.send(.noticeList(.reloadNotices))
+                }
+            }
+            .onAppear {
+                if !didAppear {
+                    noticeStore.send(.noticeList(.reloadNotices))
+                    didAppear = true
+                }
+            }
             
             BottomTabView(activeTab: $activeTab)
         }

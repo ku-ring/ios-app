@@ -48,7 +48,7 @@ struct NoticeContentView: View {
                 }
             }
             .onAppear {
-                store.send(.onAppear) // TODO: error on the preview canvas
+                store.send(.onAppear)
             }
             .sheet(
                 item: $store.scope(
