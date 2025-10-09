@@ -104,6 +104,10 @@ public struct NoticeDetailFeature {
                 state.alert = AlertState {
                     TextState("로그인이 필요한 서비스에요")
                 } actions: {
+                    ButtonState(role: .cancel) {
+                        TextState("취소")
+                    }
+                    
                     ButtonState(
                         role: .destructive,
                         action: .pushToLogin
