@@ -80,6 +80,11 @@ struct CommentView: View {
         .padding(.top, 20)
         .padding(.bottom, 14)
         .background(Color.Kuring.bg)
+        .onChange(of: parentId) { _, newValue in
+            if newValue != nil {
+                isTextFieldFocused = true
+            }
+        }
     }
     
     private var headerView: some View {
@@ -124,13 +129,13 @@ struct CommentView: View {
      
     private var sendButton: some View {
         Button {
-            guard !commentText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
-                  accessToken != "" else {
+            guard !commentText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
                 return
             }
             onSendComment(commentText, parentId)
             commentText = ""
             parentId = nil
+            isTextFieldFocused = nil
         } label: {
             Circle()
                 .fill(

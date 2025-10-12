@@ -30,6 +30,10 @@ public struct NoticeDetailView: View {
                     CommentView(
                         comments: store.comments?.comments ?? [],
                         onSendComment: { comment, parentId in
+                            if accessToken.isEmpty {
+                                store.send(.showNeedsLoginAlert)
+                                return
+                            }
                             store.send(.addComment(content: comment, parentId: parentId))
                         },
                         onDeleteComment: { comment in
@@ -79,9 +83,6 @@ public struct NoticeDetailView: View {
                     )
                 )
                 .onAppear {
-                    guard !accessToken.isEmpty else {
-                        return
-                    }
                     store.send(.getComments)
                 }
             
@@ -104,11 +105,7 @@ public struct NoticeDetailView: View {
             .padding(.bottom, 20)
             .padding(.trailing, 16)
             .onTapGesture {
-                if accessToken.isEmpty {
-                    store.send(.showNeedsLoginAlert)
-                } else {
-                    store.send(.toggleCommentSection)
-                }
+                store.send(.toggleCommentSection)
             }
         }
     }
