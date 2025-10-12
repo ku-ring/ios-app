@@ -80,6 +80,11 @@ struct CommentView: View {
         .padding(.top, 20)
         .padding(.bottom, 14)
         .background(Color.Kuring.bg)
+        .onChange(of: parentId) { _, newValue in
+            if newValue != nil {
+                isTextFieldFocused = true
+            }
+        }
     }
     
     private var headerView: some View {
