@@ -20,11 +20,12 @@ struct CommentTextField: UIViewRepresentable {
     @Binding var text: String
     @Binding var isReply: Bool
     @Binding var calculatedHeight: CGFloat
+    @AppStorage("com.kuring.sdk.v2.token.accessToken") var accessToken: String = ""
     
     // 최대 줄 수
     let maxLines: Int = 5
     let verticalPadding: CGFloat = 11.0
-
+    
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
         textView.font = .systemFont(ofSize: 15, weight: .medium)
@@ -49,14 +50,14 @@ struct CommentTextField: UIViewRepresentable {
         
         return textView
     }
-
+    
     func updateUIView(_ uiView: UITextView, context: Context) {
         Task { @MainActor in
-            var newPlaceholder = isReply ? "대댓글 추가..." : "댓글 추가..."
-            if uiView.textColor == UIColor(Color.Kuring.caption2) {
-                if uiView.text != newPlaceholder {
-                    uiView.text = newPlaceholder
-                }
+            let parentText = context.coordinator.parent.text
+            
+            // 바인딩 값이 비었을때 placeholder 노출는 로직
+            if parentText.isEmpty {
+                setPlaceholder(for: uiView)
             }
             
             let fittingSize = uiView.sizeThatFits(CGSize(width: uiView.frame.width, height: CGFloat.infinity))
@@ -67,6 +68,26 @@ struct CommentTextField: UIViewRepresentable {
             if !(fittingSize.height >= maxHeight) {
                 self.calculatedHeight = fittingSize.height
             } 
+        }
+    }
+    
+    private func setPlaceholder(for uiView: UITextView) {
+        var newPlaceholder = accessToken == "" ? "로그인 후 댓글을 추가해보세요!" : (isReply ? "대댓글 추가..." : "댓글 추가...")
+        // placeholder모드 여부
+        let isPlaceholderMode = uiView.textColor == UIColor(Color.Kuring.caption2)
+        
+        // 입력이 없는 상태(초기 placeholder 상태)
+        if isPlaceholderMode {
+            if uiView.text != newPlaceholder {
+                uiView.text = newPlaceholder
+            }
+        }
+        // 입력이 있는 상태
+        else if !uiView.text.isEmpty && !isPlaceholderMode {
+            if uiView.text != newPlaceholder {
+                uiView.text = newPlaceholder
+                uiView.textColor = UIColor(Color.Kuring.caption2)
+            }
         }
     }
 
@@ -96,7 +117,7 @@ struct CommentTextField: UIViewRepresentable {
         
         func textViewDidEndEditing(_ textView: UITextView) {
             if textView.text.isEmpty {
-                textView.text = parent.isReply ? "대댓글 추가..." : "댓글 추가..."
+                textView.text = parent.accessToken == "" ? "로그인 후 댓글을 추가해보세요!" : (parent.isReply ? "대댓글 추가..." : "댓글 추가...")
                 textView.textColor = UIColor(Color.Kuring.caption2)
             }
         }
