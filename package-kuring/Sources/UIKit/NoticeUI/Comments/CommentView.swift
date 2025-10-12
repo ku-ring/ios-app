@@ -124,13 +124,13 @@ struct CommentView: View {
      
     private var sendButton: some View {
         Button {
-            guard !commentText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
-                  accessToken != "" else {
+            guard !commentText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
                 return
             }
             onSendComment(commentText, parentId)
             commentText = ""
             parentId = nil
+            isTextFieldFocused = nil
         } label: {
             Circle()
                 .fill(

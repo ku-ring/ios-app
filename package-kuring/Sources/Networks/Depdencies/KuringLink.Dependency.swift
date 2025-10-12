@@ -374,8 +374,7 @@ extension KuringLink: DependencyKey {
                     httpMethod: .get,
                     queryItems: queryItems,
                     httpHeaders: [
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer \(accessToken)"
+                        "Content-Type": "application/json"
                     ]
                 )
             
