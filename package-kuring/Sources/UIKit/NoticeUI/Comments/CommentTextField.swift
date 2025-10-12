@@ -55,7 +55,7 @@ struct CommentTextField: UIViewRepresentable {
         Task { @MainActor in
             let parentText = context.coordinator.parent.text
             
-            // 바인딩 값이 비었을때 placeholder 노출는 로직
+            // 바인딩 값이 비었을때 placeholder 노출하는 로직
             if parentText.isEmpty {
                 setPlaceholder(for: uiView)
             }
