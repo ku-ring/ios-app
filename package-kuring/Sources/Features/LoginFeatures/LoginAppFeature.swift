@@ -40,6 +40,9 @@ public struct LoginAppFeature {
         
         public enum Delegate: Equatable {
             case popToRoot
+            case pushToTerms
+            case pushToSignup
+            case pushToFindPassword
         }
     }
 

@@ -151,10 +151,26 @@ public struct NoticeRow: View {
 
     private var dateView: some View {
         // TODO: - 정보 재구성
-        Text(separateWithDot(notice.postedDate))
-            .font(.system(size: 14))
-            .foregroundStyle(Color.Kuring.caption1)
-            .padding(.top, 4)
+        HStack {
+            Text(separateWithDot(notice.postedDate))
+                .font(.system(size: 14))
+                .foregroundStyle(Color.Kuring.caption1)
+            
+            Spacer()
+            
+            HStack (spacing: 2) {
+                Image("comment_circle", bundle: .module)
+                    .renderingMode(.template)
+                    .resizable()
+                    .frame(width: 16, height: 16)
+                    .foregroundStyle(Color.Kuring.caption2)
+                
+                Text(notice.commentCount > 99 ? "99+" : "\(notice.commentCount)")
+                    .font(.system(size: 14))
+                    .foregroundStyle(Color.Kuring.caption1)
+            }
+        }
+        .padding(.top, 4)
     }
 
     private var bookmarkView: some View {

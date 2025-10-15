@@ -359,6 +359,81 @@ extension KuringLink: DependencyKey {
                 accessToken = ""
             }
             return isSucceed
+        },
+        getComments: { noticeId, cursor, size in
+            var queryItems: [URLQueryItem] = []
+            if let cursor {
+                queryItems.append(.init(name: "cursor", value: cursor))
+            }
+            if let size {
+                queryItems.append(.init(name: "size", value: String(size)))
+            }
+            let response: Response<CommentData> = try await satellite
+                .response(
+                    for: Path.getComments(id: noticeId).path,
+                    httpMethod: .get,
+                    queryItems: queryItems,
+                    httpHeaders: [
+                        "Content-Type": "application/json"
+                    ]
+                )
+            
+            return response.data
+        },
+        addComment: { noticeId, content, parentId in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.addComment(id: noticeId).path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ],
+                    httpBody: CommentRequest(content: content, parentId: parentId)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        editComment: { noticeId, content, commentId in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.editComment(noticeId: noticeId, commentId: commentId).path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ],
+                    httpBody: CommentRequest(content: content, parentId: nil)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        deleteComment: { noticeId, commentId in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.deleteComment(noticeId: noticeId, commentId: commentId).path,
+                    httpMethod: .delete,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ]
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        reportComment: { commentId, content in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.reportComment.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ],
+                    httpBody: ReportCommentRequest(targetId: commentId, reportType: .COMMENT, content: content)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
         }
     )
 }
@@ -474,6 +549,21 @@ extension KuringLink {
             return true
         },
         withdrawAccount: {
+            return true
+        },
+        getComments: { _, _, _ in
+            return .init(comments: [], endCursor: "", hasNext: false)
+        },
+        addComment: { _, _, _ in
+            return true
+        },
+        editComment: { _, _, _ in
+            return true
+        },
+        deleteComment: { _, _ in
+            return true
+        },
+        reportComment: { _, _ in
             return true
         }
     )

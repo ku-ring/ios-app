@@ -9,9 +9,11 @@ import SwiftUI
 import ColorSet
 import LoginFeatures
 import SettingsFeatures
+import ComposableArchitecture
 
 public struct LoginTermsAndConditionsView: View {
     @State private var didAgreeToTerms: Bool?
+    @Bindable var store: StoreOf<LoginAppFeature>
     
     public var body: some View {
         VStack {
@@ -26,14 +28,13 @@ public struct LoginTermsAndConditionsView: View {
             
             Spacer(minLength: 63)
             
-            NavigationLink(state: SettingsAppFeature.Path.State.signup(EmailVerificationFeature.State())) {
-                ActionButton(
-                    title: "다음",
-                    isActive: .constant((didAgreeToTerms ?? false))
-                )
-                .allowsHitTesting(false)
-            }
-            .allowsHitTesting((didAgreeToTerms ?? false))
+            ActionButton(
+                title: "다음",
+                isActive: .constant((didAgreeToTerms ?? false)),
+                action: {
+                    store.send(.delegate(.pushToSignup))
+                }
+            )
         }
         .padding(20)
         .background(Color.Kuring.bg)
@@ -53,7 +54,9 @@ public struct LoginTermsAndConditionsView: View {
         .padding(.top, 45)
     }
     
-    public init() {}
+    public init(store: StoreOf<LoginAppFeature>) {
+        self.store = store
+    }
 }
 
 private struct AgreementButton: View {
@@ -125,5 +128,8 @@ private enum TermsAndConditions {
 }
 
 #Preview {
-    LoginTermsAndConditionsView()
+    @Previewable @State var store: StoreOf<LoginAppFeature> = .init(initialState: LoginAppFeature.State()) {
+        LoginAppFeature()
+    }
+    LoginTermsAndConditionsView(store: store)
 }

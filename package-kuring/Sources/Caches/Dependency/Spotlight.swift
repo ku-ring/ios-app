@@ -25,7 +25,7 @@ extension Spotlight {
             attributeSet.displayName = notice.subject
             attributeSet.thumbnailData = UIImage(systemName: "AppIcon")?.pngData()
             
-            let searchableItem = CSSearchableItem(uniqueIdentifier: notice.id,
+            let searchableItem = CSSearchableItem(uniqueIdentifier: "\(notice.id)",
                                                   domainIdentifier: "com.kuring.service.bookmarks",
                                                   attributeSet: attributeSet)
             
