@@ -49,6 +49,16 @@ let package = Package(
     targets: [
         // MARK: App Library Dependencies
         .target(
+            name: "AcademicCalendarUI",
+            dependencies: [
+                "ColorSet",
+                "Caches",
+                "AcademicCalendarFeatures",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/UIKit/AcademicCalendarUI"
+        ),
+        .target(
             name: "NoticeEKEventUI",
             dependencies: [
                 "Caches"
@@ -186,6 +196,14 @@ let package = Package(
         ),
         
         // MARK: Features
+        .target(
+            name: "AcademicCalendarFeatures",
+            dependencies: [
+                "Networks",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/UIKit/AcademicCalendarFeatures"
+        ),
         .target(
             name: "BotFeatures",
             dependencies: [
