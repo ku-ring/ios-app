@@ -23,7 +23,7 @@ struct CalendarMonthView: View {
     var body: some View {
         VStack(spacing: 0) {
             ForEach(0..<numberOfWeeks, id: \.self) { weekIndex in
-                HStack(spacing: 8) {
+                HStack {
                     ForEach(0..<7) { dayIndex in
                         if let dateInfo = getDateInfo(for: weekIndex, dayIndex: dayIndex) {
                             DateCellView(
@@ -36,7 +36,7 @@ struct CalendarMonthView: View {
                                     }
                                 }
                             )
-                            .frame(maxWidth: .infinity)
+                            .frame(maxWidth: .infinity, alignment: .center)
                             .frame(height: rowHeight)
                         } else {
                             Color.clear
@@ -47,10 +47,12 @@ struct CalendarMonthView: View {
                 }
             }
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 19.5)
         .frame(width: UIScreen.main.bounds.width)
     }
-    
+}
+
+extension CalendarMonthView {
     var numberOfWeeks: Int {
         let firstDay = calendar.date(from: calendar.dateComponents([.year, .month], from: month))!
         let firstWeekday = calendar.component(.weekday, from: firstDay)
@@ -61,7 +63,7 @@ struct CalendarMonthView: View {
     }
     
     var rowHeight: CGFloat {
-        return 380.0 / CGFloat(numberOfWeeks)
+        return 306.0 / CGFloat(numberOfWeeks)
     }
     
     func getDateInfo(for weekIndex: Int, dayIndex: Int) -> DateInfo? {
@@ -81,7 +83,9 @@ struct CalendarMonthView: View {
     }
     
     func isSelected(_ date: Date) -> Bool {
-        guard let selectedDate = selectedDate else { return false }
+        guard let selectedDate = selectedDate else {
+            return false
+        }
         return calendar.isDate(date, inSameDayAs: selectedDate)
     }
     
@@ -98,7 +102,9 @@ struct CalendarMonthView: View {
         month: Date(),
         selectedDate: .constant(Date()),
         dateDots: [
-            "2025-10-22": [.green, .blue, .red]
+            "2025-10-22": [
+                .green, .blue, .red
+            ]
         ]
     )
 }

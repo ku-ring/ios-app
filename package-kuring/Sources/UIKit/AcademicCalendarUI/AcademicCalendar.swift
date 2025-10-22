@@ -17,10 +17,10 @@ struct AcademicCalendar: View {
     @State private var currentMonthIndex = 1
     
     @State private var dateDots: [String: [Color]] = [
-        "2025-8-7": [.yellow, .green, .gray],
-        "2025-8-13": [.yellow],
-        "2025-8-18": [.green],
-        "2025-8-20": [.green]
+        "2025-10-7": [.yellow, .green, .gray],
+        "2025-10-13": [.yellow],
+        "2025-10-18": [.green],
+        "2025-10-20": [.green]
     ]
     
     let calendar = Calendar.current
@@ -31,69 +31,81 @@ struct AcademicCalendar: View {
     var body: some View {
         VStack(spacing: 0) {
             VStack(spacing: 0) {
-                HStack {
-                    Text(monthYearString)
-                        .font(.system(size: 18, weight: .semibold))
-                    
-                    Spacer()
-                    
-                    HStack(spacing: 26) {
-                        Button {
-                            currentMonthIndex -= 1
-                            handleInfiniteScroll(for: currentMonthIndex)
-                        } label: {
-                            Image(systemName: "chevron.left")
-                                .foregroundColor(.green)
-                                .font(.system(size: 20))
-                        }
-                        
-                        Button {
-                            currentMonthIndex += 1
-                            handleInfiniteScroll(for: currentMonthIndex)
-                        } label: {
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.green)
-                                .font(.system(size: 20))
-                        }
-                    }
-                }
-                .padding(.horizontal, 20)
-                
-                HStack(spacing: 18) {
-                    ForEach(weekdays, id: \.self) { day in
-                        Text(day)
-                            .font(.system(size: 12, weight: .semibold))
-                            .foregroundColor(Color.Kuring.gray300)
-                            .frame(maxWidth: .infinity)
-                    }
-                }
-                .padding(.horizontal, 19.5)
-                .padding(.top, 16)
+                headerView
+                weekdaysView
             }
-            
-            ScrollViewReader { proxy in
-                TabView(selection: $currentMonthIndex) {
-                    ForEach(Array(months.enumerated()), id: \.offset) { index, month in
-                        CalendarMonthView(
-                            month: month,
-                            selectedDate: $selectedDate,
-                            dateDots: dateDots
-                        )
-                        .tag(index)
-                    }
-                }
-                .tabViewStyle(.page(indexDisplayMode: .never)) // Snap-style scroll
-                .frame(height: 380)
-                .onChangeDebounced(of: currentMonthIndex, delay: 0.3) { newIndex in
-                    handleInfiniteScroll(for: newIndex)
-                }
-                .onAppear {
-                    initializeMonths()
-                }
-            }
+            calendarContent
         }
     }
     
+    private var headerView: some View {
+        HStack {
+            Text(monthYearString)
+                .font(.system(size: 18, weight: .semibold))
+            
+            Spacer()
+            
+            HStack(spacing: 26) {
+                Button {
+                    currentMonthIndex -= 1
+                    handleInfiniteScroll(for: currentMonthIndex)
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.green)
+                        .font(.system(size: 20))
+                }
+                
+                Button {
+                    currentMonthIndex += 1
+                    handleInfiniteScroll(for: currentMonthIndex)
+                } label: {
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.green)
+                        .font(.system(size: 20))
+                }
+            }
+        }
+        .padding(.horizontal, 30)
+    }
+    
+    private var weekdaysView: some View {
+        HStack {
+            ForEach(weekdays, id: \.self) { day in
+                Text(day)
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundColor(Color.Kuring.gray300)
+                    .frame(maxWidth: .infinity)
+            }
+        }
+        .padding(.horizontal, 19.5)
+        .padding(.top, 24)
+    }
+    
+    private var calendarContent: some View {
+        ScrollViewReader { proxy in
+            TabView(selection: $currentMonthIndex) {
+                ForEach(Array(months.enumerated()), id: \.offset) { index, month in
+                    CalendarMonthView(
+                        month: month,
+                        selectedDate: $selectedDate,
+                        dateDots: dateDots
+                    )
+                    .tag(index)
+                }
+            }
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .frame(height: 306)
+            .onChangeDebounced(of: currentMonthIndex, delay: 0.3) { newIndex in
+                handleInfiniteScroll(for: newIndex)
+            }
+            .onAppear {
+                initializeMonths()
+            }
+        }
+    }
+}
+
+extension AcademicCalendar {
     var monthYearString: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "M월 yyyy"
@@ -108,7 +120,9 @@ struct AcademicCalendar: View {
     }
 
     func handleInfiniteScroll(for index: Int) {
-        guard !months.isEmpty else { return }
+        guard !months.isEmpty else {
+            return
+        }
 
         if index == 0 {
             let newPrev = calendar.date(byAdding: .month, value: -1, to: months.first!)!
