@@ -23,6 +23,7 @@ let package = Package(
                 "CommonUI",
                 "OnboardingUI",
                 "LoginUI",
+                "AcademicCalendarUI",
                 "PushNotifications",
             ]
         ),
@@ -53,6 +54,7 @@ let package = Package(
             dependencies: [
                 "ColorSet",
                 "Caches",
+                "CommonUI",
                 "AcademicCalendarFeatures",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
@@ -202,7 +204,7 @@ let package = Package(
                 "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
-            path: "Sources/UIKit/AcademicCalendarFeatures"
+            path: "Sources/Features/AcademicCalendarFeatures"
         ),
         .target(
             name: "BotFeatures",
