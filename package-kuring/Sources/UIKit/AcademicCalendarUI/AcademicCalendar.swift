@@ -7,16 +7,20 @@
 
 import SwiftUI
 import ColorSet
-import Combine
 import CommonUI
 
+/// 학사 일정 캘린더 뷰
+/// ```swift
+///   AcademicCalendar()
+/// ```
+///  - Parameters: none
 struct AcademicCalendar: View {
     @State private var currentDate = Date()
     @State private var selectedDate: Date?
     @State private var months: [Date] = []
     @State private var currentMonthIndex = 1
     
-    @State private var dateDots: [String: [Color]] = [
+    @State private var eventDots: [String: [Color]] = [
         "2025-10-7": [.yellow, .green, .gray],
         "2025-10-13": [.yellow],
         "2025-10-18": [.green],
@@ -25,8 +29,6 @@ struct AcademicCalendar: View {
     
     let calendar = Calendar.current
     let weekdays = ["일", "월", "화", "수", "목", "금", "토"]
-    
-    @State private var pageIdx = 1
     
     var body: some View {
         VStack(spacing: 0) {
@@ -48,20 +50,20 @@ struct AcademicCalendar: View {
             HStack(spacing: 26) {
                 Button {
                     currentMonthIndex -= 1
-                    handleInfiniteScroll(for: currentMonthIndex)
+                    handleMonthChange(for: currentMonthIndex)
                 } label: {
                     Image(systemName: "chevron.left")
-                        .foregroundColor(.green)
-                        .font(.system(size: 20))
+                        .foregroundColor(Color.Kuring.primary)
+                        .font(.system(size: 20, weight: .medium))
                 }
                 
                 Button {
                     currentMonthIndex += 1
-                    handleInfiniteScroll(for: currentMonthIndex)
+                    handleMonthChange(for: currentMonthIndex)
                 } label: {
                     Image(systemName: "chevron.right")
-                        .foregroundColor(.green)
-                        .font(.system(size: 20))
+                        .foregroundColor(Color.Kuring.primary)
+                        .font(.system(size: 20, weight: .medium))
                 }
             }
         }
@@ -88,7 +90,7 @@ struct AcademicCalendar: View {
                     CalendarMonthView(
                         month: month,
                         selectedDate: $selectedDate,
-                        dateDots: dateDots
+                        eventDots: eventDots
                     )
                     .tag(index)
                 }
@@ -96,7 +98,7 @@ struct AcademicCalendar: View {
             .tabViewStyle(.page(indexDisplayMode: .never))
             .frame(height: 306)
             .onChangeDebounced(of: currentMonthIndex, delay: 0.3) { newIndex in
-                handleInfiniteScroll(for: newIndex)
+                handleMonthChange(for: newIndex)
             }
             .onAppear {
                 initializeMonths()
@@ -119,7 +121,7 @@ extension AcademicCalendar {
         months = [prevMonth, currentDate, nextMonth]
     }
 
-    func handleInfiniteScroll(for index: Int) {
+    func handleMonthChange(for index: Int) {
         guard !months.isEmpty else {
             return
         }

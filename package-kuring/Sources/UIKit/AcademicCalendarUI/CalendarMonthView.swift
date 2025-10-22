@@ -7,16 +7,27 @@
 
 import SwiftUI
 
-struct DateInfo {
-    let date: Date
-    let day: Int
-    let isCurrentMonth: Bool
-}
-
+/// 학사 일정 캘린더에 하나의 달을 나타내는 뷰
+/// 하나의 달은 "DateCellView"로 이루어져있음
+/// ```swift
+///  CalendarMonthView(
+///      month: Date(),
+///      selectedDate: .constant(Date()),
+///      dateDots: [
+///          "2025-10-22": [
+///              .green, .blue, .red
+///          ]
+///      ]
+///  )
+/// ```
+///  - Parameters:
+///    - month: 해당 달의 Date 객체 (날짜 자체는 상관없음, 월만 중요함)
+///    - selectedDate: 사용자가 탭하여 선택한 날짜, 바인딩이 필요하기 때문에 주입받아야함
+///    - eventDots: 해당 날짜의 학사일정들
 struct CalendarMonthView: View {
     let month: Date
     @Binding var selectedDate: Date?
-    let dateDots: [String: [Color]]
+    let eventDots: [String: [Color]]
     
     let calendar = Calendar.current
     
@@ -93,15 +104,21 @@ extension CalendarMonthView {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-M-d"
         let dateString = formatter.string(from: date)
-        return dateDots[dateString] ?? []
+        return eventDots[dateString] ?? []
     }
+}
+
+struct DateInfo {
+    let date: Date
+    let day: Int
+    let isCurrentMonth: Bool
 }
 
 #Preview {
     CalendarMonthView(
         month: Date(),
         selectedDate: .constant(Date()),
-        dateDots: [
+        eventDots: [
             "2025-10-22": [
                 .green, .blue, .red
             ]

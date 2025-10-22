@@ -8,6 +8,27 @@
 import SwiftUI
 import ColorSet
 
+/// 학사 일정 캘린더에 하나의 날짜를 나타내는 뷰
+/// ```swift
+///   DateCellView(
+///       dateInfo: .init(
+///           date: Date(),
+///           day: 3,
+///           isCurrentMonth: true
+///       ),
+///       isSelected: true,
+///       dots: [
+///           .red, .green, .yellow
+///       ]
+///   ) {
+///       print("Tapped")
+///   }
+/// ```
+///  - Parameters:
+///    - dateInfo: 하나의 날짜의 정보를 나타내는 DateInfo 객체. 해당 날짜, day(월~일), 그리고 currentMonth 정보를 담고있음.
+///    - isSelected: 사용자가 탭하여 선택한 날짜인지 나타내는 값
+///    - dots: 해당 날짜의 학사일정들, 있다면
+///    - onTap: 날짜를 탭했을때 액션을 수행함
 struct DateCellView: View {
     let dateInfo: DateInfo
     let isSelected: Bool
