@@ -8,7 +8,23 @@
 import SwiftUI
 import ColorSet
 
-struct BottomSheetContent: View {
+/// 주요 학사 일정을 한번에 보여주는 바텀시트 뷰
+/// 높이는 **280**으로 사용
+/// ```swift
+///    .sheet(isPresented: $isPresented) {
+///        AcademicScheduleSheet(
+///            schedules: schedules,
+///            isPresented: $isPresented
+///        )
+///        .presentationDetents([.height(280)])
+///        .presentationCornerRadius(20)
+///        .presentationDragIndicator(.visible)
+///    }
+/// ```
+///  - Parameters:
+///    - schedules: 보여줄 학사 일정들
+///    - isPresented: 바텀시트 노출 여부
+struct AcademicScheduleSheet: View {
     let schedules: [ScheduleItem]
     @State var currentPage: Int = 0
     @Binding var isPresented: Bool
@@ -60,6 +76,12 @@ struct BottomSheetContent: View {
     }
 }
 
+/// 학사 일정 바텀시트에 사용되는 하나의 학사 일정 카드
+/// ```swift
+///    ScheduleCard(schedule: schedules[index])
+/// ```
+///  - Parameters:
+///    - schedule: 보여줄 학사 일정
 struct ScheduleCard: View {
     let schedule: ScheduleItem
     
@@ -106,7 +128,7 @@ struct ScheduleItem {
         .padding()
     }
     .sheet(isPresented: $isPresented) {
-        BottomSheetContent(
+        AcademicScheduleSheet(
             schedules: schedules,
             isPresented: $isPresented
         )
