@@ -26,7 +26,7 @@ struct AcademicCalendar: View {
         "2025-10-13": [.yellow],
         "2025-10-18": [.green],
         "2025-10-20": [.green],
-        "2025-11-3": [.green, .red, .green, .blue, .teal]
+        "2025-11-3": [.green, .red, .yellow, .blue, .teal]
     ]
     
     let calendar = Calendar.current
