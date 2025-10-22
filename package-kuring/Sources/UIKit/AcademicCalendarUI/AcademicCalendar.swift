@@ -20,11 +20,13 @@ struct AcademicCalendar: View {
     @State private var months: [Date] = []
     @State private var currentMonthIndex = 1
     
+    /// MOCK DATA
     @State private var eventDots: [String: [Color]] = [
         "2025-10-7": [.yellow, .green, .gray],
         "2025-10-13": [.yellow],
         "2025-10-18": [.green],
-        "2025-10-20": [.green]
+        "2025-10-20": [.green],
+        "2025-11-3": [.green, .red, .green, .blue, .teal]
     ]
     
     let calendar = Calendar.current
@@ -37,6 +39,16 @@ struct AcademicCalendar: View {
                 weekdaysView
             }
             calendarContent
+            
+            Divider()
+                .frame(height: 2)
+                .padding(.top, 22)
+            
+            if let selectedDate, !getDotsForDate(selectedDate).isEmpty, isSameMonthAndYear(selectedDate, currentDate) {
+                eventInfo(for: getDotsForDate(selectedDate))
+            } else {
+                Spacer()
+            }
         }
     }
     
@@ -105,6 +117,42 @@ struct AcademicCalendar: View {
             }
         }
     }
+    
+    @ViewBuilder
+    private func eventInfo(for events: [Color]) -> some View {
+        ScrollView(.vertical) {
+            VStack(spacing: 0) {
+                ForEach(events, id: \.self) { color in
+                    VStack(alignment: .leading) {
+                        HStack(spacing: 8) {
+                            Capsule()
+                                .fill(color)
+                                .frame(width: 4)
+                                .frame(maxHeight: .infinity)
+                            
+                            VStack(spacing: 8) {
+                                Text("수강 바구니 1차")
+                                    .foregroundStyle(Color.Kuring.title)
+                                    .font(.system(size: 15, weight: .medium))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                Text("8. 04 (월) 오전 9:30 - 8. 05 (화) 오전 9:30 ")
+                                    .foregroundStyle(Color.Kuring.caption1)
+                                    .font(.system(size: 12, weight: .medium))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                        }
+                        Divider()
+                            .padding(.top, 16)
+                    }
+                    .padding(.top, 16)
+                    .padding(.horizontal, 20)
+                }
+            }
+        }
+        .scrollBounceBehavior(.basedOnSize)
+        .scrollIndicators(.never)
+    }
 }
 
 extension AcademicCalendar {
@@ -135,6 +183,17 @@ extension AcademicCalendar {
             months.append(newNext)
         }
         currentDate = months[currentMonthIndex]
+    }
+    
+    func getDotsForDate(_ date: Date) -> [Color] {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-M-d"
+        let dateString = formatter.string(from: date)
+        return eventDots[dateString] ?? []
+    }
+    
+    func isSameMonthAndYear(_ d1: Date, _ d2: Date) -> Bool {
+        calendar.isDate(d1, equalTo: d2, toGranularity: .month)
     }
 }
 
