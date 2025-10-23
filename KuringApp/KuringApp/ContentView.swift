@@ -12,6 +12,7 @@ import SettingsUI
 import NoticeFeatures
 import BookmarkFeatures
 import SettingsFeatures
+import AcademicCalendarUI
 import ComposableArchitecture
 
 struct ContentView: View {
@@ -44,8 +45,8 @@ struct ContentView: View {
                 switch activeTab {
                 case .notice:
                     NoticeApp(store: noticeStore)
-                case .archive:
-                    BookmarkApp(store: bookmarkStore)
+                case .calendar:
+                    AcademicCalendar()
                 case .campusMap:
                     CampusApp()
                 case .settings:

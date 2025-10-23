@@ -9,7 +9,7 @@ import SwiftUI
 
 enum TabBarItem: Hashable, CaseIterable {
     case notice
-    case archive
+    case calendar
     case campusMap
     case settings
     
@@ -17,8 +17,8 @@ enum TabBarItem: Hashable, CaseIterable {
         switch self {
         case .notice:
             return "공지사항"
-        case .archive:
-            return "공지보관함"
+        case .calendar:
+            return "학사일정"
         case .campusMap:
             return "캠퍼스맵"
         case .settings:
@@ -30,8 +30,8 @@ enum TabBarItem: Hashable, CaseIterable {
         switch self {
         case .notice:
             return .listFill
-        case .archive:
-            return .archiveFill
+        case .calendar:
+            return .calendarFill
         case .campusMap:
             return .mapPinFill
         case .settings:
@@ -43,8 +43,8 @@ enum TabBarItem: Hashable, CaseIterable {
         switch self {
         case .notice:
             return .list
-        case .archive:
-            return .archive
+        case .calendar:
+            return .calendar
         case .campusMap:
             return .mapPin
         case .settings:

@@ -14,7 +14,7 @@ import CommonUI
 ///   AcademicCalendar()
 /// ```
 ///  - Parameters: none
-struct AcademicCalendar: View {
+public struct AcademicCalendar: View {
     @State private var currentDate = Date()
     @State private var selectedDate: Date?
     @State private var months: [Date] = []
@@ -32,7 +32,9 @@ struct AcademicCalendar: View {
     let calendar = Calendar.current
     let weekdays = ["일", "월", "화", "수", "목", "금", "토"]
     
-    var body: some View {
+    public init() { }
+    
+    public var body: some View {
         VStack(spacing: 0) {
             VStack(spacing: 0) {
                 headerView
@@ -50,6 +52,9 @@ struct AcademicCalendar: View {
                 Spacer()
             }
         }
+        .background(Color.Kuring.bg)
+        .navigationTitle("더보기")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     private var headerView: some View {
