@@ -105,4 +105,8 @@ public struct KuringLink {
     public var deleteComment: (_ noticeId: Int, _ commentId: Int) async throws -> Bool
     /// 댓글 신고
     public var reportComment: (_ commentId: Int, _ content: String) async throws -> Bool
+    /// 학사일정 조회
+    public var fetchAcademicEvents: (_ startDate: String?, _ endDate: String?) async throws -> [AcademicEvent]
+    /// 학사일정 알림 설정
+    public var setAcademicEventPush: (_ enabled: Bool) async throws -> Bool
 }
