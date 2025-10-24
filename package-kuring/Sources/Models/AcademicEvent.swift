@@ -8,11 +8,11 @@
 import Foundation
 
 /// 학사 일정 객체
-public struct AcademicEvent: Codable {
-    let id: Int
-    let eventUid, summary: String
-    let description: String?
-    let category, startTime, endTime: String
+public struct AcademicEvent: Codable, Equatable, Hashable {
+    public let id: Int
+    public let eventUid, summary: String
+    public let description: String?
+    public let category, startTime, endTime: String
 }
 
 /// 학사 일정 알림 설정 (서버로 보내는)

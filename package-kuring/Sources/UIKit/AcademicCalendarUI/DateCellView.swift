@@ -5,24 +5,22 @@
 //  Created by Jung Hwan Park on 10/22/25.
 //
 
+import Models
 import SwiftUI
 import ColorSet
 
 /// 학사 일정 캘린더에 하나의 날짜를 나타내는 뷰
 /// ```swift
-///   DateCellView(
-///       dateInfo: .init(
-///           date: Date(),
-///           day: 3,
-///           isCurrentMonth: true
-///       ),
-///       isSelected: true,
-///       dots: [
-///           .red, .green, .yellow
-///       ]
-///   ) {
-///       print("Tapped")
-///   }
+///    DateCellView(
+///        dateInfo: dateInfo,
+///        isSelected: isSelected(dateInfo.date),
+///        events: getEventsForDate(dateInfo.date),
+///        onTap: {
+///            if dateInfo.isCurrentMonth {
+///                selectedDate = dateInfo.date
+///            }
+///        }
+///    )
 /// ```
 ///  - Parameters:
 ///    - dateInfo: 하나의 날짜의 정보를 나타내는 DateInfo 객체. 해당 날짜, day(월~일), 그리고 currentMonth 정보를 담고있음.
@@ -32,7 +30,7 @@ import ColorSet
 struct DateCellView: View {
     let dateInfo: DateInfo
     let isSelected: Bool
-    let dots: [Color]
+    let events: [AcademicEvent]
     let onTap: () -> Void
     
     var body: some View {
@@ -47,11 +45,11 @@ struct DateCellView: View {
                             .frame(width: 26, height: 26)
                     )
                 
-                if !dots.isEmpty {
+                if !events.isEmpty {
                     HStack(spacing: 0) {
-                        ForEach(0..<dots.count, id: \.self) { index in
+                        ForEach(0..<events.count, id: \.self) { index in
                             Rectangle()
-                                .fill(dots[index])
+                                .fill(.green)
                                 .frame(width: 5, height: 5)
                         }
                     }
@@ -72,9 +70,7 @@ struct DateCellView: View {
             isCurrentMonth: true
         ),
         isSelected: true,
-        dots: [
-            .red, .green, .yellow
-        ]
+        events: []
     ) {
         print("Tapped")
     }
