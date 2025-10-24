@@ -60,8 +60,10 @@ struct CalendarMonthView: View {
     }
 }
 
+// MARK: - Helper functions
 extension CalendarMonthView {
-    var numberOfWeeks: Int {
+    // 해당 월은 몇주로 이루어져있나
+    private var numberOfWeeks: Int {
         let firstDay = calendar.date(from: calendar.dateComponents([.year, .month], from: month))!
         let firstWeekday = calendar.component(.weekday, from: firstDay)
         let daysInMonth = calendar.range(of: .day, in: .month, for: month)!.count
@@ -70,11 +72,13 @@ extension CalendarMonthView {
         return Int(ceil(Double(totalDays) / 7.0))
     }
     
-    var rowHeight: CGFloat {
+    // 캘린더 높이는 고정, 행의 높이는 동적임
+    private var rowHeight: CGFloat {
         return 306.0 / CGFloat(numberOfWeeks)
     }
     
-    func getDateInfo(for weekIndex: Int, dayIndex: Int) -> DateInfo? {
+    // 몇번째 주인지, 그리고 날짜 인덱스(0~6)을 파라미터로 받고, 사용하기 쉬운 DateInfo라는 객체롴 반환.
+    private func getDateInfo(for weekIndex: Int, dayIndex: Int) -> DateInfo? {
         let firstDay = calendar.date(from: calendar.dateComponents([.year, .month], from: month))!
         let firstWeekday = calendar.component(.weekday, from: firstDay)
         
@@ -90,14 +94,14 @@ extension CalendarMonthView {
         return DateInfo(date: date, day: day, isCurrentMonth: isCurrentMonth)
     }
     
-    func isSelected(_ date: Date) -> Bool {
+    private func isSelected(_ date: Date) -> Bool {
         guard let selectedDate = selectedDate else {
             return false
         }
         return calendar.isDate(date, inSameDayAs: selectedDate)
     }
     
-    func getEventsForDate(_ date: Date) -> [AcademicEvent] {
+    private func getEventsForDate(_ date: Date) -> [AcademicEvent] {
         let midnight = calendar.startOfDay(for: date)
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
@@ -107,6 +111,10 @@ extension CalendarMonthView {
     }
 }
 
+/// 캘린더에 그리기 위해 필요한 정보를 담고있음.
+/// - date: 날짜
+/// - day: 날짜의 '일'에 해달하는 부분 (7일, 31일, 등)
+/// - isCurrentMonth: 해당 월에 속하지 않은 일자인데 표시할때도 있음. 이때는 회색으로 표시해야함. 예를 들어 10월 첫째중 9월 31일이 보이는 경우, 등
 struct DateInfo {
     let date: Date
     let day: Int

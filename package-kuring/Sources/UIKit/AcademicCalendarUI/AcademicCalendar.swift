@@ -47,7 +47,7 @@ public struct AcademicCalendar: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             store.send(.onAppear)
-            store.send(.fetchAcademicSchedule)
+            store.send(.fetchAcademicSchedule) // FIXME: use cached schedule
         }
     }
     

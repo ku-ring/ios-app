@@ -14,24 +14,27 @@ import ComposableArchitecture
 public struct AcademicCalendarFeature {
     @ObservableState
     public struct State: Equatable {
+        /// 현재 선택된 월
         public var currentDate = Date()
+        /// 현재 선택된 날짜
         public var selectedDate: Date?
         public var months: [Date] = []
         public var currentMonthIndex = 1
         
+        /// 학사 일정
         public var events: [AcademicEvent] = []
-        
-        let calendar = Calendar.current
         
         public var monthYearString: String {
             let formatter = DateFormatter()
             formatter.dateFormat = "M월 yyyy"
-            formatter.locale = Locale(identifier: "ko_KR")
             return formatter.string(from: currentDate)
         }
         
         public var eventsForSelectedDate: [AcademicEvent] {
-            guard let selectedDate, calendar.isDate(selectedDate, equalTo: currentDate, toGranularity: .month) else {
+            let calendar = Calendar.current
+            guard let selectedDate,
+                  calendar.isDate(selectedDate, equalTo: currentDate, toGranularity: .month)
+            else {
                 return []
             }
             
@@ -39,8 +42,7 @@ public struct AcademicCalendarFeature {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
             let dateString = formatter.string(from: midnight)
-            
-            return events.filter({ $0.startTime == dateString })
+            return events.filter { $0.startTime == dateString || $0.endTime == dateString }
         }
         
         public init() {}
@@ -53,7 +55,7 @@ public struct AcademicCalendarFeature {
         case nextMonthTapped
         case monthChanged(Int)
         case selectDate(Date)
-        
+        /// 학사 일정 API
         case fetchAcademicSchedule
         case fetchAcademicScheduleResponse(Result<[AcademicEvent], CalendarKuringError>)
 
@@ -119,6 +121,7 @@ public struct AcademicCalendarFeature {
 }
 
 extension AcademicCalendarFeature {
+    // 기본적으로 3달만 보유
     private func initializeMonths(state: inout State) -> Effect<Action> {
         let prevMonth = calendar.date(byAdding: .month, value: -1, to: state.currentDate) ?? state.currentDate
         let nextMonth = calendar.date(byAdding: .month, value: 1, to: state.currentDate) ?? state.currentDate
@@ -126,6 +129,7 @@ extension AcademicCalendarFeature {
         return .none
     }
 
+    // 월이 바뀌는 상황에 사용
     private func handleMonthChange(for index: Int, state: inout State) -> Effect<Action> {
         guard !state.months.isEmpty else { return .none }
         
@@ -142,6 +146,7 @@ extension AcademicCalendarFeature {
         return .none
     }
     
+    // 학사일정 API 태울때 사용. 1년(현재 날짜 - 6개월 ~ 현재 날짜 + 6개월)치의 일정을 가져오기 위함
     private func returnStartAndEndDate() -> (start: String?, end: String?) {
         let calendar = Calendar.current
         let today = Date()
