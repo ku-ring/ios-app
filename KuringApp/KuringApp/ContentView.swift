@@ -7,13 +7,13 @@ import SwiftUI
 import ColorSet
 import CampusUI
 import NoticeUI
-import BookmarkUI
 import SettingsUI
 import NoticeFeatures
 import BookmarkFeatures
 import SettingsFeatures
 import AcademicCalendarUI
 import ComposableArchitecture
+import AcademicCalendarFeatures
 
 struct ContentView: View {
     @State var activeTab: TabBarItem = .notice
@@ -25,9 +25,9 @@ struct ContentView: View {
       reducer: { NoticeAppFeature()._printChanges() }
     )
     
-    @State private var bookmarkStore = Store(
-      initialState: BookmarkAppFeature.State(bookmarkList: BookmarkListFeature.State()),
-      reducer: { BookmarkAppFeature() }
+    @State private var calendarStore = Store(
+      initialState: AcademicCalendarFeature.State(),
+      reducer: { AcademicCalendarFeature() }
     )
     
     @State private var settingsStore = Store(
@@ -46,7 +46,7 @@ struct ContentView: View {
                 case .notice:
                     NoticeApp(store: noticeStore)
                 case .calendar:
-                    AcademicCalendar()
+                    AcademicCalendar(store: calendarStore)
                 case .campusMap:
                     CampusApp()
                 case .settings:
