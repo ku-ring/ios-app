@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ColorSet
 
 /// 학사 일정 객체
 public struct AcademicEvent: Codable, Equatable, Hashable {

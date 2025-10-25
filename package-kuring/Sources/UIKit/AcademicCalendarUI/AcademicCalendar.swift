@@ -120,7 +120,7 @@ public struct AcademicCalendar: View {
                     VStack(alignment: .leading) {
                         HStack(spacing: 8) {
                             Capsule()
-                                .fill(.green)
+                                .fill((AcademicEventCategory(rawValue: event.category) ?? .etc).color)
                                 .frame(width: 4)
                                 .frame(maxHeight: .infinity)
                             
@@ -130,7 +130,7 @@ public struct AcademicCalendar: View {
                                     .font(.system(size: 15, weight: .medium))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 
-                                Text("\(event.startTime) - \(event.endTime)")
+                                Text("\(formatKoreanDateString(event.startTime)) - \(formatKoreanDateString(event.endTime))")
                                     .foregroundStyle(Color.Kuring.caption1)
                                     .font(.system(size: 12, weight: .medium))
                                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -146,6 +146,23 @@ public struct AcademicCalendar: View {
         }
         .scrollBounceBehavior(.basedOnSize)
         .scrollIndicators(.never)
+    }
+}
+
+extension AcademicCalendar {
+    private func formatKoreanDateString(_ dateString: String) -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+
+        guard let date = inputFormatter.date(from: dateString) else {
+            return dateString
+        }
+
+        let outputFormatter = DateFormatter()
+        outputFormatter.locale = Locale(identifier: "ko_KR")
+        outputFormatter.dateFormat = "M.dd (E) a h:mm"
+
+        return outputFormatter.string(from: date)
     }
 }
 

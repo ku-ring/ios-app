@@ -45,17 +45,20 @@ struct DateCellView: View {
                             .frame(width: 26, height: 26)
                     )
                 
-                if !events.isEmpty {
-                    HStack(spacing: 0) {
-                        ForEach(0..<events.count, id: \.self) { index in
+                HStack(spacing: 0) {
+                    if !events.isEmpty {
+                        ForEach(events, id: \.id) { event in
                             Rectangle()
-                                .fill(.green)
+                                .fill((AcademicEventCategory(rawValue: event.category) ?? .etc).color)
                                 .frame(width: 5, height: 5)
                         }
+                    } else {
+                        Spacer()
+                            .frame(width: 5, height: 5)
                     }
-                    .clipShape(Capsule())
-                    .padding(.top, 4)
                 }
+                .clipShape(Capsule())
+                .padding(.top, 4)
             }
         }
         .buttonStyle(PlainButtonStyle())
