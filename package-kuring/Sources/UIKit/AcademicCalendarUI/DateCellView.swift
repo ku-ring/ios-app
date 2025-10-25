@@ -47,7 +47,7 @@ struct DateCellView: View {
                 
                 HStack(spacing: 0) {
                     if !events.isEmpty {
-                        ForEach(events, id: \.id) { event in
+                        ForEach(events.prefix(6), id: \.id) { event in
                             Rectangle()
                                 .fill((AcademicEventCategory(rawValue: event.category) ?? .etc).color)
                                 .frame(width: 5, height: 5)
