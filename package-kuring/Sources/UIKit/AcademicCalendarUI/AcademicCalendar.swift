@@ -43,11 +43,10 @@ public struct AcademicCalendar: View {
             }
         }
         .background(Color.Kuring.bg)
-        .navigationTitle("더보기")
+        .navigationTitle("학사 일정")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             store.send(.onAppear)
-            store.send(.fetchAcademicSchedule) // FIXME: use cached schedule
         }
     }
     

@@ -5,9 +5,13 @@
 //  Created by Jung Hwan Park on 10/23/25.
 //
 
+
+import Caches
 import Models
 import SwiftUI
 import ColorSet
+import Dependencies
+import SwiftData
 
 /// 주요 학사 일정을 한번에 보여주는 바텀시트 뷰
 /// 높이는 **280**으로 사용
@@ -31,10 +35,12 @@ public struct AcademicScheduleSheet: View {
     @Binding var isPresented: Bool
     
     public init(
-        events: [AcademicEvent],
         isPresented: Binding<Bool>
     ) {
-        self.events = events
+        @Dependency(\.academicSchedules) var academicDB
+        let cachedEvents = ((try? academicDB.fetch(.init())?.events ?? []) ?? []).map(AcademicEvent.init(from:))
+        
+        self.events = cachedEvents.filter { $0.overlapsWithCurrentWeek() }
         self._isPresented = isPresented
     }
     
@@ -83,6 +89,34 @@ public struct AcademicScheduleSheet: View {
             .padding(.top, 24)
         }
         .background(Color.Kuring.bg)
+    }
+}
+
+private extension AcademicEvent {
+    func overlapsWithCurrentWeek() -> Bool {
+        let calendar = Calendar.current
+        let today = Date()
+        
+        guard let weekInterval = calendar.dateInterval(of: .weekOfYear, for: today) else {
+            return false
+        }
+        
+        let weekStart = weekInterval.start
+        let weekEnd = weekInterval.end
+        
+        guard let eventStart = toDate(startTime),
+              let eventEnd = toDate(endTime) else {
+            return false
+        }
+        
+        return eventStart < weekEnd && eventEnd >= weekStart
+    }
+    
+    func toDate(_ date: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        return formatter.date(from: date)
     }
 }
 
@@ -165,12 +199,9 @@ extension ScheduleCard {
         .padding()
     }
     .sheet(isPresented: $isPresented) {
-        AcademicScheduleSheet(
-            events: events,
-            isPresented: $isPresented
-        )
-        .presentationDetents([.height(280)])
-        .presentationCornerRadius(20)
-        .presentationDragIndicator(.visible)
+        AcademicScheduleSheet(isPresented: $isPresented)
+            .presentationDetents([.height(280)])
+            .presentationCornerRadius(20)
+            .presentationDragIndicator(.visible)
     }
 }

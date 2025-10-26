@@ -67,7 +67,6 @@ public struct NoticeApp: View {
             }
             .sheet(isPresented: $store.isAcademicSchedulePresented) {
                 AcademicScheduleSheet(
-                    events: (store.academicSchedule?.events ?? []).map(AcademicEvent.init(from:)),
                     isPresented: $store.isAcademicSchedulePresented
                 )
                 .presentationDetents([.height(280)])

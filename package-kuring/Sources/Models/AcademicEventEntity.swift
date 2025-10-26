@@ -19,6 +19,9 @@ public final class AcademicEventEntity {
     public var startTime: String
     public var endTime: String
     
+    @Relationship(inverse: \AcademicScheduleEntity.events)
+    public var schedule: AcademicScheduleEntity?
+    
     public init(
         id: Int,
         eventUid: String,
@@ -43,12 +46,13 @@ public final class AcademicEventEntity {
 public final class AcademicScheduleEntity {
     @Attribute(.unique) public var id: String
     public var lastUpdated: Date
+    public var isComplete: Bool = false
     @Relationship(deleteRule: .cascade) public var events: [AcademicEventEntity]
     
     public init(
         id: String = "main",
         lastUpdated: Date = .now,
-        events: [AcademicEventEntity] = []
+        events: [AcademicEventEntity]
     ) {
         self.id = id
         self.lastUpdated = lastUpdated

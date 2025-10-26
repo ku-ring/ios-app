@@ -5,9 +5,11 @@
 //  Created by Jung Hwan Park on 10/23/25.
 //
 
+import Caches
 import Models
 import Networks
 import Foundation
+import Dependencies
 import ComposableArchitecture
 
 @Reducer
@@ -45,6 +47,34 @@ public struct AcademicCalendarFeature {
             return events.filter { $0.startTime <= dateString && dateString <= $0.endTime }
         }
         
+        mutating func fetchAcademicSchedule() -> Bool {
+            @Dependency(\.academicSchedules) var academicDB
+            
+            do {
+                let schedule = try academicDB.fetch(.init())
+                self.events = (schedule?.events ?? []).map(AcademicEvent.init(from:))
+                return schedule?.isComplete ?? false
+            } catch {
+                print("❌ 캐싱된 학사 일정을 가져오는데 실패 했습니다: \(error)")
+                return false
+            }
+        }
+        
+        mutating func updateNewSchedule(from apiEvents: [AcademicEvent], isComplete: Bool = false) {
+            @Dependency(\.academicSchedules) var academicDB
+
+            let entities = apiEvents.map(AcademicEventEntity.init(from:))
+            let schedule = AcademicScheduleEntity(lastUpdated: .now, events: entities)
+            schedule.isComplete = isComplete
+            
+            do {
+                try academicDB.add(schedule)
+                print("✅ \(entities.count)개의 학사 일정 추가를 성공했습니다")
+            } catch {
+                print("❌ 힉사일정을 SwiftData에 추가하는데 실패했습니다: \(error)")
+            }
+        }
+        
         public init() {}
     }
 
@@ -56,7 +86,7 @@ public struct AcademicCalendarFeature {
         case monthChanged(Int)
         case selectDate(Date)
         /// 학사 일정 API
-        case fetchAcademicSchedule
+        case fetchEntireAcademicSchedule
         case fetchAcademicScheduleResponse(Result<[AcademicEvent], CalendarKuringError>)
 
         public enum CalendarKuringError: Error, Equatable {
@@ -80,6 +110,12 @@ public struct AcademicCalendarFeature {
         Reduce { state, action in
             switch action {
             case .onAppear:
+                if !state.fetchAcademicSchedule() {
+                    return .concatenate([
+                        initializeMonths(state: &state),
+                        .send(.fetchEntireAcademicSchedule)
+                    ])
+                }
                 return initializeMonths(state: &state)
             case .previousMonthTapped:
                 state.currentMonthIndex -= 1
@@ -92,11 +128,10 @@ public struct AcademicCalendarFeature {
             case let .selectDate(date):
                 state.selectedDate = date
                 return .none
-            case .fetchAcademicSchedule:
+            case .fetchEntireAcademicSchedule:
                 return .run { send in
                     do {
-                        let startAndEnd = returnStartAndEndDate()
-                        let result = try await kuringLink.fetchAcademicEvents(startAndEnd.start, startAndEnd.end)
+                        let result = try await kuringLink.fetchAcademicEvents(nil, nil)
                         await send(.fetchAcademicScheduleResponse(.success(result)))
                     } catch {
                         await send(.fetchAcademicScheduleResponse(.failure(.error(error.localizedDescription))))
@@ -106,6 +141,7 @@ public struct AcademicCalendarFeature {
                 switch result {
                 case .success(let events):
                     state.events = events
+                    state.updateNewSchedule(from: events, isComplete: true)
                     return .none
                 case .failure(let error):
                     print("Error: \(error)")
@@ -144,25 +180,5 @@ extension AcademicCalendarFeature {
         
         state.currentDate = state.months[state.currentMonthIndex]
         return .none
-    }
-    
-    // 학사일정 API 태울때 사용. 1년(현재 날짜 - 6개월 ~ 현재 날짜 + 6개월)치의 일정을 가져오기 위함
-    private func returnStartAndEndDate() -> (start: String?, end: String?) {
-        let calendar = Calendar.current
-        let today = Date()
-
-        guard let startDate = calendar.date(byAdding: .month, value: -6, to: today),
-              let endDate = calendar.date(byAdding: .month, value: 6, to: today) else {
-            return (nil, nil)
-        }
-
-        let formatter = DateFormatter()
-        formatter.calendar = calendar
-        formatter.dateFormat = "yyyy-MM-dd"
-
-        return (
-            start: formatter.string(from: startDate),
-            end: formatter.string(from: endDate)
-        )
     }
 }
