@@ -4,6 +4,7 @@
 //
 
 import Models
+import SwiftData
 import LoginFeatures
 import DepartmentFeatures
 import SubscriptionFeatures
@@ -13,8 +14,10 @@ import ComposableArchitecture
 public struct NoticeAppFeature {
     @ObservableState
     public struct State: Equatable {
+        /// 학사일정 바텀시트
+        public var isAcademicSchedulePresented: Bool = false
+        
         // MARK: 네비게이션
-
         /// 루트
         public var noticeList = NoticeListFeature.State()
         /// 스택 네비게이션
@@ -22,6 +25,13 @@ public struct NoticeAppFeature {
         public var signup = EmailVerificationFeature.State()
         /// 트리 네비게이션 - ``SubscriptionAppFeature``
         @Presents public var changeSubscription: SubscriptionAppFeature.State?
+        
+        /// 학사일정 SwiftData 가져올때 사용
+        var fetchDescriptor: FetchDescriptor<AcademicScheduleEntity> {
+            return .init()
+        }
+        /// 학사일정 SwiftData 엔티티
+        public var academicSchedule: AcademicScheduleEntity?
 
         public init(
             noticeList: NoticeListFeature.State = NoticeListFeature.State(),
@@ -39,9 +49,22 @@ public struct NoticeAppFeature {
                 print("북마크 가져오기를 실패했어요: \(error.localizedDescription)")
             }
         }
+        
+        mutating func fetchAcademicEvents() {
+            @Dependency(\.academicSchedules) var academicDB
+            
+            do {
+                let events = try academicDB.fetch(self.fetchDescriptor)
+                self.academicSchedule = events
+            } catch {
+                print("❌ 캐싱된 학사 일정을 가져오는데 실패 했습니다: \(error)")
+            }
+        }
     }
 
-    public enum Action: Equatable {
+    public enum Action: BindableAction, Equatable {
+        case binding(BindingAction<State>)
+        case onAppear
         /// 루트(``NoticeListFeature``) 액션
         case noticeList(NoticeListFeature.Action)
 
@@ -71,8 +94,16 @@ public struct NoticeAppFeature {
             EmailVerificationFeature()
         }
         
+        BindingReducer()
+        
         Reduce { state, action in
             switch action {
+            case .onAppear:
+                state.fetchAcademicEvents()
+                if let schedule = state.academicSchedule, !schedule.events.isEmpty {
+                    state.isAcademicSchedulePresented = true
+                }
+                return .none
             case .noticeList(.onAppear):
                 // 북마크 상태 동기화
                 @Dependency(\.bookmarks) var bookmarks
@@ -217,7 +248,7 @@ public struct NoticeAppFeature {
                     )
                 )
                 return .none
-            case .path, .noticeList, .changeSubscription, .signup:
+            case .path, .noticeList, .changeSubscription, .signup, .binding:
                 return .none
             }
         }

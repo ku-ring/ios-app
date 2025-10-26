@@ -37,8 +37,8 @@ struct DateCellView: View {
         Button(action: onTap) {
             VStack(spacing: 4) {
                 Text("\(dateInfo.day)")
-                    .font(.system(size: 16))
-                    .foregroundColor(isSelected ? Color.Kuring.primary : (dateInfo.isCurrentMonth ? Color.Kuring.title : Color.Kuring.gray300))
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(dateTextColor())
                     .background(
                         Circle()
                             .fill(isSelected ? Color.Kuring.primarySelected : Color.clear)
@@ -62,6 +62,20 @@ struct DateCellView: View {
             }
         }
         .buttonStyle(PlainButtonStyle())
+    }
+}
+
+extension DateCellView {
+    private func dateTextColor() -> Color {
+        if Calendar.current.isDateInToday(dateInfo.date) {
+            return Color.Kuring.primary
+        }
+        
+        if isSelected {
+            return Color.Kuring.primary
+        }
+        
+        return dateInfo.isCurrentMonth ? Color.Kuring.title : Color.Kuring.gray300
     }
 }
 

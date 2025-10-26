@@ -107,7 +107,7 @@ extension CalendarMonthView {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         let dateString = formatter.string(from: midnight)
         
-        return events.filter({ $0.startTime == dateString })
+        return events.filter { $0.startTime <= dateString && dateString <= $0.endTime }
     }
 }
 
