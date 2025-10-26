@@ -10,7 +10,7 @@ import SwiftData
 import Models
 
 public struct AcademicScheduleDB {
-    public var fetchAll: @Sendable (FetchDescriptor<AcademicScheduleEntity>) throws -> [AcademicScheduleEntity]
+    public var fetch: @Sendable (FetchDescriptor<AcademicScheduleEntity>) throws -> AcademicScheduleEntity?
     public var add: @Sendable (AcademicScheduleEntity) throws -> Void
     public var delete: @Sendable (AcademicScheduleEntity) throws -> Void
     public var update: @Sendable (AcademicScheduleEntity, [AcademicEventEntity]) throws -> Void
@@ -25,12 +25,16 @@ public struct AcademicScheduleDB {
 
 extension AcademicScheduleDB: DependencyKey {
     public static let liveValue = Self(
-        fetchAll: { descriptor in
-            @Dependency(\.swiftData.context) var modelContext
-            let context = try modelContext()
-            return try context.fetch(descriptor)
+        fetch: { descriptor in
+            do {
+                @Dependency(\.swiftData.context) var modelContext
+                let context = try modelContext()
+                let descriptor = FetchDescriptor<AcademicScheduleEntity>()
+                return try context.fetch(descriptor).first
+            } catch {
+                throw DBError.fetch
+            }
         },
-        
         add: { schedule in
             do {
                 @Dependency(\.swiftData.context) var modelContext
@@ -41,7 +45,6 @@ extension AcademicScheduleDB: DependencyKey {
                 throw DBError.add
             }
         },
-        
         delete: { schedule in
             do {
                 @Dependency(\.swiftData.context) var modelContext
@@ -70,14 +73,14 @@ extension AcademicScheduleDB: DependencyKey {
 
 extension AcademicScheduleDB: TestDependencyKey {
     public static let testValue = Self(
-        fetchAll: unimplemented("\(Self.self).fetchAll"),
+        fetch: unimplemented("\(Self.self).fetch"),
         add: unimplemented("\(Self.self).add"),
         delete: unimplemented("\(Self.self).delete"),
         update: unimplemented("\(Self.self).update")
     )
     
     public static let noop = Self(
-        fetchAll: { _ in [] },
+        fetch: { _ in nil },
         add: { _ in },
         delete: { _ in },
         update: { _, _ in }

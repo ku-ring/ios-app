@@ -42,7 +42,7 @@ public struct AcademicCalendarFeature {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
             let dateString = formatter.string(from: midnight)
-            return events.filter { $0.startTime == dateString || $0.endTime == dateString }
+            return events.filter { $0.startTime <= dateString && dateString <= $0.endTime }
         }
         
         public init() {}

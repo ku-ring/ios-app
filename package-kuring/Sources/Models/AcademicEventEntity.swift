@@ -41,11 +41,15 @@ public final class AcademicEventEntity {
 /// 모든 학사일정과 마지막으로 갱신된 시간을 담고있는 객체
 @Model
 public final class AcademicScheduleEntity {
-    @Attribute(.unique) public var id: UUID
+    @Attribute(.unique) public var id: String
     public var lastUpdated: Date
     @Relationship(deleteRule: .cascade) public var events: [AcademicEventEntity]
     
-    public init(id: UUID = UUID(), lastUpdated: Date = .now, events: [AcademicEventEntity] = []) {
+    public init(
+        id: String = "main",
+        lastUpdated: Date = .now,
+        events: [AcademicEventEntity] = []
+    ) {
         self.id = id
         self.lastUpdated = lastUpdated
         self.events = events
@@ -53,7 +57,7 @@ public final class AcademicScheduleEntity {
 }
 
 extension AcademicEventEntity {
-    convenience init(from event: AcademicEvent) {
+    convenience public init(from event: AcademicEvent) {
         self.init(
             id: event.id,
             eventUid: event.eventUid,
