@@ -46,6 +46,7 @@ public final class AcademicEventEntity {
 public final class AcademicScheduleEntity {
     @Attribute(.unique) public var id: String
     public var lastUpdated: Date
+    /// 학사일정이 최신 정보인지 나타낸다. 해당 값이 false면 학사일정 API 요청을 한다.
     public var isComplete: Bool = false
     @Relationship(deleteRule: .cascade) public var events: [AcademicEventEntity]
     

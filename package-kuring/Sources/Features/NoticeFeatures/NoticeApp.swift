@@ -93,9 +93,11 @@ public struct NoticeAppFeature {
         case updateBookmarks(_ notice: Notice, _ isBookmarked: Bool)
         
         case toggleAcademicScheduleSheet
-        /// 학사 일정 API
+        /// 1달치 학사 일정을 가져옵니다
         case fetch1MonthAcademicSchedule
+        /// 전체 학사 일정을 가져옵니다
         case fetchEntireAcademicSchedule
+        /// 최신 학사 일정만 가져옵니다
         case fetchLatestAcademicSchedule
         case fetchAcademicScheduleResponse(Result<[AcademicEvent], CalendarKuringError>, _ isComplete: Bool)
         
@@ -115,7 +117,7 @@ public struct NoticeAppFeature {
     @Dependency(\.departments) var departments
     @Dependency(\.kuringLink) private var kuringLink
     
-    private var formatter: DateFormatter {
+    private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd"
@@ -178,8 +180,8 @@ public struct NoticeAppFeature {
                 return .run { send in
                     do {
                         let result = try await kuringLink.fetchAcademicEvents(
-                            formatter.string(from: Date().startDateOfMonth),
-                            formatter.string(from: Date().endDateOfMonth)
+                            dateFormatter.string(from: Date().startDateOfMonth),
+                            dateFormatter.string(from: Date().endDateOfMonth)
                         )
                         await send(.fetchAcademicScheduleResponse(.success(result), false))
                         await send(.toggleAcademicScheduleSheet)
@@ -203,7 +205,7 @@ public struct NoticeAppFeature {
                 
                 return .run { send in
                     do {
-                        let result = try await kuringLink.fetchAcademicEvents(formatter.string(from: schedule.lastUpdated), nil)
+                        let result = try await kuringLink.fetchAcademicEvents(dateFormatter.string(from: schedule.lastUpdated), nil)
                         await send(.fetchAcademicScheduleResponse(.success(result), true))
                         await send(.toggleAcademicScheduleSheet)
                     } catch {

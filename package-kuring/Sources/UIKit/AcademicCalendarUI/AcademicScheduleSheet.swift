@@ -93,6 +93,7 @@ public struct AcademicScheduleSheet: View {
 }
 
 private extension AcademicEvent {
+    /// 해당 학사일정과 이번주와 일정이 겹치는지
     func overlapsWithCurrentWeek() -> Bool {
         let calendar = Calendar.current
         let today = Date()

@@ -47,16 +47,15 @@ public struct AcademicCalendarFeature {
             return events.filter { $0.startTime <= dateString && dateString <= $0.endTime }
         }
         
-        mutating func fetchAcademicSchedule() -> Bool {
+        mutating func fetchAcademicSchedule() -> AcademicScheduleEntity? {
             @Dependency(\.academicSchedules) var academicDB
             
             do {
                 let schedule = try academicDB.fetch(.init())
-                self.events = (schedule?.events ?? []).map(AcademicEvent.init(from:))
-                return schedule?.isComplete ?? false
+                return schedule
             } catch {
                 print("❌ 캐싱된 학사 일정을 가져오는데 실패 했습니다: \(error)")
-                return false
+                return nil
             }
         }
         
@@ -110,11 +109,18 @@ public struct AcademicCalendarFeature {
         Reduce { state, action in
             switch action {
             case .onAppear:
-                if !state.fetchAcademicSchedule() {
-                    return .concatenate([
-                        initializeMonths(state: &state),
-                        .send(.fetchEntireAcademicSchedule)
-                    ])
+                let actions: Effect<Action> = .concatenate([
+                    initializeMonths(state: &state),
+                    .send(.fetchEntireAcademicSchedule)
+                ])
+                // 만약 캐싱된 학사일정이 없다면
+                guard let schedule = state.fetchAcademicSchedule() else {
+                    return actions
+                }
+                state.events = schedule.events.map(AcademicEvent.init(from:))
+                // 만약 캐싱된 학사일정은 있지만 최신이 아니라면
+                if !schedule.isComplete {
+                    return actions
                 }
                 return initializeMonths(state: &state)
             case .previousMonthTapped:
