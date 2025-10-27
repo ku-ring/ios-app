@@ -22,6 +22,7 @@ public struct AcademicCalendar: View {
     
     public init(store: StoreOf<AcademicCalendarFeature>) {
         self.store = store
+        self.store.send(.selectDate(Date()))
     }
     
     public var body: some View {

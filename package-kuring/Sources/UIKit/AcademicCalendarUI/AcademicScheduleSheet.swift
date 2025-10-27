@@ -10,8 +10,8 @@ import Caches
 import Models
 import SwiftUI
 import ColorSet
-import Dependencies
 import SwiftData
+import Dependencies
 
 /// 주요 학사 일정을 한번에 보여주는 바텀시트 뷰
 /// 높이는 **280**으로 사용
@@ -30,6 +30,8 @@ import SwiftData
 ///    - schedules: 보여줄 학사 일정들
 ///    - isPresented: 바텀시트 노출 여부
 public struct AcademicScheduleSheet: View {
+    @Dependency(\.activeTab) var activeTab
+    
     let events: [AcademicEvent]
     @State var currentPage: Int = 0
     @Binding var isPresented: Bool
@@ -72,6 +74,10 @@ public struct AcademicScheduleSheet: View {
             
             Button(action: {
                 isPresented = false
+                Task {
+                    try? await Task.sleep(for: .milliseconds(200))
+                    activeTab.store.value = .calendar
+                }
             }) {
                 Text("학사일정 전체 확인하기 >")
                     .font(.system(size: 16, weight: .semibold))
