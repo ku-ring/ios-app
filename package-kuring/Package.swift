@@ -286,6 +286,7 @@ let package = Package(
                 "Caches",
                 "SubscriptionFeatures",
                 "LoginFeatures",
+                "AcademicCalendarFeatures",
                 "Labs",
                 "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")

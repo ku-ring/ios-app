@@ -87,17 +87,6 @@ public struct AcademicCalendarFeature {
         /// 학사 일정 API
         case fetchEntireAcademicSchedule
         case fetchAcademicScheduleResponse(Result<[AcademicEvent], CalendarKuringError>)
-
-        public enum CalendarKuringError: Error, Equatable {
-            case error(String)
-            
-            public static func == (lhs: CalendarKuringError, rhs: CalendarKuringError) -> Bool {
-                switch (lhs, rhs) {
-                case let (.error(lmsg), .error(rmsg)):
-                    return lmsg == rmsg
-                }
-            }
-        }
     }
     
     @Dependency(\.calendar) var calendar
