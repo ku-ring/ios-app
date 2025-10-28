@@ -47,7 +47,7 @@ public struct AcademicCalendar: View {
         .navigationTitle("학사 일정")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            store.send(.onAppear)
+            store.send(.onAppearCalendar)
         }
     }
     

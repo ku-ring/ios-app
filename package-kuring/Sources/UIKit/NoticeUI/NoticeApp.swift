@@ -65,16 +65,16 @@ public struct NoticeApp: View {
             ) { store in
                 SubscriptionApp(store: store)
             }
-            .sheet(isPresented: $store.isAcademicSchedulePresented) {
+            .sheet(isPresented: $store.academicCalendar.isAcademicSchedulePresented) {
                 AcademicScheduleSheet(
-                    isPresented: $store.isAcademicSchedulePresented
+                    isPresented: $store.academicCalendar.isAcademicSchedulePresented
                 )
                 .presentationDetents([.height(280)])
                 .presentationCornerRadius(20)
                 .presentationDragIndicator(.visible)
             }
             .onAppear {
-                store.send(.onAppear)
+                store.send(.academicCalendar(.onAppearNotice))
             }
         } destination: { store in
             switch store.state {

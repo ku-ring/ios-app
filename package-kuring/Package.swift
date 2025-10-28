@@ -223,6 +223,7 @@ let package = Package(
                 "SearchFeatures",
                 "LoginFeatures",
                 "SubscriptionFeatures",
+                "AcademicCalendarFeatures",
                 "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "ActivityUI", package: "package-activityui"),

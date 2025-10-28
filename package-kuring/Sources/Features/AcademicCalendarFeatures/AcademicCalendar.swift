@@ -16,6 +16,8 @@ import ComposableArchitecture
 public struct AcademicCalendarFeature {
     @ObservableState
     public struct State: Equatable {
+        /// 학사일정 바텀시트
+        public var isAcademicSchedulePresented: Bool = false
         /// 현재 선택된 월
         public var currentDate = Date()
         /// 현재 선택된 날짜
@@ -52,6 +54,7 @@ public struct AcademicCalendarFeature {
             
             do {
                 let schedule = try academicDB.fetch(.init())
+                self.events = (schedule?.events ?? []).map(AcademicEvent.init(from:))
                 return schedule
             } catch {
                 print("❌ 캐싱된 학사 일정을 가져오는데 실패 했습니다: \(error)")
@@ -77,27 +80,73 @@ public struct AcademicCalendarFeature {
         public init() {}
     }
 
-    public enum Action: BindableAction, Sendable {
+    public enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
-        case onAppear
+        /// 공지사항 탭 onAppear
+        case onAppearNotice
+        /// 학사일정 탭 onAppear
+        case onAppearCalendar
         case previousMonthTapped
         case nextMonthTapped
         case monthChanged(Int)
         case selectDate(Date)
         /// 학사 일정 API
+        case toggleAcademicScheduleSheet
+        /// 1달치 학사 일정을 가져옵니다
+        case fetch1MonthAcademicSchedule
+        /// 전체 학사 일정을 가져옵니다
         case fetchEntireAcademicSchedule
-        case fetchAcademicScheduleResponse(Result<[AcademicEvent], CalendarKuringError>)
+        /// 최신 학사 일정만 가져옵니다
+        case fetchLatestAcademicSchedule
+        case fetchAcademicScheduleResponse(Result<[AcademicEvent], CalendarKuringError>, _ isComplete: Bool)
     }
     
     @Dependency(\.calendar) var calendar
     @Dependency(\.kuringLink) private var kuringLink
+    
+    private var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar.current
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }
 
     public var body: some ReducerOf<Self> {
         BindingReducer()
         
         Reduce { state, action in
             switch action {
-            case .onAppear:
+            case .toggleAcademicScheduleSheet:
+                state.isAcademicSchedulePresented.toggle()
+                return .none
+            case .onAppearNotice:
+                // 캐싱된 학사일정이 없을시,
+                // 1달치 일정을 먼저 가져오고 바텀시트를 노출한 후, 모든 일정을 가져온다
+                guard let schedule = state.fetchAcademicSchedule() else {
+                    return .concatenate([
+                        .send(.fetch1MonthAcademicSchedule),
+                        .send(.fetchEntireAcademicSchedule)
+                    ])
+                }
+                
+                // 캐싱된 학사일정이 있다
+                if !schedule.events.isEmpty {
+                    let sevenDaysInSeconds: TimeInterval = 7 * 24 * 60 * 60
+                    let rightNow = Date().timeIntervalSince1970
+                    let scheduleLastUpdated = schedule.lastUpdated.timeIntervalSince1970
+                    
+                    // 일주일이 지났다
+                    if rightNow - scheduleLastUpdated >= sevenDaysInSeconds {
+                        // 일주일치 새로운 학사일정만 가져온다
+                        return .concatenate([
+                            .send(.fetchLatestAcademicSchedule)
+                        ])
+                    }
+                    // 일주일 안지났으면 아무일도 없음
+                    return .none
+                }
+                return .none
+            case .onAppearCalendar:
                 let actions: Effect<Action> = .concatenate([
                     initializeMonths(state: &state),
                     .send(.fetchEntireAcademicSchedule)
@@ -123,20 +172,46 @@ public struct AcademicCalendarFeature {
             case let .selectDate(date):
                 state.selectedDate = date
                 return .none
+            case .fetch1MonthAcademicSchedule:
+                return .run { send in
+                    do {
+                        let result = try await kuringLink.fetchAcademicEvents(
+                            dateFormatter.string(from: Date().startDateOfMonth),
+                            dateFormatter.string(from: Date().endDateOfMonth)
+                        )
+                        await send(.fetchAcademicScheduleResponse(.success(result), false))
+                        await send(.toggleAcademicScheduleSheet)
+                    } catch {
+                        await send(.fetchAcademicScheduleResponse(.failure(.error(error.localizedDescription)), false))
+                    }
+                }
             case .fetchEntireAcademicSchedule:
                 return .run { send in
                     do {
                         let result = try await kuringLink.fetchAcademicEvents(nil, nil)
-                        await send(.fetchAcademicScheduleResponse(.success(result)))
+                        await send(.fetchAcademicScheduleResponse(.success(result), true))
                     } catch {
-                        await send(.fetchAcademicScheduleResponse(.failure(.error(error.localizedDescription))))
+                        await send(.fetchAcademicScheduleResponse(.failure(.error(error.localizedDescription)), false))
                     }
                 }
-            case .fetchAcademicScheduleResponse(let result):
+            case .fetchLatestAcademicSchedule:
+                guard let schedule = state.fetchAcademicSchedule() else {
+                    return .none
+                }
+                
+                return .run { send in
+                    do {
+                        let result = try await kuringLink.fetchAcademicEvents(dateFormatter.string(from: schedule.lastUpdated), nil)
+                        await send(.fetchAcademicScheduleResponse(.success(result), true))
+                        await send(.toggleAcademicScheduleSheet)
+                    } catch {
+                        await send(.fetchAcademicScheduleResponse(.failure(.error(error.localizedDescription)), false))
+                    }
+                }
+            case .fetchAcademicScheduleResponse(let result, let isComplete):
                 switch result {
                 case .success(let events):
-                    state.events = events
-                    state.updateNewSchedule(from: events, isComplete: true)
+                    state.updateNewSchedule(from: events, isComplete: isComplete)
                     return .none
                 case .failure(let error):
                     print("Error: \(error)")
