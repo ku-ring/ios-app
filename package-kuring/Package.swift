@@ -202,6 +202,7 @@ let package = Package(
             name: "AcademicCalendarFeatures",
             dependencies: [
                 "Networks",
+                "Caches",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Features/AcademicCalendarFeatures"

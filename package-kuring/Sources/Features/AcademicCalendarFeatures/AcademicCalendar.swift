@@ -28,6 +28,18 @@ public struct AcademicCalendarFeature {
         /// 학사 일정
         public var events: [AcademicEvent] = []
         
+        /// 이동하려는 월이 오늘 - 3년 전이라면 false
+        var canShowPreviousMonth: Bool {
+            let prevMonth = Calendar.current.date(byAdding: .month, value: -1, to: currentDate ?? Date())
+            return !Date().isThreeYearsOrMoreSince(prevMonth ?? Date())
+        }
+        
+        /// 이동하려는 월이 오늘 + 3년 후라면 false
+        var canShowNextMonth: Bool {
+            let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: currentDate ?? Date())
+            return !Date().isThreeYearsOrMoreBefore(nextMonth ?? Date())
+        }
+        
         public var monthYearString: String {
             let formatter = DateFormatter()
             formatter.dateFormat = "M월 yyyy"
@@ -66,7 +78,9 @@ public struct AcademicCalendarFeature {
             @Dependency(\.academicSchedules) var academicDB
 
             let entities = apiEvents.map(AcademicEventEntity.init(from:))
-            let schedule = AcademicScheduleEntity(lastUpdated: .now, events: entities)
+            let threeYearsAfter = Calendar.current.date(byAdding: .year, value: 3, to: .now)
+
+            let schedule = AcademicScheduleEntity(lastUpdated: threeYearsAfter ?? Date(), events: entities)
             schedule.isComplete = isComplete
             
             do {
@@ -162,10 +176,10 @@ public struct AcademicCalendarFeature {
                 }
                 return initializeMonths(state: &state)
             case .previousMonthTapped:
-                state.currentMonthIndex -= 1
+                state.currentMonthIndex = state.currentMonthIndex > 0 ? state.currentMonthIndex - 1 : 0
                 return handleMonthChange(for: state.currentMonthIndex, state: &state)
             case .nextMonthTapped:
-                state.currentMonthIndex += 1
+                state.currentMonthIndex = state.currentMonthIndex >= state.months.count - 1 ? state.months.count - 1 : state.currentMonthIndex + 1
                 return handleMonthChange(for: state.currentMonthIndex, state: &state)
             case let .monthChanged(index):
                 return handleMonthChange(for: index, state: &state)
@@ -188,7 +202,15 @@ public struct AcademicCalendarFeature {
             case .fetchEntireAcademicSchedule:
                 return .run { send in
                     do {
-                        let result = try await kuringLink.fetchAcademicEvents(nil, nil)
+                        let range: (start: String, end: String) = (
+                            dateFormatter.string(
+                                from: Calendar.current.date(byAdding: .year, value: -3, to: Date()) ?? Date()
+                            ),
+                            dateFormatter.string(
+                                from: Calendar.current.date(byAdding: .year, value: 3, to: Date()) ?? Date()
+                            )
+                        )
+                        let result = try await kuringLink.fetchAcademicEvents(range.start, range.end)
                         await send(.fetchAcademicScheduleResponse(.success(result), true))
                     } catch {
                         await send(.fetchAcademicScheduleResponse(.failure(.error(error.localizedDescription)), false))
@@ -241,11 +263,20 @@ extension AcademicCalendarFeature {
         
         if index == 0 {
             let newPrev = calendar.date(byAdding: .month, value: -1, to: state.months.first!)!
-            state.months.insert(newPrev, at: 0)
-            state.currentMonthIndex = 1
+            let prevMonth = Calendar.current.date(byAdding: .month, value: -1, to: state.currentDate ?? Date()) ?? Date()
+            
+            if !Date().isThreeYearsOrMoreSince(prevMonth) {
+                state.months.insert(newPrev, at: 0)
+                state.currentMonthIndex = 1
+            } else {
+                state.currentMonthIndex = 0
+            }
         } else if index == state.months.count - 1 {
             let newNext = calendar.date(byAdding: .month, value: 1, to: state.months.last!)!
-            state.months.append(newNext)
+            
+            if !Date().isThreeYearsOrMoreBefore(newNext) {
+                state.months.append(newNext)
+            }
         }
         
         state.currentDate = state.months[state.currentMonthIndex]
