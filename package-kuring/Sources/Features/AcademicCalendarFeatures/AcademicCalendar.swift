@@ -145,13 +145,11 @@ public struct AcademicCalendarFeature {
                 
                 // 캐싱된 학사일정이 있다
                 if !schedule.events.isEmpty {
-                    let sevenDaysInSeconds: TimeInterval = 7 * 24 * 60 * 60
-                    let rightNow = Date().timeIntervalSince1970
-                    let scheduleLastUpdated = schedule.lastUpdated.timeIntervalSince1970
+                    let cachedDate = Calendar.current.date(byAdding: .year, value: -3, to: schedule.lastUpdated) ?? .now
                     
-                    // 일주일이 지났다
-                    if rightNow - scheduleLastUpdated >= sevenDaysInSeconds {
-                        // 일주일치 새로운 학사일정만 가져온다
+                    // 마지막으로 캐싱한 날짜와 현재와 주(week)가 다르다
+                    if cachedDate.isInDifferentWeek(from: .now) {
+                        // 새로운 학사일정만 가져온다
                         return .concatenate([
                             .send(.fetchLatestAcademicSchedule)
                         ])
