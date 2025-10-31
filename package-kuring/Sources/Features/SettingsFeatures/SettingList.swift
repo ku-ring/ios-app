@@ -5,10 +5,12 @@
 
 import Caches
 import Models
+import SwiftUI
 import Networks
 import Foundation
 import LoginFeatures
 import ComposableArchitecture
+import AcademicCalendarFeatures
 
 public enum URLLink: String {
     case team = "https://bit.ly/3v2c5eg"
@@ -25,6 +27,7 @@ public struct SettingListFeature {
         // TODO: 나중에 디펜던시로
         public var currentAppIcon: KuringIcon?
         public var isCustomAlarmOn: Bool = false
+        public var isAcademicScheduleAlarmOn: Bool = true
         public var email: String = "kuring@konkuk.ac.kr"
         public var nickname: String = "쿠링님"
         @Presents public var alert: AlertState<Action.Alert>?
@@ -49,6 +52,8 @@ public struct SettingListFeature {
         /// 알림 관련 액션
         case alert(PresentationAction<Alert>)
         case getUserInfoResponse(Result<UserInfo, LoginKuringError>)
+        case toggleAcademicScheduleAlarm(Bool)
+        case toggleAcademicScheduleAlarmResponse(Result<Bool, CalendarKuringError>)
         
         /// 알림
         public enum Alert: Equatable {
@@ -67,12 +72,17 @@ public struct SettingListFeature {
             case showOpensourceList
         }
     }
-
+    
+    @Dependency(\.kuringLink) private var kuringLink
+    @AppStorage("academicEventPush") var academicEventPush: Bool = true
+    
     public var body: some ReducerOf<Self> {
         BindingReducer()
 
         Reduce { state, action in
             switch action {
+            case .binding(\.isAcademicScheduleAlarmOn):
+                return .send(.toggleAcademicScheduleAlarm(state.isAcademicScheduleAlarmOn))
             case .binding, .delegate:
                 return .none
             case .onAppear:
@@ -115,6 +125,25 @@ public struct SettingListFeature {
                     }
                 }
                 return .none
+            case .toggleAcademicScheduleAlarm(let isOn):
+                return .run { send in
+                    do {
+                        let result = try await kuringLink.setAcademicEventPush(isOn)
+                        await send(.toggleAcademicScheduleAlarmResponse(.success(result)))
+                    } catch {
+                        await send(.toggleAcademicScheduleAlarmResponse(.failure(.error(error.localizedDescription))))
+                    }
+                }
+            case .toggleAcademicScheduleAlarmResponse(let result):
+                switch result {
+                case .success(let success):
+                    academicEventPush = !academicEventPush
+                    return .none
+                case .failure(let error):
+                    print("Error: \(error)")
+                    state.isAcademicScheduleAlarmOn.toggle()
+                    return .none
+                }
             case let .alert(.presented(alertAction)):
                 switch alertAction {
                 case .logout:

@@ -3,6 +3,7 @@
 // See the 'License.txt' file for licensing information.
 //
 
+import Models
 import LoginUI
 import SwiftUI
 import ColorSet
@@ -11,6 +12,7 @@ import DepartmentUI
 import SubscriptionUI
 import NoticeFeatures
 import SearchFeatures
+import AcademicCalendarUI
 import ComposableArchitecture
 
 public struct NoticeApp: View {
@@ -62,6 +64,17 @@ public struct NoticeApp: View {
                 )
             ) { store in
                 SubscriptionApp(store: store)
+            }
+            .sheet(isPresented: $store.academicCalendar.isAcademicSchedulePresented) {
+                AcademicScheduleSheet(
+                    isPresented: $store.academicCalendar.isAcademicSchedulePresented
+                )
+                .presentationDetents([.height(280)])
+                .presentationCornerRadius(20)
+                .presentationDragIndicator(.visible)
+            }
+            .onAppear {
+                store.send(.academicCalendar(.onAppearNotice))
             }
         } destination: { store in
             switch store.state {

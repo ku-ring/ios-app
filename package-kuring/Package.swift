@@ -202,6 +202,7 @@ let package = Package(
             name: "AcademicCalendarFeatures",
             dependencies: [
                 "Networks",
+                "Caches",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ],
             path: "Sources/Features/AcademicCalendarFeatures"
@@ -223,6 +224,7 @@ let package = Package(
                 "SearchFeatures",
                 "LoginFeatures",
                 "SubscriptionFeatures",
+                "AcademicCalendarFeatures",
                 "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "ActivityUI", package: "package-activityui"),
@@ -286,6 +288,7 @@ let package = Package(
                 "Caches",
                 "SubscriptionFeatures",
                 "LoginFeatures",
+                "AcademicCalendarFeatures",
                 "Labs",
                 "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")

@@ -68,7 +68,7 @@ public struct SettingList: View {
                     
                     Spacer()
 
-                    Toggle("", isOn: $store.isCustomAlarmOn)
+                    Toggle("", isOn: $store.isAcademicScheduleAlarmOn)
                         .labelsHidden()
                         .tint(Color.Kuring.primary)
                 }

@@ -5,9 +5,13 @@
 //  Created by Jung Hwan Park on 10/20/25.
 //
 
+import Caches
+import Models
 import SwiftUI
 import ColorSet
 import CommonUI
+import ComposableArchitecture
+import AcademicCalendarFeatures
 
 /// 학사 일정 캘린더 뷰
 /// ```swift
@@ -15,24 +19,12 @@ import CommonUI
 /// ```
 ///  - Parameters: none
 public struct AcademicCalendar: View {
-    @State private var currentDate = Date()
-    @State private var selectedDate: Date?
-    @State private var months: [Date] = []
-    @State private var currentMonthIndex = 1
+    @Bindable var store: StoreOf<AcademicCalendarFeature>
     
-    /// MOCK DATA
-    @State private var eventDots: [String: [Color]] = [
-        "2025-10-7": [.yellow, .green, .gray],
-        "2025-10-13": [.yellow],
-        "2025-10-18": [.green],
-        "2025-10-20": [.green],
-        "2025-11-3": [.green, .red, .yellow, .blue, .teal]
-    ]
-    
-    let calendar = Calendar.current
-    let weekdays = ["일", "월", "화", "수", "목", "금", "토"]
-    
-    public init() { }
+    public init(store: StoreOf<AcademicCalendarFeature>) {
+        self.store = store
+        self.store.send(.selectDate(Date()))
+    }
     
     public var body: some View {
         VStack(spacing: 0) {
@@ -46,28 +38,30 @@ public struct AcademicCalendar: View {
                 .frame(height: 2)
                 .padding(.top, 22)
             
-            if let selectedDate, !getDotsForDate(selectedDate).isEmpty, isSameMonthAndYear(selectedDate, currentDate) {
-                eventInfo(for: getDotsForDate(selectedDate))
+            if !store.eventsForSelectedDate.isEmpty {
+                eventInfo(for: store.eventsForSelectedDate)
             } else {
                 Spacer()
             }
         }
         .background(Color.Kuring.bg)
-        .navigationTitle("더보기")
+        .navigationTitle("학사 일정")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            store.send(.onAppearCalendar)
+        }
     }
     
     private var headerView: some View {
         HStack {
-            Text(monthYearString)
+            Text(store.monthYearString)
                 .font(.system(size: 18, weight: .semibold))
             
             Spacer()
             
             HStack(spacing: 26) {
                 Button {
-                    currentMonthIndex -= 1
-                    handleMonthChange(for: currentMonthIndex)
+                    store.send(.previousMonthTapped)
                 } label: {
                     Image(systemName: "chevron.left")
                         .foregroundColor(Color.Kuring.primary)
@@ -75,8 +69,7 @@ public struct AcademicCalendar: View {
                 }
                 
                 Button {
-                    currentMonthIndex += 1
-                    handleMonthChange(for: currentMonthIndex)
+                    store.send(.nextMonthTapped)
                 } label: {
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.Kuring.primary)
@@ -89,7 +82,7 @@ public struct AcademicCalendar: View {
     
     private var weekdaysView: some View {
         HStack {
-            ForEach(weekdays, id: \.self) { day in
+            ForEach(["일", "월", "화", "수", "목", "금", "토"], id: \.self) { day in
                 Text(day)
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundColor(Color.Kuring.gray300)
@@ -102,46 +95,43 @@ public struct AcademicCalendar: View {
     
     private var calendarContent: some View {
         ScrollViewReader { proxy in
-            TabView(selection: $currentMonthIndex) {
-                ForEach(Array(months.enumerated()), id: \.offset) { index, month in
+            TabView(selection: $store.currentMonthIndex) {
+                ForEach(Array(store.months.enumerated()), id: \.offset) { index, month in
                     CalendarMonthView(
                         month: month,
-                        selectedDate: $selectedDate,
-                        eventDots: eventDots
+                        selectedDate: $store.selectedDate,
+                        events: store.events
                     )
                     .tag(index)
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
             .frame(height: 306)
-            .onChangeDebounced(of: currentMonthIndex, delay: 0.3) { newIndex in
-                handleMonthChange(for: newIndex)
-            }
-            .onAppear {
-                initializeMonths()
+            .onChangeDebounced(of: store.currentMonthIndex, delay: 0.3) { newIndex in
+                store.send(.monthChanged(newIndex))
             }
         }
     }
     
     @ViewBuilder
-    private func eventInfo(for events: [Color]) -> some View {
+    private func eventInfo(for events: [AcademicEvent]) -> some View {
         ScrollView(.vertical) {
             VStack(spacing: 0) {
-                ForEach(events, id: \.self) { color in
+                ForEach(events, id: \.id) { event in
                     VStack(alignment: .leading) {
                         HStack(spacing: 8) {
                             Capsule()
-                                .fill(color)
+                                .fill((AcademicEventCategory(rawValue: event.category) ?? .etc).color)
                                 .frame(width: 4)
                                 .frame(maxHeight: .infinity)
                             
                             VStack(spacing: 8) {
-                                Text("수강 바구니 1차")
+                                Text("\(event.summary)")
                                     .foregroundStyle(Color.Kuring.title)
                                     .font(.system(size: 15, weight: .medium))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 
-                                Text("8. 04 (월) 오전 9:30 - 8. 05 (화) 오전 9:30 ")
+                                Text("\(formatKoreanDateString(event.startTime)) - \(formatKoreanDateString(event.endTime))")
                                     .foregroundStyle(Color.Kuring.caption1)
                                     .font(.system(size: 12, weight: .medium))
                                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -161,49 +151,24 @@ public struct AcademicCalendar: View {
 }
 
 extension AcademicCalendar {
-    var monthYearString: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "M월 yyyy"
-        formatter.locale = Locale(identifier: "ko_KR")
-        return formatter.string(from: currentDate)
-    }
-    
-    func initializeMonths() {
-        let prevMonth = calendar.date(byAdding: .month, value: -1, to: currentDate) ?? currentDate
-        let nextMonth = calendar.date(byAdding: .month, value: 1, to: currentDate) ?? currentDate
-        months = [prevMonth, currentDate, nextMonth]
-    }
+    private func formatKoreanDateString(_ dateString: String) -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
 
-    func handleMonthChange(for index: Int) {
-        guard !months.isEmpty else {
-            return
+        guard let date = inputFormatter.date(from: dateString) else {
+            return dateString
         }
 
-        if index == 0 {
-            let newPrev = calendar.date(byAdding: .month, value: -1, to: months.first!)!
-            months.insert(newPrev, at: 0)
-            currentMonthIndex = 1
-        } else if index == months.count - 1 {
-            let newNext = calendar.date(byAdding: .month, value: 1, to: months.last!)!
-            months.append(newNext)
-        }
-        currentDate = months[currentMonthIndex]
-    }
-    
-    func getDotsForDate(_ date: Date) -> [Color] {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-M-d"
-        let dateString = formatter.string(from: date)
-        return eventDots[dateString] ?? []
-    }
-    
-    func isSameMonthAndYear(_ d1: Date, _ d2: Date) -> Bool {
-        calendar.isDate(d1, equalTo: d2, toGranularity: .month)
+        let outputFormatter = DateFormatter()
+        outputFormatter.locale = Locale(identifier: "ko_KR")
+        outputFormatter.dateFormat = "M.dd (E) a h:mm"
+
+        return outputFormatter.string(from: date)
     }
 }
 
-struct CalendarView_Previews: PreviewProvider {
-    static var previews: some View {
-        AcademicCalendar()
-    }
+#Preview {
+    AcademicCalendar(store: .init(initialState: AcademicCalendarFeature.State(), reducer: {
+        AcademicCalendarFeature()
+    }))
 }
