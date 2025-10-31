@@ -41,4 +41,16 @@ public extension Date {
         }
         return self <= threeYearsBefore
     }
+    
+    /// 두개의 날짜가 같은 주에 속하는지
+    func isInDifferentWeek(from otherDate: Date) -> Bool {
+        let calendar = Calendar.current
+        let selfWeek = calendar.component(.weekOfYear, from: self)
+        let otherWeek = calendar.component(.weekOfYear, from: otherDate)
+        
+        let selfYear = calendar.component(.yearForWeekOfYear, from: self)
+        let otherYear = calendar.component(.yearForWeekOfYear, from: otherDate)
+        
+        return selfWeek != otherWeek || selfYear != otherYear
+    }
 }

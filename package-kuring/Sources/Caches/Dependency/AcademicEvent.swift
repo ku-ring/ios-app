@@ -29,7 +29,6 @@ extension AcademicScheduleDB: DependencyKey {
             do {
                 @Dependency(\.swiftData.context) var modelContext
                 let context = try modelContext()
-                let descriptor = FetchDescriptor<AcademicScheduleEntity>()
                 return try context.fetch(descriptor).first
             } catch {
                 throw DBError.fetch

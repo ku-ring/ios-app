@@ -30,13 +30,13 @@ public struct AcademicCalendarFeature {
         
         /// 이동하려는 월이 오늘 - 3년 전이라면 false
         var canShowPreviousMonth: Bool {
-            let prevMonth = Calendar.current.date(byAdding: .month, value: -1, to: currentDate ?? Date())
+            let prevMonth = Calendar.current.date(byAdding: .month, value: -1, to: currentDate)
             return !Date().isThreeYearsOrMoreSince(prevMonth ?? Date())
         }
         
         /// 이동하려는 월이 오늘 + 3년 후라면 false
         var canShowNextMonth: Bool {
-            let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: currentDate ?? Date())
+            let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: currentDate)
             return !Date().isThreeYearsOrMoreBefore(nextMonth ?? Date())
         }
         
@@ -232,6 +232,7 @@ public struct AcademicCalendarFeature {
                 switch result {
                 case .success(let events):
                     state.updateNewSchedule(from: events, isComplete: isComplete)
+                    state.events = events
                     return .none
                 case .failure(let error):
                     print("Error: \(error)")
@@ -261,7 +262,7 @@ extension AcademicCalendarFeature {
         
         if index == 0 {
             let newPrev = calendar.date(byAdding: .month, value: -1, to: state.months.first!)!
-            let prevMonth = Calendar.current.date(byAdding: .month, value: -1, to: state.currentDate ?? Date()) ?? Date()
+            let prevMonth = Calendar.current.date(byAdding: .month, value: -1, to: state.currentDate) ?? Date()
             
             if !Date().isThreeYearsOrMoreSince(prevMonth) {
                 state.months.insert(newPrev, at: 0)
