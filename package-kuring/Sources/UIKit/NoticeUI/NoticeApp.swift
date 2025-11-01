@@ -45,7 +45,20 @@ public struct NoticeApp: View {
                             .foregroundStyle(Color.Kuring.gray400)
                     }
                 }
-
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    // MARK: 공지보관함 진입
+                    NavigationLink(
+                        state: NoticeAppFeature.Path.State.bookmark(
+                            BookmarkAppFeature.State()
+                        )
+                    ) {
+                        Image("archive", bundle: Bundle.notices)
+                            .renderingMode(.template)
+                            .foregroundStyle(Color.Kuring.gray400)
+                    }
+                }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     // MARK: 푸시 알림 선택 진입
 
@@ -53,6 +66,7 @@ public struct NoticeApp: View {
                         store.send(.changeSubscriptionButtonTapped)
                     } label: {
                         Image("bell", bundle: Bundle.notices)
+                            .renderingMode(.template)
                             .foregroundStyle(Color.Kuring.gray400)
                     }
                 }
@@ -144,6 +158,13 @@ public struct NoticeApp: View {
                     action: \.signupComplete
                 ) {
                     SignupCompleteView(store: store)
+                }
+            case .bookmark:
+                if let store = store.scope(
+                    state: \.bookmark,
+                    action: \.bookmark
+                ) {
+                    BookmarkApp(store: store)
                 }
             }
         }

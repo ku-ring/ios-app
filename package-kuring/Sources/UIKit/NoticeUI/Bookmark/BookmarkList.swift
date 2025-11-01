@@ -7,7 +7,6 @@ import SwiftUI
 import ColorSet
 import NoticeUI
 import NoticeFeatures
-import BookmarkFeatures
 import ComposableArchitecture
 
 public struct BookmarkList: View {
@@ -31,7 +30,7 @@ public struct BookmarkList: View {
                           )
                           .background {
                             NavigationLink(
-                              state: BookmarkAppFeature.Path.State.detail(
+                              state: NoticeAppFeature.Path.State.detail(
                                 NoticeDetailFeature.State(
                                   notice: notice,
                                   isBookmarked: true
