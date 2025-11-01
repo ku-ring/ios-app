@@ -3,26 +3,30 @@
 // See the 'License.txt' file for licensing information.
 //
 
+import Caches
 import Models
+import SwiftData
+import Foundation
 import LoginFeatures
 import DepartmentFeatures
 import SubscriptionFeatures
 import ComposableArchitecture
+import AcademicCalendarFeatures
 
 @Reducer
 public struct NoticeAppFeature {
     @ObservableState
     public struct State: Equatable {
         // MARK: 네비게이션
-
         /// 루트
         public var noticeList = NoticeListFeature.State()
         /// 스택 네비게이션
         public var path = StackState<Path.State>()
         public var signup = EmailVerificationFeature.State()
+        public var academicCalendar = AcademicCalendarFeature.State()
         /// 트리 네비게이션 - ``SubscriptionAppFeature``
         @Presents public var changeSubscription: SubscriptionAppFeature.State?
-
+        
         public init(
             noticeList: NoticeListFeature.State = NoticeListFeature.State(),
             path: StackState<Path.State> = StackState<Path.State>(),
@@ -41,7 +45,8 @@ public struct NoticeAppFeature {
         }
     }
 
-    public enum Action: Equatable {
+    public enum Action: BindableAction, Equatable {
+        case binding(BindingAction<State>)
         /// 루트(``NoticeListFeature``) 액션
         case noticeList(NoticeListFeature.Action)
 
@@ -49,6 +54,7 @@ public struct NoticeAppFeature {
         case path(StackAction<Path.State, Path.Action>)
         /// 이메일 인증 네비게이션
         case signup(EmailVerificationFeature.Action)
+        case academicCalendar(AcademicCalendarFeature.Action)
 
         /// 구독 변경 버튼을 탭한 경우
         case changeSubscriptionButtonTapped
@@ -61,7 +67,7 @@ public struct NoticeAppFeature {
 
     @Dependency(\.bookmarks) var bookmarks
     @Dependency(\.departments) var departments
-    
+
     public var body: some ReducerOf<Self> {
         Scope(state: \.noticeList, action: \.noticeList) {
             NoticeListFeature()
@@ -70,6 +76,12 @@ public struct NoticeAppFeature {
         Scope(state: \.signup, action: \.signup) {
             EmailVerificationFeature()
         }
+        
+        Scope(state: \.academicCalendar, action: \.academicCalendar) {
+            AcademicCalendarFeature()
+        }
+        
+        BindingReducer()
         
         Reduce { state, action in
             switch action {
@@ -82,7 +94,6 @@ public struct NoticeAppFeature {
                     print("북마크 가져오기를 실패했어요: \(error.localizedDescription)")
                 }
                 return .none
-                
             case let .path(.element(id: _, action: .detail(.delegate(action)))):
                 switch action {
                 case let .bookmarkUpdated(notice, isBookmarked):
@@ -217,7 +228,7 @@ public struct NoticeAppFeature {
                     )
                 )
                 return .none
-            case .path, .noticeList, .changeSubscription, .signup:
+            case .path, .noticeList, .changeSubscription, .signup, .binding, .academicCalendar:
                 return .none
             }
         }

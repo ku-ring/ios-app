@@ -45,6 +45,12 @@ public struct NoticeDetailView: View {
                     )
                     .presentationDetents([.medium, .large])
                     .presentationDragIndicator(.visible)
+                    .alert(
+                        store: store.scope(
+                            state: \.$alert,
+                            action: \.alert
+                        )
+                    )
                 }
                 .sheet(isPresented: $store.isPresentedEventView) {
                     EKEventView()
@@ -76,12 +82,6 @@ public struct NoticeDetailView: View {
                         }
                     }
                 }
-                .alert(
-                    store: store.scope(
-                        state: \.$alert,
-                        action: \.alert
-                    )
-                )
                 .onAppear {
                     store.send(.getComments)
                 }

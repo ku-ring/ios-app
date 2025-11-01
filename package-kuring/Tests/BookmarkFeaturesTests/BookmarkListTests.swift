@@ -6,7 +6,7 @@
 import XCTest
 @testable import Caches
 @testable import Models
-@testable import BookmarkFeatures
+@testable import NoticeFeatures
 import ComposableArchitecture
 
 @MainActor

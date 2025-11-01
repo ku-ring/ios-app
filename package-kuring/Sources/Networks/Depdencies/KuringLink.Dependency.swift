@@ -434,6 +434,37 @@ extension KuringLink: DependencyKey {
                 )
             let isSucceed = (200 ..< 300) ~= response.code
             return isSucceed
+        },
+        fetchAcademicEvents: { startDate, endDate in
+            var queryItems: [URLQueryItem] = []
+            if let startDate {
+                queryItems.append(.init(name: "startDate", value: startDate))
+            }
+            if let endDate {
+                queryItems.append(.init(name: "endDate", value: endDate))
+            }
+            let response: Response<[AcademicEvent]> = try await satellite
+                .response(
+                    for: Path.fetchAcademicEvents.path,
+                    httpMethod: .get,
+                    queryItems: queryItems
+                )
+            
+            return response.data
+        },
+        setAcademicEventPush: { enabled in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.setAcademicEventPush.path,
+                    httpMethod: Satellite.patch,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ],
+                    httpBody: AcademicEventPush(enabled: enabled)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
         }
     )
 }
@@ -564,6 +595,12 @@ extension KuringLink {
             return true
         },
         reportComment: { _, _ in
+            return true
+        },
+        fetchAcademicEvents: { _, _ in
+            return []
+        },
+        setAcademicEventPush: { _ in
             return true
         }
     )

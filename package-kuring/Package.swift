@@ -17,12 +17,12 @@ let package = Package(
                 "SubscriptionUI",
                 "DepartmentUI",
                 "SearchUI",
-                "BookmarkUI",
                 "SettingsUI",
                 "CampusUI",
                 "CommonUI",
                 "OnboardingUI",
                 "LoginUI",
+                "AcademicCalendarUI",
                 "PushNotifications",
             ]
         ),
@@ -48,6 +48,17 @@ let package = Package(
     ],
     targets: [
         // MARK: App Library Dependencies
+        .target(
+            name: "AcademicCalendarUI",
+            dependencies: [
+                "ColorSet",
+                "Caches",
+                "CommonUI",
+                "AcademicCalendarFeatures",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/UIKit/AcademicCalendarUI"
+        ),
         .target(
             name: "NoticeEKEventUI",
             dependencies: [
@@ -128,17 +139,6 @@ let package = Package(
             path: "Sources/UIKit/SearchUI"
         ),
         .target(
-            name: "BookmarkUI",
-            dependencies: [
-                "BookmarkFeatures",
-                "NoticeUI",
-                "LoginUI",
-                "NoticeFeatures",
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
-            ],
-            path: "Sources/UIKit/BookmarkUI"
-        ),
-        .target(
             name: "SettingsUI",
             dependencies: [
                 "SettingsFeatures",
@@ -187,6 +187,15 @@ let package = Package(
         
         // MARK: Features
         .target(
+            name: "AcademicCalendarFeatures",
+            dependencies: [
+                "Networks",
+                "Caches",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ],
+            path: "Sources/Features/AcademicCalendarFeatures"
+        ),
+        .target(
             name: "BotFeatures",
             dependencies: [
                 "Networks",
@@ -203,6 +212,7 @@ let package = Package(
                 "SearchFeatures",
                 "LoginFeatures",
                 "SubscriptionFeatures",
+                "AcademicCalendarFeatures",
                 "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "ActivityUI", package: "package-activityui"),
@@ -249,23 +259,13 @@ let package = Package(
             path: "Sources/Features/SearchFeatures"
         ),
         .target(
-            name: "BookmarkFeatures",
-            dependencies: [
-                "NoticeFeatures",
-                "LoginFeatures",
-                "Models",
-                "Caches",
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
-            ],
-            path: "Sources/Features/BookmarkFeatures"
-        ),
-        .target(
             name: "SettingsFeatures",
             dependencies: [
                 "Models",
                 "Caches",
                 "SubscriptionFeatures",
                 "LoginFeatures",
+                "AcademicCalendarFeatures",
                 "Labs",
                 "Networks",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
@@ -353,7 +353,7 @@ let package = Package(
         .testTarget(
             name: "BookmarkFeaturesTests",
             dependencies: [
-                "BookmarkFeatures",
+                "NoticeFeatures",
                 "Caches",
                 "Models",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),

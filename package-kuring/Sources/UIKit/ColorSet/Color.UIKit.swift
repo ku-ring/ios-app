@@ -84,6 +84,23 @@ extension Color.Kuring {
         dark: Self.from(hex: "4E4E4E")
     )
     
+    // MARK: - 학사 일정
+    public static let etc: Color = Self.color(
+        light: Self.from(hex: "E5E5E5"),
+        dark: Self.from(hex: "B0B0B0")
+    )
+    public static let degree: Color = Self.color(
+        light: Self.from(hex: "FFF49D"),
+        dark: Self.from(hex: "EADF8D")
+    )
+    public static let registration: Color = Self.color(
+        light: Self.from(hex: "BAEB6B"),
+        dark: Self.from(hex: "A7D260")
+    )
+    public static let event: Color = Self.color(
+        light: Self.from(hex: "FFC8C8"),
+        dark: Self.from(hex: "E9B9B9")
+    )
 }
 
 // MARK: - function

@@ -29,6 +29,8 @@ extension NoticeAppFeature {
             case signupTerms(LoginAppFeature.State)
             case setPassword(SetPasswordFeature.State)
             case signupComplete(SignupCompleteFeature.State)
+            /// 공지보관함
+            case bookmark(BookmarkAppFeature.State)
         }
 
         public enum Action: Equatable {
@@ -47,25 +49,23 @@ extension NoticeAppFeature {
             case signupTerms(LoginAppFeature.Action)
             case setPassword(SetPasswordFeature.Action)
             case signupComplete(SignupCompleteFeature.Action)
+            /// 공지보관함
+            case bookmark(BookmarkAppFeature.Action)
         }
 
         public var body: some ReducerOf<Self> {
             Scope(state: \.detail, action: \.detail) {
                 NoticeDetailFeature()
             }
-
             Scope(state: \.search, action: \.search) {
                 SearchFeature()
             }
-
             Scope(state: \.departmentEditor, action: \.departmentEditor) {
                 DepartmentEditorFeature()
             }
-            
             Scope(state: \.reportComment, action: \.reportComment) {
                 NoticeReportCommentFeature()
             }
-            
             Scope(state: \.login, action: \.login) {
                 LoginAppFeature()
             }
@@ -86,6 +86,9 @@ extension NoticeAppFeature {
             }
             Scope(state: \.signupComplete, action: \.signupComplete) {
                 SignupCompleteFeature()
+            }
+            Scope(state: \.bookmark, action: \.bookmark) {
+                BookmarkAppFeature()
             }
         }
     }

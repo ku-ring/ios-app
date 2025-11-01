@@ -3,6 +3,7 @@
 // See the 'License.txt' file for licensing information.
 //
 
+import Models
 import LoginUI
 import SwiftUI
 import ColorSet
@@ -11,6 +12,7 @@ import DepartmentUI
 import SubscriptionUI
 import NoticeFeatures
 import SearchFeatures
+import AcademicCalendarUI
 import ComposableArchitecture
 
 public struct NoticeApp: View {
@@ -43,7 +45,20 @@ public struct NoticeApp: View {
                             .foregroundStyle(Color.Kuring.gray400)
                     }
                 }
-
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    // MARK: 공지보관함 진입
+                    NavigationLink(
+                        state: NoticeAppFeature.Path.State.bookmark(
+                            BookmarkAppFeature.State()
+                        )
+                    ) {
+                        Image("archive", bundle: Bundle.notices)
+                            .renderingMode(.template)
+                            .foregroundStyle(Color.Kuring.gray400)
+                    }
+                }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     // MARK: 푸시 알림 선택 진입
 
@@ -51,6 +66,7 @@ public struct NoticeApp: View {
                         store.send(.changeSubscriptionButtonTapped)
                     } label: {
                         Image("bell", bundle: Bundle.notices)
+                            .renderingMode(.template)
                             .foregroundStyle(Color.Kuring.gray400)
                     }
                 }
@@ -62,6 +78,17 @@ public struct NoticeApp: View {
                 )
             ) { store in
                 SubscriptionApp(store: store)
+            }
+            .sheet(isPresented: $store.academicCalendar.isAcademicSchedulePresented) {
+                AcademicScheduleSheet(
+                    isPresented: $store.academicCalendar.isAcademicSchedulePresented
+                )
+                .presentationDetents([.height(280)])
+                .presentationCornerRadius(20)
+                .presentationDragIndicator(.visible)
+            }
+            .onAppear {
+                store.send(.academicCalendar(.onAppearNotice))
             }
         } destination: { store in
             switch store.state {
@@ -131,6 +158,13 @@ public struct NoticeApp: View {
                     action: \.signupComplete
                 ) {
                     SignupCompleteView(store: store)
+                }
+            case .bookmark:
+                if let store = store.scope(
+                    state: \.bookmark,
+                    action: \.bookmark
+                ) {
+                    BookmarkApp(store: store)
                 }
             }
         }

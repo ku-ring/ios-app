@@ -50,6 +50,7 @@ public struct SettingList: View {
                 } label: {
                     itemView("icon_bell", "공지 구독하기")
                 }
+                .padding(.top, 12)
                 
                 HStack {
                     leadingItemView("icon_bell", "기타 알림 받기", "주요 공지사항, 앱 내 주요 사항")
@@ -60,6 +61,18 @@ public struct SettingList: View {
                         .labelsHidden()
                         .tint(Color.Kuring.primary)
                 }
+                .padding(.top, 12)
+                
+                HStack {
+                    leadingItemView("icon_bell", "학사 일정 알림 받기", "당일 학사일정 시작과 종료 알림")
+                    
+                    Spacer()
+
+                    Toggle("", isOn: $store.isAcademicScheduleAlarmOn)
+                        .labelsHidden()
+                        .tint(Color.Kuring.primary)
+                }
+                .padding(.top, 12)
                 
                 Divider()
                     .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
