@@ -11,7 +11,6 @@ import NoticeUI
 import SettingsUI
 import Dependencies
 import NoticeFeatures
-import BookmarkFeatures
 import SettingsFeatures
 import AcademicCalendarUI
 import ComposableArchitecture

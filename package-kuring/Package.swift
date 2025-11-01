@@ -17,7 +17,6 @@ let package = Package(
                 "SubscriptionUI",
                 "DepartmentUI",
                 "SearchUI",
-                "BookmarkUI",
                 "SettingsUI",
                 "CampusUI",
                 "CommonUI",
@@ -140,17 +139,6 @@ let package = Package(
             path: "Sources/UIKit/SearchUI"
         ),
         .target(
-            name: "BookmarkUI",
-            dependencies: [
-                "BookmarkFeatures",
-                "NoticeUI",
-                "LoginUI",
-                "NoticeFeatures",
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
-            ],
-            path: "Sources/UIKit/BookmarkUI"
-        ),
-        .target(
             name: "SettingsUI",
             dependencies: [
                 "SettingsFeatures",
@@ -271,17 +259,6 @@ let package = Package(
             path: "Sources/Features/SearchFeatures"
         ),
         .target(
-            name: "BookmarkFeatures",
-            dependencies: [
-                "NoticeFeatures",
-                "LoginFeatures",
-                "Models",
-                "Caches",
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
-            ],
-            path: "Sources/Features/BookmarkFeatures"
-        ),
-        .target(
             name: "SettingsFeatures",
             dependencies: [
                 "Models",
@@ -376,7 +353,7 @@ let package = Package(
         .testTarget(
             name: "BookmarkFeaturesTests",
             dependencies: [
-                "BookmarkFeatures",
+                "NoticeFeatures",
                 "Caches",
                 "Models",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
