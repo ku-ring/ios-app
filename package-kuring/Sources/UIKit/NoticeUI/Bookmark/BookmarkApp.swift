@@ -3,7 +3,6 @@
 // See the 'License.txt' file for licensing information.
 //
 
-import LoginUI
 import SwiftUI
 import NoticeFeatures
 import ComposableArchitecture
