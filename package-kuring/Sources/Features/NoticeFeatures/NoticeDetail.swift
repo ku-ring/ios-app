@@ -207,7 +207,13 @@ public struct NoticeDetailFeature {
                         }
                     }
                 case .pushToLogin:
-                    return .send(.delegate(.pushToLogin))
+                    return .concatenate([
+                        .send(.toggleCommentSection),
+                        .run { _ in
+                            try await clock.sleep(for: .milliseconds(200))
+                        },
+                        .send(.delegate(.pushToLogin))
+                    ])
                 }
             case .presentEventView:
                 state.isPresentedEventView = true
