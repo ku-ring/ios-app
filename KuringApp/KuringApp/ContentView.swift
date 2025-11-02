@@ -12,6 +12,7 @@ import SettingsUI
 import Dependencies
 import NoticeFeatures
 import SettingsFeatures
+import PushNotifications
 import AcademicCalendarUI
 import ComposableArchitecture
 import AcademicCalendarFeatures
@@ -75,7 +76,22 @@ struct ContentView: View {
             
             BottomTabView(activeTab: tabStore)
         }
+        // MARK: 학사일정 푸시 알림을 탭 했을 때 호출
+        .onReceive(newMessagePublisher) { message in
+            switch message {
+            case .academic:
+                @Dependency(\.activeTab) var activeTab
+                activeTab.store.value = .calendar
+                calendarStore.send(.selectDate(Date()))
+            // FIXME: 학사일정 type 서버에서 구현후 default 부분 삭제 (2025/11/02)
+            case let .default(_, body) where body.contains("오늘부터") || body.contains("오늘은"):
+                @Dependency(\.activeTab) var activeTab
+                activeTab.store.value = .calendar
+                calendarStore.send(.selectDate(Date()))
+            default:
+                return
+            }
+        }
     }
 }
-
 

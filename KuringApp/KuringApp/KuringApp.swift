@@ -7,11 +7,11 @@ import Models
 import SwiftUI
 import CommonUI
 import NoticeUI
+import SwiftData
 import OnboardingUI
 import NoticeFeatures
 import PushNotifications
 import ComposableArchitecture
-import SwiftData
 
 @main
 struct KuringApp: App {
@@ -80,6 +80,8 @@ struct KuringApp: App {
                         guard let url = URL(string: link) else { return }
                         guard UIApplication.shared.canOpenURL(url) else { return }
                         UIApplication.shared.open(url)
+                    default:
+                        return
                     }
                 }
                 // MARK: - 일주일 동안 공지를 확인하지 않았어요
