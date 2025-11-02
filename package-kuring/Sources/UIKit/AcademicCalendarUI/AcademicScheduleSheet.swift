@@ -44,6 +44,10 @@ public struct AcademicScheduleSheet: View {
         
         self.events = cachedEvents.filter { $0.overlapsWithCurrentWeek() }
         self._isPresented = isPresented
+        
+        if self.events.isEmpty {
+            self.isPresented = false
+        }
     }
     
     public var body: some View {
