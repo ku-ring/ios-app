@@ -9,7 +9,14 @@ import Dependencies
 
 extension Notifications: MessagingDelegate {
     func configureFirebase() {
-        FirebaseApp.configure()
+        var filePath: String
+        #if DEBUG
+        filePath = Bundle.main.path(forResource: "GoogleService-Info-Debug", ofType: "plist")!
+        #else
+        filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")!
+        #endif
+        let options: FirebaseOptions? = FirebaseOptions.init(contentsOfFile: filePath)
+        FirebaseApp.configure(options: options!)
         Messaging.messaging().delegate = self
     }
     
