@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A5323012EB7B5B700A06200 /* GoogleService-Info-Debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A5323002EB7B5B700A06200 /* GoogleService-Info-Debug.plist */; };
 		1A7EAAB62E77DCA700FDEB5E /* BottomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7EAAB52E77DCA700FDEB5E /* BottomTabView.swift */; };
 		1A9539D62E44F9650026A9EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A9539D52E44F9640026A9EE /* GoogleService-Info.plist */; };
 		A9DAFA542AB1F04B0064F748 /* KuringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DAFA532AB1F04B0064F748 /* KuringApp.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		1A0C8B412BCA5BB400B314C7 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		1A5323002EB7B5B700A06200 /* GoogleService-Info-Debug.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Debug.plist"; sourceTree = "<group>"; };
 		1A7EAAB52E77DCA700FDEB5E /* BottomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabView.swift; sourceTree = "<group>"; };
 		1A9539D52E44F9640026A9EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A9DAFA502AB1F04B0064F748 /* KuringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KuringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +100,7 @@
 			children = (
 				1A0C8B412BCA5BB400B314C7 /* PrivacyInfo.xcprivacy */,
 				1A9539D52E44F9640026A9EE /* GoogleService-Info.plist */,
+				1A5323002EB7B5B700A06200 /* GoogleService-Info-Debug.plist */,
 				CACC2F4B2B7E638C003142E2 /* KuringApp.entitlements */,
 				DF062D4A2AC87B6D00FC48C0 /* Info.plist */,
 				A9DAFA532AB1F04B0064F748 /* KuringApp.swift */,
@@ -218,6 +221,7 @@
 				A9DAFA5B2AB1F04C0064F748 /* Preview Assets.xcassets in Resources */,
 				A9DAFA582AB1F04C0064F748 /* Assets.xcassets in Resources */,
 				1A9539D62E44F9650026A9EE /* GoogleService-Info.plist in Resources */,
+				1A5323012EB7B5B700A06200 /* GoogleService-Info-Debug.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,7 +397,7 @@
 				CODE_SIGN_ENTITLEMENTS = KuringApp/KuringApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"KuringApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 6DXT245L5T;
 				ENABLE_PREVIEWS = YES;
@@ -433,7 +437,7 @@
 				CODE_SIGN_ENTITLEMENTS = KuringApp/KuringApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"KuringApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 6DXT245L5T;
 				ENABLE_PREVIEWS = YES;
