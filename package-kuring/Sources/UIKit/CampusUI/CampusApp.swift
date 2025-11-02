@@ -32,8 +32,13 @@ public struct CampusApp: View {
             return ""
         }
         let dict = try? NSDictionary(contentsOf: plistURL, error: ())
-        let apiHost = dict?["API_HOST"] as? String
-        return apiHost ?? ""
+        let apiHost: String
+        #if DEBUG
+        apiHost = dict?["DEBUG_API_HOST"] as? String ?? ""
+        #else
+        apiHost = dict?["API_HOST"] as? String ?? ""
+        #endif
+        return apiHost
     }
     private var libHost: String {
         guard let plistURL = Bundle.module.url(forResource: "KuringMaps-Info", withExtension: "plist") else {

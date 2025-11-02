@@ -23,11 +23,19 @@ public struct KuringLink {
     static var satellite: Satellite {
         let plistURL = Bundle.module.url(forResource: "KuringLink-Info", withExtension: "plist")!
         let dict = try! NSDictionary(contentsOf: plistURL, error: ())
+        let apiHost: String
+        #if DEBUG
+        apiHost = dict["DEBUG_API_HOST"] as? String ?? ""
+        #else
+        apiHost = dict["API_HOST"] as? String ?? ""
+        #endif
         let satellite = Satellite(
-            host: (dict["API_HOST"] as? String) ?? "",
+            host: apiHost,
             scheme: (dict["USING_HTTPS"] as? Bool) ?? true ? .https : .http
         )
-//        satellite._startGPS()
+        #if DEBUG
+        satellite._startGPS()
+        #endif
         return satellite
     }
 
