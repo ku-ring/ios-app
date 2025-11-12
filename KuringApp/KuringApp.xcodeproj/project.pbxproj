@@ -397,7 +397,7 @@
 				CODE_SIGN_ENTITLEMENTS = KuringApp/KuringApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"KuringApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 6DXT245L5T;
 				ENABLE_PREVIEWS = YES;
@@ -437,7 +437,7 @@
 				CODE_SIGN_ENTITLEMENTS = KuringApp/KuringApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"KuringApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 6DXT245L5T;
 				ENABLE_PREVIEWS = YES;
