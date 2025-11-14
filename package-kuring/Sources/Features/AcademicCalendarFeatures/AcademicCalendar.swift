@@ -159,6 +159,7 @@ public struct AcademicCalendarFeature {
                 }
                 return .none
             case .onAppearCalendar:
+                guard state.months.isEmpty else { return .none }
                 let actions: Effect<Action> = .concatenate([
                     initializeMonths(state: &state),
                     .send(.fetchEntireAcademicSchedule)

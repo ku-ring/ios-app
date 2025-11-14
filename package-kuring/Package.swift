@@ -40,7 +40,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-dependencies", exact: "1.9.3"),
         .package(url: "https://github.com/apple/swift-collections.git", exact: "1.1.0"),
         .package(url: "https://github.com/ku-ring/the-satellite", branch: "main"),
-        .package(url: "https://github.com/ku-ring/ios-maps", branch: "2.2.0"),
+        .package(url: "https://github.com/ku-ring/ios-maps", branch: "2.2.1"),
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.50.4"),
         .package(url: "https://github.com/ku-ring/package-activityui", branch: "main"),
         .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "10.21.0"),

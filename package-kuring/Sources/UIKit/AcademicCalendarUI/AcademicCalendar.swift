@@ -47,6 +47,7 @@ public struct AcademicCalendar: View {
         .background(Color.Kuring.bg)
         .navigationTitle("학사 일정")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(.hidden, for: .navigationBar)
         .onAppear {
             store.send(.onAppearCalendar)
         }
