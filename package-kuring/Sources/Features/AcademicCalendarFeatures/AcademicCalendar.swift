@@ -58,7 +58,13 @@ public struct AcademicCalendarFeature {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
             let dateString = formatter.string(from: midnight)
-            return events.filter { $0.startTime <= dateString && dateString <= $0.endTime }
+            let target = dateString.prefix(10)
+            return events.filter {
+                let startDay = $0.startTime.prefix(10)
+                let endDay = $0.endTime.prefix(10)
+
+                return startDay <= target && target <= endDay
+            }
         }
         
         mutating func fetchAcademicSchedule() -> AcademicScheduleEntity? {
