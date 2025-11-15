@@ -58,7 +58,7 @@ public struct AcademicCalendarFeature {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
             let dateString = formatter.string(from: midnight)
-            let target = dateString.prefix(10)
+            let target = dateString.prefix(10) // "2025-11-17"
             return events.filter {
                 let startDay = $0.startTime.prefix(10)
                 let endDay = $0.endTime.prefix(10)
