@@ -23,11 +23,19 @@ public struct KuringLink {
     static var satellite: Satellite {
         let plistURL = Bundle.module.url(forResource: "KuringLink-Info", withExtension: "plist")!
         let dict = try! NSDictionary(contentsOf: plistURL, error: ())
+        let apiHost: String
+        #if DEBUG
+        apiHost = dict["DEBUG_API_HOST"] as? String ?? ""
+        #else
+        apiHost = dict["API_HOST"] as? String ?? ""
+        #endif
         let satellite = Satellite(
-            host: (dict["API_HOST"] as? String) ?? "",
+            host: apiHost,
             scheme: (dict["USING_HTTPS"] as? Bool) ?? true ? .https : .http
         )
-//        satellite._startGPS()
+        #if DEBUG
+        satellite._startGPS()
+        #endif
         return satellite
     }
 
@@ -105,4 +113,8 @@ public struct KuringLink {
     public var deleteComment: (_ noticeId: Int, _ commentId: Int) async throws -> Bool
     /// 댓글 신고
     public var reportComment: (_ commentId: Int, _ content: String) async throws -> Bool
+    /// 학사일정 조회
+    public var fetchAcademicEvents: (_ startDate: String?, _ endDate: String?) async throws -> [AcademicEvent]
+    /// 학사일정 알림 설정
+    public var setAcademicEventPush: (_ enabled: Bool) async throws -> Bool
 }

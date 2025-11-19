@@ -31,6 +31,8 @@ enum Path {
     case editComment(noticeId: Int, commentId: Int)
     case deleteComment(noticeId: Int, commentId: Int)
     case reportComment
+    case fetchAcademicEvents
+    case setAcademicEventPush
 
     var path: String {
         switch self {
@@ -80,6 +82,10 @@ enum Path {
             return "api/v2/notices/\(noticeId)/comments/\(commentId)"
         case .reportComment:
             return "api/v2/reports"
+        case .fetchAcademicEvents:
+            return "api/v2/academic-events"
+        case .setAcademicEventPush:
+            return "api/v2/users/notifications/academic-events"
         }
     }
 }

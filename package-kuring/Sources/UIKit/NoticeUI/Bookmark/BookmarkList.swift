@@ -7,7 +7,6 @@ import SwiftUI
 import ColorSet
 import NoticeUI
 import NoticeFeatures
-import BookmarkFeatures
 import ComposableArchitecture
 
 public struct BookmarkList: View {
@@ -31,7 +30,7 @@ public struct BookmarkList: View {
                           )
                           .background {
                             NavigationLink(
-                              state: BookmarkAppFeature.Path.State.detail(
+                              state: NoticeAppFeature.Path.State.detail(
                                 NoticeDetailFeature.State(
                                   notice: notice,
                                   isBookmarked: true
@@ -98,6 +97,7 @@ public struct BookmarkList: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(store.isEditing)
         .onAppear { store.send(.onAppear) }
         .toolbar(
             store.isEditing ? .hidden : .visible,
@@ -105,13 +105,12 @@ public struct BookmarkList: View {
         )
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    store.send(.cancelButtonTapped)
-                } label: {
-                    Text("취소")
+                if store.isEditing {
+                    Button("취소") {
+                        store.send(.cancelButtonTapped)
+                    }
+                    .foregroundStyle(Color.Kuring.primary)
                 }
-                .foregroundStyle(.primary)
-                .opacity(store.isEditing ? 1 : 0)
             }
             ToolbarItem(placement: .topBarTrailing) {
                 Button {

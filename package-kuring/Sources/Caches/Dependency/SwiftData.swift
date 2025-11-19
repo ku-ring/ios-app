@@ -13,7 +13,12 @@ fileprivate let appContext: ModelContext = {
         let url = URL.applicationSupportDirectory.appending(path: "Model.sqlite")
         let config = ModelConfiguration(url: url)
         
-        let container = try ModelContainer(for: ChatInfo.self, configurations: config)
+        let container = try ModelContainer(
+            for: ChatInfo.self,
+            AcademicEventEntity.self,
+            AcademicScheduleEntity.self,
+            configurations: config
+        )
         return ModelContext(container)
     } catch {
         fatalError("Failed to create container.")

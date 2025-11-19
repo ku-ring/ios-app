@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ku-ring/ios-maps",
       "state" : {
-        "branch" : "2.2.0",
-        "revision" : "d234480483b635145b356615e289313e693a029c"
+        "branch" : "2.2.2",
+        "revision" : "4452fbe3fef05aace0c68735e4b1575a58fb24e3"
       }
     },
     {

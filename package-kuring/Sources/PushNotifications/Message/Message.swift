@@ -11,12 +11,19 @@ public enum Message {
     case notice(Notice)
     /// 커스텀 알림
     case custom(title: String, body: String, url: String?)
+    /// 학사일정
+    case academic(title: String, body: String)
+    /// `type`이라는 필드가 없는 푸시 알림
+    case `default`(title: String, body: String)
 }
 
 extension Message {
     init(userInfo: [String: Any]) throws {
         guard let type = userInfo["type"] as? String else {
-            throw MessageError.failedParsing
+            let title = userInfo["title"] as? String
+            let body = userInfo["body"] as? String
+            self = .default(title: title ?? "", body: body ?? "")
+            return
         }
         switch type {
         // 공지사항
@@ -37,7 +44,13 @@ extension Message {
             let url = userInfo["url"] as? String
             
             self = .custom(title: title, body: body ?? "", url: url)
-        
+        case "academic":
+            guard let title = userInfo["title"] as? String,
+                  let body = userInfo["body"] as? String else {
+                throw MessageError.failedParsing
+            }
+            
+            self = .academic(title: title, body: body)
         // 지원하지 않는 알림
         default:
             throw MessageError.notSupported

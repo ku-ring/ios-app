@@ -23,7 +23,12 @@ public class SSEClient: NSObject, ObservableObject, URLSessionDataDelegate {
         let plistURL = Bundle.module.url(forResource: "KuringLink-Info", withExtension: "plist")!
         let dict = try! NSDictionary(contentsOf: plistURL, error: ())
         
-        let apiHost = dict["API_HOST"] as? String ?? ""
+        let apiHost: String
+        #if DEBUG
+        apiHost = dict["DEBUG_API_HOST"] as? String ?? ""
+        #else
+        apiHost = dict["API_HOST"] as? String ?? ""
+        #endif
         let usingHttps = (dict["USING_HTTPS"] as? Bool) ?? true
         let scheme = usingHttps ? "https" : "http"
         
