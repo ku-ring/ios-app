@@ -4,7 +4,6 @@ public let bundleId_release = "com.kuring.service"
 public let bundleId_debug = "com.kuring.service.debug"
 
 extension Project {
-    
     public static let destinations: ProjectDescription.Destinations = [.iPhone, .iPad]
     
     public static let minDeploymentVersion: DeploymentTargets = .iOS("17.0")
