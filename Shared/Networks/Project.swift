@@ -1,7 +1,8 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-let project = Project.network(
+let project = Project.make(
+    for: .core,
     name: "Networks",
     bundleId: bundleId_release,
     dependencies: [

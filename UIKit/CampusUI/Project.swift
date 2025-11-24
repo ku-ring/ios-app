@@ -1,7 +1,8 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-let project = Project.ui(
+let project = Project.make(
+    for: .ui,
     name: "CampusUI",
     bundleId: bundleId_release,
     dependencies: [

@@ -1,7 +1,8 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-let project = Project.pushNotifications(
+let project = Project.make(
+    for: .core,
     name: "PushNotifications",
     bundleId: bundleId_release,
     dependencies: [

@@ -1,13 +1,14 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-let project = Project.feature(
+let project = Project.make(
+    for: .feature,
     name: "BotFeatures",
     bundleId: bundleId_release,
     dependencies: [
         .external(name: "ComposableArchitecture"),
-        .project(target: "Networks", path: "../../Networks"),
-        .project(target: "Caches", path: "../../Caches"),
-        .project(target: "Models", path: "../../Models")
+        .project(target: "Caches", path: "../../Shared/Caches"),
+        .project(target: "Models", path: "../../Shared/Models"),
+        .project(target: "Networks", path: "../../Shared/Networks")
     ]
 )

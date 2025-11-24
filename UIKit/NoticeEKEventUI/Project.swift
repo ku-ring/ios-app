@@ -1,10 +1,11 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-let project = Project.ui(
+let project = Project.make(
+    for: .ui,
     name: "NoticeEKEventUI",
     bundleId: bundleId_release,
     dependencies: [
-        .project(target: "Caches", path: "../../Caches"),
+        .project(target: "Caches", path: "../../Shared/Caches"),
     ]
 )

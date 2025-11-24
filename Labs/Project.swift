@@ -1,7 +1,8 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-let project = Project.lab(
+let project = Project.make(
+    for: .lab,
     name: "Labs",
     bundleId: bundleId_release,
     dependencies: [
