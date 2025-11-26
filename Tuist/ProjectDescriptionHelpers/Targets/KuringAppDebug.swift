@@ -2,7 +2,7 @@
 
 extension Target {
     public static let kuringAppDebug: Target = .target(
-        name: "KuringApp(Debug)",
+        name: "KuringApp_Debug",
         destinations: .iOS,
         product: .app,
         bundleId: bundleId_debug,

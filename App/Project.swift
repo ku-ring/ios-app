@@ -29,9 +29,9 @@ let project = Project(
             archiveAction: .archiveAction(configuration: .release)
         ),
         .scheme(
-            name: "KuringApp(Debug)",
+            name: "KuringApp_Debug",
             shared: true,
-            buildAction: .buildAction(targets: ["KuringApp(Debug)"]),
+            buildAction: .buildAction(targets: ["KuringApp_Debug"]),
             runAction: .runAction(configuration: .debug),
             archiveAction: .archiveAction(configuration: .debug)
         ),

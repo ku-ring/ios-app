@@ -77,7 +77,7 @@ func makeTarget(
             bundleId: "\(bundleId).\(name).\(type.rawValue)",
             deploymentTargets: Project.minDeploymentVersion,
             infoPlist: .extendingDefault(with: [
-                "CFBundleDisplayName": "\(name)",
+                "CFBundleDisplayName": "\(name)Example",
                 "CFBundleShortVersionString": "1.0.0",
                 "CFBundleVersion": "1",
                 "UILaunchStoryboardName": "LaunchScreen"
