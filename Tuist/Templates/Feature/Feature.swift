@@ -12,6 +12,9 @@ let template = Template(
             path: "Features/\(nameAttribute)Features/Project.swift",
             contents:
                 """
+                import ProjectDescription
+                import ProjectDescriptionHelpers
+                
                 let project = Project.make(
                     for: .feature,
                     name: "\(nameAttribute)Features",

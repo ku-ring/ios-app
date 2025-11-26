@@ -14,6 +14,9 @@ let template = Template(
             path: "UIKit/\(nameAttribute)UI/Project.swift",
             contents:
                 """
+                import ProjectDescription
+                import ProjectDescriptionHelpers
+                
                 let project = Project.make(
                     for: .ui,
                     name: "\(nameAttribute)UI",
