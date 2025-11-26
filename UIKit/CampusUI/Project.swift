@@ -8,5 +8,6 @@ let project = Project.make(
     dependencies: [
         .external(name: "KuringMapsUI"),
         .project(target: "ColorSet", path: "../ColorSet"),
-    ]
+    ],
+    needsExample: true
 )

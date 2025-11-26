@@ -15,5 +15,6 @@ let project = Project.make(
         .project(target: "LoginFeatures", path: "../../Features/LoginFeatures"),
         .project(target: "SettingsFeatures", path: "../../Features/SettingsFeatures"),
         .project(target: "SubscriptionFeatures", path: "../../Features/SubscriptionFeatures")
-    ]
+    ],
+    needsExample: true
 )

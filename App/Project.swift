@@ -3,17 +3,23 @@ import ProjectDescriptionHelpers
 
 let project = Project(
     name: "KuringApp",
+    options: .options(
+        automaticSchemesOptions: .disabled,
+        disableBundleAccessors: true,
+        disableShowEnvironmentVarsInScriptPhases: true,
+        disableSynthesizedResourceAccessors: true
+    ),
     settings: .settings(
-        base: SettingsDictionary()
-            .codeSignIdentityAppleDevelopment()
-            .automaticCodeSigning(devTeam: "6DXT245L5T")
-            .swiftVersion("5.0")
-            .otherLinkerFlags(["-all_load -Objc"])
-            .bitcodeEnabled(false),
+        base: [
+            "ENABLE_MODULE_VERIFIER": "YES",
+            "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
+            "ENABLE_GENERATED_ASSET_SYMBOL_EXTENSIONS": "YES"
+        ],
         configurations: [
             .debug(name: "Debug"),
             .release(name: "Release")
-        ]
+        ],
+        defaultSettings: .recommended
     ),
     targets: [
         .kuringApp,

@@ -59,7 +59,7 @@ extension Target {
         settings: .settings(
             base: [
                 "ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES": "AppIcon-kuring-app.jpg AppIcon-kuring-app-classic AppIcon-kuring-app-sketch AppIcon-kuring-app-blueprint",
-                "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon_Debug",
+                "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon_Debug"
             ],
             configurations: [
                 .debug(
@@ -68,6 +68,7 @@ extension Target {
                         .codeSignIdentityAppleDevelopment()
                         .automaticCodeSigning(devTeam: "6DXT245L5T")
                         .swiftActiveCompilationConditions(["DEBUG"])
+                        .otherLinkerFlags(["-all_load -Objc"])
                         .swiftVersion("5.0")
                         .bitcodeEnabled(false),
                     xcconfig: "Configurations/Debug.xcconfig"

@@ -12,5 +12,6 @@ let project = Project.make(
         .project(target: "Models", path: "../../Shared/Models"),
         .project(target: "Caches", path: "../../Shared/Caches"),
         .project(target: "AcademicCalendarFeatures", path: "../../Features/AcademicCalendarFeatures")
-    ]
+    ],
+    needsExample: true
 )

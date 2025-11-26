@@ -74,7 +74,7 @@ func makeTarget(
             name: "\(name)Example",
             destinations: Project.destinations,
             product: .app,
-            bundleId: "\(bundleId).\(name).\(type.rawValue)",
+            bundleId: "\(bundleId).\(name).example",
             deploymentTargets: Project.minDeploymentVersion,
             infoPlist: .extendingDefault(with: [
                 "CFBundleDisplayName": "\(name)Example",

@@ -5,7 +5,6 @@
 
 import Caches
 import SwiftUI
-import ColorSet
 import CampusUI
 import NoticeUI
 import SettingsUI

@@ -22,5 +22,6 @@ let project = Project.make(
         .project(target: "NoticeFeatures", path: "../../Features/NoticeFeatures"),
         .project(target: "SearchFeatures", path: "../../Features/SearchFeatures"),
         .project(target: "DepartmentFeatures", path: "../../Features/DepartmentFeatures")
-    ]
+    ],
+    needsExample: true
 )
