@@ -19,6 +19,7 @@ let project = Project.make(
         .project(target: "SubscriptionUI", path: "../SubscriptionUI"),
         .project(target: "NoticeEKEventUI", path: "../NoticeEKEventUI"),
         .project(target: "BotFeatures", path: "../../Features/BotFeatures"),
+        .project(target: "AcademicCalendarUI", path: "../AcademicCalendarUI"),
         .project(target: "NoticeFeatures", path: "../../Features/NoticeFeatures"),
         .project(target: "SearchFeatures", path: "../../Features/SearchFeatures"),
         .project(target: "DepartmentFeatures", path: "../../Features/DepartmentFeatures")
