@@ -3,7 +3,7 @@ import ProjectDescription
 let nameAttribute: Template.Attribute = .required("name")
 
 let template = Template(
-    description: "Teamplate for feature modules",
+    description: "Template for feature modules",
     attributes: [
         nameAttribute
     ],

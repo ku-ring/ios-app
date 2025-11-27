@@ -1,4 +1,4 @@
-.PHONY: generate clean regenerate
+.PHONY: generate clean reset
 .ONESHELL:
 
 SHELL := /bin/zsh

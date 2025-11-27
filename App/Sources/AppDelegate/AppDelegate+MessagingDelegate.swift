@@ -19,7 +19,11 @@ extension AppDelegate: MessagingDelegate {
             // 토큰 값이 다른 경우에만 해당 API 호출
             @Dependency(\.kuringLink) var kuringLink
             Task(priority: .background) {
-                try? await kuringLink.registerAuthorization()
+                do {
+                    _ = try await kuringLink.registerAuthorization()
+                } catch {
+                    print("유저 FCM 토큰 등록 실패: \(error)")
+                }
             }
         }
     }

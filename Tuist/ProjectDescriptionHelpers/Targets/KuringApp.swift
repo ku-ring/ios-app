@@ -12,7 +12,7 @@ extension Target {
                 "FirebaseAppDelegateProxyEnabled": .boolean(false),
                 "ITSAppUsesNonExemptEncryption": .boolean(false),
                 "NSAppTransportSecurity": [
-                    "NSAppTransportSecurity": .boolean(true)
+                    "NSAllowsArbitraryLoads": .boolean(true)
                 ],
                 "UIBackgroundModes": [
                     "remote-notification"

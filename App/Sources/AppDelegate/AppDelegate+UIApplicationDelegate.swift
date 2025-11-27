@@ -19,11 +19,6 @@ extension AppDelegate: UIApplicationDelegate {
         return true
     }
     
-    public func didFinishLaunching(_ application: UIApplication) {
-        configureFirebase()
-        registerRemoteNotification(for: application)
-    }
-    
     /// 푸시알림 디바이스 토큰 등록되었을 때 호출되는 이벤트
     public func application(
         _ application: UIApplication,

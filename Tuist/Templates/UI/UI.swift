@@ -4,7 +4,7 @@ let nameAttribute: Template.Attribute = .required("name")
 let exampleAttribute: Template.Attribute = .optional("example", default: .boolean(false))
 
 let template = Template(
-    description: "Teamplate for UI modules",
+    description: "Template for UI modules",
     attributes: [
         nameAttribute,
         exampleAttribute

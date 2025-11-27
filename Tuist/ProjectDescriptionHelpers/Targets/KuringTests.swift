@@ -7,7 +7,7 @@ extension Target {
         product: .unitTests,
         productName: "KuringTests",
         bundleId: "\(bundleId_release).tests",
-        deploymentTargets: .iOS("18.0"),
+        deploymentTargets: .iOS("17.0"),
         infoPlist: .default,
         sources: ["Tests/**"],
         dependencies: [
