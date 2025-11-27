@@ -69,7 +69,7 @@ extension Target {
                         .automaticCodeSigning(devTeam: "6DXT245L5T")
                         .swiftActiveCompilationConditions([])
                         .otherLinkerFlags(["-all_load -Objc"])
-                        .swiftVersion("5.0")
+                        .swiftVersion("5.9")
                         .bitcodeEnabled(false),
                     xcconfig: "Configurations/Release.xcconfig"
                 )
