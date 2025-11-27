@@ -9,5 +9,9 @@ extension TargetDependency {
     public static func feature(_ name: String) -> TargetDependency {
         .project(target: "\(name)", path: "../Features/\(name)")
     }
+    
+    public static func shared(_ name: String) -> TargetDependency {
+        .project(target: "\(name)", path: "../Shared/\(name)")
+    }
 }
 
