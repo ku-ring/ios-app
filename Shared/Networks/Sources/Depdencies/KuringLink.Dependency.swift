@@ -1,0 +1,607 @@
+//
+// Copyright (c) 2024 쿠링
+// See the 'License.txt' file for licensing information.
+//
+
+import Models
+import Satellite
+import Foundation
+import Dependencies
+import OrderedCollections
+
+extension DependencyValues {
+    public var kuringLink: KuringLink {
+        get { self[KuringLink.self] }
+        set { self[KuringLink.self] = newValue }
+    }
+}
+
+extension KuringLink: DependencyKey {
+    public static let liveValue = KuringLink(
+        fetchNotices: { count, type, department, page, graduted in
+            let response: Response<[Notice]> = try await satellite
+                .response(
+                    for: Path.getNotices.path,
+                    httpMethod: .get,
+                    queryItems: [
+                        .init(name: "type", value: type),
+                        .init(name: "department", value: department),
+                        .init(name: "page", value: String(page)),
+                        .init(name: "size", value: String(count)),
+                        .init(name: "graduated", value: String(graduted)),
+                    ]
+                )
+            return response.data
+        },
+        sendFeedback: { text in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.sendFeedback.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken,
+                        "User-Agent": "Kuring/\(appVersion) iOS/\(iosVersion)",
+                    ],
+                    httpBody: Feedback(content: text)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        searchNotices: { keyword in
+            // TODO: 서버 수정되면 제거하기
+            struct SearchedNoticeList: Decodable {
+                let noticeList: [SearchedNotice]
+            }
+            let response: Response<SearchedNoticeList> = try await satellite
+                .response(
+                    for: Path.searchNotices.path,
+                    httpMethod: .get,
+                    queryItems: [
+                        .init(name: "content", value: keyword),
+                    ]
+                )
+            return response.data.noticeList.compactMap { $0.asNotice }
+        },
+        searchStaffs: { keyword in
+            // TODO: 서버 수정되면 제거하기
+            struct StaffList: Decodable {
+                let staffList: [Staff]
+            }
+            let response: Response<StaffList> = try await satellite
+                .response(
+                    for: Path.searchStaffs.path,
+                    httpMethod: .get,
+                    queryItems: [
+                        .init(name: "content", value: keyword),
+                    ]
+                )
+            return response.data.staffList
+        },
+        subscribeUnivNotices: { typeNames in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.subscribeUnivNotices.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken,
+                    ],
+                    httpBody: UnivNoticeSubscription(categories: typeNames)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        subscribeDepartments: { hostPrefixes in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.subscribeDepartments.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken,
+                    ],
+                    httpBody: DepartmentSubscription(departments: hostPrefixes)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        getSubscribedUnivNotices: {
+            let response: Response<[NoticeProvider]> = try await satellite
+                .response(
+                    for: Path.getSubscribedUnivNotices.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ]
+                )
+            // 로컬 값 갱신
+            NoticeProvider.subscribedUnivNoticeTypes = response.data
+                .compactMap {
+                    NoticeProvider(
+                        name: $0.name,
+                        hostPrefix: $0.hostPrefix,
+                        korName: $0.korName,
+                        category: .대학
+                    )
+                }
+            return NoticeProvider.subscribedUnivNoticeTypes
+        },
+        getSubscribedDepartments: {
+            let response: Response<[NoticeProvider]> = try await satellite
+                .response(
+                    for: Path.getSubscribedDepartments.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ]
+                )
+            
+            // 로컬 값 갱신
+            NoticeProvider.subscribedDepartments = response.data
+                .compactMap {
+                    NoticeProvider(
+                        name: $0.name,
+                        hostPrefix: $0.hostPrefix,
+                        korName: $0.korName,
+                        category: .학과
+                    )
+                }
+            return NoticeProvider.subscribedDepartments
+        },
+        getAllUnivNoticeType: {
+            let response: Response<[NoticeProvider]> = try await satellite
+                .response(
+                    for: Path.getAllUnivNoticeType.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ]
+                )
+            
+            // 로컬 값 갱신
+            NoticeProvider.univNoticeTypes = response.data
+                .compactMap {
+                    NoticeProvider(
+                        name: $0.name,
+                        hostPrefix: $0.hostPrefix,
+                        korName: $0.korName,
+                        category: .대학
+                    )
+                }
+            var namesForPicker: OrderedDictionary<String, NoticeProvider> = ["학과": NoticeProvider.emptyDepartment] // 학과 순위 첫번째 보장
+            NoticeProvider.univNoticeTypes.forEach {
+                namesForPicker.updateValue($0, forKey: $0.korName)
+            }
+            // 서버에서 `hostPrefix: "dep"`, `korName: "학과"` 를 내려주기 때문에 업데이트 필요함
+            namesForPicker.updateValue(
+                NoticeProvider.addedDepartments.first ?? .emptyDepartment,
+                forKey: "학과"
+            )
+            NoticeProvider.allNamesForPicker = namesForPicker
+            return NoticeProvider.univNoticeTypes
+        },
+        getAllDepartments: {
+            let response: Response<[NoticeProvider]> = try await satellite
+                .response(
+                    for: Path.getAllDepartments.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ]
+                )
+            
+            // 로컬 값 갱신
+            NoticeProvider.departments = response.data
+                .compactMap {
+                    NoticeProvider(
+                        name: $0.name,
+                        hostPrefix: $0.hostPrefix,
+                        korName: $0.korName,
+                        category: .학과
+                    )
+                }
+            NoticeProvider.departments.append(
+                NoticeProvider(
+                    name: "communication_design",
+                    hostPrefix: "ccd",
+                    korName: "커뮤니케이션디자인학과",
+                    category: .학과
+                )
+            )
+            return NoticeProvider.departments
+        },
+        registerAuthorization: {
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.registerAuthorization.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                    ],
+                    httpBody: AuthRequest(token: fcmToken)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        sendVerificationCodeOnSignup: { email in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.sendVerificationCodeOnSignup.path,
+                    httpMethod: .post,
+                    httpBody: Email(email: email)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        sendVerificationCodeOnPasswordReset: { email in
+            var header: [String: String] = [
+                "Content-Type": "application/json",
+            ]
+            if !accessToken.isEmpty {
+                header["Authorization"] = "Bearer \(accessToken)"
+            }
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.sendVerificationCodeOnPasswordReset.path,
+                    httpMethod: .post,
+                    httpHeaders: header,
+                    httpBody: Email(email: email)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        verifyVerificationCode: { email, code in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.verifyVerificationCode.path,
+                    httpMethod: .post,
+                    httpBody: EmailVerification(email: email, code: code)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        signUp: { email, password in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.signUp.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken,
+                    ],
+                    httpBody: EmailPassword(email: email, password: password)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        login: { email, password in
+            let response: Response<AccessToken> = try await satellite
+                .response(
+                    for: Path.login.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken,
+                    ],
+                    httpBody: EmailPassword(email: email, password: password)
+                )
+            
+            let isSucceed = (200 ..< 300) ~= response.code
+            if isSucceed {
+                accessToken = response.data.accessToken
+            }
+            return isSucceed
+        },
+        logout: {
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.logout.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken,
+                        "Authorization": "Bearer \(accessToken)"
+                    ]
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            if isSucceed {
+                accessToken = ""
+            }
+            return isSucceed
+        },
+        getUserInfo: {
+            let response: Response<UserInfo> = try await satellite
+                .response(
+                    for: Path.getUserInfo.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ]
+                )
+            return response.data
+        },
+        resetPassword: { email, password in
+            var header = [
+                "Content-Type": "application/json",
+                "User-Token": fcmToken
+            ]
+            if !accessToken.isEmpty {
+                header["Authorization"] = "Bearer \(accessToken)"
+            }
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.resetPassword.path,
+                    httpMethod: Satellite.patch,
+                    httpHeaders: header,
+                    httpBody: EmailPassword(email: email, password: password)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        withdrawAccount: {
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.withdrawAccount.path,
+                    httpMethod: .delete,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ]
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            if isSucceed {
+                accessToken = ""
+            }
+            return isSucceed
+        },
+        getComments: { noticeId, cursor, size in
+            var queryItems: [URLQueryItem] = []
+            if let cursor {
+                queryItems.append(.init(name: "cursor", value: cursor))
+            }
+            if let size {
+                queryItems.append(.init(name: "size", value: String(size)))
+            }
+            let response: Response<CommentData> = try await satellite
+                .response(
+                    for: Path.getComments(id: noticeId).path,
+                    httpMethod: .get,
+                    queryItems: queryItems,
+                    httpHeaders: [
+                        "Content-Type": "application/json"
+                    ]
+                )
+            
+            return response.data
+        },
+        addComment: { noticeId, content, parentId in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.addComment(id: noticeId).path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ],
+                    httpBody: CommentRequest(content: content, parentId: parentId)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        editComment: { noticeId, content, commentId in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.editComment(noticeId: noticeId, commentId: commentId).path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ],
+                    httpBody: CommentRequest(content: content, parentId: nil)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        deleteComment: { noticeId, commentId in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.deleteComment(noticeId: noticeId, commentId: commentId).path,
+                    httpMethod: .delete,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ]
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        reportComment: { commentId, content in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.reportComment.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ],
+                    httpBody: ReportCommentRequest(targetId: commentId, reportType: .COMMENT, content: content)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        },
+        fetchAcademicEvents: { startDate, endDate in
+            var queryItems: [URLQueryItem] = []
+            if let startDate {
+                queryItems.append(.init(name: "startDate", value: startDate))
+            }
+            if let endDate {
+                queryItems.append(.init(name: "endDate", value: endDate))
+            }
+            let response: Response<[AcademicEvent]> = try await satellite
+                .response(
+                    for: Path.fetchAcademicEvents.path,
+                    httpMethod: .get,
+                    queryItems: queryItems
+                )
+            
+            return response.data
+        },
+        setAcademicEventPush: { enabled in
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.setAcademicEventPush.path,
+                    httpMethod: Satellite.patch,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ],
+                    httpBody: AcademicEventPush(enabled: enabled)
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
+        }
+    )
+}
+
+
+extension KuringLink {
+    public static let testValue: KuringLink = .init(
+        fetchNotices: { _, _, _, _, _ in
+            [Notice.random]
+        },
+        sendFeedback: { _ in
+            true
+        },
+        searchNotices: { _ in
+            [Notice.random]
+        },
+        searchStaffs: { _ in
+            [Staff.random()]
+        },
+        subscribeUnivNotices: { _ in
+            true
+        },
+        subscribeDepartments: { _ in
+            true
+        },
+        getSubscribedUnivNotices: {
+            [
+                NoticeProvider.학사,
+                NoticeProvider.도서관
+            ]
+        },
+        getSubscribedDepartments: {
+            [
+                NoticeProvider(
+                    name: "education",
+                    hostPrefix: "edu",
+                    korName: "교직과",
+                    category: .학과
+                ),
+                NoticeProvider(
+                    name: "physical_education",
+                    hostPrefix: "kupe",
+                    korName: "체육교육과",
+                    category: .학과
+                ),
+                NoticeProvider(
+                    name: "computer_science",
+                    hostPrefix: "cse",
+                    korName: "컴퓨터공학부",
+                    category: .학과
+                )
+            ]
+        },
+        getAllUnivNoticeType: {
+            [
+                NoticeProvider.학사,
+                NoticeProvider.취창업,
+                NoticeProvider.도서관,
+                NoticeProvider.학생,
+                NoticeProvider.국제,
+                NoticeProvider.장학,
+                NoticeProvider.산학,
+                NoticeProvider.일반,
+            ]
+        },
+        getAllDepartments: {
+            [
+                NoticeProvider(
+                    name: "education",
+                    hostPrefix: "edu",
+                    korName: "교직과",
+                    category: .학과
+                ),
+                NoticeProvider(
+                    name: "physical_education",
+                    hostPrefix: "kupe",
+                    korName: "체육교육과",
+                    category: .학과
+                ),
+                NoticeProvider(
+                    name: "computer_science",
+                    hostPrefix: "cse",
+                    korName: "컴퓨터공학부",
+                    category: .학과
+                )
+            ]
+        },
+        registerAuthorization: {
+            return true
+        },
+        sendVerificationCodeOnSignup: { _ in
+            return true
+        },
+        sendVerificationCodeOnPasswordReset: { _ in
+            return true
+        },
+        verifyVerificationCode: { _,_ in
+            return true
+        },
+        signUp: { _,_ in
+            return true
+        },
+        login: { _,_ in
+            return true
+        },
+        logout: { 
+            return true
+        },
+        getUserInfo: {
+            return UserInfo(email: "hwan333@konkuk.ac.kr", nickname: "swagati")
+        },
+        resetPassword: { _,_ in
+            return true
+        },
+        withdrawAccount: {
+            return true
+        },
+        getComments: { _, _, _ in
+            return .init(comments: [], endCursor: "", hasNext: false)
+        },
+        addComment: { _, _, _ in
+            return true
+        },
+        editComment: { _, _, _ in
+            return true
+        },
+        deleteComment: { _, _ in
+            return true
+        },
+        reportComment: { _, _ in
+            return true
+        },
+        fetchAcademicEvents: { _, _ in
+            return []
+        },
+        setAcademicEventPush: { _ in
+            return true
+        }
+    )
+}

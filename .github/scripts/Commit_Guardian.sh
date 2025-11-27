@@ -1,5 +1,5 @@
 #!/bin/bash
-TARGET_FILES=("package-kuring/Sources/UIKit/CampusUI/Resources/KuringMaps-Info.plist" "package-kuring/Sources/Networks/Resources/KuringLink-Info.plist")
+TARGET_FILES=("UIKit/CampusUI/Resources/KuringMaps-Info.plist" "Shared/Networks/Resources/KuringLink-Info.plist")
 
 echo "🩺 커밋 방지 필요 여부 체크 중"
 
