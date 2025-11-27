@@ -65,7 +65,6 @@ extension Target {
                 .release(
                     name: "Release",
                     settings: SettingsDictionary()
-                        .codeSignIdentityAppleDevelopment()
                         .automaticCodeSigning(devTeam: "6DXT245L5T")
                         .swiftActiveCompilationConditions([])
                         .otherLinkerFlags(["-all_load -Objc"])

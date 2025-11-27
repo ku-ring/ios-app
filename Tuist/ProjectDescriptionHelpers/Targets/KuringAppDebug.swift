@@ -65,7 +65,6 @@ extension Target {
                 .debug(
                     name: "Debug",
                     settings: SettingsDictionary()
-                        .codeSignIdentityAppleDevelopment()
                         .automaticCodeSigning(devTeam: "6DXT245L5T")
                         .swiftActiveCompilationConditions(["DEBUG"])
                         .otherLinkerFlags(["-all_load -Objc"])
