@@ -30,6 +30,7 @@ extension Target {
                     "UIInterfaceOrientationLandscapeLeft",
                     "UIInterfaceOrientationLandscapeRight"
                 ],
+                "UIDesignRequiresCompatibility": .boolean(true),
                 "CFBundleDisplayName": "쿠링(Debug)",
                 "CFBundleShortVersionString": "2.3.5",
                 "CFBundleVersion": "1",
