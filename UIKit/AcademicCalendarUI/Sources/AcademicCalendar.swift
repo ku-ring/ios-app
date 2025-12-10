@@ -100,7 +100,7 @@ public struct AcademicCalendar: View {
                 ForEach(Array(store.months.enumerated()), id: \.offset) { index, month in
                     CalendarMonthView(
                         month: month,
-                        selectedDate: $store.selectedDate,
+                        store: store,
                         events: store.events
                     )
                     .tag(index)

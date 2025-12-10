@@ -48,9 +48,7 @@ public struct AcademicCalendarFeature {
         
         public var eventsForSelectedDate: [AcademicEvent] {
             let calendar = Calendar.current
-            guard let selectedDate,
-                  calendar.isDate(selectedDate, equalTo: currentDate, toGranularity: .month)
-            else {
+            guard let selectedDate else {
                 return []
             }
             
@@ -225,7 +223,12 @@ public struct AcademicCalendarFeature {
                 
                 return .run { send in
                     do {
-                        let result = try await kuringLink.fetchAcademicEvents(dateFormatter.string(from: schedule.lastUpdated), nil)
+                        let start = dateFormatter.string(from: schedule.lastUpdated)
+                        let end = dateFormatter.string(
+                            from: Calendar.current.date(byAdding: .year, value: 3, to: schedule.lastUpdated) ?? Date()
+                        )
+                        
+                        let result = try await kuringLink.fetchAcademicEvents(start, end)
                         await send(.fetchAcademicScheduleResponse(.success(result), true))
                         await send(.toggleAcademicScheduleSheet)
                     } catch {
