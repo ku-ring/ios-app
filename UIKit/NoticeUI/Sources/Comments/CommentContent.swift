@@ -26,6 +26,7 @@ struct CommentContent: View {
     @Binding var parentId: Int?
     let comment: Comment
     let showReplyIcon: Bool
+    let onTapReply: (Int) -> Void
     let onDelete: (Comment) -> Void
     let onReport: (Comment) -> Void
     
@@ -33,12 +34,14 @@ struct CommentContent: View {
         parentId: Binding<Int?>,
         comment: Comment,
         showReplyIcon: Bool = false,
+        onTapReply: @escaping (Int) -> Void,
         onDelete: @escaping (Comment) -> Void,
         onReport: @escaping (Comment) -> Void
     ) {
         self._parentId = parentId
         self.comment = comment
         self.showReplyIcon = showReplyIcon
+        self.onTapReply = onTapReply
         self.onDelete = onDelete
         self.onReport = onReport
     }
@@ -80,7 +83,7 @@ struct CommentContent: View {
                     .frame(width: 24, height: 24)
                     .foregroundStyle(Color.Kuring.gray400)
                     .onTapGesture {
-                        parentId = parentId == nil ? comment.id : nil
+                        onTapReply(comment.id)
                     }
             }
             
@@ -112,6 +115,7 @@ struct CommentContent: View {
         parentId: $parentId,
         comment: CommentData.mock.first!.comment,
         showReplyIcon: true,
+        onTapReply: { _ in },
         onDelete: { _ in },
         onReport: { _ in }
     )

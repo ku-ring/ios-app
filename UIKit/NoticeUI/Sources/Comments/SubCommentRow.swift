@@ -32,6 +32,7 @@ struct SubCommentRow: View {
             CommentContent(
                 parentId: .constant(nil),
                 comment: comment,
+                onTapReply: { _ in },
                 onDelete: onDelete,
                 onReport: onReport
             )

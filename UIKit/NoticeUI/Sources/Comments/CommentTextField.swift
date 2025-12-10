@@ -72,7 +72,7 @@ struct CommentTextField: UIViewRepresentable {
     }
     
     private func setPlaceholder(for uiView: UITextView) {
-        var newPlaceholder = accessToken == "" ? "로그인 후 댓글을 추가해보세요!" : (isReply ? "대댓글 추가..." : "댓글 추가...")
+        let newPlaceholder = accessToken.isEmpty ? "로그인 후 댓글을 추가해보세요!" : (isReply ? "대댓글 추가..." : "댓글 추가...")
         // placeholder모드 여부
         let isPlaceholderMode = uiView.textColor == UIColor(Color.Kuring.caption2)
         
@@ -117,7 +117,7 @@ struct CommentTextField: UIViewRepresentable {
         
         func textViewDidEndEditing(_ textView: UITextView) {
             if textView.text.isEmpty {
-                textView.text = parent.accessToken == "" ? "로그인 후 댓글을 추가해보세요!" : (parent.isReply ? "대댓글 추가..." : "댓글 추가...")
+                textView.text = parent.accessToken.isEmpty ? "로그인 후 댓글을 추가해보세요!" : (parent.isReply ? "대댓글 추가..." : "댓글 추가...")
                 textView.textColor = UIColor(Color.Kuring.caption2)
             }
         }

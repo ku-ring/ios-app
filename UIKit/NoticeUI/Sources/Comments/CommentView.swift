@@ -37,6 +37,7 @@ struct CommentView: View {
     @AppStorage("com.kuring.sdk.v2.token.accessToken") var accessToken: String = ""
     
     let comments: [CommentResult]
+    let showNeedsLoginAlert: () -> Void
     let onSendComment: (_ content: String, _ parentId: Int?) -> Void
     let onDeleteComment: (Comment) -> Void
     let onReportComment: (Comment) -> Void
@@ -100,6 +101,13 @@ struct CommentView: View {
                 CommentRow(
                     parentId: $parentId,
                     commentResult: commentResult,
+                    onTapReply: { commentId in
+                        if !accessToken.isEmpty {
+                            parentId = parentId == nil ? commentId : nil
+                        } else {
+                            showNeedsLoginAlert()
+                        }
+                    },
                     onDelete: onDeleteComment,
                     onReport: onReportComment
                 )
@@ -119,12 +127,25 @@ struct CommentView: View {
             )
             .frame(height: textFieldHeight)
             .focused($isTextFieldFocused, equals: true)
+            .allowsHitTesting(!accessToken.isEmpty)
+            .overlay(overlayIfLoggedOut)
             
             sendButton
         }
         .padding(.horizontal, 20)
         .padding(.top, 12)
         .background(Color.Kuring.bg)
+    }
+    
+    @ViewBuilder
+    private var overlayIfLoggedOut: some View {
+        if accessToken.isEmpty {
+            Color.clear
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    showNeedsLoginAlert()
+                }
+        }
     }
      
     private var sendButton: some View {
@@ -139,11 +160,11 @@ struct CommentView: View {
         } label: {
             Circle()
                 .fill(
-                    accessToken == "" ? Color.Kuring.gray300 : Color.Kuring.gray400
+                    accessToken.isEmpty ? Color.Kuring.gray300 : Color.Kuring.gray400
                 )
                 .frame(width: 40, height: 40)
                 .overlay {
-                    Image("arrow_up", bundle: .module)
+                    Image(accessToken.isEmpty ? "lock" : "arrow_up", bundle: .module)
                         .resizable()
                         .frame(width: 24, height: 24)
                 }
@@ -154,6 +175,9 @@ struct CommentView: View {
 #Preview {
     CommentView(
         comments: CommentData.mock,
+        showNeedsLoginAlert: {
+            
+        },
         onSendComment: { comment, parentId in
             
         },
