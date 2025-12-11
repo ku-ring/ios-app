@@ -49,13 +49,9 @@ struct CalendarMonthView: View {
                                         
                                         switch comparison {
                                         case .orderedAscending:
-                                            withAnimation {
-                                                store.send(.previousMonthTapped)
-                                            }
+                                            store.send(.previousMonthTapped, animation: .snappy)
                                         case .orderedDescending:
-                                            withAnimation {
-                                                store.send(.nextMonthTapped)
-                                            }
+                                            store.send(.nextMonthTapped, animation: .snappy)
                                         default:
                                             break
                                         }

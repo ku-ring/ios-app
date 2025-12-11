@@ -62,7 +62,7 @@ public struct AcademicCalendar: View {
             
             HStack(spacing: 26) {
                 Button {
-                    store.send(.previousMonthTapped)
+                    store.send(.previousMonthTapped, animation: .snappy)
                 } label: {
                     Image(systemName: "chevron.left")
                         .foregroundColor(Color.Kuring.primary)
@@ -70,7 +70,7 @@ public struct AcademicCalendar: View {
                 }
                 
                 Button {
-                    store.send(.nextMonthTapped)
+                    store.send(.nextMonthTapped, animation: .snappy)
                 } label: {
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color.Kuring.primary)
