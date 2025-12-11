@@ -337,7 +337,7 @@ extension KuringLink: DependencyKey {
             let response: EmptyResponse = try await satellite
                 .response(
                     for: Path.resetPassword.path,
-                    httpMethod: Satellite.patch,
+                    httpMethod: .patch,
                     httpHeaders: header,
                     httpBody: EmailPassword(email: email, password: password)
                 )
@@ -456,7 +456,7 @@ extension KuringLink: DependencyKey {
             let response: EmptyResponse = try await satellite
                 .response(
                     for: Path.setAcademicEventPush.path,
-                    httpMethod: Satellite.patch,
+                    httpMethod: .patch,
                     httpHeaders: [
                         "Content-Type": "application/json",
                         "User-Token": fcmToken
