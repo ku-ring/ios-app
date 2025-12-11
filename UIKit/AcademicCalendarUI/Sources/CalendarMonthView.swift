@@ -45,7 +45,6 @@ struct CalendarMonthView: View {
                                     guard !dateInfo.isCurrentMonth else { return }
 
                                     let comparison = calendar.compare(dateInfo.date, to: month, toGranularity: .month)
-                                    store.selectedDate = dateInfo.date
                                     
                                     switch comparison {
                                     case .orderedAscending:
