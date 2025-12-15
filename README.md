@@ -25,9 +25,9 @@
 
 ## 요구 사항
 
-- Xcode 15.0+ (Swift 5.9+)
+- Xcode 26.0+ (Swift 5.9+)
 - iOS 17+
-- Tuist 4.54.3 (mise)
+- Tuist 4.109.1 (mise)
  
 ## 의존성
 
@@ -36,7 +36,7 @@
 | The Satellite | https://github.com/ku-ring/the-satellite | main | iOS API 통신모듈  |
 | Swift Collections | https://github.com/apple/swift-collections | 1.1.0 | OrderedSet |  
 | Composable Architecture | https://github.com/pointfreeco/swift-composable-architecture | 1.12.1 | TCA 구조를 위한 스위프트 패키지 |
-| Tuist | https://github.com/tuist/tuist | 4.54.3 | iOS 프로젝트 관리 도구  |
+| Tuist | https://github.com/tuist/tuist | 4.109.1 | iOS 프로젝트 관리 도구  |
 | swift-dependencies | https://github.com/pointfreeco/swift-dependencies | 1.9.3 | 디펜던시 관리 라이브러리 |
 | Lottie | https://github.com/airbnb/lottie-spm | 4.44.1 | 코드 스타일 관리 |
 | ios-maps | https://github.com/ku-ring/ios-maps | main | 쿠링 지도 |
@@ -64,10 +64,10 @@ mise install tuist@x.y.z      # Install a specific version number
 mise install tuist@3          # Install a fuzzy version number
 ```
 
-쿠링은 4.54.3 버전을 사용합니다.
+쿠링은 4.109.1 버전을 사용합니다.
 ```sh
 # 특정 버전 사용
-mise use tuist@4.54.3
+mise use tuist@4.109.1
 # 현재 활성화된 Tuist 버전 확인
 tuist --version
 ```
