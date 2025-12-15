@@ -48,9 +48,7 @@ public struct AcademicCalendarFeature {
         
         public var eventsForSelectedDate: [AcademicEvent] {
             let calendar = Calendar.current
-            guard let selectedDate,
-                  calendar.isDate(selectedDate, equalTo: currentDate, toGranularity: .month)
-            else {
+            guard let selectedDate else {
                 return []
             }
             
@@ -84,9 +82,8 @@ public struct AcademicCalendarFeature {
             @Dependency(\.academicSchedules) var academicDB
 
             let entities = apiEvents.map(AcademicEventEntity.init(from:))
-            let threeYearsAfter = Calendar.current.date(byAdding: .year, value: 3, to: .now)
 
-            let schedule = AcademicScheduleEntity(lastUpdated: threeYearsAfter ?? Date(), events: entities)
+            let schedule = AcademicScheduleEntity(lastUpdated: Date(), events: entities)
             schedule.isComplete = isComplete
             
             do {
@@ -151,10 +148,8 @@ public struct AcademicCalendarFeature {
                 
                 // 캐싱된 학사일정이 있다
                 if !schedule.events.isEmpty {
-                    let cachedDate = Calendar.current.date(byAdding: .year, value: -3, to: schedule.lastUpdated) ?? .now
-                    
                     // 마지막으로 캐싱한 날짜와 현재와 주(week)가 다르다
-                    if cachedDate.isInDifferentWeek(from: .now) {
+                    if schedule.lastUpdated.isInDifferentWeek(from: .now) {
                         // 새로운 학사일정만 가져온다
                         return .concatenate([
                             .send(.fetchLatestAcademicSchedule)
@@ -228,7 +223,12 @@ public struct AcademicCalendarFeature {
                 
                 return .run { send in
                     do {
-                        let result = try await kuringLink.fetchAcademicEvents(dateFormatter.string(from: schedule.lastUpdated), nil)
+                        let start = dateFormatter.string(from: schedule.lastUpdated)
+                        let end = dateFormatter.string(
+                            from: Calendar.current.date(byAdding: .year, value: 3, to: schedule.lastUpdated) ?? Date()
+                        )
+                        
+                        let result = try await kuringLink.fetchAcademicEvents(start, end)
                         await send(.fetchAcademicScheduleResponse(.success(result), true))
                         await send(.toggleAcademicScheduleSheet)
                     } catch {

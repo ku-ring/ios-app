@@ -7,23 +7,25 @@
 
 import Models
 import SwiftUI
+import ComposableArchitecture
+import AcademicCalendarFeatures
 
 /// 학사 일정 캘린더에 하나의 달을 나타내는 뷰
 /// 하나의 달은 "DateCellView"로 이루어져있음
 /// ```swift
 ///   CalendarMonthView(
 ///       month: month,
-///       selectedDate: $store.selectedDate,
+///       store: store,
 ///       events: store.events
 ///   )
 /// ```
 ///  - Parameters:
 ///    - month: 해당 달의 Date 객체 (날짜 자체는 상관없음, 월만 중요함)
-///    - selectedDate: 사용자가 탭하여 선택한 날짜, 바인딩이 필요하기 때문에 주입받아야함
+///    - store: 학사 캘린더 상태와 액션을 담고 있는 store
 ///    - events: 해당 날짜의 학사일정들
 struct CalendarMonthView: View {
     let month: Date
-    @Binding var selectedDate: Date?
+    @Bindable var store: StoreOf<AcademicCalendarFeature>
     let events: [AcademicEvent]
     
     let calendar = Calendar.current
@@ -39,8 +41,18 @@ struct CalendarMonthView: View {
                                 isSelected: isSelected(dateInfo.date),
                                 events: getEventsForDate(dateInfo.date),
                                 onTap: {
-                                    if dateInfo.isCurrentMonth {
-                                        selectedDate = dateInfo.date
+                                    store.selectedDate = dateInfo.date
+                                    guard !dateInfo.isCurrentMonth else { return }
+
+                                    let comparison = calendar.compare(dateInfo.date, to: month, toGranularity: .month)
+                                    
+                                    switch comparison {
+                                    case .orderedAscending:
+                                        store.send(.previousMonthTapped, animation: .snappy)
+                                    case .orderedDescending:
+                                        store.send(.nextMonthTapped, animation: .snappy)
+                                    default:
+                                        break
                                     }
                                 }
                             )
@@ -95,7 +107,7 @@ extension CalendarMonthView {
     }
     
     private func isSelected(_ date: Date) -> Bool {
-        guard let selectedDate = selectedDate else {
+        guard let selectedDate = store.selectedDate else {
             return false
         }
         return calendar.isDate(date, inSameDayAs: selectedDate)
@@ -128,8 +140,12 @@ struct DateInfo {
 
 #Preview {
     @Previewable @State var date: Date? = Date()
+    @Previewable @State var store: StoreOf<AcademicCalendarFeature> = .init(initialState: AcademicCalendarFeature.State()) {
+        AcademicCalendarFeature()
+    }
     CalendarMonthView(
         month: date!,
-        selectedDate: $date,
-        events: [])
+        store: store,
+        events: []
+    )
 }

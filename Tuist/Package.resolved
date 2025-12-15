@@ -1,5 +1,5 @@
 {
-  "originHash" : "7e8e7e2b1c181e8bf213460a4f935e9c603360cb87f7b272c5c8b97d20515e07",
+  "originHash" : "c00a1274c746a70c30217d692b2d3661ed527cacab352ebf56b060abcb9675ac",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -97,7 +97,7 @@
       "location" : "https://github.com/ku-ring/ios-maps",
       "state" : {
         "branch" : "main",
-        "revision" : "eec3d95a9a8bb1126a5201729b12619a4895b70c"
+        "revision" : "8331a1c4de91368b6c41a17cdcfde2fdaba53aaf"
       }
     },
     {
@@ -125,15 +125,6 @@
       "state" : {
         "revision" : "b7e1104502eca3a213b46303391ca4d3bc8ddec1",
         "version" : "2.30910.0"
-      }
-    },
-    {
-      "identity" : "opencombine",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/OpenCombine/OpenCombine.git",
-      "state" : {
-        "revision" : "8576f0d579b27020beccbccc3ea6844f3ddfc2c2",
-        "version" : "0.14.0"
       }
     },
     {
@@ -263,12 +254,12 @@
       }
     },
     {
-      "identity" : "the-satellite",
+      "identity" : "the-satellite-extended",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ku-ring/the-satellite",
+      "location" : "https://github.com/ku-ring/the-satellite-extended",
       "state" : {
         "branch" : "main",
-        "revision" : "66bfb1c8d3ae2848a67d0e75ce9e4e782645daf2"
+        "revision" : "2ca38855c2c5149931670c245b0e586f979ad911"
       }
     },
     {
@@ -276,8 +267,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
       "state" : {
-        "revision" : "4c27acf5394b645b70d8ba19dc249c0472d5f618",
-        "version" : "1.7.0"
+        "revision" : "31073495cae9caf243c440eac94b3ab067e3d7bc",
+        "version" : "1.8.0"
       }
     }
   ],

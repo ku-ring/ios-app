@@ -7,7 +7,7 @@
 
 import ColorSet
 import Foundation
-import SwiftUICore
+import SwiftUI
 
 enum AcademicEventCategory: String {
     /// 기타

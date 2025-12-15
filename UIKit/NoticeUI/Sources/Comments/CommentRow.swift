@@ -24,6 +24,7 @@ import SwiftUI
 struct CommentRow: View {
     @Binding var parentId: Int?
     let commentResult: CommentResult
+    let onTapReply: (Int) -> Void
     let onDelete: (Comment) -> Void
     let onReport: (Comment) -> Void
     
@@ -42,6 +43,7 @@ struct CommentRow: View {
             parentId: $parentId,
             comment: commentResult.comment,
             showReplyIcon: true,
+            onTapReply: onTapReply,
             onDelete: onDelete,
             onReport: onReport
         )
@@ -68,6 +70,7 @@ struct CommentRow: View {
     CommentRow(
         parentId: $parentId,
         commentResult: CommentData.mock.first!,
+        onTapReply: { _ in },
         onDelete: { _ in },
         onReport: { _ in }
     )

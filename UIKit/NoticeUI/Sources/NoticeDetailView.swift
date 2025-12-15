@@ -25,15 +25,15 @@ public struct NoticeDetailView: View {
         ZStack(alignment: .bottomTrailing) {
             WebView(urlString: store.notice.url)
                 .background(Color.Kuring.bg)
+                .navigationTitle(noticeProvider?.korName ?? "")
                 .navigationBarTitleDisplayMode(.inline)
                 .sheet(isPresented: $store.showCommentSection) {
                     CommentView(
                         comments: store.comments?.comments ?? [],
+                        showNeedsLoginAlert: {
+                            store.send(.showNeedsLoginAlert)
+                        },
                         onSendComment: { comment, parentId in
-                            if accessToken.isEmpty {
-                                store.send(.showNeedsLoginAlert)
-                                return
-                            }
                             store.send(.addComment(content: comment, parentId: parentId))
                         },
                         onDeleteComment: { comment in
@@ -56,10 +56,6 @@ public struct NoticeDetailView: View {
                     EKEventView()
                 }
                 .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Text(noticeProvider?.korName ?? "")
-                    }
-                    
                     ToolbarItemGroup(placement: .topBarTrailing) {
                         Button {
                             self.store.send(.calendarButtonTapped)
