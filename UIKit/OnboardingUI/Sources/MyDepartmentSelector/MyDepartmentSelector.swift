@@ -15,6 +15,7 @@ struct MyDepartmentSelector: View {
     @State private var currentStep: Step = .searchDepartment
     @State private var selectedDepartment: NoticeProvider? = nil
     
+    @Dependency(\.commons) var commons
     @Dependency(\.kuringLink) var kuringLink
     @Dependency(\.departments) var departments
     @Dependency(\.subscriptions) var subscriptions
@@ -69,6 +70,7 @@ struct MyDepartmentSelector: View {
             .padding(.vertical, 20)
         } else {
             Button(StringSet.button_start.rawValue) {
+                commons.completeOnboarding()
                 dismiss()
             }
             .buttonStyle(.kuringStyle(enabled: currentStep == .addedDepartment))
