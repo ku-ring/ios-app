@@ -16,7 +16,6 @@ import ComposableArchitecture
 @main
 struct KuringApp: App {
     @State private var completesLink: Bool = false
-    @State private var newNotice: Notice?
     @Environment(\.scenePhase) private var scenePhase
 
     // TODO: 테스트용 변수
