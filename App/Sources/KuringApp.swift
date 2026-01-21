@@ -112,7 +112,9 @@ struct KuringApp: App {
             )
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button { PushRouter.shared.activeNotice = nil } label: {
+                    Button {
+                        PushRouter.shared.activeNotice = nil
+                    } label: {
                         Image(systemName: "xmark")
                     }
                 }
