@@ -16,4 +16,4 @@ import Combine
 ///     }
 /// }
 /// ```
-public let newMessagePublisher = PassthroughSubject<Message, Never>()
+public let newMessagePublisher = CurrentValueSubject<Message?, Never>(nil)

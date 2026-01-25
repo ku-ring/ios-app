@@ -7,6 +7,7 @@ import Caches
 import Models
 import SwiftData
 import Foundation
+import Dependencies
 import LoginFeatures
 import DepartmentFeatures
 import SubscriptionFeatures
@@ -175,7 +176,12 @@ public struct NoticeAppFeature {
                 guard case let .departmentEditor(departmentEditorState) = state.path[id: id] else {
                     return .none
                 }
-                state.noticeList.provider = departmentEditorState.myDepartments.first ?? .emptyDepartment
+
+                @Dependency(\.departments) var departments
+                state.noticeList.provider = departments.getCurrent() ?? departmentEditorState.myDepartments.first ?? .emptyDepartment
+                if state.noticeList.noticeDictionary[state.noticeList.provider] == nil {
+                    return .send(.noticeList(.reloadNotices))
+                }
                 return .none
             case let .path(.element(id: id, action: .setPassword(.delegate(.pushToSignupComplete)))):
                 state.path.append(
