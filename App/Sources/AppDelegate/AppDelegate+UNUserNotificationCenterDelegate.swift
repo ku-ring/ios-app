@@ -48,6 +48,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     /// 푸시 알림을 탭 했을 때
     /// - Important: ``newMessagePublisher`` 를 구독하여 ``Message`` 객체를 이벤트로 전달받을 수 있습니다.
+    @MainActor
     public func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse

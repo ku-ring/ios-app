@@ -52,7 +52,6 @@ public struct OnboardingView: View {
                 
                 Button {
                     if currentGuidance == .search {
-                        commons.completeOnboarding()
                         showsDepartmentSelector = true
                     }
                 } label: {

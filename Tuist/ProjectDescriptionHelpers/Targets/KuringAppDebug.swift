@@ -32,8 +32,8 @@ extension Target {
                 ],
                 "UIDesignRequiresCompatibility": .boolean(true),
                 "CFBundleDisplayName": "쿠링(Debug)",
-                "CFBundleShortVersionString": "2.3.6",
-                "CFBundleVersion": "1",
+                "CFBundleShortVersionString": "2.4.1",
+                "CFBundleVersion": "2",
             ]
         ),
         sources: ["Sources/**"],

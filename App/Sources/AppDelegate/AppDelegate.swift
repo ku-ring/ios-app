@@ -25,11 +25,13 @@ class AppDelegate: NSObject {
     var fcmToken: String = ""
     
     func onTapRemoteNotification(with userInfo: [String: Any]) throws {
-        let message = try Message(userInfo: userInfo)
         Task { @MainActor in
-            // 종료된 앱을 시작시키는 경우를 고려하여 2초 딜레이.
-            try await Task.sleep(for: .seconds(1.5))
-            newMessagePublisher.send(message)
+            do {
+                let message = try Message(userInfo: userInfo)
+                PushRouter.shared.handle(message)
+            } catch {
+                print("푸시알림 파싱 실패:: \(error)")
+            }
         }
     }
     
