@@ -52,6 +52,7 @@ extension Target {
             .ui("SearchUI"),
             .ui("SettingsUI"),
             .ui("CampusUI"),
+            .ui("ClubsUI"),
             .ui("CommonUI"),
             .ui("OnboardingUI"),
             .ui("LoginUI"),
