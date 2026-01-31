@@ -1,10 +1,12 @@
 import SwiftUI
+import ClubsUI
 
 @main
 struct ClubsApp: App {
     var body: some Scene {
         WindowGroup {
-            Text("Hello, World! - ClubsUI")
+            ClubsOnboardingView()
+                .navigationTitle("동아리")
         }
     }
 }
