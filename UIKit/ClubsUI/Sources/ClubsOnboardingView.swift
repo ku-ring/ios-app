@@ -8,6 +8,40 @@
 import SwiftUI
 import CommonUI
 
+/// Temporary model; refactor to actual clubs DTO in the near future
+enum ClubsType: String, CaseIterable {
+    case academic
+    case cultureArts
+    case socialValue
+    case outdoors
+    
+    var title: String {
+        switch self {
+        case .academic:
+            return "학술활동"
+        case .cultureArts:
+            return "문화예술"
+        case .socialValue:
+            return "사회가치"
+        case .outdoors:
+            return "야외활동"
+        }
+    }
+    
+    var subtitle: String {
+        switch self {
+        case .academic:
+            return "자연과학분과, 인문학술분과"
+        case .cultureArts:
+            return "전시문예분과, 공연예술분과"
+        case .socialValue:
+            return "사회분과, 봉사분과, 종교분과"
+        case .outdoors:
+            return "구기체육분과, 레저무예분과"
+        }
+    }
+}
+
 public struct ClubsOnboardingView: View {
     
     public init() {
@@ -21,6 +55,11 @@ public struct ClubsOnboardingView: View {
                 subtitle: "관심있는 카테고리의 동아리를 탐색해보아요"
             )
             .frame(maxWidth: .infinity, alignment: .leading)
+            
+            VStack(alignment: .leading, spacing: 16) {
+                clubsOnboardingCard(types: ClubsType.allCases)
+            }
+            .padding(.top, 32)
             
             Spacer()
             
@@ -41,21 +80,33 @@ public struct ClubsOnboardingView: View {
         .ignoresSafeArea(.keyboard)
         .background(Color.Kuring.bg)
     }
-}
-
-struct HeaderView: View {
-    let title: String
-    let subtitle: String
     
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(title)
-                .font(.system(size: 24, weight: .bold))
-                .foregroundStyle(Color.Kuring.title)
-            
-            Text(subtitle)
-                .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(Color.Kuring.caption1)
+    @ViewBuilder
+    private func clubsOnboardingCard(types: [ClubsType]) -> some View {
+        ForEach(types, id: \.rawValue) { type in
+            HStack(alignment: .center) {
+                Image("graduation_cap", bundle: .module)
+                    .frame(width: 50, height: 50)
+                
+                VStack(spacing: 6) {
+                    Text(type.title)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundStyle(Color.Kuring.body)
+                    
+                    Text(type.subtitle)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(Color.Kuring.caption1)
+                }
+                .frame(maxWidth: .infinity)
+            }
+            .padding(16)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.Kuring.gray200, lineWidth: 1)
+            )
+            .frame(maxWidth: .infinity)
         }
     }
 }
