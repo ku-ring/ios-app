@@ -44,9 +44,9 @@ enum ClubsType: String, CaseIterable {
 
 public struct ClubsOnboardingView: View {
     
-    public init() {
-        
-    }
+    @State private var selectedClubType: ClubsType?
+    
+    public init() { }
     
     public var body: some View {
         VStack(spacing: 8) {
@@ -65,7 +65,9 @@ public struct ClubsOnboardingView: View {
             
             ActionButton(
                 title: "확인",
-                isActive: .constant(true)
+                isActive: .init(get: {
+                    selectedClubType != nil
+                }, set: { _ in })
             ) {
                 
             }
@@ -104,9 +106,13 @@ public struct ClubsOnboardingView: View {
             .padding(16)
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.Kuring.gray200, lineWidth: 1)
+                    .fill(selectedClubType == type ? Color.Kuring.primarySelected : Color.Kuring.bg)
+                    .stroke(selectedClubType == type ? Color.Kuring.primary : Color.Kuring.gray200, lineWidth: 1)
             )
             .frame(maxWidth: .infinity)
+            .onTapGesture {
+                selectedClubType = selectedClubType == type ? nil : type
+            }
         }
     }
 }
