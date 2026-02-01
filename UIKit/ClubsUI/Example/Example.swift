@@ -5,8 +5,17 @@ import ClubsUI
 struct ClubsApp: App {
     var body: some Scene {
         WindowGroup {
-            ClubsOnboardingView()
-                .navigationTitle("동아리")
+            NavigationView {
+                NavigationLink {
+                    ClubsOnboardingView()
+                        .navigationTitle("동아리")
+                } label: {
+                    Text("동아리 온보딩 화면")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundStyle(Color.Kuring.primary)
+                }
+            }
         }
     }
 }
