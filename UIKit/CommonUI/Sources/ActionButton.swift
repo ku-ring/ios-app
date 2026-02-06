@@ -17,13 +17,13 @@ import ColorSet
 ///    - isActive: 활성화 상태를 나타내는 부울값. 만약 활성화 상태가 바뀌지 않는 버튼이라면 .constant(true)
 ///    - activeColor: 활성화 상태의 색깔. 기본은 Kuring.primary
 ///    - action: 주입받을 액션
-struct ActionButton: View {
+public struct ActionButton: View {
     let title: String
     @Binding var isActive: Bool
     var activeColor: Color
     let action: () -> Void
     
-    init(
+    public init(
         title: String,
         isActive: Binding<Bool>,
         activeColor: Color = .Kuring.primary,
@@ -35,7 +35,7 @@ struct ActionButton: View {
         self.action = action
     }
     
-    var body: some View {
+    public var body: some View {
         Button {
             action()
         } label: {

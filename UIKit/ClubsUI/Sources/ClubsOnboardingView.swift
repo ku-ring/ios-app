@@ -1,0 +1,123 @@
+//
+//  ClubsOnboardingView.swift
+//  ClubsUI
+//
+//  Created by Jung Hwan Park on 1/31/26.
+//
+
+import SwiftUI
+import CommonUI
+
+/// Temporary model; refactor to actual clubs DTO in the near future
+enum ClubsType: String, CaseIterable {
+    case academic
+    case cultureArts
+    case socialValue
+    case outdoors
+    
+    var title: String {
+        switch self {
+        case .academic:
+            return "학술활동"
+        case .cultureArts:
+            return "문화예술"
+        case .socialValue:
+            return "사회가치"
+        case .outdoors:
+            return "야외활동"
+        }
+    }
+    
+    var subtitle: String {
+        switch self {
+        case .academic:
+            return "자연과학분과, 인문학술분과"
+        case .cultureArts:
+            return "전시문예분과, 공연예술분과"
+        case .socialValue:
+            return "사회분과, 봉사분과, 종교분과"
+        case .outdoors:
+            return "구기체육분과, 레저무예분과"
+        }
+    }
+}
+
+public struct ClubsOnboardingView: View {
+    
+    @State private var selectedClubType: ClubsType?
+    
+    public init() { }
+    
+    public var body: some View {
+        VStack(spacing: 8) {
+            HeaderView(
+                title: "어떤 동아리를 찾고 있나요?",
+                subtitle: "관심있는 카테고리의 동아리를 탐색해보아요"
+            )
+            .frame(maxWidth: .infinity, alignment: .leading)
+            
+            VStack(alignment: .leading, spacing: 16) {
+                clubsOnboardingCard(types: ClubsType.allCases)
+            }
+            .padding(.top, 32)
+            
+            Spacer()
+            
+            ActionButton(
+                title: "확인",
+                isActive: .init(get: {
+                    selectedClubType != nil
+                }, set: { _ in })
+            ) {
+                
+            }
+            .padding(.top, 16)
+            
+            Text("건너뛰기")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundStyle(Color.Kuring.caption1)
+                .padding(.top, 20)
+        }
+        .padding(20)
+        .ignoresSafeArea(.keyboard)
+        .background(Color.Kuring.bg)
+    }
+    
+    @ViewBuilder
+    private func clubsOnboardingCard(types: [ClubsType]) -> some View {
+        ForEach(types, id: \.rawValue) { type in
+            HStack(alignment: .center) {
+                Image("graduation_cap", bundle: .module)
+                    .frame(width: 50, height: 50)
+                
+                VStack(spacing: 6) {
+                    Text(type.title)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundStyle(Color.Kuring.body)
+                    
+                    Text(type.subtitle)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(Color.Kuring.caption1)
+                }
+                .frame(maxWidth: .infinity)
+            }
+            .padding(16)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(selectedClubType == type ? Color.Kuring.primarySelected : Color.Kuring.bg)
+                    .stroke(selectedClubType == type ? Color.Kuring.primary : Color.Kuring.gray200, lineWidth: 1)
+            )
+            .frame(maxWidth: .infinity)
+            .onTapGesture {
+                selectedClubType = selectedClubType == type ? nil : type
+            }
+        }
+    }
+}
+
+
+#Preview {
+    ClubsOnboardingView()
+}
