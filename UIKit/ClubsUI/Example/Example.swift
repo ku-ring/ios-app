@@ -6,14 +6,26 @@ struct ClubsApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                NavigationLink {
-                    ClubsOnboardingView()
-                        .navigationTitle("동아리")
-                } label: {
-                    Text("동아리 온보딩 화면")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundStyle(Color.Kuring.primary)
+                VStack(spacing: 24) {
+                    NavigationLink {
+                        ClubsOnboardingView()
+                            .navigationTitle("동아리")
+                    } label: {
+                        Text("동아리 온보딩 화면")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundStyle(Color.Kuring.primary)
+                    }
+                    
+                    NavigationLink {
+                        ClubsContentView()
+                            .navigationTitle("동아리")
+                    } label: {
+                        Text("동아리")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundStyle(Color.Kuring.primary)
+                    }
                 }
             }
         }
