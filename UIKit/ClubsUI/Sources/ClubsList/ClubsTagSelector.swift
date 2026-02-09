@@ -24,8 +24,10 @@ public struct ClubsTagSelector: View {
                     Button {
                         selectedTags.removeAll()
                     } label: {
-                        Image(systemName: "arrow.clockwise")
-                            .foregroundColor(Color.Kuring.gray400)
+                        Image("refresh-cw", bundle: .module)
+                            .renderingMode(.template)
+                            .frame(width: 24, height: 24)
+                            .foregroundStyle(Color.Kuring.gray400)
                             .padding(.vertical, 6.5)
                             .padding(.horizontal, 14)
                             .background(
@@ -55,13 +57,17 @@ public struct ClubsTagSelector: View {
             .padding(.trailing, 37)
         }
         .overlay(alignment: .trailing) {
-            LinearGradient(colors: [Color.Kuring.bg, Color.clear], startPoint: .center, endPoint: .leading)
-                .frame(width: 59, height: 37, alignment: .trailing)
-                .overlay(alignment: .trailing) {
-                    Image(systemName: "chevron.down")
-                        .frame(width: 24, height: 24)
-                        .foregroundStyle(Color.Kuring.gray300)
-                }
+            LinearGradient(
+                colors: [Color.Kuring.bg, Color.clear],
+                startPoint: .center,
+                endPoint: .leading
+            )
+            .frame(width: 59, height: 37, alignment: .trailing)
+            .overlay(alignment: .trailing) {
+                Image(systemName: "chevron.down")
+                    .frame(width: 24, height: 24)
+                    .foregroundStyle(Color.Kuring.gray300)
+            }
         }
         .padding(.top, 16)
     }
