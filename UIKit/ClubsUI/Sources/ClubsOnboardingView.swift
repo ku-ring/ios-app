@@ -28,6 +28,10 @@ enum ClubsType: String, CaseIterable {
         }
     }
     
+    var imageName: String {
+        self.title
+    }
+    
     var subtitle: String {
         switch self {
         case .academic:
@@ -87,7 +91,7 @@ public struct ClubsOnboardingView: View {
     private func clubsOnboardingCard(types: [ClubsType]) -> some View {
         ForEach(types, id: \.rawValue) { type in
             HStack(alignment: .center) {
-                Image("graduation_cap", bundle: .module)
+                Image(type.imageName, bundle: .module)
                     .frame(width: 50, height: 50)
                 
                 VStack(spacing: 6) {
