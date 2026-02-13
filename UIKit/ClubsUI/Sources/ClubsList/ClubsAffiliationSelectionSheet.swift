@@ -54,35 +54,39 @@ struct ClubsAffiliationSelectionSheet: View {
     }
     
     var bottomButtons: some View {
-        HStack(alignment: .bottom, spacing: 12) {
-            Button {
-                selected.removeAll()
-            } label: {
-                Text("초기화")
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(Color.Kuring.caption1)
-                    .frame(width: (UIScreen.main.bounds.size.width - 40 - 16) / 3)
-                    .padding()
-                    .background(
-                        Capsule()
-                            .fill(Color.Kuring.bg)
-                            .stroke(Color.Kuring.gray200, lineWidth: 1)
-                    )
+        GeometryReader { proxy in
+            HStack(alignment: .bottom, spacing: 12) {
+                Button {
+                    selected.removeAll()
+                } label: {
+                    Text("초기화")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundStyle(Color.Kuring.caption1)
+                        .frame(width: (proxy.size.width - 40 - 16) / 3)
+                        .padding()
+                        .background(
+                            Capsule()
+                                .fill(Color.Kuring.bg)
+                                .stroke(Color.Kuring.gray200, lineWidth: 1)
+                        )
+                }
+                
+                Button {
+                    dismiss()
+                } label: {
+                    Text("확인 (\(selected.count))")
+                        .font(.system(size: 16, weight: .semibold))
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(selected.isEmpty ? Color.Kuring.gray200 : Color.Kuring.primary)
+                        .foregroundStyle(selected.isEmpty ? Color.Kuring.caption1 : Color.Kuring.bg)
+                        .clipShape(Capsule())
+                }
+                .disabled(selected.isEmpty)
             }
-            
-            Button {
-                dismiss()
-            } label: {
-                Text("확인 (\(selected.count))")
-                    .font(.system(size: 16, weight: .semibold))
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(selected.isEmpty ? Color.Kuring.gray200 : Color.Kuring.primary)
-                    .foregroundStyle(selected.isEmpty ? Color.Kuring.caption1 : Color.Kuring.bg)
-                    .clipShape(Capsule())
-            }
-            .disabled(selected.isEmpty)
+            .frame(maxHeight: .infinity, alignment: .bottom)
         }
+        .frame(height: 56)
     }
     
     @ViewBuilder
