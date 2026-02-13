@@ -11,6 +11,7 @@ import ColorSet
 public struct ClubsContentView: View {
     @State private var selection: String = "전체"
     @State private var showAffiliationSheet: Bool = false
+    @State private var showSnackbar: Bool = true
     
     let isClubEmpty = false
     
@@ -62,6 +63,15 @@ public struct ClubsContentView: View {
             ClubsAffiliationSelectionSheet()
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
+        }
+        .overlay(alignment: .bottom) {
+            ClubsIntroSnackbar()
+                .opacity(showSnackbar ? 1.0 : 0.0)
+                .onTapGesture {
+                    withAnimation {
+                        showSnackbar = false
+                    }
+                }
         }
     }
     
