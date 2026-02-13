@@ -55,7 +55,7 @@ struct ClubsAffiliationSelectionSheet: View {
     
     var bottomButtons: some View {
         GeometryReader { proxy in
-            HStack(alignment: .bottom, spacing: 12) {
+            HStack(alignment: .bottom, spacing: 16) {
                 Button {
                     selected.removeAll()
                 } label: {

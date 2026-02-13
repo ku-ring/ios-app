@@ -26,6 +26,7 @@ struct TransparentBlur: UIViewRepresentable {
         return view
     }
     
+    /// **Uses private API**
     func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
         DispatchQueue.main.async {
             if let backdropLayer = uiView.layer.sublayers?.first {

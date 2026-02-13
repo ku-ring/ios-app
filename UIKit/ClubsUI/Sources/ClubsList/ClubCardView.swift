@@ -57,7 +57,6 @@ struct ClubCardView: View {
                     Image(isSubscribed ? "star-fill" : "star", bundle: .module)
                         .resizable()
                         .frame(width: 16, height: 16, alignment: .center)
-                        .foregroundStyle(Color.Kuring.gray300)
                         .onTapGesture {
                             isSubscribed.toggle()
                         }

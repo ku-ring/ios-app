@@ -11,7 +11,7 @@ import ColorSet
 public struct ClubsContentView: View {
     @State private var selection: String = "전체"
     @State private var showAffiliationSheet: Bool = false
-    @State private var showSnackbar: Bool = true
+    @AppStorage("hasShownClubsIntroSnackbar") private var hasShownSnackbar: Bool = false
     
     let isClubEmpty = false
     
@@ -66,10 +66,10 @@ public struct ClubsContentView: View {
         }
         .overlay(alignment: .bottom) {
             ClubsIntroSnackbar()
-                .opacity(showSnackbar ? 1.0 : 0.0)
+                .opacity(hasShownSnackbar ? 0.0 : 1.0)
                 .onTapGesture {
                     withAnimation {
-                        showSnackbar = false
+                        hasShownSnackbar = true
                     }
                 }
         }
