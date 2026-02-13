@@ -17,7 +17,7 @@ struct ClubCardView: View {
                 .fill(Color.Kuring.gray100)
                 .frame(width: 84)
                 .overlay(alignment: .center) {
-                    Image("kuring_icon", bundle: .module)
+                    Image("kuring-icon", bundle: .module)
                         .renderingMode(.template)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -54,7 +54,7 @@ struct ClubCardView: View {
                         .font(.system(size: 12, weight: .medium))
                         .foregroundStyle(Color.Kuring.caption1)
                     
-                    Image(isSubscribed ? "star.fill" : "star", bundle: .module)
+                    Image(isSubscribed ? "star-fill" : "star", bundle: .module)
                         .resizable()
                         .frame(width: 16, height: 16, alignment: .center)
                         .foregroundStyle(Color.Kuring.gray300)

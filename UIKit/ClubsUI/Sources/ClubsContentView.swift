@@ -12,6 +12,8 @@ public struct ClubsContentView: View {
     @State private var selection: String = "전체"
     @State private var showAffiliationSheet: Bool = false
     
+    let isClubEmpty = false
+    
     public init() { }
     
     public var body: some View {
@@ -24,25 +26,31 @@ public struct ClubsContentView: View {
             
             ClubsTagSelector(showAffiliationSelectionSheet: $showAffiliationSheet)
                 .padding(.horizontal, 20)
-            
-            sortByView
-                .frame(height: 32)
-                .padding(.top, 16)
-                .padding(.horizontal, 20)
-            
+
             ScrollView(.vertical) {
-                VStack(spacing: 14) {
-                    ClubCardView()
+                VStack(spacing: 0) {
+                    sortByView
+                        .frame(height: 32)
+                        .padding(.horizontal, 20)
                     
-                    ClubCardView()
-                    
-                    ClubCardView()
-                    
-                    ClubCardView()
-                    
-                    ClubCardView()
+                    if isClubEmpty {
+                        clubsEmptyView
+                    } else {
+                        VStack(spacing: 14) {
+                            ClubCardView()
+                            
+                            ClubCardView()
+                            
+                            ClubCardView()
+                            
+                            ClubCardView()
+                            
+                            ClubCardView()
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.top, 16)
+                    }
                 }
-                .padding(.horizontal, 20)
             }
             .padding(.top, 16)
             
@@ -75,11 +83,24 @@ public struct ClubsContentView: View {
                     .foregroundStyle(Color.Kuring.gray200)
                     .padding(.vertical, 8)
                 
-                Text("모집 마감일 순")
+                Text("가나다 순")
                     .font(.system(size: 14, weight: .regular))
                     .foregroundStyle(Color.Kuring.caption2)
             }
         }
+    }
+    
+    private var clubsEmptyView: some View {
+        VStack(alignment: .center, spacing: 16) {
+            Image("alert-circle", bundle: .module)
+                .resizable()
+                .frame(width: 57, height: 57)
+            
+            Text("등록된 동아리가 없어요!")
+                .font(.system(size: 15, weight: .medium))
+                .foregroundStyle(Color.Kuring.caption1)
+        }
+        .padding(.top, 120)
     }
 }
 
