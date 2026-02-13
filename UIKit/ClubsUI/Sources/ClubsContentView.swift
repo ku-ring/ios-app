@@ -10,6 +10,7 @@ import ColorSet
 
 public struct ClubsContentView: View {
     @State private var selection: String = "전체"
+    @State private var showAffiliationSheet: Bool = false
     
     public init() { }
     
@@ -21,7 +22,7 @@ public struct ClubsContentView: View {
             Divider()
                 .frame(height: 0.25)
             
-            ClubsTagSelector()
+            ClubsTagSelector(showAffiliationSelectionSheet: $showAffiliationSheet)
                 .padding(.horizontal, 20)
             
             sortByView
@@ -29,10 +30,31 @@ public struct ClubsContentView: View {
                 .padding(.top, 16)
                 .padding(.horizontal, 20)
             
+            ScrollView(.vertical) {
+                VStack(spacing: 14) {
+                    ClubCardView()
+                    
+                    ClubCardView()
+                    
+                    ClubCardView()
+                    
+                    ClubCardView()
+                    
+                    ClubCardView()
+                }
+                .padding(.horizontal, 20)
+            }
+            .padding(.top, 16)
+            
             Spacer()
         }
         .frame(maxWidth: .infinity)
         .background(Color.Kuring.bg)
+        .sheet(isPresented: $showAffiliationSheet) {
+            ClubsAffiliationSelectionSheet()
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+        }
     }
     
     private var sortByView: some View {

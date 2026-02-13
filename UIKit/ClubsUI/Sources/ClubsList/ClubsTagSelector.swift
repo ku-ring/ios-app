@@ -13,8 +13,11 @@ public struct ClubsTagSelector: View {
                 "상허교양대학"]
 
     @State private var selectedTags: Set<String> = []
+    @Binding var showAffiliationSelectionSheet: Bool
     
-    public init() { }
+    public init(showAffiliationSelectionSheet: Binding<Bool>) {
+        self._showAffiliationSelectionSheet = showAffiliationSelectionSheet
+    }
 
     public var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -67,6 +70,9 @@ public struct ClubsTagSelector: View {
                 Image(systemName: "chevron.down")
                     .frame(width: 24, height: 24)
                     .foregroundStyle(Color.Kuring.gray300)
+                    .onTapGesture {
+                        showAffiliationSelectionSheet = true
+                    }
             }
         }
         .padding(.top, 16)
@@ -87,5 +93,5 @@ public struct ClubsTagSelector: View {
 }
 
 #Preview {
-    ClubsTagSelector()
+    ClubsTagSelector(showAffiliationSelectionSheet: .constant(true))
 }

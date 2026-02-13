@@ -9,6 +9,8 @@ import SwiftUI
 import ColorSet
 
 struct ClubCardView: View {
+    @State private var isSubscribed: Bool = false
+    
     var body: some View {
         HStack(spacing: 10) {
             RoundedRectangle(cornerRadius: 14)
@@ -52,10 +54,13 @@ struct ClubCardView: View {
                         .font(.system(size: 12, weight: .medium))
                         .foregroundStyle(Color.Kuring.caption1)
                     
-                    Image("star", bundle: .module)
+                    Image(isSubscribed ? "star.fill" : "star", bundle: .module)
                         .resizable()
                         .frame(width: 16, height: 16, alignment: .center)
                         .foregroundStyle(Color.Kuring.gray300)
+                        .onTapGesture {
+                            isSubscribed.toggle()
+                        }
                 }
             }
         }
