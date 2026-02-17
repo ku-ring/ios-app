@@ -65,33 +65,7 @@ public struct ClubInfoDetailView: View {
                     clubSocialsInfo(social: .link, link: "https://www.apple.com")
                     locationLinkView
                     
-                    Map(position: .constant(
-                        .region(
-                            .init(
-                                center: .init(latitude: 37.543583, longitude: 127.077467),
-                                latitudinalMeters: 400,
-                                longitudinalMeters: 400
-                            )
-                        )
-                    )) {
-                        Annotation(
-                            "Location",
-                            coordinate: .init(latitude: 37.543583, longitude: 127.077467)
-                        ) {
-                            VStack(spacing: 0) {
-                                Image(systemName: "mappin.circle.fill")
-                                    .font(.title)
-                                    .foregroundStyle(.red)
-                                
-                                Circle()
-                                    .fill(.white)
-                                    .frame(width: 6, height: 6)
-                                    .offset(y: -8)
-                            }
-                        }
-                    }
-                    .frame(height: 174)
-                    .clipShape(RoundedRectangle(cornerRadius: 22))
+                    mapPreview
                 }
                 .padding(.top, 24)
                 
@@ -123,42 +97,9 @@ public struct ClubInfoDetailView: View {
                 }
                 .padding(.top, 24)
                 
-                AsyncImage(
-                    url: URL(string: "https://firebasestorage.googleapis.com/v0/b/amgn-8ca5f.firebasestorage.app/o/reels_club_poster.png?alt=media&token=314f5e7c-35d5-40ed-84b7-c123227c2408")!)
-                { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                } placeholder: {
-                    RoundedRectangle(cornerRadius: 14)
-                        .fill(Color.Kuring.gray100)
-                        .frame(height: 473)
-                        .overlay(alignment: .center) {
-                            Image("kuring-icon", bundle: .module)
-                                .renderingMode(.template)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 64)
-                                .foregroundStyle(Color.Kuring.gray200)
-                        }
-                }
-                .padding(.top, 24)
+                posterView
                 
-                var string: AttributedString {
-                    var temp = AttributedString("정보 수정 요청하기")
-                    temp.link = URL(string: "https://www.apple.com")!
-                    temp.foregroundColor = .gray
-                    temp.underlineStyle = .single
-                    temp.underlineColor = .gray
-                    return temp
-                }
-                
-                Text(string)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundStyle(Color.Kuring.caption1)
-                    .padding(.top, 24)
+                requestEdit
             }
         }
         .padding(.bottom, 88)
@@ -200,7 +141,24 @@ public struct ClubInfoDetailView: View {
             }
         }
     }
-    
+}
+
+// MARK: - Helper functions
+extension ClubInfoDetailView {
+    private func socialLinkString(social: ClubSocialType, link: String) -> AttributedString {
+        var string = AttributedString("\(social.description) 바로가기")
+        let url = URL(string: link)!
+        string.link = url
+        string.foregroundColor = .gray
+        string.underlineStyle = .single
+        string.underlineColor = .gray
+        
+        return string
+    }
+}
+
+// MARK: - Views
+extension ClubInfoDetailView {
     @ViewBuilder
     private func clubInfoChips(text: String) -> some View {
         Text(text)
@@ -227,17 +185,6 @@ public struct ClubInfoDetailView: View {
         }
     }
     
-    private func socialLinkString(social: ClubSocialType, link: String) -> AttributedString {
-        var string = AttributedString("\(social.description) 바로가기")
-        let url = URL(string: link)!
-        string.link = url
-        string.foregroundColor = .gray
-        string.underlineStyle = .single
-        string.underlineColor = .gray
-        
-        return string
-    }
-    
     private var locationLinkView: some View {
         HStack(spacing: 4) {
             Image("location-icon", bundle: .module)
@@ -256,6 +203,79 @@ public struct ClubInfoDetailView: View {
             Text(string)
                 .font(.system(size: 14, weight: .medium))
                 .foregroundStyle(Color.Kuring.caption1)
+        }
+    }
+    
+    private var mapPreview: some View {
+        Map(position: .constant(
+            .region(
+                .init(
+                    center: .init(latitude: 37.543583, longitude: 127.077467),
+                    latitudinalMeters: 400,
+                    longitudinalMeters: 400
+                )
+            )
+        )) {
+            Annotation(
+                "Location",
+                coordinate: .init(latitude: 37.543583, longitude: 127.077467)
+            ) {
+                VStack(spacing: 0) {
+                    Image(systemName: "mappin.circle.fill")
+                        .font(.title)
+                        .foregroundStyle(.red)
+                    
+                    Circle()
+                        .fill(.white)
+                        .frame(width: 6, height: 6)
+                        .offset(y: -8)
+                }
+            }
+        }
+        .frame(height: 174)
+        .clipShape(RoundedRectangle(cornerRadius: 22))
+    }
+    
+    private var posterView: some View {
+        AsyncImage(
+            url: URL(string: "https://firebasestorage.googleapis.com/v0/b/amgn-8ca5f.firebasestorage.app/o/reels_club_poster.png?alt=media&token=314f5e7c-35d5-40ed-84b7-c123227c2408")!)
+        { image in
+            image
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+        } placeholder: {
+            RoundedRectangle(cornerRadius: 14)
+                .fill(Color.Kuring.gray100)
+                .frame(height: 473)
+                .overlay(alignment: .center) {
+                    Image("kuring-icon", bundle: .module)
+                        .renderingMode(.template)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 64)
+                        .foregroundStyle(Color.Kuring.gray200)
+                }
+        }
+        .padding(.top, 24)
+    }
+    
+    private var requestEdit: some View {
+        Group {
+            var string: AttributedString {
+                var temp = AttributedString("정보 수정 요청하기")
+                temp.link = URL(string: "https://www.apple.com")!
+                temp.foregroundColor = .gray
+                temp.underlineStyle = .single
+                temp.underlineColor = .gray
+                return temp
+            }
+            
+            Text(string)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .font(.system(size: 14, weight: .medium))
+                .foregroundStyle(Color.Kuring.caption1)
+                .padding(.top, 24)
         }
     }
 }
