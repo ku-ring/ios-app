@@ -67,7 +67,7 @@ public struct NotificationHistoryView: View {
                     .renderingMode(.template)
                     .resizable()
                     .frame(width: 26, height: 26)
-                    .foregroundStyle(Color.Kuring.body)
+                    .foregroundStyle(Color.Kuring.gray600)
             }
         }
     }

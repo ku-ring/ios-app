@@ -65,9 +65,12 @@ public struct ClubsContentView: View {
         .overlay(alignment: .bottom) {
             ClubsIntroSnackbar()
                 .opacity(hasShownSnackbar ? 0.0 : 1.0)
-                .onTapGesture {
-                    withAnimation {
-                        hasShownSnackbar = true
+                .onAppear {
+                    Task {
+                        try await Task.sleep(for: .seconds(3))
+                        withAnimation {
+                            hasShownSnackbar = true
+                        }
                     }
                 }
         }
