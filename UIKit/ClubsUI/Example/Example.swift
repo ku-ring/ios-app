@@ -26,6 +26,16 @@ struct ClubsApp: App {
                             .fontWeight(.bold)
                             .foregroundStyle(Color.Kuring.primary)
                     }
+                    
+                    NavigationLink {
+                        ClubInfoDetailView()
+                            .navigationTitle("동아리")
+                    } label: {
+                        Text("동아리 상세")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundStyle(Color.Kuring.primary)
+                    }
                 }
             }
         }
