@@ -125,19 +125,20 @@ public struct ClubInfoDetailView: View {
             }
         }
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Text("99+")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(Color.Kuring.caption1)
-            }
-            
-            ToolbarItem(placement: .topBarTrailing) {
-                Image(isSubscribed ? "star-fill" : "star", bundle: .module)
-                    .resizable()
-                    .frame(width: 16, height: 16, alignment: .center)
-                    .onTapGesture {
-                        isSubscribed.toggle()
-                    }
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                HStack(spacing: 8) {
+                    Text("99+")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(Color.Kuring.caption1)
+
+                    Image(isSubscribed ? "star-fill" : "star", bundle: .module)
+                        .resizable()
+                        .frame(width: 16, height: 16)
+                        .onTapGesture {
+                            isSubscribed.toggle()
+                        }
+                }
+                .padding(.horizontal, 6)
             }
         }
     }
