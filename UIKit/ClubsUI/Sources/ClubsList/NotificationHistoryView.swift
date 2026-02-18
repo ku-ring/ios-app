@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ColorSet
 
 struct NotificationItem: Identifiable, Equatable {
     let id = UUID()
@@ -31,10 +32,10 @@ enum Category: String {
 
 public struct NotificationHistoryView: View {
     @State private var alerts: [NotificationItem] = [
-        .init(category: .academic, text: "AlertText", daysAgo: 1, isRead: true),
-        .init(category: .club, text: "AlertText", daysAgo: 2),
-        .init(category: .notice, text: "AlertText", daysAgo: 3, isRead: true),
-        .init(category: .academic, text: "AlertText", daysAgo: 5, isRead: true),
+        .init(category: .academic, text: "학사경고 받기 학사일정이 있어요", daysAgo: 1, isRead: true),
+        .init(category: .club, text: "릴스 시청 동아리 회원 모집", daysAgo: 2),
+        .init(category: .notice, text: "등록금 고지서", daysAgo: 3, isRead: true),
+        .init(category: .academic, text: "건구스한테서 도망가기 학사일정이 있어요", daysAgo: 5, isRead: true),
         .init(category: .club, text: "AlertText", daysAgo: 7, isRead: true)
     ]
     
@@ -59,11 +60,14 @@ public struct NotificationHistoryView: View {
             }
         }
         .listStyle(.plain)
+        .background(Color.Kuring.bg)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Image("settings", bundle: .module)
+                    .renderingMode(.template)
                     .resizable()
                     .frame(width: 26, height: 26)
+                    .foregroundStyle(Color.Kuring.body)
             }
         }
     }
