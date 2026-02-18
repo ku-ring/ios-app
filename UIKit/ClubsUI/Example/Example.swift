@@ -36,6 +36,16 @@ struct ClubsApp: App {
                             .fontWeight(.bold)
                             .foregroundStyle(Color.Kuring.primary)
                     }
+                    
+                    NavigationLink {
+                        ClubsSubscriptionView()
+                            .navigationTitle("구독")
+                    } label: {
+                        Text("구독")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundStyle(Color.Kuring.primary)
+                    }
                 }
             }
         }

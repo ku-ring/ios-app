@@ -1,33 +1,19 @@
 //
-//  ClubsContentView.swift
+//  ClubsSubscriptionView.swift
 //  ClubsUI
 //
-//  Created by Jung Hwan Park on 2/8/26.
+//  Created by Jung Hwan Park on 2/18/26.
 //
 
 import SwiftUI
-import ColorSet
 
-public struct ClubsContentView: View {
-    @State private var selection: String = "전체"
-    @State private var showAffiliationSheet: Bool = false
-    @AppStorage("hasShownClubsIntroSnackbar") private var hasShownSnackbar: Bool = false
-    
+public struct ClubsSubscriptionView: View {
     let isClubEmpty = false
     
     public init() { }
     
     public var body: some View {
         VStack(spacing: 0) {
-            ClubsCategoryPicker(selection: $selection)
-                .padding(.horizontal, 20)
-            
-            Divider()
-                .frame(height: 0.25)
-            
-            ClubsTagSelector(showAffiliationSelectionSheet: $showAffiliationSheet)
-                .padding(.horizontal, 20)
-
             ScrollView(.vertical) {
                 VStack(spacing: 0) {
                     sortByView
@@ -57,20 +43,6 @@ public struct ClubsContentView: View {
         }
         .frame(maxWidth: .infinity)
         .background(Color.Kuring.bg)
-        .sheet(isPresented: $showAffiliationSheet) {
-            ClubsAffiliationSelectionSheet()
-                .presentationDetents([.medium, .large])
-                .presentationDragIndicator(.visible)
-        }
-        .overlay(alignment: .bottom) {
-            ClubsIntroSnackbar()
-                .opacity(hasShownSnackbar ? 0.0 : 1.0)
-                .onTapGesture {
-                    withAnimation {
-                        hasShownSnackbar = true
-                    }
-                }
-        }
     }
     
     private var sortByView: some View {
@@ -113,5 +85,5 @@ public struct ClubsContentView: View {
 }
 
 #Preview {
-    ClubsContentView()
+    ClubsSubscriptionView()
 }
