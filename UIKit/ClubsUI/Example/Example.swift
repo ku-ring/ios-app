@@ -46,6 +46,16 @@ struct ClubsApp: App {
                             .fontWeight(.bold)
                             .foregroundStyle(Color.Kuring.primary)
                     }
+                    
+                    NavigationLink {
+                        NotificationHistoryView()
+                            .navigationTitle("알림")
+                    } label: {
+                        Text("알림")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundStyle(Color.Kuring.primary)
+                    }
                 }
             }
         }
