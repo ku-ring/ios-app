@@ -18,7 +18,6 @@ struct NotificationHistoryRow: View {
                 Image(item.category.icon, bundle: .module)
                     .resizable()
                     .frame(width: 14, height: 14)
-                    .foregroundStyle(Color.Kuring.caption1)
                 
                 Text(item.category.rawValue)
                     .font(.system(size: 12, weight: .medium))
