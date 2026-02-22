@@ -7,12 +7,21 @@
 
 import Foundation
 
-public struct DataClass: Codable {
+public struct ClubDivisions: Codable {
     let divisions: [Division]
+    
+    public init(divisions: [Division]) {
+        self.divisions = divisions
+    }
 }
 
-struct Division: Codable {
+public struct Division: Codable {
     let code: String
     let koreanName: String
+    
+    public init(code: String, koreanName: String) {
+        self.code = code
+        self.koreanName = koreanName
+    }
 }
 

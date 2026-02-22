@@ -467,7 +467,7 @@ extension KuringLink: DependencyKey {
             return isSucceed
         },
         getClubDivisions: {
-            let response: EmptyResponse = try await satellite
+            let response: Response<ClubDivisions> = try await satellite
                 .response(
                     for: Path.getClubDivisions.path,
                     httpMethod: .get,
@@ -477,7 +477,7 @@ extension KuringLink: DependencyKey {
                     ]
                 )
             let isSucceed = (200 ..< 300) ~= response.code
-            return isSucceed
+            return response.data
         }
     )
 }
@@ -617,7 +617,7 @@ extension KuringLink {
             return true
         },
         getClubDivisions: {
-            return true
+            return .init(divisions: [])
         }
     )
 }
