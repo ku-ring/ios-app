@@ -117,4 +117,6 @@ public struct KuringLink {
     public var fetchAcademicEvents: (_ startDate: String?, _ endDate: String?) async throws -> [AcademicEvent]
     /// 학사일정 알림 설정
     public var setAcademicEventPush: (_ enabled: Bool) async throws -> Bool
+    /// 동아리 소속 목록 조회
+    public var getClubDivisions: () async throws -> Bool
 }

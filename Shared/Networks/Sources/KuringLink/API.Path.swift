@@ -33,6 +33,7 @@ enum Path {
     case reportComment
     case fetchAcademicEvents
     case setAcademicEventPush
+    case getClubDivisions
 
     var path: String {
         switch self {
@@ -86,6 +87,8 @@ enum Path {
             return "api/v2/academic-events"
         case .setAcademicEventPush:
             return "api/v2/users/notifications/academic-events"
+        case .getClubDivisions:
+            return "api/v2/clubs/divisions"
         }
     }
 }

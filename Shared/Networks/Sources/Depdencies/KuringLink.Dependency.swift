@@ -465,6 +465,19 @@ extension KuringLink: DependencyKey {
                 )
             let isSucceed = (200 ..< 300) ~= response.code
             return isSucceed
+        },
+        getClubDivisions: {
+            let response: EmptyResponse = try await satellite
+                .response(
+                    for: Path.getClubDivisions.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ]
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return isSucceed
         }
     )
 }
@@ -601,6 +614,9 @@ extension KuringLink {
             return []
         },
         setAcademicEventPush: { _ in
+            return true
+        },
+        getClubDivisions: {
             return true
         }
     )
