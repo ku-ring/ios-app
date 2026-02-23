@@ -19,7 +19,10 @@ public struct Division: Codable {
     let code: String
     let koreanName: String
     
-    public init(code: String, koreanName: String) {
+    public init(
+        code: String,
+        koreanName: String
+    ) {
         self.code = code
         self.koreanName = koreanName
     }

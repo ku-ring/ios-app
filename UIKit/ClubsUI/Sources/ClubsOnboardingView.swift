@@ -5,46 +5,9 @@
 //  Created by Jung Hwan Park on 1/31/26.
 //
 
+import Models
 import SwiftUI
 import CommonUI
-
-/// Temporary model; refactor to actual clubs DTO in the near future
-enum ClubsType: String, CaseIterable {
-    case academic
-    case cultureArts
-    case socialValue
-    case outdoors
-    
-    var title: String {
-        switch self {
-        case .academic:
-            return "학술활동"
-        case .cultureArts:
-            return "문화예술"
-        case .socialValue:
-            return "사회가치"
-        case .outdoors:
-            return "야외활동"
-        }
-    }
-    
-    var imageName: String {
-        self.title
-    }
-    
-    var subtitle: String {
-        switch self {
-        case .academic:
-            return "자연과학분과, 인문학술분과"
-        case .cultureArts:
-            return "전시문예분과, 공연예술분과"
-        case .socialValue:
-            return "사회분과, 봉사분과, 종교분과"
-        case .outdoors:
-            return "구기체육분과, 레저무예분과"
-        }
-    }
-}
 
 public struct ClubsOnboardingView: View {
     

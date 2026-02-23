@@ -119,4 +119,6 @@ public struct KuringLink {
     public var setAcademicEventPush: (_ enabled: Bool) async throws -> Bool
     /// 동아리 소속 목록 조회
     public var getClubDivisions: () async throws -> ClubDivisions
+    /// 동아리 목록 조회
+    public var getClubsList: (_ category: ClubsType, _ cursor: String?, _ division: [String], _ size: Int?, _ sortBy: String?) async throws -> ClubsResult
 }
