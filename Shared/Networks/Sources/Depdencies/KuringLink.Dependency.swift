@@ -506,6 +506,20 @@ extension KuringLink: DependencyKey {
                 )
             
             return response.data
+        },
+        getClubDetail: { clubId in
+            let response: Response<ClubDetail> = try await satellite
+                .response(
+                    for: Path.getClubDetail(id: clubId).path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)",
+                        "User-Token": fcmToken
+                    ]
+                )
+            
+            return response.data
         }
     )
 }
@@ -649,6 +663,33 @@ extension KuringLink {
         },
         getClubsList: { _, _, _, _, _  in
             return .init(clubs: [], cursor: "", hasNext: false, totalCount: 0)
+        },
+        getClubDetail: { _ in
+            return .init(
+                id: 1,
+                name: "리드미",
+                summary: "단순히 책만 읽는 독서모임이 아닌, 책 속에 빠져 인사이트를 나누는 모임",
+                category: "academic",
+                division: "central",
+                subscriberCount: 128,
+                isSubscribed: true,
+                instagramUrl:  "https://instagram.com/kuring.official",
+                youtubeUrl: nil,
+                etcUrl: nil,
+                description: "저희 리드미는 2020년부터 시작된...",
+                qualifications: "건국대학교 재학생 및 휴학생 누구나\n(매주 목요일 활동 가능하신 분)",
+                recruitmentStatus: "recruiting",
+                recruitStartAt: "2026-03-02T00:00:00",
+                recruitEndAt: "2026-03-15T23:59:59",
+                applyUrl: "https://forms.gle/xyz...",
+                posterImageUrl: "https://api.kuring.com/images/club_poster_readme.png",
+                location: .init(
+                    building: "sanghuh_library",
+                    room: "101",
+                    lon: 127.074,
+                    lat: 37.541
+                )
+            )
         }
     )
 }

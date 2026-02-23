@@ -59,3 +59,73 @@ public struct Club: Codable {
         self.recruitEndDate = recruitEndDate
     }
 }
+
+public struct ClubDetail: Codable {
+    let id: Int
+    let name, summary, category, division: String
+    let subscriberCount: Int
+    let isSubscribed: Bool
+    let instagramUrl, youtubeUrl, etcUrl: String?
+    let description, qualifications, recruitmentStatus, recruitStartAt: String
+    let recruitEndAt: String
+    let applyUrl: String
+    let posterImageUrl: String
+    let location: ClubLocation
+    
+    public init(
+        id: Int,
+        name: String,
+        summary: String,
+        category: String,
+        division: String,
+        subscriberCount: Int,
+        isSubscribed: Bool,
+        instagramUrl: String?,
+        youtubeUrl: String?,
+        etcUrl: String?,
+        description: String,
+        qualifications: String,
+        recruitmentStatus: String,
+        recruitStartAt: String,
+        recruitEndAt: String,
+        applyUrl: String,
+        posterImageUrl: String,
+        location: ClubLocation
+    ) {
+        self.id = id
+        self.name = name
+        self.summary = summary
+        self.category = category
+        self.division = division
+        self.subscriberCount = subscriberCount
+        self.isSubscribed = isSubscribed
+        self.instagramUrl = instagramUrl
+        self.youtubeUrl = youtubeUrl
+        self.etcUrl = etcUrl
+        self.description = description
+        self.qualifications = qualifications
+        self.recruitmentStatus = recruitmentStatus
+        self.recruitStartAt = recruitStartAt
+        self.recruitEndAt = recruitEndAt
+        self.applyUrl = applyUrl
+        self.posterImageUrl = posterImageUrl
+        self.location = location
+    }
+}
+
+public struct ClubLocation: Codable {
+    let building, room: String
+    let lon, lat: Double
+    
+    public init(
+        building: String,
+        room: String,
+        lon: Double,
+        lat: Double
+    ) {
+        self.building = building
+        self.room = room
+        self.lon = lon
+        self.lat = lat
+    }
+}
