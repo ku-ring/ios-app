@@ -9,13 +9,13 @@ import Foundation
 
 public struct ClubsResult: Codable {
     public let clubs: [Club]
-    public let cursor: String
+    public let cursor: String?
     public let hasNext: Bool
     public let totalCount: Int
     
     public init(
         clubs: [Club],
-        cursor: String,
+        cursor: String?,
         hasNext: Bool,
         totalCount: Int
     ) {

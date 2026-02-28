@@ -123,4 +123,6 @@ public struct KuringLink {
     public var getClubsList: (_ category: ClubsType, _ cursor: String?, _ division: [String], _ size: Int?, _ sortBy: String?) async throws -> ClubsResult
     /// 동아리 상세 조회
     public var getClubDetail: (_ clubId: Int) async throws -> ClubDetail
+    /// 즐겨찾기한 동아리 목록 조회
+    public var getSubscribedClubs: () async throws -> ClubsResult
 }

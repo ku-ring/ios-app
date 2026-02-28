@@ -520,6 +520,20 @@ extension KuringLink: DependencyKey {
                 )
             
             return response.data
+        },
+        getSubscribedClubs: {
+            let response: Response<ClubsResult> = try await satellite
+                .response(
+                    for: Path.getSubscribedClubs.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)",
+                        "User-Token": fcmToken
+                    ]
+                )
+            
+            return response.data
         }
     )
 }
@@ -689,6 +703,27 @@ extension KuringLink {
                     lon: 127.074,
                     lat: 37.541
                 )
+            )
+        },
+        getSubscribedClubs: {
+            return .init(
+                clubs: [
+                    .init(
+                        id: 1,
+                        name: "Kuring",
+                        summary: "건국대학교 공지사항 알림 서비스 개발 동아리",
+                        iconImageUrl: "https://api.kuring.com/images/club_icon.png",
+                        category: "academic",
+                        division: "central",
+                        isSubscribed: true,
+                        subscriberCount: 19,
+                        recruitStartDate: "2026-05-01T00:00:00",
+                        recruitEndDate: "2026-06-03T23:59:59"
+                    )
+                ],
+                cursor: "",
+                hasNext: false,
+                totalCount: 0
             )
         }
     )
