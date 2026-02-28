@@ -129,3 +129,20 @@ public struct ClubLocation: Codable {
         self.lat = lat
     }
 }
+
+/// 사용자 동아리 즐겨찾기 추가 (서버로 보내는)
+public struct SubscribeToClubRequest: Encodable {
+    let id: Int
+    
+    public init(id: Int) {
+        self.id = id
+    }
+}
+
+public struct ClubBookmarkCountResponse: Codable {
+    let bookmarkCount: Int
+    
+    public init(bookmarkCount: Int) {
+        self.bookmarkCount = bookmarkCount
+    }
+}

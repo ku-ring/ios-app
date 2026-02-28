@@ -534,6 +534,21 @@ extension KuringLink: DependencyKey {
                 )
             
             return response.data
+        },
+        subscribeToClub: { id in
+            let response: Response<ClubBookmarkCountResponse> = try await satellite
+                .response(
+                    for: Path.subscribeToClub.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)",
+                        "User-Token": fcmToken
+                    ],
+                    httpBody: SubscribeToClubRequest(id: id)
+                )
+            
+            return response.data
         }
     )
 }
@@ -725,6 +740,9 @@ extension KuringLink {
                 hasNext: false,
                 totalCount: 0
             )
+        },
+        subscribeToClub: { _ in
+            return .init(bookmarkCount: 67)
         }
     )
 }

@@ -125,4 +125,6 @@ public struct KuringLink {
     public var getClubDetail: (_ clubId: Int) async throws -> ClubDetail
     /// 즐겨찾기한 동아리 목록 조회
     public var getSubscribedClubs: () async throws -> ClubsResult
+    /// 동아리 즐겨찾기 추가
+    public var subscribeToClub: (_ clubId: Int) async throws -> ClubBookmarkCountResponse
 }
