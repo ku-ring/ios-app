@@ -8,7 +8,7 @@
 import Foundation
 
 public struct ClubDivisions: Codable {
-    let divisions: [Division]
+    public let divisions: [Division]
     
     public init(divisions: [Division]) {
         self.divisions = divisions
@@ -16,8 +16,8 @@ public struct ClubDivisions: Codable {
 }
 
 public struct Division: Codable {
-    let code: String
-    let koreanName: String
+    public let code: String
+    public let koreanName: String
     
     public init(
         code: String,

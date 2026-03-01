@@ -61,16 +61,16 @@ public struct Club: Codable {
 }
 
 public struct ClubDetail: Codable {
-    let id: Int
-    let name, summary, category, division: String
-    let subscriberCount: Int
-    let isSubscribed: Bool
-    let instagramUrl, youtubeUrl, etcUrl: String?
-    let description, qualifications, recruitmentStatus, recruitStartAt: String
-    let recruitEndAt: String
-    let applyUrl: String
-    let posterImageUrl: String
-    let location: ClubLocation
+    public let id: Int
+    public let name, summary, category, division: String
+    public let subscriberCount: Int
+    public let isSubscribed: Bool
+    public let instagramUrl, youtubeUrl, etcUrl: String?
+    public let description, qualifications, recruitmentStatus, recruitStartAt: String
+    public let recruitEndAt: String
+    public let applyUrl: String
+    public let posterImageUrl: String
+    public let location: ClubLocation
     
     public init(
         id: Int,
@@ -114,8 +114,8 @@ public struct ClubDetail: Codable {
 }
 
 public struct ClubLocation: Codable {
-    let building, room: String
-    let lon, lat: Double
+    public let building, room: String
+    public let lon, lat: Double
     
     public init(
         building: String,
@@ -140,7 +140,7 @@ public struct SubscribeToClubRequest: Encodable {
 }
 
 public struct ClubBookmarkCountResponse: Codable {
-    let bookmarkCount: Int
+    public let bookmarkCount: Int
     
     public init(bookmarkCount: Int) {
         self.bookmarkCount = bookmarkCount
