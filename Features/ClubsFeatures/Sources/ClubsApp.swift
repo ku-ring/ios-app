@@ -43,6 +43,16 @@ public struct ClubsAppFeature {
         
         Reduce { state, action in
             switch action {
+            case let .clubsList(.delegate(delegate)):
+                switch delegate {
+                case .showClubDetail:
+                    state.path.append(
+                        Path.State.detail(
+                            ClubsDetailFeature.State()
+                        )
+                    )
+                    return .none
+                }
             default:
                 return .none
             }

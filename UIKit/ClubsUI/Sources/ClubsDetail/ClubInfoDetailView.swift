@@ -9,6 +9,8 @@ import MapKit
 import SwiftUI
 import CommonUI
 import ColorSet
+import ClubsFeatures
+import ComposableArchitecture
 
 enum ClubSocialType: String {
     case instagram
@@ -32,9 +34,12 @@ enum ClubSocialType: String {
 }
 
 public struct ClubInfoDetailView: View {
+    @Bindable var store: StoreOf<ClubsDetailFeature>
     @State private var isSubscribed: Bool = false
     
-    public init() { }
+    public init(store: StoreOf<ClubsDetailFeature>) {
+        self.store = store
+    }
     
     public var body: some View {
         ScrollView(.vertical) {
@@ -282,5 +287,7 @@ extension ClubInfoDetailView {
 }
 
 #Preview {
-    ClubInfoDetailView()
+    ClubInfoDetailView(store: .init(initialState: ClubsDetailFeature.State(), reducer: {
+        ClubsDetailFeature()
+    }))
 }

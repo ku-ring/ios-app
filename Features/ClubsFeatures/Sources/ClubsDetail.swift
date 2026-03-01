@@ -1,5 +1,5 @@
 //
-//  ClubsList.swift
+//  ClubsDetail.swift
 //  ClubsFeatures
 //
 //  Created by Jung Hwan Park on 3/1/26.
@@ -9,7 +9,7 @@ import Models
 import ComposableArchitecture
 
 @Reducer
-public struct ClubsListFeature {
+public struct ClubsDetailFeature {
     @ObservableState
     public struct State: Equatable {
         public init() { }
@@ -17,12 +17,6 @@ public struct ClubsListFeature {
 
     public enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
-        case delegate(Delegate)
-        
-        public enum Delegate: Equatable {
-            /// 공지를 눌렀을 경우
-            case showClubDetail(Club)
-        }
     }
 
     public var body: some ReducerOf<Self> {
@@ -38,4 +32,3 @@ public struct ClubsListFeature {
 
     public init() { }
 }
-

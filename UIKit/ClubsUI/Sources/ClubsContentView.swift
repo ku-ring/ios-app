@@ -7,15 +7,21 @@
 
 import SwiftUI
 import ColorSet
+import ClubsFeatures
+import ComposableArchitecture
 
 public struct ClubsContentView: View {
+    
+    @Bindable var store: StoreOf<ClubsAppFeature>
     @State private var selection: String = "전체"
     @State private var showAffiliationSheet: Bool = false
     @AppStorage("hasShownClubsIntroSnackbar") private var hasShownSnackbar: Bool = false
     
     let isClubEmpty = false
     
-    public init() { }
+    public init(store: StoreOf<ClubsAppFeature>) {
+        self.store = store
+    }
     
     public var body: some View {
         VStack(spacing: 0) {
@@ -116,5 +122,7 @@ public struct ClubsContentView: View {
 }
 
 #Preview {
-    ClubsContentView()
+    ClubsContentView(store: .init(initialState: ClubsAppFeature.State()) {
+        ClubsAppFeature()
+    })
 }

@@ -26,7 +26,7 @@ public struct ClubsResult: Codable {
     }
 }
 
-public struct Club: Codable {
+public struct Club: Codable, Equatable {
     public let id: Int
     public let name, summary: String
     public let iconImageUrl: String
