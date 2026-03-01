@@ -13,9 +13,10 @@ import ComposableArchitecture
 
 public struct ClubsOnboardingView: View {
     
-    @Bindable var store: StoreOf<ClubsOnboardingFeatures>
+    @Bindable var store: StoreOf<ClubsAppFeature>
+    @State private var selectedClubType: ClubsType?
     
-    public init(store: StoreOf<ClubsOnboardingFeatures>) {
+    public init(store: StoreOf<ClubsAppFeature>) {
         self.store = store
     }
     
@@ -37,10 +38,12 @@ public struct ClubsOnboardingView: View {
             ActionButton(
                 title: "확인",
                 isActive: .init(get: {
-                    store.selectedClubType != nil
+                    selectedClubType != nil
                 }, set: { _ in })
             ) {
-                
+                withAnimation(.easeOut(duration: 0.4)) {
+                    store.didFinishOnboarding = true
+                }
             }
             .padding(.top, 16)
             
@@ -48,6 +51,11 @@ public struct ClubsOnboardingView: View {
                 .font(.system(size: 16, weight: .medium))
                 .foregroundStyle(Color.Kuring.caption1)
                 .padding(.top, 20)
+                .onTapGesture {
+                    withAnimation(.easeOut(duration: 0.4)) {
+                        store.didFinishOnboarding = true
+                    }
+                }
         }
         .padding(20)
         .ignoresSafeArea(.keyboard)
@@ -77,20 +85,13 @@ public struct ClubsOnboardingView: View {
             .padding(16)
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(store.selectedClubType == type ? Color.Kuring.primarySelected : Color.Kuring.bg)
-                    .stroke(store.selectedClubType == type ? Color.Kuring.primary : Color.Kuring.gray200, lineWidth: 1)
+                    .fill(selectedClubType == type ? Color.Kuring.primarySelected : Color.Kuring.bg)
+                    .stroke(selectedClubType == type ? Color.Kuring.primary : Color.Kuring.gray200, lineWidth: 1)
             )
             .frame(maxWidth: .infinity)
             .onTapGesture {
-                store.selectedClubType = store.selectedClubType == type ? nil : type
+                selectedClubType = selectedClubType == type ? nil : type
             }
         }
     }
-}
-
-
-#Preview {
-    ClubsOnboardingView(store: .init(initialState: ClubsOnboardingFeatures.State(), reducer: {
-        ClubsOnboardingFeatures()
-    }))
 }

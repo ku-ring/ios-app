@@ -1,29 +1,27 @@
 //
-//  ClubsFeatures.swift
-//  package-kuring
+//  ClubsList.swift
+//  ClubsFeatures
 //
-//  Created by Jung Hwan Park on 03/01/26.
+//  Created by Jung Hwan Park on 3/1/26.
 //
 
 import Models
 import ComposableArchitecture
 
 @Reducer
-public struct ClubsOnboardingFeatures {
+public struct ClubsListFeature {
     @ObservableState
     public struct State: Equatable {
-        public var selectedClubType: ClubsType?
-        
-        public init() {}
+        public init() { }
     }
-    
+
     public enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
     }
-    
+
     public var body: some ReducerOf<Self> {
         BindingReducer()
-        
+
         Reduce { state, action in
             switch action {
             default:
@@ -31,6 +29,7 @@ public struct ClubsOnboardingFeatures {
             }
         }
     }
-    
-    public init() {}
+
+    public init() { }
 }
+

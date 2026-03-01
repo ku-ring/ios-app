@@ -13,15 +13,17 @@ extension ClubsAppFeature {
     public struct Path {
         @ObservableState
         public enum State: Equatable {
-            
+            case clubsList(ClubsListFeature.State)
         }
         
         public enum Action: Equatable {
-            
+            case clubsList(ClubsListFeature.Action)
         }
         
         public var body: some ReducerOf<Self> {
-            
+            Scope(state: \.clubsList, action: \.clubsList) {
+                ClubsListFeature()
+            }
         }
     }
 }
