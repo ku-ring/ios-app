@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ClubDivisions: Codable {
+public struct ClubDivisions: Codable, Hashable, Equatable {
     public let divisions: [Division]
     
     public init(divisions: [Division]) {
@@ -15,7 +15,7 @@ public struct ClubDivisions: Codable {
     }
 }
 
-public struct Division: Codable {
+public struct Division: Codable, Hashable, Equatable {
     public let code: String
     public let koreanName: String
     

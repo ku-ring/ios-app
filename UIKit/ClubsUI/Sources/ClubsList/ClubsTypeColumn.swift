@@ -5,19 +5,20 @@
 //  Created by Jung Hwan Park on 2/8/26.
 //
 
+import Models
 import SwiftUI
 import ColorSet
 
 public struct ClubsTypeColumn: View {
-    public let title: String
-    public let selection: String
+    public let original: ClubsType
+    public let selection: ClubsType
     
     private var isSelected: Bool {
-        title == selection
+        original == selection
     }
     
     public var body: some View {
-        Text(title)
+        Text(original.title)
             .frame(maxWidth: .infinity)
             .font(.system(size: 16, weight: isSelected ? .semibold : .medium))
             .padding(.vertical, 8)
@@ -38,8 +39,8 @@ public struct ClubsTypeColumn: View {
             )
     }
 
-    public init(key: String, selection: String) {
-        self.title = key
+    public init(original: ClubsType, selection: ClubsType) {
+        self.original = original
         self.selection = selection
     }
 }

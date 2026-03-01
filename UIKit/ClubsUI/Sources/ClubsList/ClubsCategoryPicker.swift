@@ -5,22 +5,23 @@
 //  Created by Jung Hwan Park on 2/8/26.
 //
 
+import Models
 import SwiftUI
 
 public struct ClubsCategoryPicker: View {
-    @Binding var selection: String
+    @Binding var selection: ClubsType
     
     public var body: some View {
         HStack {
             ForEach(
-                ["전체", "학술활동", "문화예술", "사회가치", "야외활동"],
+                ClubsType.allCases,
                 id: \.self
             ) { key in
                 Button {
                     selection = key
                 } label: {
                     ClubsTypeColumn(
-                        key: key,
+                        original: key,
                         selection: selection
                     )
                 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ClubsResult: Codable {
+public struct ClubsResult: Codable, Equatable {
     public let clubs: [Club]
     public let cursor: String?
     public let hasNext: Bool

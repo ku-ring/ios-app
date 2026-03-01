@@ -8,6 +8,7 @@
 import Foundation
 
 public enum ClubsType: String, CaseIterable, Encodable {
+    case all
     case academic
     case culture_art
     case social_value
@@ -15,6 +16,8 @@ public enum ClubsType: String, CaseIterable, Encodable {
     
     public var title: String {
         switch self {
+        case .all:
+            return "전체"
         case .academic:
             return "학술활동"
         case .culture_art:
@@ -32,6 +35,8 @@ public enum ClubsType: String, CaseIterable, Encodable {
     
     public var subtitle: String {
         switch self {
+        case .all:
+            return "전체"
         case .academic:
             return "자연과학분과, 인문학술분과"
         case .culture_art:

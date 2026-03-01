@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ColorSet
+import ClubsFeatures
 
 public struct ClubsSubscriptionView: View {
     let isClubEmpty = false
@@ -24,19 +25,9 @@ public struct ClubsSubscriptionView: View {
                     if isClubEmpty {
                         clubsEmptyView
                     } else {
-                        VStack(spacing: 14) {
-                            ClubCardView()
-                            
-                            ClubCardView()
-                            
-                            ClubCardView()
-                            
-                            ClubCardView()
-                            
-                            ClubCardView()
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.top, 16)
+                        ClubsListView(store: .init(initialState: ClubsListFeature.State(), reducer: {
+                            ClubsListFeature()
+                        }))
                     }
                 }
             }

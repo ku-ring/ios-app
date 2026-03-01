@@ -5,17 +5,18 @@
 //  Created by Jung Hwan Park on 2/8/26.
 //
 
+import Models
 import SwiftUI
 import ColorSet
 
 struct ClubsTag: View {
-    let title: String
+    let division: Division
     let isSelected: Bool
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
-            Text(title)
+            Text(division.koreanName)
                 .font(.system(size: 14, weight: .medium))
                 .foregroundColor(isSelected ? Color.Kuring.primary : Color.Kuring.caption1)
                 .padding(.horizontal, 14)
