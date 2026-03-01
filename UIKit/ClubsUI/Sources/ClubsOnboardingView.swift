@@ -8,12 +8,16 @@
 import Models
 import SwiftUI
 import CommonUI
+import ClubsFeatures
+import ComposableArchitecture
 
 public struct ClubsOnboardingView: View {
     
-    @State private var selectedClubType: ClubsType?
+    @Bindable var store: StoreOf<ClubsOnboardingFeatures>
     
-    public init() { }
+    public init(store: StoreOf<ClubsOnboardingFeatures>) {
+        self.store = store
+    }
     
     public var body: some View {
         VStack(spacing: 8) {
@@ -33,7 +37,7 @@ public struct ClubsOnboardingView: View {
             ActionButton(
                 title: "확인",
                 isActive: .init(get: {
-                    selectedClubType != nil
+                    store.selectedClubType != nil
                 }, set: { _ in })
             ) {
                 
@@ -73,12 +77,12 @@ public struct ClubsOnboardingView: View {
             .padding(16)
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(selectedClubType == type ? Color.Kuring.primarySelected : Color.Kuring.bg)
-                    .stroke(selectedClubType == type ? Color.Kuring.primary : Color.Kuring.gray200, lineWidth: 1)
+                    .fill(store.selectedClubType == type ? Color.Kuring.primarySelected : Color.Kuring.bg)
+                    .stroke(store.selectedClubType == type ? Color.Kuring.primary : Color.Kuring.gray200, lineWidth: 1)
             )
             .frame(maxWidth: .infinity)
             .onTapGesture {
-                selectedClubType = selectedClubType == type ? nil : type
+                store.selectedClubType = store.selectedClubType == type ? nil : type
             }
         }
     }
@@ -86,5 +90,7 @@ public struct ClubsOnboardingView: View {
 
 
 #Preview {
-    ClubsOnboardingView()
+    ClubsOnboardingView(store: .init(initialState: ClubsOnboardingFeatures.State(), reducer: {
+        ClubsOnboardingFeatures()
+    }))
 }
