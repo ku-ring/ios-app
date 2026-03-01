@@ -10,6 +10,7 @@ let project = Project.make(
         .project(target: "CommonUI", path: "../CommonUI"),
         .project(target: "Models", path: "../../Shared/Models"),
         .project(target: "Caches", path: "../../Shared/Caches"),
+        .project(target: "ClubsFeatures", path: "../../Features/ClubsFeatures")
     ],
     needsExample: true
 )
