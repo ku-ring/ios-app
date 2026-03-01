@@ -38,6 +38,7 @@ enum Path {
     case getClubDetail(id: Int)
     case getSubscribedClubs
     case subscribeToClub
+    case unsubscribeToClub
 
     var path: String {
         switch self {
@@ -97,9 +98,7 @@ enum Path {
             return "api/v2/clubs"
         case .getClubDetail(let id):
             return "api/v2/clubs/\(id)"
-        case .getSubscribedClubs:
-            return "api/v2/users/bookmarks/clubs"
-        case .subscribeToClub:
+        case .getSubscribedClubs, .subscribeToClub, .unsubscribeToClub:
             return "api/v2/users/bookmarks/clubs"
         }
     }
