@@ -8,7 +8,7 @@
 import Foundation
 
 public struct ClubsResult: Codable, Equatable {
-    public let clubs: [Club]
+    public var clubs: [Club]
     public let cursor: String?
     public let hasNext: Bool
     public let totalCount: Int
@@ -31,7 +31,7 @@ public struct Club: Codable, Equatable {
     public let name, summary: String
     public let iconImageUrl: String
     public let category, division: String
-    public let isSubscribed: Bool
+    public var isSubscribed: Bool
     public let subscriberCount: Int
     public let recruitStartDate, recruitEndDate: String
     
@@ -139,7 +139,7 @@ public struct SubscribeToClubRequest: Encodable {
     }
 }
 
-public struct ClubBookmarkCountResponse: Codable {
+public struct ClubBookmarkCountResponse: Codable, Equatable {
     public let bookmarkCount: Int
     
     public init(bookmarkCount: Int) {

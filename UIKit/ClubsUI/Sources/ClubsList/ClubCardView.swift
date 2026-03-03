@@ -11,6 +11,7 @@ import ColorSet
 
 struct ClubCardView: View {
     let club: Club
+    let onBookmarkTap: () -> Void
     
     var body: some View {
         HStack(spacing: 10) {
@@ -43,26 +44,40 @@ struct ClubCardView: View {
             
             VStack(alignment: .leading) {
                 HStack {
-                    Text(club.name)
+                    Text(club.name.count > 12 ? String(club.name.prefix(12)) + "..." : club.name)
                         .font(.system(size: 20, weight: .bold))
                         .foregroundStyle(Color.Kuring.title)
                     
                     Spacer()
                     
-                    clubInfoChips(text: "D-3")
+                    let dday = ddayText(for: club)
+
+                    Text(dday.text)
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundStyle(dday.isUrgent ? .red : Color.Kuring.caption1)
+                        .padding(.vertical, 2)
+                        .padding(.horizontal, 4)
+                        .background(
+                            RoundedRectangle(cornerRadius: 6)
+                                .fill(Color.Kuring.gray100)
+                        )
                 }
                 
                 Text(club.summary)
                     .padding(.top, 4)
                     .font(.system(size: 14))
                     .foregroundStyle(Color.Kuring.caption1)
+                    .lineLimit(2)
+                    .truncationMode(.tail)
                 
                 Spacer()
                 
                 HStack {
                     clubInfoChips(text: club.category)
                     
-                    clubInfoChips(text: club.division)
+                    ForEach(club.division.components(separatedBy: ","), id: \.self) { division in
+                        clubInfoChips(text: division)
+                    }
                     
                     Spacer()
                     
@@ -74,7 +89,7 @@ struct ClubCardView: View {
                         .resizable()
                         .frame(width: 16, height: 16, alignment: .center)
                         .onTapGesture {
-                            /// send action to subscirbe
+                            onBookmarkTap()
                         }
                 }
             }
@@ -101,6 +116,28 @@ struct ClubCardView: View {
                     .fill(Color.Kuring.gray100)
             )
     }
+    
+    private func parseDate(_ string: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.date(from: string)
+    }
+    
+    private func ddayText(for club: Club) -> (text: String, isUrgent: Bool) {
+        guard let end = parseDate(club.recruitEndDate) else {
+            return ("상시모집", false)
+        }
+
+        let days = Calendar.current.dateComponents([.day], from: Date(), to: end).day ?? 0
+
+        if days < 0 {
+            return ("마감 종료", true)
+        } else if days <= 3 {
+            return ("D-\(days)", true)
+        } else {
+            return ("D-\(days)", false)
+        }
+    }
 }
 
 #Preview {
@@ -115,6 +152,8 @@ struct ClubCardView: View {
         subscriberCount: 19,
         recruitStartDate: "2026-05-01T00:00:00",
         recruitEndDate: "2026-06-03T23:59:59"
-    ))
+    ), onBookmarkTap: {
+        
+    })
     .padding(.horizontal, 20)
 }

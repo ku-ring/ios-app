@@ -24,6 +24,7 @@ public struct ClubsTagSelector: View {
                 if !store.selectedCategories.isEmpty {
                     Button {
                         store.selectedCategories.removeAll()
+                        store.send(.applyFiltersAndSort)
                     } label: {
                         Image("refresh-cw", bundle: .module)
                             .renderingMode(.template)
@@ -51,6 +52,7 @@ public struct ClubsTagSelector: View {
                         isSelected: store.selectedCategories.contains(division)
                     ) {
                         toggle(division)
+                        store.send(.applyFiltersAndSort)
                     }
                 }
                 .frame(height: 37)
@@ -69,7 +71,7 @@ public struct ClubsTagSelector: View {
                     .frame(width: 24, height: 24)
                     .foregroundStyle(Color.Kuring.gray300)
                     .onTapGesture {
-                        store.showAffiliationSelectionSheet = true
+                        store.showDivisionSelectionSheet = true
                     }
             }
         }

@@ -29,18 +29,18 @@ struct ClubsListView: View {
         ScrollView(.vertical) {
             VStack(spacing: 0) {
                 sortByView
-                    .frame(height: 32)
-                    .padding(.horizontal, 20)
                 
-                if store.clubsResult?.clubs.count == 0 {
+                if store.filteredClubs?.clubs.count == 0 {
                     clubsEmptyView
                 } else {
                     VStack(spacing: 14) {
-                        ForEach(store.clubsResult?.clubs ?? [], id: \.id) { club in
-                            ClubCardView(club: club)
-                                .onTapGesture {
-                                    store.send(.delegate(.showClubDetail(club)))
-                                }
+                        ForEach(store.filteredClubs?.clubs ?? [], id: \.id) { club in
+                            ClubCardView(club: club) {
+                                store.send(.subscribeToClub(club.id))
+                            }
+                            .onTapGesture {
+                                store.send(.delegate(.showClubDetail(club)))
+                            }
                         }
                     }
                     .padding(.horizontal, 20)
@@ -52,7 +52,7 @@ struct ClubsListView: View {
         .onAppear {
             store.send(.onAppear)
         }
-        .sheet(isPresented: $store.showAffiliationSelectionSheet) {
+        .sheet(isPresented: $store.showDivisionSelectionSheet) {
             ClubsAffiliationSelectionSheet()
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
@@ -63,27 +63,40 @@ struct ClubsListView: View {
 extension ClubsListView {
     private var sortByView: some View {
         HStack {
-            Text("총 \(store.clubsResult?.clubs.count ?? 0)개")
-                .font(.system(size: 15, weight: .semibold))
-                .foregroundStyle(Color.Kuring.caption1)
-            
             Spacer()
-            
+
             HStack(spacing: 9) {
                 Text("모집 마감일 순")
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundStyle(Color.Kuring.caption1)
-                
+                    .font(.system(size: 14))
+                    .fontWeight(store.sortType == .deadline ? .medium : .regular)
+                    .foregroundColor(
+                        store.sortType == .deadline
+                        ? Color.Kuring.caption1
+                        : Color.Kuring.caption2
+                    )
+                    .onTapGesture {
+                        store.send(.changeSortBy(by: .deadline))
+                    }
+
                 Divider()
                     .frame(width: 1)
-                    .foregroundStyle(Color.Kuring.gray200)
-                    .padding(.vertical, 8)
-                
+
                 Text("가나다 순")
-                    .font(.system(size: 14, weight: .regular))
-                    .foregroundStyle(Color.Kuring.caption2)
+                    .font(.system(size: 14))
+                    .fontWeight(store.sortType == .alphabetical ? .medium : .regular)
+                    .foregroundColor(
+                        store.sortType == .alphabetical
+                        ? Color.Kuring.caption1
+                        : Color.Kuring.caption2
+                    )
+                    .onTapGesture {
+                        store.send(.changeSortBy(by: .alphabetical))
+                    }
             }
         }
+        .frame(height: 32)
+        .padding(.horizontal, 20)
+
     }
     
     private var clubsEmptyView: some View {
@@ -98,5 +111,4 @@ extension ClubsListView {
         }
         .padding(.top, 120)
     }
-
 }
