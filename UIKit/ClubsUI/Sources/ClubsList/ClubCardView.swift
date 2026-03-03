@@ -73,10 +73,10 @@ struct ClubCardView: View {
                 Spacer()
                 
                 HStack {
-                    clubInfoChips(text: club.category)
+                    clubInfoChips(text: ClubsType(rawValue: club.category)?.title ?? "전체")
                     
                     ForEach(club.division.components(separatedBy: ","), id: \.self) { division in
-                        clubInfoChips(text: division)
+                        clubInfoChips(text: ClubDivisions.allCases.first(where: { $0.code.lowercased() == division.lowercased() })?.koreanName ?? "중앙")
                     }
                     
                     Spacer()

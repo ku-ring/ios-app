@@ -5,21 +5,15 @@
 //  Created by Jung Hwan Park on 2/12/26.
 //
 
+import Models
 import SwiftUI
 import ColorSet
 
 struct ClubsAffiliationSelectionSheet: View {
     @Environment(\.dismiss) private var dismiss
     
-    let categories = [
-        "중앙동아리", "문과대학", "이과대학", "건축대학",
-        "공과대학", "사회과학대학", "경영대학",
-        "부동산과학원", "융합과학기술원", "생명과학대학",
-        "수의과대학", "예술디자인대학", "사범대학",
-        "KU자유전공학부", "상허교양대학"
-    ]
-    
-    @State private var selected: Set<String> = []
+    let division: [Division]
+    @Binding var selectedDivisions: Set<Division>
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
@@ -28,15 +22,15 @@ struct ClubsAffiliationSelectionSheet: View {
             
             ScrollView {
                 FlowLayout(spacing: 10) {
-                    ForEach(categories, id: \.self) { item in
+                    ForEach(division, id: \.self) { division in
                         tagButton(
-                            title: item,
-                            isSelected: selected.contains(item)
+                            title: division.koreanName,
+                            isSelected: selectedDivisions.contains(division)
                         ) {
-                            if selected.contains(item) {
-                                selected.remove(item)
+                            if selectedDivisions.contains(division) {
+                                selectedDivisions.remove(division)
                             } else {
-                                selected.insert(item)
+                                selectedDivisions.insert(division)
                             }
                         }
                     }
@@ -57,7 +51,7 @@ struct ClubsAffiliationSelectionSheet: View {
         GeometryReader { proxy in
             HStack(alignment: .bottom, spacing: 16) {
                 Button {
-                    selected.removeAll()
+                    selectedDivisions.removeAll()
                 } label: {
                     Text("초기화")
                         .font(.system(size: 16, weight: .semibold))
@@ -74,15 +68,15 @@ struct ClubsAffiliationSelectionSheet: View {
                 Button {
                     dismiss()
                 } label: {
-                    Text("확인 (\(selected.count))")
+                    Text("확인 (\(selectedDivisions.count))")
                         .font(.system(size: 16, weight: .semibold))
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(selected.isEmpty ? Color.Kuring.gray200 : Color.Kuring.primary)
-                        .foregroundStyle(selected.isEmpty ? Color.Kuring.caption1 : Color.Kuring.bg)
+                        .background(selectedDivisions.isEmpty ? Color.Kuring.gray200 : Color.Kuring.primary)
+                        .foregroundStyle(selectedDivisions.isEmpty ? Color.Kuring.caption1 : Color.Kuring.bg)
                         .clipShape(Capsule())
                 }
-                .disabled(selected.isEmpty)
+                .disabled(selectedDivisions.isEmpty)
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
         }
@@ -114,8 +108,4 @@ struct ClubsAffiliationSelectionSheet: View {
                 )
         }
     }
-}
-
-#Preview {
-    ClubsAffiliationSelectionSheet()
 }

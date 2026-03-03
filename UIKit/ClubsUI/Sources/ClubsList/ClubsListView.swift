@@ -53,9 +53,12 @@ struct ClubsListView: View {
             store.send(.onAppear)
         }
         .sheet(isPresented: $store.showDivisionSelectionSheet) {
-            ClubsAffiliationSelectionSheet()
-                .presentationDetents([.medium, .large])
-                .presentationDragIndicator(.visible)
+            ClubsAffiliationSelectionSheet(
+                division: store.clubDivisions.divisions,
+                selectedDivisions: $store.selectedCategories
+            )
+            .presentationDetents([.medium, .large])
+            .presentationDragIndicator(.visible)
         }
     }
 }
