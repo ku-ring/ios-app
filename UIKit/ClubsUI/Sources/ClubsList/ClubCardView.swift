@@ -59,7 +59,7 @@ struct ClubCardView: View {
                         .padding(.horizontal, 4)
                         .background(
                             RoundedRectangle(cornerRadius: 6)
-                                .fill(Color.Kuring.gray100)
+                                .fill(dday.isUrgent ? Color.Kuring.event : Color.Kuring.gray100)
                         )
                 }
                 
@@ -141,18 +141,7 @@ struct ClubCardView: View {
 }
 
 #Preview {
-    ClubCardView(club: .init(
-        id: 1,
-        name: "Kuring",
-        summary: "건국대학교 공지사항 알림 서비스 개발 동아리",
-        iconImageUrl: "https://api.kuring.com/images/club_icon.png",
-        category: "academic",
-        division: "central",
-        isSubscribed: true,
-        subscriberCount: 19,
-        recruitStartDate: "2026-05-01T00:00:00",
-        recruitEndDate: "2026-06-03T23:59:59"
-    ), onBookmarkTap: {
+    ClubCardView(club: .mock, onBookmarkTap: {
         
     })
     .padding(.horizontal, 20)

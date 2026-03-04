@@ -5,6 +5,7 @@
 //  Created by Jung Hwan Park on 2/14/26.
 //
 
+import Models
 import MapKit
 import SwiftUI
 import CommonUI
@@ -35,7 +36,6 @@ enum ClubSocialType: String {
 
 public struct ClubInfoDetailView: View {
     @Bindable var store: StoreOf<ClubsDetailFeature>
-    @State private var isSubscribed: Bool = false
     
     public init(store: StoreOf<ClubsDetailFeature>) {
         self.store = store
@@ -45,19 +45,23 @@ public struct ClubInfoDetailView: View {
         ScrollView(.vertical) {
             VStack(alignment: .leading, spacing: 0) {
                 HStack(spacing: 4) {
-                    clubInfoChips(text: "D-3")
-                    clubInfoChips(text: "학술동아리")
-                    clubInfoChips(text: "중앙동아리")
+                    clubInfoChips(text: "\(ddayText(for: store.club).text)")
+
+                    clubInfoChips(text: ClubsType(rawValue: store.club.category)?.title ?? "전체")
+                    
+                    ForEach(store.club.division.components(separatedBy: ","), id: \.self) { division in
+                        clubInfoChips(text: ClubDivisions.allCases.first(where: { $0.code.lowercased() == division.lowercased() })?.koreanName ?? "중앙")
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 24)
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("릴스 시청 동아리")
+                    Text(store.club.name)
                         .font(.system(size: 24, weight: .bold))
                         .foregroundStyle(Color.Kuring.title)
                     
-                    Text("매주 목요일 학생회관에서 릴스 100번 넘기기")
+                    Text(store.club.summary)
                         .font(.system(size: 16, weight: .medium))
                         .foregroundStyle(Color.Kuring.body)
                 }
@@ -65,12 +69,23 @@ public struct ClubInfoDetailView: View {
                 .padding(.top, 16)
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    clubSocialsInfo(social: .instagram, link: "https://www.apple.com")
-                    clubSocialsInfo(social: .youtube, link: "https://www.apple.com")
-                    clubSocialsInfo(social: .link, link: "https://www.apple.com")
+                    if let detail = store.clubDetail {
+                        if let instagramUrl = detail.instagramUrl {
+                            clubSocialsInfo(social: .instagram, link: instagramUrl)
+                        }
+                        if let youtubeUrl = detail.youtubeUrl {
+                            clubSocialsInfo(social: .youtube, link: youtubeUrl)
+                        }
+                        if let etcUrl = detail.etcUrl {
+                            clubSocialsInfo(social: .link, link: etcUrl)
+                        }
+                    }
+                    
                     locationLinkView
                     
-                    mapPreview
+                    if let detail = store.clubDetail {
+                        mapPreview(detail)
+                    }
                 }
                 .padding(.top, 24)
                 
@@ -78,14 +93,7 @@ public struct ClubInfoDetailView: View {
                     .padding(.top, 24)
                 
                 Text("""
-                    우리는 현대인의 중요한 문화 활동을 연구합니다.
-                    주제: “릴스를 100번 넘기면 인간은 무엇을 느끼는가?”
-
-                    매주 목요일 학생회관에서
-                    집단 알고리즘 체험 및 웃음 공유 세션 진행.
-
-                    결론:
-                    혼자 보는 것보다 같이 보면 더 재밌다.
+                    \(store.clubDetail?.description ?? "")
                     """)
                     .font(.system(size: 16, weight: .medium))
                     .foregroundStyle(Color.Kuring.body)
@@ -96,7 +104,7 @@ public struct ClubInfoDetailView: View {
                         .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(Color.Kuring.body)
                     
-                    Text("25살 이상, 인스타 스크린타임 일평균 4시간 이상 ")
+                    Text("\(store.clubDetail?.qualifications ?? "알수없음")")
                         .font(.system(size: 16, weight: .medium))
                         .foregroundStyle(Color.Kuring.body)
                 }
@@ -113,8 +121,10 @@ public struct ClubInfoDetailView: View {
         .scrollIndicators(.never)
         .overlay(alignment: .bottom) {
             ActionButton(
-                title: "확인",
-                isActive: .constant(true)
+                title: [.recruiting, .always, nil].contains(store.clubDetail?.recruitmentStatus) ? "확인" : "모집 기간이 아니에요",
+                isActive: .init(get: {
+                    [.recruiting, .always, nil].contains(store.clubDetail?.recruitmentStatus)
+                }, set: { _ in })
             ) {
                 
             }
@@ -132,19 +142,22 @@ public struct ClubInfoDetailView: View {
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 HStack(spacing: 8) {
-                    Text("99+")
+                    Text(store.club.subscriberCount > 99 ? "99+" : "\(store.club.subscriberCount)")
                         .font(.system(size: 12, weight: .medium))
                         .foregroundStyle(Color.Kuring.caption1)
 
-                    Image(isSubscribed ? "star-fill" : "star", bundle: .module)
+                    Image(store.clubDetail?.isSubscribed ?? false ? "star-fill" : "star", bundle: .module)
                         .resizable()
                         .frame(width: 16, height: 16)
                         .onTapGesture {
-                            isSubscribed.toggle()
+                            store.send(.subscribeToClub(id: store.club.id, isSubscribed: store.club.isSubscribed))
                         }
                 }
                 .padding(.horizontal, 6)
             }
+        }
+        .onAppear {
+            store.send(.getClubDetail)
         }
     }
 }
@@ -160,6 +173,28 @@ extension ClubInfoDetailView {
         string.underlineColor = .gray
         
         return string
+    }
+    
+    private func parseDate(_ string: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.date(from: string)
+    }
+    
+    private func ddayText(for club: Club) -> (text: String, isUrgent: Bool) {
+        guard let end = parseDate(club.recruitEndDate) else {
+            return ("상시모집", false)
+        }
+
+        let days = Calendar.current.dateComponents([.day], from: Date(), to: end).day ?? 0
+
+        if days < 0 {
+            return ("마감 종료", true)
+        } else if days <= 3 {
+            return ("D-\(days)", true)
+        } else {
+            return ("D-\(days)", false)
+        }
     }
 }
 
@@ -212,19 +247,20 @@ extension ClubInfoDetailView {
         }
     }
     
-    private var mapPreview: some View {
+    @ViewBuilder
+    private func mapPreview(_ detail: ClubDetail) -> some View {
         Map(position: .constant(
             .region(
                 .init(
-                    center: .init(latitude: 37.543583, longitude: 127.077467),
+                    center: .init(latitude: detail.location.lat, longitude: detail.location.lon),
                     latitudinalMeters: 400,
                     longitudinalMeters: 400
                 )
             )
         )) {
             Annotation(
-                "Location",
-                coordinate: .init(latitude: 37.543583, longitude: 127.077467)
+                "위치",
+                coordinate: .init(latitude: detail.location.lat, longitude: detail.location.lon)
             ) {
                 VStack(spacing: 0) {
                     Image(systemName: "mappin.circle.fill")
@@ -244,7 +280,7 @@ extension ClubInfoDetailView {
     
     private var posterView: some View {
         AsyncImage(
-            url: URL(string: "https://firebasestorage.googleapis.com/v0/b/amgn-8ca5f.firebasestorage.app/o/reels_club_poster.png?alt=media&token=314f5e7c-35d5-40ed-84b7-c123227c2408")!)
+            url: URL(string: store.clubDetail?.posterImageUrl ?? ""))
         { image in
             image
                 .resizable()
@@ -287,7 +323,7 @@ extension ClubInfoDetailView {
 }
 
 #Preview {
-    ClubInfoDetailView(store: .init(initialState: ClubsDetailFeature.State(), reducer: {
+    ClubInfoDetailView(store: .init(initialState: ClubsDetailFeature.State(club: .mock), reducer: {
         ClubsDetailFeature()
     }))
 }

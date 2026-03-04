@@ -58,15 +58,31 @@ public struct Club: Codable, Equatable {
         self.recruitStartDate = recruitStartDate
         self.recruitEndDate = recruitEndDate
     }
+    
+    public static var mock: Self {
+        return .init(
+            id: 1,
+            name: "Kuring",
+            summary: "건국대학교 공지사항 알림 서비스 개발 동아리",
+            iconImageUrl: "https://api.kuring.com/images/club_icon.png",
+            category: "academic",
+            division: "central",
+            isSubscribed: true,
+            subscriberCount: 19,
+            recruitStartDate: "2026-05-01T00:00:00",
+            recruitEndDate: "2026-06-03T23:59:59"
+        )
+    }
 }
 
-public struct ClubDetail: Codable {
+public struct ClubDetail: Equatable, Codable {
     public let id: Int
     public let name, summary, category, division: String
     public let subscriberCount: Int
     public let isSubscribed: Bool
     public let instagramUrl, youtubeUrl, etcUrl: String?
-    public let description, qualifications, recruitmentStatus, recruitStartAt: String
+    public let description, qualifications, recruitStartAt: String
+    public let recruitmentStatus: RecruitmentStatus
     public let recruitEndAt: String
     public let applyUrl: String
     public let posterImageUrl: String
@@ -85,7 +101,7 @@ public struct ClubDetail: Codable {
         etcUrl: String?,
         description: String,
         qualifications: String,
-        recruitmentStatus: String,
+        recruitmentStatus: RecruitmentStatus,
         recruitStartAt: String,
         recruitEndAt: String,
         applyUrl: String,
@@ -113,7 +129,27 @@ public struct ClubDetail: Codable {
     }
 }
 
-public struct ClubLocation: Codable {
+public enum RecruitmentStatus: String, Codable {
+    case before
+    case recruiting
+    case closed
+    case always
+    
+    public var rawValue: String {
+        switch self {
+        case .before:
+            "모집전"
+        case .recruiting:
+            "모집중"
+        case .closed:
+            "모집완료"
+        case .always:
+            "상시모집"
+        }
+    }
+}
+
+public struct ClubLocation: Equatable, Codable {
     public let building, room: String
     public let lon, lat: Double
     

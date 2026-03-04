@@ -45,10 +45,10 @@ public struct ClubsAppFeature {
             switch action {
             case let .clubsList(.delegate(delegate)):
                 switch delegate {
-                case .showClubDetail:
+                case .showClubDetail(let club):
                     state.path.append(
                         Path.State.detail(
-                            ClubsDetailFeature.State()
+                            ClubsDetailFeature.State(club: club)
                         )
                     )
                     return .none

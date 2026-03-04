@@ -36,7 +36,7 @@ struct ClubsListView: View {
                     VStack(spacing: 14) {
                         ForEach(store.filteredClubs?.clubs ?? [], id: \.id) { club in
                             ClubCardView(club: club) {
-                                store.send(.subscribeToClub(club.id))
+                                store.send(.subscribeToClub(id: club.id, isSubscribed: club.isSubscribed))
                             }
                             .onTapGesture {
                                 store.send(.delegate(.showClubDetail(club)))
