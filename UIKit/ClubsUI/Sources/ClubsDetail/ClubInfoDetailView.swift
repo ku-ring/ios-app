@@ -121,7 +121,7 @@ public struct ClubInfoDetailView: View {
         .scrollIndicators(.never)
         .overlay(alignment: .bottom) {
             ActionButton(
-                title: [.recruiting, .always, nil].contains(store.clubDetail?.recruitmentStatus) ? "확인" : "모집 기간이 아니에요",
+                title: [.recruiting, .always, nil].contains(store.clubDetail?.recruitmentStatus) ? "지원하기" : "모집 기간이 아니에요",
                 isActive: .init(get: {
                     [.recruiting, .always, nil].contains(store.clubDetail?.recruitmentStatus)
                 }, set: { _ in })
@@ -259,7 +259,7 @@ extension ClubInfoDetailView {
             )
         )) {
             Annotation(
-                "위치",
+                store.club.name,
                 coordinate: .init(latitude: detail.location.lat, longitude: detail.location.lon)
             ) {
                 VStack(spacing: 0) {

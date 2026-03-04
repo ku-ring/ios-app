@@ -13,6 +13,10 @@ struct ClubCardView: View {
     let club: Club
     let onBookmarkTap: () -> Void
     
+    private var isRecruiting: Bool {
+        ddayText(for: club).text != "마감 종료"
+    }
+    
     var body: some View {
         HStack(spacing: 10) {
             RoundedRectangle(cornerRadius: 14)
@@ -29,7 +33,7 @@ struct ClubCardView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     } placeholder: {
                         RoundedRectangle(cornerRadius: 14)
-                            .fill(Color.Kuring.gray100)
+                            .fill(!isRecruiting ? Color.Kuring.gray200  : Color.Kuring.gray100)
                             .frame(width: 84)
                             .overlay(alignment: .center) {
                                 Image("kuring-icon", bundle: .module)
@@ -37,7 +41,7 @@ struct ClubCardView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 28)
-                                    .foregroundStyle(Color.Kuring.gray200)
+                                    .foregroundStyle(!isRecruiting ? Color.Kuring.gray100 : Color.Kuring.gray200)
                             }
                     }
                 }
@@ -46,7 +50,7 @@ struct ClubCardView: View {
                 HStack {
                     Text(club.name.count > 12 ? String(club.name.prefix(12)) + "..." : club.name)
                         .font(.system(size: 20, weight: .bold))
-                        .foregroundStyle(Color.Kuring.title)
+                        .foregroundStyle(!isRecruiting ? Color.Kuring.caption1 : Color.Kuring.title)
                     
                     Spacer()
                     
@@ -66,7 +70,7 @@ struct ClubCardView: View {
                 Text(club.summary)
                     .padding(.top, 4)
                     .font(.system(size: 14))
-                    .foregroundStyle(Color.Kuring.caption1)
+                    .foregroundStyle(!isRecruiting ? Color.Kuring.caption2 : Color.Kuring.caption1)
                     .lineLimit(2)
                     .truncationMode(.tail)
                 
@@ -99,7 +103,7 @@ struct ClubCardView: View {
         .padding(.vertical, 10)
         .background(
             RoundedRectangle(cornerRadius: 16)
-                .fill(Color.Kuring.bg)
+                .fill(!isRecruiting ? Color.Kuring.gray200 : Color.Kuring.bg)
                 .stroke(Color.Kuring.gray100, lineWidth: 1)
         )
     }
