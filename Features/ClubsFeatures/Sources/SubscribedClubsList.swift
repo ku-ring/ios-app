@@ -1,0 +1,112 @@
+//
+//  SubscribedClubsList.swift
+//  ClubsFeatures
+//
+//  Created by Jung Hwan Park on 3/4/26.
+//
+
+import Models
+import Networks
+import Foundation
+import Dependencies
+import ComposableArchitecture
+
+@Reducer
+public struct SubscribedClubsList {
+    @ObservableState
+    public struct State: Equatable {
+        /// 동아리 목록 (원본 데이터)
+        public var originalClubs: ClubsResult?
+        /// 동아리 목록 (화면에 보여줄 최종 데이터)
+        public var filteredClubs: ClubsResult?
+        /// 동아리 목록 정렬 기준
+        public var sortType: SortType = .deadline
+        
+        public enum SortType: Equatable {
+            case deadline
+            case alphabetical
+        }
+        
+        public init() { }
+    }
+    
+    @Dependency(\.kuringLink) private var kuringLink
+
+    public enum Action: BindableAction, Equatable {
+        case binding(BindingAction<State>)
+        case delegate(Delegate)
+        
+        case changeSortBy(by: State.SortType)
+        case onAppear
+        /// 동아리 소속 목록을 조회한다
+        case getSubscribedClubsList
+        case getSubscribedClubsListResponse(Result<ClubsResult, ClubsKuringError>)
+        
+        public enum Delegate: Equatable {
+            /// 공지를 눌렀을 경우
+            case showClubDetail(Club)
+        }
+    }
+
+    public var body: some ReducerOf<Self> {
+        BindingReducer()
+
+        Reduce { state, action in
+            switch action {
+            case .onAppear:
+                return .concatenate([
+                    .send(.getSubscribedClubsList)
+                ])
+            case .changeSortBy(let by):
+                state.sortType = by
+                var clubs = state.originalClubs
+                switch state.sortType {
+                case .deadline:
+                    clubs?.clubs.sort {
+                        parseDate($0.recruitEndDate) ?? .distantFuture <
+                            parseDate($1.recruitEndDate) ?? .distantFuture
+                    }
+                case .alphabetical:
+                    clubs?.clubs.sort { $0.name < $1.name }
+                }
+                
+                state.filteredClubs?.clubs = clubs?.clubs ?? []
+                
+                return .none
+            case .getSubscribedClubsList:
+                return .run { send in
+                    do {
+                        let result = try await kuringLink.getSubscribedClubs()
+                        await send(.getSubscribedClubsListResponse(.success(result)))
+                    } catch {
+                        await send(.getSubscribedClubsListResponse(.failure(.error(error.localizedDescription))))
+                    }
+                }
+            case .getSubscribedClubsListResponse(let result):
+                switch result {
+                case .success(let clubs):
+                    state.originalClubs = clubs
+                    state.filteredClubs = clubs
+                    return .none
+                case .failure(let error):
+                    print("Clubs error: \(error)")
+                    return .none
+                }
+            case .binding:
+                return .none
+            default:
+                return .none
+            }
+        }
+    }
+
+    private func parseDate(_ string: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-ddTHH:mm:ss"
+        return formatter.date(from: string)
+    }
+    
+    public init() { }
+}
+
+

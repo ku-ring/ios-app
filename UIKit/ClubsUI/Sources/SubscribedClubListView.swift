@@ -1,15 +1,15 @@
 //
-//  ClubsListView.swift
+//  SubscribedClubListView.swift
 //  ClubsUI
 //
-//  Created by Jung Hwan Park on 3/1/26.
+//  Created by Jung Hwan Park on 3/4/26.
 //
 
 import SwiftUI
 import ClubsFeatures
 import ComposableArchitecture
 
-struct ClubsListView: View {
+struct SubscribedClubListView: View {
     @Bindable var store: StoreOf<ClubsListFeature>
     
     public init(store: StoreOf<ClubsListFeature>) {
@@ -17,15 +17,6 @@ struct ClubsListView: View {
     }
 
     var body: some View {
-        ClubsCategoryPicker(selection: $store.selectedClubType)
-            .padding(.horizontal, 20)
-        
-        Divider()
-            .frame(height: 0.25)
-        
-        ClubsTagSelector(store: store)
-            .padding(.horizontal, 20)
-
         ScrollView(.vertical) {
             VStack(spacing: 0) {
                 sortByView
@@ -52,38 +43,10 @@ struct ClubsListView: View {
         .onAppear {
             store.send(.onAppear)
         }
-        .sheet(isPresented: $store.showDivisionSelectionSheet) {
-            ClubsAffiliationSelectionSheet(
-                division: store.clubDivisions.divisions,
-                selectedDivisions: $store.selectedCategories
-            )
-            .presentationDetents([.medium, .large])
-            .presentationDragIndicator(.visible)
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .topBarTrailing) {
-                HStack(spacing: 12) {
-                    Image("star", bundle: .module)
-                        .resizable()
-                        .frame(width: 18, height: 18)
-                        .onTapGesture {
-                            // push to subscribed clubs list
-                        }
-                    
-                    Image("bell", bundle: .module)
-                        .resizable()
-                        .frame(width: 18, height: 18)
-                        .onTapGesture {
-                            // push to subscribed clubs list
-                        }
-                }
-                .padding(.horizontal, 6)
-            }
-        }
     }
 }
 
-extension ClubsListView {
+extension SubscribedClubListView {
     private var sortByView: some View {
         HStack {
             Spacer()
