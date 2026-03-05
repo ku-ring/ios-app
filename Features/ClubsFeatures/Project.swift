@@ -9,6 +9,7 @@ let project = Project.make(
         .external(name: "ComposableArchitecture"),
         .project(target: "Caches", path: "../../Shared/Caches"),
         .project(target: "Models", path: "../../Shared/Models"),
-        .project(target: "Networks", path: "../../Shared/Networks")
+        .project(target: "Networks", path: "../../Shared/Networks"),
+        .project(target: "LoginFeatures", path: "../LoginFeatures")
     ]
 )

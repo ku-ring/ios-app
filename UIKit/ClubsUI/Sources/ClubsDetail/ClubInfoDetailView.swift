@@ -36,6 +36,7 @@ enum ClubSocialType: String {
 
 public struct ClubInfoDetailView: View {
     @Bindable var store: StoreOf<ClubsDetailFeature>
+    @AppStorage("com.kuring.sdk.v2.token.accessToken") var accessToken: String = ""
     
     public init(store: StoreOf<ClubsDetailFeature>) {
         self.store = store
@@ -150,7 +151,11 @@ public struct ClubInfoDetailView: View {
                         .resizable()
                         .frame(width: 16, height: 16)
                         .onTapGesture {
-                            store.send(.subscribeToClub(id: store.club.id, isSubscribed: store.club.isSubscribed))
+                            if !accessToken.isEmpty {
+                                store.send(.subscribeToClub(id: store.club.id, isSubscribed: store.club.isSubscribed))
+                            } else {
+                                store.send(.showNeedsLoginAlert)
+                            }
                         }
                 }
                 .padding(.horizontal, 6)
@@ -159,6 +164,12 @@ public struct ClubInfoDetailView: View {
         .onAppear {
             store.send(.getClubDetail)
         }
+        .alert(
+            store: store.scope(
+                state: \.$alert,
+                action: \.alert
+            )
+        )
     }
 }
 

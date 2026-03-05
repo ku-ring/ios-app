@@ -15,6 +15,8 @@ import ComposableArchitecture
 public struct ClubsListFeature {
     @ObservableState
     public struct State: Equatable {
+        @Presents public var alert: AlertState<Action.Alert>?
+        
         public var selectedClubType: ClubsType = .all
         /// 동아리 목록 (원본 데이터)
         public var originalClubs: ClubsResult?
@@ -58,9 +60,19 @@ public struct ClubsListFeature {
         case subscribeToClub(id: Int, isSubscribed: Bool)
         case subscribeToClubResponse(Result<ClubBookmarkCountResponse, ClubsKuringError>, Int)
         
+        case showNeedsLoginAlert
+        /// 알림 관련 액션
+        case alert(PresentationAction<Alert>)
+        
         public enum Delegate: Equatable {
             /// 공지를 눌렀을 경우
             case showClubDetail(Club)
+            case pushToLogin
+        }
+        
+        /// 알러트
+        public enum Alert: Equatable {
+            case pushToLogin
         }
     }
 
@@ -151,6 +163,28 @@ public struct ClubsListFeature {
                 if let index = state.filteredClubs?.clubs.firstIndex(where: { $0.id == id }) {
                     state.filteredClubs?.clubs[index].isSubscribed.toggle()
                 }
+                return .none
+            case .showNeedsLoginAlert:
+                state.alert = AlertState {
+                    TextState("로그인이 필요한 서비스에요")
+                } actions: {
+                    ButtonState(role: .cancel) {
+                        TextState("취소")
+                    }
+                    
+                    ButtonState(
+                        role: .destructive,
+                        action: .pushToLogin
+                    ) {
+                        TextState("로그인하기")
+                    }
+                }
+                return .none
+            case .alert(.presented(.pushToLogin)):
+                state.alert = nil
+                return .send(.delegate(.pushToLogin))
+            case .alert(.dismiss):
+                state.alert = nil
                 return .none
             case .binding:
                 return .none

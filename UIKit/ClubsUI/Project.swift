@@ -6,6 +6,7 @@ let project = Project.make(
     name: "ClubsUI",
     bundleId: bundleId_release,
     dependencies: [
+        .project(target: "LoginUI", path: "../LoginUI"),
         .project(target: "ColorSet", path: "../ColorSet"),
         .project(target: "CommonUI", path: "../CommonUI"),
         .project(target: "Models", path: "../../Shared/Models"),

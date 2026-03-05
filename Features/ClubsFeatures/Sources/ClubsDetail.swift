@@ -15,6 +15,8 @@ import ComposableArchitecture
 public struct ClubsDetailFeature {
     @ObservableState
     public struct State: Equatable {
+        @Presents public var alert: AlertState<Action.Alert>?
+        
         public var club: Club
         public var clubDetail: ClubDetail?
         
@@ -27,6 +29,7 @@ public struct ClubsDetailFeature {
     
     public enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
+        case delegate(Delegate)
         
         /// 동아리 상세 조회
         case getClubDetail
@@ -35,6 +38,20 @@ public struct ClubsDetailFeature {
         /// 동아리 즐겨찾기
         case subscribeToClub(id: Int, isSubscribed: Bool)
         case subscribeToClubResponse(Result<ClubBookmarkCountResponse, ClubsKuringError>)
+        
+        case showNeedsLoginAlert
+        /// 알림 관련 액션
+        case alert(PresentationAction<Alert>)
+        
+        public enum Delegate: Equatable {
+            /// 미로그인 시 로그인 화면으로 이동
+            case pushToLogin
+        }
+        
+        /// 알러트
+        public enum Alert: Equatable {
+            case pushToLogin
+        }
     }
 
     public var body: some ReducerOf<Self> {
@@ -71,6 +88,28 @@ public struct ClubsDetailFeature {
                 }
             case .subscribeToClubResponse:
                 state.club.isSubscribed.toggle()
+                return .none
+            case .showNeedsLoginAlert:
+                state.alert = AlertState {
+                    TextState("로그인이 필요한 서비스에요")
+                } actions: {
+                    ButtonState(role: .cancel) {
+                        TextState("취소")
+                    }
+                    
+                    ButtonState(
+                        role: .destructive,
+                        action: .pushToLogin
+                    ) {
+                        TextState("로그인하기")
+                    }
+                }
+                return .none
+            case .alert(.presented(.pushToLogin)):
+                state.alert = nil
+                return .send(.delegate(.pushToLogin))
+            case .alert(.dismiss):
+                state.alert = nil
                 return .none
             default:
                 return .none

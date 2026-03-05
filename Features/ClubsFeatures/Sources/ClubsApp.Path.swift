@@ -6,6 +6,7 @@
 //
 
 import Models
+import LoginFeatures
 import ComposableArchitecture
 
 extension ClubsAppFeature {
@@ -15,11 +16,15 @@ extension ClubsAppFeature {
         public enum State: Equatable {
             case detail(ClubsDetailFeature.State)
             case subscribedClubsList(SubscribedClubsListFeature.State)
+            /// 로그인
+            case login(LoginAppFeature.State)
         }
         
         public enum Action: Equatable {
             case detail(ClubsDetailFeature.Action)
             case subscribedClubsList(SubscribedClubsListFeature.Action)
+            /// 로그인
+            case login(LoginAppFeature.Action)
         }
         
         public var body: some ReducerOf<Self> {
@@ -28,6 +33,9 @@ extension ClubsAppFeature {
             }
             Scope(state: \.subscribedClubsList, action: \.subscribedClubsList) {
                 SubscribedClubsListFeature()
+            }
+            Scope(state: \.login, action: \.login) {
+                LoginAppFeature()
             }
         }
     }

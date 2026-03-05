@@ -11,6 +11,7 @@ import ComposableArchitecture
 
 public struct SubscribedClubListView: View {
     @Bindable var store: StoreOf<SubscribedClubsListFeature>
+    @AppStorage("com.kuring.sdk.v2.token.accessToken") var accessToken: String = ""
     
     public init(store: StoreOf<SubscribedClubsListFeature>) {
         self.store = store
@@ -27,7 +28,11 @@ public struct SubscribedClubListView: View {
                     VStack(spacing: 14) {
                         ForEach(store.filteredClubs?.clubs ?? [], id: \.id) { club in
                             ClubCardView(club: club) {
-                                store.send(.subscribeToClub(id: club.id, isSubscribed: club.isSubscribed))
+                                if !accessToken.isEmpty {
+                                    store.send(.subscribeToClub(id: club.id, isSubscribed: club.isSubscribed))
+                                } else {
+                                    store.send(.showNeedsLoginAlert)
+                                }
                             }
                             .onTapGesture {
                                 store.send(.delegate(.showClubDetail(club)))
@@ -43,6 +48,12 @@ public struct SubscribedClubListView: View {
         .onAppear {
             store.send(.onAppear)
         }
+        .alert(
+            store: store.scope(
+                state: \.$alert,
+                action: \.alert
+            )
+        )
     }
 }
 

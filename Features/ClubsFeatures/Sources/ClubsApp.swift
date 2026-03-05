@@ -6,6 +6,7 @@
 //
 
 import Models
+import LoginFeatures
 import ComposableArchitecture
 
 @Reducer
@@ -53,6 +54,13 @@ public struct ClubsAppFeature {
                         )
                     )
                     return .none
+                case .pushToLogin:
+                    state.path.append(
+                        Path.State.login(
+                            LoginAppFeature.State()
+                        )
+                    )
+                    return .none
                 }
             case .path(.element(id: _, action: .subscribedClubsList(.delegate(.showClubDetail(let club))))):
                 state.path.append(
@@ -60,6 +68,17 @@ public struct ClubsAppFeature {
                         ClubsDetailFeature.State(club: club)
                     )
                 )
+                return .none
+            case .path(.element(id: _, action: .subscribedClubsList(.delegate(.pushToLogin)))),
+                    .path(.element(id: _, action: .detail(.delegate(.pushToLogin)))):
+                state.path.append(
+                    Path.State.login(
+                        LoginAppFeature.State()
+                    )
+                )
+                return .none
+            case .path(.element(id: _, action: .login(.delegate(.popToRoot)))):
+                state.path.removeAll()
                 return .none
             case .pushToSubscribedClubsList:
                 state.path.append(
