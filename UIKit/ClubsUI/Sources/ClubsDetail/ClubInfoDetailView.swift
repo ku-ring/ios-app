@@ -146,7 +146,7 @@ public struct ClubInfoDetailView: View {
                         .font(.system(size: 12, weight: .medium))
                         .foregroundStyle(Color.Kuring.caption1)
 
-                    Image(store.clubDetail?.isSubscribed ?? false ? "star-fill" : "star", bundle: .module)
+                    Image(store.club.isSubscribed ? "star-fill" : "star", bundle: .module)
                         .resizable()
                         .frame(width: 16, height: 16)
                         .onTapGesture {

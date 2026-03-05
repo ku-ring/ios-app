@@ -44,6 +44,26 @@ public struct ClubsContentView: View {
                     }
                 }
         }
+        .toolbar {
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                HStack(spacing: 12) {
+                    Image("star", bundle: .module)
+                        .resizable()
+                        .frame(width: 18, height: 18)
+                        .onTapGesture {
+                            store.send(.pushToSubscribedClubsList)
+                        }
+                    
+                    Image("bell", bundle: .module)
+                        .resizable()
+                        .frame(width: 18, height: 18)
+                        .onTapGesture {
+                            // push to alert view
+                        }
+                }
+                .padding(.horizontal, 6)
+            }
+        }
     }
 }
 

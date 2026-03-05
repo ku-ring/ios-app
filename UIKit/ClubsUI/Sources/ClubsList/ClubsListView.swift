@@ -60,26 +60,6 @@ struct ClubsListView: View {
             .presentationDetents([.medium, .large])
             .presentationDragIndicator(.visible)
         }
-        .toolbar {
-            ToolbarItemGroup(placement: .topBarTrailing) {
-                HStack(spacing: 12) {
-                    Image("star", bundle: .module)
-                        .resizable()
-                        .frame(width: 18, height: 18)
-                        .onTapGesture {
-                            // push to subscribed clubs list
-                        }
-                    
-                    Image("bell", bundle: .module)
-                        .resizable()
-                        .frame(width: 18, height: 18)
-                        .onTapGesture {
-                            // push to subscribed clubs list
-                        }
-                }
-                .padding(.horizontal, 6)
-            }
-        }
     }
 }
 

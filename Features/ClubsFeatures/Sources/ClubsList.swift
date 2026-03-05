@@ -148,6 +148,9 @@ public struct ClubsListFeature {
                 if let index = state.originalClubs?.clubs.firstIndex(where: { $0.id == id }) {
                     state.originalClubs?.clubs[index].isSubscribed.toggle()
                 }
+                if let index = state.filteredClubs?.clubs.firstIndex(where: { $0.id == id }) {
+                    state.filteredClubs?.clubs[index].isSubscribed.toggle()
+                }
                 return .none
             case .binding:
                 return .none

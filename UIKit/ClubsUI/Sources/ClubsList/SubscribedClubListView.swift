@@ -9,14 +9,14 @@ import SwiftUI
 import ClubsFeatures
 import ComposableArchitecture
 
-struct SubscribedClubListView: View {
-    @Bindable var store: StoreOf<ClubsListFeature>
+public struct SubscribedClubListView: View {
+    @Bindable var store: StoreOf<SubscribedClubsListFeature>
     
-    public init(store: StoreOf<ClubsListFeature>) {
+    public init(store: StoreOf<SubscribedClubsListFeature>) {
         self.store = store
     }
 
-    var body: some View {
+    public var body: some View {
         ScrollView(.vertical) {
             VStack(spacing: 0) {
                 sortByView
@@ -35,11 +35,11 @@ struct SubscribedClubListView: View {
                         }
                     }
                     .padding(.horizontal, 20)
-                    .padding(.top, 16)
+                    .padding(.top, 8)
                 }
             }
         }
-        .padding(.top, 16)
+        .navigationTitle("구독")
         .onAppear {
             store.send(.onAppear)
         }

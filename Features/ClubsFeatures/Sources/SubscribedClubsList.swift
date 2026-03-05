@@ -12,7 +12,7 @@ import Dependencies
 import ComposableArchitecture
 
 @Reducer
-public struct SubscribedClubsList {
+public struct SubscribedClubsListFeature {
     @ObservableState
     public struct State: Equatable {
         /// 동아리 목록 (원본 데이터)
@@ -41,6 +41,10 @@ public struct SubscribedClubsList {
         /// 동아리 소속 목록을 조회한다
         case getSubscribedClubsList
         case getSubscribedClubsListResponse(Result<ClubsResult, ClubsKuringError>)
+        
+        /// 동아리 즐겨찾기
+        case subscribeToClub(id: Int, isSubscribed: Bool)
+        case subscribeToClubResponse(Result<ClubBookmarkCountResponse, ClubsKuringError>, Int)
         
         public enum Delegate: Equatable {
             /// 공지를 눌렀을 경우
@@ -92,6 +96,23 @@ public struct SubscribedClubsList {
                     print("Clubs error: \(error)")
                     return .none
                 }
+            case .subscribeToClub(let id, let isSubscribed):
+                return .run { send in
+                    do {
+                        let response = isSubscribed ? try await kuringLink.unsubscribeToClub(id) : try await kuringLink.subscribeToClub(id)
+                        await send(.subscribeToClubResponse(.success(response), id))
+                    } catch {
+                        await send(.subscribeToClubResponse(.failure(.error(error.localizedDescription)), id))
+                    }
+                }
+            case .subscribeToClubResponse(_, let id):
+                if let index = state.originalClubs?.clubs.firstIndex(where: { $0.id == id }) {
+                    state.originalClubs?.clubs[index].isSubscribed.toggle()
+                }
+                if let index = state.filteredClubs?.clubs.firstIndex(where: { $0.id == id }) {
+                    state.filteredClubs?.clubs[index].isSubscribed.toggle()
+                }
+                return .none
             case .binding:
                 return .none
             default:

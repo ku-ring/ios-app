@@ -32,6 +32,7 @@ public struct ClubsAppFeature {
         case clubsList(ClubsListFeature.Action)
         /// 스택 네비게이션 액션 (``ClubsAppFeature/Path``)
         case path(StackAction<Path.State, Path.Action>)
+        case pushToSubscribedClubsList
     }
     
     public var body: some ReducerOf<Self> {
@@ -53,6 +54,18 @@ public struct ClubsAppFeature {
                     )
                     return .none
                 }
+            case .path(.element(id: _, action: .subscribedClubsList(.delegate(.showClubDetail(let club))))):
+                state.path.append(
+                    Path.State.detail(
+                        ClubsDetailFeature.State(club: club)
+                    )
+                )
+                return .none
+            case .pushToSubscribedClubsList:
+                state.path.append(
+                    Path.State.subscribedClubsList(SubscribedClubsListFeature.State())
+                )
+                return .none
             default:
                 return .none
             }

@@ -63,7 +63,7 @@ public struct ClubsDetailFeature {
             case .subscribeToClub(let id, let isSubscribed):
                 return .run { send in
                     do {
-                        let response = isSubscribed ?  try await kuringLink.unsubscribeToClub(id) : try await kuringLink.subscribeToClub(id)
+                        let response = isSubscribed ? try await kuringLink.unsubscribeToClub(id) : try await kuringLink.subscribeToClub(id)
                         await send(.subscribeToClubResponse(.success(response)))
                     } catch {
                         await send(.subscribeToClubResponse(.failure(.error(error.localizedDescription))))
