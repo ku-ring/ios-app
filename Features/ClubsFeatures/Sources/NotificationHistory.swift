@@ -10,6 +10,7 @@ import Networks
 import SwiftData
 import Foundation
 import Dependencies
+import SubscriptionFeatures
 import ComposableArchitecture
 
 @Reducer
@@ -19,6 +20,8 @@ public struct NotificationHistoryFeature {
     @ObservableState
     public struct State: Equatable {
         public var notifications: [NotificationHistoryEntity] = []
+        /// 트리 네비게이션 - ``SubscriptionAppFeature``
+        @Presents public var changeSubscription: SubscriptionAppFeature.State?
         
         public init() { }
     }
@@ -31,6 +34,11 @@ public struct NotificationHistoryFeature {
         
         case markAsRead(String)
         case deleteNotification(String)
+        
+        /// 구독 변경 버튼을 탭한 경우
+        case changeSubscriptionButtonTapped
+        /// ``SubscriptionAppFeature`` 의 Presentation 액션
+        case changeSubscription(PresentationAction<SubscriptionAppFeature.Action>)
     }
 
     public var body: some ReducerOf<Self> {
@@ -69,9 +77,19 @@ public struct NotificationHistoryFeature {
                     try notificationHistory.delete(id)
                     await send(.fetchNotifications)
                 }
-            case .binding:
+            case .changeSubscription(.presented(.subscriptionView(.subscriptionResponse))):
+                /// ``SubscriptionAppFeature`` 액션
+                state.changeSubscription = nil
+                return .none
+            case .changeSubscriptionButtonTapped:
+                state.changeSubscription = SubscriptionAppFeature.State()
+                return .none
+            case .binding, .changeSubscription:
                 return .none
             }
+        }
+        .ifLet(\.$changeSubscription, action: \.changeSubscription) {
+            SubscriptionAppFeature()
         }
     }
 
