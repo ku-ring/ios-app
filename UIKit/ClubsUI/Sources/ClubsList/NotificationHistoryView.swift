@@ -9,6 +9,7 @@ import Models
 import SwiftUI
 import ColorSet
 import ClubsFeatures
+import SubscriptionUI
 import ComposableArchitecture
 
 public struct NotificationHistoryView: View {
@@ -45,10 +46,21 @@ public struct NotificationHistoryView: View {
                     .resizable()
                     .frame(width: 26, height: 26)
                     .foregroundStyle(Color.Kuring.gray600)
+                    .onTapGesture {
+                        store.send(.changeSubscriptionButtonTapped)
+                    }
             }
         }
         .task {
             store.send(.fetchNotifications)
+        }
+        .sheet(
+            item: $store.scope(
+                state: \.changeSubscription,
+                action: \.changeSubscription
+            )
+        ) { store in
+            SubscriptionApp(store: store)
         }
     }
 }
