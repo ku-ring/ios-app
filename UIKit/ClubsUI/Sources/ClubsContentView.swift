@@ -11,7 +11,6 @@ import ClubsFeatures
 import ComposableArchitecture
 
 public struct ClubsContentView: View {
-    
     @Bindable var store: StoreOf<ClubsAppFeature>
     @AppStorage("hasShownClubsIntroSnackbar") private var hasShownSnackbar: Bool = false
     
@@ -58,7 +57,7 @@ public struct ClubsContentView: View {
                         .resizable()
                         .frame(width: 18, height: 18)
                         .onTapGesture {
-                            // push to alert view
+                            store.send(.pushToNotificationHistory)
                         }
                 }
                 .padding(.horizontal, 6)

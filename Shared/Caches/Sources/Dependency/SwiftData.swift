@@ -17,6 +17,7 @@ fileprivate let appContext: ModelContext = {
             for: ChatInfo.self,
             AcademicEventEntity.self,
             AcademicScheduleEntity.self,
+            NotificationHistoryEntity.self,
             configurations: config
         )
         return ModelContext(container)

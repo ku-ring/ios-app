@@ -34,6 +34,7 @@ public struct ClubsAppFeature {
         /// 스택 네비게이션 액션 (``ClubsAppFeature/Path``)
         case path(StackAction<Path.State, Path.Action>)
         case pushToSubscribedClubsList
+        case pushToNotificationHistory
     }
     
     public var body: some ReducerOf<Self> {
@@ -83,6 +84,11 @@ public struct ClubsAppFeature {
             case .pushToSubscribedClubsList:
                 state.path.append(
                     Path.State.subscribedClubsList(SubscribedClubsListFeature.State())
+                )
+                return .none
+            case .pushToNotificationHistory:
+                state.path.append(
+                    Path.State.notificationHistory(NotificationHistoryFeature.State())
                 )
                 return .none
             default:

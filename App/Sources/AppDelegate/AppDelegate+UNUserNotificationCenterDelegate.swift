@@ -6,7 +6,10 @@
 //
 
 import UIKit
+import Caches
+import Models
 import Firebase
+import Dependencies
 import PushNotifications
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
@@ -39,12 +42,23 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         guard let userInfo = userInfo as? [String: Any] else { return [] }
         do {
             let _ = try Message(userInfo: userInfo)
+            
+            guard let type = userInfo["type"] as? String else {
+                return [.banner, .sound]
+            }
+            let title = notification.request.content.title
+            let body = notification.request.content.body
+
+            @Dependency(\.notificationHistory) var notificationHistoryDB
+            try notificationHistoryDB.add(NotificationHistoryEntity(title: title, body: body, type: type))
+            
             return [.banner, .sound]
         } catch {
             // 커스텀 알림 수신 미동의 인데 커스텀 알림이 온 경우
             return []
         }
     }
+
     
     /// 푸시 알림을 탭 했을 때
     /// - Important: ``newMessagePublisher`` 를 구독하여 ``Message`` 객체를 이벤트로 전달받을 수 있습니다.
@@ -74,6 +88,16 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // Kuring.application(application, didReceiveRemoteNotification: userInfo)
         guard let userInfo = userInfo as? [String: Any] else { return .failed }
         do {
+            if let type = userInfo["type"] as? String,
+               let aps = userInfo["aps"] as? [String: Any],
+               let alert = aps["alert"] as? [String: Any],
+               let title = alert["title"] as? String,
+               let body = alert["body"] as? String
+            {
+                @Dependency(\.notificationHistory) var notificationHistoryDB
+                try notificationHistoryDB.add(NotificationHistoryEntity(title: title, body: body, type: type))
+            }
+            
             try onTapRemoteNotification(with: userInfo)
             return .newData
         } catch {

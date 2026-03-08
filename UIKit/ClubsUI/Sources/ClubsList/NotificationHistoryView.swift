@@ -5,46 +5,23 @@
 //  Created by Jung Hwan Park on 2/18/26.
 //
 
+import Models
 import SwiftUI
 import ColorSet
-
-struct NotificationItem: Identifiable, Equatable {
-    let id = UUID()
-    let category: Category
-    let text: String
-    let daysAgo: Int
-    var isRead: Bool = false
-}
-
-enum Category: String {
-    case academic = "학사일정"
-    case club = "동아리"
-    case notice = "공지사항"
-    
-    var icon: String {
-        switch self {
-        case .academic: return "calendar"
-        case .club: return "users"
-        case .notice: return "list"
-        }
-    }
-}
+import ClubsFeatures
+import ComposableArchitecture
 
 public struct NotificationHistoryView: View {
-    @State private var alerts: [NotificationItem] = [
-        .init(category: .academic, text: "학사경고 받기 학사일정이 있어요", daysAgo: 1, isRead: true),
-        .init(category: .club, text: "릴스 시청 동아리 회원 모집", daysAgo: 2),
-        .init(category: .notice, text: "등록금 고지서", daysAgo: 3, isRead: true),
-        .init(category: .academic, text: "건구스한테서 도망가기 학사일정이 있어요", daysAgo: 5, isRead: true),
-        .init(category: .club, text: "AlertText", daysAgo: 7, isRead: true)
-    ]
+    @Bindable var store: StoreOf<NotificationHistoryFeature>
     
-    public init() { }
+    public init(store: StoreOf<NotificationHistoryFeature>) {
+        self.store = store
+    }
     
     public var body: some View {
         List {
-            ForEach(alerts) { item in
-                NotificationHistoryRow(item: item)
+            ForEach(store.notifications) { notification in
+                NotificationHistoryRow(notification: notification)
                     .listRowInsets(.init())
                     .listRowSeparator(.visible)
                     .alignmentGuide(.listRowSeparatorLeading) { _ in
@@ -52,7 +29,7 @@ public struct NotificationHistoryView: View {
                     }
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button(role: .destructive) {
-                            delete(item)
+                            store.send(.deleteNotification(notification.id))
                         } label: {
                             Text("삭제")
                         }
@@ -70,15 +47,8 @@ public struct NotificationHistoryView: View {
                     .foregroundStyle(Color.Kuring.gray600)
             }
         }
-    }
-    
-    private func delete(_ item: NotificationItem) {
-        withAnimation(.snappy) {
-            alerts.removeAll { $0.id == item.id }
+        .task {
+            store.send(.fetchNotifications)
         }
     }
-}
-
-#Preview {
-    NotificationHistoryView()
 }

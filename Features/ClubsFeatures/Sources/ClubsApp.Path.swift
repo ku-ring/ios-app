@@ -18,6 +18,7 @@ extension ClubsAppFeature {
             case subscribedClubsList(SubscribedClubsListFeature.State)
             /// 로그인
             case login(LoginAppFeature.State)
+            case notificationHistory(NotificationHistoryFeature.State)
         }
         
         public enum Action: Equatable {
@@ -25,6 +26,7 @@ extension ClubsAppFeature {
             case subscribedClubsList(SubscribedClubsListFeature.Action)
             /// 로그인
             case login(LoginAppFeature.Action)
+            case notificationHistory(NotificationHistoryFeature.Action)
         }
         
         public var body: some ReducerOf<Self> {
@@ -36,6 +38,9 @@ extension ClubsAppFeature {
             }
             Scope(state: \.login, action: \.login) {
                 LoginAppFeature()
+            }
+            Scope(state: \.notificationHistory, action: \.notificationHistory) {
+                NotificationHistoryFeature()
             }
         }
     }
