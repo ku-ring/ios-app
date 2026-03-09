@@ -79,8 +79,8 @@ public struct SubscribedClubsListFeature {
                 switch state.sortType {
                 case .deadline:
                     clubs?.clubs.sort {
-                        parseDate($0.recruitEndDate) ?? .distantFuture <
-                            parseDate($1.recruitEndDate) ?? .distantFuture
+                        parseDate($0.recruitEndDate ?? "") ?? .distantFuture <
+                            parseDate($1.recruitEndDate ?? "") ?? .distantFuture
                     }
                 case .alphabetical:
                     clubs?.clubs.sort { $0.name < $1.name }

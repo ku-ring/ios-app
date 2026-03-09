@@ -49,11 +49,12 @@ struct ClubsListView: View {
                         }
                     }
                     .padding(.horizontal, 20)
-                    .padding(.top, 16)
+                    .padding(.top, 12)
                 }
             }
         }
-        .padding(.top, 16)
+        .padding(.top, 8)
+        .padding(.bottom, 20)
         .onAppear {
             store.send(.onAppear)
         }
@@ -77,6 +78,10 @@ struct ClubsListView: View {
 extension ClubsListView {
     private var sortByView: some View {
         HStack {
+            Text("총 \(store.filteredClubs?.clubs.count ?? 0)개")
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(Color.Kuring.caption1)
+            
             Spacer()
 
             HStack(spacing: 9) {

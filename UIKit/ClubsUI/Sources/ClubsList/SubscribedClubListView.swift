@@ -45,6 +45,7 @@ public struct SubscribedClubListView: View {
             }
         }
         .navigationTitle("구독")
+        .background(Color.Kuring.bg)
         .onAppear {
             store.send(.onAppear)
         }

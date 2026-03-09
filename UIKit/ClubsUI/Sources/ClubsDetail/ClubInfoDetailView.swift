@@ -71,9 +71,7 @@ public struct ClubInfoDetailView: View {
                 
                 VStack(alignment: .leading, spacing: 8) {
                     if let detail = store.clubDetail {
-                        if let instagramUrl = detail.instagramUrl {
-                            clubSocialsInfo(social: .instagram, link: instagramUrl)
-                        }
+                        clubSocialsInfo(social: .instagram, link: store.clubDetail?.instagramUrl ?? "https://www.instagram.com/konkuk_official/")
                         if let youtubeUrl = detail.youtubeUrl {
                             clubSocialsInfo(social: .youtube, link: youtubeUrl)
                         }
@@ -144,12 +142,14 @@ public struct ClubInfoDetailView: View {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 HStack(spacing: 8) {
                     Text(store.club.subscriberCount > 99 ? "99+" : "\(store.club.subscriberCount)")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(Color.Kuring.caption1)
 
                     Image(store.club.isSubscribed ? "star-fill" : "star", bundle: .module)
+                        .renderingMode(.template)
                         .resizable()
-                        .frame(width: 16, height: 16)
+                        .frame(width: 24, height: 24)
+                        .foregroundStyle(store.club.isSubscribed ? .clear : Color.Kuring.gray400)
                         .onTapGesture {
                             if !accessToken.isEmpty {
                                 store.send(.subscribeToClub(id: store.club.id, isSubscribed: store.club.isSubscribed))
@@ -193,7 +193,7 @@ extension ClubInfoDetailView {
     }
     
     private func ddayText(for club: Club) -> (text: String, isUrgent: Bool) {
-        guard let end = parseDate(club.recruitEndDate) else {
+        guard let end = parseDate(club.recruitEndDate ?? "") else {
             return ("상시모집", false)
         }
 
@@ -245,7 +245,9 @@ extension ClubInfoDetailView {
             
             var string: AttributedString {
                 var temp = AttributedString("위치")
-                temp.link = URL(string: "https://www.apple.com")!
+                if let loc = store.clubDetail?.location {
+                    temp.link = URL(string: "nmap://route/walk?dlat=\(loc.lat ?? 37.541875)&dlng=\(loc.lon ?? 127.077966)&dname=\(store.club.name)")!
+                }
                 temp.foregroundColor = .gray
                 temp.underlineStyle = .single
                 temp.underlineColor = .gray
@@ -263,7 +265,7 @@ extension ClubInfoDetailView {
         Map(position: .constant(
             .region(
                 .init(
-                    center: .init(latitude: detail.location.lat, longitude: detail.location.lon),
+                    center: .init(latitude: detail.location.lat ?? 37.541875, longitude: detail.location.lon ?? 127.077966),
                     latitudinalMeters: 400,
                     longitudinalMeters: 400
                 )
@@ -271,7 +273,7 @@ extension ClubInfoDetailView {
         )) {
             Annotation(
                 store.club.name,
-                coordinate: .init(latitude: detail.location.lat, longitude: detail.location.lon)
+                coordinate: .init(latitude: detail.location.lat ?? 37.541875, longitude: detail.location.lon ?? 127.077966)
             ) {
                 VStack(spacing: 0) {
                     Image(systemName: "mappin.circle.fill")

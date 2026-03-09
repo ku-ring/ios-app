@@ -39,6 +39,8 @@ public struct NotificationHistoryView: View {
         }
         .listStyle(.plain)
         .background(Color.Kuring.bg)
+        .navigationTitle("알림")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Image("settings", bundle: .module)

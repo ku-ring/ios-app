@@ -12,6 +12,7 @@ import ComposableArchitecture
 
 public struct ClubsContentView: View {
     @Bindable var store: StoreOf<ClubsAppFeature>
+    @AppStorage("hasShownClubsOnboarding") private var hasShownClubsOnboarding: Bool = false
     @AppStorage("hasShownClubsIntroSnackbar") private var hasShownSnackbar: Bool = false
     
     let isClubEmpty = false
@@ -32,35 +33,55 @@ public struct ClubsContentView: View {
         .frame(maxWidth: .infinity)
         .background(Color.Kuring.bg)
         .overlay(alignment: .bottom) {
-            ClubsIntroSnackbar()
-                .opacity(hasShownSnackbar ? 0.0 : 1.0)
-                .onAppear {
-                    Task {
-                        try await Task.sleep(for: .seconds(3))
-                        withAnimation {
-                            hasShownSnackbar = true
+            if hasShownClubsOnboarding {
+                ClubsIntroSnackbar()
+                    .padding(.bottom, 11)
+                    .opacity(hasShownSnackbar ? 0.0 : 1.0)
+                    .onAppear {
+                        Task {
+                            try await Task.sleep(for: .seconds(3))
+                            withAnimation {
+                                hasShownSnackbar = true
+                            }
                         }
                     }
-                }
+            }
         }
         .toolbar {
-            ToolbarItemGroup(placement: .topBarTrailing) {
-                HStack(spacing: 12) {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    store.send(.pushToSubscribedClubsList)
+                } label: {
                     Image("star", bundle: .module)
+                        .renderingMode(.template)
                         .resizable()
-                        .frame(width: 18, height: 18)
-                        .onTapGesture {
-                            store.send(.pushToSubscribedClubsList)
-                        }
-                    
-                    Image("bell", bundle: .module)
-                        .resizable()
-                        .frame(width: 18, height: 18)
-                        .onTapGesture {
-                            store.send(.pushToNotificationHistory)
-                        }
+                        .frame(width: 24, height: 24)
+                        .foregroundStyle(Color.Kuring.gray400)
                 }
-                .padding(.horizontal, 6)
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    store.send(.pushToNotificationHistory)
+                } label: {
+                    Image("bell", bundle: .module)
+                        .renderingMode(.template)
+                        .foregroundStyle(Color.Kuring.gray400)
+                }
+            }
+        }
+        .onAppear {
+            guard !hasShownClubsOnboarding else {
+                return
+            }
+            
+            Task {
+                try await Task.sleep(for: .seconds(0.6))
+                
+                if !store.needsOnboarding {
+                    withAnimation(.easeOut(duration: 0.4)) {
+                        store.needsOnboarding = true
+                    }
+                }
             }
         }
     }

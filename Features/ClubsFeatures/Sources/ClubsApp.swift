@@ -18,7 +18,7 @@ public struct ClubsAppFeature {
         /// 네비게이션
         public var path = StackState<Path.State>()
         
-        public var didFinishOnboarding: Bool = false
+        public var needsOnboarding: Bool = false
         
         public init(
             path: StackState<Path.State> = StackState<Path.State>()

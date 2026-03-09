@@ -18,14 +18,12 @@ public struct ClubsApp: View {
     
     public var body: some View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
-            Group {
-                if !store.didFinishOnboarding {
+            ClubsContentView(store: store)
+                .navigationTitle("동아리")
+                .navigationBarTitleDisplayMode(.inline)
+                .fullScreenCover(isPresented: $store.needsOnboarding) {
                     ClubsOnboardingView(store: store)
-                        .transition(.move(edge: .leading))
-                } else {
-                    ClubsContentView(store: store)
                 }
-            }
         } destination: { store in
             switch store.state {
             case .detail:

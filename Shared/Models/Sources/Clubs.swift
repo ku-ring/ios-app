@@ -9,43 +9,34 @@ import Foundation
 
 public struct ClubsResult: Codable, Equatable {
     public var clubs: [Club]
-    public let cursor: String?
-    public let hasNext: Bool
-    public let totalCount: Int
     
     public init(
-        clubs: [Club],
-        cursor: String?,
-        hasNext: Bool,
-        totalCount: Int
+        clubs: [Club]
     ) {
         self.clubs = clubs
-        self.cursor = cursor
-        self.hasNext = hasNext
-        self.totalCount = totalCount
     }
 }
 
 public struct Club: Codable, Equatable {
     public let id: Int
     public let name, summary: String
-    public let iconImageUrl: String
+    public let iconImageUrl: String?
     public let category, division: String
     public var isSubscribed: Bool
     public let subscriberCount: Int
-    public let recruitStartDate, recruitEndDate: String
+    public let recruitStartDate, recruitEndDate: String?
     
     public init(
         id: Int,
         name: String,
         summary: String,
-        iconImageUrl: String,
+        iconImageUrl: String?,
         category: String,
         division: String,
         isSubscribed: Bool,
         subscriberCount: Int,
-        recruitStartDate: String,
-        recruitEndDate: String
+        recruitStartDate: String?,
+        recruitEndDate: String?
     ) {
         self.id = id
         self.name = name
@@ -80,12 +71,10 @@ public struct ClubDetail: Equatable, Codable {
     public let name, summary, category, division: String
     public let subscriberCount: Int
     public let isSubscribed: Bool
-    public let instagramUrl, youtubeUrl, etcUrl: String?
-    public let description, qualifications, recruitStartAt: String
+    public let instagramUrl: String
+    public let youtubeUrl, etcUrl, description, qualifications: String?
     public let recruitmentStatus: RecruitmentStatus
-    public let recruitEndAt: String
-    public let applyUrl: String
-    public let posterImageUrl: String
+    public let recruitStartAt, recruitEndAt, applyUrl, posterImageUrl: String?
     public let location: ClubLocation
     
     public init(
@@ -96,16 +85,16 @@ public struct ClubDetail: Equatable, Codable {
         division: String,
         subscriberCount: Int,
         isSubscribed: Bool,
-        instagramUrl: String?,
+        instagramUrl: String,
         youtubeUrl: String?,
         etcUrl: String?,
-        description: String,
-        qualifications: String,
+        description: String?,
+        qualifications: String?,
         recruitmentStatus: RecruitmentStatus,
-        recruitStartAt: String,
-        recruitEndAt: String,
-        applyUrl: String,
-        posterImageUrl: String,
+        recruitStartAt: String?,
+        recruitEndAt: String?,
+        applyUrl: String?,
+        posterImageUrl: String?,
         location: ClubLocation
     ) {
         self.id = id
@@ -151,13 +140,13 @@ public enum RecruitmentStatus: String, Codable {
 
 public struct ClubLocation: Equatable, Codable {
     public let building, room: String
-    public let lon, lat: Double
+    public let lon, lat: Double?
     
     public init(
         building: String,
         room: String,
-        lon: Double,
-        lat: Double
+        lon: Double?,
+        lat: Double?
     ) {
         self.building = building
         self.room = room

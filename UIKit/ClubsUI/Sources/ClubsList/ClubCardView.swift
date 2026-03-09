@@ -24,7 +24,7 @@ struct ClubCardView: View {
                 .frame(width: 84)
                 .overlay(alignment: .center) {
                     AsyncImage(
-                        url: URL(string: club.iconImageUrl)!)
+                        url: URL(string: club.iconImageUrl ?? ""))
                     { image in
                         image
                             .resizable()
@@ -90,8 +90,10 @@ struct ClubCardView: View {
                         .foregroundStyle(Color.Kuring.caption1)
                     
                     Image(club.isSubscribed ? "star-fill" : "star", bundle: .module)
+                        .renderingMode(.template)
                         .resizable()
-                        .frame(width: 16, height: 16, alignment: .center)
+                        .frame(width: 20, height: 20)
+                        .foregroundStyle(Color.Kuring.gray300)
                         .onTapGesture {
                             onBookmarkTap()
                         }
@@ -128,7 +130,7 @@ struct ClubCardView: View {
     }
     
     private func ddayText(for club: Club) -> (text: String, isUrgent: Bool) {
-        guard let end = parseDate(club.recruitEndDate) else {
+        guard let end = parseDate(club.recruitEndDate ?? "") else {
             return ("상시모집", false)
         }
 

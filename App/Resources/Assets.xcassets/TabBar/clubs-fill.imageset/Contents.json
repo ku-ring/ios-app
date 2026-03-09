@@ -1,19 +1,18 @@
 {
   "images" : [
     {
-      "filename" : "clubs-fill@1.png",
-      "idiom" : "universal",
-      "scale" : "1x"
+      "filename" : "clubs-fill.svg",
+      "idiom" : "universal"
     },
     {
-      "filename" : "clubs-fill@2.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "clubs-fill@3.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "clubs_1.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

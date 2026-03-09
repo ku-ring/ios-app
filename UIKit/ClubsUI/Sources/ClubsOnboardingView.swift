@@ -13,6 +13,7 @@ import ComposableArchitecture
 
 public struct ClubsOnboardingView: View {
     @Bindable var store: StoreOf<ClubsAppFeature>
+    @AppStorage("hasShownClubsOnboarding") private var hasShownClubsOnboarding: Bool = false
     
     public init(store: StoreOf<ClubsAppFeature>) {
         self.store = store
@@ -40,7 +41,8 @@ public struct ClubsOnboardingView: View {
                 }, set: { _ in })
             ) {
                 withAnimation(.easeOut(duration: 0.4)) {
-                    store.didFinishOnboarding = true
+                    store.needsOnboarding = false
+                    hasShownClubsOnboarding = true
                 }
             }
             .padding(.top, 16)
@@ -52,11 +54,12 @@ public struct ClubsOnboardingView: View {
                 .onTapGesture {
                     withAnimation(.easeOut(duration: 0.4)) {
                         store.clubsList.selectedClubType = .all
-                        store.didFinishOnboarding = true
+                        store.needsOnboarding = false
+                        hasShownClubsOnboarding = true
                     }
                 }
         }
-        .padding(20)
+        .padding(28)
         .ignoresSafeArea(.keyboard)
         .background(Color.Kuring.bg)
     }
