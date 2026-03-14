@@ -42,15 +42,16 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         guard let userInfo = userInfo as? [String: Any] else { return [] }
         do {
             let _ = try Message(userInfo: userInfo)
-            
-            guard let type = userInfo["type"] as? String else {
+
+            guard let messageType = (userInfo["messageType"] ?? userInfo["type"]) as? String else {
                 return [.banner, .sound]
             }
+            
             let title = notification.request.content.title
             let body = notification.request.content.body
 
             @Dependency(\.notificationHistory) var notificationHistoryDB
-            try notificationHistoryDB.add(NotificationHistoryEntity(title: title, body: body, type: type))
+            try notificationHistoryDB.add(NotificationHistoryEntity(title: title, body: body, type: messageType))
             
             return [.banner, .sound]
         } catch {
@@ -88,7 +89,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // Kuring.application(application, didReceiveRemoteNotification: userInfo)
         guard let userInfo = userInfo as? [String: Any] else { return .failed }
         do {
-            if let type = userInfo["type"] as? String,
+            if let type = userInfo["messageType"] as? String,
                let aps = userInfo["aps"] as? [String: Any],
                let alert = aps["alert"] as? [String: Any],
                let title = alert["title"] as? String,

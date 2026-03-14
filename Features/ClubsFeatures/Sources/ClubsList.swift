@@ -156,12 +156,19 @@ public struct ClubsListFeature {
                         await send(.subscribeToClubResponse(.failure(.error(error.localizedDescription)), id))
                     }
                 }
-            case .subscribeToClubResponse(_, let id):
-                if let index = state.originalClubs?.clubs.firstIndex(where: { $0.id == id }) {
-                    state.originalClubs?.clubs[index].isSubscribed.toggle()
-                }
-                if let index = state.filteredClubs?.clubs.firstIndex(where: { $0.id == id }) {
-                    state.filteredClubs?.clubs[index].isSubscribed.toggle()
+            case .subscribeToClubResponse(let result, let id):
+                switch result {
+                case .success:
+                    if let clubs = state.originalClubs?.clubs, let index = clubs.firstIndex(where: { $0.id == id }) {
+                        state.originalClubs?.clubs[index].subscriberCount = clubs[index].subscriberCount + (clubs[index].isSubscribed ? -1 : 1)
+                        state.originalClubs?.clubs[index].isSubscribed.toggle()
+                    }
+                    if let clubs = state.filteredClubs?.clubs, let index = clubs.firstIndex(where: { $0.id == id }) {
+                        state.filteredClubs?.clubs[index].subscriberCount = clubs[index].subscriberCount + (clubs[index].isSubscribed ? -1 : 1)
+                        state.filteredClubs?.clubs[index].isSubscribed.toggle()
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
                 return .none
             case .showNeedsLoginAlert:

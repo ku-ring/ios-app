@@ -23,7 +23,7 @@ public struct Club: Codable, Equatable {
     public let iconImageUrl: String?
     public let category, division: String
     public var isSubscribed: Bool
-    public let subscriberCount: Int
+    public var subscriberCount: Int
     public let recruitStartDate, recruitEndDate: String?
     
     public init(
@@ -69,7 +69,7 @@ public struct Club: Codable, Equatable {
 public struct ClubDetail: Equatable, Codable {
     public let id: Int
     public let name, summary, category, division: String
-    public let subscriberCount: Int
+    public var subscriberCount: Int
     public let isSubscribed: Bool
     public let instagramUrl: String
     public let youtubeUrl, etcUrl, description, qualifications: String?

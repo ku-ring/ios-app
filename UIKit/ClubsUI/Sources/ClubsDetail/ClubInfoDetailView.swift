@@ -202,10 +202,10 @@ private extension ClubInfoDetailView {
 
                 let isSubscribed = store.club.isSubscribed
                 Image(isSubscribed ? "star-fill" : "star", bundle: .module)
-                    .renderingMode(.template)
+                    .renderingMode(isSubscribed ? .original : .template)
                     .resizable()
                     .frame(width: 24, height: 24)
-                    .foregroundStyle(isSubscribed ? .clear : Color.Kuring.gray400)
+                    .foregroundStyle(Color.Kuring.gray300)
                     .onTapGesture {
                         store.send(
                             isLoggedIn

@@ -86,8 +86,14 @@ public struct ClubsDetailFeature {
                         await send(.subscribeToClubResponse(.failure(.error(error.localizedDescription))))
                     }
                 }
-            case .subscribeToClubResponse:
-                state.club.isSubscribed.toggle()
+            case .subscribeToClubResponse(let result):
+                switch result {
+                case .success:
+                    state.club.subscriberCount = state.club.subscriberCount + (state.club.isSubscribed ? -1 : 1)
+                    state.club.isSubscribed.toggle()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
                 return .none
             case .showNeedsLoginAlert:
                 state.alert = AlertState {
