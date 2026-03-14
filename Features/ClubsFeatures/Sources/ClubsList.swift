@@ -90,7 +90,7 @@ public struct ClubsListFeature {
                 var clubs = state.originalClubs
                 
                 if !state.selectedCategories.isEmpty {
-                    let selectedNames = Set(state.selectedCategories.map { $0.koreanName })
+                    let selectedNames = Set(state.selectedCategories.map { $0.code })
                     let filtered = clubs?.clubs.filter { selectedNames.contains($0.division) }
                     clubs?.clubs = filtered ?? []
                 }
