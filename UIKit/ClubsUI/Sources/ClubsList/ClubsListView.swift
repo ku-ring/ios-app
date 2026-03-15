@@ -35,7 +35,7 @@ struct ClubsListView: View {
             VStack(spacing: 0) {
                 sortByView
 
-                if store.filteredClubs?.clubs.count == 0 {
+                if (store.filteredClubs?.clubs.count ?? 0) == 0 {
                     clubsEmptyView
                 } else {
                     clubsList

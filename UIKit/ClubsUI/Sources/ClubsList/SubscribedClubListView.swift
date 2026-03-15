@@ -26,7 +26,7 @@ public struct SubscribedClubListView: View {
             VStack(spacing: 0) {
                 sortByView
 
-                if store.filteredClubs?.clubs.count == 0 {
+                if (store.filteredClubs?.clubs.count ?? 0) == 0 {
                     clubsEmptyView
                 } else {
                     clubsList
@@ -94,7 +94,7 @@ private extension SubscribedClubListView {
                 .resizable()
                 .frame(width: 57, height: 57)
 
-            Text("등록된 동아리가 없어요!")
+            Text("구독된 동아리가 없어요!")
                 .font(.system(size: 15, weight: .medium))
                 .foregroundStyle(Color.Kuring.caption1)
         }

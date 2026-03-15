@@ -193,6 +193,16 @@ public struct ClubsListFeature {
             case .alert(.dismiss):
                 state.alert = nil
                 return .none
+            case .binding(\.selectedClubType):
+                let clubs = state.originalClubs?.clubs
+                guard state.selectedClubType != .all else {
+                    state.filteredClubs?.clubs = clubs ?? []
+                    return .none
+                }
+                
+                let filtered = clubs?.filter { ClubsType(rawValue: $0.category) == state.selectedClubType }
+                state.filteredClubs?.clubs = filtered ?? []
+                return .none
             case .binding:
                 return .none
             default:
