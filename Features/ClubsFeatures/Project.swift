@@ -10,6 +10,7 @@ let project = Project.make(
         .project(target: "Caches", path: "../../Shared/Caches"),
         .project(target: "Models", path: "../../Shared/Models"),
         .project(target: "Networks", path: "../../Shared/Networks"),
-        .project(target: "LoginFeatures", path: "../LoginFeatures")
+        .project(target: "LoginFeatures", path: "../LoginFeatures"),
+        .project(target: "SubscriptionFeatures", path: "../SubscriptionFeatures"),
     ]
 )
