@@ -10,7 +10,19 @@ import Models
 
 fileprivate let appContext: ModelContext = {
     do {
-        let url = URL.applicationSupportDirectory.appending(path: "Model.sqlite")
+        #if DEBUG
+        let groupID = "group.com.kuring.shared.debug"
+        #else
+        let groupID = "group.com.kuring.shared"
+        #endif
+        
+        guard let containerURL = FileManager.default.containerURL(
+            forSecurityApplicationGroupIdentifier: groupID
+        ) else {
+            fatalError("App Group container not found")
+        }
+        
+        let url = containerURL.appending(path: "Model.sqlite")
         let config = ModelConfiguration(url: url)
         
         let container = try ModelContainer(

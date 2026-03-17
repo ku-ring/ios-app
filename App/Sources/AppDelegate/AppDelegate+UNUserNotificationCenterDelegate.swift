@@ -38,21 +38,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         Messaging.messaging().appDidReceiveMessage(userInfo)
         
         // TODO: 로컬 알림을 띄워줘야 하는가?
-        
         guard let userInfo = userInfo as? [String: Any] else { return [] }
         do {
             let _ = try Message(userInfo: userInfo)
-
-            guard let messageType = (userInfo["messageType"] ?? userInfo["type"]) as? String else {
-                return [.banner, .sound]
-            }
-            
-            let title = notification.request.content.title
-            let body = notification.request.content.body
-
-            @Dependency(\.notificationHistory) var notificationHistoryDB
-            try notificationHistoryDB.add(NotificationHistoryEntity(title: title, body: body, type: messageType))
-            
             return [.banner, .sound]
         } catch {
             // 커스텀 알림 수신 미동의 인데 커스텀 알림이 온 경우
@@ -89,16 +77,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // Kuring.application(application, didReceiveRemoteNotification: userInfo)
         guard let userInfo = userInfo as? [String: Any] else { return .failed }
         do {
-            if let type = userInfo["messageType"] as? String,
-               let aps = userInfo["aps"] as? [String: Any],
-               let alert = aps["alert"] as? [String: Any],
-               let title = alert["title"] as? String,
-               let body = alert["body"] as? String
-            {
-                @Dependency(\.notificationHistory) var notificationHistoryDB
-                try notificationHistoryDB.add(NotificationHistoryEntity(title: title, body: body, type: type))
-            }
-            
             try onTapRemoteNotification(with: userInfo)
             return .newData
         } catch {

@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>aps-environment</key>
-	<string>production</string>
+	<string>development</string>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.kuring.shared</string>
+		<string>group.com.kuring.shared.debug</string>
 	</array>
 </dict>
 </plist>

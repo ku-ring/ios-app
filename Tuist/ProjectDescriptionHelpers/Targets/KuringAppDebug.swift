@@ -41,7 +41,7 @@ extension Target {
             "Resources/**",
             "Configurations/**"
         ],
-        entitlements: "KuringApp.entitlements",
+        entitlements: "KuringAppDebug.entitlements",
         dependencies: [
             .external(name: "FirebaseMessaging"),
             .project(target: "PushNotifications", path: "../Shared/PushNotifications"),
@@ -56,7 +56,8 @@ extension Target {
             .ui("CommonUI"),
             .ui("OnboardingUI"),
             .ui("LoginUI"),
-            .ui("AcademicCalendarUI")
+            .ui("AcademicCalendarUI"),
+            .target(name: "NotificationServiceExtension")
         ],
         settings: .settings(
             base: [
