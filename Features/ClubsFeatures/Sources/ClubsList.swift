@@ -88,9 +88,6 @@ public struct ClubsListFeature {
         Reduce { state, action in
             switch action {
             case .onAppear:
-                guard state.originalClubs == nil else {
-                    return .none
-                }
                 return .concatenate([
                     .send(.getClubsList),
                     .send(.getClubDivisions)
@@ -135,11 +132,8 @@ public struct ClubsListFeature {
                 switch result {
                 case .success(let clubs):
                     state.originalClubs = clubs
-                    guard state.filteredClubs == nil else {
-                        return .none
-                    }
                     state.filteredClubs = clubs
-                    return .none
+                    return .send(.applyFiltersAndSort)
                 case .failure(let error):
                     print("Clubs error: \(error)")
                     return .none
