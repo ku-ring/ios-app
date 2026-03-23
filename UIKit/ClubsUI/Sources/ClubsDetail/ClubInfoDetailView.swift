@@ -69,8 +69,10 @@ public struct ClubInfoDetailView: View {
                 Divider()
                     .padding(.top, 24)
 
-                descriptionSection
-                    .padding(.top, 24)
+                if let description = store.clubDetail?.description {
+                    descriptionSection(description: description)
+                        .padding(.top, 24)
+                }
 
                 qualificationsSection
                     .padding(.top, 24)
@@ -139,16 +141,16 @@ private extension ClubInfoDetailView {
                 }
             }
 
-            locationLinkView
-
-            if let detail = store.clubDetail {
-                mapPreview(detail)
+            if let detail = store.clubDetail, let location = detail.location {
+                locationLinkView(location)
+                mapPreview(location)
             }
         }
     }
 
-    var descriptionSection: some View {
-        Text(store.clubDetail?.description ?? "")
+    @ViewBuilder
+    func descriptionSection(description: String) -> some View {
+        Text(description)
             .font(.system(size: 16, weight: .medium))
             .foregroundStyle(Color.Kuring.body)
     }
@@ -244,14 +246,15 @@ private extension ClubInfoDetailView {
         }
     }
 
-    var locationLinkView: some View {
+    @ViewBuilder
+    func locationLinkView(_ loc: ClubLocation) -> some View {
         HStack(spacing: 4) {
             Image("location-icon", bundle: .module)
                 .resizable()
                 .frame(width: 24, height: 24)
 
             var string: AttributedString {
-                var temp = AttributedString("위치")
+                var temp = AttributedString("\(loc.building) \(loc.room)")
                 if let loc = store.clubDetail?.location {
                     temp.link = URL(string: "nmap://route/walk?dlat=\(loc.lat ?? 37.541875)&dlng=\(loc.lon ?? 127.077966)&dname=\(store.club.name)")!
                 }
@@ -267,11 +270,12 @@ private extension ClubInfoDetailView {
         }
     }
 
-    func mapPreview(_ detail: ClubDetail) -> some View {
+    
+    func mapPreview(_ loc: ClubLocation) -> some View {
         let defaultCoordinate = CLLocationCoordinate2D(latitude: 37.541875, longitude: 127.077966)
         let coordinate = CLLocationCoordinate2D(
-            latitude: detail.location.lat ?? defaultCoordinate.latitude,
-            longitude: detail.location.lon ?? defaultCoordinate.longitude
+            latitude: loc.lat ?? defaultCoordinate.latitude,
+            longitude: loc.lon ?? defaultCoordinate.longitude
         )
         return Map(position: .constant(
             .region(.init(center: coordinate, latitudinalMeters: 400, longitudinalMeters: 400))
