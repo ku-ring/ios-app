@@ -75,7 +75,7 @@ public struct ClubDetail: Equatable, Codable {
     public let youtubeUrl, etcUrl, description, qualifications: String?
     public let recruitmentStatus: RecruitmentStatus
     public let recruitStartAt, recruitEndAt, applyUrl, posterImageUrl: String?
-    public let location: ClubLocation
+    public let location: ClubLocation?
     
     public init(
         id: Int,
@@ -95,7 +95,7 @@ public struct ClubDetail: Equatable, Codable {
         recruitEndAt: String?,
         applyUrl: String?,
         posterImageUrl: String?,
-        location: ClubLocation
+        location: ClubLocation?
     ) {
         self.id = id
         self.name = name
@@ -164,10 +164,10 @@ public struct SubscribeToClubRequest: Encodable {
     }
 }
 
-public struct ClubBookmarkCountResponse: Codable, Equatable {
-    public let bookmarkCount: Int
+public struct ClubSubscriptionCountResponse: Codable, Equatable {
+    public let subscriptionCount: Int
     
-    public init(bookmarkCount: Int) {
-        self.bookmarkCount = bookmarkCount
+    public init(subscriptionCount: Int) {
+        self.subscriptionCount = subscriptionCount
     }
 }

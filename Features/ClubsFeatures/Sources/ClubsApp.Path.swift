@@ -15,7 +15,7 @@ extension ClubsAppFeature {
         @ObservableState
         public enum State: Equatable {
             case detail(ClubsDetailFeature.State)
-            case subscribedClubsList(SubscribedClubsListFeature.State)
+            case subscribedClubsList
             /// 로그인
             case login(LoginAppFeature.State)
             case notificationHistory(NotificationHistoryFeature.State)
@@ -23,7 +23,7 @@ extension ClubsAppFeature {
         
         public enum Action: Equatable {
             case detail(ClubsDetailFeature.Action)
-            case subscribedClubsList(SubscribedClubsListFeature.Action)
+            case subscribedClubsList(ClubsListFeature.Action)
             /// 로그인
             case login(LoginAppFeature.Action)
             case notificationHistory(NotificationHistoryFeature.Action)
@@ -32,9 +32,6 @@ extension ClubsAppFeature {
         public var body: some ReducerOf<Self> {
             Scope(state: \.detail, action: \.detail) {
                 ClubsDetailFeature()
-            }
-            Scope(state: \.subscribedClubsList, action: \.subscribedClubsList) {
-                SubscribedClubsListFeature()
             }
             Scope(state: \.login, action: \.login) {
                 LoginAppFeature()

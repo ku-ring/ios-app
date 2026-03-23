@@ -37,7 +37,7 @@ public struct ClubsDetailFeature {
         
         /// 동아리 즐겨찾기
         case subscribeToClub(id: Int, isSubscribed: Bool)
-        case subscribeToClubResponse(Result<ClubBookmarkCountResponse, ClubsKuringError>)
+        case subscribeToClubResponse(Result<ClubSubscriptionCountResponse, ClubsKuringError>, Int)
         
         case showNeedsLoginAlert
         /// 알림 관련 액션
@@ -46,6 +46,7 @@ public struct ClubsDetailFeature {
         public enum Delegate: Equatable {
             /// 미로그인 시 로그인 화면으로 이동
             case pushToLogin
+            case subscriptionChanged(clubId: Int, isSubscribed: Bool)
         }
         
         /// 알러트
@@ -81,16 +82,20 @@ public struct ClubsDetailFeature {
                 return .run { send in
                     do {
                         let response = isSubscribed ? try await kuringLink.unsubscribeToClub(id) : try await kuringLink.subscribeToClub(id)
-                        await send(.subscribeToClubResponse(.success(response)))
+                        await send(.subscribeToClubResponse(.success(response), id))
                     } catch {
-                        await send(.subscribeToClubResponse(.failure(.error(error.localizedDescription))))
+                        await send(.subscribeToClubResponse(.failure(.error(error.localizedDescription)), id))
                     }
                 }
-            case .subscribeToClubResponse(let result):
+            case .subscribeToClubResponse(let result, let id):
                 switch result {
                 case .success:
-                    state.club.subscriberCount = state.club.subscriberCount + (state.club.isSubscribed ? -1 : 1)
+                    state.club.subscriberCount += state.club.isSubscribed ? -1 : 1
                     state.club.isSubscribed.toggle()
+                    return .send(.delegate(.subscriptionChanged(
+                        clubId: id,
+                        isSubscribed: state.club.isSubscribed
+                    )))
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

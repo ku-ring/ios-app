@@ -78,12 +78,22 @@ public struct ClubsAppFeature {
                     )
                 )
                 return .none
+            case .path(.element(id: _, action: .detail(.delegate(.subscriptionChanged(let clubId, let isSubscribed))))):
+                if let index = state.clubsList.originalClubs?.clubs.firstIndex(where: { $0.id == clubId }) {
+                    state.clubsList.originalClubs?.clubs[index].isSubscribed = isSubscribed
+                    state.clubsList.originalClubs?.clubs[index].subscriberCount += isSubscribed ? 1 : -1
+                }
+                if let index = state.clubsList.filteredClubs?.clubs.firstIndex(where: { $0.id == clubId }) {
+                    state.clubsList.filteredClubs?.clubs[index].isSubscribed = isSubscribed
+                    state.clubsList.filteredClubs?.clubs[index].subscriberCount += isSubscribed ? 1 : -1
+                }
+                return .none
             case .path(.element(id: _, action: .login(.delegate(.popToRoot)))):
                 state.path.removeAll()
                 return .none
             case .pushToSubscribedClubsList:
                 state.path.append(
-                    Path.State.subscribedClubsList(SubscribedClubsListFeature.State())
+                    Path.State.subscribedClubsList
                 )
                 return .none
             case .pushToNotificationHistory:

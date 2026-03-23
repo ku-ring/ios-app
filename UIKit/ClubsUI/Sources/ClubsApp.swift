@@ -24,34 +24,22 @@ public struct ClubsApp: View {
                 .fullScreenCover(isPresented: $store.needsOnboarding) {
                     ClubsOnboardingView(store: store)
                 }
-        } destination: { store in
-            switch store.state {
+        } destination: { [store] pathStore in
+            switch pathStore.state {
             case .detail:
-                if let store = store.scope(
-                    state: \.detail,
-                    action: \.detail
-                ) {
+                if let store = pathStore.scope(state: \.detail, action: \.detail) {
                     ClubInfoDetailView(store: store)
                 }
             case .subscribedClubsList:
-                if let store = store.scope(
-                    state: \.subscribedClubsList,
-                    action: \.subscribedClubsList
-                ) {
-                    SubscribedClubListView(store: store)
-                }
+                SubscribedClubListView(
+                    store: store.scope(state: \.clubsList, action: \.clubsList)
+                )
             case .login:
-                if let store = store.scope(
-                    state: \.login,
-                    action: \.login
-                ) {
+                if let store = pathStore.scope(state: \.login, action: \.login) {
                     LoginView(store: store)
                 }
             case .notificationHistory:
-                if let store = store.scope(
-                    state: \.notificationHistory,
-                    action: \.notificationHistory
-                ) {
+                if let store = pathStore.scope(state: \.notificationHistory, action: \.notificationHistory) {
                     NotificationHistoryView(store: store)
                 }
             }

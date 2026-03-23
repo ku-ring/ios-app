@@ -16,6 +16,7 @@ public struct ClubsListFeature {
     @ObservableState
     public struct State: Equatable {
         @Presents public var alert: AlertState<Action.Alert>?
+        @Presents public var subscribedAlert: AlertState<Action.Alert>?
         
         public var selectedClubType: ClubsType = .all
         /// 동아리 목록 (원본 데이터)
@@ -30,6 +31,8 @@ public struct ClubsListFeature {
         public var showDivisionSelectionSheet: Bool = false
         /// 동아리 목록 정렬 기준
         public var sortType: SortType = .deadline
+        /// 구독된 동아리 목록 정렬 기준
+        public var subscribedClubsSortType: SortType = .deadline
         
         public enum SortType: Equatable {
             case deadline
@@ -46,6 +49,7 @@ public struct ClubsListFeature {
         case delegate(Delegate)
         
         case changeSortBy(by: State.SortType)
+        case changeSubscribedClubSortBy(by: State.SortType)
         case applyFiltersAndSort
         case onAppear
         /// 동아리 소속 목록을 조회한다
@@ -58,11 +62,13 @@ public struct ClubsListFeature {
         
         /// 동아리 즐겨찾기
         case subscribeToClub(id: Int, isSubscribed: Bool)
-        case subscribeToClubResponse(Result<ClubBookmarkCountResponse, ClubsKuringError>, Int)
+        case subscribeToClubResponse(Result<ClubSubscriptionCountResponse, ClubsKuringError>, Int)
         
         case showNeedsLoginAlert
+        case showSubscribedNeedsLoginAlert
         /// 알림 관련 액션
         case alert(PresentationAction<Alert>)
+        case subscribedAlert(PresentationAction<Alert>)
         
         public enum Delegate: Equatable {
             /// 공지를 눌렀을 경우
@@ -82,6 +88,9 @@ public struct ClubsListFeature {
         Reduce { state, action in
             switch action {
             case .onAppear:
+                guard state.originalClubs == nil else {
+                    return .none
+                }
                 return .concatenate([
                     .send(.getClubsList),
                     .send(.getClubDivisions)
@@ -110,6 +119,9 @@ public struct ClubsListFeature {
             case .changeSortBy(let by):
                 state.sortType = by
                 return .send(.applyFiltersAndSort)
+            case .changeSubscribedClubSortBy(let by):
+                state.subscribedClubsSortType = by
+                return .none
             case .getClubsList:
                 return .run { send in
                     do {
@@ -123,6 +135,9 @@ public struct ClubsListFeature {
                 switch result {
                 case .success(let clubs):
                     state.originalClubs = clubs
+                    guard state.filteredClubs == nil else {
+                        return .none
+                    }
                     state.filteredClubs = clubs
                     return .none
                 case .failure(let error):
@@ -160,11 +175,11 @@ public struct ClubsListFeature {
                 switch result {
                 case .success:
                     if let clubs = state.originalClubs?.clubs, let index = clubs.firstIndex(where: { $0.id == id }) {
-                        state.originalClubs?.clubs[index].subscriberCount = clubs[index].subscriberCount + (clubs[index].isSubscribed ? -1 : 1)
+                        state.originalClubs?.clubs[index].subscriberCount += clubs[index].isSubscribed ? -1 : 1
                         state.originalClubs?.clubs[index].isSubscribed.toggle()
                     }
                     if let clubs = state.filteredClubs?.clubs, let index = clubs.firstIndex(where: { $0.id == id }) {
-                        state.filteredClubs?.clubs[index].subscriberCount = clubs[index].subscriberCount + (clubs[index].isSubscribed ? -1 : 1)
+                        state.filteredClubs?.clubs[index].subscriberCount += clubs[index].isSubscribed ? -1 : 1
                         state.filteredClubs?.clubs[index].isSubscribed.toggle()
                     }
                 case .failure(let error):
@@ -187,11 +202,33 @@ public struct ClubsListFeature {
                     }
                 }
                 return .none
+            case .showSubscribedNeedsLoginAlert:
+                state.subscribedAlert = AlertState {
+                    TextState("로그인이 필요한 서비스에요")
+                } actions: {
+                    ButtonState(role: .cancel) {
+                        TextState("취소")
+                    }
+                    
+                    ButtonState(
+                        role: .destructive,
+                        action: .pushToLogin
+                    ) {
+                        TextState("로그인하기")
+                    }
+                }
+                return .none
             case .alert(.presented(.pushToLogin)):
                 state.alert = nil
                 return .send(.delegate(.pushToLogin))
             case .alert(.dismiss):
                 state.alert = nil
+                return .none
+            case .subscribedAlert(.presented(.pushToLogin)):
+                state.subscribedAlert = nil
+                return .send(.delegate(.pushToLogin))
+            case .subscribedAlert(.dismiss):
+                state.subscribedAlert = nil
                 return .none
             case .binding(\.selectedClubType):
                 let clubs = state.originalClubs?.clubs
