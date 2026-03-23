@@ -41,6 +41,10 @@ struct ClubsListView: View {
                     clubsList
                 }
             }
+            .padding(.bottom, 20)
+        }
+        .refreshable {
+            store.send(.getClubsList)
         }
         .padding(.top, 8)
         .onAppear {
