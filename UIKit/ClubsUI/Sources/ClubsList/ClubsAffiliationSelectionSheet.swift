@@ -16,48 +16,45 @@ struct ClubsAffiliationSelectionSheet: View {
     @Binding var selectedDivisions: Set<Division>
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            Text("동아리 소속 선택")
-                .font(.system(size: 18, weight: .bold))
+        GeometryReader { proxy in
+            VStack(alignment: .leading, spacing: 24) {
+                Text("동아리 소속 선택")
+                    .font(.system(size: 18, weight: .bold))
 
-            ScrollView {
-                FlowLayout(spacing: 10) {
-                    ForEach(division, id: \.self) { division in
-                        tagButton(
-                            title: division.koreanName,
-                            isSelected: selectedDivisions.contains(division)
-                        ) {
-                            if selectedDivisions.contains(division) {
-                                selectedDivisions.remove(division)
-                            } else {
-                                selectedDivisions.insert(division)
+                ScrollView {
+                    FlowLayout(spacing: 10) {
+                        ForEach(division, id: \.self) { division in
+                            tagButton(
+                                title: division.koreanName,
+                                isSelected: selectedDivisions.contains(division)
+                            ) {
+                                if selectedDivisions.contains(division) {
+                                    selectedDivisions.remove(division)
+                                } else {
+                                    selectedDivisions.insert(division)
+                                }
                             }
                         }
                     }
                 }
+
+                bottomButtons(totalWidth: proxy.size.width - 40)
             }
-
-            Spacer()
-
-            bottomButtons
+            .padding(.horizontal, 20)
+            .padding(.top, 24)
+            .padding(.bottom, 12)
+            .background(Color.Kuring.bg)
         }
-        .padding(.horizontal, 20)
-        .padding(.top, 24)
-        .padding(.bottom, 12)
-        .background(Color.Kuring.bg)
     }
 }
 
 // MARK: - Subviews
 private extension ClubsAffiliationSelectionSheet {
     
-    var bottomButtons: some View {
-        GeometryReader { proxy in
-            HStack(alignment: .bottom, spacing: 16) {
-                resetButton(width: (proxy.size.width - 40 - 16) / 3)
-                confirmButton
-            }
-            .frame(maxHeight: .infinity, alignment: .bottom)
+    func bottomButtons(totalWidth: CGFloat) -> some View {
+        HStack(alignment: .bottom, spacing: 16) {
+            resetButton(width: (totalWidth - 40 - 16) / 3)
+            confirmButton
         }
         .frame(height: 56)
     }
@@ -65,6 +62,7 @@ private extension ClubsAffiliationSelectionSheet {
     func resetButton(width: CGFloat) -> some View {
         Button {
             selectedDivisions.removeAll()
+            dismiss()
         } label: {
             Text("초기화")
                 .font(.system(size: 16, weight: .semibold))

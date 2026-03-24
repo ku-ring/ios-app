@@ -89,8 +89,8 @@ public struct ClubsDetailFeature {
                 }
             case .subscribeToClubResponse(let result, let id):
                 switch result {
-                case .success:
-                    state.club.subscriberCount += state.club.isSubscribed ? -1 : 1
+                case .success(let response):
+                    state.club.subscriberCount = response.subscriptionCount
                     state.club.isSubscribed.toggle()
                     return .send(.delegate(.subscriptionChanged(
                         clubId: id,

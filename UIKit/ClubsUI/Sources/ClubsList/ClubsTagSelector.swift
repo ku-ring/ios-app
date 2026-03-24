@@ -21,9 +21,9 @@ public struct ClubsTagSelector: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
                 // 초기화 버튼 (선택된 게 있을 때만)
-                if !store.selectedCategories.isEmpty {
+                if !store.selectedDivisions.isEmpty {
                     Button {
-                        store.selectedCategories.removeAll()
+                        store.selectedDivisions.removeAll()
                         store.send(.applyFiltersAndSort)
                     } label: {
                         Image("refresh-cw", bundle: .module)
@@ -49,7 +49,7 @@ public struct ClubsTagSelector: View {
                 ForEach(store.clubDivisions.divisions, id: \.self) { division in
                     ClubsTag(
                         division: division,
-                        isSelected: store.selectedCategories.contains(division)
+                        isSelected: store.selectedDivisions.contains(division)
                     ) {
                         toggle(division)
                         store.send(.applyFiltersAndSort)
@@ -83,10 +83,10 @@ public struct ClubsTagSelector: View {
         var transaction = Transaction()
         transaction.disablesAnimations = true
         withTransaction(transaction) {
-            if store.selectedCategories.contains(division) {
-                store.selectedCategories.remove(division)
+            if store.selectedDivisions.contains(division) {
+                store.selectedDivisions.remove(division)
             } else {
-                store.selectedCategories.insert(division)
+                store.selectedDivisions.insert(division)
             }
         }
     }

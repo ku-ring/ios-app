@@ -26,7 +26,7 @@ public struct ClubsListFeature {
         /// 동아리 소속 목록
         public var clubDivisions: ClubDivisions = .init(divisions: ClubDivisions.allCases)
         /// 선택된 동아리 카테고리
-        public var selectedCategories: Set<Division> = []
+        public var selectedDivisions: Set<Division> = []
         /// 동아리 카테고리 바텀시트
         public var showDivisionSelectionSheet: Bool = false
         /// 동아리 목록 정렬 기준
@@ -95,8 +95,8 @@ public struct ClubsListFeature {
             case .applyFiltersAndSort:
                 var clubs = state.originalClubs
                 
-                if !state.selectedCategories.isEmpty {
-                    let selectedNames = Set(state.selectedCategories.map { $0.code })
+                if !state.selectedDivisions.isEmpty {
+                    let selectedNames = Set(state.selectedDivisions.map { $0.code })
                     let filtered = clubs?.clubs.filter { selectedNames.contains($0.division) }
                     clubs?.clubs = filtered ?? []
                 }
@@ -167,13 +167,13 @@ public struct ClubsListFeature {
                 }
             case .subscribeToClubResponse(let result, let id):
                 switch result {
-                case .success:
+                case .success(let response):
                     if let clubs = state.originalClubs?.clubs, let index = clubs.firstIndex(where: { $0.id == id }) {
-                        state.originalClubs?.clubs[index].subscriberCount += clubs[index].isSubscribed ? -1 : 1
+                        state.originalClubs?.clubs[index].subscriberCount = response.subscriptionCount
                         state.originalClubs?.clubs[index].isSubscribed.toggle()
                     }
                     if let clubs = state.filteredClubs?.clubs, let index = clubs.firstIndex(where: { $0.id == id }) {
-                        state.filteredClubs?.clubs[index].subscriberCount += clubs[index].isSubscribed ? -1 : 1
+                        state.filteredClubs?.clubs[index].subscriberCount = response.subscriptionCount
                         state.filteredClubs?.clubs[index].isSubscribed.toggle()
                     }
                 case .failure(let error):

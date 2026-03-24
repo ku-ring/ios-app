@@ -50,14 +50,16 @@ struct ClubsListView: View {
         .onAppear {
             store.send(.onAppear)
         }
-        .sheet(isPresented: $store.showDivisionSelectionSheet) {
+        .sheet(isPresented: $store.showDivisionSelectionSheet, onDismiss: {
+            store.send(.applyFiltersAndSort)
+        }, content: {
             ClubsAffiliationSelectionSheet(
                 division: store.clubDivisions.divisions,
-                selectedDivisions: $store.selectedCategories
+                selectedDivisions: $store.selectedDivisions
             )
             .presentationDetents([.medium, .large])
             .presentationDragIndicator(.visible)
-        }
+        })
         .alert(store: store.scope(state: \.$alert, action: \.alert))
     }
 }
