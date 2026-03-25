@@ -559,8 +559,7 @@ extension KuringLink: DependencyKey {
                         "Content-Type": "application/json",
                         "Authorization": "Bearer \(accessToken)",
                         "User-Token": fcmToken
-                    ],
-                    httpBody: SubscribeToClubRequest(id: id)
+                    ]
                 )
             
             return response.data
