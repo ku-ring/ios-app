@@ -131,7 +131,9 @@ private extension ClubInfoDetailView {
     var socialsAndMapSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             if let detail = store.clubDetail {
-                clubSocialsInfo(social: .instagram, link: detail.instagramUrl)
+                if let instagramUrl = detail.instagramUrl {
+                    clubSocialsInfo(social: .instagram, link: instagramUrl)
+                }
                 
                 if let youtubeUrl = detail.youtubeUrl {
                     clubSocialsInfo(social: .youtube, link: youtubeUrl)

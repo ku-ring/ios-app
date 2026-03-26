@@ -71,8 +71,7 @@ public struct ClubDetail: Equatable, Codable {
     public let name, summary, category, division: String
     public var subscriberCount: Int
     public let isSubscribed: Bool
-    public let instagramUrl: String
-    public let youtubeUrl, etcUrl, description, qualifications: String?
+    public let instagramUrl, youtubeUrl, etcUrl, description, qualifications: String?
     public let recruitmentStatus: RecruitmentStatus
     public let recruitStartAt, recruitEndAt, applyUrl, posterImageUrl: String?
     public let location: ClubLocation?
@@ -85,7 +84,7 @@ public struct ClubDetail: Equatable, Codable {
         division: String,
         subscriberCount: Int,
         isSubscribed: Bool,
-        instagramUrl: String,
+        instagramUrl: String?,
         youtubeUrl: String?,
         etcUrl: String?,
         description: String?,
