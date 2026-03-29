@@ -31,10 +31,9 @@ public struct ClubsContentView: View {
         .frame(maxWidth: .infinity)
         .background(Color.Kuring.bg)
         .overlay(alignment: .bottom) {
-            if hasShownClubsOnboarding {
+            if hasShownClubsOnboarding && !hasShownSnackbar {
                 ClubsIntroSnackbar()
                     .padding(.bottom, 11)
-                    .opacity(hasShownSnackbar ? 0.0 : 1.0)
                     .onAppear {
                         Task {
                             try await Task.sleep(for: .seconds(5))

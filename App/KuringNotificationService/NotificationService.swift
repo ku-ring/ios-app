@@ -19,22 +19,26 @@ class NotificationService: UNNotificationServiceExtension {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
-        if let bestAttemptContent = bestAttemptContent, let userInfo = bestAttemptContent.userInfo as? [String: Any] {
-            if let type = (userInfo["messageType"] ?? userInfo["type"]) as? String,
-               let aps = userInfo["aps"] as? [String: Any],
-               let alert = aps["alert"] as? [String: Any],
-               let title = alert["title"] as? String,
-               let body = alert["body"] as? String
-            {
-                @Dependency(\.notificationHistory) var notificationHistoryDB
-                do {
-                    try notificationHistoryDB.add(NotificationHistoryEntity(title: title, body: body, type: type))
-                } catch {
-                    print("NotifcationService Error:: \(error.localizedDescription)")
-                }
+        guard let bestAttemptContent else {
+            contentHandler(request.content)
+            return
+        }
+        
+        defer { contentHandler(bestAttemptContent) }
+        
+        let userInfo = bestAttemptContent.userInfo
+        if let type = (userInfo["messageType"] ?? userInfo["type"]) as? String,
+           let aps = userInfo["aps"] as? [String: Any],
+           let alert = aps["alert"] as? [String: Any],
+           let title = alert["title"] as? String,
+           let body = alert["body"] as? String
+        {
+            @Dependency(\.notificationHistory) var notificationHistoryDB
+            do {
+                try notificationHistoryDB.add(NotificationHistoryEntity(title: title, body: body, type: type))
+            } catch {
+                print("NotifcationService Error:: \(error.localizedDescription)")
             }
-            
-            contentHandler(bestAttemptContent)
         }
     }
     

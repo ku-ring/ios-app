@@ -34,14 +34,16 @@ extension Target {
                     name: "Debug",
                     settings: [
                         "PRODUCT_BUNDLE_IDENTIFIER": "com.kuring.service.debug.KuringNotificationService",
-                        "CODE_SIGN_ENTITLEMENTS": "KuringNotificationService/NotificationServiceDebug.entitlements"
+                        "CODE_SIGN_ENTITLEMENTS": "KuringNotificationService/NotificationServiceDebug.entitlements",
+                        "SWIFT_ACTIVE_COMPILATION_CONDITIONS": "DEBUG"
                     ]
                 ),
                 .release(
                     name: "Release",
                     settings: [
                         "PRODUCT_BUNDLE_IDENTIFIER": "com.kuring.service.KuringNotificationService",
-                        "CODE_SIGN_ENTITLEMENTS": "KuringNotificationService/NotificationService.entitlements"
+                        "CODE_SIGN_ENTITLEMENTS": "KuringNotificationService/NotificationService.entitlements",
+                        "SWIFT_ACTIVE_COMPILATION_CONDITIONS": "RELEASE"
                     ]
                 )
             ]

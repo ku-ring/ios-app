@@ -495,7 +495,6 @@ extension KuringLink: DependencyKey {
                     queryItems: queryItems,
                     httpHeaders: [
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer \(accessToken)",
                         "User-Token": fcmToken
                     ]
                 )
@@ -509,7 +508,6 @@ extension KuringLink: DependencyKey {
                     httpMethod: .get,
                     httpHeaders: [
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer \(accessToken)",
                         "User-Token": fcmToken
                     ]
                 )

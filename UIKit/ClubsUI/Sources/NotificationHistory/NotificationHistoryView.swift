@@ -43,14 +43,15 @@ public struct NotificationHistoryView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Image("settings", bundle: .module)
-                    .renderingMode(.template)
-                    .resizable()
-                    .frame(width: 26, height: 26)
-                    .foregroundStyle(Color.Kuring.gray600)
-                    .onTapGesture {
-                        store.send(.changeSubscriptionButtonTapped)
-                    }
+                Button {
+                    store.send(.changeSubscriptionButtonTapped)
+                } label: {
+                    Image("settings", bundle: .module)
+                        .renderingMode(.template)
+                        .resizable()
+                        .frame(width: 26, height: 26)
+                        .foregroundStyle(Color.Kuring.gray600)
+                }
             }
         }
         .task {

@@ -13,6 +13,8 @@ import ComposableArchitecture
 
 @Reducer
 public struct ClubsListFeature {
+    let formatter = DateFormatter()
+    
     @ObservableState
     public struct State: Equatable {
         @Presents public var alert: AlertState<Action.Alert>?
@@ -240,7 +242,6 @@ public struct ClubsListFeature {
     }
 
     private func parseDate(_ string: String) -> Date? {
-        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-ddTHH:mm:ss"
         return formatter.date(from: string)
     }

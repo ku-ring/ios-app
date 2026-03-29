@@ -14,6 +14,8 @@ public struct SubscribedClubListView: View {
     @Bindable var store: StoreOf<ClubsListFeature>
     @AppStorage("com.kuring.sdk.v2.token.accessToken") private var accessToken: String = ""
 
+    private let formatter = DateFormatter()
+    
     public init(store: StoreOf<ClubsListFeature>) {
         self.store = store
     }
@@ -42,7 +44,6 @@ public struct SubscribedClubListView: View {
     }
     
     private func parseDate(_ string: String) -> Date? {
-        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-ddTHH:mm:ss"
         return formatter.date(from: string)
     }

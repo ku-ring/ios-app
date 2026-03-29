@@ -33,6 +33,8 @@ public struct ClubInfoDetailView: View {
     @Bindable var store: StoreOf<ClubsDetailFeature>
     @AppStorage("com.kuring.sdk.v2.token.accessToken") private var accessToken: String = ""
 
+    private let formatter = DateFormatter()
+    
     public init(store: StoreOf<ClubsDetailFeature>) {
         self.store = store
     }
@@ -172,7 +174,7 @@ private extension ClubInfoDetailView {
     var applyButtonOverlay: some View {
         ActionButton(
             title: canApply ? "지원하기" : "모집 기간이 아니에요",
-            isActive: .constant(canApply)
+            isActive: .constant(canApply && store.clubDetail?.applyUrl != nil)
         ) {
             if let url = URL(string: store.clubDetail?.applyUrl ?? "") {
                 UIApplication.shared.open(url)
@@ -258,7 +260,8 @@ private extension ClubInfoDetailView {
             var string: AttributedString {
                 var temp = AttributedString("\(loc.building) \(loc.room)")
                 if let loc = store.clubDetail?.location {
-                    temp.link = URL(string: "nmap://route/walk?dlat=\(loc.lat ?? 37.541875)&dlng=\(loc.lon ?? 127.077966)&dname=\(store.club.name)")!
+                    let encodedName = store.club.name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? store.club.name
+                    temp.link = URL(string: "nmap://route/walk?dlat=\(loc.lat ?? 37.541875)&dlng=\(loc.lon ?? 127.077966)&dname=\(encodedName)")
                 }
                 temp.foregroundColor = .gray
                 temp.underlineStyle = .single
@@ -346,8 +349,7 @@ private extension ClubInfoDetailView {
     }
 
     private func parseDate(_ string: String) -> Date? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "yyyy-MM-ddTHH:mm:ss"
         return formatter.date(from: string)
     }
 

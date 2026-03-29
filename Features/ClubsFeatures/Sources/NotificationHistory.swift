@@ -52,9 +52,14 @@ public struct NotificationHistoryFeature {
                         sortBy: [SortDescriptor(\.receivedAt, order: .reverse)]
                     )
                     
-                    let notifications = try notificationHistory.fetch(descriptor)
-                    
-                    await send(.notificationsFetched(notifications))
+                    do {
+                        let notifications = try notificationHistory.fetch(descriptor)
+                        
+                        await send(.notificationsFetched(notifications))
+                    } catch {
+                        print("[NotificationHistory] 알림 내역 조회 실패: \(error)")
+                        await send(.notificationsFetched([]))
+                    }
                 }
             case let .notificationsFetched(notifications):
                 state.notifications = notifications
@@ -65,12 +70,17 @@ public struct NotificationHistoryFeature {
                         predicate: #Predicate { $0.id == id }
                     )
                     
-                    if let notification = try notificationHistory.fetch(descriptor).first {
-                        notification.isRead = true
-                        try notificationHistory.update(notification)
+                    do {
+                        if let notification = try notificationHistory.fetch(descriptor).first {
+                            notification.isRead = true
+                            try notificationHistory.update(notification)
+                        }
+                        
+                        await send(.fetchNotifications)
+                    } catch {
+                        print("[NotificationHistory] 읽음 처리 실패: \(error)")
+                       await send(.fetchNotifications)
                     }
-                    
-                    await send(.fetchNotifications)
                 }
             case let .deleteNotification(id):
                 return .run { send in

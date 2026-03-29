@@ -67,12 +67,13 @@ public struct ClubsTagSelector: View {
             )
             .frame(width: 59, height: 37, alignment: .trailing)
             .overlay(alignment: .trailing) {
-                Image(systemName: "chevron.down")
-                    .frame(width: 24, height: 24)
-                    .foregroundStyle(Color.Kuring.gray300)
-                    .onTapGesture {
-                        store.showDivisionSelectionSheet = true
-                    }
+                Button {
+                    store.showDivisionSelectionSheet = true
+                } label: {
+                    Image(systemName: "chevron.down")
+                        .frame(width: 24, height: 24)
+                        .foregroundStyle(Color.Kuring.gray300)
+                }
             }
         }
         .padding(.top, 16)
