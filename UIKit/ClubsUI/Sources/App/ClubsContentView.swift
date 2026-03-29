@@ -15,8 +15,6 @@ public struct ClubsContentView: View {
     @AppStorage("hasShownClubsOnboarding") private var hasShownClubsOnboarding: Bool = false
     @AppStorage("hasShownClubsIntroSnackbar") private var hasShownSnackbar: Bool = false
     
-    let isClubEmpty = false
-    
     public init(store: StoreOf<ClubsAppFeature>) {
         self.store = store
     }
@@ -39,7 +37,7 @@ public struct ClubsContentView: View {
                     .opacity(hasShownSnackbar ? 0.0 : 1.0)
                     .onAppear {
                         Task {
-                            try await Task.sleep(for: .seconds(3))
+                            try await Task.sleep(for: .seconds(5))
                             withAnimation {
                                 hasShownSnackbar = true
                             }

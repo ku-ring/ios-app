@@ -6,10 +6,7 @@
 //
 
 import UIKit
-import Caches
-import Models
 import Firebase
-import Dependencies
 import PushNotifications
 
 extension AppDelegate: UNUserNotificationCenterDelegate {

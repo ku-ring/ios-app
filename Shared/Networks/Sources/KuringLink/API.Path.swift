@@ -98,12 +98,10 @@ enum Path {
             return "api/v2/clubs"
         case .getClubDetail(let id):
             return "api/v2/clubs/\(id)"
-        case .subscribeToClub:
+        case .subscribeToClub, .getSubscribedClubs:
             return "api/v2/users/subscriptions/clubs"
         case .unsubscribeToClub(let id):
             return "api/v2/users/subscriptions/clubs/\(id)"
-        case .getSubscribedClubs:
-            return "api/v2/users/subscriptions/clubs"
         }
     }
 }

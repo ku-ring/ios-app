@@ -479,18 +479,13 @@ extension KuringLink: DependencyKey {
             let isSucceed = (200 ..< 300) ~= response.code
             return response.data
         },
-        getClubsList: { category, cursor, division, size, sortBy in
+        getClubsList: { category, division in
             var queryItems: [URLQueryItem] = []
-            queryItems.append(.init(name: "category", value: category.rawValue))
-            if let cursor {
-                queryItems.append(.init(name: "cursor", value: cursor))
+            if category != .all {
+                queryItems.append(.init(name: "category", value: category.rawValue))
             }
-            queryItems.append(.init(name: "division", value: division.joined(separator: ",")))
-            if let size {
-                queryItems.append(.init(name: "size", value: String(size)))
-            }
-            if let sortBy {
-                queryItems.append(.init(name: "sortBy", value: sortBy))
+            if !division.isEmpty {
+                queryItems.append(.init(name: "division", value: division.joined(separator: ",").lowercased()))
             }
             
             let response: Response<ClubsResult> = try await satellite
@@ -704,7 +699,7 @@ extension KuringLink {
         getClubDivisions: {
             return .init(divisions: [])
         },
-        getClubsList: { _, _, _, _, _  in
+        getClubsList: { _, _  in
             return .init(clubs: [])
         },
         getClubDetail: { _ in
