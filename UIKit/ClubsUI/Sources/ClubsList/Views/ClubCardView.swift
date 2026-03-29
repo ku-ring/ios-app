@@ -12,8 +12,6 @@ import ColorSet
 struct ClubCardView: View {
     let club: Club
     let onBookmarkTap: () -> Void
-    
-    private let formatter = DateFormatter()
 
     private var dday: (text: String, isUrgent: Bool) {
         ddayText(for: club)
@@ -156,6 +154,7 @@ private extension ClubCardView {
 // MARK: - Helper functions
 private extension ClubCardView {
     func parseDate(_ string: String) -> Date? {
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-ddTHH:mm:ss"
         return formatter.date(from: string)
     }

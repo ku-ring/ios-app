@@ -24,8 +24,6 @@ class NotificationService: UNNotificationServiceExtension {
             return
         }
         
-        defer { contentHandler(bestAttemptContent) }
-        
         let userInfo = bestAttemptContent.userInfo
         if let type = (userInfo["messageType"] ?? userInfo["type"]) as? String,
            let aps = userInfo["aps"] as? [String: Any],

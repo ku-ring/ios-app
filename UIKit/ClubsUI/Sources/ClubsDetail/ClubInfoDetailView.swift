@@ -32,8 +32,6 @@ private enum ClubSocialType: String {
 public struct ClubInfoDetailView: View {
     @Bindable var store: StoreOf<ClubsDetailFeature>
     @AppStorage("com.kuring.sdk.v2.token.accessToken") private var accessToken: String = ""
-
-    private let formatter = DateFormatter()
     
     public init(store: StoreOf<ClubsDetailFeature>) {
         self.store = store
@@ -349,6 +347,7 @@ private extension ClubInfoDetailView {
     }
 
     private func parseDate(_ string: String) -> Date? {
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-ddTHH:mm:ss"
         return formatter.date(from: string)
     }
