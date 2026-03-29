@@ -56,7 +56,8 @@ extension Target {
             .ui("CommonUI"),
             .ui("OnboardingUI"),
             .ui("LoginUI"),
-            .ui("AcademicCalendarUI")
+            .ui("AcademicCalendarUI"),
+            .target(name: "NotificationServiceExtension")
         ],
         settings: .settings(
             base: [

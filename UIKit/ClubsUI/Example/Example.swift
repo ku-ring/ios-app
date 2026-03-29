@@ -1,60 +1,54 @@
+import Models
+import LoginUI
 import SwiftUI
 import ClubsUI
+import Networks
+import ColorSet
+import ClubsFeatures
+import ComposableArchitecture
 
 @main
 struct ClubsApp: App {
+    @State var store: StoreOf<ClubsAppFeature> = .init(initialState: ClubsAppFeature.State()) {
+        ClubsAppFeature()._printChanges()
+    }
+    
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                VStack(spacing: 24) {
-                    NavigationLink {
-                        ClubsOnboardingView()
-                            .navigationTitle("동아리")
-                    } label: {
-                        Text("동아리 온보딩 화면")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundStyle(Color.Kuring.primary)
+            NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
+                ClubsContentView(store: store)
+                    .fullScreenCover(isPresented: $store.needsOnboarding) {
+                        ClubsOnboardingView(store: store)
                     }
-                    
-                    NavigationLink {
-                        ClubsContentView()
-                            .navigationTitle("동아리")
-                    } label: {
-                        Text("동아리")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundStyle(Color.Kuring.primary)
+            } destination: { store in
+                switch store.state {
+                case .detail:
+                    if let store = store.scope(
+                        state: \.detail,
+                        action: \.detail
+                    ) {
+                        ClubInfoDetailView(store: store)
                     }
-                    
-                    NavigationLink {
-                        ClubInfoDetailView()
-                            .navigationTitle("동아리")
-                    } label: {
-                        Text("동아리 상세")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundStyle(Color.Kuring.primary)
+                case .subscribedClubsList:
+                    if let store = store.scope(
+                        state: \.subscribedClubsList,
+                        action: \.subscribedClubsList
+                    ) {
+                        SubscribedClubListView(store: store)
                     }
-                    
-                    NavigationLink {
-                        ClubsSubscriptionView()
-                            .navigationTitle("구독")
-                    } label: {
-                        Text("구독")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundStyle(Color.Kuring.primary)
+                case .login:
+                    if let store = store.scope(
+                        state: \.login,
+                        action: \.login
+                    ) {
+                        LoginView(store: store)
                     }
-                    
-                    NavigationLink {
-                        NotificationHistoryView()
-                            .navigationTitle("알림")
-                    } label: {
-                        Text("알림")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundStyle(Color.Kuring.primary)
+                case .notificationHistory:
+                    if let store = store.scope(
+                        state: \.notificationHistory,
+                        action: \.notificationHistory
+                    ) {
+                        NotificationHistoryView(store: store)
                     }
                 }
             }

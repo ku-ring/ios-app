@@ -14,6 +14,7 @@ let project = Project.make(
         .project(target: "LoginFeatures", path: "../LoginFeatures"),
         .project(target: "SearchFeatures", path: "../SearchFeatures"),
         .project(target: "DepartmentFeatures", path: "../DepartmentFeatures"),
+        .project(target: "ClubsFeatures", path: "../../Features/ClubsFeatures"),
         .project(target: "SubscriptionFeatures", path: "../SubscriptionFeatures"),
         .project(target: "AcademicCalendarFeatures", path: "../AcademicCalendarFeatures")
     ]

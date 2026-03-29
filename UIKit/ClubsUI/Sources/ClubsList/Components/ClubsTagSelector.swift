@@ -5,27 +5,26 @@
 //  Created by Jung Hwan Park on 2/8/26.
 //
 
+import Models
 import SwiftUI
 import ColorSet
+import ClubsFeatures
+import ComposableArchitecture
 
 public struct ClubsTagSelector: View {
-    let tags = ["중앙동아리", "문과대학", "이과대학", "건축대학", "공과대학", "사회과학대학", "경영대학", "부동산과학원", "융합과학기술원", "생명과학대학", "수의과대학", "예술디자인대학", "사범대학", "KU자유전공학부",
-                "상허교양대학"]
-
-    @State private var selectedTags: Set<String> = []
-    @Binding var showAffiliationSelectionSheet: Bool
+    @Bindable var store: StoreOf<ClubsListFeature>
     
-    public init(showAffiliationSelectionSheet: Binding<Bool>) {
-        self._showAffiliationSelectionSheet = showAffiliationSelectionSheet
+    public init(store: StoreOf<ClubsListFeature>) {
+        self.store = store
     }
-
     public var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
                 // 초기화 버튼 (선택된 게 있을 때만)
-                if !selectedTags.isEmpty {
+                if !store.selectedDivisions.isEmpty {
                     Button {
-                        selectedTags.removeAll()
+                        store.selectedDivisions.removeAll()
+                        store.send(.applyFiltersAndSort)
                     } label: {
                         Image("refresh-cw", bundle: .module)
                             .renderingMode(.template)
@@ -47,12 +46,13 @@ public struct ClubsTagSelector: View {
                     }
                 }
 
-                ForEach(tags, id: \.self) { tag in
+                ForEach(store.clubDivisions.divisions, id: \.self) { division in
                     ClubsTag(
-                        title: tag,
-                        isSelected: selectedTags.contains(tag)
+                        division: division,
+                        isSelected: store.selectedDivisions.contains(division)
                     ) {
-                        toggle(tag)
+                        toggle(division)
+                        store.send(.applyFiltersAndSort)
                     }
                 }
                 .frame(height: 37)
@@ -67,31 +67,34 @@ public struct ClubsTagSelector: View {
             )
             .frame(width: 59, height: 37, alignment: .trailing)
             .overlay(alignment: .trailing) {
-                Image(systemName: "chevron.down")
-                    .frame(width: 24, height: 24)
-                    .foregroundStyle(Color.Kuring.gray300)
-                    .onTapGesture {
-                        showAffiliationSelectionSheet = true
-                    }
+                Button {
+                    store.showDivisionSelectionSheet = true
+                } label: {
+                    Image(systemName: "chevron.down")
+                        .frame(width: 24, height: 24)
+                        .foregroundStyle(Color.Kuring.gray300)
+                }
             }
         }
         .padding(.top, 16)
     }
 
     // Use Transaction to disable all animation
-    private func toggle(_ tag: String) {
+    private func toggle(_ division: Division) {
         var transaction = Transaction()
         transaction.disablesAnimations = true
         withTransaction(transaction) {
-            if selectedTags.contains(tag) {
-                selectedTags.remove(tag)
+            if store.selectedDivisions.contains(division) {
+                store.selectedDivisions.remove(division)
             } else {
-                selectedTags.insert(tag)
+                store.selectedDivisions.insert(division)
             }
         }
     }
 }
 
 #Preview {
-    ClubsTagSelector(showAffiliationSelectionSheet: .constant(true))
+    ClubsTagSelector(store: .init(initialState: ClubsListFeature.State(), reducer: {
+        ClubsListFeature()
+    }))
 }
