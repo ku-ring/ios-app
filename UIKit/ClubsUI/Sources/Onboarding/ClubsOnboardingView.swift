@@ -92,7 +92,7 @@ public struct ClubsOnboardingView: View {
             )
             .frame(maxWidth: .infinity)
             .onTapGesture {
-                store.clubsList.selectedClubType = store.clubsList.selectedClubType == type ? .all : type
+                store.send(.clubsList(.binding(.set(\.selectedClubType, store.clubsList.selectedClubType == type ? .all : type))))
             }
         }
     }

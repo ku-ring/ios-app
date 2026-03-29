@@ -95,6 +95,11 @@ public struct ClubsListFeature {
             case .applyFiltersAndSort:
                 var clubs = state.originalClubs
                 
+                if state.selectedClubType != .all {
+                    let filtered = clubs?.clubs.filter { ClubsType(rawValue: $0.category) == state.selectedClubType }
+                    clubs?.clubs = filtered ?? []
+                }
+                
                 if !state.selectedDivisions.isEmpty {
                     let selectedNames = Set(state.selectedDivisions.map { $0.code })
                     let filtered = clubs?.clubs.filter { selectedNames.contains($0.division) }
@@ -225,15 +230,7 @@ public struct ClubsListFeature {
                 state.subscribedAlert = nil
                 return .none
             case .binding(\.selectedClubType):
-                let clubs = state.originalClubs?.clubs
-                guard state.selectedClubType != .all else {
-                    state.filteredClubs?.clubs = clubs ?? []
-                    return .none
-                }
-                
-                let filtered = clubs?.filter { ClubsType(rawValue: $0.category) == state.selectedClubType }
-                state.filteredClubs?.clubs = filtered ?? []
-                return .none
+                return .send(.applyFiltersAndSort)
             case .binding:
                 return .none
             default:
