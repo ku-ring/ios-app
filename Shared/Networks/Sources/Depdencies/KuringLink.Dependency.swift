@@ -473,7 +473,6 @@ extension KuringLink: DependencyKey {
                     httpMethod: .get,
                     httpHeaders: [
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer \(accessToken)"
                     ]
                 )
             let isSucceed = (200 ..< 300) ~= response.code
@@ -487,29 +486,39 @@ extension KuringLink: DependencyKey {
             if !division.isEmpty {
                 queryItems.append(.init(name: "division", value: division.joined(separator: ",").lowercased()))
             }
+        
+            var headers: [String: String] = [
+                "Content-Type": "application/json",
+                "User-Token": fcmToken
+            ]
+            if accessToken != "" {
+                headers["Authorization"] = "Bearer \(accessToken)"
+            }
             
             let response: Response<ClubsResult> = try await satellite
                 .response(
                     for: Path.getClubsList.path,
                     httpMethod: .get,
                     queryItems: queryItems,
-                    httpHeaders: [
-                        "Content-Type": "application/json",
-                        "User-Token": fcmToken
-                    ]
+                    httpHeaders: headers
                 )
             
             return response.data
         },
         getClubDetail: { clubId in
+            var headers: [String: String] = [
+                "Content-Type": "application/json",
+                "User-Token": fcmToken
+            ]
+            if accessToken != "" {
+                headers["Authorization"] = "Bearer \(accessToken)"
+            }
+            
             let response: Response<ClubDetail> = try await satellite
                 .response(
                     for: Path.getClubDetail(id: clubId).path,
                     httpMethod: .get,
-                    httpHeaders: [
-                        "Content-Type": "application/json",
-                        "User-Token": fcmToken
-                    ]
+                    httpHeaders: headers
                 )
             
             return response.data
