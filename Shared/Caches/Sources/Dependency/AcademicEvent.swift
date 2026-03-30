@@ -5,9 +5,9 @@
 //  Created by Jung Hwan Park on 10/25/25.
 //
 
-import Dependencies
-import SwiftData
 import Models
+import SwiftData
+import Dependencies
 
 public struct AcademicScheduleDB {
     public var fetch: @Sendable (FetchDescriptor<AcademicScheduleEntity>) throws -> AcademicScheduleEntity?

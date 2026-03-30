@@ -8,6 +8,7 @@ let project = Project.make(
     dependencies: [
         .external(name: "Lottie"),
         .external(name: "ComposableArchitecture"),
+        .project(target: "CommonUI", path: "../CommonUI"),
         .project(target: "ColorSet", path: "../ColorSet"),
         .project(target: "LoginFeatures", path: "../../Features/LoginFeatures"),
         .project(target: "SettingsFeatures", path: "../../Features/SettingsFeatures")

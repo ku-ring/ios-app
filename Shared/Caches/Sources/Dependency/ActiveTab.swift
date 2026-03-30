@@ -38,6 +38,7 @@ public enum TabBarItem: Hashable, CaseIterable {
     case notice
     case calendar
     case campusMap
+    case clubs
     case settings
     
     public var title: String {
@@ -48,6 +49,8 @@ public enum TabBarItem: Hashable, CaseIterable {
             return "학사일정"
         case .campusMap:
             return "캠퍼스맵"
+        case .clubs:
+            return "동아리"
         case .settings:
             return "더보기"
         }

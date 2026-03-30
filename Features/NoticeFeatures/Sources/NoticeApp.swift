@@ -9,6 +9,7 @@ import SwiftData
 import Foundation
 import Dependencies
 import LoginFeatures
+import ClubsFeatures
 import DepartmentFeatures
 import SubscriptionFeatures
 import ComposableArchitecture
@@ -25,17 +26,13 @@ public struct NoticeAppFeature {
         public var path = StackState<Path.State>()
         public var signup = EmailVerificationFeature.State()
         public var academicCalendar = AcademicCalendarFeature.State()
-        /// 트리 네비게이션 - ``SubscriptionAppFeature``
-        @Presents public var changeSubscription: SubscriptionAppFeature.State?
         
         public init(
             noticeList: NoticeListFeature.State = NoticeListFeature.State(),
-            path: StackState<Path.State> = StackState<Path.State>(),
-            changeSubscription: SubscriptionAppFeature.State? = nil
+            path: StackState<Path.State> = StackState<Path.State>()
         ) {
             self.noticeList = noticeList
             self.path = path
-            self.changeSubscription = changeSubscription
             
             @Dependency(\.bookmarks) var bookmarks
             do {
@@ -56,12 +53,9 @@ public struct NoticeAppFeature {
         /// 이메일 인증 네비게이션
         case signup(EmailVerificationFeature.Action)
         case academicCalendar(AcademicCalendarFeature.Action)
-
-        /// 구독 변경 버튼을 탭한 경우
-        case changeSubscriptionButtonTapped
-
-        /// ``SubscriptionAppFeature`` 의 Presentation 액션
-        case changeSubscription(PresentationAction<SubscriptionAppFeature.Action>)
+        
+        /// 알림 내역 화면으로 이동
+        case pushToNotificationHistory
         
         case updateBookmarks(_ notice: Notice, _ isBookmarked: Bool)
     }
@@ -163,15 +157,11 @@ public struct NoticeAppFeature {
                     )
                     return .none
                 }
-            case .changeSubscription(.presented(.subscriptionView(.subscriptionResponse))):
-                /// ``SubscriptionAppFeature`` 액션
-                state.changeSubscription = nil
+            case .pushToNotificationHistory:
+                state.path.append(
+                    Path.State.notificationHistory(NotificationHistoryFeature.State())
+                )
                 return .none
-
-            case .changeSubscriptionButtonTapped:
-                state.changeSubscription = SubscriptionAppFeature.State()
-                return .none
-                
             case let .path(.element(id: id, action: .departmentEditor(.delegate(.addedDepartmentsUpdated)))):
                 guard case let .departmentEditor(departmentEditorState) = state.path[id: id] else {
                     return .none
@@ -234,15 +224,12 @@ public struct NoticeAppFeature {
                     )
                 )
                 return .none
-            case .path, .noticeList, .changeSubscription, .signup, .binding, .academicCalendar:
+            case .path, .noticeList, .signup, .binding, .academicCalendar:
                 return .none
             }
         }
         .forEach(\.path, action: \.path) {
             Path()
-        }
-        .ifLet(\.$changeSubscription, action: \.changeSubscription) {
-            SubscriptionAppFeature()
         }
     }
 

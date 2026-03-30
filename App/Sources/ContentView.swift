@@ -5,10 +5,12 @@
 
 import Caches
 import SwiftUI
+import ClubsUI
 import CampusUI
 import NoticeUI
 import SettingsUI
 import Dependencies
+import ClubsFeatures
 import NoticeFeatures
 import SettingsFeatures
 import PushNotifications
@@ -37,6 +39,11 @@ struct ContentView: View {
       initialState: SettingsAppFeature.State(),
       reducer: { SettingsAppFeature() }
     )
+    
+    @State private var clubsStore: StoreOf<ClubsAppFeature> = Store(
+        initialState: ClubsAppFeature.State(),
+        reducer: { ClubsAppFeature() }
+    )
 
     init(didAppear: Binding<Bool>) {
         self._didAppear = didAppear
@@ -53,6 +60,8 @@ struct ContentView: View {
                     AcademicCalendar(store: calendarStore)
                 case .campusMap:
                     CampusApp()
+                case .clubs:
+                    ClubsApp(store: clubsStore)
                 case .settings:
                     SettingsApp(store: settingsStore)
                 }

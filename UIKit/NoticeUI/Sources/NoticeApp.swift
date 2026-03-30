@@ -4,8 +4,9 @@
 //
 
 import Models
-import LoginUI
 import SwiftUI
+import LoginUI
+import ClubsUI
 import ColorSet
 import SearchUI
 import DepartmentUI
@@ -63,21 +64,13 @@ public struct NoticeApp: View {
                     // MARK: 푸시 알림 선택 진입
 
                     Button {
-                        store.send(.changeSubscriptionButtonTapped)
+                        store.send(.pushToNotificationHistory)
                     } label: {
                         Image("bell", bundle: Bundle.notices)
                             .renderingMode(.template)
                             .foregroundStyle(Color.Kuring.gray400)
                     }
                 }
-            }
-            .sheet(
-                item: $store.scope(
-                    state: \.changeSubscription,
-                    action: \.changeSubscription
-                )
-            ) { store in
-                SubscriptionApp(store: store)
             }
             .sheet(isPresented: $store.academicCalendar.isAcademicSchedulePresented) {
                 AcademicScheduleSheet(
@@ -165,6 +158,13 @@ public struct NoticeApp: View {
                     action: \.bookmark
                 ) {
                     BookmarkApp(store: store)
+                }
+            case .notificationHistory:
+                if let store = store.scope(
+                    state: \.notificationHistory,
+                    action: \.notificationHistory
+                ) {
+                    NotificationHistoryView(store: store)
                 }
             }
         }
