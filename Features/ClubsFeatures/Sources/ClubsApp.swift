@@ -78,14 +78,14 @@ public struct ClubsAppFeature {
                     )
                 )
                 return .none
-            case .path(.element(id: _, action: .detail(.delegate(.subscriptionChanged(let clubId, let isSubscribed))))):
+            case .path(.element(id: _, action: .detail(.delegate(.subscriptionChanged(let clubId, let isSubscribed, let subscriptionCount))))):
                 if let index = state.clubsList.originalClubs?.clubs.firstIndex(where: { $0.id == clubId }) {
                     state.clubsList.originalClubs?.clubs[index].isSubscribed = isSubscribed
-                    state.clubsList.originalClubs?.clubs[index].subscriberCount += isSubscribed ? 1 : -1
+                    state.clubsList.originalClubs?.clubs[index].subscriberCount = subscriptionCount
                 }
                 if let index = state.clubsList.filteredClubs?.clubs.firstIndex(where: { $0.id == clubId }) {
                     state.clubsList.filteredClubs?.clubs[index].isSubscribed = isSubscribed
-                    state.clubsList.filteredClubs?.clubs[index].subscriberCount += isSubscribed ? 1 : -1
+                    state.clubsList.filteredClubs?.clubs[index].subscriberCount = subscriptionCount
                 }
                 return .none
             case .path(.element(id: _, action: .login(.delegate(.popToRoot)))):

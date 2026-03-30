@@ -46,7 +46,7 @@ public struct ClubsDetailFeature {
         public enum Delegate: Equatable {
             /// 미로그인 시 로그인 화면으로 이동
             case pushToLogin
-            case subscriptionChanged(clubId: Int, isSubscribed: Bool)
+            case subscriptionChanged(clubId: Int, isSubscribed: Bool, subscriberCount: Int)
         }
         
         /// 알러트
@@ -94,7 +94,8 @@ public struct ClubsDetailFeature {
                     state.club.isSubscribed.toggle()
                     return .send(.delegate(.subscriptionChanged(
                         clubId: id,
-                        isSubscribed: state.club.isSubscribed
+                        isSubscribed: state.club.isSubscribed,
+                        subscriberCount: response.subscriptionCount
                     )))
                 case .failure(let error):
                     print(error.localizedDescription)

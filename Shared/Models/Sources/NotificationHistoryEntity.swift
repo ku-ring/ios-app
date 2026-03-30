@@ -36,7 +36,7 @@ public final class NotificationHistoryEntity {
 
 extension NotificationHistoryEntity {
     public func timeAgo(from now: Date = .now) -> String {
-        let seconds = Int(now.timeIntervalSince(receivedAt))
+        let seconds = max(0, Int(now.timeIntervalSince(receivedAt)))
         
         if seconds < 60 {
             return "\(seconds)초 전"
