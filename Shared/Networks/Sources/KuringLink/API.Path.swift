@@ -33,6 +33,12 @@ enum Path {
     case reportComment
     case fetchAcademicEvents
     case setAcademicEventPush
+    case getClubDivisions
+    case getClubsList
+    case getClubDetail(id: Int)
+    case getSubscribedClubs
+    case subscribeToClub
+    case unsubscribeToClub(id: Int)
 
     var path: String {
         switch self {
@@ -86,6 +92,16 @@ enum Path {
             return "api/v2/academic-events"
         case .setAcademicEventPush:
             return "api/v2/users/notifications/academic-events"
+        case .getClubDivisions:
+            return "api/v2/clubs/divisions"
+        case .getClubsList:
+            return "api/v2/clubs"
+        case .getClubDetail(let id):
+            return "api/v2/clubs/\(id)"
+        case .subscribeToClub, .getSubscribedClubs:
+            return "api/v2/users/subscriptions/clubs"
+        case .unsubscribeToClub(let id):
+            return "api/v2/users/subscriptions/clubs/\(id)"
         }
     }
 }

@@ -465,6 +465,97 @@ extension KuringLink: DependencyKey {
                 )
             let isSucceed = (200 ..< 300) ~= response.code
             return isSucceed
+        },
+        getClubDivisions: {
+            let response: Response<ClubDivisions> = try await satellite
+                .response(
+                    for: Path.getClubDivisions.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)"
+                    ]
+                )
+            let isSucceed = (200 ..< 300) ~= response.code
+            return response.data
+        },
+        getClubsList: { category, division in
+            var queryItems: [URLQueryItem] = []
+            if category != .all {
+                queryItems.append(.init(name: "category", value: category.rawValue))
+            }
+            if !division.isEmpty {
+                queryItems.append(.init(name: "division", value: division.joined(separator: ",").lowercased()))
+            }
+            
+            let response: Response<ClubsResult> = try await satellite
+                .response(
+                    for: Path.getClubsList.path,
+                    httpMethod: .get,
+                    queryItems: queryItems,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ]
+                )
+            
+            return response.data
+        },
+        getClubDetail: { clubId in
+            let response: Response<ClubDetail> = try await satellite
+                .response(
+                    for: Path.getClubDetail(id: clubId).path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "User-Token": fcmToken
+                    ]
+                )
+            
+            return response.data
+        },
+        getSubscribedClubs: {
+            let response: Response<ClubsResult> = try await satellite
+                .response(
+                    for: Path.getSubscribedClubs.path,
+                    httpMethod: .get,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)",
+                        "User-Token": fcmToken
+                    ]
+                )
+            
+            return response.data
+        },
+        subscribeToClub: { id in
+            let response: Response<ClubSubscriptionCountResponse> = try await satellite
+                .response(
+                    for: Path.subscribeToClub.path,
+                    httpMethod: .post,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)",
+                        "User-Token": fcmToken
+                    ],
+                    httpBody: SubscribeToClubRequest(id: id)
+                )
+            
+            return response.data
+        },
+        unsubscribeToClub: { id in
+            let response: Response<ClubSubscriptionCountResponse> = try await satellite
+                .response(
+                    for: Path.unsubscribeToClub(id: id).path,
+                    httpMethod: .delete,
+                    httpHeaders: [
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer \(accessToken)",
+                        "User-Token": fcmToken
+                    ]
+                )
+            
+            return response.data
         }
     )
 }
@@ -602,6 +693,54 @@ extension KuringLink {
         },
         setAcademicEventPush: { _ in
             return true
+        },
+        getClubDivisions: {
+            return .init(divisions: [])
+        },
+        getClubsList: { _, _  in
+            return .init(clubs: [])
+        },
+        getClubDetail: { _ in
+            return .init(
+                id: 1,
+                name: "리드미",
+                summary: "단순히 책만 읽는 독서모임이 아닌, 책 속에 빠져 인사이트를 나누는 모임",
+                category: "academic",
+                division: "central",
+                subscriberCount: 128,
+                isSubscribed: true,
+                instagramUrl:  "https://instagram.com/kuring.official",
+                youtubeUrl: nil,
+                etcUrl: nil,
+                description: "저희 리드미는 2020년부터 시작된...",
+                qualifications: "건국대학교 재학생 및 휴학생 누구나\n(매주 목요일 활동 가능하신 분)",
+                recruitmentStatus: .recruiting,
+                recruitStartAt: "2026-03-02T00:00:00",
+                recruitEndAt: "2026-03-15T23:59:59",
+                applyUrl: "https://forms.gle/xyz...",
+                posterImageUrl: "https://api.kuring.com/images/club_poster_readme.png",
+                location: .init(
+                    building: "sanghuh_library",
+                    room: "101",
+                    lon: 127.074,
+                    lat: 37.541
+                )
+            )
+        },
+        getSubscribedClubs: {
+            return .init(
+                clubs: [
+                    .mock,
+                    .mock,
+                    .mock
+                ]
+            )
+        },
+        subscribeToClub: { _ in
+            return .init(subscriptionCount: 67)
+        },
+        unsubscribeToClub: { _ in
+            return .init(subscriptionCount: 67)
         }
     )
 }
