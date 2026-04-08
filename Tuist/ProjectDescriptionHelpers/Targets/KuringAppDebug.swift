@@ -32,7 +32,7 @@ extension Target {
                 ],
                 "UIDesignRequiresCompatibility": .boolean(true),
                 "CFBundleDisplayName": "쿠링(Debug)",
-                "CFBundleShortVersionString": "2.4.1",
+                "CFBundleShortVersionString": "2.5.0",
                 "CFBundleVersion": "2",
             ]
         ),
@@ -41,7 +41,7 @@ extension Target {
             "Resources/**",
             "Configurations/**"
         ],
-        entitlements: "KuringApp.entitlements",
+        entitlements: "KuringAppDebug.entitlements",
         dependencies: [
             .external(name: "FirebaseMessaging"),
             .project(target: "PushNotifications", path: "../Shared/PushNotifications"),
@@ -52,10 +52,12 @@ extension Target {
             .ui("SearchUI"),
             .ui("SettingsUI"),
             .ui("CampusUI"),
+            .ui("ClubsUI"),
             .ui("CommonUI"),
             .ui("OnboardingUI"),
             .ui("LoginUI"),
-            .ui("AcademicCalendarUI")
+            .ui("AcademicCalendarUI"),
+            .target(name: "NotificationServiceExtension")
         ],
         settings: .settings(
             base: [

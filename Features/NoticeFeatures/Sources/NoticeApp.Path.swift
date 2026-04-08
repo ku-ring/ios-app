@@ -5,6 +5,7 @@
 
 import Models
 import LoginFeatures
+import ClubsFeatures
 import SearchFeatures
 import DepartmentFeatures
 import ComposableArchitecture
@@ -31,6 +32,8 @@ extension NoticeAppFeature {
             case signupComplete(SignupCompleteFeature.State)
             /// 공지보관함
             case bookmark(BookmarkAppFeature.State)
+            /// 알림 내역
+            case notificationHistory(NotificationHistoryFeature.State)
         }
 
         public enum Action: Equatable {
@@ -51,6 +54,8 @@ extension NoticeAppFeature {
             case signupComplete(SignupCompleteFeature.Action)
             /// 공지보관함
             case bookmark(BookmarkAppFeature.Action)
+            /// 알림 내역
+            case notificationHistory(NotificationHistoryFeature.Action)
         }
 
         public var body: some ReducerOf<Self> {
@@ -89,6 +94,9 @@ extension NoticeAppFeature {
             }
             Scope(state: \.bookmark, action: \.bookmark) {
                 BookmarkAppFeature()
+            }
+            Scope(state: \.notificationHistory, action: \.notificationHistory) {
+                NotificationHistoryFeature()
             }
         }
     }

@@ -24,7 +24,8 @@ let project = Project(
     targets: [
         .kuringApp,
         .kuringAppDebug,
-        .kuringTests
+        .kuringTests,
+        .notificationServiceExtension
     ],
     schemes: [
         .scheme(

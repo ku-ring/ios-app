@@ -59,6 +59,8 @@ extension TabBarItem {
             return .calendarFill
         case .campusMap:
             return .mapPinFill
+        case .clubs:
+            return .clubsFill
         case .settings:
             return .moreHorizontalFill
         }
@@ -72,6 +74,8 @@ extension TabBarItem {
             return .calendar
         case .campusMap:
             return .mapPin
+        case .clubs:
+            return .clubs
         case .settings:
             return .moreHorizontal
         }

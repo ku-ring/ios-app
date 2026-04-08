@@ -32,7 +32,7 @@ extension Target {
                 ],
                 "UIDesignRequiresCompatibility": .boolean(true),
                 "CFBundleDisplayName": "쿠링",
-                "CFBundleShortVersionString": "2.4.1",
+                "CFBundleShortVersionString": "2.5.0",
                 "CFBundleVersion": "2",
             ]
         ),
@@ -52,10 +52,12 @@ extension Target {
             .ui("SearchUI"),
             .ui("SettingsUI"),
             .ui("CampusUI"),
+            .ui("ClubsUI"),
             .ui("CommonUI"),
             .ui("OnboardingUI"),
             .ui("LoginUI"),
-            .ui("AcademicCalendarUI")
+            .ui("AcademicCalendarUI"),
+            .target(name: "NotificationServiceExtension")
         ],
         settings: .settings(
             base: [

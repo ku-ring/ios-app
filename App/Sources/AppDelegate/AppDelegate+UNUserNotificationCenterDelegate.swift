@@ -35,7 +35,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         Messaging.messaging().appDidReceiveMessage(userInfo)
         
         // TODO: 로컬 알림을 띄워줘야 하는가?
-        
         guard let userInfo = userInfo as? [String: Any] else { return [] }
         do {
             let _ = try Message(userInfo: userInfo)
@@ -45,6 +44,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             return []
         }
     }
+
     
     /// 푸시 알림을 탭 했을 때
     /// - Important: ``newMessagePublisher`` 를 구독하여 ``Message`` 객체를 이벤트로 전달받을 수 있습니다.

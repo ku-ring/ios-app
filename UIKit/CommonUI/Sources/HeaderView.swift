@@ -19,11 +19,19 @@ import ColorSet
 ///  - Parameters:
 ///    - title: 제목
 ///    - subtitle: 부제목
-struct HeaderView: View {
+public struct HeaderView: View {
     let title: String
     let subtitle: String
     
-    var body: some View {
+    public init(
+        title: String,
+        subtitle: String
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+    }
+    
+    public var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title)
                 .font(.system(size: 24, weight: .bold))
