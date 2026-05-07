@@ -53,8 +53,8 @@ private extension ClubCardView {
                 AsyncImage(url: URL(string: club.iconImageUrl ?? "")) { image in
                     image
                         .resizable()
+                        .aspectRatio(1, contentMode: .fit)
                         .frame(width: 84)
-                        .aspectRatio(contentMode: .fit)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                 } placeholder: {
                     RoundedRectangle(cornerRadius: 14)
@@ -105,7 +105,7 @@ private extension ClubCardView {
         Text(club.summary)
             .padding(.top, 4)
             .font(.system(size: 14))
-            .foregroundStyle(!isRecruiting ? Color.Kuring.caption2 : Color.Kuring.caption1)
+            .foregroundStyle(Color.Kuring.caption1)
             .lineLimit(2)
             .truncationMode(.tail)
     }
