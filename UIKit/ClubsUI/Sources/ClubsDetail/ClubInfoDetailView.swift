@@ -354,7 +354,7 @@ private extension ClubInfoDetailView {
 
     private func ddayText(for club: Club) -> (text: String, isUrgent: Bool) {
         guard let end = parseDate(club.recruitEndDate ?? "") else {
-            return ("상시모집", false)
+            return ("마감 종료", false)
         }
         let days = Calendar.current.dateComponents([.day], from: .now, to: end).day ?? 0
 
