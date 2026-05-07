@@ -125,9 +125,9 @@ public struct ClubsListFeature {
                 state.subscribedClubsSortType = by
                 return .none
             case .getClubsList:
-                return .run { [state] send in
+                return .run { send in
                     do {
-                        let result = try await kuringLink.getClubsList(state.selectedClubType, state.selectedDivisions.map { $0.code.lowercased() })
+                        let result = try await kuringLink.getClubsList(.all, [])
                         await send(.getClubsListResponse(.success(result)))
                     } catch {
                         await send(.getClubsListResponse(.failure(.error(error.localizedDescription))))
