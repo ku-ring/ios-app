@@ -51,7 +51,7 @@ extension Notice {
     /// try Notice(userInfo: userInfo)
     /// ```
     public init(userInfo: [String: Any]) throws {
-        guard let id = userInfo["id"] as? Int else {
+        guard let idString = userInfo["id"] as? String, let id = Int(idString) else {
             throw DecodingError.noID
         }
         guard let articleID = userInfo["articleId"] as? String else {
