@@ -24,6 +24,7 @@ public struct Club: Codable, Equatable {
     public let category, division: String
     public var isSubscribed: Bool
     public var subscriberCount: Int
+    public let recruitmentStatus: RecruitmentStatus
     public let recruitStartDate, recruitEndDate: String?
     
     public init(
@@ -35,6 +36,7 @@ public struct Club: Codable, Equatable {
         division: String,
         isSubscribed: Bool,
         subscriberCount: Int,
+        recruitmentStatus: RecruitmentStatus,
         recruitStartDate: String?,
         recruitEndDate: String?
     ) {
@@ -46,6 +48,7 @@ public struct Club: Codable, Equatable {
         self.division = division
         self.isSubscribed = isSubscribed
         self.subscriberCount = subscriberCount
+        self.recruitmentStatus = recruitmentStatus
         self.recruitStartDate = recruitStartDate
         self.recruitEndDate = recruitEndDate
     }
@@ -60,6 +63,7 @@ public struct Club: Codable, Equatable {
             division: "central",
             isSubscribed: true,
             subscriberCount: 19,
+            recruitmentStatus: .recruiting,
             recruitStartDate: "2026-05-01T00:00:00",
             recruitEndDate: "2026-06-03T23:59:59"
         )
