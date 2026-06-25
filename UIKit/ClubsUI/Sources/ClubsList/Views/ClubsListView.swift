@@ -65,9 +65,7 @@ struct ClubsListView: View {
 }
 
 // MARK: - Sub-views
-
 private extension ClubsListView {
-
     var sortByView: some View {
         HStack {
             Text("총 \(store.filteredClubs?.clubs.count ?? 0)개")

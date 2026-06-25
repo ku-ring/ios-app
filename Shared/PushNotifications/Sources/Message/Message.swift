@@ -33,7 +33,6 @@ extension Message {
             self = .notice(
                 try Notice(userInfo: userInfo)
             )
-            
         // 커스텀 알림
         case "admin":
             @AppStorage("com.kuring.sdk.notification.custom")
