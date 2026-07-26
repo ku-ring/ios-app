@@ -18,7 +18,7 @@ struct ClubCardView: View {
     }
 
     private var isRecruiting: Bool {
-        dday.text != "마감 종료"
+        club.recruitmentStatus != .closed
     }
 
     // 12자 초과시 ... 처리
@@ -53,8 +53,8 @@ private extension ClubCardView {
                 AsyncImage(url: URL(string: club.iconImageUrl ?? "")) { image in
                     image
                         .resizable()
+                        .aspectRatio(1, contentMode: .fit)
                         .frame(width: 84)
-                        .aspectRatio(contentMode: .fit)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                 } placeholder: {
                     RoundedRectangle(cornerRadius: 14)
@@ -105,7 +105,7 @@ private extension ClubCardView {
         Text(club.summary)
             .padding(.top, 4)
             .font(.system(size: 14))
-            .foregroundStyle(!isRecruiting ? Color.Kuring.caption2 : Color.Kuring.caption1)
+            .foregroundStyle(Color.Kuring.caption1)
             .lineLimit(2)
             .truncationMode(.tail)
     }
@@ -160,8 +160,9 @@ private extension ClubCardView {
     }
 
     func ddayText(for club: Club) -> (text: String, isUrgent: Bool) {
+        // 마감일이 있다면 D-{n} 형식 노출, 없다면 recruitmentStatus 기반
         guard let end = parseDate(club.recruitEndDate ?? "") else {
-            return ("상시모집", false)
+            return (club.recruitmentStatus.rawValue, false)
         }
 
         let days = Calendar.current.dateComponents([.day], from: Date(), to: end).day ?? 0
