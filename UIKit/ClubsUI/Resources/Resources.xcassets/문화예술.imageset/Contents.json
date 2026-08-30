@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "문화예술_1.png",
+      "filename" : "문화예술_1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "문화예술_2.png",
+      "filename" : "문화예술_2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "문화예술_3.png",
+      "filename" : "문화예술_3.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

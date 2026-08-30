@@ -24,6 +24,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", exact: "1.12.1"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", exact: "1.9.3"),
+        .package(url: "https://github.com/pointfreeco/swift-concurrency-extras", exact: "1.3.2"),
         .package(url: "https://github.com/apple/swift-collections.git", exact: "1.1.0"),
         .package(url: "https://github.com/ku-ring/ios-maps", branch: "main"),
         .package(url: "https://github.com/ku-ring/package-activityui", branch: "main"),

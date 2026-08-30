@@ -11,6 +11,7 @@ extension Target {
             with: [
                 "FirebaseAppDelegateProxyEnabled": .boolean(false),
                 "ITSAppUsesNonExemptEncryption": .boolean(false),
+                "NSLocationWhenInUseUsageDescription": "위치 정보를 사용하여 현재 위치를 지도에 표시합니다.",
                 "NSAppTransportSecurity": [
                     "NSAllowsArbitraryLoads": .boolean(true)
                 ],
@@ -32,7 +33,7 @@ extension Target {
                 ],
                 "UIDesignRequiresCompatibility": .boolean(true),
                 "CFBundleDisplayName": "쿠링(Debug)",
-                "CFBundleShortVersionString": "2.5.1",
+                "CFBundleShortVersionString": "2.6.0",
                 "CFBundleVersion": "2",
             ]
         ),
