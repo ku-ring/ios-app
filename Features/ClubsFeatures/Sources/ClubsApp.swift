@@ -91,6 +91,54 @@ public struct ClubsAppFeature {
             case .path(.element(id: _, action: .login(.delegate(.popToRoot)))):
                 state.path.removeAll()
                 return .none
+            case .path(.element(id: _, action: .login(.delegate(.pushToTerms)))):
+                state.path.append(
+                    Path.State.signupTerms(
+                        LoginAppFeature.State()
+                    )
+                )
+                return .none
+            case .path(.element(id: _, action: .login(.delegate(.pushToFindPassword)))):
+                state.path.append(
+                    Path.State.findPassword(
+                        EmailVerificationFeature.State()
+                    )
+                )
+                return .none
+            case .path(.element(id: _, action: .signupTerms(.delegate(.pushToSignup)))):
+                state.path.append(
+                    Path.State.signup(
+                        EmailVerificationFeature.State()
+                    )
+                )
+                return .none
+            case let .path(.element(id: _, action: .signup(.delegate(.pushToSignupPassword(email))))):
+                state.path.append(
+                    Path.State.setPassword(
+                        SetPasswordFeature.State(email: email)
+                    )
+                )
+                return .none
+            case .path(.element(id: _, action: .setPassword(.delegate(.pushToSignupComplete)))):
+                state.path.append(
+                    Path.State.signupComplete(
+                        SignupCompleteFeature.State()
+                    )
+                )
+                return .none
+            case let .path(.element(id: _, action: .findPassword(.delegate(.pushToChangePassword(email))))):
+                state.path.append(
+                    Path.State.changePassword(
+                        SetPasswordFeature.State(email: email)
+                    )
+                )
+                return .none
+            case .path(.element(id: _, action: .changePassword(.delegate(.popToRoot)))):
+                state.path.removeAll()
+                return .none
+            case .path(.element(id: _, action: .signupComplete(.delegate(.popToRoot)))):
+                state.path.removeSubrange(1...)
+                return .none
             case .pushToSubscribedClubsList:
                 state.path.append(
                     Path.State.subscribedClubsList
