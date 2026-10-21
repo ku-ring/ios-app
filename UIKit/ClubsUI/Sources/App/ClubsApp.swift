@@ -29,6 +29,7 @@ public struct ClubsApp: View {
             case .detail:
                 if let store = pathStore.scope(state: \.detail, action: \.detail) {
                     ClubInfoDetailView(store: store)
+                        .toolbar(.hidden, for: .tabBar)
                 }
             case .subscribedClubsList:
                 SubscribedClubListView(
@@ -37,6 +38,7 @@ public struct ClubsApp: View {
             case .login:
                 if let store = pathStore.scope(state: \.login, action: \.login) {
                     LoginView(store: store)
+                        .toolbar(.hidden, for: .tabBar)
                 }
             case .notificationHistory:
                 if let store = pathStore.scope(state: \.notificationHistory, action: \.notificationHistory) {
