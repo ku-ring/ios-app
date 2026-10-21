@@ -40,9 +40,7 @@ struct KuringApp: App {
             Group {
                 if completesLink {
                     // MARK: ContentView
-                    NavigationStack {
-                        ContentView(didAppear: $didAppear)
-                    }
+                    ContentView(didAppear: $didAppear)
                     // MARK: 앱 업데이트 알림
                     .versionUpdateAlert()
                     // MARK: - 일주일 동안 공지를 확인하지 않았어요
