@@ -5,6 +5,7 @@
 
 import Models
 import Networks
+import Analytics
 import ComposableArchitecture
 
 @Reducer
@@ -64,6 +65,8 @@ public struct SubscriptionFeature {
     }
 
     public enum Action: Equatable {
+        /// 화면에 진입했을 때
+        case onAppear
         /// 일반 / 학과 카테고리 세그먼트 선택
         case segmentSelected(State.SubscriptionType)
         /// 일반 공지 카테고리 중 하나 선택
@@ -80,10 +83,15 @@ public struct SubscriptionFeature {
     @Dependency(\.dismiss) var dismiss
     @Dependency(\.kuringLink) var kuringLink
     @Dependency(\.subscriptions) var subscriptions
+    @Dependency(\.analytics) var analytics
 
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
+            case .onAppear:
+                analytics.track(.pushSettingView)
+                return .none
+
             case let .segmentSelected(subscriptionType):
                 state.subscriptionType = subscriptionType
                 return .none
