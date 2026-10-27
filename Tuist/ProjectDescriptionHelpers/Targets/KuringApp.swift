@@ -46,7 +46,6 @@ extension Target {
         dependencies: [
             .external(name: "FirebaseMessaging"),
             .project(target: "PushNotifications", path: "../Shared/PushNotifications"),
-            .shared("Analytics"),
             .ui("BotUI"),
             .ui("NoticeUI"),
             .ui("SubscriptionUI"),
