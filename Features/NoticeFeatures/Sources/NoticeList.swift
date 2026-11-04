@@ -171,6 +171,10 @@ public struct NoticeListFeature {
                     isReload: true
                 )
             case .fetchNextPageOfNotices:
+                // 리로드(또는 다른 페이지 요청)가 진행 중이면 중복 방지를 위해 무시한다.
+                guard !state.isLoading else {
+                    return .none
+                }
                 return fetchNotices(
                     state: &state,
                     retrievalInfo: state.noticeDictionary[state.provider] ?? State.NoticeInfo(),
