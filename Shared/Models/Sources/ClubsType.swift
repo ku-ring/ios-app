@@ -30,7 +30,7 @@ public enum ClubsType: String, CaseIterable, Encodable {
     }
     
     public var imageName: String {
-        self.title
+        return self.rawValue
     }
     
     public var subtitle: String {
