@@ -49,7 +49,11 @@ extension AnalyticsClient {
 extension AnalyticsClient: DependencyKey {
     public static let liveValue = Self(
         track: { event, properties in
+            #if DEBUG
+            print("[Amplitude 🧙‍♂️] \(event.rawValue) \(properties)")
+            #else
             amplitude.track(eventType: event.rawValue, eventProperties: properties)
+            #endif
         }
     )
 }
