@@ -39,6 +39,7 @@ public struct SettingsApp: View {
                     action: \.login
                 ) {
                     LoginView(store: store)
+                        .toolbar(.hidden, for: .tabBar)
                 }
             case .findPassword:
                 if let store = store.scope(
@@ -46,6 +47,7 @@ public struct SettingsApp: View {
                     action: \.findPassword
                 ) {
                     FindPasswordView(store: store)
+                        .toolbar(.hidden, for: .tabBar)
                 }
             case .changePassword:
                 if let store = store.scope(
@@ -53,6 +55,7 @@ public struct SettingsApp: View {
                     action: \.changePassword
                 ) {
                     ChangePasswordView(store: store)
+                        .toolbar(.hidden, for: .tabBar)
                 }
             case .signup:
                 if let store = store.scope(
@@ -60,6 +63,7 @@ public struct SettingsApp: View {
                     action: \.signup
                 ) {
                     SignupView(store: store)
+                        .toolbar(.hidden, for: .tabBar)
                 }
             case .signupTerms:
                 if let store = store.scope(
@@ -67,6 +71,7 @@ public struct SettingsApp: View {
                     action: \.signupTerms
                 ) {
                     LoginTermsAndConditionsView(store: store)
+                        .toolbar(.hidden, for: .tabBar)
                 }
             case .setPassword:
                 if let store = store.scope(
@@ -74,6 +79,7 @@ public struct SettingsApp: View {
                     action: \.setPassword
                 ) {
                     SetPasswordView(store: store)
+                        .toolbar(.hidden, for: .tabBar)
                 }
             case .signupComplete:
                 if let store = store.scope(
@@ -81,6 +87,7 @@ public struct SettingsApp: View {
                     action: \.signupComplete
                 ) {
                     SignupCompleteView(store: store)
+                        .toolbar(.hidden, for: .tabBar)
                 }
             case .deleteAccount:
                 if let store = store.scope(

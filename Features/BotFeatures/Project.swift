@@ -7,6 +7,7 @@ let project = Project.make(
     bundleId: bundleId_release,
     dependencies: [
         .external(name: "ComposableArchitecture"),
+        .project(target: "Analytics", path: "../../Shared/Analytics"),
         .project(target: "Caches", path: "../../Shared/Caches"),
         .project(target: "Models", path: "../../Shared/Models"),
         .project(target: "Networks", path: "../../Shared/Networks")

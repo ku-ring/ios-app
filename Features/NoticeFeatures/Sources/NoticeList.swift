@@ -112,6 +112,8 @@ public struct NoticeListFeature {
         public struct NoticesResult: Equatable {
             let provider: NoticeProvider
             let notices: [Notice]
+            /// 새로고침(리로드) 응답인지 여부. `true`면 기존 리스트를 교체하고, `false`면 다음 페이지로 이어붙인다
+            let isReload: Bool
         }
     }
 
@@ -160,13 +162,13 @@ public struct NoticeListFeature {
             case .changeDepartment(.dismiss):
                 return .send(.reloadNotices)
             case .reloadNotices:
-                if state.provider != .emptyDepartment && state.provider.hostPrefix != "ccd" {
-                    state.noticeDictionary[state.provider] = State.NoticeInfo()
-                }
+                // 기존 공지 리스트는 새 응답이 도착할 때까지 그대로 유지한다.
+                // 즉, **먼저 비우지 않는다**는 뜻
                 return fetchNotices(
                     state: &state,
                     retrievalInfo: State.NoticeInfo(),
-                    cancelID: CancelID.reloadNotices
+                    cancelID: CancelID.reloadNotices,
+                    isReload: true
                 )
             case .fetchNextPageOfNotices:
                 return fetchNotices(
@@ -183,8 +185,13 @@ public struct NoticeListFeature {
                 guard var noticeInfo = state.noticeDictionary[provider] else { return .none }
 
                 noticeInfo.hasNextList = notices.count >= noticeInfo.loadLimit
-                noticeInfo.page += 1
-                noticeInfo.notices += notices
+                if noticesResult.isReload {
+                    noticeInfo.notices = notices
+                    noticeInfo.page = 1
+                } else {
+                    noticeInfo.page += 1
+                    noticeInfo.notices += notices
+                }
 
                 state.noticeDictionary[provider] = noticeInfo
                 state.isLoading = false
@@ -236,21 +243,22 @@ public struct NoticeListFeature {
     private func fetchNotices(
         state: inout State,
         retrievalInfo: State.NoticeInfo,
-        cancelID: CancelID
+        cancelID: CancelID,
+        isReload: Bool = false
     ) -> Effect<Action> {
         if state.provider == .emptyDepartment || state.provider.hostPrefix == "ccd" {
             return .none
         }
-        
+
         state.isLoading = true
-        
+
         return .run { [provider = state.provider] send in
             let department: String? = if provider.category == .학과 {
                 provider.hostPrefix
             } else {
                 nil
             }
-            
+
             await send(
                 .noticesResponse(
                     TaskResult {
@@ -263,7 +271,8 @@ public struct NoticeListFeature {
                         )
                         return Action.NoticesResult(
                             provider: provider,
-                            notices: notices
+                            notices: notices,
+                            isReload: isReload
                         )
                     }
                 )
