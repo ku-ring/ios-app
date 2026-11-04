@@ -5,6 +5,7 @@
 
 import Caches
 import SwiftUI
+import Analytics
 import ClubsUI
 import CampusUI
 import NoticeUI
@@ -20,6 +21,7 @@ import AcademicCalendarFeatures
 
 struct ContentView: View {
     @Dependency(\.activeTab) var activeTab
+    @Dependency(\.analytics) var analytics
     @Bindable private var tabStore: ActiveTabStore
 
     // 앱 최초 구동 시점에 1회 공지를 가져오기 위함
@@ -79,11 +81,16 @@ struct ContentView: View {
             if oldValue != newValue && newValue == .notice {
                 noticeStore.send(.noticeList(.reloadNotices))
             }
+            if oldValue != newValue, let event = newValue.analyticsEvent {
+                analytics.track(event)
+            }
         }
         .onAppear {
+            // 앱 최초 구동
             if !didAppear {
                 noticeStore.send(.noticeList(.reloadNotices))
                 didAppear = true
+                analytics.track(.noticeHomeView)
             }
         }
         // MARK: 학사일정 푸시 알림을 탭 했을 때 호출
@@ -142,6 +149,22 @@ extension TabBarItem {
             return .clubs
         case .settings:
             return .moreHorizontal
+        }
+    }
+
+    /// 탭 전환 시 기록할 Amplitude 이벤트. 로깅 대상이 아니면 `nil`
+    var analyticsEvent: AnalyticsEvent? {
+        switch self {
+        case .notice:
+            return .noticeHomeView
+        case .calendar:
+            return .calendarView
+        case .campusMap:
+            return .mapView
+        case .clubs:
+            return .clubTabView
+        case .settings:
+            return nil
         }
     }
 }
