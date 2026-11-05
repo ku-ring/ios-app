@@ -45,6 +45,7 @@ extension Target {
         entitlements: "KuringAppDebug.entitlements",
         dependencies: [
             .external(name: "FirebaseMessaging"),
+            .shared("Analytics"),
             .project(target: "PushNotifications", path: "../Shared/PushNotifications"),
             .ui("BotUI"),
             .ui("NoticeUI"),
