@@ -23,7 +23,6 @@ public struct AcademicCalendar: View {
     
     public init(store: StoreOf<AcademicCalendarFeature>) {
         self.store = store
-        self.store.send(.selectDate(Date()))
     }
     
     public var body: some View {
@@ -50,6 +49,9 @@ public struct AcademicCalendar: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(.hidden, for: .navigationBar)
             .onAppear {
+                if store.selectedDate == nil {
+                    store.send(.selectDate(Date()))
+                }
                 store.send(.onAppearCalendar)
             }
         }
