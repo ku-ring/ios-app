@@ -5,6 +5,7 @@
 
 import Caches
 import SwiftUI
+import Analytics
 import ClubsUI
 import CampusUI
 import NoticeUI
@@ -20,26 +21,27 @@ import AcademicCalendarFeatures
 
 struct ContentView: View {
     @Dependency(\.activeTab) var activeTab
-    @State private var tabStore: ActiveTabStore
-    
+    @Dependency(\.analytics) var analytics
+    @Bindable private var tabStore: ActiveTabStore
+
     // 앱 최초 구동 시점에 1회 공지를 가져오기 위함
     @Binding var didAppear: Bool
-    
+
     @State private var noticeStore = Store(
       initialState: NoticeAppFeature.State(noticeList: NoticeListFeature.State()),
       reducer: { NoticeAppFeature()._printChanges() }
     )
-    
+
     @State private var calendarStore = Store(
       initialState: AcademicCalendarFeature.State(),
       reducer: { AcademicCalendarFeature() }
     )
-    
+
     @State private var settingsStore = Store(
       initialState: SettingsAppFeature.State(),
       reducer: { SettingsAppFeature() }
     )
-    
+
     @State private var clubsStore: StoreOf<ClubsAppFeature> = Store(
         initialState: ClubsAppFeature.State(),
         reducer: { ClubsAppFeature() }
@@ -49,40 +51,47 @@ struct ContentView: View {
         self._didAppear = didAppear
         self.tabStore = ActiveTabDependency.liveValue.store
     }
-    
+
     var body: some View {
-        VStack(spacing: 0) {
-            Group {
-                switch tabStore.value {
-                case .notice:
-                    NoticeApp(store: noticeStore)
-                case .calendar:
-                    AcademicCalendar(store: calendarStore)
-                case .campusMap:
-                    CampusApp()
-                case .clubs:
-                    ClubsApp(store: clubsStore)
-                case .settings:
-                    SettingsApp(store: settingsStore)
-                }
+        TabView(selection: $tabStore.value) {
+            NoticeApp(store: noticeStore)
+                .tabItem { tabLabel(for: .notice) }
+                .tag(TabBarItem.notice)
+
+            AcademicCalendar(store: calendarStore)
+                .tabItem { tabLabel(for: .calendar) }
+                .tag(TabBarItem.calendar)
+
+            CampusApp()
+                .tabItem { tabLabel(for: .campusMap) }
+                .tag(TabBarItem.campusMap)
+
+            ClubsApp(store: clubsStore)
+                .tabItem { tabLabel(for: .clubs) }
+                .tag(TabBarItem.clubs)
+
+            SettingsApp(store: settingsStore)
+                .tabItem { tabLabel(for: .settings) }
+                .tag(TabBarItem.settings)
+        }
+        .tint(Color.Kuring.gray600)
+        .background(Color.Kuring.bg)
+        .environment(\.horizontalSizeClass, .compact)
+        .onChange(of: tabStore.value) { oldValue, newValue in
+            if oldValue != newValue && newValue == .notice {
+                noticeStore.send(.noticeList(.reloadNotices))
             }
-            .tint(Color.Kuring.gray600)
-            .background(Color.Kuring.bg)
-            .environment(\.horizontalSizeClass, .compact)
-            .tabViewStyle(.page(indexDisplayMode: .never))
-            .onChange(of: tabStore.value) { oldValue, newValue in
-                if oldValue != newValue && newValue == .notice {
-                    noticeStore.send(.noticeList(.reloadNotices))
-                }
+            if oldValue != newValue, let event = newValue.analyticsEvent {
+                analytics.track(event)
             }
-            .onAppear {
-                if !didAppear {
-                    noticeStore.send(.noticeList(.reloadNotices))
-                    didAppear = true
-                }
+        }
+        .onAppear {
+            // 앱 최초 구동
+            if !didAppear {
+                noticeStore.send(.noticeList(.reloadNotices))
+                didAppear = true
+                analytics.track(.noticeHomeView)
             }
-            
-            BottomTabView(activeTab: tabStore)
         }
         // MARK: 학사일정 푸시 알림을 탭 했을 때 호출
         .onReceive(newMessagePublisher) { message in
@@ -101,5 +110,61 @@ struct ContentView: View {
             }
         }
     }
+
+    @ViewBuilder
+    private func tabLabel(for tab: TabBarItem) -> some View {
+        Label {
+            Text(tab.title)
+        } icon: {
+            Image(tabStore.value == tab ? tab.selectedImage : tab.defaultImage)
+        }
+    }
 }
 
+extension TabBarItem {
+    var selectedImage: ImageResource {
+        switch self {
+        case .notice:
+            return .listFill
+        case .calendar:
+            return .calendarFill
+        case .campusMap:
+            return .mapPinFill
+        case .clubs:
+            return .clubsFill
+        case .settings:
+            return .moreHorizontalFill
+        }
+    }
+
+    var defaultImage: ImageResource {
+        switch self {
+        case .notice:
+            return .list
+        case .calendar:
+            return .calendar
+        case .campusMap:
+            return .mapPin
+        case .clubs:
+            return .clubs
+        case .settings:
+            return .moreHorizontal
+        }
+    }
+
+    /// 탭 전환 시 기록할 Amplitude 이벤트. 로깅 대상이 아니면 `nil`
+    var analyticsEvent: AnalyticsEvent? {
+        switch self {
+        case .notice:
+            return .noticeHomeView
+        case .calendar:
+            return .calendarView
+        case .campusMap:
+            return .mapView
+        case .clubs:
+            return .clubTabView
+        case .settings:
+            return nil
+        }
+    }
+}

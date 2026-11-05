@@ -9,6 +9,7 @@ import SwiftData
 import Models
 import Dependencies
 import Caches
+import Analytics
 
 @Reducer
 public struct BotFeature {
@@ -68,7 +69,8 @@ public struct BotFeature {
     }
     
     @Dependency(\.bots) public var context
-    
+    @Dependency(\.analytics) public var analytics
+
     public var body: some ReducerOf<Self> {
         BindingReducer()
         Reduce { state, action in
@@ -142,6 +144,7 @@ public struct BotFeature {
                 
             case .onAppear:
                 state.refetchChat()
+                analytics.track(.botView)
                 return .none
             }
         }

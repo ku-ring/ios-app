@@ -31,7 +31,7 @@ extension Target {
                     "UIInterfaceOrientationLandscapeLeft",
                     "UIInterfaceOrientationLandscapeRight"
                 ],
-                "UIDesignRequiresCompatibility": .boolean(true),
+                "UIDesignRequiresCompatibility": .boolean(false),
                 "CFBundleDisplayName": "쿠링(Debug)",
                 "CFBundleShortVersionString": "2.6.0",
                 "CFBundleVersion": "2",
@@ -45,6 +45,7 @@ extension Target {
         entitlements: "KuringAppDebug.entitlements",
         dependencies: [
             .external(name: "FirebaseMessaging"),
+            .shared("Analytics"),
             .project(target: "PushNotifications", path: "../Shared/PushNotifications"),
             .ui("BotUI"),
             .ui("NoticeUI"),
