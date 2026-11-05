@@ -164,11 +164,14 @@ public struct NoticeListFeature {
             case .reloadNotices:
                 // 기존 공지 리스트는 새 응답이 도착할 때까지 그대로 유지한다.
                 // 즉, **먼저 비우지 않는다**는 뜻
-                return fetchNotices(
-                    state: &state,
-                    retrievalInfo: State.NoticeInfo(),
-                    cancelID: CancelID.reloadNotices,
-                    isReload: true
+                return .merge(
+                    .cancel(id: CancelID.fetchNextPageOfNotices),
+                    fetchNotices(
+                        state: &state,
+                        retrievalInfo: State.NoticeInfo(),
+                        cancelID: CancelID.reloadNotices,
+                        isReload: true
+                    )
                 )
             case .fetchNextPageOfNotices:
                 // 리로드(또는 다른 페이지 요청)가 진행 중이면 중복 방지를 위해 무시한다.
