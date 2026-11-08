@@ -33,7 +33,7 @@ extension Target {
                 ],
                 "UIDesignRequiresCompatibility": .boolean(false),
                 "CFBundleDisplayName": "쿠링",
-                "CFBundleShortVersionString": "2.6.0",
+                "CFBundleShortVersionString": "2.6.1",
                 "CFBundleVersion": "2",
             ]
         ),
