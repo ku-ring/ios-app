@@ -73,6 +73,7 @@ public struct ClubsApp: View {
             case .notificationHistory:
                 if let store = pathStore.scope(state: \.notificationHistory, action: \.notificationHistory) {
                     NotificationHistoryView(store: store)
+                        .toolbar(.hidden, for: .tabBar)
                 }
             }
         }

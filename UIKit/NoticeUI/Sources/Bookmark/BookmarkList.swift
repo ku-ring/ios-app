@@ -100,7 +100,7 @@ public struct BookmarkList: View {
         .navigationBarBackButtonHidden(store.isEditing)
         .onAppear { store.send(.onAppear) }
         .toolbar(
-            store.isEditing ? .hidden : .visible,
+            store.isEditing ? .hidden : .automatic,
             for: .tabBar
         )
         .toolbar {
