@@ -191,6 +191,9 @@ struct SubscriptionView: View {
         }
         .padding(.horizontal, 20)
         .background(Color.Kuring.bg)
+        .onAppear {
+            store.send(.onAppear)
+        }
         // TODO: TCA에 따라 외부에서 구현
         .navigationTitle("푸시 알림 설정")
         .navigationBarTitleDisplayMode(.inline)

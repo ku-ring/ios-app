@@ -23,33 +23,37 @@ public struct AcademicCalendar: View {
     
     public init(store: StoreOf<AcademicCalendarFeature>) {
         self.store = store
-        self.store.send(.selectDate(Date()))
     }
     
     public var body: some View {
-        VStack(spacing: 0) {
+        NavigationStack {
             VStack(spacing: 0) {
-                headerView
-                weekdaysView
+                VStack(spacing: 0) {
+                    headerView
+                    weekdaysView
+                }
+                calendarContent
+
+                Divider()
+                    .frame(height: 2)
+                    .padding(.top, 22)
+
+                if !store.eventsForSelectedDate.isEmpty {
+                    eventInfo(for: store.eventsForSelectedDate)
+                } else {
+                    Spacer()
+                }
             }
-            calendarContent
-            
-            Divider()
-                .frame(height: 2)
-                .padding(.top, 22)
-            
-            if !store.eventsForSelectedDate.isEmpty {
-                eventInfo(for: store.eventsForSelectedDate)
-            } else {
-                Spacer()
+            .background(Color.Kuring.bg)
+            .navigationTitle("학사 일정")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(.hidden, for: .navigationBar)
+            .onAppear {
+                if store.selectedDate == nil {
+                    store.send(.selectDate(Date()))
+                }
+                store.send(.onAppearCalendar)
             }
-        }
-        .background(Color.Kuring.bg)
-        .navigationTitle("학사 일정")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(.hidden, for: .navigationBar)
-        .onAppear {
-            store.send(.onAppearCalendar)
         }
     }
     

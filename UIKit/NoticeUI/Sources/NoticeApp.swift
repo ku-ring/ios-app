@@ -30,8 +30,15 @@ public struct NoticeApp: View {
             .background(Color.Kuring.bg)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Image("appIconLabel", bundle: Bundle.notices)
+                if #available(iOS 26.0, *) {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Image("appIconLabel", bundle: Bundle.notices)
+                    }
+                    .sharedBackgroundVisibility(.hidden)
+                } else {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Image("appIconLabel", bundle: Bundle.notices)
+                    }
                 }
 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -88,6 +95,7 @@ public struct NoticeApp: View {
             case .detail:
                 if let store = store.scope(state: \.detail, action: \.detail) {
                     NoticeDetailView(store: store)
+                        .toolbar(.hidden, for: .tabBar)
                 }
             case .search:
                 if let store = store.scope(state: \.search, action: \.search) {
