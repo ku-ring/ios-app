@@ -26,11 +26,11 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-dependencies", exact: "1.9.3"),
         .package(url: "https://github.com/pointfreeco/swift-concurrency-extras", exact: "1.3.2"),
         .package(url: "https://github.com/apple/swift-collections.git", exact: "1.1.0"),
-        .package(url: "https://github.com/ku-ring/ios-maps", branch: "main"),
+        .package(url: "https://github.com/ku-ring/ios-maps", exact: "2.4.1"),
         .package(url: "https://github.com/ku-ring/package-activityui", branch: "main"),
         .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "10.24.0"),
         .package(url: "https://github.com/airbnb/lottie-spm.git", from: "4.4.1"),
         .package(url: "https://github.com/amplitude/Amplitude-Swift", from: "1.19.3"),
-        .package(url: "https://github.com/ku-ring/the-satellite-extended", branch: "main")
+        .package(url: "https://github.com/ku-ring/the-satellite-extended", exact: "1.0.0")
     ]
 )
